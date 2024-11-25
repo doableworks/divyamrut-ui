@@ -64,44 +64,11 @@ export const LayoutSection = ({ children, sessionData }) => {
   return (
     <>
       <div>
-        {/* Header */}
+        <div>
         <Navbar />
-
-        {/* Main Content */}
-        <main>{children}</main>
-
-        {/* Footer */}
+        <main  className="h-[50vh]">{children}</main>
+        </div>
         <Footer />
-
-        <style jsx>{`
-          header {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-          }
-
-          nav ul {
-            display: flex;
-            list-style-type: none;
-            padding: 0;
-          }
-
-          nav a {
-            color: white;
-            text-decoration: none;
-          }
-
-          nav a.active {
-            font-weight: bold;
-            border-bottom: 2px solid #fff;
-          }
-
-          footer {
-            background-color: #222;
-            color: white;
-            padding: 20px;
-          }
-        `}</style>
       </div>
     </>
   );
