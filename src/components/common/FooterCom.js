@@ -1,0 +1,357 @@
+// import { Col, Row } from "antd";
+// import Image from "next/image";
+// import Link from "next/link";
+// import { useState } from "react";
+// import { useRouter } from "nextjs-toploader/app";
+// import { usePathname } from "next/navigation";
+// import { Facebook, Instagram, Twitter, Youtube } from "../../icon/social-media";
+
+// export default function FooterCom() {
+//   const path = usePathname();
+//   const router = useRouter();
+//   const [hoveredPlatform, setHoveredPlatform] = useState(null);
+
+//   const sport_links = [
+//     // { label: "About", route: "/about-us" },
+//     { label: "Chief Guest", route: "/chief-guest" },
+//     { label: "Blog", route: "/blog" },
+//     { label: "Sanskar Kendra", route: "/sanskar-kendra" },
+//     { label: "Saksham Bharat", route: "/saksham-bharat" },
+//     { label: "Utsah", route: "/utsah" },
+//     // { label: "Contact", route: "/contact-us" },
+//   ];
+
+//   const explore_links = [
+//     { label: "About", route: "/about-us" },
+//     { label: "Privacy Policy", route: "/privacy-policy" },
+//     { label: "Disclaimer", route: "/disclaimer" },
+//     { label: "Copyright", route: "/copyright" },
+//     { label: "Contact", route: "/contact-us" },
+//   ];
+
+//   const handleMoveRoute = (route) => {
+//     router.push(route);
+//   };
+
+//   return (
+//     <>
+//       <footer className="bg-[#4A5C24] text-white">
+//         <div className="container mx-auto px-4 py-12">
+//           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+//             {/* About Section */}
+//             {/* <div className="space-y-4">
+//           <h3 className="text-2xl font-serif">Pranaveda</h3>
+//           <p className="text-green-100">
+//             Experience authentic Ayurvedic treatments and holistic wellness programs
+//             for mind, body, and soul healing.
+//           </p>
+//           <div className="flex space-x-4">
+//             <Facebook className="w-5 h-5 text-green-100 hover:text-white cursor-pointer" />
+//             <Instagram className="w-5 h-5 text-green-100 hover:text-white cursor-pointer" />
+//             <Twitter className="w-5 h-5 text-green-100 hover:text-white cursor-pointer" />
+//           </div>
+//         </div> */}
+
+//             {/* Quick Links */}
+//             <div>
+//               <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+//               <ul className="space-y-2">
+//                 <li>
+//                   <a href="#" className="text-green-100 hover:text-white">
+//                     About Us
+//                   </a>
+//                 </li>
+//                 <li>
+//                   <a href="#" className="text-green-100 hover:text-white">
+//                     Our Services
+//                   </a>
+//                 </li>
+//                 <li>
+//                   <a href="#" className="text-green-100 hover:text-white">
+//                     Book Appointment
+//                   </a>
+//                 </li>
+//                 <li>
+//                   <a href="#" className="text-green-100 hover:text-white">
+//                     Privacy Policy
+//                   </a>
+//                 </li>
+//               </ul>
+//             </div>
+
+//             {/* Treatments */}
+//             <div>
+//               <h4 className="text-lg font-semibold mb-4">Our Treatments</h4>
+//               <ul className="space-y-2">
+//                 <li>
+//                   <a href="#" className="text-green-100 hover:text-white">
+//                     Ayurvedic Massage
+//                   </a>
+//                 </li>
+//                 <li>
+//                   <a href="#" className="text-green-100 hover:text-white">
+//                     Panchakarma
+//                   </a>
+//                 </li>
+//                 <li>
+//                   <a href="#" className="text-green-100 hover:text-white">
+//                     Wellness Programs
+//                   </a>
+//                 </li>
+//                 <li>
+//                   <a href="#" className="text-green-100 hover:text-white">
+//                     Beauty Treatments
+//                   </a>
+//                 </li>
+//               </ul>
+//             </div>
+
+//             {/* Contact Info */}
+//             {/* <div>
+//           <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
+//           <div className="space-y-4">
+//             <p className="flex items-center text-green-100">
+//               <Phone className="w-4 h-4 mr-2" />
+//               +1 234 567 8900
+//             </p>
+//             <p className="flex items-center text-green-100">
+//               <Mail className="w-4 h-4 mr-2" />
+//               info@pranaveda.com
+//             </p>
+//             <p className="text-green-100">
+//               123 Wellness Street,<br />
+//               Harmony City, HC 12345
+//             </p>
+//           </div>
+//         </div> */}
+//           </div>
+
+//           {/* Bottom Bar */}
+//           <div className="flex justify-between items-center border-t border-[#FFFFFF2B] mt-8 pt-8 text-center text-green-100 ">
+//             <p>Copyright © {new Date().getFullYear()} Pranaveda, All rights reserved. Powered by MoxCreative.</p>
+//             <div className="flex space-x-4 mt-4">
+//               {[
+//                 {
+//                   label: "Facebook",
+//                   url: "https://www.facebook.com/people/Parmartham/100087884869484/",
+//                 },
+//                 {
+//                   label: "Instagram",
+//                   url: "https://www.instagram.com/parmartham.zucol/",
+//                 },
+//                 {
+//                   label: "Twitter",
+//                   url: "https://x.com/i/flow/login?redirect_after_login=%2FParmarthamzucol",
+//                 },
+//                 {
+//                   label: "Youtube",
+//                   url: "https://www.linkedin.com/showcase/parmartham",
+//                 },
+
+//               ].map((items) => (
+//                 <Link key={items.label} href={items.url} target="_blank">
+//                   <div
+//                     onMouseEnter={() => setHoveredPlatform(items.label)}
+//                     onMouseLeave={() => setHoveredPlatform(null)}
+
+//                     className="hover:bg-[#FFFFFF] rounded-full p-2"
+//                   >
+//                    {items.label == 'Facebook' ?
+//                    <Facebook fill={hoveredPlatform === items.label? "#4A5C24" :"#FFFFFF" } /> :
+//                    items.label == 'Instagram' ?
+//                    <Instagram fill={hoveredPlatform === items.label? "#4A5C24" :"#FFFFFF" } /> :
+//                    items.label == 'Twitter' ?
+//                    <Twitter fill={hoveredPlatform === items.label? "#4A5C24" :"#FFFFFF" } /> :
+//                    <Youtube fill={hoveredPlatform === items.label? "#4A5C24" :"#FFFFFF" } />
+//                     }
+//                   </div>
+//                 </Link>
+//               ))}
+//             </div>
+//           </div>
+//         </div>
+//       </footer>
+//     </>
+//   );
+// }
+
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "nextjs-toploader/app";
+import { usePathname } from "next/navigation";
+import { Facebook, Instagram, Twitter, Youtube } from "../../icon/social-media";
+
+export default function FooterCom() {
+  const path = usePathname();
+  const router = useRouter();
+  const [hoveredPlatform, setHoveredPlatform] = useState(null);
+
+  const sport_links = [
+    // { label: "About", route: "/about-us" },
+    { label: "Chief Guest", route: "/chief-guest" },
+    { label: "Blog", route: "/blog" },
+    { label: "Sanskar Kendra", route: "/sanskar-kendra" },
+    { label: "Saksham Bharat", route: "/saksham-bharat" },
+    { label: "Utsah", route: "/utsah" },
+    // { label: "Contact", route: "/contact-us" },
+  ];
+
+  const explore_links = [
+    { label: "About", route: "/about-us" },
+    { label: "Privacy Policy", route: "/privacy-policy" },
+    { label: "Disclaimer", route: "/disclaimer" },
+    { label: "Copyright", route: "/copyright" },
+    { label: "Contact", route: "/contact-us" },
+  ];
+
+  const handleMoveRoute = (route) => {
+    router.push(route);
+  };
+
+  return (
+    <>
+      <footer className="bg-[#4A5C24] text-white">
+        <div className="container mx-auto w-[85%] pt-20">
+          {/* <div className="px-4 grid grid-cols-1 md:grid-cols-4 gap-8"> */}
+          {/* Logo and Description */}
+          <div className="flex gap-40 pb-16">
+            <div className=" w-[30%]">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8">
+                  <img
+                    src="/asset/Logo_Pranaveda.png"
+                    alt="Divyamrut Logo"
+                    className="w-full h-full"
+                  />
+                </div>
+                <h2 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF]">
+                  Divyamrut
+                </h2>
+              </div>
+              <p className="mt-4 font-jost text-[18px] font-[400] leading-[1.4em] text-left text-[#FFFFFF]">
+                Discover holistic wellness with Divyamrut's expert Ayurveda
+                services and transform your health naturally.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+              {/* Get in Touch */}
+              <div>
+                <h4 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF] mb-2">
+                  Get in Touch
+                </h4>
+                <hr className="border-t-[5px] border-dotted border-[#6E9039] my-6" />
+                <p className="font-jost text-[14px] font-[500]  text-left text-[#99C24A] uppercase">
+                  Customer Support
+                </p>
+                <p className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF] mt-2">
+                  (888) 4000-2424
+                </p>
+              </div>
+
+              {/* Email Support */}
+              <div>
+                <h4 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF] mb-2">
+                  Email Support
+                </h4>
+                <hr className="border-t-[5px] border-dotted border-[#6E9039] my-6" />
+                <p className="font-jost text-[14px] font-[500]  text-left text-[#99C24A] uppercase">
+                  Send Us a Ticket
+                </p>
+                <p className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF] mt-2">
+                  hello@domain.tld
+                </p>
+              </div>
+
+              {/* Head Office */}
+              <div>
+                <h4 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF] mb-2">
+                  Head Office
+                </h4>
+                <hr className="border-t-[5px] border-dotted border-[#6E9039] my-6" />
+                <p className="font-jost text-[14px] font-[500]  text-left text-[#99C24A] uppercase">
+                  Visit Us
+                </p>
+                <p className="font-jost text-[18px] font-[400] leading-[1.4em] text-left text-[#FFFFFF] mt-2">
+                  Jln Cempaka Wangi No. 22
+                  <br />
+                  Jakarta - Indonesia
+                </p>
+              </div>
+            </div>
+          </div>
+          {/* Bottom Bar */}
+          <div className="flex justify-between items-center border-t border-[#FFFFFF2B] py-2  text-center text-green-100 ">
+            <p className="font-inter text-[13px] font-[400] leading-[1.5em] text-left text-[#FFFFFF]">
+              Copyright © {new Date().getFullYear()} Divyamrut, All rights
+              reserved. Powered by MoxCreative.
+            </p>
+            <div className="flex space-x-2 mt-4">
+              {[
+                {
+                  label: "Facebook",
+                  url: "https://www.facebook.com/people/Parmartham/100087884869484/",
+                },
+                {
+                  label: "Instagram",
+                  url: "https://www.instagram.com/parmartham.zucol/",
+                },
+                {
+                  label: "Twitter",
+                  url: "https://x.com/i/flow/login?redirect_after_login=%2FParmarthamzucol",
+                },
+                {
+                  label: "Youtube",
+                  url: "https://www.linkedin.com/showcase/parmartham",
+                },
+              ].map((items) => (
+                <Link key={items.label} href={items.url} target="_blank">
+                  <div
+                    onMouseEnter={() => setHoveredPlatform(items.label)}
+                    onMouseLeave={() => setHoveredPlatform(null)}
+                    className="hover:bg-[#FFFFFF] rounded-full p-2"
+                  >
+                    {items.label == "Facebook" ? (
+                      <Facebook
+                        fill={
+                          hoveredPlatform === items.label
+                            ? "#4A5C24"
+                            : "#FFFFFF"
+                        }
+                      />
+                    ) : items.label == "Instagram" ? (
+                      <Instagram
+                        fill={
+                          hoveredPlatform === items.label
+                            ? "#4A5C24"
+                            : "#FFFFFF"
+                        }
+                      />
+                    ) : items.label == "Twitter" ? (
+                      <Twitter
+                        fill={
+                          hoveredPlatform === items.label
+                            ? "#4A5C24"
+                            : "#FFFFFF"
+                        }
+                      />
+                    ) : (
+                      <Youtube
+                        fill={
+                          hoveredPlatform === items.label
+                            ? "#4A5C24"
+                            : "#FFFFFF"
+                        }
+                      />
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
+  );
+}
