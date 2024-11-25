@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { Footer, Navbar } from "@/components/common";
-// import { Layout } from "antd";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -17,8 +16,6 @@ import {
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import React from "react";
-
-// const { Content } = Layout;
 
 export const LayoutSection = ({ children, sessionData }) => {
   const { data: session, status } = useSession();
