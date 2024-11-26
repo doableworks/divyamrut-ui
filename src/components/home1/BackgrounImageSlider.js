@@ -1,0 +1,53 @@
+import { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+
+const images = [
+  '/asset/home/ayurvedic-facial-massage.jpg', // Replace with your image URLs
+  '/asset/home/caucasian-woman-having-ayurveda-shirodhara-treatment-in-india.jpg',
+  '/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg',
+  '/asset/home/turmeric-with-ginger-and-lemon-tea.jpg',
+];
+
+export default function BackgroundImagesSlider() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const imageRef = useRef(null);
+
+  useEffect(() => {
+    // GSAP animation: Scale up the image when it changes
+    if (imageRef.current) {
+      gsap.fromTo(
+        imageRef.current,
+        { scale: 1},
+        { scale: 1.2, duration: 2, delay:0.5, ease: 'power2.out' }
+      );
+    }
+
+    // Timer to loop through images
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 4000); // Change image every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [currentImageIndex]);
+
+  return (
+    <div className="relative h-screen w-full overflow-hidden rounded-br-[20%]">
+        <div
+        ref={imageRef}
+        className="h-full bg-cover bg-center transition-all duration-1000"
+        style={{ backgroundImage: `url(${images[currentImageIndex]})` }} 
+        // style={{ backgroundImage: `url('/asset/home/ayurvedic-facial-massage.jpg')`}}
+      />
+
+
+      {/* <div className="relative w-3/4 h-3/4 overflow-hidden rounded-lg shadow-lg">
+        <img
+          ref={imageRef}
+          src={images[currentImageIndex]}
+          alt="carousel"
+          className="absolute w-full h-full object-cover"
+        />
+      </div> */}
+    </div>
+  );
+}
