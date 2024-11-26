@@ -6,6 +6,22 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
+  --e-global-color-secondary: #4a5c24;
+  --e-global-color-primary: #64748b;
+  --e-global-color-text: #ffffff;
+  --e-global-color-accent: #ffffff2b;
+  --e-global-color-d49ac81: #a48125;
+  --e-global-color-332724a: #4a5c24;
+  --e-global-color-4d462f5: #dcdcde;
+  --e-global-color-cfa1f76: #f9f3eb;
+  --e-global-color-291baba: #fafbfc;
+  --e-global-color-c94d9ab: #99c24a;
+  --e-global-color-044b931: #6e9039;
+  --e-global-color-638d055: #4a5c24;
+  --e-global-color-a2c0d56: #99c24a;
+  --e-global-color-4ca25af: #a48125;
+  --e-global-color-f83c760: #000000;
 }
 
 @media (prefers-color-scheme: dark) {

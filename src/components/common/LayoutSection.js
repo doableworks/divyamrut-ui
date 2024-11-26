@@ -60,10 +60,10 @@ export const LayoutSection = ({ children, sessionData }) => {
 
   return (
     <>
-      <div>
+      <div style={{position:"relative", minHeight:"100vh",display: "flex" ,flexDirection: "column",justifyContent: "space-between"  }}>
         <div>
         <Navbar />
-        <main  className="h-[50vh]">{children}</main>
+        <main >{children}</main>
         </div>
         <Footer />
       </div>

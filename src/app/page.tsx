@@ -2,8 +2,18 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-between p-24">
-     <h1> main page</h1>
+    <main className="relative z-10 mt-[-12rem] bg-cover bg-[url('/asset/home/caucasian-woman-having-ayurveda-shirodhara-treatment-in-india.jpg')] bg-no-repeat">
+      <h1> main page</h1>
+      <h1> main page</h1>
+      <h1> main page</h1>
+      <h1> main page</h1>
+      <h1> main page</h1>
+      <h1> main page</h1>
+      <h1> main page</h1>
+      <h1> main page</h1>
+      <h1> main page</h1>
+      <h1> main page</h1>
+      <h1> main page</h1>
     </main>
   );
 }
