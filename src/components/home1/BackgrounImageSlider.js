@@ -31,23 +31,13 @@ export default function BackgroundImagesSlider() {
   }, [currentImageIndex]);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden rounded-br-[20%]">
+    <div className="h-full overflow-hidden">
         <div
         ref={imageRef}
         className="h-full bg-cover bg-center transition-all duration-1000"
         style={{ backgroundImage: `url(${images[currentImageIndex]})` }} 
         // style={{ backgroundImage: `url('/asset/home/ayurvedic-facial-massage.jpg')`}}
       />
-
-
-      {/* <div className="relative w-3/4 h-3/4 overflow-hidden rounded-lg shadow-lg">
-        <img
-          ref={imageRef}
-          src={images[currentImageIndex]}
-          alt="carousel"
-          className="absolute w-full h-full object-cover"
-        />
-      </div> */}
     </div>
   );
 }

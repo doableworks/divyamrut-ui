@@ -95,7 +95,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "nextjs-toploader/app";
-import { Arrow } from "@/icon/icons";
+import { Arrow, Call, Message, ThreeLine } from "@/icon/icons";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -112,23 +112,23 @@ const Navbar = () => {
       {/* Top Banner */}
       <div className="bg-q638d055  py-2">
         <div className="w-[85%] container mx-auto flex items-center text-white justify-between">
-          <p className="text-sm font-medium">
+          <p className="text-sm font-medium hidden md:block">
             Get a Free Ayurveda Consultation from PranaVeda!
           </p>
           <div className="flex gap-4 text-sm">
             <div className="flex items-center gap-1">
-              <i className="icons icon-envelope"></i>
+              <Message fill={"#6E9039"} />
               <span>support@domain.tld</span>
             </div>
             <div className="flex items-center gap-1">
-              <i className="icons icon-phone"></i>
+              <Call fill={"#6E9039"} />
               <span>(888) 4000-2424</span>
             </div>
           </div>
         </div>
       </div>
       {/* Main Navigation */}
-      <div className="bg-transparent w-[85%] container mx-auto flex items-center justify-between">
+      <div className="bg-transparent w-[90%] md:w-[85%] container mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="https://shine.creativemox.com/pranaveda">
           <div className="flex w-8 h-8">
@@ -273,8 +273,8 @@ const Navbar = () => {
         </nav>
 
         {/* Mobile Menu Toggle */}
-        <button className="lg:hidden text-gray-600 focus:outline-none">
-          <i className="icons icon-menu"></i>
+        <button className="lg:hidden my-4">
+          <ThreeLine fill={"#FFFFFF"} w={50} h={35} />
         </button>
       </div>
     </header>
