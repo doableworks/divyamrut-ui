@@ -55,7 +55,7 @@ export default function FooterCom() {
                 </h2>
               </div>
               <p className="mt-4 font-jost text-[18px] font-[400] leading-[1.4em] text-left text-[#FFFFFF]">
-                Discover holistic wellness with Divyamrut's expert Ayurveda
+                Discover holistic wellness with Divyamrut&apos;s expert Ayurveda
                 services and transform your health naturally.
               </p>
             </div>

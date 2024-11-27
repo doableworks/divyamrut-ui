@@ -6,7 +6,6 @@ export default function Home() {
     <main
     //  className="relative z-10 mt-[-12rem] bg-cover bg-[url('/asset/home/caucasian-woman-having-ayurveda-shirodhara-treatment-in-india.jpg')] bg-no-repeat"
      >
-
       <Banner />
 
       <h1> main page</h1>

@@ -1,13 +1,13 @@
 "use client";
-import { SessionProvider } from "next-auth/react";
+// import { SessionProvider } from "next-auth/react";
 // import { ConfigProvider } from "antd";
 import LayoutWrapper from "@/components/common/LayoutWrapper";
 import { LayoutSection } from "@/components/common/LayoutSection";
 import {Suspense, useEffect} from "react";
 import {useDispatch} from "react-redux";
-import {setUserSession} from "@/redux/feature/authSlice";
+// import {setUserSession} from "@/redux/feature/authSlice";
 
-export default function MainLayout({ children, session }) {
+export default function MainLayout({ children }) {
   const dispatch = useDispatch()
   // const customTheme = {
   //   components: {
@@ -30,21 +30,21 @@ export default function MainLayout({ children, session }) {
   //   },
   // };
 
- dispatch(setUserSession(session))
+//  dispatch(setUserSession(session))
 
   return (
     <Suspense>
       {/* <ConfigProvider theme={customTheme}> */}
-        <SessionProvider session={session}
+        {/* <SessionProvider session={session}
         refetchInterval={10 * 60}
         refetchOnWindowFocus={false}
-        >
+        > */}
           <LayoutWrapper>
-            <LayoutSection sessionData={session}>
+            <LayoutSection sessionData={""}>
               {children}
             </LayoutSection>
           </LayoutWrapper>
-        </SessionProvider>
+        {/* </SessionProvider> */}
       {/* </ConfigProvider> */}
     </Suspense>
   );

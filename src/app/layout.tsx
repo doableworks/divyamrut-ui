@@ -24,17 +24,23 @@
 // import { AntdRegistry } from "@ant-design/nextjs-registry";
 // import "antd/dist/reset.css";
 import { ReduxProvider } from "../redux/provider";
-import { Poppins, Epilogue, Rubik, Suranna, Jost, Inter } from "next/font/google";
+import {
+  Poppins,
+  Epilogue,
+  Rubik,
+  Suranna,
+  Jost,
+  Inter,
+} from "next/font/google";
 import localFont from "@next/font/local";
 import NextTopLoader from "nextjs-toploader";
-import {getServerSession} from "next-auth/next";
-import {authOptions} from "@/app/auth";
-import MainLayout from "@/components/common/Mainlayout"
+// import {getServerSession} from "next-auth/next";
+// import {authOptions} from "@/app/auth";
+import MainLayout from "@/components/common/Mainlayout";
 import Script from "next/script";
 // import { ConfigProvider } from "antd";
 // import MainLayout from "@/components/MainLayout";
 import "@/app/globals.css";
-
 
 const suranna = Suranna({
   subsets: [],
@@ -85,8 +91,12 @@ const bentonSans_bold = localFont({
 //   },
 // };
 
-export default async function RootLayout({ children }) {
-  const session = await getServerSession(authOptions);
+interface RootLayoutProps {
+  children: React.ReactNode;
+}
+
+export default async function RootLayout({ children }: RootLayoutProps) {
+  // const session = await getServerSession(authOptions);
 
   // const customTheme = {
   //   components: {
@@ -122,12 +132,12 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        style={{ overflowX: "hidden" }}  
+        style={{ overflowX: "hidden" }}
         className={`${inter.variable} ${jost.variable} ${suranna.variable} `}
         // className={`${poppins.variable}`}
       >
         <NextTopLoader />
-        <ReduxProvider session={session}>
+        <ReduxProvider>
           <MainLayout>{children}</MainLayout>
         </ReduxProvider>
       </body>
