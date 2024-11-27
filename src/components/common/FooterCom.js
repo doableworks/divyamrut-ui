@@ -42,13 +42,13 @@ export default function FooterCom() {
             <div className="w-full md:w-[30%]">
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8">
-                  <Image
+                  {/* <Image
                     src="/asset/Logo_Pranaveda.png"
                     alt="Divyamrut Logo"
                     className="w-full h-full"
                     width={150}
                     height={50}
-                  />
+                  /> */}
                 </div>
                 <h2 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF]">
                   Divyamrut

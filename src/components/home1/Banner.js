@@ -53,7 +53,7 @@ const Banner = () => {
             </h1>
             <p className="max-w-3xl mx-auto font-jost text-[16px] md:text-[21px] font-[400] leading-[1.4em] text-left text-[#FFFFFF]">
               Experience Holistic Wellness with PranaVeda: Embrace the Power of
-              Ayurveda for a Balanced Life.
+              Ayurveda for a Balanced Life. 
             </p>
             <div className="font-suranna text-[16px] md:text-[21px] font-[400] leading-[1.4em] text-left text-[#FFFFFF] inline-flex items-center gap-2 justify-center px-6 py-3 mt-4 bg-q4ca25af  hover:bg-q638d055 transition">
             <Calender fill={"#FFFFFF"} /> Book an Appointment

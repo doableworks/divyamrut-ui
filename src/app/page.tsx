@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Banner from "@/components/home1/Banner"
+import Banner from "@/components/home1/Banner";
+import Testimonial from "@/components/home1/Testimonial";
 
 export default function Home() {
   return (
@@ -7,18 +8,7 @@ export default function Home() {
     //  className="relative z-10 mt-[-12rem] bg-cover bg-[url('/asset/home/caucasian-woman-having-ayurveda-shirodhara-treatment-in-india.jpg')] bg-no-repeat"
      >
       <Banner />
-
-      <h1> main page</h1>
-      <h1> main page</h1>
-      <h1> main page</h1>
-      <h1> main page</h1>
-      <h1> main page</h1>
-      <h1> main page</h1>
-      <h1> main page</h1>
-      <h1> main page</h1>
-      <h1> main page</h1>
-      <h1> main page</h1>
-      <h1> main page</h1>
+      <Testimonial />
     </main>
   );
 }
