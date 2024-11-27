@@ -146,17 +146,15 @@ const Navbar = () => {
         </Link>
 
         {/* Navigation Menu */}
-        <nav className="hidden lg:flex gap-8 font-jost text-[18px] font-[500]  text-left text-[#FFFFFF]">
-        <div
+        <nav className="hidden lg:flex gap-8 font-jost text-[18px] font-[500] text-left text-[#FFFFFF] items-center">
+          <div
             className="relative group"
-            onMouseEnter={() => setHasHover('HomePage')}
+            onMouseEnter={() => setHasHover("HomePage")}
             onMouseLeave={() => setHasHover(null)}
           >
-            <div
-              className="flex items-center"
-            >
+            <div className="flex items-center">
               <h5 className="hover:text-a2c0d56 mr-2">HomePage</h5>
-              <Arrow fill={hasHover == 'HomePage' ? "#99C24A" : "#FFFFFF"} />
+              <Arrow fill={hasHover == "HomePage" ? "#99C24A" : "#FFFFFF"} />
             </div>
             {/* Dropdown */}
             <div className="absolute left-0 hidden group-hover:block bg-white shadow-lg mt-2 rounded">
@@ -182,14 +180,12 @@ const Navbar = () => {
           </h5>
           <div
             className="relative group"
-            onMouseEnter={() => setHasHover('Services')}
+            onMouseEnter={() => setHasHover("Services")}
             onMouseLeave={() => setHasHover(null)}
           >
-            <div
-              className="flex items-center"
-            >
+            <div className="flex items-center">
               <h5 className="hover:text-a2c0d56 mr-2">Services</h5>
-              <Arrow fill={hasHover == 'Services' ? "#99C24A" : "#FFFFFF"} />
+              <Arrow fill={hasHover == "Services" ? "#99C24A" : "#FFFFFF"} />
             </div>
             {/* Dropdown */}
             <div className="absolute left-0 hidden group-hover:block bg-white shadow-lg mt-2 rounded">
@@ -215,38 +211,79 @@ const Navbar = () => {
           </h5>
           <div
             className="relative group"
-            onMouseEnter={() => setHasHover('Pages')}
+            onMouseEnter={() => setHasHover("Pages")}
             onMouseLeave={() => setHasHover(null)}
           >
-            <div
-              className="flex items-center"
-            >
+            <div className="flex items-center">
               <h5 className="hover:text-a2c0d56 mr-2">Pages</h5>
-              <Arrow fill={hasHover == 'Pages' ? "#99C24A" : "#FFFFFF"} />
+              <Arrow fill={hasHover == "Pages" ? "#99C24A" : "#FFFFFF"} />
             </div>
             {/* Dropdown */}
             <div className="absolute left-0 hidden group-hover:block bg-white shadow-lg mt-2 rounded">
-              <Link href="/team">
-                <h5 className="block px-4 py-2 hover:bg-green-500 hover:text-white">
-                  Team
-                </h5>
-              </Link>
-              <Link href="/gallery">
-                <h5 className="block px-4 py-2 hover:bg-green-500 hover:text-white">
-                  Gallery
-                </h5>
-              </Link>
-              <Link href="/faq">
-                <h5 className="block px-4 py-2 hover:bg-green-500 hover:text-white">
-                  FAQ
-                </h5>
-              </Link>
-              <Link href="/blog-archive">
-                <h5 className="block px-4 py-2 hover:bg-green-500 hover:text-white">
-                  Blog Archive
-                </h5>
-              </Link>
+              <h5
+                className={`cursor-pointer hover:text-a2c0d56 ${
+                  pathname == "/team" ? "text-[#FFFFFF]" : "text-a2c0d56"
+                }`}
+                onClick={() => handleMoveRoute("/team")}
+              >
+                Team
+              </h5>
+              <h5
+                className={`cursor-pointer hover:text-a2c0d56 ${
+                  pathname == "/Gallery" ? "text-[#FFFFFF]" : "text-a2c0d56"
+                }`}
+                onClick={() => handleMoveRoute("/Gallery")}
+              >
+                Gallery
+              </h5>
+              <h5
+                className={`cursor-pointer hover:text-a2c0d56 ${
+                  pathname == "/FAQ" ? "text-[#FFFFFF]" : "text-a2c0d56"
+                }`}
+                onClick={() => handleMoveRoute("/FAQ")}
+              >
+                FAQ
+              </h5>
+              <h5
+                className={`cursor-pointer hover:text-a2c0d56 ${
+                  pathname == "/pricing-plan"
+                    ? "text-[#FFFFFF]"
+                    : "text-a2c0d56"
+                }`}
+                onClick={() => handleMoveRoute("/pricing-plan")}
+              >
+                Pricing Plan
+              </h5>
+              <h5
+                className={`cursor-pointer hover:text-a2c0d56 ${
+                  pathname == "/pricing-plan"
+                    ? "text-[#FFFFFF]"
+                    : "text-a2c0d56"
+                }`}
+                onClick={() => handleMoveRoute("/pricing-plan")}
+              >
+                Pricing Plan
+              </h5>
+              <h5
+                className={`cursor-pointer hover:text-a2c0d56 ${
+                  pathname == "/Blog" ? "text-[#FFFFFF]" : "text-a2c0d56"
+                }`}
+                onClick={() => handleMoveRoute("/Blog")}
+              >
+                Blog
+              </h5>
+              <h5
+                className={`cursor-pointer hover:text-a2c0d56 ${
+                  pathname == "/archive" ? "text-[#FFFFFF]" : "text-a2c0d56"
+                }`}
+                onClick={() => handleMoveRoute("/archive")}
+              >
+                Archive
+              </h5>
             </div>
+          </div>
+          <div className="text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-q4ca25af  hover:bg-q638d055 transition">
+            <i className="mr-2 icons icon-calendar"></i> Get Started
           </div>
         </nav>
 

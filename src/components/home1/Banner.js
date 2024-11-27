@@ -28,18 +28,18 @@ const Banner = () => {
       { opacity: 0, y: 50 },
       { opacity: 1, y: 0, duration: 1, stagger: 0.2 }
     );
-    gsap.fromTo("#card_id",
-      { opacity: 0,  x:-200,},
+    gsap.fromTo(
+      "#card_id",
+      { opacity: 0, x: -200 },
       {
-        x:0,
+        x: 0,
         opacity: 1,
-        duration:1,
-        delay:0.5,
-        stagger: 0.2
+        duration: 1,
+        delay: 0.5,
+        stagger: 0.2,
       }
-     )
+    );
   }, []);
-
 
   // useGSAP(()=>{
   //   gsap.from("#card_id",
@@ -68,24 +68,21 @@ const Banner = () => {
               Experience Holistic Wellness with PranaVeda: Embrace the Power of
               Ayurveda for a Balanced Life.
             </p>
-            <a
-              href="#"
-              className="font-suranna text-[21px] font-[400] leading-[1.4em] text-left text-[#FFFFFF] inline-flex items-center justify-center px-6 py-3 mt-4 bg-q4ca25af  hover:bg-q638d055 transition"
-            >
+            <div className="font-suranna text-[21px] font-[400] leading-[1.4em] text-left text-[#FFFFFF] inline-flex items-center justify-center px-6 py-3 mt-4 bg-q4ca25af  hover:bg-q638d055 transition">
               <i className="mr-2 icons icon-calendar"></i> Book an Appointment
-            </a>
+            </div>
           </div>
         </div>
         <div className="relative">
           <BackgroundImagesSlider />
           <div
-          id="card_id"
-           className="absolute bottom-0 bg-white h-[300px] w-[300px] p-4">
+            id="card_id"
+            className="absolute bottom-0 bg-white h-[300px] w-[300px] p-4"
+          >
             {/* Icon Box */}
 
             <div className="h-full flex flex-col justify-evenly items-center text-center border border-1 border-d49ac81 p-4">
               {/* Icon */}
-            
 
               {/* Title */}
               <h3 className="text-lg font-semibold text-gray-800">
