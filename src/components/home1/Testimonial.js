@@ -72,7 +72,7 @@ const TestimonialSlider = () => {
             <Star h={25} w={25} fill={"#ccd6df"} />
           </div>
         </div>
-        <div className="flex flex-wrap gap-12">
+        <div className="flex flex-wrap justify-between gap-8">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
