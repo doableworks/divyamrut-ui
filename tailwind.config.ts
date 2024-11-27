@@ -21,7 +21,7 @@ const config: Config = {
         c94d9ab: "var(--e-global-color-c94d9ab)",
         q044b931 : "var(--e-global-color-044b931)",
         q638d055 : "var(--e-global-color-638d055)",
-        qa2c0d56: "var(--e-global-color-a2c0d56)",
+        a2c0d56: "var(--e-global-color-a2c0d56)",
         q4ca25af : "var(--e-global-color-4ca25af)",
         f83c760: "var(--e-global-color-f83c760)",
       },

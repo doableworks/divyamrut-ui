@@ -91,8 +91,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
+import {Arrow}  from '@/icon/icons';
 
 const Navbar = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleMoveRoute = (route) => {
+    router.push(route);
+  };
+
   return (
     <header className="absolute z-20 w-full shadow">
       {/* Top Banner */}
@@ -132,31 +142,30 @@ const Navbar = () => {
         </Link>
 
         {/* Navigation Menu */}
-        <nav className="hidden lg:flex gap-8">
-          <Link href="/homepage">
-            <h5 className="hover:text-green-500">Homepage</h5>
-          </Link>
-          <Link href="/about-us">
-            <h5 className="hover:text-green-500">About Us</h5>
-          </Link>
+        <nav className="hidden lg:flex gap-8 font-jost text-[18px] font-[500]  text-left text-[#FFFFFF]">
+            <h5 className={`cursor-pointer hover:text-a2c0d56 ${ pathname == "/homepage" ? "text-a2c0d56" : "text-[#FFFFFF]"}`}
+             onClick={() => handleMoveRoute("/homepage")}
+            >Homepage</h5>
+            <h5 className={`cursor-pointer hover:text-a2c0d56 ${ pathname == "/about-us" ? "text-a2c0d56" : "text-[#FFFFFF]"}`}
+             onClick={() => handleMoveRoute("/about-us")}
+            >About Us</h5>
           <div className="relative group">
-            <Link href="/services">
-              <h5 className="hover:text-green-500">Services</h5>
-            </Link>
+            <div className="flex items-center" >
+              <h5 className="hover:text-a2c0d56 mr-2">Services</h5>
+              <Arrow  fill={true ? "#99C24A" : "#FFFFFF"} />
+              </div>
             {/* Dropdown */}
             <div className="absolute left-0 hidden group-hover:block bg-white shadow-lg mt-2 rounded">
-              <Link href="/pricing-plan">
-                <h5 className="block px-4 py-2 hover:bg-green-500 hover:text-white">
-                  Pricing Plan
-                </h5>
-              </Link>
+              <h5 className={`cursor-pointer hover:text-a2c0d56 ${ pathname == "/pricing-plan" ?"text-[#FFFFFF]" : "text-a2c0d56"}`}
+             onClick={() => handleMoveRoute("/pricing-plan")}
+            >Pricing Plan</h5>
             </div>
           </div>
-          <Link href="/contact-us">
-            <h5 className="hover:text-green-500">Contact Us</h5>
-          </Link>
+          <h5 className={`cursor-pointer hover:text-a2c0d56 ${ pathname == "/contact-us" ? "text-a2c0d56" : "text-[#FFFFFF]"}`}
+             onClick={() => handleMoveRoute("/contact-us")}
+            >Contact Us</h5>
           <div className="relative group">
-            <h5 className="hover:text-green-500 cursor-pointer">Pages</h5>
+            <h5 className="hover:text-a2c0d56 cursor-pointer">Pages</h5>
             {/* Dropdown */}
             <div className="absolute left-0 hidden group-hover:block bg-white shadow-lg mt-2 rounded">
               <Link href="/team">
