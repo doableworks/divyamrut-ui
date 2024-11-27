@@ -128,7 +128,7 @@ const Navbar = () => {
         </div>
       </div>
       {/* Main Navigation */}
-      <div className="bg-transparent w-[85%] container mx-auto flex items-center justify-between py-4">
+      <div className="bg-transparent w-[85%] container mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="https://shine.creativemox.com/pranaveda">
           <div className="flex w-8 h-8">
@@ -153,11 +153,11 @@ const Navbar = () => {
             onMouseLeave={() => setHasHover(null)}
           >
             <div className="flex items-center">
-              <h5 className="hover:text-a2c0d56 mr-2">HomePage</h5>
+              <h5 className="hover:text-a2c0d56 leading-[3.5em] cursor-pointer">HomePage</h5>
               <Arrow fill={hasHover == "HomePage" ? "#99C24A" : "#FFFFFF"} />
             </div>
             {/* Dropdown */}
-            <div className="absolute left-0 hidden group-hover:block bg-white shadow-lg mt-2 rounded">
+            <div className="absolute left-0 hidden group-hover:block bg-white shadow-lg py-2 px-4 text-nowrap">
               <h5
                 className={`cursor-pointer hover:text-a2c0d56 ${
                   pathname == "/pricing-plan"
@@ -184,16 +184,15 @@ const Navbar = () => {
             onMouseLeave={() => setHasHover(null)}
           >
             <div className="flex items-center">
-              <h5 className="hover:text-a2c0d56 mr-2">Services</h5>
+              <h5 className="hover:text-a2c0d56 leading-[3.5em] cursor-pointer">Services</h5>
               <Arrow fill={hasHover == "Services" ? "#99C24A" : "#FFFFFF"} />
             </div>
             {/* Dropdown */}
-            <div className="absolute left-0 hidden group-hover:block bg-white shadow-lg mt-2 rounded">
+            <div className={`absolute left-0 hidden group-hover:block bg-white hover:bg-d49ac81 text-text shadow-lg  py-2 px-4 text-nowrap`}>
               <h5
-                className={`cursor-pointer hover:text-a2c0d56 ${
+                className={`cursor-pointer hover:text-text ${
                   pathname == "/pricing-plan"
-                    ? "text-[#FFFFFF]"
-                    : "text-a2c0d56"
+                    ?"text-a2c0d56" :"text-[#FFFFFF]"
                 }`}
                 onClick={() => handleMoveRoute("/pricing-plan")}
               >
@@ -214,12 +213,12 @@ const Navbar = () => {
             onMouseEnter={() => setHasHover("Pages")}
             onMouseLeave={() => setHasHover(null)}
           >
-            <div className="flex items-center">
+            <div className="flex items-center leading-[3.5em] cursor-pointer">
               <h5 className="hover:text-a2c0d56 mr-2">Pages</h5>
               <Arrow fill={hasHover == "Pages" ? "#99C24A" : "#FFFFFF"} />
             </div>
             {/* Dropdown */}
-            <div className="absolute left-0 hidden group-hover:block bg-white shadow-lg mt-2 rounded">
+            <div className="absolute left-0 hidden group-hover:block bg-white shadow-lg py-2 px-4 text-nowrap">
               <h5
                 className={`cursor-pointer hover:text-a2c0d56 ${
                   pathname == "/team" ? "text-[#FFFFFF]" : "text-a2c0d56"
