@@ -89,15 +89,19 @@
 //   );
 // }
 
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "nextjs-toploader/app";
-import {Arrow}  from '@/icon/icons';
+import { Arrow } from "@/icon/icons";
+import { useState } from "react";
 
 const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const [hasHover, setHasHover] = useState(null);
 
   const handleMoveRoute = (route) => {
     router.push(route);
@@ -143,29 +147,83 @@ const Navbar = () => {
 
         {/* Navigation Menu */}
         <nav className="hidden lg:flex gap-8 font-jost text-[18px] font-[500]  text-left text-[#FFFFFF]">
-            <h5 className={`cursor-pointer hover:text-a2c0d56 ${ pathname == "/homepage" ? "text-a2c0d56" : "text-[#FFFFFF]"}`}
-             onClick={() => handleMoveRoute("/homepage")}
-            >Homepage</h5>
-            <h5 className={`cursor-pointer hover:text-a2c0d56 ${ pathname == "/about-us" ? "text-a2c0d56" : "text-[#FFFFFF]"}`}
-             onClick={() => handleMoveRoute("/about-us")}
-            >About Us</h5>
-          <div className="relative group">
-            <div className="flex items-center" >
-              <h5 className="hover:text-a2c0d56 mr-2">Services</h5>
-              <Arrow  fill={true ? "#99C24A" : "#FFFFFF"} />
-              </div>
+        <div
+            className="relative group"
+            onMouseEnter={() => setHasHover('HomePage')}
+            onMouseLeave={() => setHasHover(null)}
+          >
+            <div
+              className="flex items-center"
+            >
+              <h5 className="hover:text-a2c0d56 mr-2">HomePage</h5>
+              <Arrow fill={hasHover == 'HomePage' ? "#99C24A" : "#FFFFFF"} />
+            </div>
             {/* Dropdown */}
             <div className="absolute left-0 hidden group-hover:block bg-white shadow-lg mt-2 rounded">
-              <h5 className={`cursor-pointer hover:text-a2c0d56 ${ pathname == "/pricing-plan" ?"text-[#FFFFFF]" : "text-a2c0d56"}`}
-             onClick={() => handleMoveRoute("/pricing-plan")}
-            >Pricing Plan</h5>
+              <h5
+                className={`cursor-pointer hover:text-a2c0d56 ${
+                  pathname == "/pricing-plan"
+                    ? "text-[#FFFFFF]"
+                    : "text-a2c0d56"
+                }`}
+                onClick={() => handleMoveRoute("/home-page-2")}
+              >
+                HomePage 2
+              </h5>
             </div>
           </div>
-          <h5 className={`cursor-pointer hover:text-a2c0d56 ${ pathname == "/contact-us" ? "text-a2c0d56" : "text-[#FFFFFF]"}`}
-             onClick={() => handleMoveRoute("/contact-us")}
-            >Contact Us</h5>
-          <div className="relative group">
-            <h5 className="hover:text-a2c0d56 cursor-pointer">Pages</h5>
+          <h5
+            className={`cursor-pointer hover:text-a2c0d56 ${
+              pathname == "/about-us" ? "text-a2c0d56" : "text-[#FFFFFF]"
+            }`}
+            onClick={() => handleMoveRoute("/about-us")}
+          >
+            About Us
+          </h5>
+          <div
+            className="relative group"
+            onMouseEnter={() => setHasHover('Services')}
+            onMouseLeave={() => setHasHover(null)}
+          >
+            <div
+              className="flex items-center"
+            >
+              <h5 className="hover:text-a2c0d56 mr-2">Services</h5>
+              <Arrow fill={hasHover == 'Services' ? "#99C24A" : "#FFFFFF"} />
+            </div>
+            {/* Dropdown */}
+            <div className="absolute left-0 hidden group-hover:block bg-white shadow-lg mt-2 rounded">
+              <h5
+                className={`cursor-pointer hover:text-a2c0d56 ${
+                  pathname == "/pricing-plan"
+                    ? "text-[#FFFFFF]"
+                    : "text-a2c0d56"
+                }`}
+                onClick={() => handleMoveRoute("/pricing-plan")}
+              >
+                Pricing Plan
+              </h5>
+            </div>
+          </div>
+          <h5
+            className={`cursor-pointer hover:text-a2c0d56 ${
+              pathname == "/contact-us" ? "text-a2c0d56" : "text-[#FFFFFF]"
+            }`}
+            onClick={() => handleMoveRoute("/contact-us")}
+          >
+            Contact Us
+          </h5>
+          <div
+            className="relative group"
+            onMouseEnter={() => setHasHover('Pages')}
+            onMouseLeave={() => setHasHover(null)}
+          >
+            <div
+              className="flex items-center"
+            >
+              <h5 className="hover:text-a2c0d56 mr-2">Pages</h5>
+              <Arrow fill={hasHover == 'Pages' ? "#99C24A" : "#FFFFFF"} />
+            </div>
             {/* Dropdown */}
             <div className="absolute left-0 hidden group-hover:block bg-white shadow-lg mt-2 rounded">
               <Link href="/team">
