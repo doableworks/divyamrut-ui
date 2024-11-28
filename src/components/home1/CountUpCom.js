@@ -8,7 +8,7 @@ const CountUpCom = ({id, end, suffix,decimals=0 }) => {
         ref: id,
         end: end,
         enableScrollSpy: true,
-        scrollSpyDelay: 1000,
+        // scrollSpyDelay: 500,
         suffix:suffix,
         decimals:decimals
       }
