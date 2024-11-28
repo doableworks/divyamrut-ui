@@ -45,7 +45,7 @@ const WhyChooseUs = () => {
           backgroundImage: "url('/asset/home/powder-spices-and-herbs.jpg')",
         }}
       >
-        <div className="bg-[rgba(0,0,0,.4)] h-full w-full  text-white">
+        <div className="bg-[rgba(0,0,0,.4)] min-h-screen w-full  text-white">
           <div className="relative z-20 mx-auto flex flex-col items-center justify-center w-[90%] md:w-[85%] py-32">
             <div className="fade-up max-w-xl">
               <h6 className="font-jost text-c94d9ab text-[14px] font-[500] leading-[1.4em] uppercase text-center">
@@ -55,7 +55,7 @@ const WhyChooseUs = () => {
                 Medicine with the green perspective.
               </h2>
             </div>
-            <div className="flex flex-wrap justify-between gap-8 mb-10">
+            <div className="flex flex-wrap justify-center gap-8">
               {features.map((feature, index) => (
                 <div
                   key={index}
