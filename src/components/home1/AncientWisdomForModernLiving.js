@@ -8,24 +8,43 @@ import { RightArrow, Star } from "@/icon/icons";
 gsap.registerPlugin(ScrollTrigger);
 
 const AncientWisdomForModernLiving = () => {
+    
   useEffect(() => {
     gsap.fromTo(
-      ".fade-up",
-      { opacity: 0, y: 200 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.5,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: "#AncientWisdomForModernLiving",
-          start: "top 80%",
-          end: "bottom 20%",
-          // scrub: true,
-        },
-      }
-    );
+        ".left-section",
+        { opacity: 0, x: -1000 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1,
+          delay: 0.5,
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: "#AncientWisdomForModernLiving",
+            start: "top 80%",
+            end: "bottom 20%",
+            // scrub: true,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        ".right-section",
+        { opacity: 0, x: 1000 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1,
+          delay: 0.5,
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: "#AncientWisdomForModernLiving",
+            start: "top 80%",
+            end: "bottom 20%",
+            // scrub: true,
+          },
+        }
+      );
   }, []);
 
   return (
@@ -35,8 +54,7 @@ const AncientWisdomForModernLiving = () => {
     >
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-32">
         <div className="relative grid grid-cols-1 md:grid-cols-2 items-center gap-x-24 gap-y-5 ">
-          <div
-            className="h-full bg-cover bg-center transition-all duration-1000 min-h-[250px]"
+          <div className="left-section h-full bg-cover bg-center transition-all duration-1000 min-h-[250px]"
             style={{
               backgroundImage: `url("/asset/home/yoga-coach-training-session-.jpg")`,
             }}
@@ -64,7 +82,7 @@ const AncientWisdomForModernLiving = () => {
               </div>
             </div>
           </div>
-          <div className="fade-up py-[1.5rem] md:py-[5.5rem]">
+          <div className="right-section py-[1.5rem] md:py-[5.5rem]">
             <h2 className="font-suranna text-[50px] font-[400] leading-[1.3em] text-secondary text-left mb-6">
               Ancient Wisdom for Modern Living.
             </h2>
