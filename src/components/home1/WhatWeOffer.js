@@ -124,8 +124,7 @@ const WhatWeOffer = () => {
                 {testimonial.feedback}
               </p>
 
-              <div className="border border-1 border-[gray] mt-10" />
-
+              <div className="border-t-[0.5px] border-q4d462f5 mt-10" />
               <div className="text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-q4ca25af  hover:bg-q638d055 transition mt-10">
                 Learn more
               </div>

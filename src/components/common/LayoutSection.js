@@ -59,7 +59,7 @@ export const LayoutSection = ({ children, sessionData }) => {
 
   return (
     <>
-      <div style={{position:"relative", minHeight:"100vh",display: "flex" ,flexDirection: "column",justifyContent: "space-between"  }}>
+      <div style={{position:"relative", minHeight:"100vh",display: "flex" ,flexDirection: "column",justifyContent: "space-between", backgroundColor:"#FFFFFF"  }}>
         <div>
         <Navbar />
         <main >{children}</main>
