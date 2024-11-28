@@ -7,7 +7,7 @@ import { DoubleComma, Star } from "@/icon/icons";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const testimonials = [
+const offers = [
   {
     name: "Sarah Johnson",
     location: "Jakarta",
@@ -55,7 +55,7 @@ const testimonials = [
     rating: 4,
     feedback:
       "I’ve tried many wellness programs, but PranaVeda stands out. The natural remedies and expert guidance have truly improved my overall health.",
-  }
+  },
 ];
 
 const WhatWeOffer = () => {
@@ -70,7 +70,7 @@ const WhatWeOffer = () => {
         stagger: 0.2,
         ease: "power3.out",
         scrollTrigger: {
-          trigger: "#testimonials",
+          trigger: "#WhatWeOffer",
           start: "top 80%",
           end: "bottom 20%",
           // scrub: true,
@@ -80,7 +80,7 @@ const WhatWeOffer = () => {
   }, []);
 
   return (
-    <div id="testimonials" className="w-full relative bg-[#F9F3EB]">
+    <div id="WhatWeOffer" className="w-full relative bg-[#F9F3EB]">
       <Image
         className="absolute z-10 top-0 left-0"
         height={200}
@@ -99,7 +99,7 @@ const WhatWeOffer = () => {
           </h2>
         </div>
         <div className="flex flex-wrap justify-between gap-8">
-          {testimonials.map((testimonial, index) => (
+          {offers.map((testimonial, index) => (
             <div
               key={index}
               className="relative testimonial-card bg-[white] shadow-lg p-6 rounded-lg max-w-sm

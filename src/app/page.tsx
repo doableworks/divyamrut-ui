@@ -2,6 +2,7 @@ import Image from "next/image";
 import Banner from "@/components/home1/Banner";
 import Testimonial from "@/components/home1/Testimonial";
 import WhatWeOffer from "@/components/home1/WhatWeOffer";
+import AncientWisdomForModernLiving from "@/components/home1/AncientWisdomForModernLiving";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
     >
       <Banner />
       <WhatWeOffer />
+      <AncientWisdomForModernLiving />
       <Testimonial />
     </main>
   );
