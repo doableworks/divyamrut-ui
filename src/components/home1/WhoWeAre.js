@@ -55,9 +55,9 @@ const WhoWeAre = () => {
 
   return (
     <div id="AncientWisdomForModernLiving" className="w-full relative bg-text">
-      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-32">
+      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-20 md:py-32">
         <div className="relative grid grid-cols-1 md:grid-cols-2 items-center gap-x-24 gap-y-5 ">
-          <div className="left-section py-[1.5rem] md:py-[5.5rem]">
+          <div className="left-section py-[1rem] md:py-[5.5rem]">
             <h6 className="font-jost text-d49ac81 text-[14px] font-[500] leading-[1.4em] uppercase text-left mb-5">
               Who we are
             </h6>

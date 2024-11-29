@@ -488,6 +488,7 @@ const Navbar = () => {
                 className={`${
                   hasHover == "Pages" ? "text-a2c0d56" : "#FFFFFF"
                 } leading-[3.5em] cursor-pointer`}
+                onClick={() => handleMoveRoute("/")}
               >
                 Products
               </h5>
