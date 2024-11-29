@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Stone, Flower, Aroma, Puzzle, Globe, Coffee } from "@/icon/icons";
+import {  Puzzle, Globe, Coffee } from "@/icon/icons";
 
 gsap.registerPlugin(ScrollTrigger);
 

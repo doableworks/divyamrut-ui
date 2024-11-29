@@ -583,14 +583,14 @@ const Navbar = () => {
           >
             Holistic Health
           </h5>
-          {/* <h5
+          <h5
             className={`cursor-pointer hover:text-a2c0d56 ${
               pathname == "/contact-us" ? "text-a2c0d56" : "text-[#FFFFFF]"
             }`}
             onClick={() => handleMoveRoute("/contact-us")}
           >
             Contact Us
-          </h5> */}
+          </h5>
           <div
             className="relative group"
             onMouseEnter={() => setHasHover("Pages")}

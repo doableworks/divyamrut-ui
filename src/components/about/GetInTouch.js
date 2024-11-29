@@ -1,0 +1,230 @@
+"use client";
+import React, { useEffect } from "react";
+import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Puzzle, Call, Message } from "@/icon/icons";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const features = [
+  {
+    icon: "Puzzle",
+    heading: "Head Office",
+    title: "Jln Cempaka Wangi No 22",
+    text: "Jln Cempaka Wangi No. 22 Jakarta - Indonesia.",
+  },
+  {
+    icon: "Message",
+    heading: "Email Support",
+    title: "support@yourdomain.tld",
+    text: "hello@domain.tld.",
+  },
+  {
+    icon: "Call",
+    heading: "Let's Talk",
+    title: "Phone : +6221.2002.2012",
+    text: "Fax : +6221.2002.2013",
+  },
+];
+
+const OurServices = () => {
+  useEffect(() => {
+    gsap.fromTo(
+      ".left-section",
+      { opacity: 0, x: -1000 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1,
+        delay: 0.5,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: "#AncientWisdomForModernLiving",
+          start: "top 80%",
+          end: "bottom 20%",
+          // scrub: true,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      ".right-section",
+      { opacity: 0, x: 1000 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1,
+        delay: 0.5,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: "#AncientWisdomForModernLiving",
+          start: "top 80%",
+          end: "bottom 20%",
+          // scrub: true,
+        },
+      }
+    );
+  }, []);
+
+  return (
+    <div
+      id="AncientWisdomForModernLiving"
+      className="w-full relative bg-text pb-[2rem] md:pb-[10rem]"
+    >
+      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-32">
+        <div className="flex flex-col md:flex-row justify-between gap-x-24 gap-y-5 ">
+          <div className="left-section w-full md:w-[35%]">  
+            <h6 className="font-jost text-d49ac81 text-[14px] font-[500] leading-[1.4em] uppercase text-left mb-5">
+              Get in touch
+            </h6>
+            <h2 className="font-suranna text-[50px] font-[400] leading-[1.3em] text-secondary text-left mb-6">
+              We will be in touch shortly.
+            </h2>
+
+            <p className="font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-a2c0d56 text-left">
+              Leo aenean ut nec dictum venenatis suspendisse nunc ornare arcu.
+            </p>
+            <div className="flex flex-col gap-8">
+              {features.map((feature, index) => (
+                <div
+                  key={index}
+                  className={`flex items-start justify-between w-full gap-8`}
+                >
+                  <div className={`mb-4 p-6  bg-c94d9ab`}>
+                    {feature.icon == "Puzzle" ? (
+                      <Puzzle fill="#FFFFFF" h={35} w={35} />
+                    ) : feature.icon == "Message" ? (
+                      <Message fill="#FFFFFF" h={35} w={35} />
+                    ) : (
+                      <Call fill="#FFFFFF" h={35} w={35} />
+                    )}
+                  </div>
+                  <div>
+                    <h3
+                      className={`font-suranna text-[22px] md:text-[28px] font-[400] leading-[1.3em] text-secondary mb-2`}
+                    >
+                      {feature.heading}
+                    </h3>
+                    <p
+                      className={`font-jost text-[14px] md:text-[18px] font-[400] text-left text-primary`}
+                    >
+                      {feature.title}
+                    </p>
+                    <p
+                      className={`font-jost text-[14px] md:text-[18px] font-[400] text-left text-primary`}
+                    >
+                      {feature.text}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="right-section w-full md:w-[65%] h-full">
+            <div className="bg-white p-8 shadow-lg rounded-md max-w-3xl mx-auto">
+              <h2 className="font-suranna text-[50px] font-[400] leading-[1.3em] text-secondary text-left mb-6">
+              Send us a message
+            </h2>
+              <form className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block text-blue-900 font-medium"
+                    >
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      placeholder="Name"
+                      className="w-full p-3 border border-gray-300 rounded bg-beige-50"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="company"
+                      className="block text-blue-900 font-medium"
+                    >
+                      Company
+                    </label>
+                    <input
+                      type="text"
+                      id="company"
+                      placeholder="Company"
+                      className="w-full p-3 border border-gray-300 rounded bg-beige-50"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="block text-blue-900 font-medium"
+                    >
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      placeholder="Phone"
+                      className="w-full p-3 border border-gray-300 rounded bg-beige-50"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-blue-900 font-medium"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="Email"
+                      className="w-full p-3 border border-gray-300 rounded bg-beige-50"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="subject"
+                    className="block text-blue-900 font-medium"
+                  >
+                    Subject
+                  </label>
+                  <input
+                    type="text"
+                    id="subject"
+                    placeholder="Subject"
+                    className="w-full p-3 border border-gray-300 rounded bg-beige-50"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-blue-900 font-medium"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    placeholder="Message"
+                    className="w-full p-3 border border-gray-300 rounded bg-beige-50 h-32 resize-none"
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-q4ca25af text-white p-4 rounded flex items-center justify-center gap-2"
+                >
+                  <Message fill={"#FFFFFF"}  w={25} h={25} /> Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default OurServices;
