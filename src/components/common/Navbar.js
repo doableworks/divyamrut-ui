@@ -431,7 +431,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="absolute z-20 w-full shadow">
+    <header className="absolute z-30 w-full shadow">
       {/* Top Banner */}
       <div className="bg-q638d055  py-2">
         <div className="w-[85%] container mx-auto flex items-center text-white justify-between">
@@ -462,7 +462,7 @@ const Navbar = () => {
               width={150}
               height={150}
             /> */}
-            <h2 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF]">
+            <h2 onClick={()=>console.log("on nnnnnnnn")} className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF]">
               Divyamrut
             </h2>
           </div>

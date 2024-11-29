@@ -2,7 +2,7 @@ import MainBanner from '@/components/common/MainBanner'
 import React from 'react'
 
 const page = () => {
-  const heading = "Mission and Vision"
+  const heading = "Holistic Health"
   const subHeading = "Trusted by millions, validated by you."
 
   return (
