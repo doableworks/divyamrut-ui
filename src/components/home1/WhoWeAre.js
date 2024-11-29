@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { RightArrow, Star, Checked, Flower } from "@/icon/icons";
+import { RightArrow, Star, Checked, Flower, HeadPhone } from "@/icon/icons";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -113,6 +113,21 @@ const WhoWeAre = () => {
                 Eget lobortis convallis habitant aliquam cras nulla tempor
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="relative z-10 border-t-[0.5px] border-q4d462f5 mb-[5rem] flex justify-center">
+        <div className="relative z-20 top-[-36px] flex items-center flex-col md:flex-row justify-between items-center p-4 px-2 md:px-32 rounded-xl md:rounded-full border border-gray-300 shadow-md gap-8 bg-white ">
+          {/* <div className="flex items-center space-x-3"> */}
+            <HeadPhone fill="#99C24A" h={35} w={35} />
+            <p className="w-[80%] font-suranna text-[16px] md:text-[21px] font-[400] leading-[1.4em] text-secondary text-center">
+              Start Your Personal Health Plan with PranaVeda ! 
+            </p>
+          {/* </div> */}
+          <div className="text-center text-[#FFFFFF] inline-flex items-center justify-center px-2  py-1 bg-q4ca25af transition rounded-xl">
+            <h5 className="font-inter text-[13px] font-[400] leading-[1.5em] text-text text-nowrap">
+              Contact us
+            </h5>
           </div>
         </div>
       </div>

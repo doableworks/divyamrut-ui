@@ -6,6 +6,7 @@ import AncientWisdomForModernLiving from "@/components/home1/AncientWisdomForMod
 import HolisticHealth from "@/components/home1/HolisticHealth";
 import WhyChooseUs from "@/components/home1/WhyChooseUs";
 import WhoWeAre from "@/components/home1/WhoWeAre";
+import OurServices from "@/components/home1/OurServices";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Banner />
       <WhoWeAre />
       <HolisticHealth />
+      <OurServices />
       <WhatWeOffer />
       <WhyChooseUs />
       <AncientWisdomForModernLiving />
