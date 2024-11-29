@@ -25,9 +25,6 @@
 // import "antd/dist/reset.css";
 import { ReduxProvider } from "../redux/provider";
 import {
-  Poppins,
-  Epilogue,
-  Rubik,
   Suranna,
   Jost,
   Inter,
@@ -85,7 +82,7 @@ const bentonSans_bold = localFont({
 });
 
 // export const metadata = {
-//   title: "Parmartham",
+//   title: "Diyamrut Naturals",
 //   icons: {
 //     icon: "/favicon.ico",
 //   },

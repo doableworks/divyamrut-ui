@@ -478,6 +478,86 @@ const Navbar = () => {
           >
             About Us
           </h5>
+          <div
+            className="relative group"
+            onMouseEnter={() => setHasHover("Pages")}
+            onMouseLeave={() => setHasHover(null)}
+          >
+            <div className="flex items-center leading-[3.5em] cursor-pointer">
+              <h5
+                className={`${
+                  hasHover == "Pages" ? "text-a2c0d56" : "#FFFFFF"
+                } leading-[3.5em] cursor-pointer`}
+              >
+                Products
+              </h5>
+              <Arrow fill={hasHover == "Pages" ? "#99C24A" : "#FFFFFF"} />
+            </div>
+            {/* Dropdown */}
+            <div
+              className={`absolute left-0 hidden group-hover:block shadow-lg text-nowrap cursor-pointer
+            bg-white 
+            text-a2c0d56 
+            `}
+            >
+              <h5
+                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
+                  pathname == "/team" ? "text-text bg-d49ac81" : ""
+                }`}
+                onClick={() => handleMoveRoute("/team")}
+              >
+                Products
+              </h5>
+              <h5
+                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
+                  pathname == "/Gallery" ? "text-text bg-d49ac81" : ""
+                }`}
+                onClick={() => handleMoveRoute("/Gallery")}
+              >
+                Kansa Vati Foot Massage Kit
+              </h5>
+              <h5
+                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
+                  pathname == "/FAQ" ? "text-text bg-d49ac81" : ""
+                }`}
+                onClick={() => handleMoveRoute("/FAQ")}
+              >
+                Meditation/Puja Asans
+              </h5>
+              <h5
+                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
+                  pathname == "/log-archiev" ? "text-text bg-d49ac81" : ""
+                }`}
+                onClick={() => handleMoveRoute("/blog-archiev")}
+              >
+                Meditation/Puja Shawls
+              </h5>
+              <h5
+                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
+                  pathname == "/single-post" ? "text-text bg-d49ac81" : ""
+                }`}
+                onClick={() => handleMoveRoute("/single-post")}
+              >
+                Chandan-Kumkum Bindi Kit
+              </h5>
+              <h5
+                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
+                  pathname == "/single-post" ? "text-text bg-d49ac81" : ""
+                }`}
+                onClick={() => handleMoveRoute("/single-post")}
+              >
+                Bath/Aura Cleansing Salt
+              </h5>
+              <h5
+                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
+                  pathname == "/single-post" ? "text-text bg-d49ac81" : ""
+                }`}
+                onClick={() => handleMoveRoute("/single-post")}
+              >
+                Diya
+              </h5>
+            </div>
+          </div>
           <h5
             className={`cursor-pointer hover:text-a2c0d56 ${
               pathname == "/purpose" ? "text-a2c0d56" : "text-[#FFFFFF]"
@@ -502,14 +582,14 @@ const Navbar = () => {
           >
             Holistic Health
           </h5>
-          <h5
+          {/* <h5
             className={`cursor-pointer hover:text-a2c0d56 ${
               pathname == "/contact-us" ? "text-a2c0d56" : "text-[#FFFFFF]"
             }`}
             onClick={() => handleMoveRoute("/contact-us")}
           >
             Contact Us
-          </h5>
+          </h5> */}
           <div
             className="relative group"
             onMouseEnter={() => setHasHover("Pages")}
@@ -595,87 +675,6 @@ const Navbar = () => {
                 onClick={() => handleMoveRoute("/single-post")}
               >
                 Art Therapy
-              </h5>
-            </div>
-          </div>
-
-          <div
-            className="relative group"
-            onMouseEnter={() => setHasHover("Pages")}
-            onMouseLeave={() => setHasHover(null)}
-          >
-            <div className="flex items-center leading-[3.5em] cursor-pointer">
-              <h5
-                className={`${
-                  hasHover == "Pages" ? "text-a2c0d56" : "#FFFFFF"
-                } leading-[3.5em] cursor-pointer`}
-              >
-                Products
-              </h5>
-              <Arrow fill={hasHover == "Pages" ? "#99C24A" : "#FFFFFF"} />
-            </div>
-            {/* Dropdown */}
-            <div
-              className={`absolute left-0 hidden group-hover:block shadow-lg text-nowrap cursor-pointer
-            bg-white 
-            text-a2c0d56 
-            `}
-            >
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/team" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/team")}
-              >
-                Products
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/Gallery" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/Gallery")}
-              >
-                Kansa Vati Foot Massage Kit
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/FAQ" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/FAQ")}
-              >
-                Meditation/Puja Asans
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/log-archiev" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/blog-archiev")}
-              >
-                Meditation/Puja Shawls
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/single-post" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/single-post")}
-              >
-                Chandan-Kumkum Bindi Kit
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/single-post" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/single-post")}
-              >
-                Bath/Aura Cleansing Salt
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/single-post" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/single-post")}
-              >
-                Diya
               </h5>
             </div>
           </div>

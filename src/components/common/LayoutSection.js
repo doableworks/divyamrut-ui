@@ -13,8 +13,9 @@ import {
 //   setUserSession,
 // } from "@/redux/feature/authSlice";
 import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname } from "next/navigation";
 import React from "react";
+import MainBanner from '@/components/common/MainBanner'
 
 export const LayoutSection = ({ children, sessionData }) => {
   // const { data: session, status } = useSession();
@@ -22,6 +23,7 @@ export const LayoutSection = ({ children, sessionData }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const path = usePathname();
 
   // useEffect(() => {
   //   if (userSession === null && !session) {
@@ -57,11 +59,22 @@ export const LayoutSection = ({ children, sessionData }) => {
   //   }
   // }, [session]);
 
+  const hideNavbarFooterPaths = [
+    "/blog",
+    "/about-us",
+    "/contact-us",
+  ];
+  const shouldHideMainBanner =
+    hideNavbarFooterPaths.includes(path) ||
+    /^\/blog\/[\w-]+$/.test(path) ||
+    /^\/newspost\/[\w-]+$/.test(path);
+
   return (
     <>
       <div style={{position:"relative", minHeight:"100vh",display: "flex" ,flexDirection: "column",justifyContent: "space-between", backgroundColor:"#FFFFFF"  }}>
         <div>
         <Navbar />
+        {/* {shouldHideMainBanner && <MainBanner />} */}
         <main >{children}</main>
         </div>
         <Footer />
