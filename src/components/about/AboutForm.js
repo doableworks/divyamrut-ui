@@ -28,7 +28,7 @@ const features = [
   },
 ];
 
-const OurServices = () => {
+const AboutForm = () => {
   useEffect(() => {
     gsap.fromTo(
       ".left-section",
@@ -40,7 +40,7 @@ const OurServices = () => {
         delay: 0.5,
         stagger: 0.2,
         scrollTrigger: {
-          trigger: "#AncientWisdomForModernLiving",
+          trigger: "#AboutForm",
           start: "top 80%",
           end: "bottom 20%",
           // scrub: true,
@@ -58,7 +58,7 @@ const OurServices = () => {
         delay: 0.5,
         stagger: 0.2,
         scrollTrigger: {
-          trigger: "#AncientWisdomForModernLiving",
+          trigger: "#AboutForm",
           start: "top 80%",
           end: "bottom 20%",
           // scrub: true,
@@ -69,8 +69,8 @@ const OurServices = () => {
 
   return (
     <div
-      id="AncientWisdomForModernLiving"
-      className="w-full relative bg-text pb-[2rem] md:pb-[10rem]"
+      id="AboutForm"
+      className="w-full relative bg-text"
     >
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-32">
         <div className="flex flex-col md:flex-row justify-between gap-x-24 gap-y-5 ">
@@ -82,14 +82,14 @@ const OurServices = () => {
               We will be in touch shortly.
             </h2>
 
-            <p className="font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-a2c0d56 text-left">
+            <p className="font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-a2c0d56 text-left mb-5">
               Leo aenean ut nec dictum venenatis suspendisse nunc ornare arcu.
             </p>
             <div className="flex flex-col gap-8">
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className={`flex items-start justify-between w-full gap-8`}
+                  className={`flex items-start w-full gap-8`}
                 >
                   <div className={`mb-4 p-6  bg-c94d9ab`}>
                     {feature.icon == "Puzzle" ? (
@@ -102,17 +102,17 @@ const OurServices = () => {
                   </div>
                   <div>
                     <h3
-                      className={`font-suranna text-[22px] md:text-[28px] font-[400] leading-[1.3em] text-secondary mb-2`}
+                      className={`font-jost text-[12px] md:text-[14px] font-[500] leading-[1.3em] text-secondary uppercase mb-2`}
                     >
                       {feature.heading}
                     </h3>
                     <p
-                      className={`font-jost text-[14px] md:text-[18px] font-[400] text-left text-primary`}
+                      className={`font-suranna text-[16px] md:text-[21px] font-[400] text-left leading-[1.4em] text-primary`}
                     >
                       {feature.title}
                     </p>
                     <p
-                      className={`font-jost text-[14px] md:text-[18px] font-[400] text-left text-primary`}
+                       className={`font-suranna text-[16px] md:text-[21px] font-[400] text-left leading-[1.4em] text-primary`}  
                     >
                       {feature.text}
                     </p>
@@ -131,7 +131,7 @@ const OurServices = () => {
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-blue-900 font-medium"
+                      className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.5em] text-primary"
                     >
                       Name
                     </label>
@@ -139,13 +139,20 @@ const OurServices = () => {
                       type="text"
                       id="name"
                       placeholder="Name"
-                      className="w-full p-3 border border-gray-300 rounded bg-beige-50"
+                      className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
+                      // style={{
+                      //   fontFamily:"jost",
+                      //   fontSize:"16px",
+                      //   color: "#4A5C24",
+                      //   backgroundColor:"#F9F3EB",
+                      //   borderColor:"#F9F3EB",
+                      // }}
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="company"
-                      className="block text-blue-900 font-medium"
+                      className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.5em] text-primary"
                     >
                       Company
                     </label>
@@ -153,13 +160,13 @@ const OurServices = () => {
                       type="text"
                       id="company"
                       placeholder="Company"
-                      className="w-full p-3 border border-gray-300 rounded bg-beige-50"
+                      className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="phone"
-                      className="block text-blue-900 font-medium"
+                      className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.5em] text-primary"
                     >
                       Phone
                     </label>
@@ -167,13 +174,13 @@ const OurServices = () => {
                       type="tel"
                       id="phone"
                       placeholder="Phone"
-                      className="w-full p-3 border border-gray-300 rounded bg-beige-50"
+                      className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-blue-900 font-medium"
+                      className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.5em] text-primary"
                     >
                       Email
                     </label>
@@ -181,14 +188,14 @@ const OurServices = () => {
                       type="email"
                       id="email"
                       placeholder="Email"
-                      className="w-full p-3 border border-gray-300 rounded bg-beige-50"
+                      className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
                     />
                   </div>
                 </div>
                 <div>
                   <label
                     htmlFor="subject"
-                    className="block text-blue-900 font-medium"
+                    className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.5em] text-primary"
                   >
                     Subject
                   </label>
@@ -196,20 +203,20 @@ const OurServices = () => {
                     type="text"
                     id="subject"
                     placeholder="Subject"
-                    className="w-full p-3 border border-gray-300 rounded bg-beige-50"
+                    className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-blue-900 font-medium"
+                    className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.5em] text-primary"
                   >
                     Message
                   </label>
                   <textarea
                     id="message"
                     placeholder="Message"
-                    className="w-full p-3 border border-gray-300 rounded bg-beige-50 h-32 resize-none"
+                    className="w-full p-3  h-32 resize-none font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
                   ></textarea>
                 </div>
                 <button
@@ -227,4 +234,4 @@ const OurServices = () => {
   );
 };
 
-export default OurServices;
+export default AboutForm;

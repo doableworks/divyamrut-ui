@@ -1,7 +1,7 @@
 import MainBanner from '@/components/common/MainBanner'
 import React from 'react'
 import GoogleMapCom from '../../components/common/GoogleMapCom'
-import GetInTouch from '../../components/about/GetInTouch'
+import AboutForm from '../../components/about/AboutForm'
 
 const page = () => {
   const heading = "Contact us"
@@ -10,7 +10,7 @@ const page = () => {
   return (
     <>
     <MainBanner heading={heading} subHeading={subHeading} />
-    {/* <GetInTouch /> */}
+    <AboutForm />
     <GoogleMapCom />
     </>
   )
