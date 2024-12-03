@@ -92,14 +92,6 @@ const Navbar = () => {
             >
               <h5
                 className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/team" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/team")}
-              >
-                Products
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
                   pathname == "/Gallery" ? "text-text bg-d49ac81" : ""
                 }`}
                 onClick={() => handleMoveRoute("/Gallery")}
