@@ -1,9 +1,9 @@
 "use client";
-import React, { useEffect } from "react";
-import Image from "next/image";
-import { gsap } from "gsap";
+import React, { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { RightArrow, Star, Checked, Flower, HeadPhone } from "@/icon/icons";
+import { Checked, Flower, HeadPhone } from "@/icon/icons";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,10 +15,12 @@ const features = [
 ];
 
 const WhoWeAre = () => {
-  useEffect(() => {
+
+  useGSAP(() => {
     gsap.fromTo(
-      ".left-section",
-      { opacity: 0, x: -1000 },
+      ".left-section-wwa",
+      {x: -300,
+        opacity: 0},
       {
         x: 0,
         opacity: 1,
@@ -26,7 +28,7 @@ const WhoWeAre = () => {
         delay: 0.5,
         stagger: 0.2,
         scrollTrigger: {
-          trigger: "#AncientWisdomForModernLiving",
+          trigger: "#whoWeAre",
           start: "top 80%",
           end: "bottom 20%",
           // scrub: true,
@@ -35,29 +37,68 @@ const WhoWeAre = () => {
     );
 
     gsap.fromTo(
-      ".right-section",
-      { opacity: 0, x: 1000 },
+        ".right-section-wwa",
+      {y: -300,
+        opacity: 0},
       {
-        x: 0,
+        y: 0,
         opacity: 1,
-        duration: 1,
-        delay: 0.5,
+        duration: 0.5,
+        delay: 0.2,
         stagger: 0.2,
         scrollTrigger: {
-          trigger: "#AncientWisdomForModernLiving",
+          trigger: "#whoWeAre",
           start: "top 80%",
           end: "bottom 20%",
           // scrub: true,
         },
       }
     );
-  }, []);
 
+    gsap.fromTo(
+      "#bottom-card-wwa",
+    {y: 200,
+      opacity: 0},
+    {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      delay: 0.5,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: "#whoWeAre",
+        start: "top 90%",
+        end: "bottom 20%",
+        // scrub: true,
+      },
+    }
+  );
+
+    gsap.fromTo(
+      "#card_id-wwa",
+    {y: 300, x:300,
+      opacity: 0},
+    {
+      y: 0,
+      x:0,
+      opacity: 1,
+      duration: 1,
+      delay: 0.5,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: "#whoWeAre",
+        start: "top 80%",
+        end: "bottom 20%",
+        // scrub: true,
+      },
+    }
+  );
+  },[]); 
   return (
-    <div id="AncientWisdomForModernLiving" className="w-full relative bg-text">
+    <div id="whoWeAre" className="w-full relative bg-text">
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-20 md:py-32">
         <div className="relative grid grid-cols-1 md:grid-cols-2 items-center gap-x-24 gap-y-5 ">
-          <div className="left-section py-[1rem] md:py-[5.5rem]">
+          <div className="left-section-wwa py-[1rem] md:py-[5.5rem]">
             <h6 className="font-jost text-d49ac81 text-[14px] font-[500] leading-[1.4em] uppercase text-left mb-5">
               Who we are
             </h6>
@@ -88,15 +129,13 @@ const WhoWeAre = () => {
               ))}
             </div>
           </div>
-          <div
-            className="right-section h-full bg-cover bg-center md:bg-center  mr-5 md:mr-0 transition-all duration-1000 min-h-[450px]"
+          <div className="right-section-wwa h-full bg-cover bg-center md:bg-center  mr-5 md:mr-0 transition-all duration-1000 min-h-[450px]"
             style={{
               backgroundImage: `url("/asset/home/ayurvedic-facial-massage.jpg")`,
             }}
           >
-            <div
-              className="absolute bottom-[-30px] right-[-30px] bg-white h-[250px] w-[200px] p-4 bg-custom-radial flex flex-col justify-evenly items-center text-center"
-              id="card_id"
+            <div className="absolute bottom-[-30px] right-[-30px] bg-white h-[250px] w-[200px] p-4 bg-custom-radial flex flex-col justify-evenly items-center text-center"
+              id="card_id-wwa"
             >
               {/* Icon */}
               <div className="flex justify-center w-full mb-5">
@@ -117,7 +156,7 @@ const WhoWeAre = () => {
         </div>
       </div>
       <div className="relative z-10 border-t-[0.5px] border-q4d462f5 mb-[5rem] flex justify-center">
-        <div className="relative z-20 top-[-36px] flex items-center flex-col md:flex-row justify-between items-center p-4 px-2 md:px-32 rounded-xl md:rounded-full border border-gray-300 shadow-md gap-8 bg-white ">
+        <div id="bottom-card-wwa" className="relative z-20 top-[-36px] flex items-center flex-col md:flex-row justify-between items-center p-4 px-2 md:px-32 rounded-xl md:rounded-full border border-gray-300 shadow-md gap-8 bg-white ">
           {/* <div className="flex items-center space-x-3"> */}
             <HeadPhone fill="#99C24A" h={35} w={35} />
             <p className="w-[80%] font-suranna text-[16px] md:text-[21px] font-[400] leading-[1.4em] text-secondary text-center">

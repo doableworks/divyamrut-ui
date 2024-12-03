@@ -75,7 +75,6 @@ const Banner = () => {
                     h={40}
                     w={40}
                   />
-
               {/* Title */}
               <h3 className="text-lg font-semibold text-gray-800">
                 Premium Treatments

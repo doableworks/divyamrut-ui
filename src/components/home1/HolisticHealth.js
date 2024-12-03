@@ -17,14 +17,14 @@ const HolisticHealth = () => {
 
   return (
     <section
-      className="relative bg-cover bg-center h-screen overflow-hidden"
+      className="relative bg-cover bg-center overflow-hidden h-[45rem] md:h-screen"
       style={{
         backgroundImage: "url('/asset/home/natural-health-support.jpg')",
       }}
     >
       <div className="bg-[rgba(0,0,0,.4)] h-full w-full flex items-center justify-center text-white">
         <div className="hero-content text-center">
-          <div className="flex justify-center items-center mb-6">
+          <div className="flex justify-center items-center mb-12">
             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg">
               <PlayIcon  />
             </div>
@@ -41,26 +41,26 @@ const HolisticHealth = () => {
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 py-4">
-        <div className="flex justify-around items-center text-center text-white">
+        <div className="grid grid-cols-2 md:grid-cols-4 text-center text-white">
           <div className="flex flex-col md:flex-row items-center gap-4">
             <Diamond fill="#99C24A" h={35} w={35} />
             <p className="font-suranna text-[25px] font-[400] leading-[1.3em] text-text">
               Trusted Company
             </p>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col md:flex-row items-center gap-4">
             <Chat fill="#99C24A" h={35} w={35} />
             <p className="font-suranna text-[25px] font-[400] leading-[1.3em] text-text">
               Premium Support
             </p>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col md:flex-row items-center gap-4">
             <PaymentCard fill="#99C24A" h={35} w={35} />
             <p className="font-suranna text-[25px] font-[400] leading-[1.3em] text-text">
               Safety Payment
             </p>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col md:flex-row items-center gap-4">
             <Help fill="#99C24A" h={35} w={35} />
             <p className="font-suranna text-[25px] font-[400] leading-[1.3em] text-text">
               Help Center
