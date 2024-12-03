@@ -393,5 +393,4 @@ export const Play = ({ h = 18, w = 18, fill = "black" }) => (
 );
 
 // export const RightArrow = ({ h = 18, w = 18, fill = "black" }) => (
-
 // )

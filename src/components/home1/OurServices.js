@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
+import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -26,18 +27,19 @@ const features = [
 ];
 
 const OurServices = () => {
-  useEffect(() => {
+
+  useGSAP(() => {
     gsap.fromTo(
-      ".left-section",
-      { opacity: 0, x: -1000 },
+      ".bottom-cards-os",
+      { opacity: 0, x: -300 },
       {
         x: 0,
         opacity: 1,
-        duration: 1,
-        delay: 0.5,
+        duration: 0.5,
+        delay: 0.2,
         stagger: 0.2,
         scrollTrigger: {
-          trigger: "#AncientWisdomForModernLiving",
+          trigger: "#OurServices",
           start: "top 80%",
           end: "bottom 20%",
           // scrub: true,
@@ -46,16 +48,16 @@ const OurServices = () => {
     );
 
     gsap.fromTo(
-      ".right-section",
-      { opacity: 0, x: 1000 },
+      ".right-section-os",
+      { opacity: 0, x: 300 },
       {
         x: 0,
         opacity: 1,
-        duration: 1,
-        delay: 0.5,
+        duration: 0.5,
+        delay: 0.2,
         stagger: 0.2,
         scrollTrigger: {
-          trigger: "#AncientWisdomForModernLiving",
+          trigger: "#OurServices",
           start: "top 80%",
           end: "bottom 20%",
           // scrub: true,
@@ -66,7 +68,7 @@ const OurServices = () => {
 
   return (
     <div
-      id="AncientWisdomForModernLiving"
+      id="OurServices"
       className="w-full relative bg-text pb-[2rem] md:pb-[10rem]"
     >
       <Image
@@ -79,7 +81,7 @@ const OurServices = () => {
 
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-32">
         <div className="flex flex-col md:flex-row justify-between gap-x-24 gap-y-5 ">
-          <div className="left-section w-full md:w-[65%] py-[1.5rem] md:py-[5.5rem]">
+          <div className="w-full md:w-[65%] py-[1.5rem] md:py-[5.5rem]">
             <h6 className="font-jost text-d49ac81 text-[14px] font-[500] leading-[1.4em] uppercase text-left mb-5">
               Our Services
             </h6>
@@ -101,14 +103,13 @@ const OurServices = () => {
               </p>
             </div>
           </div>
-          <div
-            className="right-section w-full md:w-[35%] h-full bg-cover bg-center md:bg-center  mr-5 md:mr-0 transition-all duration-1000 min-h-[250px] md:min-h-[630px]"
+          <div className="right-section-os w-full md:w-[35%] h-full bg-cover bg-center md:bg-center  mr-5 md:mr-0 transition-all duration-1000 min-h-[250px] md:min-h-[630px]"
             style={{
               backgroundImage: `url("/asset/home/turmeric-powder-and-curcuma-root.jpg")`,
             }}
           ></div>
         </div>
-        <div className="relative md:absolute bottom-0 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="bottom-cards-os relative md:absolute bottom-0 grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <div
               key={index}

@@ -1,64 +1,66 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const offers = [
   {
-    name: "Sarah Johnson",
+    name: "Consultations",
     location: "Jakarta",
-    image: "/asset/testimonial/Sarah.jpg",
+    image:"/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
     rating: 4,
     feedback:
-      "PranaVeda has transformed my life! The personalized Ayurvedic plan has helped me achieve a level of balance and wellness I never thought possible.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
   },
   {
-    name: "Michael Brown",
+    name: "Detoxification",
     location: "Bandung",
-    image: "/asset/testimonial/Michael.jpg",
+    image:"/asset/home/caucasian-woman-having-ayurveda-shirodhara-treatment-in-india.jpg",
     rating: 4,
     feedback:
-      "I’ve tried many wellness programs, but PranaVeda stands out. The natural remedies and expert guidance have truly improved my overall health.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
   },
   {
-    name: "Emily Davis",
+    name: "SpaTreatments",
     location: "Bali",
-    image: "/asset/testimonial/Emily.jpg",
+    image: "/asset/home/spa-treatment.jpg",
     rating: 5,
     feedback:
-      "PranaVeda's Ayurvedic treatments have been a game-changer for me. The stress management techniques have made a huge difference in my daily life.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
   },
   {
-    name: "Michael Brown",
+    name: "BeautyCare",
     location: "Bandung",
-    image: "/asset/testimonial/Michael.jpg",
+    image:  "/asset/home/multiethnic-women.jpg",
     rating: 4,
     feedback:
-      "I’ve tried many wellness programs, but PranaVeda stands out. The natural remedies and expert guidance have truly improved my overall health.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
   },
   {
-    name: "Emily Davis",
+    name: "Nutrition",
     location: "Bali",
-    image: "/asset/testimonial/Emily.jpg",
+    image: "/asset/home/ayurvedic-supplement.jpg",
     rating: 5,
     feedback:
-      "PranaVeda's Ayurvedic treatments have been a game-changer for me. The stress management techniques have made a huge difference in my daily life.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
   },
   {
-    name: "Michael Brown",
+    name: "Workshops",
     location: "Bandung",
-    image: "/asset/testimonial/Michael.jpg",
+    image: "/asset/home/yoga-coach-training-session-.jpg",
     rating: 4,
     feedback:
-      "I’ve tried many wellness programs, but PranaVeda stands out. The natural remedies and expert guidance have truly improved my overall health.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
   },
 ];
 
 const WhatWeOffer = () => {
-  useEffect(() => {
+
+  useGSAP(() => {
     gsap.fromTo(
       ".fade-up",
       { opacity: 0, y: 200 },
@@ -66,6 +68,24 @@ const WhatWeOffer = () => {
         opacity: 1,
         y: 0,
         duration: 1.5,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#WhatWeOffer",
+          start: "top 80%",
+          end: "bottom 20%",
+          // scrub: true,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      ".card-wwo",
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 1.5,
+        delay: 0.5,
         stagger: 0.2,
         ease: "power3.out",
         scrollTrigger: {
@@ -97,24 +117,25 @@ const WhatWeOffer = () => {
             The combination of nature and science.
           </h2>
         </div>
-        <div className="flex flex-wrap justify-between gap-8">
+        <div className="card-wwo flex flex-wrap justify-between gap-8">
           {offers.map((testimonial, index) => (
             <div
               key={index}
-              className="relative testimonial-card bg-[white] shadow-lg p-6 rounded-lg max-w-sm
-            py-10 pb-20"
+              className="relative testimonial-card bg-[white] shadow-lg p-6 max-w-sm
+            py-10 "
             >
               <div className="absolute top-0 right-0 rounded-bl-[4rem] overflow-hidden">
                 <Image
-                  src={"/asset/home/spa-treatment.jpg"}
-                  width={200}
+                  // src={"/asset/home/spa-treatment.jpg"}
+                  src={testimonial.image}
+                  width={180}
                   height={200}
                   alt="img"
                 />
               </div>
-              <div className="flex flex-col justify-start items-start gap-4 mb-32">
+              <div className="flex flex-col justify-start items-start gap-4 mb-20">
                 <div className="text-start">
-                  <strong className="font-suranna text-[21px] font-[400] leading-[1.4em] text-secondary">
+                  <strong className="font-suranna text-[28px] font-[400] leading-[1.4em] text-secondary">
                     {testimonial.name}
                   </strong>
                 </div>

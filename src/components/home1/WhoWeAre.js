@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Checked, Flower, HeadPhone } from "@/icon/icons";
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 const features = [
@@ -94,6 +95,7 @@ const WhoWeAre = () => {
     }
   );
   },[]); 
+
   return (
     <div id="whoWeAre" className="w-full relative bg-text">
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-20 md:py-32">
@@ -129,12 +131,12 @@ const WhoWeAre = () => {
               ))}
             </div>
           </div>
-          <div className="right-section-wwa h-full bg-cover bg-center md:bg-center  mr-5 md:mr-0 transition-all duration-1000 min-h-[450px]"
+          <div className="right-section-wwa h-full bg-cover bg-center md:bg-center  mr-8 md:mr-0 transition-all duration-1000 min-h-[450px]"
             style={{
               backgroundImage: `url("/asset/home/ayurvedic-facial-massage.jpg")`,
             }}
           >
-            <div className="absolute bottom-[-30px] right-[-30px] bg-white h-[250px] w-[200px] p-4 bg-custom-radial flex flex-col justify-evenly items-center text-center"
+            <div className="absolute bottom-[-30px] right-[-10px] md:right-[-30px] bg-white h-[250px] w-[200px] p-4 bg-custom-radial flex flex-col justify-evenly items-center text-center"
               id="card_id-wwa"
             >
               {/* Icon */}

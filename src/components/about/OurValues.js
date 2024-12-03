@@ -1,9 +1,10 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
-import { gsap } from "gsap";
+import  gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {  Puzzle, Globe, Coffee } from "@/icon/icons";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,18 +27,19 @@ const features = [
 ];
 
 const OurValues = () => {
-  useEffect(() => {
+
+  useGSAP(() => {
     gsap.fromTo(
-      ".left-section",
-      { opacity: 0, x: -1000 },
+      ".left-section-ov",
+      { opacity: 0, x: -300 },
       {
         x: 0,
         opacity: 1,
-        duration: 1,
-        delay: 0.5,
+        duration: 0.5,
+        delay: 0.2,
         stagger: 0.2,
         scrollTrigger: {
-          trigger: "#AncientWisdomForModernLiving",
+          trigger: "#OurValues",
           start: "top 80%",
           end: "bottom 20%",
           // scrub: true,
@@ -46,16 +48,16 @@ const OurValues = () => {
     );
 
     gsap.fromTo(
-        ".middle-section",
-        { opacity: 0, x: 500 },
+        ".middle-section-ov",
+        { opacity: 0, x: 300 },
         {
           x: 0,
           opacity: 1,
-          duration: 1,
-          delay: 0.5,
+          duration: 0.5,
+          delay: 0.2,
           stagger: 0.2,
           scrollTrigger: {
-            trigger: "#AncientWisdomForModernLiving",
+            trigger: "#OurValues",
             start: "top 80%",
             end: "bottom 20%",
             // scrub: true,
@@ -64,8 +66,8 @@ const OurValues = () => {
       );
 
     gsap.fromTo(
-      ".right-section",
-      { opacity: 0, x: 1000 },
+      ".right-section-ov",
+      { opacity: 0, x: 300 },
       {
         x: 0,
         opacity: 1,
@@ -73,7 +75,7 @@ const OurValues = () => {
         delay: 0.5,
         stagger: 0.2,
         scrollTrigger: {
-          trigger: "#AncientWisdomForModernLiving",
+          trigger: "#OurValues",
           start: "top 80%",
           end: "bottom 20%",
           // scrub: true,
@@ -84,14 +86,14 @@ const OurValues = () => {
 
   return (
     <section
-      id="AncientWisdomForModernLiving"
+      id="OurValues"
       className="relative bg-text "
     >
     <div className="flex flex-col justify-center items-center w-screen">
     <div class="absolute top-0 w-full bg-contain h-full opacity-5 bg-center bg-[url('/asset/home/banner-left.png')] bg-no-repeat" />
       <div className="z-20 mx-auto w-[90%] md:w-[85%] py-20 md:py-32">
         <div className="flex flex-col md:flex-row justify-between gap-x-24 gap-y-10 ">
-          <div className="left-section w-full md:w-[35%]">
+          <div className="left-section-ov w-full md:w-[35%]">
             <h6 className="font-jost text-d49ac81 text-[14px] font-[500] leading-[1.4em] uppercase text-left mb-5">
               Our Value
             </h6>
@@ -108,14 +110,14 @@ const OurValues = () => {
               Learn more
             </div>
           </div>
-          <div className="middle-section relative w-full md:w-[30%] h-full bg-cover bg-center md:bg-center  mr-5 md:mr-0 transition-all duration-1000 min-h-[350px] md:min-h-[530px]"
+          <div className="middle-section-ov relative w-full md:w-[30%] h-full bg-cover bg-center md:bg-center  mr-5 md:mr-0 transition-all duration-1000 min-h-[350px] md:min-h-[530px]"
             style={{
               backgroundImage: `url("/asset/home/multiethnic-women.jpg")`,
             }}
           >
             <Image className="absolute bottom-[-2rem] md:bottom-[-4rem] left-[-1rem] md:left-[-2rem]" src={"/asset/home/leaf-icon.png"} alt="img" height={100} width={200} /> 
           </div>
-          <div className="right-section w-full md:w-[35%] py-[0.5rem] md:py-[2.5rem] flex flex-col items-center gap-6">
+          <div className="right-section-ov w-full md:w-[35%] py-[0.5rem] md:py-[2.5rem] flex flex-col items-center gap-6">
             {features.map((feature, index) => (
               <div key={index} className={`flex items-start justify-between w-full gap-8`}>
                 <div
