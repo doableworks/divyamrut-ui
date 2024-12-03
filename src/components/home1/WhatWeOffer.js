@@ -117,7 +117,7 @@ const WhatWeOffer = () => {
             The combination of nature and science.
           </h2>
         </div>
-        <div className="card-wwo flex flex-wrap justify-between gap-8">
+        <div className="card-wwo flex flex-wrap justify-center gap-8">
           {offers.map((testimonial, index) => (
             <div
               key={index}

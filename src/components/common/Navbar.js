@@ -262,9 +262,9 @@ const Navbar = () => {
               </h5>
             </div>
           </div>
-          <div className="text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-q4ca25af  hover:bg-q638d055 transition">
+          {/* <div className="text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-q4ca25af  hover:bg-q638d055 transition">
             <i className="mr-2 icons icon-calendar"></i> Get Started
-          </div>
+          </div> */}
         </nav>
 
         {/* Mobile Menu Toggle */}

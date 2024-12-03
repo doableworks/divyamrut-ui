@@ -44,7 +44,7 @@ const Banner = () => {
         {/* left section */}
         <div className="relative bg-transparent bg-custom-radial h-full pl-10 md:pl-32 pr-5 md:pr-24">
           <div class="relative top-0 md:top-[18%] left-[-2.5rem] md:left-0  w-screen bg-contain h-full md:h-[65%]  opacity-15 bg-[url('/asset/home/banner-left.png')] bg-no-repeat" />
-          <div className="absolute bottom-[20%] text-left space-y-6 fade-up pr-10">
+          <div className="absolute top-[20%] text-left space-y-6 fade-up pr-10">
             <h6 className="font-jost text-[12px] md:text-[14px] font-[500] text-c94d9ab uppercase">
               Welcome to PranaVeda
             </h6>
