@@ -1,5 +1,6 @@
 "use client"; // Use client-side rendering for GSAP animations
 import { Chat, Diamond, PaymentCard, Help } from "@/icon/icons";
+import PlayIcon from "./PlayIcon";
 
 import { useEffect } from "react";
 import gsap from "gsap";
@@ -25,7 +26,7 @@ const HolisticHealth = () => {
         <div className="hero-content text-center">
           <div className="flex justify-center items-center mb-6">
             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg">
-              <button className="text-black text-2xl">▶</button>
+              <PlayIcon  />
             </div>
           </div>
           <h2 className="max-w-xl font-suranna text-[32px] md:text-[89px] font-[400] leading-[1em] text-center text-[#FFFFFF] mb-4">

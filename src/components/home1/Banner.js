@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import BackgroundImagesSlider from "@/components/home1/BackgrounImageSlider";
-import { Calender } from "@/icon/icons";
+import { Calender, Flower } from "@/icon/icons";
 
 const Banner = () => {
   useEffect(() => {
@@ -70,6 +70,11 @@ const Banner = () => {
 
             <div className="h-full flex flex-col justify-evenly items-center text-center border border-1 border-d49ac81 p-4">
               {/* Icon */}
+              <Flower
+                    fill={"#99C24A"}
+                    h={40}
+                    w={40}
+                  />
 
               {/* Title */}
               <h3 className="text-lg font-semibold text-gray-800">
