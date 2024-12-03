@@ -46,7 +46,7 @@ const WhyChooseUs = () => {
         }}
       >
         <div className="bg-[rgba(0,0,0,.4)] min-h-screen w-full  text-white">
-          <div className="relative z-20 mx-auto flex flex-col items-center justify-center w-[90%] md:w-[85%] py-32">
+          <div className="relative z-20 mx-auto flex flex-col items-center justify-center w-[90%] md:w-[85%] xl:w-full py-32">
             <div className="fade-up max-w-xl">
               <h6 className="font-jost text-c94d9ab text-[14px] font-[500] leading-[1.4em] uppercase text-center">
                 Why Choose Us
@@ -59,7 +59,7 @@ const WhyChooseUs = () => {
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center max-w-[280px] p-6 bg-black bg-opacity-60 text-white rounded-lg hover:scale-105 transition-transform duration-300"
+                  className="flex flex-col items-center p-6 bg-black bg-opacity-60 text-white rounded-lg hover:scale-105 transition-transform duration-300 max-w-[280px] w-[33%]"
                 >
                   <div className="mb-4">
                     {feature.icon == "Diamond" ? (

@@ -113,9 +113,9 @@ const OurServices = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`flex flex-col items-center max-w-[280px] p-8 px-12 bg-black ${
+              className={`flex flex-col items-center  p-8 px-12 bg-black ${
                 index == 1 ? "bg-q044b931" : "bg-text"
-              } text-white hover:scale-105 transition-transform duration-300 shadow-lg min-w-[350px] `}
+              } text-white hover:scale-105 transition-transform duration-300 shadow-lg w-[1/3] `}
             >
               <div className="mb-4">
                 {feature.icon == "Aroma" ? (

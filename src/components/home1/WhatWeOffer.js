@@ -108,7 +108,7 @@ const WhatWeOffer = () => {
         alt="img"
       />
 
-      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-32">
+      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] xl:w-full py-32">
         <div className="fade-up">
           <h6 className="font-jost text-d49ac81 text-[14px] font-[500] leading-[1.4em] uppercase text-center">
             What We offer
@@ -121,8 +121,8 @@ const WhatWeOffer = () => {
           {offers.map((testimonial, index) => (
             <div
               key={index}
-              className="relative testimonial-card bg-[white] shadow-lg p-6 max-w-sm
-            py-10 "
+              className="relative bg-[white] shadow-lg px-6 max-w-sm w-full md:w-[33%] 
+            py-10"
             >
               <div className="absolute top-0 right-0 rounded-bl-[4rem] overflow-hidden">
                 <Image

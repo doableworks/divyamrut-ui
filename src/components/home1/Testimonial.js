@@ -56,7 +56,7 @@ const TestimonialSlider = () => {
       <Image className="absolute z-10 top-[40%] left-0" height={200} width={200} src={"/asset/home/img_4.png"} alt="img" />
       <Image className="absolute z-10 bottom-[10%] right-0" height={200} width={200} src={"/asset/home/img_5.png"} alt="img" />
 
-      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-32">
+      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] xl:w-full py-32">
         <div className="fade-up">
           <h6 className="font-jost text-d49ac81 text-[14px] font-[500] leading-[1.4em] uppercase text-center">
             Testimonial
@@ -76,7 +76,7 @@ const TestimonialSlider = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="relative testimonial-card bg-[#F9F3EB] shadow-lg p-6 rounded-lg max-w-sm
+              className="relative testimonial-card bg-[#F9F3EB] shadow-lg p-6 rounded-lg max-w-sm w-full md:w-[33%] 
             py-10 pb-20"
             >
               <div className="absolute top-0 right-0 bg-c94d9ab p-6  rounded-bl-[10rem]">
