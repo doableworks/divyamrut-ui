@@ -69,7 +69,7 @@ const AncientWisdomForModernLiving = () => {
   return (
     <div
       id="AncientWisdomForModernLiving"
-      className="w-full relative bg-[#F9F3EB]"
+      className="w-full relative bg-[#F9F3EB] overflow-hidden"
     >
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-32">
         <div className="relative grid grid-cols-1 md:grid-cols-2 items-center gap-x-24 gap-y-5 ">

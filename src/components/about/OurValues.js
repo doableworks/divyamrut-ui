@@ -87,7 +87,7 @@ const OurValues = () => {
   return (
     <section
       id="OurValues"
-      className="relative bg-text "
+      className="relative bg-text overflow-hidden"
     >
     <div className="flex flex-col justify-center items-center w-screen">
     <div class="absolute top-0 w-full bg-contain h-full opacity-5 bg-center bg-[url('/asset/home/banner-left.png')] bg-no-repeat" />

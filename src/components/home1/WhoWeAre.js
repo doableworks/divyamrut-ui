@@ -97,7 +97,7 @@ const WhoWeAre = () => {
   },[]); 
 
   return (
-    <div id="whoWeAre" className="w-full relative bg-text">
+    <div id="whoWeAre" className="w-full relative bg-text overflow-hidden">
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-20 md:py-32">
         <div className="relative grid grid-cols-1 md:grid-cols-2 items-center gap-x-24 gap-y-5 ">
           <div className="left-section-wwa py-[1rem] md:py-[5.5rem]">

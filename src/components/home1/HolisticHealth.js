@@ -48,7 +48,7 @@ const HolisticHealth = () => {
               Safety Payment
             </p>
           </div>
-          <div className="flex flex-col md:flex-row  items-center gap-4">
+          <div className="flex flex-col md:flex-row items-center gap-4">
             <Help fill="#99C24A" h={35} w={35} />
             <p className="font-suranna text-[25px] font-[400] leading-[1.3em] text-text">
               Help Center

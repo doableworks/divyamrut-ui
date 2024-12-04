@@ -52,7 +52,7 @@ const TestimonialSlider = () => {
   }, []);
 
   return (
-    <div id="testimonials" className="w-full relative">
+    <div id="testimonials" className="w-full relative overflow-hidden">
       <Image className="absolute z-10 top-[40%] left-0" height={200} width={200} src={"/asset/home/img_4.png"} alt="img" />
       <Image className="absolute z-10 bottom-[10%] right-0" height={200} width={200} src={"/asset/home/img_5.png"} alt="img" />
 

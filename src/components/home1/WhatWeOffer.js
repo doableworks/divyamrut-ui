@@ -99,7 +99,7 @@ const WhatWeOffer = () => {
   }, []);
 
   return (
-    <div id="WhatWeOffer" className="w-full relative bg-[#F9F3EB]">
+    <div id="WhatWeOffer" className="w-full relative bg-[#F9F3EB] overflow-hidden">
       <Image
         className="absolute z-10 top-0 left-0"
         height={200}

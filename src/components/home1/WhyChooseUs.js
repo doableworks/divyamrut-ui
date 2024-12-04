@@ -55,11 +55,11 @@ const WhyChooseUs = () => {
                 Medicine with the green perspective.
               </h2>
             </div>
-            <div className="flex flex-wrap justify-center gap-8">
+            <div className="flex flex-col md:flex-row flex-wrap justify-center gap-8">
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center p-6 bg-black bg-opacity-60 text-white rounded-lg hover:scale-105 transition-transform duration-300 max-w-[280px] w-[33%]"
+                  className="flex flex-col items-center p-6 bg-black bg-opacity-60 text-white rounded-lg hover:scale-105 transition-transform duration-300 max-w-[280px] w-full md:w-[33%]"
                 >
                   <div className="mb-4">
                     {feature.icon == "Diamond" ? (

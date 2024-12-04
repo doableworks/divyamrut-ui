@@ -69,7 +69,7 @@ const OurServices = () => {
   return (
     <div
       id="OurServices"
-      className="w-full relative bg-text pb-[2rem] md:pb-[10rem]"
+      className="w-full relative bg-text pb-[2rem] md:pb-[10rem] overflow-hidden"
     >
       <Image
         className="hidden md:block absolute z-10 bottom-0 right-0"
