@@ -312,7 +312,7 @@ const page = () => {
             <h2 className="text-2xl font-bold mb-4">Latest Posts</h2>
             <div className="grid grid-cols-1 gap-4">
               {blogPosts.map((post, index) => (
-                <div className="flex gap-4 p-4">
+                <div key={index + 11} className="flex gap-4 p-4">
                   <Image
                     src={post.image}
                     alt={"img"}
