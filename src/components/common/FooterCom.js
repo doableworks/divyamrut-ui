@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "nextjs-toploader/app";
@@ -27,10 +26,6 @@ export default function FooterCom() {
     { label: "Copyright", route: "/copyright" },
     { label: "Contact", route: "/contact-us" },
   ];
-
-  const handleMoveRoute = (route) => {
-    router.push(route);
-  };
 
   return (
     <>

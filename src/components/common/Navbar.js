@@ -8,6 +8,26 @@ import { Arrow, Call, Message, ThreeLine } from "@/icon/icons";
 import { useState } from "react";
 import MobileNav from './MobileNav'
 
+const navProducts = [
+  { route: "kansa-vati-foot-massage-kit", title: "Kansa Vati Foot Massage Kit" },
+  { route: "meditation-puja-asans", title: "Meditation/Puja Asans" },
+  { route: "meditation-puja-shawls", title: "Meditation/Puja Shawls" },
+  { route: "chandan-kumkum-bindi-kit", title: "Chandan-Kumkum Bindi Kit" },
+  { route: "bath-aura-cleansing-salt", title: "Bath/Aura Cleansing Salt" },
+  { route: "diya", title: "Diya" }
+]
+
+const Therapies = [
+  { route: "basic-flower-therapy", title: "Basic Flower Therapy" },
+  { route: "cranio-sacral-therapy", title: "Cranio Sacral Therapy" },
+  { route: "meru-chikitsa", title: "Meru Chikitsa" },
+  { route: "marma", title: "Marma" },
+  { route: "sound-therapy", title: "Sound Therapy" },
+  { route: "sujok-and-acupuncture", title: "Sujok & Acupuncture" },
+  { route: "osteopathy", title: "Osteopathy" },
+  { route: "art-therapy", title: "Art Therapy" }
+]
+
 const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -90,54 +110,17 @@ const Navbar = () => {
             text-a2c0d56 
             `}
             >
-              <h5
+              {navProducts.map((item, index)=>(
+                <h5
+                key={index + 'product'}
                 className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/Gallery" ? "text-text bg-d49ac81" : ""
+                  pathname == `/products/${item.route}`? "text-text bg-d49ac81" : ""
                 }`}
-                onClick={() => handleMoveRoute("/Gallery")}
+                onClick={() => handleMoveRoute(`/products/${item.route}`)}
               >
-                Kansa Vati Foot Massage Kit
+                {item.title}
               </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/FAQ" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/FAQ")}
-              >
-                Meditation/Puja Asans
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/log-archiev" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/blog-archiev")}
-              >
-                Meditation/Puja Shawls
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/single-post" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/single-post")}
-              >
-                Chandan-Kumkum Bindi Kit
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/single-post" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/single-post")}
-              >
-                Bath/Aura Cleansing Salt
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/single-post" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/single-post")}
-              >
-                Diya
-              </h5>
+              ))}
             </div>
           </div>
           <h5
@@ -196,70 +179,17 @@ const Navbar = () => {
             text-a2c0d56 
             `}
             >
-              <h5
+              {Therapies.map((item, index)=>(
+                <h5
+                key={index + 'Therapy'}
                 className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/team" ? "text-text bg-d49ac81" : ""
+                  pathname == `/therapy/${item.route}`? "text-text bg-d49ac81" : ""
                 }`}
-                onClick={() => handleMoveRoute("/team")}
+                onClick={() => handleMoveRoute(`/therapy/${item.route}`)}
               >
-                Basic Flower Therapy
+                {item.title}
               </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/Gallery" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/Gallery")}
-              >
-                Cranio Sacral Therapy
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/FAQ" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/FAQ")}
-              >
-                Meru Chikitsa
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/log-archiev" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/blog-archiev")}
-              >
-                Marma
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/single-post" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/single-post")}
-              >
-                Sound Therapy
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/single-post" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/single-post")}
-              >
-                Sujok & Acupuncture
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/single-post" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/single-post")}
-              >
-                Osteopathy
-              </h5>
-              <h5
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == "/single-post" ? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute("/single-post")}
-              >
-                Art Therapy
-              </h5>
+              ))}
             </div>
           </div>
           {/* <div className="text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-q4ca25af  hover:bg-q638d055 transition">
