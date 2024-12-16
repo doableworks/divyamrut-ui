@@ -4,13 +4,12 @@ import Image from "next/image";
 import { useRouter } from "nextjs-toploader/app";
 
 
-const Product = ({ title, image, description, comments, date, category }) => {
+const Product = ({ title, image, description, comments, date, category, route }) => {
   const router = useRouter();
 
-  
-
   return (
-    <div className="relative flex flex-col justify-between bg-[white] shadow-lg  max-w-sm w-full md:w-[33%]" >
+    <div className="relative flex flex-col justify-between bg-[white] shadow-lg  max-w-sm w-full md:w-[33%]"
+    onClick={() => router.push(`/products/${route}/detail`)}>
       <div>
         <Image
           src={image}

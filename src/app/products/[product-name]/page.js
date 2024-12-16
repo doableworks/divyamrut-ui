@@ -54,7 +54,8 @@ const products = [
   ]
   
 
-const page = () => {
+const page = ({params}) => {
+
   const heading = "Bath/Aura Cleansing Salt"
   const subHeading = "Trusted by millions, validated by you."
 
@@ -64,7 +65,7 @@ const page = () => {
       <div>
       <div className="my-20 flex flex-wrap justify-center gap-8">
           {products.map((product, index) => (
-          <Product key={index} {...product} />
+          <Product key={index} {...product} route={params["product-name"]} />
           ))}
         </div>
       </div>
