@@ -4,9 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "nextjs-toploader/app";
-import { Arrow, Call, Message, ThreeLine } from "@/icon/icons";
+import { Arrow, Call, Message } from "@/icon/icons";
 import { useState } from "react";
-import MobileNav from './MobileNav'
+import MobileNav from './MobileNav';
+import { useDispatch } from "react-redux";
+import {
+  setOpenLoginModal,
+  setOpenRegisterModal,
+} from "@/redux/feature/authModalSlice";
+
 
 const navProducts = [
   { route: "kansa-vati-foot-massage-kit", title: "Kansa Vati Foot Massage Kit" },
@@ -29,12 +35,19 @@ const Therapies = [
 ]
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const pathname = usePathname();
   const [hasHover, setHasHover] = useState(null);
+
   const handleMoveRoute = (route) => {
     router.push(route);
   };
+
+  const handleLogin = ()=>{
+    dispatch(setOpenLoginModal(true))
+  }
+
 
   return (
     <header className="absolute z-30 w-full shadow">
@@ -192,6 +205,17 @@ const Navbar = () => {
               ))}
             </div>
           </div>
+          <h5
+            className={`cursor-pointer hover:text-a2c0d56 ${
+              pathname == "/contact-us" ? "text-a2c0d56" : "text-[#FFFFFF]"
+            }`}
+            onClick={() => handleLogin()}
+          >
+            Login
+          </h5>
+
+
+
           {/* <div className="text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-q4ca25af  hover:bg-q638d055 transition">
             <i className="mr-2 icons icon-calendar"></i> Get Started
           </div> */}

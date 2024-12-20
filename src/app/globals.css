@@ -47,3 +47,28 @@ body {
     text-wrap: balance;
   }
 }
+
+/* login section */
+
+.login_modal {
+  width: 70vw !important;
+}
+
+.login_modal .ant-modal-content {
+  height: 575px;
+}
+.login_modal .ant-modal-body {
+  height: 100%;
+}
+.login_modal .ant-modal {
+  top: 70px !important;
+}
+
+@media screen and (min-width: 0px) and (max-width: 575px) {
+  .login_modal {
+    width: 100vw !important;
+  }
+  .login_modal .ant-modal-content {
+    height: auto !important;
+  }
+}

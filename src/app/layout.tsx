@@ -21,23 +21,20 @@
 //   );
 // }
 
-// import { AntdRegistry } from "@ant-design/nextjs-registry";
-// import "antd/dist/reset.css";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import "antd/dist/reset.css";
 import { ReduxProvider } from "../redux/provider";
-import {
-  Suranna,
-  Jost,
-  Inter,
-} from "next/font/google";
+import { Suranna, Jost, Inter } from "next/font/google";
 import localFont from "@next/font/local";
 import NextTopLoader from "nextjs-toploader";
-// import {getServerSession} from "next-auth/next";
-// import {authOptions} from "@/app/auth";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/auth";
 import MainLayout from "@/components/common/Mainlayout";
 import Script from "next/script";
-// import { ConfigProvider } from "antd";
+import { ConfigProvider } from "antd";
 // import MainLayout from "@/components/MainLayout";
 import "@/app/globals.css";
+import { AuthOptions } from "next-auth";
 
 const suranna = Suranna({
   subsets: [],
@@ -93,39 +90,7 @@ interface RootLayoutProps {
 }
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  // const session = await getServerSession(authOptions);
-
-  // const customTheme = {
-  //   components: {
-  //     Button: {
-  //       algorithm: true,
-  //       fontFamily: '"Inter", sans-serif',
-  //       colorSecondaryBg: "#3F4FE41A",
-  //       colorSecondaryBorder: "#3F4FE4",
-  //       colorSecondaryText: "#3F4FE4",
-  //       colorSecondaryHover: "#3F4FE433",
-  //       color: "white",
-  //     },
-  //     Spin: {
-  //       contentHeight: "100%",
-  //     },
-  //     Steps: {
-  //       iconSize: 50,
-  //       // titleLineHeight:
-  //     },
-  //     Pagination: {
-  //       /* here is your component tokens */
-  //       itemSize: 36,
-  //       // itemSizeSM:32,
-  //       fontSize: 20,
-  //     },
-  //   },
-  //   token: {
-  //     colorPrimary: "#3F4FE4",
-  //     fontFamily: '"Inter", sans-serif',
-  //   },
-  // };
-
+  const session = await getServerSession(authOptions as AuthOptions);
   return (
     <html lang="en">
       <body
@@ -135,7 +100,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       >
         <NextTopLoader />
         <ReduxProvider>
-          <MainLayout>{children}</MainLayout>
+          <AntdRegistry>
+            <MainLayout session={session}>{children}</MainLayout>
+          </AntdRegistry>
         </ReduxProvider>
       </body>
     </html>

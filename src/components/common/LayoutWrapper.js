@@ -1,5 +1,5 @@
-// import LoginModal from "../login/loginModal";
-// import RegisterModal from "../register/RegisterModal";
+import LoginModal from "../login/loginModal";
+import RegisterModal from "../login/RegisterModal";
 // import UploadDocumentModal from "../../components/modals/UploadDocument"
 // import MessageModal from "../../components/modals/MessageModal"
 // import PhoneVerificationModal from "../../components/modals/PhoneVerificationModal"
@@ -15,9 +15,9 @@ export function LayoutWrapper({children}) {
     return (
         <>
             {children}
-            {/* <LoginModal/>
-            <SubscriptionSidebar/>
+            <LoginModal/>
             <RegisterModal />
+            {/* <SubscriptionSidebar/>
             <UploadDocumentModal/>
             <MessageModal/>
             <PhoneVerificationModal />
