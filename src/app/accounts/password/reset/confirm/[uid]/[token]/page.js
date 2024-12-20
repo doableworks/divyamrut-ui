@@ -11,7 +11,7 @@ import {
   import {useDispatch } from "react-redux";
 
 
-export const Page = () => {
+const Page = () => {
     const params = useParams();
     const dispatch = useDispatch();
     const { uid, token } = params;

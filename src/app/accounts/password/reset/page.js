@@ -10,7 +10,7 @@ import {
 } from "@/redux/feature/authModalSlice";
 import CONSTANTS from "../../../../contants/contants";
 
-export const Page = () => {
+const Page = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);

@@ -12,7 +12,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import {useSession} from "next-auth/react";
 
-export const EmailConfirmation = () => {
+const EmailConfirmation = () => {
   const params = useParams();
   const router = useRouter()
   const dispatch = useDispatch();
