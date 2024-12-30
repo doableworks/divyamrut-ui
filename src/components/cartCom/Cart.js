@@ -40,7 +40,7 @@ const CartPage = () => {
   };
 
   const handleRemoveItem = (item) => {
-    dispatch(removeItem(item.id));
+    dispatch(removeItem({id:item.id}));
   };
 
   const handleSelectAll = (item) => {
@@ -60,8 +60,8 @@ const CartPage = () => {
   const handleSelectItem = (item) => {
     try {
       item.selected
-        ? dispatch(unSelectItem(item.id))
-        : dispatch(selectItem(item.id));
+        ? dispatch(unSelectItem({id:item.id}))
+        : dispatch(selectItem({id:item.id}));
     } catch (error) {}
   };
   const allSelected =

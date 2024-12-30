@@ -54,22 +54,21 @@ const cartSlice = createSlice({
     },
     selectItem: (state, action: PayloadAction<{ id: number }>)=>{
       const existingItem = state.items.find(
-        (item) => item.id === action.payload
+        (item) => item.id === action.payload.id
       );
-      console.log("hell gourav", existingItem)
       if (existingItem) {
         existingItem.selected = true ;
       }
     },
     unSelectItem: (state, action: PayloadAction<{ id: number }>)=>{  
       const existingItem = state.items.find(
-        (item) => item.id === action.payload
+        (item) => item.id === action.payload.id
       );
       if (existingItem) {
         existingItem.selected = false ;
       }
     },
-    addItem: (state, action: PayloadAction<Omit<CartItem, "quantity">>) => {
+    addItem: (state, action: PayloadAction<CartItem>) => {
       const existingItem = state.items.find(
         (item) => item.id === action.payload.id
       );
@@ -81,12 +80,12 @@ const cartSlice = createSlice({
     },
     removeItem: (state, action: PayloadAction<{ id: number }>) => {
       const existingItem = state.items.find(
-        (item) => item.id === action.payload
+        (item) => item.id === action.payload.id
       );
-      if (existingItem?.quantity > 1) {
+      if (existingItem && existingItem.quantity > 1) {
         existingItem.quantity -= 1;
       } else {
-        state.items = state.items.filter((item) => item.id !== action.payload);
+        state.items = state.items.filter((item) => item.id !== action.payload.id);
 
       }
     },
