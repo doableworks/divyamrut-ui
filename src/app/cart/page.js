@@ -1,5 +1,5 @@
 import MainBanner from "@/components/common/MainBanner";
-import PricingPlans from "@/components/pricing/Pricing";
+import CartPage from "@/components/cartCom/Cart";
 import Image from "next/image";
 import HolisticHealth from "@/components/home1/HolisticHealth"
 
@@ -19,14 +19,13 @@ const page = () => {
               Choose Package
             </h6>
             <h2 className="font-suranna text-[50px] font-[400] leading-[1.3em] text-secondary text-center mb-6">
-              Transform Your Health with Our 
-              <br />Flexible PranaVeda Plans.
+            Shopping Cart
             </h2>
           </div>
-          <PricingPlans />
+          <CartPage />
         </div>
       </div>
-      <HolisticHealth />
+      {/* <HolisticHealth /> */}
     </div>
   );
 };

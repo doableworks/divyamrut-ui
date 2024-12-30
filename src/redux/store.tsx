@@ -52,6 +52,7 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { persistStore, persistReducer, PersistConfig } from 'redux-persist';
 import authModalSlice from './feature/authModalSlice';
+import cartSlice from './feature/cartSlice';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 import type { Middleware } from 'redux';
 import type { PersistPartial } from 'redux-persist/es/persistReducer';
@@ -81,6 +82,7 @@ const storage: Storage =
 
 const rootReducer = combineReducers({
   authModal: authModalSlice,
+  cart:cartSlice,
 });
 
 const persistConfig: PersistConfig<ReturnType<typeof rootReducer>> = {
