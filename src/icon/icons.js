@@ -556,13 +556,8 @@ export const BambooTree = ({ h = 18, w = 18, fill = "black" }) => (
   </svg>
 );
 
-export const Leaf = ({ h = 18, w = 18, fill="black" }) => (
-  <svg
-    fill={fill}
-    width={w}
-    height={h}
-    viewBox="796 796 200 200"
-  >
+export const Leaf = ({ h = 18, w = 18, fill = "black" }) => (
+  <svg fill={fill} width={w} height={h} viewBox="796 796 200 200">
     <path
       d="M986.031,802.573l-0.534-5.124l-5.123-0.534c-0.358-0.037-8.924-0.914-22.182-0.914c-30.28,0-86.278,4.694-121.113,36.133
 	c-36.504,32.94-42.048,76.042-15.656,119.01c-0.412,0.729-0.826,1.464-1.233,2.169c-0.594,1.047-1.177,2.069-1.745,3.071
@@ -592,3 +587,33 @@ export const Leaf = ({ h = 18, w = 18, fill="black" }) => (
     />
   </svg>
 );
+
+export const CartIcon = ({ h = 18, w = 18, cartItemCount }) => {
+  return (
+    <svg width={w} height={h} viewBox="0 0 24 24" fill="none">
+      <path
+        d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+
+      {cartItemCount &&
+        <>
+      <circle cx="13" cy="4" r="6" fill="red" />
+      <text
+        x="13"
+        y="4"
+        textAnchor="middle"
+        dy=".3em"
+        fontSize="10"
+        fill="white"
+        fontWeight="bold"
+      >
+        {cartItemCount}
+      </text>
+      </>}
+    </svg>
+  );
+};

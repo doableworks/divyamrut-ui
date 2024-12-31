@@ -4,24 +4,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "nextjs-toploader/app";
-import { Arrow, Call, Message } from "@/icon/icons";
+import { Arrow, Call, Message, CartIcon } from "@/icon/icons";
 import { useState } from "react";
-import MobileNav from './MobileNav';
-import { useDispatch } from "react-redux";
+import MobileNav from "./MobileNav";
+import InitialAvatar from "@/components/common/InitialAvatar";
 import {
   setOpenLoginModal,
   setOpenRegisterModal,
 } from "@/redux/feature/authModalSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 
 const navProducts = [
-  { route: "kansa-vati-foot-massage-kit", title: "Kansa Vati Foot Massage Kit" },
+  {
+    route: "kansa-vati-foot-massage-kit",
+    title: "Kansa Vati Foot Massage Kit",
+  },
   { route: "meditation-puja-asans", title: "Meditation/Puja Asans" },
   { route: "meditation-puja-shawls", title: "Meditation/Puja Shawls" },
   { route: "chandan-kumkum-bindi-kit", title: "Chandan-Kumkum Bindi Kit" },
   { route: "bath-aura-cleansing-salt", title: "Bath/Aura Cleansing Salt" },
-  { route: "diya", title: "Diya" }
-]
+  { route: "diya", title: "Diya" },
+];
 
 const Therapies = [
   { route: "basic-flower-therapy", title: "Basic Flower Therapy" },
@@ -31,23 +35,28 @@ const Therapies = [
   { route: "sound-therapy", title: "Sound Therapy" },
   { route: "sujok-and-acupuncture", title: "Sujok & Acupuncture" },
   { route: "osteopathy", title: "Osteopathy" },
-  { route: "art-therapy", title: "Art Therapy" }
-]
+  { route: "art-therapy", title: "Art Therapy" },
+];
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const pathname = usePathname();
   const [hasHover, setHasHover] = useState(null);
+  const cartItems = useSelector((state) => state.cart.items);
+
 
   const handleMoveRoute = (route) => {
     router.push(route);
   };
 
-  const handleLogin = ()=>{
-    dispatch(setOpenLoginModal(true))
-  }
+  const handleLogin = () => {
+    dispatch(setOpenLoginModal(true));
+  };
 
+  const handleLogout = () => {
+    // dispatch(setOpenLoginModal(true));
+  };
 
   return (
     <header className="absolute z-30 w-full shadow">
@@ -123,16 +132,18 @@ const Navbar = () => {
             text-a2c0d56 
             `}
             >
-              {navProducts.map((item, index)=>(
+              {navProducts.map((item, index) => (
                 <h5
-                key={index + 'product'}
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == `/products/${item.route}`? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute(`/products/${item.route}`)}
-              >
-                {item.title}
-              </h5>
+                  key={index + "product"}
+                  className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
+                    pathname == `/products/${item.route}`
+                      ? "text-text bg-d49ac81"
+                      : ""
+                  }`}
+                  onClick={() => handleMoveRoute(`/products/${item.route}`)}
+                >
+                  {item.title}
+                </h5>
               ))}
             </div>
           </div>
@@ -192,29 +203,90 @@ const Navbar = () => {
             text-a2c0d56 
             `}
             >
-              {Therapies.map((item, index)=>(
+              {Therapies.map((item, index) => (
                 <h5
-                key={index + 'Therapy'}
-                className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                  pathname == `/therapy/${item.route}`? "text-text bg-d49ac81" : ""
-                }`}
-                onClick={() => handleMoveRoute(`/therapy/${item.route}`)}
-              >
-                {item.title}
-              </h5>
+                  key={index + "Therapy"}
+                  className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
+                    pathname == `/therapy/${item.route}`
+                      ? "text-text bg-d49ac81"
+                      : ""
+                  }`}
+                  onClick={() => handleMoveRoute(`/therapy/${item.route}`)}
+                >
+                  {item.title}
+                </h5>
               ))}
             </div>
           </div>
           <h5
-            className={`cursor-pointer hover:text-a2c0d56 ${
+            className={`flex items-center gap-2 cursor-pointer hover:text-a2c0d56 ${
               pathname == "/contact-us" ? "text-a2c0d56" : "text-[#FFFFFF]"
             }`}
-            onClick={() => handleLogin()}
+            onClick={() => handleMoveRoute("/cart")}
           >
-            Login
+            <CartIcon cartItemCount={cartItems?.length || 0} h = {38} w = {30} />
+            Cart
           </h5>
+          <div
+            className="relative group"
+            onMouseEnter={() => setHasHover("user")}
+            onMouseLeave={() => setHasHover(null)}
+          >
+            <div className="flex items-center leading-[3.5em] cursor-pointer">
+              <div
+                className={`
+               leading-[3.5em] cursor-pointer`}
+              >
+                <InitialAvatar shape={"ractangle"} user={null} />
+              </div>
+            </div>
+            {/* Dropdown */}
+            <div
+              className={`absolute right-[-3rem] hidden group-hover:block shadow-lg text-nowrap cursor-pointer
+            bg-white 
+            text-a2c0d56 
+            `}
+            >
+              {true ? (
+                <>
+                  <h5
+                    
+                    className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-5 ${
+                      pathname == `/profile` ? "text-text bg-d49ac81" : ""
+                    }`}
+                    onClick={() => handleMoveRoute("/profile")}
+                  >
+                    Profile
+                  </h5>
 
+                  <h5
+                   
+                    className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-5 ${
+                      pathname == `/order-list` ? "text-text bg-d49ac81" : ""
+                    }`}
+                    onClick={() => handleMoveRoute("/order-list")}
+                  >
+                    Order List
+                  </h5>
 
+                  <h5
+                   
+                    className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-5`}
+                    // onClick={() => handleLogout()}
+                  >
+                    Logout
+                  </h5>
+                </>
+              ) : (
+                <h5
+                  className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-5`}
+                  onClick={() => handleLogin()}
+                >
+                  Log in/Sign up
+                </h5>
+              )}
+            </div>
+          </div>
 
           {/* <div className="text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-q4ca25af  hover:bg-q638d055 transition">
             <i className="mr-2 icons icon-calendar"></i> Get Started
@@ -223,7 +295,6 @@ const Navbar = () => {
 
         {/* Mobile Menu Toggle */}
         <MobileNav pathname={pathname} handleMoveRoute={handleMoveRoute} />
-       
       </div>
     </header>
   );

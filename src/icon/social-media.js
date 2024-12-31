@@ -3,7 +3,7 @@ export const Facebook = ({ h=18, w=18, fill='black' }) => (
     width={w}
     height={h}
     fill={fill}
-    class="e-font-icon-svg e-fab-facebook-f"
+    className="e-font-icon-svg e-fab-facebook-f"
     viewBox="0 0 320 512"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -16,7 +16,7 @@ export const Instagram = ({ h=18, w=18, fill='black' }) => (
     width={w}
     height={h}
     fill={fill}
-    class="e-font-icon-svg e-fab-instagram"
+    className="e-font-icon-svg e-fab-instagram"
     viewBox="0 0 448 512"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -29,7 +29,7 @@ export const Twitter = ({ h=18, w=18, fill='black' }) => (
     width={w}
     height={h}
     fill={fill}
-    class="e-font-icon-svg e-fab-twitter"
+    className="e-font-icon-svg e-fab-twitter"
     viewBox="0 0 512 512"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -42,7 +42,7 @@ export const Youtube = ({ h=18, w=18, fill='black' }) => (
     width={w}
     height={h}
     fill={fill}
-    class="e-font-icon-svg e-fab-youtube"
+    className="e-font-icon-svg e-fab-youtube"
     viewBox="0 0 576 512"
     xmlns="http://www.w3.org/2000/svg"
   >

@@ -12,28 +12,10 @@ import {
   unSelectItem,
 } from "@/redux/feature/cartSlice";
 
+
 const CartPage = () => {
   const cartItems = useSelector((state) => state.cart.items);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    [
-      {
-        id: 1,
-        name: "Wireless Headphones",
-        price: 99.99,
-        image: "/asset/home/ayurvedic-supplement.jpg",
-        quantity: 1,
-      },
-      {
-        id: 2,
-        name: "Smartwatch",
-        price: 199.99,
-        image: "/asset/home/ayurvedic-supplement.jpg",
-        quantity: 2,
-      },
-    ].map((item) => dispatch(addItem(item)));
-  }, []);
+  const dispatch = useDispatch();  
 
   const handleAddItem = (item) => {
     dispatch(addItem(item));
