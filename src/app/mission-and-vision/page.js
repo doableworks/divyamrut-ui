@@ -13,6 +13,15 @@ const page = () => {
   const date = "August 6, 2024"
   const comment = "No Comments"
 
+  const item = {
+    id: 3,
+    name: "product",
+    price: 99.99,
+    image: "/asset/home/ayurvedic-supplement.jpg",
+    quantity: 1,
+    type:"product"
+  }
+
   return (
     <div>
       <MainBanner2 heading={heading} subHeading={subHeading} date={date} comment={comment} mainType={mainType} />
@@ -20,7 +29,7 @@ const page = () => {
         <div className="lg:flex gap-8">
           {/* Main Content */}
           <main className="lg:w-2/3">
-            <DetailPage />
+            <DetailPage item={item} />
             <ShareReview />
             <LeaveAReply />
           </main>
