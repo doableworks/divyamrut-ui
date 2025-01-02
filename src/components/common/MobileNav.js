@@ -12,7 +12,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
   return (
     <>
       <button
-        className="lg:hidden my-4"
+        className="xl:hidden my-4"
         onClick={() => setOpenMobileNav(!openMobileNav)}
       >
         {openMobileNav ? (

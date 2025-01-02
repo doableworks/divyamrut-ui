@@ -61,7 +61,7 @@ const Navbar = () => {
   return (
     <header className="absolute z-30 w-full shadow">
       {/* Top Banner */}
-      <div className="bg-q638d055  py-2">
+      {/* <div className="bg-q638d055  py-2">
         <div className="w-[85%] container mx-auto flex items-center text-white justify-between">
           <p className="text-sm font-medium hidden md:block">
             Get a Free Ayurveda Consultation from PranaVeda!
@@ -77,9 +77,9 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* Main Navigation */}
-      <div className="bg-transparent w-[90%] md:w-[85%] container mx-auto flex items-center justify-between">
+      <div className="bg-transparent w-[95%] mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/">
           <div className="flex w-8 h-8">
@@ -91,7 +91,6 @@ const Navbar = () => {
               height={150}
             /> */}
             <h2
-              onClick={() => console.log("on nnnnnnnn")}
               className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF]"
             >
               Divyamrut
@@ -100,7 +99,7 @@ const Navbar = () => {
         </Link>
 
         {/* Navigation Menu */}
-        <nav className="hidden lg:flex gap-8 font-jost text-[18px] font-[500] text-left text-[#FFFFFF] items-center">
+        <nav className="hidden xl:flex gap-8 font-jost text-[18px] font-[500] text-left text-[#FFFFFF] items-center">
           <h5
             className={`cursor-pointer hover:text-a2c0d56 ${
               pathname == "/about-us" ? "text-a2c0d56" : "text-[#FFFFFF]"
@@ -109,77 +108,13 @@ const Navbar = () => {
           >
             About Us
           </h5>
-          <div
-            className="relative group"
-            onMouseEnter={() => setHasHover("Pages")}
-            onMouseLeave={() => setHasHover(null)}
-          >
-            <div className="flex items-center leading-[3.5em] cursor-pointer">
-              <h5
-                className={`${
-                  hasHover == "Pages" ? "text-a2c0d56" : "#FFFFFF"
-                } leading-[3.5em] cursor-pointer`}
-                onClick={() => handleMoveRoute("/")}
-              >
-                Products
-              </h5>
-              <Arrow fill={hasHover == "Pages" ? "#99C24A" : "#FFFFFF"} />
-            </div>
-            {/* Dropdown */}
-            <div
-              className={`absolute left-0 hidden group-hover:block shadow-lg text-nowrap cursor-pointer
-            bg-white 
-            text-a2c0d56 
-            `}
-            >
-              {navProducts.map((item, index) => (
-                <h5
-                  key={index + "product"}
-                  className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                    pathname == `/products/${item.route}`
-                      ? "text-text bg-d49ac81"
-                      : ""
-                  }`}
-                  onClick={() => handleMoveRoute(`/products/${item.route}`)}
-                >
-                  {item.title}
-                </h5>
-              ))}
-            </div>
-          </div>
           <h5
             className={`cursor-pointer hover:text-a2c0d56 ${
-              pathname == "/purpose" ? "text-a2c0d56" : "text-[#FFFFFF]"
+              pathname == "/consultations" ? "text-a2c0d56" : "text-[#FFFFFF]"
             }`}
-            onClick={() => handleMoveRoute("/purpose")}
+            onClick={() => handleMoveRoute("/consultations")}
           >
-            Purpose
-          </h5>
-          <h5
-            className={`cursor-pointer hover:text-a2c0d56 ${
-              pathname == "/mission-and-vision"
-                ? "text-a2c0d56"
-                : "text-[#FFFFFF]"
-            }`}
-            onClick={() => handleMoveRoute("/mission-and-vision")}
-          >
-            Mission and Vision
-          </h5>
-          <h5
-            className={`cursor-pointer hover:text-a2c0d56 ${
-              pathname == "/holistic-health" ? "text-a2c0d56" : "text-[#FFFFFF]"
-            }`}
-            onClick={() => handleMoveRoute("/holistic-health")}
-          >
-            Holistic Health
-          </h5>
-          <h5
-            className={`cursor-pointer hover:text-a2c0d56 ${
-              pathname == "/contact-us" ? "text-a2c0d56" : "text-[#FFFFFF]"
-            }`}
-            onClick={() => handleMoveRoute("/contact-us")}
-          >
-            Contact Us
+            Consultations
           </h5>
           <div
             className="relative group"
@@ -192,7 +127,7 @@ const Navbar = () => {
                   hasHover == "Pages" ? "text-a2c0d56" : "#FFFFFF"
                 } leading-[3.5em] cursor-pointer`}
               >
-                Advance Therapies
+                Therapies
               </h5>
               <Arrow fill={hasHover == "Pages" ? "#99C24A" : "#FFFFFF"} />
             </div>
@@ -219,12 +154,87 @@ const Navbar = () => {
             </div>
           </div>
           <h5
-            className={`flex items-center gap-2 cursor-pointer hover:text-a2c0d56 ${
+            className={`cursor-pointer hover:text-a2c0d56 ${
+              pathname == "/health-packages" ? "text-a2c0d56" : "text-[#FFFFFF]"
+            }`}
+            onClick={() => handleMoveRoute("/health-packages")}
+          >
+            Health Packages
+          </h5>
+          <h5
+                className={`${
+                  pathname == "/products" ? "text-a2c0d56" : "#FFFFFF"
+                } leading-[3.5em] cursor-pointer`}
+                onClick={() => handleMoveRoute("/products")}
+              >
+                Products
+              </h5>
+          {/* <div
+            className="relative group"
+            onMouseEnter={() => setHasHover("Pages")}
+            onMouseLeave={() => setHasHover(null)}
+          >
+            <div className="flex items-center leading-[3.5em] cursor-pointer">
+              <h5
+                className={`${
+                  hasHover == "Pages" ? "text-a2c0d56" : "#FFFFFF"
+                } leading-[3.5em] cursor-pointer`}
+                onClick={() => handleMoveRoute("/")}
+              >
+                Products
+              </h5>
+              <Arrow fill={hasHover == "Pages" ? "#99C24A" : "#FFFFFF"} />
+            </div>
+           
+            <div
+              className={`absolute left-0 hidden group-hover:block shadow-lg text-nowrap cursor-pointer
+            bg-white 
+            text-a2c0d56 
+            `}
+            >
+              {navProducts.map((item, index) => (
+                <h5
+                  key={index + "product"}
+                  className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
+                    pathname == `/products/${item.route}`
+                      ? "text-text bg-d49ac81"
+                      : ""
+                  }`}
+                  onClick={() => handleMoveRoute(`/products/${item.route}`)}
+                >
+                  {item.title}
+                </h5>
+              ))}
+            </div>
+          </div> */}
+          <h5
+            className={`cursor-pointer hover:text-a2c0d56 ${
+              pathname == "/mission-and-vision"
+                ? "text-a2c0d56"
+                : "text-[#FFFFFF]"
+            }`}
+            onClick={() => handleMoveRoute("/mission-and-vision")}
+          >
+            Purpose and Vision
+          </h5>
+         
+          <h5
+            className={`cursor-pointer hover:text-a2c0d56 ${
               pathname == "/contact-us" ? "text-a2c0d56" : "text-[#FFFFFF]"
             }`}
-            onClick={() => handleMoveRoute("/cart")}
+            onClick={() => handleMoveRoute("/contact-us")}
           >
-            <CartIcon cartItemCount={cartItems?.length || 0} h = {38} w = {30} />
+            Contact Us
+          </h5>
+          <h5
+            className={`flex items-center gap-2 cursor-pointer hover:text-a2c0d56 ${
+              pathname == "/cart" ? "text-a2c0d56" : "text-[#FFFFFF]"
+            }`}
+            onClick={() => handleMoveRoute("/cart")}
+            onMouseEnter={() => setHasHover("cart")}
+            onMouseLeave={() => setHasHover(null)}
+          >
+            <CartIcon cartItemCount={cartItems?.length || 0} h = {38} w = {30} color={pathname == "/cart" || hasHover == "cart" ? "#99C24A" : "#FFFFFF"} />
             Cart
           </h5>
           <div

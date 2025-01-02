@@ -14,13 +14,13 @@ export default function Home() {
     //  className="relative z-10 mt-[-12rem] bg-cover bg-[url('/asset/home/caucasian-woman-having-ayurveda-shirodhara-treatment-in-india.jpg')] bg-no-repeat"
     >
       <Banner />
-      <WhoWeAre />
-      <HolisticHealth />
-      <OurServices />
+      {/* <WhoWeAre /> */}
+      {/* <HolisticHealth /> */}
+      {/* <OurServices /> */}
       <WhatWeOffer />
       <WhyChooseUs />
-      <AncientWisdomForModernLiving />
       <Testimonial />
+      <AncientWisdomForModernLiving />
     </main>
   );
 }
