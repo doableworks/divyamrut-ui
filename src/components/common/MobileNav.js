@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Arrow, ThreeLine, Cross, CartIcon } from "@/icon/icons";
-import { Therapies } from "@/contants/contants";
+import { Therapies, NavProducts } from "@/contants/contants";
 import { useSelector, useDispatch } from "react-redux";
 import InitialAvatar from "@/components/common/InitialAvatar";
 
@@ -13,6 +13,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
     products: false,
     advanceTherapies: false,
     user: false,
+    products: false
   });
 
   return (
@@ -104,14 +105,61 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
           >
             Health Packages
           </h5>
-          <h5
+          {/* <h5
             className={`cursor-pointer  py-2 px-5  ${
               pathname == "/products" ? "text-text bg-q4ca25af" : "text-E0A43B"
             }`}
             onClick={() => handleMoveRoute("/products")}
           >
             Products
-          </h5>
+          </h5> */}
+
+          <div
+            className="relative group"
+            onClick={() =>
+              setItemOpen({
+                ...itemOpen,
+                products: !itemOpen.products,
+              })
+            }
+          >
+            <div
+              className={`cursor-pointer ${
+                itemOpen.products
+                  ? "text-text bg-q4ca25af"
+                  : "text-E0A43B"
+              }`}
+            >
+              <h5 className={`flex items-center py-2 pb-4 px-5 cursor-pointer`}>
+                Products
+                <Arrow
+                  fill={itemOpen.products ? "#FFFFFF" : "#E0A43B"}
+                />
+              </h5>
+            </div>
+            {/* Dropdown */}
+            {itemOpen.products && (
+              <div
+                className={`text-nowrap cursor-pointer
+            text-E0A43B 
+            `}
+              >
+                {NavProducts.map((item, index) => (
+                  <h5
+                    key={index + item.title}
+                    className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-8 ${
+                      pathname == `/therapy/${item.route}`
+                        ? "text-text bg-d49ac81"
+                        : ""
+                    }`}
+                    onClick={() =>handleMoveRoute(`/products/${item.route}`)}
+                  >
+                    {item.title}
+                  </h5>
+                ))}
+              </div>
+            )}
+          </div>
 
           <h5
             className={`cursor-pointer py-2 px-5  ${
