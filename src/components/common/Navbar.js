@@ -150,19 +150,19 @@ const Navbar = () => {
               </h5> */}
           <div
             className="relative group"
-            onMouseEnter={() => setHasHover("Pages")}
+            onMouseEnter={() => setHasHover("products")}
             onMouseLeave={() => setHasHover(null)}
           >
             <div className="flex items-center leading-[3.5em] cursor-pointer">
               <h5
                 className={`${
-                  hasHover == "Pages" ? "text-E0A43B" : "#FFFFFF"
+                  hasHover == "products" ? "text-E0A43B" : "#FFFFFF"
                 } leading-[3.5em] cursor-pointer`}
                 // onClick={() => handleMoveRoute("/")}
               >
                 Products
               </h5>
-              <Arrow fill={hasHover == "Pages" ? "#E0A43B" : "#FFFFFF"} />
+              <Arrow fill={hasHover == "products" ? "#E0A43B" : "#FFFFFF"} />
             </div>
            
             <div
