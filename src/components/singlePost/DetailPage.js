@@ -45,7 +45,7 @@ const DetailPage = ({item}) => {
           imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
           mollis pretium. Integer tincidunt. Cras dapibus.
         </p>
-        <div className="flex justify-center gap-10">
+        <div className="flex justify-center flex-col md:flex-row gap-10">
           <img
             src="/asset/gril_img.jpg"
             alt="Article Image"

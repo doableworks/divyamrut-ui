@@ -4,7 +4,7 @@ import ProductsScroller from "@/components/common/ProductsScroller";
 
 const categories = [
   {
-    category: "kansa-vati-foot-massage-kit",
+    route: "kansa-vati-foot-massage-kit",
     title: "Kansa Vati Foot Massage Kit",
     products: [
       {
@@ -72,7 +72,7 @@ const categories = [
     ],
   },
   {
-    category: "meditation-puja-asans",
+    route: "meditation-puja-asans",
     title: "Meditation/Puja Asans",
     products: [
       {
@@ -141,7 +141,7 @@ const categories = [
   },
 
   {
-    category: "meditation-puja-shawls",
+    route: "meditation-puja-shawls",
     title: "Meditation/Puja Shawls",
     products: [
       {
@@ -209,7 +209,7 @@ const categories = [
     ],
   },
   {
-    category: "chandan-kumkum-bindi-kit",
+    route: "chandan-kumkum-bindi-kit",
     title: "Chandan-Kumkum Bindi Kit",
     products: [
       {
@@ -277,7 +277,7 @@ const categories = [
     ],
   },
   {
-    category: "bath-aura-cleansing-salt",
+    route: "bath-aura-cleansing-salt",
     title: "Bath/Aura Cleansing Salt",
     products: [
       {
@@ -345,7 +345,7 @@ const categories = [
     ],
   },
   {
-    category: "diya",
+    route: "diya",
     title: "Diya",
     products: [
       {

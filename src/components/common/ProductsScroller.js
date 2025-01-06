@@ -129,7 +129,7 @@ const ProductsScroller = ({ category }) => {
           {category &&
             category?.products.map((product, index) => (
               <div key={index + category.category} className="px-1">
-                <Product {...product} />
+                <Product {...product} route={category.route} />
               </div>
             ))}
         </Slider>
