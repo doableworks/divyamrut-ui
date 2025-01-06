@@ -194,7 +194,7 @@ const Navbar = () => {
             }`}
             onClick={() => handleMoveRoute("/mission-and-vision")}
           >
-            Purpose and Vision
+            Mission and Vision
           </h5>
          
           <h5

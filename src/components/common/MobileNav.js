@@ -12,7 +12,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
   const [itemOpen, setItemOpen] = useState({
     products: false,
     advanceTherapies: false,
-    user:false,
+    user: false,
   });
 
   return (
@@ -80,6 +80,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
               >
                 {Therapies.map((item, index) => (
                   <h5
+                    key={index + "nav_therapy"}
                     className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-8 ${
                       pathname == `/therapy/${item.route}`
                         ? "text-text bg-d49ac81"
@@ -164,16 +165,12 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
           >
             <div
               className={`cursor-pointer ${
-                itemOpen.user
-                  ? "text-text bg-q4ca25af"
-                  : "text-a2c0d56"
+                itemOpen.user ? "text-text bg-q4ca25af" : "text-a2c0d56"
               }`}
             >
               <h5 className={`flex items-center py-2 pb-4 px-5 cursor-pointer`}>
-              <InitialAvatar shape={"ractangle"} user={null} />
-                <Arrow
-                  fill={itemOpen.user ? "#FFFFFF" : "#99C24A"}
-                />
+                <InitialAvatar shape={"ractangle"} user={null} />
+                <Arrow fill={itemOpen.user ? "#FFFFFF" : "#99C24A"} />
               </h5>
             </div>
             {/* Dropdown */}
@@ -183,40 +180,39 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
             text-a2c0d56 
             `}
               >
-                  {true ?(<>
+                {true ? (
+                  <>
                     <h5
-                    className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-8 ${
-                      pathname == `/profile`
-                        ? "text-text bg-d49ac81"
-                        : ""
-                    }`}
-                    onClick={() => handleMoveRoute("/profile")}
-                  >
-                    Profile
-                  </h5>
+                      className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-8 ${
+                        pathname == `/profile` ? "text-text bg-d49ac81" : ""
+                      }`}
+                      onClick={() => handleMoveRoute("/profile")}
+                    >
+                      Profile
+                    </h5>
+                    <h5
+                      className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-8 ${
+                        pathname == `/order-list` ? "text-text bg-d49ac81" : ""
+                      }`}
+                      onClick={() => handleMoveRoute("/order-list")}
+                    >
+                      Order List
+                    </h5>
+                    <h5
+                      className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-8`}
+                      // onClick={() => handleMoveRoute("/order-list")}
+                    >
+                      Logout
+                    </h5>
+                  </>
+                ) : (
                   <h5
-                    className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-8 ${
-                      pathname == `/order-list`
-                        ? "text-text bg-d49ac81"
-                        : ""
-                    }`}
-                    onClick={() => handleMoveRoute("/order-list")}
-                  >
-                    Order List
-                  </h5>
-                  <h5
-                    className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-8`}
-                    // onClick={() => handleMoveRoute("/order-list")}
-                  >
-                    Logout
-                  </h5>
-                  </>) :
-                  (<h5
                     className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-8`}
                     onClick={() => handleLogin()}
-                >
-                  Log in/Sign up
-                </h5>)}
+                  >
+                    Log in/Sign up
+                  </h5>
+                )}
               </div>
             )}
           </div>
