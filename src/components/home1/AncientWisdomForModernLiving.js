@@ -69,7 +69,7 @@ const AncientWisdomForModernLiving = () => {
   return (
     <div
       id="AncientWisdomForModernLiving"
-      className="w-full relative bg-[#F9F3EB] overflow-hidden"
+      className="w-full relative bg-FFEEE2 overflow-hidden"
     >
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-32">
         <div className="relative grid grid-cols-1 md:grid-cols-2 items-center gap-x-24 gap-y-5 ">
@@ -79,7 +79,7 @@ const AncientWisdomForModernLiving = () => {
             }}
           >
             <div className="left-card-awf absolute top-[20px] left-[20px] flex flex-col items-center justify-center bg-text">
-              <h5 className="font-jost text-text text-[16px] md:text-[18px] font-[500] leading-[1.5em] text-center bg-q044b931 py-2 px-8 w-full">
+              <h5 className="font-jost text-text text-[16px] md:text-[18px] font-[500] leading-[1.5em] text-center bg-E0A43B py-2 px-8 w-full">
                 {" "}
                 Excellent{" "}
               </h5>
@@ -90,7 +90,7 @@ const AncientWisdomForModernLiving = () => {
                 <Star h={15} w={15} fill={"#f0ad4e"} />
                 <Star h={15} w={15} fill={"#ccd6df"} />
               </div>
-              <h5 className="font-jost text-[24px] md:text-[50px] font-[600] leading-[1.3em] text-center text-q044b931 px-6 mb-2 w-full">
+              <h5 className="font-jost text-[24px] md:text-[50px] font-[600] leading-[1.3em] text-center text-q3c3c3d px-6 mb-2 w-full">
                 {" "}
                 4.7
               </h5>
@@ -102,7 +102,7 @@ const AncientWisdomForModernLiving = () => {
             </div>
           </div>
           <div className="right-section-awf py-[1.5rem] md:py-[5.5rem]">
-            <h2 className="font-suranna text-[50px] font-[400] leading-[1.3em] text-secondary text-left mb-6">
+            <h2 className="font-suranna text-[50px] font-[400] leading-[1.3em] text-E0A43B text-left mb-6">
               Ancient Wisdom for Modern Living.
             </h2>
             <p className="font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-a2c0d56 text-left">
@@ -110,7 +110,7 @@ const AncientWisdomForModernLiving = () => {
               rhoncus vulputate maximus enim ornare. Diam eu id rutrum lobortis
               netus neque integer venenatis letius libero a.
             </p>
-            <div className="text-center text-[#FFFFFF] inline-flex items-center justify-center gap-2 px-4 py-2 bg-q4ca25af  hover:bg-q638d055 transition mt-10">
+            <div className="text-center text-[#FFFFFF] inline-flex items-center justify-center gap-2 px-4 py-2 bg-E0A43B  hover:bg-q4ca25af transition mt-10 cursor-pointer">
               Discover more
               <RightArrow fill={"#FFFFFF"} />
             </div>

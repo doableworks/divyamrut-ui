@@ -24,6 +24,14 @@ const config: Config = {
         a2c0d56: "var(--e-global-color-a2c0d56)",
         q4ca25af : "var(--e-global-color-4ca25af)",
         f83c760: "var(--e-global-color-f83c760)",
+
+        //  new color
+        FFEEE2 :"var(--e-global-color-FFEEE2)",
+        AA218C : "var(--e-global-color-AA218C)",
+        q45B29D :"var(--e-global-color-45B29D)",
+        E0A43B :"var(--e-global-color-E0A43B)",
+        q3c3c3d :"var(--e-global-color-3c3c3d)",
+
       },
       backgroundImage: {
         'custom-radial': 'radial-gradient(at top right, var(--e-global-color-044b931) 0%, var(--e-global-color-638d055) 100%)',

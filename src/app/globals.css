@@ -22,6 +22,15 @@
   --e-global-color-a2c0d56: #99c24a;
   --e-global-color-4ca25af: #a48125;
   --e-global-color-f83c760: #000000;
+
+  /* new color */
+  --e-global-color-FFEEE2: #FFEEE2;
+  --e-global-color-AA218C: #AA218C;
+  --e-global-color-45B29D: #45B29D;
+  --e-global-color-E0A43B: #E0A43B;
+  --e-global-color-3c3c3d:#3c3c3d;
+
+
 }
 
 @media (prefers-color-scheme: dark) {

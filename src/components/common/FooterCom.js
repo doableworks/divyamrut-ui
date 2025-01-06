@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "nextjs-toploader/app";
 import { usePathname } from "next/navigation";
@@ -29,25 +30,25 @@ export default function FooterCom() {
 
   return (
     <>
-      <footer className="bg-[#4A5C24] text-white">
+      <footer className="bg-[#4A5C24] bg-q45B29D text-white">
         <div className="container mx-auto w-[85%] pt-20">
           {/* <div className="px-4 grid grid-cols-1 md:grid-cols-4 gap-8"> */}
           {/* Logo and Description */}
           <div className="flex flex-col md:flex-row gap-20 md:gap-40 pb-16">
             <div className="w-full md:w-[30%]">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8">
-                  {/* <Image
-                    src="/asset/Logo_Pranaveda.png"
+                <div className="flex w-48 h-20 gap-2">
+                  <Image
+                    src="/asset/divyamrut_transparent_logo.webp"
                     alt="Divyamrut Logo"
-                    className="w-full h-full"
-                    width={150}
-                    height={50}
-                  /> */}
+                    width={250}
+                    height={250}
+                    // className="w-full h-full"
+                  />
                 </div>
-                <h2 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF]">
+                {/* <h2 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF]">
                   Divyamrut
-                </h2>
+                </h2> */}
               </div>
               <p className="mt-4 font-jost text-[18px] font-[400] leading-[1.4em] text-left text-[#FFFFFF]">
                 Discover holistic wellness with Divyamrut&apos;s expert Ayurveda
@@ -62,7 +63,7 @@ export default function FooterCom() {
                   Get in Touch
                 </h4>
                 <hr className="border-t-[5px] border-dotted border-[#6E9039] my-6" />
-                <p className="font-jost text-[14px] font-[500]  text-left text-[#99C24A] uppercase">
+                <p className="font-jost text-[14px] font-[500]  text-left text-[#99C24A] text-text uppercase">
                   Customer Support
                 </p>
                 <p className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF] mt-2">
@@ -76,7 +77,7 @@ export default function FooterCom() {
                   Email Support
                 </h4>
                 <hr className="border-t-[5px] border-dotted border-[#6E9039] my-6" />
-                <p className="font-jost text-[14px] font-[500]  text-left text-[#99C24A] uppercase">
+                <p className="font-jost text-[14px] font-[500]  text-left text-[#99C24A] text-text uppercase">
                   Send Us a Ticket
                 </p>
                 <p className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF] mt-2">
@@ -90,7 +91,7 @@ export default function FooterCom() {
                   Head Office
                 </h4>
                 <hr className="border-t-[5px] border-dotted border-[#6E9039] my-6" />
-                <p className="font-jost text-[14px] font-[500]  text-left text-[#99C24A] uppercase">
+                <p className="font-jost text-[14px] font-[500]  text-left text-[#99C24A] text-text uppercase">
                   Visit Us
                 </p>
                 <p className="font-jost text-[18px] font-[400] leading-[1.4em] text-left text-[#FFFFFF] mt-2">

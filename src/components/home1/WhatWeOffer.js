@@ -99,7 +99,7 @@ const WhatWeOffer = () => {
   }, []);
 
   return (
-    <div id="WhatWeOffer" className="w-full relative bg-[#F9F3EB] overflow-hidden">
+    <div id="WhatWeOffer" className="w-full relative bg-FFEEE2 overflow-hidden">
       <Image
         className="absolute z-10 top-0 left-0"
         height={200}
@@ -110,10 +110,10 @@ const WhatWeOffer = () => {
 
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] xl:w-full py-32">
         <div className="fade-up">
-          <h6 className="font-jost text-d49ac81 text-[14px] font-[500] leading-[1.4em] uppercase text-center">
+          <h6 className="font-jost text-q3c3c3d text-[14px] font-[500] leading-[1.4em] uppercase text-center">
             What We offer
           </h6>
-          <h2 className="font-suranna text-[50px] font-[400] leading-[1.3em] text-secondary text-center mb-6">
+          <h2 className="font-suranna text-[50px] font-[400] leading-[1.3em] text-E0A43B text-center mb-6">
             The combination of nature and science.
           </h2>
         </div>
@@ -135,7 +135,7 @@ const WhatWeOffer = () => {
               </div>
               <div className="flex flex-col justify-start items-start gap-4 mb-20">
                 <div className="text-start">
-                  <strong className="font-suranna text-[28px] font-[400] leading-[1.4em] text-secondary">
+                  <strong className="font-suranna text-[28px] font-[400] leading-[1.4em] text-E0A43B">
                     {testimonial.name}
                   </strong>
                 </div>
@@ -145,7 +145,7 @@ const WhatWeOffer = () => {
               </p>
 
               <div className="border-t-[0.5px] border-q4d462f5 mt-10" />
-              <div className="text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-q4ca25af  hover:bg-q638d055 transition mt-10">
+              <div className="text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-E0A43B   hover:bg-q4ca25af transition mt-10 cursor-pointer">
                 Learn more
               </div>
             </div>

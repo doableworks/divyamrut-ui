@@ -48,7 +48,7 @@ const WhyChooseUs = () => {
         <div className="bg-[rgba(0,0,0,.4)] min-h-screen w-full  text-white">
           <div className="relative z-20 mx-auto flex flex-col items-center justify-center w-[90%] md:w-[85%] xl:w-full py-32">
             <div className="fade-up max-w-xl">
-              <h6 className="font-jost text-c94d9ab text-[14px] font-[500] leading-[1.4em] uppercase text-center">
+              <h6 className="font-jost text-text text-[14px] font-[500] leading-[1.4em] uppercase text-center">
                 Why Choose Us
               </h6>
               <h2 className="font-suranna text-[50px] font-[400] leading-[1.3em] text-text text-center mb-6">
@@ -84,29 +84,29 @@ const WhyChooseUs = () => {
           </div>
         </div>
       </div>
-      <div className="bg-custom-radial2 py-4">
+      <div className="bg-q45B29D py-4">
         <div className="flex justify-around items-center flex-wrap gap-8  text-center  text-white">
           <div>
             <CountUpCom id="product" end={47} suffix="K+" />
-            <p className="font-jost text-[13px] md:text-[13px] font-[500] text-c94d9ab uppercase">
+            <p className="font-jost text-[13px] md:text-[13px] font-[500] text-q3c3c3d uppercase">
               Product Sold
             </p>
           </div>
           <div>
             <CountUpCom id="happy" end={8} suffix="K+" />
-            <p className="font-jost text-[13px] md:text-[13px] font-[500] text-c94d9ab uppercase">
+            <p className="font-jost text-[13px] md:text-[13px] font-[500] text-q3c3c3d uppercase">
               Happy Customer
             </p>
           </div>
           <div>
             <CountUpCom id="country" end={51} suffix="+" />
-            <p className="font-jost text-[13px] md:text-[13px] font-[500] text-c94d9ab uppercase">
+            <p className="font-jost text-[13px] md:text-[13px] font-[500] text-q3c3c3d uppercase">
               Country Support
             </p>
           </div>
           <div>
             <CountUpCom id="rating" end={4.8} suffix="" decimals={1} />
-            <p className="font-jost text-[13px] md:text-[13px] font-[500] text-c94d9ab uppercase">
+            <p className="font-jost text-[13px] md:text-[13px] font-[500] text-q3c3c3d uppercase">
               Customer Ratings
             </p>
           </div>

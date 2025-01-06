@@ -42,10 +42,10 @@ const Banner = () => {
     <div className="min-h-screen h-screen w-full rounded-br-[10rem] md:rounded-br-[12rem] overflow-hidden">
       <div className="md:grid grid-cols-2 flex flex-col-reverse h-full">
         {/* left section */}
-        <div className="relative bg-transparent bg-custom-radial h-full pl-10 md:pl-32 pr-5 md:pr-24">
+        <div className="relative bg-q45B29D h-full pl-10 md:pl-32 pr-5 md:pr-24">
           <div className="relative top-0 md:top-[18%] left-[-2.5rem] md:left-0  w-screen bg-contain h-full md:h-[65%]  opacity-15 bg-[url('/asset/home/banner-left.png')] bg-no-repeat" />
           <div className="absolute top-[20%] text-left space-y-6 fade-up pr-10">
-            <h6 className="font-jost text-[12px] md:text-[14px] font-[500] text-c94d9ab uppercase">
+            <h6 className="font-jost text-[12px] md:text-[14px] font-[500] text-q3c3c3d uppercase">
               Welcome to PranaVeda
             </h6>
             <h1 className="font-suranna text-[32px] md:text-[89px] font-[400] leading-[1em] text-left text-[#FFFFFF]">
@@ -55,7 +55,7 @@ const Banner = () => {
               Experience Holistic Wellness with PranaVeda: Embrace the Power of
               Ayurveda for a Balanced Life. 
             </p>
-            <div className="font-suranna text-[16px] md:text-[21px] font-[400] leading-[1.4em] text-left text-[#FFFFFF] inline-flex items-center gap-2 justify-center px-6 py-3 mt-4 bg-q4ca25af  hover:bg-q638d055 transition">
+            <div className="font-suranna text-[16px] md:text-[21px] font-[400] leading-[1.4em] text-left text-[#FFFFFF] inline-flex items-center gap-2 justify-center px-6 py-3 mt-4 bg-E0A43B  hover:bg-q4ca25af  transition cursor-pointer">
             <Calender fill={"#FFFFFF"} /> Book an Appointment
             </div>
           </div>
@@ -64,7 +64,7 @@ const Banner = () => {
           <BackgroundImagesSlider />
           <div
             id="card_id"
-            className="hidden md:block absolute bottom-0 bg-white h-[300px] w-[300px] p-4"
+            className="hidden md:block absolute bottom-0 bg-white bg-FFEEE2 h-[300px] w-[300px] p-4"
           >
             {/* Icon Box */}
 
