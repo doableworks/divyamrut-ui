@@ -11,8 +11,8 @@ const page = () => {
   return (
     <>
     <MainBanner heading={heading} subHeading={subHeading} />
-     <WhoWeAre />
-     <HolisticHealth />
+     {/* <WhoWeAre />
+     <HolisticHealth /> */}
      <OurValues />
     </>
   )

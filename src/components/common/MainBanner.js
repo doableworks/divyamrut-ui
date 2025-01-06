@@ -50,10 +50,10 @@ const MainBanner = ({heading, subHeading}) => {
     >
       <div className="bg-[rgba(0,0,0,.4)] min-h-[250px] md:min-h-[500px] h-full w-full flex items-center justify-center text-white">
         <div className="relative z-20 mx-auto w-[90%] md:w-[85%] pb-12 pt-48   md:pb-32 md:pt-80 ">
-          <h2 className="fade-up font-suranna text-[27px] md:text-[50px] font-[400] leading-[1.3em] text-text text-center mb-4">
+          <h2 className="fade-up font-suranna text-[27px] md:text-[50px] font-[400] leading-[1.3em] text-text text-center mb-4 capitalize">
             {heading}
           </h2>
-          <h3 className="fade-down font-suranna text-[18px] md:text-[28px] font-[400] leading-[1.3em] text-text text-center mb-6">
+          <h3 className="fade-down font-suranna text-[18px] md:text-[28px] font-[400] leading-[1.3em] text-text text-center mb-6 capitalize">
             {subHeading}
           </h3>
         </div>

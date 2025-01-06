@@ -89,7 +89,7 @@ const OurValues = () => {
       id="OurValues"
       className="relative bg-text overflow-hidden"
     >
-    <div className="flex flex-col justify-center items-center w-screen">
+    <div className="flex flex-col justify-center items-center w-screen bg-FFEEE2">
     <div class="absolute top-0 w-full bg-contain h-full opacity-5 bg-center bg-[url('/asset/home/banner-left.png')] bg-no-repeat" />
       <div className="z-20 mx-auto w-[90%] md:w-[85%] py-20 md:py-32">
         <div className="flex flex-col md:flex-row justify-between gap-x-24 gap-y-10 ">

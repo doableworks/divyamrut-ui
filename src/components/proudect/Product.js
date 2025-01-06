@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "nextjs-toploader/app";
 
 
-const Product = ({ title, image, description, comments, date, category, route }) => {
+const Product = ({ title, image, description, route }) => {
   const router = useRouter();
 
   return (

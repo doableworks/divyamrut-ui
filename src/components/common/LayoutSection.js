@@ -75,7 +75,7 @@ export const LayoutSection = ({ children, sessionData }) => {
         <div>
         <Navbar />
         {/* {shouldHideMainBanner && <MainBanner />} */}
-        <main >{children}</main>
+        <main className="bg-FFEEE2" >{children}</main>
         </div>
         <Footer />
       </div>
