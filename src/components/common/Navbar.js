@@ -80,16 +80,16 @@ const Navbar = () => {
         {/* Navigation Menu */}
         <nav className="hidden xl:flex gap-8 font-jost text-[18px] font-[500] text-left text-[#FFFFFF] items-center">
           <h5
-            className={`cursor-pointer hover:text-a2c0d56 ${
-              pathname == "/about-us" ? "text-a2c0d56" : "text-[#FFFFFF]"
+            className={`cursor-pointer hover:text-E0A43B ${
+              pathname == "/about-us" ? "text-E0A43B" : "text-[#FFFFFF]"
             }`}
             onClick={() => handleMoveRoute("/about-us")}
           >
             About Us
           </h5>
           <h5
-            className={`cursor-pointer hover:text-a2c0d56 ${
-              pathname == "/consultations" ? "text-a2c0d56" : "text-[#FFFFFF]"
+            className={`cursor-pointer hover:text-E0A43B ${
+              pathname == "/consultations" ? "text-E0A43B" : "text-[#FFFFFF]"
             }`}
             onClick={() => handleMoveRoute("/consultations")}
           >
@@ -103,18 +103,18 @@ const Navbar = () => {
             <div className="flex items-center leading-[3.5em] cursor-pointer">
               <h5
                 className={`${
-                  hasHover == "Pages" ? "text-a2c0d56" : "#FFFFFF"
+                  hasHover == "Pages" ? "text-E0A43B" : "#FFFFFF"
                 } leading-[3.5em] cursor-pointer`}
               >
                 Therapies
               </h5>
-              <Arrow fill={hasHover == "Pages" ? "#99C24A" : "#FFFFFF"} />
+              <Arrow fill={hasHover == "Pages" ? "#E0A43B" : "#FFFFFF"} />
             </div>
             {/* Dropdown */}
             <div
               className={`absolute left-0 hidden group-hover:block shadow-lg text-nowrap cursor-pointer
             bg-white 
-            text-a2c0d56 
+            text-E0A43B 
             `}
             >
               {Therapies.map((item, index) => (
@@ -133,8 +133,8 @@ const Navbar = () => {
             </div>
           </div>
           <h5
-            className={`cursor-pointer hover:text-a2c0d56 ${
-              pathname == "/health-packages" ? "text-a2c0d56" : "text-[#FFFFFF]"
+            className={`cursor-pointer hover:text-E0A43B ${
+              pathname == "/health-packages" ? "text-E0A43B" : "text-[#FFFFFF]"
             }`}
             onClick={() => handleMoveRoute("/health-packages")}
           >
@@ -142,7 +142,7 @@ const Navbar = () => {
           </h5>
           <h5
                 className={`${
-                  pathname == "/products" ? "text-a2c0d56" : "#FFFFFF"
+                  pathname == "/products" ? "text-E0A43B" : "#FFFFFF"
                 } leading-[3.5em] cursor-pointer`}
                 onClick={() => handleMoveRoute("/products")}
               >
@@ -156,7 +156,7 @@ const Navbar = () => {
             <div className="flex items-center leading-[3.5em] cursor-pointer">
               <h5
                 className={`${
-                  hasHover == "Pages" ? "text-a2c0d56" : "#FFFFFF"
+                  hasHover == "Pages" ? "text-E0A43B" : "#FFFFFF"
                 } leading-[3.5em] cursor-pointer`}
                 onClick={() => handleMoveRoute("/")}
               >
@@ -168,7 +168,7 @@ const Navbar = () => {
             <div
               className={`absolute left-0 hidden group-hover:block shadow-lg text-nowrap cursor-pointer
             bg-white 
-            text-a2c0d56 
+            text-E0A43B 
             `}
             >
               {navProducts.map((item, index) => (
@@ -187,9 +187,9 @@ const Navbar = () => {
             </div>
           </div> */}
           <h5
-            className={`cursor-pointer hover:text-a2c0d56 ${
+            className={`cursor-pointer hover:text-E0A43B ${
               pathname == "/mission-and-vision"
-                ? "text-a2c0d56"
+                ? "text-E0A43B"
                 : "text-[#FFFFFF]"
             }`}
             onClick={() => handleMoveRoute("/mission-and-vision")}
@@ -198,22 +198,22 @@ const Navbar = () => {
           </h5>
          
           <h5
-            className={`cursor-pointer hover:text-a2c0d56 ${
-              pathname == "/contact-us" ? "text-a2c0d56" : "text-[#FFFFFF]"
+            className={`cursor-pointer hover:text-E0A43B ${
+              pathname == "/contact-us" ? "text-E0A43B" : "text-[#FFFFFF]"
             }`}
             onClick={() => handleMoveRoute("/contact-us")}
           >
             Contact Us
           </h5>
           <h5
-            className={`flex items-center gap-2 cursor-pointer hover:text-a2c0d56 ${
-              pathname == "/cart" ? "text-a2c0d56" : "text-[#FFFFFF]"
+            className={`flex items-center gap-2 cursor-pointer hover:text-E0A43B ${
+              pathname == "/cart" ? "text-E0A43B" : "text-[#FFFFFF]"
             }`}
             onClick={() => handleMoveRoute("/cart")}
             onMouseEnter={() => setHasHover("cart")}
             onMouseLeave={() => setHasHover(null)}
           >
-            <CartIcon cartItemCount={cartItems?.length || 0} h = {38} w = {30} color={pathname == "/cart" || hasHover == "cart" ? "#99C24A" : "#FFFFFF"} />
+            <CartIcon cartItemCount={cartItems?.length || 0} h = {38} w = {30} color={pathname == "/cart" || hasHover == "cart" ? "#E0A43B" : "#FFFFFF"} />
             Cart
           </h5>
           <div
@@ -233,7 +233,7 @@ const Navbar = () => {
             <div
               className={`absolute right-[-3rem] hidden group-hover:block shadow-lg text-nowrap cursor-pointer
             bg-white 
-            text-a2c0d56 
+            text-E0A43B 
             `}
             >
               {true ? (

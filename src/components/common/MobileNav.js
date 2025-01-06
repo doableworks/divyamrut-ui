@@ -29,10 +29,10 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
       </button>
 
       {openMobileNav ? (
-        <nav className="absolute top-20 left-0 w-screen bg-text flex flex-col gap-2 font-jost text-[16px] md:text-[18px] font-[500] text-left text-a2c0d56 shadow-lg">
+        <nav className="absolute top-20 left-0 w-screen bg-text flex flex-col gap-2 font-jost text-[16px] md:text-[18px] font-[500] text-left text-E0A43B shadow-lg">
           <h5
             className={`cursor-pointer py-2 pt-4 px-5  ${
-              pathname == "/about-us" ? "text-text bg-q4ca25af" : "text-a2c0d56"
+              pathname == "/about-us" ? "text-text bg-q4ca25af" : "text-E0A43B"
             }`}
             onClick={() => handleMoveRoute("/about-us")}
           >
@@ -42,7 +42,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
             className={`cursor-pointer py-2 pt-4 px-5  ${
               pathname == "/consultations"
                 ? "text-text bg-q4ca25af"
-                : "text-a2c0d56"
+                : "text-E0A43B"
             }`}
             onClick={() => handleMoveRoute("/consultations")}
           >
@@ -61,13 +61,13 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
               className={`cursor-pointer ${
                 itemOpen.advanceTherapies
                   ? "text-text bg-q4ca25af"
-                  : "text-a2c0d56"
+                  : "text-E0A43B"
               }`}
             >
               <h5 className={`flex items-center py-2 pb-4 px-5 cursor-pointer`}>
                 Therapies
                 <Arrow
-                  fill={itemOpen.advanceTherapies ? "#FFFFFF" : "#99C24A"}
+                  fill={itemOpen.advanceTherapies ? "#FFFFFF" : "#E0A43B"}
                 />
               </h5>
             </div>
@@ -75,7 +75,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
             {itemOpen.advanceTherapies && (
               <div
                 className={`text-nowrap cursor-pointer
-            text-a2c0d56 
+            text-E0A43B 
             `}
               >
                 {Therapies.map((item, index) => (
@@ -98,7 +98,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
             className={`cursor-pointer  py-2 px-5  ${
               pathname == "/health-packages"
                 ? "text-text bg-q4ca25af"
-                : "text-a2c0d56"
+                : "text-E0A43B"
             }`}
             onClick={() => handleMoveRoute("/health-packages")}
           >
@@ -106,7 +106,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
           </h5>
           <h5
             className={`cursor-pointer  py-2 px-5  ${
-              pathname == "/products" ? "text-text bg-q4ca25af" : "text-a2c0d56"
+              pathname == "/products" ? "text-text bg-q4ca25af" : "text-E0A43B"
             }`}
             onClick={() => handleMoveRoute("/products")}
           >
@@ -117,7 +117,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
             className={`cursor-pointer py-2 px-5  ${
               pathname == "/mission-and-vision"
                 ? "text-text bg-q4ca25af"
-                : "text-a2c0d56"
+                : "text-E0A43B"
             }`}
             onClick={() => handleMoveRoute("/mission-and-vision")}
           >
@@ -127,7 +127,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
             className={`cursor-pointer py-2 px-5  ${
               pathname == "/contact-us"
                 ? "text-text bg-q4ca25af"
-                : "text-a2c0d56"
+                : "text-E0A43B"
             }`}
             onClick={() => handleMoveRoute("/contact-us")}
           >
@@ -135,7 +135,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
           </h5>
           <h5
             className={`flex items-center gap-2 py-2 px-5  ${
-              pathname == "/cart" ? "text-text bg-q4ca25af" : "text-a2c0d56"
+              pathname == "/cart" ? "text-text bg-q4ca25af" : "text-E0A43B"
             }`}
             onClick={() => handleMoveRoute("/cart")}
             onMouseEnter={() => setHasHover("cart")}
@@ -146,9 +146,9 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
               h={38}
               w={30}
               color={
-                pathname == "/cart" || hasHover == "cart"
+                pathname == "/cart"
                   ? "#FFFFFF"
-                  : "#99C24A"
+                  : "#E0A43B"
               }
             />
             Cart
@@ -165,7 +165,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
           >
             <div
               className={`cursor-pointer ${
-                itemOpen.user ? "text-text bg-q4ca25af" : "text-a2c0d56"
+                itemOpen.user ? "text-text bg-q4ca25af" : "text-E0A43B"
               }`}
             >
               <h5 className={`flex items-center py-2 pb-4 px-5 cursor-pointer`}>
@@ -177,7 +177,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
             {itemOpen.user && (
               <div
                 className={`text-nowrap cursor-pointer
-            text-a2c0d56 
+            text-E0A43B 
             `}
               >
                 {true ? (
