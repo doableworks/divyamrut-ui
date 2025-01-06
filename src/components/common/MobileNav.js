@@ -29,7 +29,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
       </button>
 
       {openMobileNav ? (
-        <nav className="absolute top-12 left-0 w-screen bg-text flex flex-col gap-2 font-jost text-[16px] md:text-[18px] font-[500] text-left text-a2c0d56 shadow-lg">
+        <nav className="absolute top-20 left-0 w-screen bg-text flex flex-col gap-2 font-jost text-[16px] md:text-[18px] font-[500] text-left text-a2c0d56 shadow-lg">
           <h5
             className={`cursor-pointer py-2 pt-4 px-5  ${
               pathname == "/about-us" ? "text-text bg-q4ca25af" : "text-a2c0d56"

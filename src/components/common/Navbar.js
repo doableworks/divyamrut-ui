@@ -61,19 +61,19 @@ const Navbar = () => {
       <div className="bg-transparent w-[95%] mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/">
-          <div className="flex w-8 h-8">
-            {/* <Image
-              src="/asset/Logo_Pranaveda.png"
+          <div className="flex w-48 h-20 gap-2">
+            <Image
+              src="/asset/divyamrut_transparent_logo.webp"
               alt="Divyamrut Logo"
-              className="w-full h-full"
-              width={150}
-              height={150}
-            /> */}
-            <h2
+              width={250}
+              height={250}
+              // className="w-full h-full"
+            />  
+            {/* <h2
               className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF]"
             >
               Divyamrut
-            </h2>
+            </h2> */}
           </div>
         </Link>
 
