@@ -655,6 +655,29 @@ export const studySubjectData = [
   },
 ];
 
+export const Therapies = [
+  { route: "basic-flower-therapy", title: "Basic Flower Therapy" },
+  { route: "cranio-sacral-therapy", title: "Cranio Sacral Therapy" },
+  { route: "meru-chikitsa", title: "Meru Chikitsa" },
+  { route: "marma", title: "Marma" },
+  { route: "sound-therapy", title: "Sound Therapy" },
+  { route: "sujok-and-acupuncture", title: "Sujok & Acupuncture" },
+  { route: "osteopathy", title: "Osteopathy" },
+  { route: "art-therapy", title: "Art Therapy" },
+];
+
+export const NavProducts = [
+  {
+    route: "kansa-vati-foot-massage-kit",
+    title: "Kansa Vati Foot Massage Kit",
+  },
+  { route: "meditation-puja-asans", title: "Meditation/Puja Asans" },
+  { route: "meditation-puja-shawls", title: "Meditation/Puja Shawls" },
+  { route: "chandan-kumkum-bindi-kit", title: "Chandan-Kumkum Bindi Kit" },
+  { route: "bath-aura-cleansing-salt", title: "Bath/Aura Cleansing Salt" },
+  { route: "diya", title: "Diya" },
+];
+
 const CONSTANTS = {
   NGROK_URL,
   PAYPAL_CLIENT_ID,
@@ -665,6 +688,8 @@ const CONSTANTS = {
   Features,
   FeaturesComp,
   studySubjectData,
+  Therapies,
+  NavProducts,
 };
 
 export default CONSTANTS;

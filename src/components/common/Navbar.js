@@ -13,30 +13,9 @@ import {
   setOpenRegisterModal,
 } from "@/redux/feature/authModalSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { Therapies } from "@/contants/contants";
 
 
-const navProducts = [
-  {
-    route: "kansa-vati-foot-massage-kit",
-    title: "Kansa Vati Foot Massage Kit",
-  },
-  { route: "meditation-puja-asans", title: "Meditation/Puja Asans" },
-  { route: "meditation-puja-shawls", title: "Meditation/Puja Shawls" },
-  { route: "chandan-kumkum-bindi-kit", title: "Chandan-Kumkum Bindi Kit" },
-  { route: "bath-aura-cleansing-salt", title: "Bath/Aura Cleansing Salt" },
-  { route: "diya", title: "Diya" },
-];
-
-const Therapies = [
-  { route: "basic-flower-therapy", title: "Basic Flower Therapy" },
-  { route: "cranio-sacral-therapy", title: "Cranio Sacral Therapy" },
-  { route: "meru-chikitsa", title: "Meru Chikitsa" },
-  { route: "marma", title: "Marma" },
-  { route: "sound-therapy", title: "Sound Therapy" },
-  { route: "sujok-and-acupuncture", title: "Sujok & Acupuncture" },
-  { route: "osteopathy", title: "Osteopathy" },
-  { route: "art-therapy", title: "Art Therapy" },
-];
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -280,7 +259,6 @@ const Navbar = () => {
                   </h5>
 
                   <h5
-                   
                     className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-5`}
                     // onClick={() => handleLogout()}
                   >
@@ -297,10 +275,6 @@ const Navbar = () => {
               )}
             </div>
           </div>
-
-          {/* <div className="text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-q4ca25af  hover:bg-q638d055 transition">
-            <i className="mr-2 icons icon-calendar"></i> Get Started
-          </div> */}
         </nav>
 
         {/* Mobile Menu Toggle */}
