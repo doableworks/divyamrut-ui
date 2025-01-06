@@ -16,6 +16,12 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
     products: false
   });
 
+  const handleRotue = (path) =>{
+    handleMoveRoute(path)
+    setOpenMobileNav(!openMobileNav)
+  }
+
+
   return (
     <>
       <button
@@ -35,7 +41,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
             className={`cursor-pointer py-2 pt-4 px-5  ${
               pathname == "/about-us" ? "text-text bg-q4ca25af" : "text-E0A43B"
             }`}
-            onClick={() => handleMoveRoute("/about-us")}
+            onClick={() => handleRotue("/about-us")}
           >
             About Us
           </h5>
@@ -45,7 +51,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
                 ? "text-text bg-q4ca25af"
                 : "text-E0A43B"
             }`}
-            onClick={() => handleMoveRoute("/consultations")}
+            onClick={() => handleRotue("/consultations")}
           >
             Consultations
           </h5>
@@ -87,7 +93,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
                         ? "text-text bg-d49ac81"
                         : ""
                     }`}
-                    onClick={() => handleMoveRoute(`/therapy/${item.route}`)}
+                    onClick={() => handleRotue(`/therapy/${item.route}`)}
                   >
                     {item.title}
                   </h5>
@@ -101,7 +107,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
                 ? "text-text bg-q4ca25af"
                 : "text-E0A43B"
             }`}
-            onClick={() => handleMoveRoute("/health-packages")}
+            onClick={() => handleRotue("/health-packages")}
           >
             Health Packages
           </h5>
@@ -109,7 +115,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
             className={`cursor-pointer  py-2 px-5  ${
               pathname == "/products" ? "text-text bg-q4ca25af" : "text-E0A43B"
             }`}
-            onClick={() => handleMoveRoute("/products")}
+            onClick={() => handleRotue("/products")}
           >
             Products
           </h5> */}
@@ -152,7 +158,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
                         ? "text-text bg-d49ac81"
                         : ""
                     }`}
-                    onClick={() =>handleMoveRoute(`/products/${item.route}`)}
+                    onClick={() =>handleRotue(`/products/${item.route}`)}
                   >
                     {item.title}
                   </h5>
@@ -167,7 +173,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
                 ? "text-text bg-q4ca25af"
                 : "text-E0A43B"
             }`}
-            onClick={() => handleMoveRoute("/mission-and-vision")}
+            onClick={() => handleRotue("/mission-and-vision")}
           >
             Mission and Vision
           </h5>
@@ -177,7 +183,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
                 ? "text-text bg-q4ca25af"
                 : "text-E0A43B"
             }`}
-            onClick={() => handleMoveRoute("/contact-us")}
+            onClick={() => handleRotue("/contact-us")}
           >
             Contact Us
           </h5>
@@ -185,7 +191,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
             className={`flex items-center gap-2 py-2 px-5  ${
               pathname == "/cart" ? "text-text bg-q4ca25af" : "text-E0A43B"
             }`}
-            onClick={() => handleMoveRoute("/cart")}
+            onClick={() => handleRotue("/cart")}
             onMouseEnter={() => setHasHover("cart")}
             onMouseLeave={() => setHasHover(null)}
           >
@@ -234,7 +240,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
                       className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-8 ${
                         pathname == `/profile` ? "text-text bg-d49ac81" : ""
                       }`}
-                      onClick={() => handleMoveRoute("/profile")}
+                      onClick={() => handleRotue("/profile")}
                     >
                       Profile
                     </h5>
@@ -242,13 +248,13 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
                       className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-8 ${
                         pathname == `/order-list` ? "text-text bg-d49ac81" : ""
                       }`}
-                      onClick={() => handleMoveRoute("/order-list")}
+                      onClick={() => handleRotue("/order-list")}
                     >
                       Order List
                     </h5>
                     <h5
                       className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-8`}
-                      // onClick={() => handleMoveRoute("/order-list")}
+                      // onClick={() => handleRotue("/order-list")}
                     >
                       Logout
                     </h5>
