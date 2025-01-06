@@ -13,7 +13,7 @@ import {
   setOpenRegisterModal,
 } from "@/redux/feature/authModalSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { Therapies } from "@/contants/contants";
+import { Therapies, NavProducts } from "@/contants/contants";
 
 
 
@@ -140,15 +140,15 @@ const Navbar = () => {
           >
             Health Packages
           </h5>
-          <h5
+          {/* <h5
                 className={`${
                   pathname == "/products" ? "text-E0A43B" : "#FFFFFF"
                 } leading-[3.5em] cursor-pointer`}
                 onClick={() => handleMoveRoute("/products")}
               >
                 Products
-              </h5>
-          {/* <div
+              </h5> */}
+          <div
             className="relative group"
             onMouseEnter={() => setHasHover("Pages")}
             onMouseLeave={() => setHasHover(null)}
@@ -158,11 +158,11 @@ const Navbar = () => {
                 className={`${
                   hasHover == "Pages" ? "text-E0A43B" : "#FFFFFF"
                 } leading-[3.5em] cursor-pointer`}
-                onClick={() => handleMoveRoute("/")}
+                // onClick={() => handleMoveRoute("/")}
               >
                 Products
               </h5>
-              <Arrow fill={hasHover == "Pages" ? "#99C24A" : "#FFFFFF"} />
+              <Arrow fill={hasHover == "Pages" ? "#E0A43B" : "#FFFFFF"} />
             </div>
            
             <div
@@ -171,7 +171,7 @@ const Navbar = () => {
             text-E0A43B 
             `}
             >
-              {navProducts.map((item, index) => (
+              {NavProducts.map((item, index) => (
                 <h5
                   key={index + "product"}
                   className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
@@ -185,7 +185,7 @@ const Navbar = () => {
                 </h5>
               ))}
             </div>
-          </div> */}
+          </div>
           <h5
             className={`cursor-pointer hover:text-E0A43B ${
               pathname == "/mission-and-vision"
