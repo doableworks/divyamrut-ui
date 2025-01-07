@@ -4,9 +4,11 @@ import CONSTANTS from "./contants"
 
 
 export const isJwtExpired = (token) => {
+    console.log("______________token", token)
     // offset by 120 seconds, so we will check if the token is "almost expired".
     const currentTime = Math.round(Date.now() / 1000 + 120);
     const decoded = jwt.decode(token);
+    console.log("____decoded", decoded)
     // console.log(`Current time + 120 seconds: ${new Date(currentTime * 1000)}`);
     // console.log(`Token lifetime: ${new Date(decoded["exp"] * 1000)}`);
     // console.log(`Time left: ${new Date(currentTime * 1000) - new Date(decoded["exp"] * 1000)}`);
@@ -29,7 +31,7 @@ export const refreshToken = async function (token) {
     try {
         const response = await axios.post(
             // "http://localhost:8000/api/auth/token/refresh/",
-            CONSTANTS.NGROK_URL + `api/account/auth/token/refresh/`,
+            CONSTANTS.NGROK_URL + `api/auth/token/refresh/`,
 
             {
                 refresh: token.refreshToken,

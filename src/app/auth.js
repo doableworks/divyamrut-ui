@@ -19,11 +19,11 @@ export const authOptions = {
             },
             async authorize(credentials, req) {
                 const payload = {
-                    email: credentials.email,
+                    username: credentials.email,
                     password: credentials.password,
                 };
 
-                const res = await fetch(process.env.API_URL + 'api/account/auth/login/', {
+                const res = await fetch(process.env.API_URL + 'api/auth/login/', {
                     method: 'POST',
                     body: JSON.stringify(payload),
                     headers: {
@@ -34,7 +34,6 @@ export const authOptions = {
 
                 const status = res.status;
                 const statusText = res.statusText;
-                // console.log(statusText);
 
 
                 // If no error and we have user data, return it
@@ -141,8 +140,8 @@ export const authOptions = {
                     return token;
                 } else if (account.provider === "credentials") {
                     // const { access_token, refresh_token, ...rest } = user;
-                    token.accessToken = user.access_token;
-                    token.refreshToken = user.refresh_token;
+                    token.accessToken = user.access;
+                    token.refreshToken = user.refresh;
                     // token.username = user.username;
                     token.user = user;
                     return token;
@@ -154,8 +153,6 @@ export const authOptions = {
                     return token;
                 }
             }
-
-            // console.log('JWT callback');
 
             if (isJwtExpired(token.accessToken)) {
                 const [newAccessToken, newRefreshToken,] = await refreshToken(token);

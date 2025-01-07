@@ -48,6 +48,7 @@ const LoginModal = () => {
   }, [index, openLoginModal]);
 
   const onFinish = (values) => {
+    console.log("values 555", values)
     setLoading(true);
     setErrorMessage("");
     signIn("credentials", {
@@ -56,9 +57,10 @@ const LoginModal = () => {
       password: values.password,
     })
       .then(({ ok, error }) => {
+        console.log("ok", ok, "error", error)
         setLoading(false);
         if (ok) {
-          router.push("/home");
+          // router.push("/home");
           dispatch(setOpenLoginModal(false));
           showResponseMessage("success", "Login successfully!");
         } else {
@@ -95,16 +97,40 @@ const LoginModal = () => {
         className="login_modal"
       >
         <Row justify="center" className="h-full mt-6">
-          <Col span={12} className="hidden lg:flex items-center">
+          <Col xs={0} sm={0} md={0} lg={12} xl={12} xxl={12}>
             <Image
               src="/asset/home/img1.png"
               alt="Login"
-              className="h-full w-auto object-cover rounded-2xl"
+              className="h-auto w-full rounded-2xl"
               fill
             />
           </Col>
           <Col
-            span={11}
+          xs={{
+            span:24,
+            offset:1
+          }}
+          sm={{
+            span:24,
+            offset:1
+          }}
+          md={{
+            span:24,
+            offset:1
+          }}
+          lg={{
+            span:11,
+            offset:1
+          }}
+          xl={{
+            span:11,
+            offset:1
+          }}
+          xxl={{
+            span:11,
+            offset:1
+          }}
+            // span={11}
             className="flex flex-col items-center pl-2 pb-5 w-full"
           >
             <div className="w-full">

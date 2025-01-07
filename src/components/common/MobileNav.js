@@ -5,7 +5,7 @@ import { Therapies, NavProducts } from "@/contants/contants";
 import { useSelector, useDispatch } from "react-redux";
 import InitialAvatar from "@/components/common/InitialAvatar";
 
-const MobileNav = ({ pathname, handleMoveRoute }) => {
+const MobileNav = ({session, pathname, handleMoveRoute, handleLogin, onLogOut }) => {
   const cartItems = useSelector((state) => state.cart.items);
   const [openMobileNav, setOpenMobileNav] = useState(false);
   const [hasHover, setHasHover] = useState(null);
@@ -234,7 +234,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
             text-E0A43B 
             `}
               >
-                {true ? (
+                {session ? (
                   <>
                     <h5
                       className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-8 ${
@@ -254,7 +254,7 @@ const MobileNav = ({ pathname, handleMoveRoute }) => {
                     </h5>
                     <h5
                       className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-8`}
-                      // onClick={() => handleRotue("/order-list")}
+                      onClick={() => onLogOut()}
                     >
                       Logout
                     </h5>

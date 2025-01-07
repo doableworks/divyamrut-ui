@@ -1,5 +1,5 @@
 // const NGROK_URL = `https://staging.desklib.com/`
-const NGROK_URL = `https://app2.desklib.com/`;
+const NGROK_URL = `https://register.divyamrutnaturals.com/`;
 // const NGROK_URL = `https://2535-2401-4900-7b14-dc79-b36c-451a-d0d6-cc33.ngrok-free.app/`
 const PAYPAL_CLIENT_ID =
   "AUwMd0CgwkCmURyZPPGTZoF1h8ZR84Qv0v5Ud7Zn_P7Eu3qOB_0w24kQUI7WUWsUWamEIzrOqc-sws6m";

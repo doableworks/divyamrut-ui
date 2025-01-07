@@ -370,54 +370,61 @@ const RegisterModal = () => {
   };
 
   const onSubmit = async (values) => {
-    if (capcha) {
-      setLoading(true);
-      try {
-        const data = {
-          email: values.email,
-          first_name: values.firstName,
-          last_name: values.lastName,
-          password1: values.password,
-          password2: values.confirm,
-          recaptcha: capcha,
-        };
+    // if (capcha) {
+    setLoading(true);
+    try {
+      const data = {
+        email: values.email,
+        first_name: values.firstName,
+        last_name: values.lastName,
+        password1: values.password,
+        password2: values.confirm,
+        // recaptcha: capcha,
+      };
 
-        const response = await fetch(
-          CONSTANTS.NGROK_URL + `api/account/auth/register/`,
-          {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-              "Content-Type": "application/json",
-              "Accept-Language": "en-US",
-            },
-          }
-        );
-        const responseData = await response.json();
-        setLoading(false);
-        if (response.ok && responseData) {
-          showResponseMessage(
-            "success",
-            "You are successfully signed up. Please check your email address for verification."
-          );
-          dispatch(setOpenRegisterModal(false));
-          router.push("/accounts/confirm-email/");
-        } else {
-          const errs = Object.entries(responseData).map(
-            ([key, value]) => `${key}: ${value}`
-          );
-          showResponseMessage("error", errs);
-        }
-        return true;
-      } catch (error) {
+      console.log(
+        CONSTANTS.NGROK_URL + `api/auth/register/`,
+        "vlaues register",
+        data
+      );
+
+      const response = await fetch(CONSTANTS.NGROK_URL + `api/auth/register/`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept-Language": "en-US",
+        },
+      });
+
+      console.log("vlaues register response", response);
+
+      const responseData = await response.json();
+      setLoading(false);
+      if (response.ok && responseData) {
         showResponseMessage(
-          "error",
-          "Something went wrong, please try again later!"
+          "success",
+          "You are successfully signed up. Please check your email address for verification."
         );
-        setLoading(false);
-        return false;
+        dispatch(setOpenRegisterModal(false));
+        router.push("/accounts/confirm-email/");
+      } else {
+        const errs = Object.entries(responseData).map(
+          ([key, value]) => `${key}: ${value}`
+        );
+        showResponseMessage("error", errs);
       }
+      return true;
+    } catch (error) {
+      console.log("error register error", error);
+      showResponseMessage(
+        "error",
+        "Something went wrong, please try again later!"
+      );
+      setLoading(false);
+      return false;
     }
+    // }
   };
 
   const onCaptchaChange = (token) => {
@@ -441,15 +448,23 @@ const RegisterModal = () => {
         className="login_modal"
       >
         <Row justify="center" className="h-full mt-6">
-          <Col span={12} className="hidden lg:flex items-center">
+          <Col xs={0} sm={0} md={0} lg={12} xl={12} xxl={12}>
             <Image
               src="/asset/home/img1.png"
               alt="Login"
-              className="h-full w-auto object-cover rounded-2xl"
+              className="h-auto w-full rounded-2xl"
               fill
             />
           </Col>
-          <Col xs={24} sm={24} md={12} className="flex flex-col justify-center">
+          <Col
+            xs={24}
+            sm={24}
+            md={24}
+            lg={12}
+            xl={12}
+            xxl={12}
+            className="flex flex-col justify-center"
+          >
             <Form
               name="register"
               onFinish={onSubmit}
@@ -577,13 +592,13 @@ const RegisterModal = () => {
                   className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
                 />
               </Form.Item>
-              <Form.Item className="captcha">
+              {/* <Form.Item className="captcha">
                 <ReCAPTCHA
                   sitekey={CONSTANTS.SITE_KEY}
                   onChange={onCaptchaChange}
                   ref={recaptcha}
                 />
-              </Form.Item>
+              </Form.Item> */}
               <Button
                 loading={loading}
                 htmlType="submit"

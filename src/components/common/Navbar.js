@@ -8,21 +8,22 @@ import { Arrow, Call, Message, CartIcon } from "@/icon/icons";
 import { useState } from "react";
 import MobileNav from "./MobileNav";
 import InitialAvatar from "@/components/common/InitialAvatar";
+import { signOut } from "next-auth/react";
+import { Button, Form, message, Input, Row, Col, Modal } from "antd";
 import {
   setOpenLoginModal,
-  setOpenRegisterModal,
+  setResetModalSlice
 } from "@/redux/feature/authModalSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Therapies, NavProducts } from "@/contants/contants";
 
-
-
-const Navbar = () => {
+const Navbar = ({ session }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const pathname = usePathname();
   const [hasHover, setHasHover] = useState(null);
   const cartItems = useSelector((state) => state.cart.items);
+  const [messageApi, contextHolder] = message.useMessage();
 
 
   const handleMoveRoute = (route) => {
@@ -33,11 +34,44 @@ const Navbar = () => {
     dispatch(setOpenLoginModal(true));
   };
 
-  const handleLogout = () => {
-    // dispatch(setOpenLoginModal(true));
+  const onLogOut = async ()=>{
+    try{
+     await signOut()
+     await dispatch(setOpenLoginModal(true));
+     
+      // .then(({ ok, error }) => {
+      //   console.log("ok", ok, "error",error)
+      //   if (ok) {
+      //     // router.push("/home");
+      //     dispatch(setOpenLoginModal(true));
+      //     showResponseMessage("success", "Logout successfully!");
+      //   } else {
+      //     showResponseMessage("error", 'Something went wrong. Please try again.');
+      //   }
+      // })
+      // .catch(() => {
+      //   showResponseMessage("error", 'Something went wrong. Please try again.');
+      // });
+
+
+    // signOut({ callbackUrl: `/?loginpopup=true&next=${pathname}` });
+    // dispatch(setResetAuthSlice());
+    // dispatch(setResetAIAnsSlice());
+    // dispatch(setResetModalSlice());
+    // dispatch(clearUserData())
+  }
+  catch(error){
+    console.log("onLogOut error", error)
+  }
+  }
+
+  const showResponseMessage = (type, content) => {
+    messageApi.open({ type, content });
   };
 
   return (
+    <>
+     {contextHolder}
     <header className="absolute z-30 w-full shadow">
       {/* Top Banner */}
       {/* <div className="bg-q638d055  py-2">
@@ -58,7 +92,7 @@ const Navbar = () => {
         </div>
       </div> */}
       {/* Main Navigation */}
-      <div className="bg-transparent w-[95%] mx-auto flex items-center justify-between">
+      <div className="bg-transparent w-[98%] mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/">
           <div className="flex w-48 h-20 gap-2">
@@ -68,7 +102,7 @@ const Navbar = () => {
               width={250}
               height={250}
               // className="w-full h-full"
-            />  
+            />
             {/* <h2
               className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF]"
             >
@@ -164,7 +198,7 @@ const Navbar = () => {
               </h5>
               <Arrow fill={hasHover == "products" ? "#E0A43B" : "#FFFFFF"} />
             </div>
-           
+
             <div
               className={`absolute left-0 hidden group-hover:block shadow-lg text-nowrap cursor-pointer
             bg-white 
@@ -196,7 +230,7 @@ const Navbar = () => {
           >
             Mission and Vision
           </h5>
-         
+
           <h5
             className={`cursor-pointer hover:text-E0A43B ${
               pathname == "/contact-us" ? "text-E0A43B" : "text-[#FFFFFF]"
@@ -213,7 +247,16 @@ const Navbar = () => {
             onMouseEnter={() => setHasHover("cart")}
             onMouseLeave={() => setHasHover(null)}
           >
-            <CartIcon cartItemCount={cartItems?.length || 0} h = {38} w = {30} color={pathname == "/cart" || hasHover == "cart" ? "#E0A43B" : "#FFFFFF"} />
+            <CartIcon
+              cartItemCount={cartItems?.length || 0}
+              h={38}
+              w={30}
+              color={
+                pathname == "/cart" || hasHover == "cart"
+                  ? "#E0A43B"
+                  : "#FFFFFF"
+              }
+            />
             Cart
           </h5>
           <div
@@ -231,15 +274,14 @@ const Navbar = () => {
             </div>
             {/* Dropdown */}
             <div
-              className={`absolute right-[-3rem] hidden group-hover:block shadow-lg text-nowrap cursor-pointer
+              className={`absolute right-[-1rem] hidden group-hover:block shadow-lg text-nowrap cursor-pointer
             bg-white 
             text-E0A43B 
             `}
             >
-              {true ? (
+              {session ? (
                 <>
                   <h5
-                    
                     className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-5 ${
                       pathname == `/profile` ? "text-text bg-d49ac81" : ""
                     }`}
@@ -249,7 +291,6 @@ const Navbar = () => {
                   </h5>
 
                   <h5
-                   
                     className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-5 ${
                       pathname == `/order-list` ? "text-text bg-d49ac81" : ""
                     }`}
@@ -260,7 +301,7 @@ const Navbar = () => {
 
                   <h5
                     className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-5`}
-                    // onClick={() => handleLogout()}
+                    onClick={() => onLogOut()}
                   >
                     Logout
                   </h5>
@@ -278,9 +319,19 @@ const Navbar = () => {
         </nav>
 
         {/* Mobile Menu Toggle */}
-        <MobileNav pathname={pathname} handleMoveRoute={handleMoveRoute} />
+        <div className="block xl:hidden">
+        <MobileNav
+          session={session}
+          pathname={pathname}
+          handleMoveRoute={handleMoveRoute}
+          handleLogin={handleLogin}
+          onLogOut={onLogOut}
+        />
+        </div>
+        
       </div>
     </header>
+    </>
   );
 };
 
