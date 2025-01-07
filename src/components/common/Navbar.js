@@ -9,13 +9,15 @@ import { useState } from "react";
 import MobileNav from "./MobileNav";
 import InitialAvatar from "@/components/common/InitialAvatar";
 import {
+  setMobileAuthDrawer,
   setOpenLoginModal,
   setOpenRegisterModal,
 } from "@/redux/feature/authModalSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Therapies, NavProducts } from "@/contants/contants";
-
-
+import MobileNavbar from "./MobileNavbar";
+import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
+import { closeNav, openNav, toggleNav } from "@/redux/feature/mobileNavSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -24,6 +26,7 @@ const Navbar = () => {
   const [hasHover, setHasHover] = useState(null);
   const cartItems = useSelector((state) => state.cart.items);
 
+  const isMobileNavOpen = useSelector((state) => state.mobileNav.isOpen);
 
   const handleMoveRoute = (route) => {
     router.push(route);
@@ -35,6 +38,14 @@ const Navbar = () => {
 
   const handleLogout = () => {
     // dispatch(setOpenLoginModal(true));
+  };
+
+  const handleMobileClose = () => {
+    dispatch(closeNav(false));
+  };
+
+  const handleMobileOpen = () => {
+    dispatch(openNav(true));
   };
 
   return (
@@ -65,10 +76,10 @@ const Navbar = () => {
             <Image
               src="/asset/divyamrut_transparent_logo.webp"
               alt="Divyamrut Logo"
-              width={250}
+              width={120}
               height={250}
               // className="w-full h-full"
-            />  
+            />
             {/* <h2
               className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF]"
             >
@@ -164,7 +175,7 @@ const Navbar = () => {
               </h5>
               <Arrow fill={hasHover == "Pages" ? "#E0A43B" : "#FFFFFF"} />
             </div>
-           
+
             <div
               className={`absolute left-0 hidden group-hover:block shadow-lg text-nowrap cursor-pointer
             bg-white 
@@ -196,7 +207,7 @@ const Navbar = () => {
           >
             Mission and Vision
           </h5>
-         
+
           <h5
             className={`cursor-pointer hover:text-E0A43B ${
               pathname == "/contact-us" ? "text-E0A43B" : "text-[#FFFFFF]"
@@ -213,7 +224,16 @@ const Navbar = () => {
             onMouseEnter={() => setHasHover("cart")}
             onMouseLeave={() => setHasHover(null)}
           >
-            <CartIcon cartItemCount={cartItems?.length || 0} h = {38} w = {30} color={pathname == "/cart" || hasHover == "cart" ? "#E0A43B" : "#FFFFFF"} />
+            <CartIcon
+              cartItemCount={cartItems?.length || 0}
+              h={38}
+              w={30}
+              color={
+                pathname == "/cart" || hasHover == "cart"
+                  ? "#E0A43B"
+                  : "#FFFFFF"
+              }
+            />
             Cart
           </h5>
           <div
@@ -239,7 +259,6 @@ const Navbar = () => {
               {true ? (
                 <>
                   <h5
-                    
                     className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-5 ${
                       pathname == `/profile` ? "text-text bg-d49ac81" : ""
                     }`}
@@ -249,7 +268,6 @@ const Navbar = () => {
                   </h5>
 
                   <h5
-                   
                     className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-5 ${
                       pathname == `/order-list` ? "text-text bg-d49ac81" : ""
                     }`}
@@ -278,8 +296,29 @@ const Navbar = () => {
         </nav>
 
         {/* Mobile Menu Toggle */}
-        <MobileNav pathname={pathname} handleMoveRoute={handleMoveRoute} />
+        {/* <MobileNav pathname={pathname} handleMoveRoute={handleMoveRoute} /> */}
+
+        <div className="lg:hidden">
+          {isMobileNavOpen ? (
+            <button
+              type="button"
+              onClick={handleMobileClose}
+              className="flex justify-center p-3 backdrop-blur-lg rounded-md"
+            >
+              <CloseOutlined className="text-[28px]" />
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={handleMobileOpen}
+              className="flex justify-center p-3 backdrop-blur-lg rounded-md"
+            >
+              <MenuOutlined className="text-[28px]" />
+            </button>
+          )}
+        </div>
       </div>
+      <div className="lg:hidden">{<MobileNavbar />}</div>
     </header>
   );
 };
