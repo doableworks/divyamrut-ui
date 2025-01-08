@@ -407,7 +407,7 @@ const RegisterModal = () => {
           "You are successfully signed up. Please check your email address for verification."
         );
         dispatch(setOpenRegisterModal(false));
-        router.push("/accounts/confirm-email/");
+        dispatch(setOpenLoginModal(true));
       } else {
         const errs = Object.entries(responseData).map(
           ([key, value]) => `${key}: ${value}`
