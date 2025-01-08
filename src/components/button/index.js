@@ -10,7 +10,7 @@ export default function CustomButton({
 
   const variantClasses =
     variant === "filled"
-      ? "bg-blue-500 text-white hover:bg-[--e-global-color-E0A43B]"
+      ? "bg-[--e-global-color-E0A43B] text-white hover:bg-[--e-global-color-d49ac81]"
       : "border border-blue-500 text-blue-500 hover:bg-blue-100";
 
   return (
