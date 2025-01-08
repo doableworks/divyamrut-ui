@@ -25,9 +25,6 @@ export const LayoutSection = ({ children, sessionData }) => {
   const searchParams = useSearchParams();
   const path = usePathname();
 
-  console.log("sessionData 333 44",sessionData)
-  console.log("session 333 44",session)
-
   // useEffect(() => {
   //   if (userSession === null && !session) {
   //     dispatch(setResetAuthSlice());
@@ -72,8 +69,6 @@ export const LayoutSection = ({ children, sessionData }) => {
     /^\/blog\/[\w-]+$/.test(path) ||
     /^\/newspost\/[\w-]+$/.test(path);
 
-
-    console.log("layout session", session)
 
   return (
     <>

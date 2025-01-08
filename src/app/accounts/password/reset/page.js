@@ -26,7 +26,7 @@ const Page = () => {
     try {
       setLoading(true)
       const res = await axios.post(
-        CONSTANTS.NGROK_URL + `api/account/auth/password/reset/`,
+        CONSTANTS.NGROK_URL + `api/auth/forgot-password/`,
         data
       );
       if (res.status === 200) {
@@ -74,7 +74,8 @@ const Page = () => {
         <Row
           justify={"center"}
           align={"middle"}
-          style={{ marginTop: "10rem", width: "100%" }}
+          // style={{ marginTop: "10rem", width: "100%" }}
+          className="w-full py-32"
         >
           <Col xs={22} sm={16} md={12} lg={10} xl={8} xxl={6}>
             {showhide == false ? (
