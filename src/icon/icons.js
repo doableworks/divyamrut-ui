@@ -588,7 +588,12 @@ export const Leaf = ({ h = 18, w = 18, fill = "black" }) => (
   </svg>
 );
 
-export const CartIcon = ({ h = 18, w = 18, cartItemCount, color="#FFFFFF" }) => {
+export const CartIcon = ({
+  h = 18,
+  w = 18,
+  cartItemCount,
+  color = "#FFFFFF",
+}) => {
   return (
     <svg width={w} height={h} viewBox="0 0 24 24" fill="none">
       <path
@@ -599,21 +604,41 @@ export const CartIcon = ({ h = 18, w = 18, cartItemCount, color="#FFFFFF" }) => 
         stroke-linejoin="round"
       />
 
-      {cartItemCount &&
+      {cartItemCount && (
         <>
-      <circle cx="13" cy="4" r="6" fill="red" />
-      <text
-        x="13"
-        y="4"
-        textAnchor="middle"
-        dy=".3em"
-        fontSize="10"
-        fill="white"
-        fontWeight="bold"
-      >
-        {cartItemCount}
-      </text>
-      </>}
+          <circle cx="13" cy="4" r="6" fill="red" />
+          <text
+            x="13"
+            y="4"
+            textAnchor="middle"
+            dy=".3em"
+            fontSize="10"
+            fill="white"
+            fontWeight="bold"
+          >
+            {cartItemCount}
+          </text>
+        </>
+      )}
     </svg>
   );
 };
+
+export function ThreeDots({
+  h = 18,
+  w = 18,
+  color = "#FFFFFF",
+}) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={w}
+      height={h}
+      fill={color}
+      class="bi bi-three-dots-vertical"
+      viewBox="0 0 16 16"
+    >
+      <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+    </svg>
+  );
+}

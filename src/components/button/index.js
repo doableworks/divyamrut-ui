@@ -1,5 +1,5 @@
 export default function CustomButton({
-  title = "Button",
+  title,
   className = "",
   style = {},
   variant = "filled",
@@ -20,7 +20,7 @@ export default function CustomButton({
       onClick={onClick}
     >
       {icon && <span className="mr-1">{icon}</span>}
-      <span>{title}</span>
+      {title && <span>{title}</span>}
     </button>
   );
 }

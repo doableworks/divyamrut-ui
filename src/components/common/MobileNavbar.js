@@ -12,6 +12,9 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import CustomButton from "../button/index";
+import InitialAvatar from "./InitialAvatar";
+import UserProfileModalComp from "./UserProfileModalComp";
+import { CartIcon } from "@/icon/icons";
 
 const MobileNavbar = ({
   menuItems,
@@ -67,7 +70,7 @@ const MobileNavbar = ({
       }
     >
       <div className="h-full flex flex-col justify-between">
-        <div>
+        <div className="overflow-y-auto p-1">
           {menuItems.map((item, index) => (
             <div key={index} className="mb-2">
               <div
@@ -98,7 +101,11 @@ const MobileNavbar = ({
                   {item.subMenu.map((subItem, subIndex) => (
                     <p
                       key={subIndex}
-                      className={`text-[#3E3E3E] hover:text-[#FF5400] cursor-pointer px-5 py-2`}
+                      className={`${
+                        pathname === subItem.path
+                          ? "text-[--e-global-color-E0A43B] font-bold"
+                          : "text-[#3E3E3E]"
+                      } hover:text-[#FF5400] cursor-pointer px-5 py-2`}
                       onClick={() => handleAction(subItem.path)}
                     >
                       {subItem.label}
@@ -109,12 +116,39 @@ const MobileNavbar = ({
             </div>
           ))}
         </div>
-        {!session && <CustomButton
-          className="bg-[--e-global-color-45B29D] "
-          title="Login / Sign up"
-          onClick={handleLogin}
-          icon={<UserOutlined className="text-sm" />}
-        />}
+        <div className="border-t-2 pt-3">
+          {!session && (
+            <div className="flex gap-2">
+              <CustomButton
+                className="bg-[--e-global-color-45B29D] w-full"
+                title="Login / Sign up"
+                onClick={handleLogin}
+                icon={<UserOutlined className="text-sm" />}
+              />
+              <CustomButton
+                className="bg-[--e-global-color-45B29D]"
+                onClick={handleLogin}
+                icon={
+                  <CartIcon cartItemCount={0} h={28} w={25} color="#FFFFFF" />
+                }
+              />
+            </div>
+          )}
+          {session && (
+            <div className="relative flex items-center justify-between">
+              <div className="flex gap-2 items-center">
+                <InitialAvatar user={session?.user?.user} />
+                <p>{session?.user?.user.first_name}</p>
+              </div>
+              <div className="flex gap-2 items-center">
+                <UserProfileModalComp
+                  session={session}
+                  handleLogout={onLogOut}
+                />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </Drawer>
   );

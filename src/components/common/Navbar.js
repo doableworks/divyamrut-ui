@@ -20,6 +20,7 @@ import { Therapies, NavProducts } from "@/contants/contants";
 import MobileNavbar from "./MobileNavbar";
 import { MenuOutlined, CloseOutlined, UserOutlined } from "@ant-design/icons";
 import { closeNav, openNav, toggleNav } from "@/redux/feature/mobileNavSlice";
+import { useEffect } from "react";
 
 const menuItems = [
   { label: "Home", path: "/" },
@@ -82,17 +83,20 @@ const Navbar = ({ session }) => {
   const [messageApi, contextHolder] = message.useMessage();
 
   const isMobileNavOpen = useSelector((state) => state.mobileNav.isOpen);
+
   const handleMoveRoute = (route) => {
     router.push(route);
   };
 
   const handleLogin = () => {
+    dispatch(closeNav());
     dispatch(setOpenLoginModal(true));
   };
 
   const onLogOut = async () => {
     try {
       await signOut();
+      await dispatch(closeNav());
       await dispatch(setOpenLoginModal(true));
 
       // .then(({ ok, error }) => {
@@ -134,7 +138,11 @@ const Navbar = ({ session }) => {
   return (
     <>
       {contextHolder}
-      <header className="absolute z-30 w-full shadow">
+      <header
+        className={`absolute z-30 w-full shadow ${
+          false ? "bg-black" : "bg-transparent"
+        }`}
+      >
         {/* Top Banner */}
         {/* <div className="bg-q638d055  py-2">
         <div className="w-[85%] container mx-auto flex items-center text-white justify-between">
@@ -381,10 +389,20 @@ const Navbar = ({ session }) => {
             </div>
           </nav>
 
-          {/* Mobile Menu Toggle */}
-          {/* <MobileNav pathname={pathname} handleMoveRoute={handleMoveRoute} /> */}
+          <div className="[@media(max-width:1340.98px)]:flex hidden items-center gap-3">
+            <button
+              type="button"
+              onClick={() => handleMoveRoute("/cart")}
+              className="flex justify-center p-3 backdrop-blur-lg rounded-md"
+            >
+              <CartIcon
+                cartItemCount={cartItems?.length || 0}
+                h={30}
+                w={30}
+                color="#3d3d3d"
+              />
+            </button>
 
-          <div className="[@media(max-width:1340.98px)]:flex hidden">
             {isMobileNavOpen ? (
               <button
                 type="button"
@@ -402,6 +420,7 @@ const Navbar = ({ session }) => {
                 <MenuOutlined className="text-[28px]" />
               </button>
             )}
+
             <div className="[@media(max-width:1340.98px)]:flex hidden">
               {
                 <MobileNavbar
