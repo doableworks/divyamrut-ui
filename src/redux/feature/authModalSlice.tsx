@@ -125,6 +125,7 @@ interface AuthModalState {
   isLoading: boolean;
   openLoginModal: boolean;
   openRegisterModal: boolean;
+  // openOtpModal: boolean;
   openUploadDocument: boolean;
   openMessageModal: boolean;
   openVerificationNumberModal: boolean;
@@ -142,6 +143,7 @@ const initialState: AuthModalState = {
   isLoading: true,
   openLoginModal: false,
   openRegisterModal: false,
+  // openOtpModal:false,
   openUploadDocument: false,
   openMessageModal: false,
   openVerificationNumberModal: false,
@@ -163,6 +165,9 @@ const authModalSlice = createSlice({
     setOpenLoginModal: (state, action: PayloadAction<boolean>) => {
       state.openLoginModal = action.payload;
     },
+    // setOpenOtpModal: (state, action: PayloadAction<boolean>) => {
+    //   state.openOtpModal = action.payload;
+    // },
     setMobileAuthDrawer: (state, action: PayloadAction<boolean>) => {
       state.mobileAuthDrawer = action.payload;
     },
@@ -207,6 +212,7 @@ export const {
   logout,
   finishInitialLoad,
   setOpenLoginModal,
+  // setOpenOtpModal,
   setOpenRegisterModal,
   setOpenUploadDocumentModal,
   setOpenMessageModal,
