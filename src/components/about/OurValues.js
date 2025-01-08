@@ -90,9 +90,7 @@ const OurValues = () => {
         <div className="z-20 mx-auto w-[90%] xl:w-[85%] py-20 md:py-32">
           <div className=" flex flex-wrap xl:flex-nowrap gap-x-24 gap-y-10 ">
             <div className="left-section-ov w-full md:w-[35%]">
-              <h6 className="section-title !text-left">
-                Our Value
-              </h6>
+              <h6 className="section-title !text-left">Our Value</h6>
               <h2 className="!text-left highlight-heading">
                 Teamwork makes the dream work.
               </h2>
@@ -102,11 +100,10 @@ const OurValues = () => {
                 erat. Arcu fusce praesent himenaeos fames placerat eu purus id
                 libero congue malesuada.
               </p>
-              <div className="site-button">
-                Learn more
-              </div>
+              <div className="site-button">Learn more</div>
             </div>
-            <div className="flex-grow middle-section-ov relative w-full md:w-[30%] h-full bg-cover bg-center md:bg-center  mr-5 md:mr-0 transition-all duration-1000 min-h-[350px] md:min-h-[530px]"
+            <div
+              className="flex-grow middle-section-ov relative w-full md:w-[30%] h-full bg-cover bg-center md:bg-center  mr-5 md:mr-0 transition-all duration-1000 min-h-[350px] md:min-h-[530px]"
               style={{
                 backgroundImage: `url("/asset/home/multiethnic-women.jpg")`,
               }}
@@ -127,7 +124,9 @@ const OurValues = () => {
                 >
                   <div
                     className={`mb-4 p-6 ${
-                      index == 1 ? "bg-d49ac81" : "bg-c94d9ab"
+                      index == 1
+                        ? "bg-[--e-global-color-E0A43B]"
+                        : "bg-[--e-global-color-AA218C]"
                     }`}
                   >
                     {feature.icon == "Puzzle" ? (

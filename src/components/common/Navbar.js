@@ -409,7 +409,10 @@ const Navbar = ({ session }) => {
                 onClick={handleMobileClose}
                 className="flex justify-center p-3 backdrop-blur-lg rounded-md"
               >
-                <CloseOutlined className="text-[28px]" />
+                <CloseOutlined
+                  className="text-[28px]"
+                  style={{ color: "#3d3d3d" }}
+                />
               </button>
             ) : (
               <button
@@ -417,7 +420,10 @@ const Navbar = ({ session }) => {
                 onClick={handleMobileOpen}
                 className="flex justify-center p-3 backdrop-blur-lg rounded-md"
               >
-                <MenuOutlined className="text-[28px]" />
+                <MenuOutlined
+                  className="text-[28px]"
+                  style={{ color: "#3d3d3d" }}
+                />
               </button>
             )}
 
