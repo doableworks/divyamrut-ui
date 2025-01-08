@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { Button, Modal, Input, Form, message, Skeleton, Row, Col } from "antd";
+import OTPModal from "../../../../components/modals/OtpModal";
 import {
   setOpenLoginModal,
   setOpenRegisterModal,
@@ -14,7 +15,7 @@ const Page = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isEmailSentSuccessful, setIsEmailSentSuccessful] = useState(null);
+  const [isOptSendSuccessful, setIsOptSendSuccessful] = useState(null);
   const [isPasswordResetSuccessModel, setIsPasswordResetSuccessModel] =
     useState(null);
   const [showhide, setShowHide] = useState(false);
@@ -30,17 +31,17 @@ const Page = () => {
         data
       );
       if (res.status === 200) {
-        setIsEmailSentSuccessful(true);
-        setShowHide(true);
-        setIsPasswordResetSuccessModel(true);
-        setTimeout(() => {
-          router.push("/");
-          setIsPasswordResetSuccessModel(false);
-          dispatch(setOpenLoginModal(true));
-        }, 5000);
+        setIsOptSendSuccessful(true);
+        // setShowHide(true);
+        // setIsPasswordResetSuccessModel(true);
+        // setTimeout(() => {
+        //   router.push("/");
+        //   setIsPasswordResetSuccessModel(false);
+        //   dispatch(setOpenLoginModal(true));
+        // }, 5000);
       } else {
         showResponseMessage("error", "Something went wrong!");
-        setIsEmailSentSuccessful(false);
+        setIsOptSendSuccessful(false);
       }
     } catch (err) {
       showResponseMessage("error", "Something went wrong!");
@@ -128,33 +129,13 @@ const Page = () => {
                     <Button htmlType="submit" className="reset_email_btn1"
                     loading={loading}>
                       {" "}
-                      Submit{" "}
+                      Send OTP{" "}
                     </Button>
                   </Form.Item>
                 </Form>
               </div>
-            ) : isEmailSentSuccessful ? (
-              <Modal
-                open={isPasswordResetSuccessModel}
-                footer={null}
-                className="reset_heading"
-                title="Password Reset Email Sent."
-              >
-                <p className="reset_text1">
-                  We have sent you an e-mail. Please contact us if you do not
-                  receive it within a few minutes.
-                </p>
-                <p className="reset_text1">
-                  You will be redirected to
-                  <span
-                    style={{ color: "#3F4FE4", cursor: "pointer" }}
-                    onClick={handleLogin}
-                  >
-                    Sign In
-                  </span>
-                  page in 5 seconds.
-                </p>
-              </Modal>
+            ) : isOptSendSuccessful ? (
+              <OTPModal />
             ) : (
               <Skeleton active />
             )}
