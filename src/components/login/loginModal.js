@@ -48,7 +48,7 @@ const LoginModal = () => {
   }, [index, openLoginModal]);
 
   const onFinish = (values) => {
-    console.log("values 555", values)
+    console.log("values 555", values);
     setLoading(true);
     setErrorMessage("");
     signIn("credentials", {
@@ -57,7 +57,7 @@ const LoginModal = () => {
       password: values.password,
     })
       .then(({ ok, error }) => {
-        console.log("ok", ok, "error", error)
+        console.log("ok", ok, "error", error);
         setLoading(false);
         if (ok) {
           // router.push("/home");
@@ -106,30 +106,30 @@ const LoginModal = () => {
             />
           </Col>
           <Col
-          xs={{
-            span:24,
-            offset:1
-          }}
-          sm={{
-            span:24,
-            offset:1
-          }}
-          md={{
-            span:24,
-            offset:1
-          }}
-          lg={{
-            span:11,
-            offset:1
-          }}
-          xl={{
-            span:11,
-            offset:1
-          }}
-          xxl={{
-            span:11,
-            offset:1
-          }}
+            xs={{
+              span: 24,
+              offset: 1,
+            }}
+            sm={{
+              span: 24,
+              offset: 1,
+            }}
+            md={{
+              span: 24,
+              offset: 1,
+            }}
+            lg={{
+              span: 11,
+              offset: 1,
+            }}
+            xl={{
+              span: 11,
+              offset: 1,
+            }}
+            xxl={{
+              span: 11,
+              offset: 1,
+            }}
             // span={11}
             className="flex flex-col items-center pl-2 pb-5 w-full"
           >
@@ -151,6 +151,10 @@ const LoginModal = () => {
               <Form.Item
                 name="email"
                 rules={[
+                  {
+                    type: "email",
+                    message: "Invalid email!",
+                  },
                   { required: true, message: "Please input your email!" },
                 ]}
                 className="w-full"
