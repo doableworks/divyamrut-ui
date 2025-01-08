@@ -5,10 +5,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { Button, Modal, Input, Form, message, Skeleton, Row, Col } from "antd";
 import OTPModal from "../../../../components/modals/OtpModal";
-import {
-  setOpenLoginModal,
-  setOpenRegisterModal,
-} from "@/redux/feature/authModalSlice";
+import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import CONSTANTS from "../../../../contants/contants";
 
 const Page = () => {
@@ -20,13 +17,12 @@ const Page = () => {
   const [loading2, setLoading2] = useState(false);
   const [isOptSendSuccessful, setIsOptSendSuccessful] = useState(null);
   const [isOptExpired, setIsOptExpired] = useState(false);
-  const [isPasswordResetSuccessModel, setIsPasswordResetSuccessModel] =
-    useState(null);
+  const [isPasswordResetSuccessfully, setIsPasswordResetSuccessfully] =
+    useState(false);
   const [showhide, setShowHide] = useState(false);
   const dispatch = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
-  let timer = null;
-
+  let timer;
 
   useEffect(() => {
     return () => {
@@ -34,16 +30,20 @@ const Page = () => {
     };
   }, []);
 
-  const handleExpireOtpTime = ()=>{
+  const handleExpireOtpTime = () => {
     timer = setTimeout(() => {
       setIsOptExpired(true);
     }, 1000 * 10);
-  }
+  };
+
+  const clearTimeoutFun = () => {
+    clearTimeout(timer);
+  };
 
   const sendOtp = async (data) => {
-    console.log("onfinish 333", data);
     try {
       setLoading2(true);
+      timer && clearTimeoutFun();
       const res = await axios.post(
         CONSTANTS.NGROK_URL + `api/auth/forgot-password/`,
         data
@@ -53,9 +53,7 @@ const Page = () => {
         setEmail(data.email);
         setIsOptSendSuccessful(true);
         showResponseMessage("success", "OTP has been sent to your email");
-        // setShowHide(true);
-        // setIsPasswordResetSuccessModel(true);
-
+        handleExpireOtpTime();
       } else {
         showResponseMessage("error", "Something went wrong!");
         setIsOptSendSuccessful(false);
@@ -74,11 +72,9 @@ const Page = () => {
 
   const VerifyOtp = async (values) => {
     const data = {
-      email: "vijayformal2@gmail.com",
+      email: email,
       ...values,
     };
-    console.log("data VerifyOtp", data);
-
     try {
       setLoading(true);
       const res = await axios.post(
@@ -88,18 +84,11 @@ const Page = () => {
       console.log("changePassword res", res);
       if (res.status === 200) {
         setOtp({ value: data.otp, verified: true });
-        setIsOptSendSuccessful(true);
-        showResponseMessage("success", "OTP verified");
-        // setShowHide(true);
-        // setIsPasswordResetSuccessModel(true);
-        // setTimeout(() => {
-        //   setIsPasswordResetSuccessModel(false);
-        //   dispatch(setOpenLoginModal(true));
-        // }, 5000);
-      } else {
-        setOtp({ value: null, verified: false }); 
-        showResponseMessage("error", "Invalid OTP!");
         setIsOptSendSuccessful(false);
+        showResponseMessage("success", "OTP verified");
+      } else {
+        setOtp({ value: null, verified: false });
+        showResponseMessage("error", "Invalid OTP!");
       }
     } catch (err) {
       showResponseMessage(
@@ -126,22 +115,23 @@ const Page = () => {
         data
       );
       if (res.status === 200) {
-        setEmail(data.email);
-        setIsOptSendSuccessful(true);
+        setIsPasswordResetSuccessfully(true);
         showResponseMessage("success", "Password has been reset successfully");
-        // setShowHide(true);
-        // setIsPasswordResetSuccessModel(true);
-        // setTimeout(() => {
-        //   router.push("/");
-        //   setIsPasswordResetSuccessModel(false);
-        //   dispatch(setOpenLoginModal(true));
-        // }, 5000);
+        clearTimeoutFun();
+        setTimeout(() => {
+          router.push("/");
+          setIsPasswordResetSuccessfully(false);
+          dispatch(setOpenLoginModal(true));
+        }, 5000);
       } else {
+        setIsPasswordResetSuccessfully(false);
         showResponseMessage("error", "Something went wrong!");
-        setIsOptSendSuccessful(false);
       }
     } catch (err) {
-      showResponseMessage("error", "Something went wrong!");
+      showResponseMessage(
+        "error",
+        err.response.data.error || "Something went wrong!"
+      );
       message.error(err.response.data);
     } finally {
       setLoading(false);
@@ -149,7 +139,8 @@ const Page = () => {
   };
 
   const handleLogin = () => {
-    dispatch(setOpenRegisterModal(true));
+    router.push("/");
+    dispatch(setOpenLoginModal(true));
   };
 
   const showResponseMessage = (type, content) => {
@@ -186,7 +177,6 @@ const Page = () => {
                   }}
                   onFinish={sendOtp}
                   autoComplete="off"
-                  
                 >
                   <Form.Item
                     name="email"
@@ -224,13 +214,12 @@ const Page = () => {
                       className="reset_email_btn1"
                       loading={loading2}
                     >
-                      {" "}
-                      Send OTP{" "}
+                      &nbsp; Send OTP&nbsp;
                     </Button>
                   </Form.Item>
                 </Form>
               </div>
-            ) : otp.verified ? (
+            ) : otp.verified && !isPasswordResetSuccessfully ? (
               <Form
                 name="basic"
                 wrapperCol={{
@@ -241,9 +230,6 @@ const Page = () => {
                 // style={{width:"100%"}}
                 className="text-center"
               >
-                <h1 className="reset_heading" style={{ marginBottom: "10px" }}>
-                  Reset Password{" "}
-                </h1>
                 <Form.Item
                   // label="Password1"
                   name="new_password1"
@@ -309,15 +295,28 @@ const Page = () => {
                     className="reset_email_btn1"
                     loading={loading}
                   >
-                    {" "}
-                    Submit{" "}
+                    Submit
                   </Button>
                 </Form.Item>
               </Form>
+            ) : isPasswordResetSuccessfully ? (
+              <div>
+                <p>Password has been change successfully</p>
+                <p className="reset_text1">
+                  You will be redirected to &nbsp;
+                  <span
+                    style={{ color: "#3F4FE4", cursor: "pointer" }}
+                    onClick={handleLogin}
+                  >
+                    login
+                  </span>
+                  &nbsp; page in 5 seconds.
+                </p>
+              </div>
             ) : (
               <Skeleton active />
             )}
-            {isOptSendSuccessful  && (
+            {isOptSendSuccessful && (
               <OTPModal
                 email={email}
                 sendOtpAgain={sendOtp}
