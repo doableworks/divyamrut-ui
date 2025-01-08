@@ -133,7 +133,7 @@ const WhatWeOffer = () => {
                   width={180}
                   height={150}
                   alt={testimonial.name}
-                  className="rounded-bl-[4rem]"
+                  className="rounded-bl-[4rem] max-w-[180px]"
                   objectFit="cover"
                 />
               </div>

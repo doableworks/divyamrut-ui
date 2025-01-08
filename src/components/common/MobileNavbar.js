@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Button, Drawer } from "antd";
+import { Drawer } from "antd";
 import { useRouter } from "nextjs-toploader/app";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { closeNav } from "@/redux/feature/mobileNavSlice";
-import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
+import { MenuOutlined, CloseOutlined, DownOutlined, UpOutlined, UserOutlined } from "@ant-design/icons";
+import CustomButton from '../button/index'
 
-const MobileNavbar = () => {
-  const [hoveredPlatform, setHoveredPlatform] = useState(false);
+
+const MobileNavbar = ({ menuItems }) => {
+  const [activeSubMenu, setActiveSubMenu] = useState(null);
   const dispatch = useDispatch();
   const router = useRouter();
   const pathname = usePathname();
@@ -20,19 +22,18 @@ const MobileNavbar = () => {
     handleMobileClose();
   };
 
-  const openPdf = (pdfUrl) => {
-    window.open(pdfUrl, "_blank");
+  const handleMobileClose = () => {
+    dispatch(closeNav(false));
   };
 
-  const handleMobileClose = () => {
-    dispatch(closeNav(false)); // Dispatch an action to close the navigation
+  const toggleSubMenu = (index) => {
+    setActiveSubMenu(activeSubMenu === index ? null : index);
   };
 
   return (
     <Drawer
       open={isMobileNavOpen}
-      closable={false} // Disable default close button
-      headerStyle={{ border: "none" }} // Optional: Remove border if needed
+      closable={false}
       title={
         <>
           <div className="flex justify-between items-center">
@@ -44,52 +45,53 @@ const MobileNavbar = () => {
               className="cursor-pointer"
               alt="connect_image"
             />
-            {isMobileNavOpen ? (
-              <button
-                type="button"
-                onClick={handleMobileClose}
-                className="flex justify-center p-3 backdrop-blur-lg rounded-md"
-              >
-                <CloseOutlined className="text-[28px]" />
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="flex justify-center p-3 backdrop-blur-lg rounded-md"
-              >
-                <MenuOutlined className="text-[28px]" />
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={handleMobileClose}
+              className="flex justify-center p-3 backdrop-blur-lg rounded-md"
+            >
+              <CloseOutlined className="text-[28px]" />
+            </button>
           </div>
-          <hr className='mt-3'/>
         </>
       }
     >
       <div className="h-full flex flex-col justify-between">
         <div>
-          {/* Navigation Items */}
-          <p
-            className={`${
-              pathname == "/" ? "text-[#FF5400]" : "text-[#3E3E3E]"
-            } mb-2 hover:bg-[#2366FF] hover:text-white cursor-pointer
-            font-suse text-[16px] font-[500] leading-[22px] text-left
-            px-5 py-2 rounded-xl`}
-            onClick={() => handleAction("/")}
-          >
-            Home
-          </p>
-          <p
-            className={`${
-              pathname == "/about-us" ? "text-[#FF5400]" : "text-[#3E3E3E]"
-            } mb-2 hover:bg-[#2366FF] hover:text-white cursor-pointer
-            font-suse text-[16px] font-[500] leading-[22px] text-left
-            px-5 py-2 rounded-xl`}
-            onClick={() => handleAction("/about-us")}
-          >
-            About Us
-          </p>
-          {/* Add other links here */}
+          {menuItems.map((item, index) => (
+            <div key={index} className="mb-2">
+              <div
+                className={`${
+                  pathname === item.path ? "text-[--e-global-color-E0A43B] font-bold" : "text-[#3E3E3E]"
+                } flex justify-between items-center hover:bg-[--e-global-color-E0A43B] hover:text-white cursor-pointer
+                font-suse text-[16px] font-[500] leading-[22px] text-left
+                px-5 py-2 rounded`}
+                onClick={() => (item.subMenu ? toggleSubMenu(index) : handleAction(item.path))}
+              >
+                {item.label}
+                {item.subMenu && (
+                  <>
+                    {activeSubMenu === index ? <UpOutlined /> : <DownOutlined />}
+                  </>
+                )}
+              </div>
+              {item.subMenu && activeSubMenu === index && (
+                <div className="pl-5">
+                  {item.subMenu.map((subItem, subIndex) => (
+                    <p
+                      key={subIndex}
+                      className={`text-[#3E3E3E] hover:text-[#FF5400] cursor-pointer px-5 py-2`}
+                      onClick={() => handleAction(subItem.path)}
+                    >
+                      {subItem.label}
+                    </p>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
+        <CustomButton className="bg-[--e-global-color-45B29D] " title="Login / Sign up" icon={<UserOutlined className="text-sm"/>}/>
       </div>
     </Drawer>
   );

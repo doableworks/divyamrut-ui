@@ -92,11 +92,9 @@ interface RootLayoutProps {
 export default async function RootLayout({ children }: RootLayoutProps) {
   const session = await getServerSession(authOptions as AuthOptions);
   return (
-    <html lang="en" style={{ overflow: "hidden" }}>
+    <html lang="en">
       <body
-        style={{ overflowX: "hidden" }}
         className={`${inter.variable} ${jost.variable} ${suranna.variable} `}
-        // className={`${poppins.variable}`}
       >
         <NextTopLoader />
         <ReduxProvider>

@@ -16,8 +16,42 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { Therapies, NavProducts } from "@/contants/contants";
 import MobileNavbar from "./MobileNavbar";
-import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
+import { MenuOutlined, CloseOutlined, UserOutlined } from "@ant-design/icons";
 import { closeNav, openNav, toggleNav } from "@/redux/feature/mobileNavSlice";
+
+const menuItems = [
+  { label: "Home", path: "/" },
+  { label: "About Us", path: "/about-us" },
+  { label: "Consultations", path: "/consultations" },
+  {
+    label: "Therapies",
+    subMenu: [
+      { label: "Basic Flower Therapy", path: "/therapy/basic-flower-therapy" },
+      { label: "Cranio Sacral Therapy", path: "/therapy/cranio-sacral-therapy" },
+      { label: "Meru Chikitsa", path: "/therapy/meru-chikitsa" },
+      { label: "Marma", path: "/therapy/marma" },
+      { label: "Sound Therapy", path: "/therapy/sound-therapy" },
+      { label: "Meru Chikitsa", path: "/therapy/meru-chikitsa" },
+      { label: "Sujok & Acupuncture", path: "/therapy/sujok-and-acupuncture" },
+      { label: "Osteopathy", path: "/therapy/osteopathy" },
+      { label: "Art Therapy", path: "/therapy/art-therapy" },
+    ],
+  },
+  { label: "Health Packages", path: "/health-packages" },
+  {
+    label: "Products",
+    subMenu: [
+      { label: "Kansa Vati Foot Massage Kit", path: "/products/kansa-vati-foot-massage-kit" },
+      { label: "Meditation/Pooja Asans", path: "/products/meditation-puja-asans" },
+      { label: "Meditation/Pooja Shawls", path: "/products/meditation-puja-shawls" },
+      { label: "Chandan-Kumkum Bindi Kit", path: "/products/chandan-kumkum-bindi-kit" },
+      { label: "Bath/Aura Cleansing Salt", path: "/products/bath-aura-cleansing-salt" },
+      { label: "Diya", path: "/products/diya" },
+    ],
+  },
+  { label: "Mission and Vision", path: "/mission-and-vision" },
+  { label: "Contact Us", path: "/contact-us" },
+];
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -78,7 +112,6 @@ const Navbar = () => {
               alt="Divyamrut Logo"
               width={120}
               height={250}
-              // className="w-full h-full"
             />
             {/* <h2
               className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF]"
@@ -89,7 +122,7 @@ const Navbar = () => {
         </Link>
 
         {/* Navigation Menu */}
-        <nav className="hidden xl:flex gap-8 font-jost text-[18px] font-[500] text-left text-[#FFFFFF] items-center">
+        <nav className="hidden [@media(min-width:1340.98px)]:flex gap-8 font-jost text-[18px] font-[500] text-left text-[#FFFFFF] items-center">
           <h5
             className={`cursor-pointer hover:text-E0A43B ${
               pathname == "/about-us" ? "text-E0A43B" : "text-[#FFFFFF]"
@@ -298,7 +331,7 @@ const Navbar = () => {
         {/* Mobile Menu Toggle */}
         {/* <MobileNav pathname={pathname} handleMoveRoute={handleMoveRoute} /> */}
 
-        <div className="lg:hidden">
+        <div className="[@media(max-width:1340.98px)]:flex hidden">
           {isMobileNavOpen ? (
             <button
               type="button"
@@ -316,9 +349,11 @@ const Navbar = () => {
               <MenuOutlined className="text-[28px]" />
             </button>
           )}
+          <div className="[@media(max-width:1340.98px)]:flex hidden">
+            {<MobileNavbar menuItems={menuItems} />}
+          </div>
         </div>
       </div>
-      <div className="lg:hidden">{<MobileNavbar />}</div>
     </header>
   );
 };
