@@ -87,3 +87,19 @@ body {
     height: auto !important;
   }
 }
+
+
+@layer utilities {
+  .highlight-heading {
+    @apply mt-[1rem] mb-[1.5rem] text-[32px] leading-[36px] md:text-[3em] md:leading-[1.3em] font-suranna  font-[400] text-E0A43B text-center 
+  }
+  .section-title {
+    @apply font-jost text-q3c3c3d text-[14px] font-[500] leading-[1.4em] uppercase text-center
+  }
+  .section-content {
+    @apply font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-center
+  }
+  .site-button {
+    @apply text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-E0A43B   hover:bg-q4ca25af transition mt-10 cursor-pointer
+  }
+}
