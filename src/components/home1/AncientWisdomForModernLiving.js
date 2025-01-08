@@ -69,7 +69,7 @@ const AncientWisdomForModernLiving = () => {
   return (
     <div
       id="AncientWisdomForModernLiving"
-      className="w-full relative bg-FFEEE2 overflow-hidden"
+      className="w-full relative bg-FFEEE2 overflow-hiddens"
     >
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-32">
         <div className="relative grid grid-cols-1 md:grid-cols-2 items-center gap-x-24 gap-y-5 ">
@@ -102,10 +102,10 @@ const AncientWisdomForModernLiving = () => {
             </div>
           </div>
           <div className="right-section-awf py-[1.5rem] md:py-[5.5rem]">
-            <h2 className="font-suranna text-[50px] font-[400] leading-[1.3em] text-E0A43B text-left mb-6">
+            <h2 className="font-suranna font-[400] text-E0A43B text-left mb-[1rem] text-[32px] leading-[36px] md:text-[3em] md:leading-[1.3em]">
               Ancient Wisdom for Modern Living.
             </h2>
-            <p className="font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-a2c0d56 text-left">
+            <p className="font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-left">
               Aliquam pellentesque quam aenean bibendum mollis per. Duis non
               rhoncus vulputate maximus enim ornare. Diam eu id rutrum lobortis
               netus neque integer venenatis letius libero a.

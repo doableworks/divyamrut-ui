@@ -94,9 +94,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body
-        style={{ overflowX: "hidden" }}
         className={`${inter.variable} ${jost.variable} ${suranna.variable} `}
-        // className={`${poppins.variable}`}
       >
         <NextTopLoader />
         <ReduxProvider>

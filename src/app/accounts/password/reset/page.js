@@ -22,15 +22,15 @@ const Page = () => {
   const dispatch = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
 
-
   const onFinish = async (data) => {
     try {
-      setLoading(true)
+      setLoading(true);
       const res = await axios.post(
-        CONSTANTS.NGROK_URL + `api/account/auth/password/reset/`,
+        CONSTANTS.NGROK_URL + `api/auth/forgot-password/`,
         data
       );
       if (res.status === 200) {
+        setEmail(data.email)
         setIsOptSendSuccessful(true);
         // setShowHide(true);
         // setIsPasswordResetSuccessModel(true);
@@ -46,9 +46,8 @@ const Page = () => {
     } catch (err) {
       showResponseMessage("error", "Something went wrong!");
       message.error(err.response.data);
-    }
-    finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -72,11 +71,7 @@ const Page = () => {
     <>
       {contextHolder}
       <div className="reset_pass_container">
-        <Row
-          justify={"center"}
-          align={"middle"}
-          style={{ marginTop: "10rem", width: "100%" }}
-        >
+        <Row justify={"center"} align={"middle"} className="w-full py-32">
           <Col xs={22} sm={16} md={12} lg={10} xl={8} xxl={6}>
             {showhide == false ? (
               <div
@@ -96,7 +91,7 @@ const Page = () => {
                 <p className="reset_sub_text">
                   Forgotten your password? <br />
                   Enter your e-mail address below, and we&apos;ll send you an
-                  e-mail allowing you to reset it.
+                  opt on e-mail allowing you to reset it.
                 </p>
                 <Form
                   name="basic"
@@ -126,19 +121,21 @@ const Page = () => {
                       span: 24,
                     }}
                   >
-                    <Button htmlType="submit" className="reset_email_btn1"
-                    loading={loading}>
+                    <Button
+                      htmlType="submit"
+                      className="reset_email_btn1"
+                      loading={loading}
+                    >
                       {" "}
                       Send OTP{" "}
                     </Button>
                   </Form.Item>
                 </Form>
               </div>
-            ) : isOptSendSuccessful ? (
-              <OTPModal />
             ) : (
               <Skeleton active />
             )}
+            {true && <OTPModal email={email} />}
           </Col>
         </Row>
       </div>

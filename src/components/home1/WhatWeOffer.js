@@ -11,18 +11,20 @@ const offers = [
   {
     name: "Consultations",
     location: "Jakarta",
-    image:"/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+    image:
+      "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
     rating: 4,
     feedback:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
   },
   {
     name: "Detoxification",
     location: "Bandung",
-    image:"/asset/home/caucasian-woman-having-ayurveda-shirodhara-treatment-in-india.jpg",
+    image:
+      "/asset/home/caucasian-woman-having-ayurveda-shirodhara-treatment-in-india.jpg",
     rating: 4,
     feedback:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
   },
   {
     name: "SpaTreatments",
@@ -30,15 +32,15 @@ const offers = [
     image: "/asset/home/spa-treatment.jpg",
     rating: 5,
     feedback:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
   },
   {
     name: "BeautyCare",
     location: "Bandung",
-    image:  "/asset/home/multiethnic-women.jpg",
+    image: "/asset/home/multiethnic-women.jpg",
     rating: 4,
     feedback:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
   },
   {
     name: "Nutrition",
@@ -46,7 +48,7 @@ const offers = [
     image: "/asset/home/ayurvedic-supplement.jpg",
     rating: 5,
     feedback:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
   },
   {
     name: "Workshops",
@@ -54,12 +56,11 @@ const offers = [
     image: "/asset/home/yoga-coach-training-session-.jpg",
     rating: 4,
     feedback:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
   },
 ];
 
 const WhatWeOffer = () => {
-
   useGSAP(() => {
     gsap.fromTo(
       ".fade-up",
@@ -101,7 +102,7 @@ const WhatWeOffer = () => {
   return (
     <div id="WhatWeOffer" className="w-full relative bg-FFEEE2 overflow-hidden">
       <Image
-        className="absolute z-10 top-0 left-0"
+        className="absolute z-10 top-0 left-0 w-[150px] md:w-[200px] [@media(max-width:299.98px)]:w-[118px]"
         height={200}
         width={200}
         src={"/asset/home/img1.png"}
@@ -109,44 +110,42 @@ const WhatWeOffer = () => {
       />
 
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] xl:w-full py-32">
-        <div className="fade-up">
+        <div className="fade-up flex flex-col justify-center items-center">
           <h6 className="font-jost text-q3c3c3d text-[14px] font-[500] leading-[1.4em] uppercase text-center">
             What We offer
           </h6>
-          <h2 className="font-suranna text-[50px] font-[400] leading-[1.3em] text-E0A43B text-center mb-6">
+          <h2 className="max-w-xl text-center font-suranna font-[400] text-E0A43B mt-[1rem] mb-[1.5rem] text-[32px] leading-[36px] md:text-[3em] md:leading-[1.3em]">
             The combination of nature and science.
           </h2>
         </div>
-        <div className="card-wwo flex flex-wrap justify-center gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6 m-auto">
           {offers.map((testimonial, index) => (
             <div
               key={index}
-              className="relative bg-[white] shadow-lg px-6 max-w-sm w-full md:w-[33%] 
-            py-10"
+              className="relative bg-[white] shadow-lg w-full"
             >
-              <div className="absolute top-0 right-0 rounded-bl-[4rem] overflow-hidden">
+              <div className="flex gap-2 justify-between overflow-hidden">
+                <strong className=" ml-6 mt-6 font-suranna text-[28px] font-[400] leading-[1.4em] text-E0A43B">
+                  {testimonial.name}
+                </strong>
                 <Image
-                  // src={"/asset/home/spa-treatment.jpg"}
                   src={testimonial.image}
                   width={180}
-                  height={200}
-                  alt="img"
+                  height={150}
+                  alt={testimonial.name}
+                  className="rounded-bl-[4rem] max-w-[180px]"
+                  objectFit="cover"
                 />
               </div>
-              <div className="flex flex-col justify-start items-start gap-4 mb-20">
-                <div className="text-start">
-                  <strong className="font-suranna text-[28px] font-[400] leading-[1.4em] text-E0A43B">
-                    {testimonial.name}
-                  </strong>
-                </div>
-              </div>
-              <p className="font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-a2c0d56 text-center">
-                {testimonial.feedback}
-              </p>
+              <div className="py-4 px-6">
+                <p className="font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-start">
+                  {testimonial.feedback}
+                </p>
 
-              <div className="border-t-[0.5px] border-q4d462f5 mt-10" />
-              <div className="text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-E0A43B   hover:bg-q4ca25af transition mt-10 cursor-pointer">
-                Learn more
+                <div className="border-t-[0.5px] border-q4d462f5 mt-10" />
+                <div className="text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-E0A43B   hover:bg-q4ca25af transition mt-10 cursor-pointer">
+                  Learn more
+                </div>
               </div>
             </div>
           ))}

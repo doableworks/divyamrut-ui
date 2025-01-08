@@ -34,31 +34,30 @@ export default function FooterCom() {
         <div className="container mx-auto w-[85%] pt-20">
           {/* <div className="px-4 grid grid-cols-1 md:grid-cols-4 gap-8"> */}
           {/* Logo and Description */}
-          <div className="flex flex-col md:flex-row gap-20 md:gap-40 pb-16">
-            <div className="w-full md:w-[30%]">
-              <div className="flex items-center space-x-2">
-                <div className="flex w-48 h-20 gap-2">
-                  <Image
-                    src="/asset/divyamrut_transparent_logo.webp"
-                    alt="Divyamrut Logo"
-                    width={250}
-                    height={250}
-                    // className="w-full h-full"
-                  />
-                </div>
+          <div className="flex flex-col lg:flex-row justify-between gap-10 pb-16">
+            <div className="w-full lg:w-[30%]">
+              <div className="max-w-xl text-center m-auto">
+                <Image
+                  src="/asset/divyamrut_transparent_logo.webp"
+                  alt="Divyamrut Logo"
+                  width={100}
+                  height={100}
+                  className="m-auto lg:m-0 h-[120px] w-[160px]"
+                />
+
                 {/* <h2 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF]">
                   Divyamrut
                 </h2> */}
+                <p className="text-center mt-4 font-jost text-[18px] font-[400] leading-[1.4em] lg:text-left text-[#FFFFFF]">
+                  Discover holistic wellness with Divyamrut&apos;s expert
+                  Ayurveda services and transform your health naturally.
+                </p>
               </div>
-              <p className="mt-4 font-jost text-[18px] font-[400] leading-[1.4em] text-left text-[#FFFFFF]">
-                Discover holistic wellness with Divyamrut&apos;s expert Ayurveda
-                services and transform your health naturally.
-              </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div className="flex flex-wrap gap-6">
               {/* Get in Touch */}
-              <div>
+              <div className="flex-grow">
                 <h4 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF] mb-2">
                   Get in Touch
                 </h4>
@@ -72,7 +71,7 @@ export default function FooterCom() {
               </div>
 
               {/* Email Support */}
-              <div>
+              <div className="flex-grow">
                 <h4 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF] mb-2">
                   Email Support
                 </h4>
@@ -86,7 +85,7 @@ export default function FooterCom() {
               </div>
 
               {/* Head Office */}
-              <div>
+              <div className="flex-grow">
                 <h4 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF] mb-2">
                   Head Office
                 </h4>

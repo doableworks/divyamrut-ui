@@ -40,26 +40,26 @@ const WhyChooseUs = () => {
   return (
     <section>
       <div
-        className="bg-cover bg-center min-h-screen overflow-hidden"
+        className="bg-cover bg-center overflow-hidden"
         style={{
           backgroundImage: "url('/asset/home/powder-spices-and-herbs.jpg')",
         }}
       >
-        <div className="bg-[rgba(0,0,0,.4)] min-h-screen w-full  text-white">
+        <div className="bg-[rgba(0,0,0,.4)] w-full  text-white">
           <div className="relative z-20 mx-auto flex flex-col items-center justify-center w-[90%] md:w-[85%] xl:w-full py-32">
             <div className="fade-up max-w-xl">
               <h6 className="font-jost text-text text-[14px] font-[500] leading-[1.4em] uppercase text-center">
                 Why Choose Us
               </h6>
-              <h2 className="font-suranna text-[50px] font-[400] leading-[1.3em] text-text text-center mb-6">
+              <h2 className="font-suranna mt-[1rem] mb-[1.5rem] text-[32px] leading-[36px] md:text-[3em] md:leading-[1.3em] font-[400] text-text text-center">
                 Medicine with the green perspective.
               </h2>
             </div>
-            <div className="flex flex-col md:flex-row flex-wrap justify-center gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-6">
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center p-6 bg-black bg-opacity-60 text-white rounded-lg hover:scale-105 transition-transform duration-300 max-w-[280px] w-full md:w-[33%]"
+                  className="flex flex-col items-center p-6 bg-black bg-opacity-60 text-white rounded-lg hover:scale-105 transition-transform duration-300 w-full"
                 >
                   <div className="mb-4">
                     {feature.icon == "Diamond" ? (
@@ -84,27 +84,27 @@ const WhyChooseUs = () => {
           </div>
         </div>
       </div>
-      <div className="bg-q45B29D py-4">
-        <div className="flex justify-around items-center flex-wrap gap-8  text-center  text-white">
-          <div>
+      <div className="bg-q45B29D p-4">
+        <div className="grid [@media(max-width:319.98px)]:grid-cols-1 grid-cols-2 md:grid-cols-4 items-center gap-8 text-center  text-white">
+          <div >
             <CountUpCom id="product" end={47} suffix="K+" />
             <p className="font-jost text-[13px] md:text-[13px] font-[500] text-q3c3c3d uppercase">
               Product Sold
             </p>
           </div>
-          <div>
+          <div >
             <CountUpCom id="happy" end={8} suffix="K+" />
             <p className="font-jost text-[13px] md:text-[13px] font-[500] text-q3c3c3d uppercase">
               Happy Customer
             </p>
           </div>
-          <div>
+          <div >
             <CountUpCom id="country" end={51} suffix="+" />
             <p className="font-jost text-[13px] md:text-[13px] font-[500] text-q3c3c3d uppercase">
               Country Support
             </p>
           </div>
-          <div>
+          <div >
             <CountUpCom id="rating" end={4.8} suffix="" decimals={1} />
             <p className="font-jost text-[13px] md:text-[13px] font-[500] text-q3c3c3d uppercase">
               Customer Ratings
