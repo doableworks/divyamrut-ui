@@ -22,7 +22,7 @@ const Page = () => {
   const [showhide, setShowHide] = useState(false);
   const dispatch = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
-  let timer;
+  var timer;
 
   useEffect(() => {
     return () => {

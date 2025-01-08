@@ -61,9 +61,9 @@ export default function OTPModal({ email, sendOtpAgain, loading, VerifyOtp }) {
             />
           </Form.Item>
           <h2 className="text-[14px] leading-[20px] font-[400] mb-4">
-            Didn't get OTP ? {" "}
+            Didn&apos;t get OTP ? &apos;
             <span
-              onClick={() => sendOtpAgain({email:email})}
+              onClick={() => sendOtpAgain({ email: email })}
               className="text-cyan-400 underline cursor-pointer"
             >
               Send again otp.
@@ -80,8 +80,7 @@ export default function OTPModal({ email, sendOtpAgain, loading, VerifyOtp }) {
               className="reset_email_btn1"
               loading={loading}
             >
-              {" "}
-              Verify{" "}
+              Verify
             </Button>
           </Form.Item>
         </Form>
