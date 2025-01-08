@@ -108,10 +108,10 @@ const TestimonialSlider = () => {
 
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] xl:w-full py-32">
         <div className="fade-up">
-          <h6 className="font-jost text-q3c3c3d text-[14px] font-[500] leading-[1.4em] uppercase text-center">
+          <h6 className="section-title">
             Testimonial
           </h6>
-          <h2 className="font-suranna  font-[400] text-E0A43B text-center mt-[1rem] mb-[1.5rem] text-[32px] leading-[36px] md:text-[3em] md:leading-[1.3em]">
+          <h2 className="highlight-heading">
             Customer Feedback & Reviews
           </h2>
           <div className="flex gap-4 justify-center mb-10">
@@ -147,7 +147,7 @@ const TestimonialSlider = () => {
                     </p>
                   </div>
                 </div>
-                <p className="font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-center">
+                <p className="section-content">
                   {testimonial.feedback}
                 </p>
               </div>
