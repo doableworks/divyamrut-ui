@@ -1,8 +1,9 @@
+"use client";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { Button, Form, message, Input, Row, Col, Modal } from "antd";
 
-export default function OTPModal({ email, closeModal }) {
+export default function OTPModal({ email, sendOtpAgain, loading, VerifyOtp }) {
   const [otp, setOtp] = useState("");
   const [open, setOpen] = useState(true);
   // const router = useRouter();
@@ -26,41 +27,65 @@ export default function OTPModal({ email, closeModal }) {
       // className="login_modal"
     >
       {/* <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"> */}
-        <div className="bg-white w-full">
-          <h3 className="text-lg font-medium text-gray-900 text-center">
-            Enter OTP
-          </h3>
-          <p className="text-sm text-gray-600 text-center my-2">
-            An OTP has been sent to <span className="font-medium">{email}</span>
-            .
-          </p>
-          <form onSubmit={handleOtpSubmit}>
-            <input
+      <div className="bg-white w-full">
+        <p className="text-sm text-gray-600 text-center my-2">
+          An OTP has been sent to <span className="font-medium">{email}</span>.
+        </p>
+        <Form
+          name="basic"
+          wrapperCol={{
+            span: 24,
+          }}
+          onFinish={VerifyOtp}
+          autoComplete="off"
+          // style={{width:"100%"}}
+        >
+          <Form.Item
+            name="otp"
+            rules={[
+              {
+                required: true,
+                message: "Please enter the 6-digit OTP",
+              },
+              {
+                len: 6,
+                message: "OTP must be exactly 6 digits",
+              },
+            ]}
+          >
+            <Input
               type="text"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              className="mt-4 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-center"
-              placeholder="Enter 6-digit OTP"
               maxLength={6}
-              required
+              className="reset_input"
+              placeholder="Enter 6-digit OTP"
             />
-            <div className="flex justify-center mt-4">
-              {/* <button
-                type="button"
-                onClick={closeModal}
-                className="px-4 py-2 bg-gray-300 rounded-md shadow hover:bg-gray-400"
-              >
-                Cancel
-              </button> */}
-              <button
-                type="submit"
-                className="px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700"
-              >
-                Verify OTP
-              </button>
-            </div>
-          </form>
-        </div>
+          </Form.Item>
+          <h2 className="text-[14px] leading-[20px] font-[400] mb-4">
+            Didn't get OTP ? {" "}
+            <span
+              onClick={() => sendOtpAgain({email:email})}
+              className="text-cyan-400 underline cursor-pointer"
+            >
+              Send again otp.
+            </span>
+          </h2>
+          <Form.Item
+            wrapperCol={{
+              span: 24,
+            }}
+            className="text-center"
+          >
+            <Button
+              htmlType="submit"
+              className="reset_email_btn1"
+              loading={loading}
+            >
+              {" "}
+              Verify{" "}
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
       {/* </div> */}
     </Modal>
   );
