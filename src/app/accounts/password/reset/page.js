@@ -232,7 +232,7 @@ const Page = () => {
               >
                 <Form.Item
                   // label="Password1"
-                  name="new_password1"
+                  name="new_password"
                   rules={[
                     {
                       required: true,
@@ -254,7 +254,7 @@ const Page = () => {
                 <Form.Item
                   // label="Password2"
                   name="new_password2"
-                  dependencies={["new_password1"]}
+                  dependencies={["new_password"]}
                   hasFeedback
                   rules={[
                     {
@@ -265,7 +265,7 @@ const Page = () => {
                       validator(_, value) {
                         if (
                           !value ||
-                          getFieldValue("new_password1") === value
+                          getFieldValue("new_password") === value
                         ) {
                           return Promise.resolve();
                         }
