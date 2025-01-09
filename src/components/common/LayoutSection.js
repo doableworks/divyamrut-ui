@@ -1,12 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Footer, Navbar } from "@/components/common";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import {
-  setResetModalSlice,
-} from "@/redux/feature/authModalSlice";
+import { setResetModalSlice } from "@/redux/feature/authModalSlice";
 // import {
 //   fetchUserData,
 //   setResetAuthSlice,
@@ -15,7 +13,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useSearchParams, usePathname } from "next/navigation";
 import React from "react";
-import MainBanner from '@/components/common/MainBanner'
+import MainBanner from "@/components/common/MainBanner";
 
 export const LayoutSection = ({ children, sessionData }) => {
   const { data: session, status } = useSession();
@@ -24,6 +22,9 @@ export const LayoutSection = ({ children, sessionData }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const path = usePathname();
+
+  const scrollContainerRef = useRef(null);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   // useEffect(() => {
   //   if (userSession === null && !session) {
@@ -59,27 +60,40 @@ export const LayoutSection = ({ children, sessionData }) => {
   //   }
   // }, [session]);
 
-  const hideNavbarFooterPaths = [
-    "/blog",
-    "/about-us",
-    "/contact-us",
-  ];
+  const hideNavbarFooterPaths = ["/blog", "/about-us", "/contact-us"];
   const shouldHideMainBanner =
     hideNavbarFooterPaths.includes(path) ||
     /^\/blog\/[\w-]+$/.test(path) ||
     /^\/newspost\/[\w-]+$/.test(path);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollContainerRef.current) {
+        setIsScrolled(scrollContainerRef.current.scrollTop > 50);
+      }
+    };
 
+    const container = scrollContainerRef.current;
+
+    if (container) {
+      container.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
+  
   return (
-    <>
-      <div style={{position:"relative", minHeight:"100vh",display: "flex" ,flexDirection: "column",justifyContent: "space-between", backgroundColor:"#FFFFFF"  }}>
-        <div>
-        <Navbar session={session} />
-        {/* {shouldHideMainBanner && <MainBanner />} */}
-        <main className="bg-FFEEE2" >{children}</main>
-        </div>
-        <Footer />
-      </div>
-    </>
+    <main
+      ref={scrollContainerRef}
+      className="relative bg-[--base] h-[100vh] overflow-y-auto overflow-x-hidden"
+    >
+      <Navbar session={session} isScrolled={isScrolled} />
+      {children}
+      <Footer />
+    </main>
   );
 };

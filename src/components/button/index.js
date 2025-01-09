@@ -1,25 +1,34 @@
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+
 export default function CustomButton({
   title,
   className = "",
   style = {},
-  variant = "filled",
-  onClick = () => {},
   icon = null,
+  loading = false,
+  type = "button",
+  spinnerColor = "#fff",
+  spinnerSize = "small",
+  spinnerStyle = { color: spinnerColor, marginRight: "8px" },
+  ...rest
 }) {
-  const baseClasses = "px-4 py-2 rounded font-medium text-center h-[48px]";
-
-  const variantClasses =
-    variant === "filled"
-      ? "bg-[--e-global-color-E0A43B] text-white hover:bg-[--e-global-color-d49ac81]"
-      : "border border-blue-500 text-blue-500 hover:bg-blue-100";
-
   return (
     <button
-      className={`${baseClasses} ${variantClasses} ${className}`}
+      disabled={loading}
+      type={type}
+      className={`${className}`}
       style={style}
-      onClick={onClick}
+      {...rest}
     >
-      {icon && <span className="mr-1">{icon}</span>}
+      {loading && (
+        <Spin
+          indicator={<LoadingOutlined spin />}
+          size={spinnerSize}
+          style={spinnerStyle}
+        />
+      )}
+      {icon && !loading && <span className="mr-2">{icon}</span>}
       {title && <span>{title}</span>}
     </button>
   );
