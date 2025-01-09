@@ -30,7 +30,11 @@
   --e-global-color-E0A43B: #E0A43B;
   --e-global-color-3c3c3d:#3c3c3d;
 
-
+  --voilet: #AA218C;
+  --green: #45B29D;
+  --yellow: #E0A43B;
+  --base: #FFEEE2;
+  --neutral: #3c3c3d;
 }
 
 html,
@@ -99,7 +103,16 @@ body {
   .section-content {
     @apply font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-center
   }
-  .site-button {
-    @apply text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-E0A43B   hover:bg-q4ca25af transition mt-10 cursor-pointer
+  .site-button-primary {
+    @apply text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-E0A43B   hover:bg-q4ca25af transition mt-10 cursor-pointer min-h-[48px] rounded
+  }
+  .site-button-secondary {
+    @apply text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-[#AA218C]   hover:!bg-[#85186d] transition mt-10 cursor-pointer min-h-[48px] rounded
+  }
+  .input-label {
+    @apply block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-[--neutral] mb-3
+  }
+  .input-label-required {
+    @apply text-red-600
   }
 }

@@ -39,11 +39,11 @@ const blogPosts = [
 
 const LatestPost = () => {
   return (
-    <section className="p-4 bg-white shadow-md ">
-    <h2 className="font-suranna text-[22px] md:text-[28px] font-[400] leading-[1.3em] text-secondary mb-4">Latest Posts</h2>
+    <section className="p-4 bg-white shadow-md">
+    <h2 className="highlight-heading !text-left !text-[2rem]">Latest Posts</h2>
     <div className="grid grid-cols-1 gap-4">
       {blogPosts.map((post, index) => (
-        <div key={index + 11} className="flex gap-4 p-4">
+        <div key={index + 11} className="flex gap-4">
           <Image
             src={post.image}
             alt={"img"}
@@ -52,7 +52,7 @@ const LatestPost = () => {
             className="h-[60px] w-[60px]"
           />
           <div>
-            <h3 className="font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] text-secondary mb-2">{post.title}</h3>
+            <h3 className="section-title !text-left mb-2 !normal-case !text-[16px] !text-[--neutral]">{post.title}</h3>
             <p className="font-inter text-[11px] md:text-[13px] font-[400] leading-[1.4em] text-[#adadad]">{post.date}</p>
           </div>
         </div>

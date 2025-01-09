@@ -4,7 +4,7 @@ const BookNowBtn = () => {
   return (
     <button
       type="submit"
-      className="w-full bg-[#82b440] text-white p-4 rounded min-w-[250px] max-w-[350px]"
+      className="site-button-primary rounded w-full lg:w-[350px] h-[58px] !m-0"
     >
       Book Now
     </button>
