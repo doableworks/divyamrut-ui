@@ -118,21 +118,12 @@ const MobileNavbar = ({
         </div>
         <div className="border-t-2 pt-3">
           {!session && (
-            <div className="flex gap-2">
-              <CustomButton
-                className="bg-[--e-global-color-45B29D] w-full"
-                title="Login / Sign up"
-                onClick={handleLogin}
-                icon={<UserOutlined className="text-sm" />}
-              />
-              <CustomButton
-                className="bg-[--e-global-color-45B29D]"
-                onClick={handleLogin}
-                icon={
-                  <CartIcon cartItemCount={0} h={28} w={25} color="#FFFFFF" />
-                }
-              />
-            </div>
+            <CustomButton
+              className="site-button-primary !m-0 w-[-webkit-fill-available]"
+              title="Login / Sign up"
+              onClick={handleLogin}
+              icon={<UserOutlined className="text-[12px]" />}
+            />
           )}
           {session && (
             <div className="relative flex items-center justify-between">

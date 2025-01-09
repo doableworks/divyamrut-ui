@@ -74,7 +74,7 @@ const menuItems = [
   { label: "Contact Us", path: "/contact-us" },
 ];
 
-const Navbar = ({ session }) => {
+const Navbar = ({ session, isScrolled }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const pathname = usePathname();
@@ -139,8 +139,8 @@ const Navbar = ({ session }) => {
     <>
       {contextHolder}
       <header
-        className={`absolute z-30 w-full shadow ${
-          false ? "bg-black" : "bg-transparent"
+        className={`fixed top-0 z-30 w-full shadow ${
+          isScrolled ? "backdrop-blur bg-gradient-to-r from-slate-50 via-gray-400 to-transparent" : "bg-transparent"
         }`}
       >
         {/* Top Banner */}
@@ -397,9 +397,9 @@ const Navbar = ({ session }) => {
             >
               <CartIcon
                 cartItemCount={cartItems?.length || 0}
-                h={30}
-                w={30}
-                color="#3d3d3d"
+                h={38}
+                w={34}
+                color="#3c3c3d"
               />
             </button>
 
@@ -410,8 +410,8 @@ const Navbar = ({ session }) => {
                 className="flex justify-center p-3 backdrop-blur-lg rounded-md"
               >
                 <CloseOutlined
-                  className="text-[28px]"
-                  style={{ color: "#3d3d3d" }}
+                  className="text-[30px]"
+                  style={{ color: "#3c3c3d" }}
                 />
               </button>
             ) : (
@@ -421,7 +421,7 @@ const Navbar = ({ session }) => {
                 className="flex justify-center p-3 backdrop-blur-lg rounded-md"
               >
                 <MenuOutlined
-                  className="text-[28px]"
+                  className="text-[32px]"
                   style={{ color: "#3d3d3d" }}
                 />
               </button>
