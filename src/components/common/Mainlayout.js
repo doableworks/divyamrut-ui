@@ -9,16 +9,39 @@ import {useDispatch} from "react-redux";
 
 export default function MainLayout({ children, session }) {
   const dispatch = useDispatch()
+  
   const customTheme = {
     components: {
+      Input: {
+        colorBgContainer: '#F9F3EB',
+        hoverBorderColor:"black",
+        activeBorderColor:"black",
+        activeBg:"#FFFFFF",
+        paddingBlock: 10,
+        borderRadius:2,
+        lineWidth:1,
+        inputFontSize: 16,
+        colorTextPlaceholder:'#999',
+      },
       Button: {
-        algorithm: true,
-        fontFamily: '"Inter", sans-serif',
-        colorSecondaryBg: '#3F4FE41A',
-        colorSecondaryBorder: '#3F4FE4',
-        colorSecondaryText: '#3F4FE4',
-        colorSecondaryHover: '#3F4FE433',
-        color: "white",
+        activeBg:"#A48125",
+        defaultBg:"#E0A43B",
+        defaultColor:"#FFFFFF",
+        defaultActiveColor:"#FFFFFF",
+        
+        paddingInline:40,
+        paddingBlock: 10,
+        
+
+
+
+        // algorithm: true,
+        // fontFamily: '"Inter", sans-serif',
+        // colorSecondaryBg: '#3F4FE41A',
+        // colorSecondaryBorder: '#3F4FE4',
+        // colorSecondaryText: '#3F4FE4',
+        // colorSecondaryHover: '#3F4FE433',
+        // color: "white",
       },
       Spin: {
         contentHeight: "100%",

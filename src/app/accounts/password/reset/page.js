@@ -168,7 +168,7 @@ const Page = () => {
                 <p className="reset_sub_text mb-10">
                   Forgotten your password? <br />
                   Enter your e-mail address below, and we&apos;ll send you an
-                  opt on e-mail allowing you to reset it.
+                  otp on e-mail allowing you to reset it.
                 </p>
                 <Form
                   name="basic"
@@ -211,7 +211,8 @@ const Page = () => {
                   >
                     <Button
                       htmlType="submit"
-                      className="reset_email_btn1"
+                      size={"large"}
+                      // className="reset_email_btn1"
                       loading={loading2}
                     >
                       &nbsp; Send OTP&nbsp;

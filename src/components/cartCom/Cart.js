@@ -12,17 +12,16 @@ import {
   unSelectItem,
 } from "@/redux/feature/cartSlice";
 
-
 const CartPage = () => {
   const cartItems = useSelector((state) => state.cart.items);
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch();
 
   const handleAddItem = (item) => {
     dispatch(addItem(item));
   };
 
   const handleRemoveItem = (item) => {
-    dispatch(removeItem({id:item.id}));
+    dispatch(removeItem({ id: item.id }));
   };
 
   const handleSelectAll = (item) => {
@@ -42,8 +41,8 @@ const CartPage = () => {
   const handleSelectItem = (item) => {
     try {
       item.selected
-        ? dispatch(unSelectItem({id:item.id}))
-        : dispatch(selectItem({id:item.id}));
+        ? dispatch(unSelectItem({ id: item.id }))
+        : dispatch(selectItem({ id: item.id }));
     } catch (error) {}
   };
   const allSelected =
@@ -67,9 +66,12 @@ const CartPage = () => {
           </div>
           {cartItems.length > 0 && (
             <div className="flex justify-between items-center mb-2">
-              <label className="flex items-center space-x-2 text-cyan-400 underline cursor-pointer" onClick={() =>
-                    allSelected ? handleUnselectAll() : handleSelectAll()
-                  }>
+              <label
+                className="flex items-center space-x-2 text-cyan-400 underline cursor-pointer"
+                onClick={() =>
+                  allSelected ? handleUnselectAll() : handleSelectAll()
+                }
+              >
                 {/* <input
                   type="checkbox"
                   onChange={(e) =>

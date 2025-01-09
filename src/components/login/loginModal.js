@@ -159,17 +159,7 @@ const LoginModal = () => {
                 ]}
                 className="w-full"
               >
-                {/* <Input
-                  placeholder="Email id"
-                  className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
-                /> */}
-
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="Email"
-                  className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
-                />
+                <Input placeholder="Email" />
               </Form.Item>
 
               <Form.Item
@@ -179,38 +169,32 @@ const LoginModal = () => {
                 ]}
                 className="w-full"
               >
-                {/* <Input.Password
-                  placeholder="Enter Password"
-                  className="w-full bg-gray-100 rounded-md border-none focus:ring-0"
-                /> */}
-
-                <input
-                  type="password"
-                  id="password"
-                  placeholder="Enter Password"
-                  className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
-                />
+                <Input.Password placeholder="Enter Password" />
               </Form.Item>
 
-              <h4
-                className="text-sm font-semibold text-right text-blue-600 cursor-pointer mb-5"
-                onClick={handleForgetPass}
-              >
-                Forgot Password
-              </h4>
+              <div className="text-right mb-5">
+                <span
+                  className="text-sm text-right font-semibold text-right text-blue-600 cursor-pointer mb-5"
+                  onClick={handleForgetPass}
+                >
+                  Forgot Password
+                </span>
+              </div>
 
               <Form.Item className="w-full">
                 <Button
                   htmlType="submit"
                   loading={loading}
-                  className="w-full h-12 rounded-md bg-blue-600 text-white font-semibold"
+                  size={"large"}
+                  // className="w-full h-12 rounded-md bg-blue-600 text-white font-semibold"
+                  className="w-full"
                 >
                   Login
                 </Button>
               </Form.Item>
             </Form>
 
-            <div className="w-full flex items-center justify-center mt-4">
+            {/* <div className="w-full flex items-center justify-center mt-4">
               <div className="h-px bg-gray-200 w-1/3"></div>
               <p className="mx-4 text-sm">Or</p>
               <div className="h-px bg-gray-200 w-1/3"></div>
@@ -228,7 +212,7 @@ const LoginModal = () => {
                 height={24}
               />
               <p className="ml-3 font-medium text-sm">Continue with Google</p>
-            </div>
+            </div> */}
 
             <p className="mt-5 text-sm text-center">
               Not a member? &nbsp;
