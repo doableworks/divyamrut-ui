@@ -12,12 +12,12 @@ const AncientWisdomForModernLiving = () => {
   useGSAP(() => {
     gsap.fromTo(
         ".left-section-awf",
-        { opacity: 0, x: -500 },
+        { opacity: 0, x: -100 },
         {
           x: 0,
           opacity: 1,
-          duration: 0.5,
-          delay: 0.2,
+          duration: 0.1,
+          delay: 0,
           // stagger: 0.2,
           scrollTrigger: {
             trigger: "#AncientWisdomForModernLiving",
@@ -35,8 +35,8 @@ const AncientWisdomForModernLiving = () => {
         {
           x: 0,
           opacity: 1,
-          duration: 0.5,
-          delay: 0.2,
+          duration: 0.1,
+          delay: 0,
           // stagger: 0.2,
           scrollTrigger: {
             trigger: "#AncientWisdomForModernLiving",
@@ -53,7 +53,7 @@ const AncientWisdomForModernLiving = () => {
         {
           x: 0,
           opacity: 1,
-          duration: 0.5,
+          duration: 0.1,
           delay: 0,
           // stagger: 0.2,
           scrollTrigger: {
@@ -68,10 +68,10 @@ const AncientWisdomForModernLiving = () => {
 
   return (
     <div
-      id="AncientWisdomForModernLiving"
+      // id="AncientWisdomForModernLiving"
       className="w-full relative bg-FFEEE2 overflow-hiddens"
     >
-      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-32">
+      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] pb-10 md:py-32">
         <div className="relative grid grid-cols-1 md:grid-cols-2 items-center gap-x-24 gap-y-5 ">
           <div className="left-section-awf h-full bg-cover bg-center transition-all duration-1000 min-h-[250px]"
             style={{
