@@ -109,15 +109,15 @@ const LoginModal = () => {
           <Col
             xs={{
               span: 24,
-              offset: 1,
+        
             }}
             sm={{
               span: 24,
-              offset: 1,
+            
             }}
             md={{
               span: 24,
-              offset: 1,
+            
             }}
             lg={{
               span: 11,
@@ -132,7 +132,7 @@ const LoginModal = () => {
               offset: 1,
             }}
             // span={11}
-            className="flex flex-col items-center pl-2 pb-5 w-full"
+            className="flex flex-col items-center pb-5 w-full"
           >
             <div className="w-full">
               <h3 className="font-semibold text-lg text-left">
