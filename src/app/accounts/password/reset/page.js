@@ -11,7 +11,6 @@ import CONSTANTS from "../../../../contants/contants";
 const Page = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
-  // const [otp, setOtp] = useState({ value: "969100", verified: true });
   const [otp, setOtp] = useState({ value: null, verified: false });
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
@@ -19,7 +18,6 @@ const Page = () => {
   const [isOptExpired, setIsOptExpired] = useState(false);
   const [isPasswordResetSuccessfully, setIsPasswordResetSuccessfully] =
     useState(false);
-  const [showhide, setShowHide] = useState(false);
   const dispatch = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
   var timer;
@@ -48,7 +46,6 @@ const Page = () => {
         CONSTANTS.NGROK_URL + `api/auth/forgot-password/`,
         data
       );
-      console.log("res 222", res);
       if (res.status === 200) {
         setEmail(data.email);
         setIsOptSendSuccessful(true);
@@ -59,7 +56,6 @@ const Page = () => {
         setIsOptSendSuccessful(false);
       }
     } catch (err) {
-      console.log("res 222", err.response.data.error);
       showResponseMessage(
         "error",
         err.response.data.error || "Something went wrong!"
@@ -81,7 +77,6 @@ const Page = () => {
         CONSTANTS.NGROK_URL + `api/auth/verify-otp/`,
         data
       );
-      console.log("changePassword res", res);
       if (res.status === 200) {
         setOtp({ value: data.otp, verified: true });
         setIsOptSendSuccessful(false);
@@ -102,7 +97,6 @@ const Page = () => {
   };
 
   const changePassword = async (value) => {
-    console.log("data changePassword", value);
     try {
       const data = {
         email: email,
@@ -153,8 +147,8 @@ const Page = () => {
   return (
     <>
       {contextHolder}
-      <div className="reset_pass_container">
-        <Row justify={"center"} align={"middle"} className="w-full py-32">
+      <div>
+        <Row justify={"center"} align={"middle"} className="w-full py-36">
           <Col xs={22} sm={16} md={12} lg={10} xl={8} xxl={6}>
             {!otp.verified ? (
               <div
@@ -168,7 +162,7 @@ const Page = () => {
                 <p className="reset_sub_text mb-10">
                   Forgotten your password? <br />
                   Enter your e-mail address below, and we&apos;ll send you an
-                  otp on e-mail allowing you to reset it.
+                  OTP on e-mail allowing you to reset it.
                 </p>
                 <Form
                   name="basic"
@@ -193,16 +187,8 @@ const Page = () => {
                     className="text-start"
                   >
                     <Input
-                      className="reset_input"
                       placeholder="email"
-                      // onChange={setEmail}
                     />
-                    {/* <input
-                      type="email"
-                      id="email"
-                      placeholder="Email"
-                      className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
-                    /> */}
                   </Form.Item>
                   <Form.Item
                     wrapperCol={{
@@ -212,15 +198,14 @@ const Page = () => {
                     <Button
                       htmlType="submit"
                       size={"large"}
-                      // className="reset_email_btn1"
                       loading={loading2}
                     >
-                      &nbsp; Send OTP&nbsp;
+                    Send OTP
                     </Button>
                   </Form.Item>
                 </Form>
               </div>
-            ) : otp.verified && !isPasswordResetSuccessfully ? (
+            ) :  otp.verified && !isPasswordResetSuccessfully ? (
               <Form
                 name="basic"
                 wrapperCol={{
@@ -228,11 +213,9 @@ const Page = () => {
                 }}
                 onFinish={changePassword}
                 autoComplete="off"
-                // style={{width:"100%"}}
                 className="text-center"
               >
                 <Form.Item
-                  // label="Password1"
                   name="new_password"
                   rules={[
                     {
@@ -246,14 +229,11 @@ const Page = () => {
                   ]}
                 >
                   <Input.Password
-                    className="reset_input"
                     placeholder="Enter Password"
-                    // onChange={setFirstPassword}
                   />
                 </Form.Item>
 
                 <Form.Item
-                  // label="Password2"
                   name="new_password2"
                   dependencies={["new_password"]}
                   hasFeedback
@@ -281,9 +261,7 @@ const Page = () => {
                   ]}
                 >
                   <Input.Password
-                    className="reset_input"
                     placeholder="Re-enter Password"
-                    // onChange={setSecondPassword}
                   />
                 </Form.Item>
                 <Form.Item
@@ -295,25 +273,26 @@ const Page = () => {
                     htmlType="submit"
                     className="reset_email_btn1"
                     loading={loading}
+                    size="large"
                   >
                     Submit
                   </Button>
                 </Form.Item>
               </Form>
             ) : isPasswordResetSuccessfully ? (
-              <div>
-                <p>Password has been change successfully</p>
-                <p className="reset_text1">
+              <>
+                <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-primary">Password has been change successfully</p>
+                <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-primary">
                   You will be redirected to &nbsp;
                   <span
-                    style={{ color: "#3F4FE4", cursor: "pointer" }}
+                    className="underline text-[#3F4FE4] cursor-pointer"
                     onClick={handleLogin}
                   >
                     login
                   </span>
                   &nbsp; page in 5 seconds.
                 </p>
-              </div>
+              </>
             ) : (
               <Skeleton active />
             )}

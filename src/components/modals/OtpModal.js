@@ -1,19 +1,23 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Button, Form, message, Input, Row, Col, Modal } from "antd";
 
 export default function OTPModal({ email, sendOtpAgain, loading, VerifyOtp }) {
-  const [otp, setOtp] = useState("");
   const [open, setOpen] = useState(true);
-  // const router = useRouter();
+  const [seconds, setSeconds] = useState(60);
 
-  const handleOtpSubmit = (e) => {
-    e.preventDefault();
-    if (otp.length !== 6) return alert("Enter a valid 6-digit OTP.");
-    // Trigger backend OTP validation (API call here)
-    // router.push("/forgot-password/reset-password"); // Redirect to reset password page
-  };
+    useEffect(() => {
+      if (seconds > 0) {
+        const timerId = setTimeout(() => {
+          setSeconds((prev) => prev - 1);
+        }, 1000);
+  
+        // Cleanup timeout to avoid memory leaks
+        return () => clearTimeout(timerId);
+      }
+    }, [seconds]);
+
 
   const handleCancel = () => {
     setOpen(false);
@@ -24,9 +28,7 @@ export default function OTPModal({ email, sendOtpAgain, loading, VerifyOtp }) {
       open={open}
       onCancel={handleCancel}
       footer={null}
-      // className="login_modal"
     >
-      {/* <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"> */}
       <div className="bg-white w-full">
         <p className="text-sm text-gray-600 text-center my-2">
           An OTP has been sent to <span className="font-medium">{email}</span>.
@@ -38,7 +40,6 @@ export default function OTPModal({ email, sendOtpAgain, loading, VerifyOtp }) {
           }}
           onFinish={VerifyOtp}
           autoComplete="off"
-          // style={{width:"100%"}}
         >
           <Form.Item
             name="otp"
@@ -53,22 +54,28 @@ export default function OTPModal({ email, sendOtpAgain, loading, VerifyOtp }) {
               },
             ]}
           >
-            <Input
+            <Input.OTP
               type="text"
               maxLength={6}
-              className="reset_input"
               placeholder="Enter 6-digit OTP"
             />
           </Form.Item>
-          <h2 className="text-[14px] leading-[20px] font-[400] mb-4">
-            Didn&apos;t get OTP ? &apos;
+          {seconds > 0 ?
+            (<h2 className="text-[14px] leading-[20px] font-[400] mb-4"> <span
+              className="text-cyan-400 cursor-pointer"
+            >
+              Resend OTP &nbsp;
+            </span>in {seconds} seconds</h2>)
+            :
+            (<h2 className="text-[14px] leading-[20px] font-[400] mb-4">
+            Didn&apos;t get OTP ?&nbsp;
             <span
               onClick={() => sendOtpAgain({ email: email })}
               className="text-cyan-400 underline cursor-pointer"
             >
-              Send again otp.
+              Resend OTP.
             </span>
-          </h2>
+          </h2>)}
           <Form.Item
             wrapperCol={{
               span: 24,
@@ -79,13 +86,13 @@ export default function OTPModal({ email, sendOtpAgain, loading, VerifyOtp }) {
               htmlType="submit"
               className="reset_email_btn1"
               loading={loading}
+              size="large"
             >
               Verify
             </Button>
           </Form.Item>
         </Form>
       </div>
-      {/* </div> */}
     </Modal>
   );
 }

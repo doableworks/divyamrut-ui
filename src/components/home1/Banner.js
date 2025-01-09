@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import {Button} from "antd";
+import { Button } from "antd";
 
 import BackgroundImagesSlider from "@/components/home1/BackgrounImageSlider";
 import { Calender, Flower } from "@/icon/icons";
@@ -60,14 +60,6 @@ const Banner = () => {
             <div className="font-suranna text-[16px] md:text-[21px] font-[400] leading-[1.4em] text-left text-[#FFFFFF] inline-flex items-center gap-2 justify-center px-6 py-3 mt-4 bg-E0A43B  hover:bg-q4ca25af  transition cursor-pointer">
               <Calender fill={"#FFFFFF"} /> Book an Appointment
             </div>
-            <Button 
-            style={{
-              backgroundColor:"#E0A43B",
-              padding:"27px",
-              color:"#FFFFFF"
-            }}
-            className="hover:bg-[red]"
-            >Book an Appointment22</Button>
           </div>
         </div>
         <div className="relative w-full h-full">

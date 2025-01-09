@@ -173,7 +173,7 @@ const Navbar = ({ session }) => {
                 height={250}
               />
               {/* <h2
-              className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF]"
+              className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[--neutral]"
             >
               Divyamrut
             </h2> */}
@@ -181,10 +181,10 @@ const Navbar = ({ session }) => {
           </Link>
 
           {/* Navigation Menu */}
-          <nav className="hidden [@media(min-width:1340.98px)]:flex gap-8 font-jost text-[18px] font-[500] text-left text-[#FFFFFF] items-center">
+          <nav className="hidden [@media(min-width:1340.98px)]:flex gap-8 font-jost text-[18px] font-[500] text-left text-[--neutral] items-center">
             <h5
               className={`cursor-pointer hover:text-E0A43B ${
-                pathname == "/about-us" ? "text-E0A43B" : "text-[#FFFFFF]"
+                pathname == "/about-us" ? "text-E0A43B" : "text-[--neutral]"
               }`}
               onClick={() => handleMoveRoute("/about-us")}
             >
@@ -192,7 +192,7 @@ const Navbar = ({ session }) => {
             </h5>
             <h5
               className={`cursor-pointer hover:text-E0A43B ${
-                pathname == "/consultations" ? "text-E0A43B" : "text-[#FFFFFF]"
+                pathname == "/consultations" ? "text-E0A43B" : "text-[--neutral]"
               }`}
               onClick={() => handleMoveRoute("/consultations")}
             >
@@ -211,7 +211,7 @@ const Navbar = ({ session }) => {
                 >
                   Therapies
                 </h5>
-                <Arrow fill={hasHover == "therapies" ? "#E0A43B" : "#FFFFFF"} />
+                <Arrow fill={hasHover == "therapies" ? "#E0A43B" : "#3c3c3d"} />
               </div>
               {/* Dropdown */}
               <div
@@ -239,7 +239,7 @@ const Navbar = ({ session }) => {
               className={`cursor-pointer hover:text-E0A43B ${
                 pathname == "/health-packages"
                   ? "text-E0A43B"
-                  : "text-[#FFFFFF]"
+                  : "text-[--neutral]"
               }`}
               onClick={() => handleMoveRoute("/health-packages")}
             >
@@ -267,7 +267,7 @@ const Navbar = ({ session }) => {
                 >
                   Products
                 </h5>
-                <Arrow fill={hasHover == "products" ? "#E0A43B" : "#FFFFFF"} />
+                <Arrow fill={hasHover == "products" ? "#E0A43B" : "#3c3c3d"} />
               </div>
 
               <div
@@ -295,7 +295,7 @@ const Navbar = ({ session }) => {
               className={`cursor-pointer hover:text-E0A43B ${
                 pathname == "/mission-and-vision"
                   ? "text-E0A43B"
-                  : "text-[#FFFFFF]"
+                  : "text-[--neutral]"
               }`}
               onClick={() => handleMoveRoute("/mission-and-vision")}
             >
@@ -304,7 +304,7 @@ const Navbar = ({ session }) => {
 
             <h5
               className={`cursor-pointer hover:text-E0A43B ${
-                pathname == "/contact-us" ? "text-E0A43B" : "text-[#FFFFFF]"
+                pathname == "/contact-us" ? "text-E0A43B" : "text-[--neutral]"
               }`}
               onClick={() => handleMoveRoute("/contact-us")}
             >
@@ -312,7 +312,7 @@ const Navbar = ({ session }) => {
             </h5>
             <h5
               className={`flex items-center gap-2 cursor-pointer hover:text-E0A43B ${
-                pathname == "/cart" ? "text-E0A43B" : "text-[#FFFFFF]"
+                pathname == "/cart" ? "text-E0A43B" : "text-[--neutral]"
               }`}
               onClick={() => handleMoveRoute("/cart")}
               onMouseEnter={() => setHasHover("cart")}
@@ -325,7 +325,7 @@ const Navbar = ({ session }) => {
                 color={
                   pathname == "/cart" || hasHover == "cart"
                     ? "#E0A43B"
-                    : "#FFFFFF"
+                    : "#3c3c3d"
                 }
               />
               Cart
@@ -345,7 +345,7 @@ const Navbar = ({ session }) => {
               </div>
               {/* Dropdown */}
               <div
-                className={`absolute right-[-1rem] hidden group-hover:block shadow-lg text-nowrap cursor-pointer
+                className={`absolute right-[-0.5rem] hidden group-hover:block shadow-lg text-nowrap cursor-pointer
             bg-white 
             text-E0A43B 
             `}

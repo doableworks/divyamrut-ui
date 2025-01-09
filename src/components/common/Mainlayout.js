@@ -23,26 +23,6 @@ export default function MainLayout({ children, session }) {
         inputFontSize: 16,
         colorTextPlaceholder:'#999',
       },
-      Button: {
-        activeBg:"#A48125",
-        defaultBg:"#E0A43B",
-        defaultColor:"#FFFFFF",
-        defaultActiveColor:"#FFFFFF",
-        
-        paddingInline:40,
-        paddingBlock: 10,
-        
-
-
-
-        // algorithm: true,
-        // fontFamily: '"Inter", sans-serif',
-        // colorSecondaryBg: '#3F4FE41A',
-        // colorSecondaryBorder: '#3F4FE4',
-        // colorSecondaryText: '#3F4FE4',
-        // colorSecondaryHover: '#3F4FE433',
-        // color: "white",
-      },
       Spin: {
         contentHeight: "100%",
       },
