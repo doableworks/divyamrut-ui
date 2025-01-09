@@ -100,7 +100,7 @@ const OurValues = () => {
                 erat. Arcu fusce praesent himenaeos fames placerat eu purus id
                 libero congue malesuada.
               </p>
-              <div className="site-button">Learn more</div>
+              <div className="site-button-primary">Learn more</div>
             </div>
             <div
               className="flex-grow middle-section-ov relative w-full md:w-[30%] h-full bg-cover bg-center md:bg-center  mr-5 md:mr-0 transition-all duration-1000 min-h-[350px] md:min-h-[530px]"

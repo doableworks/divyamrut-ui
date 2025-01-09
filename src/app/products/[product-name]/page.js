@@ -576,7 +576,7 @@ const page = ({params}) => {
   return (
     <>
       <MainBanner heading={heading} subHeading={subHeading} />
-      <div className="py-20 flex flex-wrap justify-center gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 px-12 py-20 md:px-20 md:py-28">
           {products.map((product, index) => (
           <Product key={index} {...product} route={params["product-name"]} />
           ))}

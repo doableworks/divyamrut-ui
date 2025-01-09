@@ -143,7 +143,7 @@ const WhatWeOffer = () => {
                 </p>
 
                 <div className="border-t-[0.5px] border-q4d462f5 mt-10" />
-                <div className="site-button">
+                <div className="site-button-primary">
                   Learn more
                 </div>
               </div>

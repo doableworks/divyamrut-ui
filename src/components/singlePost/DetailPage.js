@@ -33,13 +33,13 @@ const DetailPage = ({item}) => {
   return (
     <>
       <article className="space-y-4">
-        <p className="font-jost text-[14px] md:text-[18px] font-[400] leading-[1.4em] text-primary">
+        <p className="section-content !text-left">
           Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
           commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
           et magnis dis parturient montes, nascetur ridiculus mus. Donec quam
           felis, ultricies nec, pellentesque eu, pretium quis, sem.
         </p>
-        <p className="font-jost text-[14px] md:text-[18px] font-[400] leading-[1.4em] text-primary">
+        <p className="section-content !text-left">
           Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
           aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
           imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
@@ -52,13 +52,13 @@ const DetailPage = ({item}) => {
             className="rounded-lg"
           />
           <div>
-            <p className="font-jost text-[14px] md:text-[18px] font-[400] leading-[1.4em] text-primary">
+            <p className="section-content !text-left">
               Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
               Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
               enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,
               tellus. Phasellus viverra nulla ut metus varius laoreet.
             </p>
-            <p className="font-jost text-[14px] md:text-[18px] font-[400] leading-[1.4em] text-primary">
+            <p className="section-content !text-left">
               Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue.
               Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.
               Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper
@@ -66,13 +66,13 @@ const DetailPage = ({item}) => {
             </p>
           </div>
         </div>
-        <p className="font-jost text-[14px] md:text-[18px] font-[400] leading-[1.4em] text-primary">
+        <p className="section-content !text-left">
           Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.
           Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut
           libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget
           eros faucibus tincidunt. Duis leo.
         </p>
-        <p className="font-jost text-[14px] md:text-[18px] font-[400] leading-[1.4em] text-primary">
+        <p className="section-content !text-left">
           Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed
           consequat, leo eget bibendum sodales, augue velit cursus nunc, quis
           gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum

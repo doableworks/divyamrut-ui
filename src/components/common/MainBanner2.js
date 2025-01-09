@@ -74,8 +74,8 @@ const MainBanner2 = ({ heading, subHeading, date, comment, mainType }) => {
     >
       <div className="bg-[rgba(0,0,0,.4)] min-h-[250px] md:min-h-[500px] h-full w-full flex items-center justify-start text-white">
         <div className="relative mx-auto z-20 w-[90%] md:w-[85%] pb-12 pt-48 md:pb-32 md:pt-80">
-          <h3 className="fade-up1 font-jost text-[14px] md:text-[14px] font-[500] text-a2c0d56 uppercase">{mainType}</h3>
-          <h2 className="fade-up font-suranna text-[54px] md:text-[67px] font-[400] leading-[1.3em] leading-[1.3em] text-text text-start mb-4">
+          <h3 className="section-title !text-left !text-white">{mainType}</h3>
+          <h2 className="highlight-heading !text-left !text-white">
             {heading}
           </h2>
           <div className="border-t-[0.5px] border-accent my-4" />

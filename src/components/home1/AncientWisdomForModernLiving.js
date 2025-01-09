@@ -54,7 +54,7 @@ const AncientWisdomForModernLiving = () => {
           x: 0,
           opacity: 1,
           duration: 0.5,
-          delay: 0.2,
+          delay: 0,
           // stagger: 0.2,
           scrollTrigger: {
             trigger: "#AncientWisdomForModernLiving",

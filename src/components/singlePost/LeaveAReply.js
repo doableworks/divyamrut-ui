@@ -3,28 +3,28 @@ import React from 'react'
 const LeaveAReply = () => {
   return (
     <section className="mt-8">
-    <h2 className="font-suranna text-[36px] md:text-[50px] font-[400] leading-[1.4em] text-secondary">Leave a Reply</h2>
+    <h2 className="highlight-heading !text-left">Leave a Reply</h2>
     <form className="space-y-4 mt-4">
-      <div>
+      <div className='mb-3'>
         <label
           required
           htmlFor="Comment"
-          className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-primary"
+          className="input-label"
         >
-          Comment*
+          Comment<span className='input-label-required ms-[1px]'>*</span>
         </label>
         <textarea
           id="Comment"
           // placeholder="Comment"
           className="w-full p-3  h-32 resize-none font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
         ></textarea>
-        <div>
+        <div className='mb-3'>
           <label
             required
             htmlFor="name"
-            className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-primary"
+            className="input-label"
           >
-            Name*
+            Name<span className='input-label-required ms-[1px]'>*</span>
           </label>
           <input
             required
@@ -34,13 +34,13 @@ const LeaveAReply = () => {
             className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
           />
         </div>
-        <div>
+        <div className='mb-3'>
           <label
             required
             htmlFor="email"
-            className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-primary"
+            className="input-label"
           >
-            Email*
+            Email<span className='input-label-required ms-[1px]'>*</span>
           </label>
           <input
             required
@@ -50,10 +50,10 @@ const LeaveAReply = () => {
             className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
           />
         </div>
-        <div>
+        <div className='mb-3'>
           <label
             htmlFor="name"
-            className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-primary"
+            className="input-label"
           >
             Website
           </label>
@@ -74,7 +74,7 @@ const LeaveAReply = () => {
       </div>
       <button
         type="submit"
-        className="bg-q4ca25af p-2 flex items-center justify-center gap-2 font-jost text-[12px] md:text-[16px] font-[500] leading-[1.4em] text-text"
+        className="site-button-primary !mt-6"
       >
         Post Comment
       </button>
