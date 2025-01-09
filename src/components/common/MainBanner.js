@@ -45,7 +45,7 @@ const MainBanner = ({heading, subHeading}) => {
     <section
       className="relative bg-cover bg-center min-h-[250px] md:min-h-[500px] w-[100%] overflow-hidden"
       style={{
-        backgroundImage: "url('/asset/home/yoga-coach-training-session-.jpg')",
+        backgroundImage: "url('/asset/home/natural-health-support.jpg')",
       }}
     >
       <div className="bg-[rgba(0,0,0,.4)] min-h-[250px] md:min-h-[500px] h-full w-full flex items-center justify-center text-white">
