@@ -49,8 +49,8 @@ const CartPage = () => {
   const allSelected =
     cartItems.length > 0 && cartItems.every((item) => item.selected === true);
   return (
-    <div className="flex gap-10 relative z-20 mx-auto w-[90%] md:w-[85%] py-10">
-      <div className="w-[75%] mx-auto bg-white shadow-md rounded-lg">
+    <div className="flex flex-col lg:flex-row gap-10 relative z-20 mx-auto w-[90%] md:w-[85%] py-10">
+      <div className="w-full lg:w-[75%] mx-auto bg-white shadow-md rounded-lg">
         <div className="p-6 h-full">
           <div className="flex justify-between">
             <h2 className="text-[18px] leading-[24px] font-semibold mb-4">
@@ -147,7 +147,7 @@ const CartPage = () => {
           )}
         </div>
       </div>
-      <div className="w-[25%] mx-auto bg-white shadow-md rounded-lg flex flex-col items-center p-6">
+      <div className="w-full lg:w-[40%] xl:w-[30%] mx-auto bg-white shadow-md rounded-lg flex flex-col items-center p-6">
         {/* Total Section */}
         <div className="text-right mt-6">
           <h3 className="text-xl font-medium">Total: ${calculateTotal()}</h3>
@@ -158,6 +158,7 @@ const CartPage = () => {
           <button
             type="submit"
             className="w-full bg-q4ca25af text-white p-4 rounded min-w-[250px] max-w-[350px]"
+            disabled={cartItems.length > 0}
           >
             Proceed to Checkout
           </button>
