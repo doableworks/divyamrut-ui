@@ -139,8 +139,8 @@ const Navbar = ({ session, isScrolled }) => {
     <>
       {contextHolder}
       <header
-        className={`fixed top-0 z-30 w-full shadow ${
-          isScrolled ? "backdrop-blur bg-gradient-to-r from-slate-50 via-gray-400 to-transparent" : "bg-transparent"
+        className={`absolute z-30 w-full shadow ${
+          false ? "backdrop-blur bg-gradient-to-r from-slate-50 via-gray-400 to-transparent" : "bg-transparent"
         }`}
       >
         {/* Top Banner */}

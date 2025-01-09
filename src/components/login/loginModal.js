@@ -10,6 +10,7 @@ import {
   setOpenRegisterModal,
 } from "@/redux/feature/authModalSlice";
 import { useRouter } from "nextjs-toploader/app";
+import CustomButton from "@/components/common/CustomButton";
 
 const LoginModal = () => {
   const dispatch = useDispatch();
@@ -182,7 +183,7 @@ const LoginModal = () => {
               </div>
 
               <Form.Item className="w-full">
-                <Button
+                {/* <Button
                   htmlType="submit"
                   loading={loading}
                   size={"large"}
@@ -190,7 +191,15 @@ const LoginModal = () => {
                   className="w-full"
                 >
                   Login
-                </Button>
+                </Button> */}
+
+                <CustomButton
+                  htmlType="submit"
+                  className="site-button-primary !m-0 w-[-webkit-fill-available]"
+                  title="Login"
+                  loading={loading}
+                  type="submit"
+                />
               </Form.Item>
             </Form>
 

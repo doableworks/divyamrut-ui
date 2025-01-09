@@ -12,6 +12,8 @@ import {
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button, Form, message, Input, Row, Col, Modal } from "antd";
+import CustomButton from "@/components/common/CustomButton";
+
 
 const RegisterModal = () => {
   const [form] = Form.useForm();
@@ -266,14 +268,21 @@ const RegisterModal = () => {
                   ref={recaptcha}
                 />
               </Form.Item> */}
-              <Button
+              {/* <Button
                 loading={loading}
                 size="large"
                 htmlType="submit"
                 className="w-full bg-blue-600 text-white font-semibold rounded-lg py-2"
               >
                 Sign Up
-              </Button>
+              </Button> */}
+              <CustomButton
+                htmlType="submit"
+                className="site-button-primary !m-0 w-[-webkit-fill-available]"
+                title="Sign Up"
+                loading={loading}
+                type="submit"
+              />
 
               {/* <button
                 type="submit"

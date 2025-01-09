@@ -7,6 +7,7 @@ import { Button, Modal, Input, Form, message, Skeleton, Row, Col } from "antd";
 import OTPModal from "../../../../components/modals/OtpModal";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import CONSTANTS from "../../../../contants/contants";
+import CustomButton from "@/components/common/CustomButton";
 
 const Page = () => {
   const router = useRouter();
@@ -186,26 +187,27 @@ const Page = () => {
                     ]}
                     className="text-start"
                   >
-                    <Input
-                      placeholder="email"
-                    />
+                    <Input placeholder="email" />
                   </Form.Item>
                   <Form.Item
                     wrapperCol={{
                       span: 24,
                     }}
                   >
-                    <Button
+                    {/* <Button htmlType="submit" size={"large"} loading={loading2}>
+                      Send OTP
+                    </Button> */}
+                    <CustomButton
                       htmlType="submit"
-                      size={"large"}
+                      className="site-button-primary !m-0 w-[-webkit-fill-available]"
+                      title="Send OTP"
                       loading={loading2}
-                    >
-                    Send OTP
-                    </Button>
+                      type="submit"
+                    />
                   </Form.Item>
                 </Form>
               </div>
-            ) :  otp.verified && !isPasswordResetSuccessfully ? (
+            ) : otp.verified && !isPasswordResetSuccessfully ? (
               <Form
                 name="basic"
                 wrapperCol={{
@@ -228,9 +230,7 @@ const Page = () => {
                     },
                   ]}
                 >
-                  <Input.Password
-                    placeholder="Enter Password"
-                  />
+                  <Input.Password placeholder="Enter Password" />
                 </Form.Item>
 
                 <Form.Item
@@ -244,10 +244,7 @@ const Page = () => {
                     },
                     ({ getFieldValue }) => ({
                       validator(_, value) {
-                        if (
-                          !value ||
-                          getFieldValue("new_password") === value
-                        ) {
+                        if (!value || getFieldValue("new_password") === value) {
                           return Promise.resolve();
                         }
 
@@ -260,28 +257,35 @@ const Page = () => {
                     }),
                   ]}
                 >
-                  <Input.Password
-                    placeholder="Re-enter Password"
-                  />
+                  <Input.Password placeholder="Re-enter Password" />
                 </Form.Item>
                 <Form.Item
                   wrapperCol={{
                     span: 24,
                   }}
                 >
-                  <Button
+                  {/* <Button
                     htmlType="submit"
                     className="reset_email_btn1"
                     loading={loading}
                     size="large"
                   >
                     Submit
-                  </Button>
+                  </Button> */}
+                  <CustomButton
+                      htmlType="submit"
+                      className="site-button-primary !m-0 w-[-webkit-fill-available]"
+                      title="Submit"
+                      loading={loading}
+                      type="submit"
+                    />
                 </Form.Item>
               </Form>
             ) : isPasswordResetSuccessfully ? (
               <>
-                <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-primary">Password has been change successfully</p>
+                <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-primary">
+                  Password has been change successfully
+                </p>
                 <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-primary">
                   You will be redirected to &nbsp;
                   <span

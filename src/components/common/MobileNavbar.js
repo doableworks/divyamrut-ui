@@ -11,7 +11,7 @@ import {
   UpOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import CustomButton from "../button/index";
+import CustomButton from "@/components/common/CustomButton";
 import InitialAvatar from "./InitialAvatar";
 import UserProfileModalComp from "./UserProfileModalComp";
 import { CartIcon } from "@/icon/icons";
