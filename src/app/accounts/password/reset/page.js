@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { Button, Modal, Input, Form, message, Skeleton, Row, Col } from "antd";
+import { Input, Form, message, Skeleton, Row, Col } from "antd";
 import OTPModal from "../../../../components/modals/OtpModal";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import CONSTANTS from "../../../../contants/contants";
