@@ -21,28 +21,10 @@ const Page = () => {
     useState(false);
   const dispatch = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
-  var timer;
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
-
-  const handleExpireOtpTime = () => {
-    timer = setTimeout(() => {
-      setIsOptExpired(true);
-    }, 1000 * 10);
-  };
-
-  const clearTimeoutFun = () => {
-    clearTimeout(timer);
-  };
 
   const sendOtp = async (data) => {
     try {
       setLoading2(true);
-      timer && clearTimeoutFun();
       const res = await axios.post(
         CONSTANTS.NGROK_URL + `api/auth/forgot-password/`,
         data
@@ -51,7 +33,6 @@ const Page = () => {
         setEmail(data.email);
         setIsOptSendSuccessful(true);
         showResponseMessage("success", "OTP has been sent to your email");
-        handleExpireOtpTime();
       } else {
         showResponseMessage("error", "Something went wrong!");
         setIsOptSendSuccessful(false);
@@ -112,7 +93,6 @@ const Page = () => {
       if (res.status === 200) {
         setIsPasswordResetSuccessfully(true);
         showResponseMessage("success", "Password has been reset successfully");
-        clearTimeoutFun();
         setTimeout(() => {
           router.push("/");
           setIsPasswordResetSuccessfully(false);
