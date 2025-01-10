@@ -18,13 +18,13 @@ export const LayoutSection = ({
       refetchInterval={10 * 60}
       refetchOnWindowFocus={false}
     >
-      <main className="relative bg-[--base] h-[100vh] overflow-y-auto overflow-x-hidden">
+      <main className="flex flex-col relative bg-[--base] h-[100vh] overflow-y-auto overflow-x-hidden">
         <Navbar
           therapySubmenu={therapySubmenu}
           productSubMenu={productSubMenu}
         />
 
-        {children}
+        <div className="flex-grow">{children}</div>
         <Footer />
       </main>
 
