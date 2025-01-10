@@ -98,19 +98,26 @@ const MobileNavbar = ({
               </div>
               {item.subMenu && activeSubMenu === index && (
                 <div className="pl-5">
-                  {item.subMenu.map((subItem, subIndex) => (
-                    <p
-                      key={subIndex}
-                      className={`${
-                        pathname === subItem.path
-                          ? "text-[--e-global-color-E0A43B] font-bold"
-                          : "text-[#3E3E3E]"
-                      } hover:text-[#FF5400] cursor-pointer px-5 py-2`}
-                      onClick={() => handleAction(subItem.path)}
-                    >
-                      {subItem.label}
-                    </p>
-                  ))}
+                  {item.subMenu.map(
+                    (subItem, subIndex) =>
+                      subItem.is_published && (
+                        <p
+                          key={subIndex}
+                          className={`${
+                            pathname === subItem?.slug
+                              ? "text-[--e-global-color-E0A43B] font-bold"
+                              : "text-[#3E3E3E]"
+                          } hover:text-[#FF5400] cursor-pointer px-5 py-2`}
+                          onClick={() =>
+                            handleAction(
+                              `${item.parentSlug}/${subItem.slug}/`
+                            )
+                          }
+                        >
+                          {subItem?.name}
+                        </p>
+                      )
+                  )}
                 </div>
               )}
             </div>

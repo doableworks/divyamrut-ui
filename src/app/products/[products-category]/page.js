@@ -34,8 +34,8 @@ const page = async ({ params }) => {
           {products.map((product, index) => (
             <Product
               key={index}
-              {...product}
-              category={params["product-name"]}
+              item={product}
+              productCategory={params["products-category"]}
             />
           ))}
         </div>

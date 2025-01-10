@@ -15,16 +15,7 @@ import {
 } from "@/redux/feature/cartSlice";
 import AddToCartBtn from "../BtnCom/AddToCart";
 
-const Product = ({
-  title,
-  image,
-  description,
-  slug,
-  category,
-  price,
-  currency,
-  products,
-}) => {
+const Product = ({ item, productCategory }) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -37,27 +28,14 @@ const Product = ({
     }
   };
 
-  // console.log(
-  //   "title",
-  //   title,
-  //   "image",
-  //   image,
-  //   "description",
-  //   description,
-  //   "slug",
-  //   slug,
-  //   "category",
-  //   slug
-  // );
-
   return (
     <div
       className="relative flex flex-col justify-between bg-[white] shadow-lg w-full cursor-pointer rounded overflow-hidden"
-      onClick={() => router.push(`/products/${category}/${slug}`)}
+      onClick={() => router.push(`/products/${productCategory}/${item?.slug}`)}
     >
-      {image && (
+      {item?.image && (
         <Image
-          src={image}
+          src={item?.image}
           width={180}
           height={200}
           className="w-full h-[200px]"
@@ -66,24 +44,24 @@ const Product = ({
       )}
       <div className="flex-grow flex flex-col px-6 py-4">
         <h6 className="section-title !normal-case !text-[1.5rem] !text-left hover:!text-[--yellow]">
-          {title}
+          {item?.title}
         </h6>
         {/* <p className="section-title !normal-case !text-[1rem] !text-left !text-gray-400">
           {description}
         </p> */}
         <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-[black] mt-2">
-          {currency == "USD" && "$"}&nbsp;{price}
+          {item?.currency == "USD" && "$"}&nbsp;{item?.price}
         </p>
       </div>
       <div className="w-full text-center">
-          <AddToCartBtn />
-          {/* <BtnSection
+        <AddToCartBtn cartFun={handleAddItem} />
+        {/* <BtnSection
             showAddToCartBtn={true}
             showBuyBtn={true}
             showBookBtn={false}
             cartFun={handleAddItem}
           /> */}
-        </div>
+      </div>
     </div>
   );
 };
