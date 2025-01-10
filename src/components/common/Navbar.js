@@ -4,9 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "nextjs-toploader/app";
-import { Arrow, Call, Message, CartIcon } from "@/icon/icons";
+import { Arrow, CartIcon } from "@/icon/icons";
 import { useState } from "react";
-import MobileNav from "./MobileNav";
 import InitialAvatar from "@/components/common/InitialAvatar";
 import { signOut } from "next-auth/react";
 import { Button, Form, message, Input, Row, Col, Modal } from "antd";
@@ -20,69 +19,54 @@ import { Therapies, NavProducts } from "@/contants/contants";
 import MobileNavbar from "./MobileNavbar";
 import { MenuOutlined, CloseOutlined, UserOutlined } from "@ant-design/icons";
 import { closeNav, openNav, toggleNav } from "@/redux/feature/mobileNavSlice";
-import { useEffect } from "react";
+import { useSession } from "next-auth/react";
 
-const menuItems = [
+const initialMenuItems = [
   { label: "Home", path: "/" },
   { label: "About Us", path: "/about-us" },
   { label: "Consultations", path: "/consultations" },
   {
     label: "Therapies",
-    subMenu: [
-      { label: "Basic Flower Therapy", path: "/therapy/basic-flower-therapy" },
-      {
-        label: "Cranio Sacral Therapy",
-        path: "/therapy/cranio-sacral-therapy",
-      },
-      { label: "Meru Chikitsa", path: "/therapy/meru-chikitsa" },
-      { label: "Marma", path: "/therapy/marma" },
-      { label: "Sound Therapy", path: "/therapy/sound-therapy" },
-      { label: "Meru Chikitsa", path: "/therapy/meru-chikitsa" },
-      { label: "Sujok & Acupuncture", path: "/therapy/sujok-and-acupuncture" },
-      { label: "Osteopathy", path: "/therapy/osteopathy" },
-      { label: "Art Therapy", path: "/therapy/art-therapy" },
-    ],
+    subMenu: [],
   },
   { label: "Health Packages", path: "/health-packages" },
   {
     label: "Products",
-    subMenu: [
-      {
-        label: "Kansa Vati Foot Massage Kit",
-        path: "/products/kansa-vati-foot-massage-kit",
-      },
-      {
-        label: "Meditation/Pooja Asans",
-        path: "/products/meditation-puja-asans",
-      },
-      {
-        label: "Meditation/Pooja Shawls",
-        path: "/products/meditation-puja-shawls",
-      },
-      {
-        label: "Chandan-Kumkum Bindi Kit",
-        path: "/products/chandan-kumkum-bindi-kit",
-      },
-      {
-        label: "Bath/Aura Cleansing Salt",
-        path: "/products/bath-aura-cleansing-salt",
-      },
-      { label: "Diya", path: "/products/diya" },
-    ],
+    subMenu: [],
   },
   { label: "Mission and Vision", path: "/mission-and-vision" },
   { label: "Contact Us", path: "/contact-us" },
 ];
 
-const Navbar = ({ session, isScrolled }) => {
+const Navbar = ({ therapySubmenu, productSubMenu }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const pathname = usePathname();
   const [hasHover, setHasHover] = useState(null);
   const cartItems = useSelector((state) => state.cart.items);
   const [messageApi, contextHolder] = message.useMessage();
+  const { data: session } = useSession();
 
   const isMobileNavOpen = useSelector((state) => state.mobileNav.isOpen);
+
+  const menuItems = initialMenuItems.map((each) => {
+    switch (each.label) {
+      case "Therapies":
+        return {
+          label: "Therapies",
+          parentSlug: "/therapy/",
+          subMenu: therapySubmenu,
+        };
+      case "Products":
+        return {
+          label: "Products",
+          parentSlug: "/products/",
+          subMenu: productSubMenu,
+        };
+      default:
+        return each;
+    }
+  });
 
   const handleMoveRoute = (route) => {
     router.push(route);
@@ -96,8 +80,8 @@ const Navbar = ({ session, isScrolled }) => {
   const onLogOut = async () => {
     try {
       await signOut();
-      await dispatch(closeNav());
-      await dispatch(setOpenLoginModal(true));
+      dispatch(closeNav());
+      dispatch(setOpenLoginModal(true));
 
       // .then(({ ok, error }) => {
       //   console.log("ok", ok, "error",error)
@@ -140,28 +124,11 @@ const Navbar = ({ session, isScrolled }) => {
       {contextHolder}
       <header
         className={`absolute z-30 w-full shadow ${
-          false ? "backdrop-blur bg-gradient-to-r from-slate-50 via-gray-400 to-transparent" : "bg-transparent"
+          false
+            ? "backdrop-blur bg-gradient-to-r from-slate-50 via-gray-400 to-transparent"
+            : "bg-transparent"
         }`}
       >
-        {/* Top Banner */}
-        {/* <div className="bg-q638d055  py-2">
-        <div className="w-[85%] container mx-auto flex items-center text-white justify-between">
-          <p className="text-sm font-medium hidden md:block">
-            Get a Free Ayurveda Consultation from PranaVeda!
-          </p>
-          <div className="flex gap-4 text-sm">
-            <div className="flex items-center gap-1">
-              <Message fill={"#6E9039"} />
-              <span>support@domain.tld</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Call fill={"#6E9039"} />
-              <span>(888) 4000-2424</span>
-            </div>
-          </div>
-        </div>
-      </div> */}
-        {/* Main Navigation */}
         <div className="bg-transparent w-[98%] mx-auto flex items-center justify-between">
           {/* Logo */}
           <Link href="/">
@@ -172,15 +139,9 @@ const Navbar = ({ session, isScrolled }) => {
                 width={120}
                 height={250}
               />
-              {/* <h2
-              className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[--neutral]"
-            >
-              Divyamrut
-            </h2> */}
             </div>
           </Link>
 
-          {/* Navigation Menu */}
           <nav className="hidden [@media(min-width:1340.98px)]:flex gap-8 font-jost text-[18px] font-[500] text-left text-[--neutral] items-center">
             <h5
               className={`cursor-pointer hover:text-E0A43B ${
@@ -192,7 +153,9 @@ const Navbar = ({ session, isScrolled }) => {
             </h5>
             <h5
               className={`cursor-pointer hover:text-E0A43B ${
-                pathname == "/consultations" ? "text-E0A43B" : "text-[--neutral]"
+                pathname == "/consultations"
+                  ? "text-E0A43B"
+                  : "text-[--neutral]"
               }`}
               onClick={() => handleMoveRoute("/consultations")}
             >
@@ -213,26 +176,31 @@ const Navbar = ({ session, isScrolled }) => {
                 </h5>
                 <Arrow fill={hasHover == "therapies" ? "#E0A43B" : "#3c3c3d"} />
               </div>
-              {/* Dropdown */}
+              
               <div
                 className={`absolute left-0 hidden group-hover:block shadow-lg text-nowrap cursor-pointer
             bg-white 
             text-E0A43B 
             `}
               >
-                {Therapies.map((item, index) => (
-                  <h5
-                    key={index + "Therapy"}
-                    className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                      pathname == `/therapy/${item.route}`
-                        ? "text-text bg-d49ac81"
-                        : ""
-                    }`}
-                    onClick={() => handleMoveRoute(`/therapy/${item.route}`)}
-                  >
-                    {item.title}
-                  </h5>
-                ))}
+                {therapySubmenu?.map(
+                  (item, index) =>
+                    item.is_published && (
+                      <h5
+                        key={index + "Therapy"}
+                        className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
+                          pathname == `/therapy/${item.slug}/`
+                            ? "text-text bg-d49ac81"
+                            : ""
+                        }`}
+                        onClick={() =>
+                          handleMoveRoute(`/therapy/${item.slug}/`)
+                        }
+                      >
+                        {item?.name}
+                      </h5>
+                    )
+                )}
               </div>
             </div>
             <h5
@@ -245,14 +213,7 @@ const Navbar = ({ session, isScrolled }) => {
             >
               Health Packages
             </h5>
-            {/* <h5
-                className={`${
-                  pathname == "/products" ? "text-E0A43B" : "#FFFFFF"
-                } leading-[3.5em] cursor-pointer`}
-                onClick={() => handleMoveRoute("/products")}
-              >
-                Products
-              </h5> */}
+          
             <div
               className="relative group"
               onMouseEnter={() => setHasHover("products")}
@@ -276,19 +237,24 @@ const Navbar = ({ session, isScrolled }) => {
             text-E0A43B 
             `}
               >
-                {NavProducts.map((item, index) => (
-                  <h5
-                    key={index + "product"}
-                    className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
-                      pathname == `/products/${item.route}`
-                        ? "text-text bg-d49ac81"
-                        : ""
-                    }`}
-                    onClick={() => handleMoveRoute(`/products/${item.route}`)}
-                  >
-                    {item.title}
-                  </h5>
-                ))}
+                {productSubMenu.map(
+                  (item, index) =>
+                    item?.is_published && (
+                      <h5
+                        key={index + "product"}
+                        className={`leading-[2em] hover:text-text hover:bg-d49ac81 py-2 px-4 ${
+                          pathname == `/products/${item?.slug}/`
+                            ? "text-text bg-d49ac81"
+                            : ""
+                        }`}
+                        onClick={() =>
+                          handleMoveRoute(`/products/${item?.slug}/`)
+                        }
+                      >
+                        {item?.name}
+                      </h5>
+                    )
+                )}
               </div>
             </div>
             <h5
