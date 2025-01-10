@@ -37,7 +37,6 @@ const menuItems = [
       { label: "Meru Chikitsa", path: "/therapy/meru-chikitsa" },
       { label: "Marma", path: "/therapy/marma" },
       { label: "Sound Therapy", path: "/therapy/sound-therapy" },
-      { label: "Meru Chikitsa", path: "/therapy/meru-chikitsa" },
       { label: "Sujok & Acupuncture", path: "/therapy/sujok-and-acupuncture" },
       { label: "Osteopathy", path: "/therapy/osteopathy" },
       { label: "Art Therapy", path: "/therapy/art-therapy" },

@@ -4,7 +4,7 @@ const BuyNowBtn = () => {
   return (
     <button
     type="submit"
-    className="site-button-primary rounded w-full lg:w-[350px] h-[58px]"
+    className="site-button-primary rounded w-full max-w-[350px]"
   >
     Buy Now
   </button>
