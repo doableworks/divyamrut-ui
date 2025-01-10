@@ -366,6 +366,7 @@ const Navbar = ({ therapySubmenu, productSubMenu }) => {
                 h={38}
                 w={34}
                 color="#3c3c3d"
+                isUsedForMobile={true}
               />
             </button>
 

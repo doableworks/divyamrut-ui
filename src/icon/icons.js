@@ -593,6 +593,7 @@ export const CartIcon = ({
   w = 18,
   cartItemCount,
   color = "#FFFFFF",
+  isUsedForMobile
 }) => {
   return (
     <svg width={w} height={h} viewBox="0 0 24 24" fill="none">
@@ -606,13 +607,13 @@ export const CartIcon = ({
 
       {cartItemCount && (
         <>
-          <circle cx="13" cy="4" r="6" fill="red" />
+          <circle cx="13" cy="4" r={isUsedForMobile ? "5" :"6"} fill="red" />
           <text
             x="13"
             y="4"
             textAnchor="middle"
             dy=".3em"
-            fontSize="10"
+            fontSize={isUsedForMobile ? '8' : '10'}
             fill="white"
             fontWeight="bold"
           >
