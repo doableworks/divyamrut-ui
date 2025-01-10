@@ -53,7 +53,7 @@ const Product = ({ item, productCategory }) => {
           {item?.currency == "USD" && "$"}&nbsp;{item?.price}
         </p>
       </div>
-      <div className="w-full text-center">
+      <div className="w-full text-center pb-4 px-2">
         <AddToCartBtn cartFun={handleAddItem} />
         {/* <BtnSection
             showAddToCartBtn={true}
