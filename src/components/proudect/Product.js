@@ -13,6 +13,7 @@ import {
   selectItem,
   unSelectItem,
 } from "@/redux/feature/cartSlice";
+import AddToCartBtn from "../BtnCom/AddToCart";
 
 const Product = ({
   title,
@@ -64,30 +65,25 @@ const Product = ({
         />
       )}
       <div className="flex-grow flex flex-col px-6 py-4">
-        <h6 className="section-title !normal-case !text-[1.5rem] !text-left mb-4 hover:!text-[--yellow]">
+        <h6 className="section-title !normal-case !text-[1.5rem] !text-left hover:!text-[--yellow]">
           {title}
         </h6>
-        <p className="section-title !normal-case !text-[1rem] !text-left !text-gray-400">
+        {/* <p className="section-title !normal-case !text-[1rem] !text-left !text-gray-400">
           {description}
-        </p>
-        <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-[black] my-2">
+        </p> */}
+        <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-[black] mt-2">
           {currency == "USD" && "$"}&nbsp;{price}
         </p>
-        <div className="mx-2 w-full">
-          <BtnSection
+      </div>
+      <div className="w-full text-center">
+          <AddToCartBtn />
+          {/* <BtnSection
             showAddToCartBtn={true}
             showBuyBtn={true}
             showBookBtn={false}
             cartFun={handleAddItem}
-          />
+          /> */}
         </div>
-      </div>
-      {/* <div>
-        <div className="border-t-[0.5px] border-q4d462f5 " />
-        <div className="text-sm text-gray-500 px-6 py-4">
-          {date} • {comments}
-        </div>
-      </div> */}
     </div>
   );
 };
