@@ -43,7 +43,7 @@ const Banner = () => {
     <div className="min-h-screen h-screen w-full rounded-br-[10rem] md:rounded-br-[12rem] overflow-hidden">
       <div className="lg:grid grid-cols-2 flex flex-col-reverse h-full">
         {/* left section */}
-        <div className="flex justify-center items-center lg:block relative bg-q45B29D h-full pl-10 lg:pl-32 pr-5 md:pr-24">
+        <div className="flex justify-center items-center lg:block relative bg-AA218C h-full pl-10 lg:pl-32 pr-5 md:pr-24">
           <div className="absolute bg-cover bg-center lg:bg-left lg:relative top-0 lg:top-[18%] lg:left-[-2.5rem] md:left-0  w-screen lg:bg-contain h-full lg:h-[65%]  opacity-10 bg-[url('/asset/home/banner-left.png')] bg-no-repeat" />
 
           <div className="lg:absolute lg:top-[20%] text-left space-y-6 fade-up pr-10 ">

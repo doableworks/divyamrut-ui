@@ -12,7 +12,7 @@ const offers = [
     name: "Consultations",
     location: "Jakarta",
     image:
-      "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+      "/asset/home/ayurvedic-supplement.jpg",
     rating: 4,
     feedback:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
@@ -21,7 +21,7 @@ const offers = [
     name: "Detoxification",
     location: "Bandung",
     image:
-      "/asset/home/caucasian-woman-having-ayurveda-shirodhara-treatment-in-india.jpg",
+      "/asset/home/ayurvedic-supplement.jpg",
     rating: 4,
     feedback:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
@@ -29,7 +29,7 @@ const offers = [
   {
     name: "SpaTreatments",
     location: "Bali",
-    image: "/asset/home/spa-treatment.jpg",
+    image: "/asset/home/ayurvedic-supplement.jpg",
     rating: 5,
     feedback:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
@@ -37,7 +37,7 @@ const offers = [
   {
     name: "BeautyCare",
     location: "Bandung",
-    image: "/asset/home/multiethnic-women.jpg",
+    image: "/asset/home/ayurvedic-supplement.jpg",
     rating: 4,
     feedback:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
@@ -53,7 +53,7 @@ const offers = [
   {
     name: "Workshops",
     location: "Bandung",
-    image: "/asset/home/yoga-coach-training-session-.jpg",
+    image: "/asset/home/ayurvedic-supplement.jpg",
     rating: 4,
     feedback:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",

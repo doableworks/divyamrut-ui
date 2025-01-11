@@ -45,7 +45,7 @@ const WhyChooseUs = () => {
           backgroundImage: "url('/asset/home/powder-spices-and-herbs.jpg')",
         }}
       >
-        <div className="bg-[rgba(0,0,0,.4)] w-full  text-white">
+        <div className="bg-[rgba(0,0,0,.4)] w-full text-white">
           <div className="relative z-20 mx-auto flex flex-col items-center justify-center w-[90%] md:w-[85%] xl:w-full py-32">
             <div className="fade-up max-w-xl">
               <h6 className="font-jost text-text text-[14px] font-[500] leading-[1.4em] uppercase text-center">
@@ -84,7 +84,7 @@ const WhyChooseUs = () => {
           </div>
         </div>
       </div>
-      <div className="bg-q45B29D p-4">
+      <div className="bg-AA218C p-4">
         <div className="grid [@media(max-width:319.98px)]:grid-cols-1 grid-cols-2 md:grid-cols-4 items-center gap-8 text-center  text-white">
           <div >
             <CountUpCom id="product" end={47} suffix="K+" />

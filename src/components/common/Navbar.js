@@ -50,8 +50,6 @@ const Navbar = ({ therapySubmenu, productSubMenu }) => {
 
   const isMobileNavOpen = useSelector((state) => state.mobileNav.isOpen);
 
-  console.log("therapySubmenu 444", therapySubmenu)
-
   const menuItems = initialMenuItems.map((each) => {
     switch (each.label) {
       case "Therapies":

@@ -30,7 +30,8 @@ const config: Config = {
         AA218C : "var(--e-global-color-AA218C)",
         q45B29D :"var(--e-global-color-45B29D)",
         E0A43B :"var(--e-global-color-E0A43B)",
-        q3c3c3d :"var(--e-global-color-3c3c3d)",
+        // q3c3c3d :"var(--e-global-color-3c3c3d)",
+        q3c3c3d :"var(--e-global-color-f83c760)"
 
       },
       backgroundImage: {
