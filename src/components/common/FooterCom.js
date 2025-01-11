@@ -31,20 +31,20 @@ export default function FooterCom() {
 
   return (
     <>
-      <footer className="bg-[#4A5C24] bg-q45B29D text-white">
+      <footer className="bg-AA218C text-white">
         <div className="container mx-auto w-[85%] pt-20">
           {/* <div className="px-4 grid grid-cols-1 md:grid-cols-4 gap-8"> */}
           {/* Logo and Description */}
           <div className="flex flex-col lg:flex-row justify-between gap-10 pb-16">
             <div className="w-full lg:w-[30%]">
               <div className="max-w-xl text-center m-auto">
-                <Image
+                {/* <Image
                   src="/asset/divyamrut_transparent_logo.webp"
                   alt="Divyamrut Logo"
                   width={100}
                   height={100}
                   className="m-auto lg:m-0 h-[120px] w-[160px]"
-                />
+                /> */}
 
                 {/* <h2 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF]">
                   Divyamrut
@@ -62,7 +62,7 @@ export default function FooterCom() {
                 <h4 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF] mb-2">
                   Get in Touch
                 </h4>
-                <hr className="border-t-[5px] border-dotted border-[#6E9039] my-6" />
+                <hr className="border-t-[5px] border-dotted border-E0A43B my-6" />
                 <p className="font-jost text-[14px] font-[500]  text-left text-[#99C24A] text-text uppercase">
                   Customer Support
                 </p>
@@ -76,7 +76,7 @@ export default function FooterCom() {
                 <h4 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF] mb-2">
                   Email Support
                 </h4>
-                <hr className="border-t-[5px] border-dotted border-[#6E9039] my-6" />
+                <hr className="border-t-[5px] border-dotted border-E0A43B my-6" />
                 <p className="font-jost text-[14px] font-[500]  text-left text-[#99C24A] text-text uppercase">
                   Send Us a Ticket
                 </p>
@@ -90,7 +90,7 @@ export default function FooterCom() {
                 <h4 className="font-suranna text-[28px] font-[400] leading-[1.3em] text-left text-[#FFFFFF] mb-2">
                   Head Office
                 </h4>
-                <hr className="border-t-[5px] border-dotted border-[#6E9039] my-6" />
+                <hr className="border-t-[5px] border-dotted border-E0A43B my-6" />
                 <p className="font-jost text-[14px] font-[500]  text-left text-[#99C24A] text-text uppercase">
                   Visit Us
                 </p>

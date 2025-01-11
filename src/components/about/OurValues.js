@@ -105,7 +105,7 @@ const OurValues = () => {
             <div
               className="flex-grow middle-section-ov relative w-full md:w-[30%] h-full bg-cover bg-center md:bg-center  mr-5 md:mr-0 transition-all duration-1000 min-h-[350px] md:min-h-[530px]"
               style={{
-                backgroundImage: `url("/asset/home/multiethnic-women.jpg")`,
+                backgroundImage: `url("/asset/home/ayurvedic-supplement.jpg")`,
               }}
             >
               <Image

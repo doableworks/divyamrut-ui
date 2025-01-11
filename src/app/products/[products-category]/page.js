@@ -5,8 +5,7 @@ import Product from "@/components/proudect/Product";
 const getCategoryProducts = async (params) => {
   try {
     const res = await fetch(
-      process.env.API_URL +
-        `product/products/?category=${params}`
+      process.env.API_URL + `product/products/?category=${params}`
     );
     if (res.status == 200) {
       const data = await res.json();
@@ -23,8 +22,22 @@ const getCategoryProducts = async (params) => {
 const page = async ({ params }) => {
   // const heading = params["product-categ"];
   // const subHeading = "Products";
-  const products = await getCategoryProducts(params["products-category"]);
+  // const products = await getCategoryProducts(params["products-category"]);
 
+  const products = [
+    {
+      title:
+        "Natural Health Supplements",
+      slug: "product-massage-kit",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+      date: "August 6, 2024",
+      price:"10.00",
+      currency:"USD",
+      image:
+        "/asset/home/natural-health-support.jpg",
+    },
+  ];
 
   return (
     <>
