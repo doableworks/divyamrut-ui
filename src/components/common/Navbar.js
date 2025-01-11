@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -38,6 +37,8 @@ const initialMenuItems = [
   { label: "Contact Us", path: "/contact-us" },
 ];
 
+
+
 const Navbar = ({ therapySubmenu, productSubMenu }) => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -48,6 +49,8 @@ const Navbar = ({ therapySubmenu, productSubMenu }) => {
   const { data: session } = useSession();
 
   const isMobileNavOpen = useSelector((state) => state.mobileNav.isOpen);
+
+  console.log("therapySubmenu 444", therapySubmenu)
 
   const menuItems = initialMenuItems.map((each) => {
     switch (each.label) {
@@ -123,8 +126,8 @@ const Navbar = ({ therapySubmenu, productSubMenu }) => {
     <>
       {contextHolder}
       <header
-        className={`absolute z-30 w-full shadow ${
-          false
+        className={`relative z-30 w-full shadow ${
+          true
             ? "backdrop-blur bg-gradient-to-r from-slate-50 via-gray-400 to-transparent"
             : "bg-transparent"
         }`}

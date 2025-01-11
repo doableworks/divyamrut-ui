@@ -27,61 +27,61 @@ const features = [
 ];
 
 const OurValues = () => {
-  useGSAP(() => {
-    gsap.fromTo(
-      ".left-section-ov",
-      { opacity: 0, x: -300 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 0.5,
-        delay: 0.2,
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: "#OurValues",
-          start: "top 80%",
-          end: "bottom 20%",
-          // scrub: true,
-        },
-      }
-    );
+  // useGSAP(() => {
+  //   gsap.fromTo(
+  //     ".left-section-ov",
+  //     { opacity: 0, x: -300 },
+  //     {
+  //       x: 0,
+  //       opacity: 1,
+  //       duration: 0.5,
+  //       delay: 0.2,
+  //       stagger: 0.2,
+  //       scrollTrigger: {
+  //         trigger: "#OurValues",
+  //         start: "top 80%",
+  //         end: "bottom 20%",
+  //         // scrub: true,
+  //       },
+  //     }
+  //   );
 
-    gsap.fromTo(
-      ".middle-section-ov",
-      { opacity: 0, x: 300 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 0.5,
-        delay: 0.2,
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: "#OurValues",
-          start: "top 80%",
-          end: "bottom 20%",
-          // scrub: true,
-        },
-      }
-    );
+  //   gsap.fromTo(
+  //     ".middle-section-ov",
+  //     { opacity: 0, x: 300 },
+  //     {
+  //       x: 0,
+  //       opacity: 1,
+  //       duration: 0.5,
+  //       delay: 0.2,
+  //       stagger: 0.2,
+  //       scrollTrigger: {
+  //         trigger: "#OurValues",
+  //         start: "top 80%",
+  //         end: "bottom 20%",
+  //         // scrub: true,
+  //       },
+  //     }
+  //   );
 
-    gsap.fromTo(
-      ".right-section-ov",
-      { opacity: 0, x: 300 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 1,
-        delay: 0.5,
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: "#OurValues",
-          start: "top 80%",
-          end: "bottom 20%",
-          // scrub: true,
-        },
-      }
-    );
-  }, []);
+  //   gsap.fromTo(
+  //     ".right-section-ov",
+  //     { opacity: 0, x: 300 },
+  //     {
+  //       x: 0,
+  //       opacity: 1,
+  //       duration: 1,
+  //       delay: 0.5,
+  //       stagger: 0.2,
+  //       scrollTrigger: {
+  //         trigger: "#OurValues",
+  //         start: "top 80%",
+  //         end: "bottom 20%",
+  //         // scrub: true,
+  //       },
+  //     }
+  //   );
+  // }, []);
 
   return (
     <section id="OurValues" className="relative bg-text overflow-hidden">

@@ -67,13 +67,13 @@ const MainBanner2 = ({ heading, subHeading, date, comment, mainType }) => {
 
   return (
     <section
-      className="mainBanner2 relative bg-cover bg-center min-h-[250px] md:min-h-[500px] w-[100%] overflow-hidden"
+      className="mainBanner2 relative bg-cover bg-center min-h-[250px] md:max-h-[500px] w-[100%] overflow-hidden"
       style={{
         backgroundImage: "url('/asset/home/natural-health-support.jpg')",
       }}
     >
       <div className="bg-[rgba(0,0,0,.4)] min-h-[250px] md:min-h-[500px] h-full w-full flex items-center justify-start text-white">
-        <div className="relative mx-auto z-20 w-[90%] md:w-[85%] pb-12 pt-48 md:pb-32 md:pt-80">
+        <div className="relative mx-auto z-20 w-[90%] md:w-[85%] pb-12 pt-48 md:pb-48">
           <h3 className="section-title !text-left !text-white">{mainType}</h3>
           <h2 className="highlight-heading !text-left !text-white">
             {heading}
