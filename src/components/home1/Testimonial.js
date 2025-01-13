@@ -7,6 +7,7 @@ import { DoubleComma, Star } from "@/icon/icons";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { twMerge } from "tailwind-merge";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,7 +38,7 @@ const testimonials = [
   },
 ];
 
-const TestimonialSlider = () => {
+const TestimonialSlider = ({ className }) => {
   useEffect(() => {
     gsap.fromTo(
       ".fade-up",
@@ -89,7 +90,10 @@ const TestimonialSlider = () => {
   return (
     <div
       id="testimonials"
-      className="w-full relative overflow-hidden bg-FFEEE2"
+      className={twMerge(
+        "w-full relative overflow-hidden bg-FFEEE2",
+        className
+      )}
     >
       <Image
         className="absolute z-10 top-[40%] left-0"
@@ -106,14 +110,10 @@ const TestimonialSlider = () => {
         alt="img"
       />
 
-      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] xl:w-full py-32">
-        <div className="fade-up">
-          <h6 className="section-title">
-            Testimonial
-          </h6>
-          <h2 className="highlight-heading">
-            Customer Feedback & Reviews
-          </h2>
+      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-14 md:py-32">
+        <div>
+          <h6 className="section-title">Testimonial</h6>
+          <h2 className="highlight-heading">Customer Feedback & Reviews</h2>
           <div className="flex gap-4 justify-center mb-10">
             <Star h={25} w={25} fill={"#f0ad4e"} />
             <Star h={25} w={25} fill={"#f0ad4e"} />
@@ -123,10 +123,10 @@ const TestimonialSlider = () => {
           </div>
         </div>
 
-        <Slider {...settings} >
+        <Slider {...settings}>
           {testimonials.map((testimonial, index) => (
-            <li className=" p-4" key={index}>
-              <div className="relative testimonial-card bg-[#F9F3EB] shadow-lg p-6 rounded-lg w-full py-10 pb-20">
+            <li className="flex p-4 overflow-hidden " key={index}>
+              <div className="relative min-h-full testimonial-card bg-[#F9F3EB] shadow-lg p-6 rounded-lg w-full py-10 pb-20">
                 <div className="absolute top-0 right-0 bg-E0A43B p-6  rounded-bl-[10rem]">
                   <DoubleComma fill={"#FFFFFF"} h={30} w={30} />
                 </div>
@@ -147,7 +147,7 @@ const TestimonialSlider = () => {
                     </p>
                   </div>
                 </div>
-                <p className="section-content">
+                <p className="section-content h-[100px] overflow-hidden">
                   {testimonial.feedback}
                 </p>
               </div>

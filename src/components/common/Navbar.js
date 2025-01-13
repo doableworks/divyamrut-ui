@@ -39,7 +39,7 @@ const initialMenuItems = [
 
 
 
-const Navbar = ({ therapySubmenu, productSubMenu }) => {
+const Navbar = ({ therapySubmenu, productSubMenu, isScrolled }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const pathname = usePathname();
@@ -124,10 +124,10 @@ const Navbar = ({ therapySubmenu, productSubMenu }) => {
     <>
       {contextHolder}
       <header
-        className={`relative z-30 w-full shadow ${
-          true
-            ? "backdrop-blur bg-gradient-to-r from-slate-50 via-gray-400 to-transparent"
-            : "bg-transparent"
+        className={`z-30 w-full shadow backdrop-blur bg-gradient-to-r from-slate-50 via-gray-400 to-[#ffffff82] ${
+          isScrolled
+            ? "fixed top-0"
+            : ""
         }`}
       >
         <div className="bg-transparent w-[98%] mx-auto flex items-center justify-between">

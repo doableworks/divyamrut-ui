@@ -82,7 +82,7 @@ const OurServices = () => {
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-32">
         <div className="flex flex-col md:flex-row justify-between gap-x-24 gap-y-5 ">
           <div className="w-full md:w-[65%] py-[1.5rem] md:py-[5.5rem]">
-            <h6 className="font-jost text-d49ac81 text-[14px] font-[500] leading-[1.4em] uppercase text-left mb-5">
+            <h6 className="section-title">
               Our Services
             </h6>
             <h2 className="font-suranna text-[50px] font-[400] leading-[1.3em] text-secondary text-left mb-6">

@@ -22,6 +22,7 @@ export const LayoutSection = ({
         <Navbar
           therapySubmenu={therapySubmenu}
           productSubMenu={productSubMenu}
+          isScrolled={true}
         />
 
         <div className="flex-grow">{children}</div>

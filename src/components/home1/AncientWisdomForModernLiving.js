@@ -102,7 +102,7 @@ const AncientWisdomForModernLiving = () => {
             </div>
           </div>
           <div className="right-section-awf py-[1.5rem] md:py-[5.5rem]">
-            <h2 className="font-suranna font-[400] text-E0A43B text-left mb-[1rem] text-[32px] leading-[36px] md:text-[3em] md:leading-[1.3em]">
+            <h2 className="highlight-heading !text-left">
               Ancient Wisdom for Modern Living.
             </h2>
             <p className="font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-left">
