@@ -75,7 +75,7 @@ const AncientWisdomForModernLiving = () => {
         <div className="relative grid grid-cols-1 md:grid-cols-2 items-center gap-x-24 gap-y-5 ">
           <div className="left-section-awf h-full bg-cover bg-center transition-all duration-1000 min-h-[250px]"
             style={{
-              backgroundImage: `url("/asset/home/yoga-coach-training-session-.jpg")`,
+              backgroundImage: `url("/asset/home/ayurvedic-supplement.jpg")`,
             }}
           >
             <div className="left-card-awf absolute top-[20px] left-[20px] flex flex-col items-center justify-center bg-text">
