@@ -15,7 +15,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "Top Ayurvedic Herbs for Enhanced Immunity and Well-being",
@@ -25,7 +25,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title:
@@ -36,7 +36,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "How PranaVeda Helps You Achieve Holistic Health and Vitality",
@@ -46,7 +46,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "10 Ayurvedic Practices to Boost Your Daily Wellness Routine",
@@ -56,7 +56,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title:
@@ -67,7 +67,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
     ],
   },
@@ -83,7 +83,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "Top Ayurvedic Herbs for Enhanced Immunity and Well-being",
@@ -93,7 +93,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title:
@@ -104,7 +104,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "How PranaVeda Helps You Achieve Holistic Health and Vitality",
@@ -114,7 +114,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "10 Ayurvedic Practices to Boost Your Daily Wellness Routine",
@@ -124,7 +124,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title:
@@ -135,7 +135,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
     ],
   },
@@ -152,7 +152,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "Top Ayurvedic Herbs for Enhanced Immunity and Well-being",
@@ -162,7 +162,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title:
@@ -173,7 +173,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "How PranaVeda Helps You Achieve Holistic Health and Vitality",
@@ -183,7 +183,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "10 Ayurvedic Practices to Boost Your Daily Wellness Routine",
@@ -193,7 +193,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title:
@@ -204,7 +204,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
     ],
   },
@@ -220,7 +220,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "Top Ayurvedic Herbs for Enhanced Immunity and Well-being",
@@ -230,7 +230,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title:
@@ -241,7 +241,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "How PranaVeda Helps You Achieve Holistic Health and Vitality",
@@ -251,7 +251,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "10 Ayurvedic Practices to Boost Your Daily Wellness Routine",
@@ -261,7 +261,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title:
@@ -272,7 +272,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
     ],
   },
@@ -288,7 +288,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "Top Ayurvedic Herbs for Enhanced Immunity and Well-being",
@@ -298,7 +298,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title:
@@ -309,7 +309,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "How PranaVeda Helps You Achieve Holistic Health and Vitality",
@@ -319,7 +319,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "10 Ayurvedic Practices to Boost Your Daily Wellness Routine",
@@ -329,7 +329,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title:
@@ -340,7 +340,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
     ],
   },
@@ -356,7 +356,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "Top Ayurvedic Herbs for Enhanced Immunity and Well-being",
@@ -366,7 +366,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title:
@@ -377,7 +377,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "How PranaVeda Helps You Achieve Holistic Health and Vitality",
@@ -387,7 +387,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title: "10 Ayurvedic Practices to Boost Your Daily Wellness Routine",
@@ -397,7 +397,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
       {
         title:
@@ -408,7 +408,7 @@ const categories = [
         date: "August 6, 2024",
         comments: "No Comments",
         image:
-          "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
+          "/asset/home/ayurvedic-supplement.jpg",
       },
     ],
   },

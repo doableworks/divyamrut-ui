@@ -2,13 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import PlayIcon from "./PlayIcon";
 
-
 const images = [
-  // "/asset/home/ayurvedic-facial-massage.jpg",
-  "/asset/home/caucasian-woman-having-ayurveda-shirodhara-treatment-in-india.jpg",
-  "/asset/home/remotely-work-freelancer-works-remotely-home-cozy-workation-remote-work-leisure-work-life-balance-.jpg",
-  "/asset/home/turmeric-with-ginger-and-lemon-tea.jpg",
-];
+  "/asset/home/ayurvedic-supplement.jpg",
+  "/asset/home/ayurvedic-supplement.jpg",
+  "/asset/home/ayurvedic-supplement.jpg",
+  "/asset/home/ayurvedic-supplement.jpg",
+]
 
 export default function BackgroundImagesSlider() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
