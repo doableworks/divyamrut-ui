@@ -38,7 +38,7 @@ const testimonials = [
   },
 ];
 
-const TestimonialSlider = ({ className }) => {
+const TestimonialSlider = ({ className = '' }) => {
   useEffect(() => {
     gsap.fromTo(
       ".fade-up",
