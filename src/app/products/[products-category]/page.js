@@ -37,6 +37,78 @@ const page = async ({ params }) => {
       image:
         "/asset/home/natural-health-support.jpg",
     },
+    {
+      title:
+        "Natural Health Supplements",
+      slug: "product-massage-kit",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+      date: "August 6, 2024",
+      price:"10.00",
+      currency:"USD",
+      image:
+        "/asset/home/natural-health-support.jpg",
+    },
+    {
+      title:
+        "Natural Health Supplements",
+      slug: "product-massage-kit",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+      date: "August 6, 2024",
+      price:"10.00",
+      currency:"USD",
+      image:
+        "/asset/home/natural-health-support.jpg",
+    },
+    {
+      title:
+        "Natural Health Supplements",
+      slug: "product-massage-kit",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+      date: "August 6, 2024",
+      price:"10.00",
+      currency:"USD",
+      image:
+        "/asset/home/natural-health-support.jpg",
+    },
+    {
+      title:
+        "Natural Health Supplements",
+      slug: "product-massage-kit",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+      date: "August 6, 2024",
+      price:"10.00",
+      currency:"USD",
+      image:
+        "/asset/home/natural-health-support.jpg",
+    },
+    {
+      title:
+        "Natural Health Supplements",
+      slug: "product-massage-kit",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+      date: "August 6, 2024",
+      price:"10.00",
+      currency:"USD",
+      image:
+        "/asset/home/natural-health-support.jpg",
+    },
+    {
+      title:
+        "Natural Health Supplements",
+      slug: "product-massage-kit",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+      date: "August 6, 2024",
+      price:"10.00",
+      currency:"USD",
+      image:
+        "/asset/home/natural-health-support.jpg",
+    },
   ];
 
   return (
