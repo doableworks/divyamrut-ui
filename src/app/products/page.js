@@ -1,6 +1,11 @@
-import MainBanner from "@/components/common/MainBanner";
+"use client";
+import ProductBanner from "@/components/common/ProductBanner";
 import React from "react";
 import ProductsScroller from "@/components/common/ProductsScroller";
+import Slider from "react-slick";
+import Product from "@/components/proudect/Product";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const categories = [
   {
@@ -418,15 +423,61 @@ const page = () => {
   const heading = "Bath/Aura Cleansing Salt";
   const subHeading = "Trusted by millions, validated by you.";
 
+  var settings = {
+    infinite: true,
+    lazyLoad: true,
+    className: "center",
+    centerMode: true,
+    centerPadding: "0px",
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    dots: false,
+    autoplay: true,
+    speed: 5000,
+    autoplaySpeed: 500,
+    cssEase: "linear",
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1100,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: false,
+          dots: false,
+        },
+      },
+    ],
+  };
+
   return (
-    <>
-      <MainBanner heading={heading} subHeading={subHeading} />
-      <div className=" mx-auto w-[90%] py-10 md:py-20">
-        {categories.map((category, index) => (
-          <ProductsScroller key={index + category.title} category={category} />
-        ))}
+    <div className="mt-[10rem] h-screen">
+      <div className="relative h-1/2">
+        <ProductBanner heading={heading} subHeading={subHeading} />
       </div>
-    </>
+      <div className=" mx-auto w-[90%] py-10 md:py-20">
+        <Slider {...settings} className="custom-slick-slider">
+
+          {categories &&
+            categories?.map((cate, index) => (
+              <div className="slick-slide">
+                <div key={index + cate.title} className="ml-2 rounded-xl bg-text h-32 flex justify-center items-center">
+                  <p>{cate.title}</p>
+                </div>
+              </div>
+            ))}
+        </Slider>
+
+        {/* {categories.map((category, index) => (
+          <ProductsScroller key={index + category.title} category={category} />
+        ))} */}
+      </div>
+      <style jsx global>{`
+        .custom-slick-slider .slick-slide {
+          margin: 0 10px;
+        }
+      `}</style>
+    </div>
   );
 };
 

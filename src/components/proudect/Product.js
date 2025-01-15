@@ -30,7 +30,7 @@ const Product = ({ item, productCategory }) => {
 
   return (
     <div
-      className="relative flex flex-col justify-between bg-[white] shadow-lg w-full cursor-pointer rounded overflow-hidden"
+      className="relative flex flex-col justify-between w-full cursor-pointer rounded overflow-hidden"
       onClick={() => router.push(`/products/${productCategory}/${item?.slug}`)}
     >
       {item?.image && (
