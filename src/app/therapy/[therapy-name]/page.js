@@ -28,7 +28,7 @@ const TherapyName = () => {
           <section className="relative h-[550px]">
             <figure className="relative z-10 flex rounded-tr-full rounded-tl-full overflow-hidden min-h-[500px] border">
               <Image
-                src="/asset/home/ayurvedic-facial-massage.jpg"
+                src="/asset/home/ayurvedic-supplement.jpg"
                 alt="therapy"
                 layout="responsive"
                 width={100}

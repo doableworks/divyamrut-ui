@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Puzzle, Globe, Coffee } from "@/icon/icons";
 import { useGSAP } from "@gsap/react";
+import { SearchOutlined } from "@ant-design/icons";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,6 +24,39 @@ const features = [
     icon: "Coffee",
     title: "Our Motto",
     text: "Auctor elementum etiam congue gravida posuere nostra inceptos scelerisque mus consequat imperdiet.",
+  },
+];
+
+const whyUsArray = [
+  {
+    id: 0,
+    label: <SearchOutlined style={{ fontSize: "20px" }} />,
+    icon: "Addressing the Root Cause",
+  },
+  {
+    id: 1,
+    label: <SearchOutlined style={{ fontSize: "20px" }} />,
+    icon: "Help with a BODY MIND connection",
+  },
+  {
+    id: 2,
+    label: <SearchOutlined style={{ fontSize: "20px" }} />,
+    icon: "Non Invasive | No Medication",
+  },
+  {
+    id: 3,
+    label: <SearchOutlined style={{ fontSize: "20px" }} />,
+    icon: "No side effects",
+  },
+  {
+    id: 4,
+    label: <SearchOutlined style={{ fontSize: "20px" }} />,
+    icon: "Works on the natural ability of the body to Heal",
+  },
+  {
+    id: 5,
+    label: <SearchOutlined style={{ fontSize: "20px" }} />,
+    icon: "The role of Emotions in your healing Journey",
   },
 ];
 
@@ -88,8 +122,8 @@ const OurValues = () => {
       <div className="flex flex-col justify-center items-center w-screen bg-FFEEE2">
         <div class="absolute top-0 w-full bg-contain h-full opacity-5 bg-center bg-[url('/asset/home/banner-left.png')] bg-no-repeat" />
         <div className="z-20 mx-auto w-[90%] xl:w-[85%] py-20 md:py-32">
-          <div className=" flex flex-wrap xl:flex-nowrap gap-x-24 gap-y-10 ">
-            <div className="left-section-ov w-full md:w-[35%]">
+          <div className="grid grid-cols-2 gap-x-24 gap-y-10 ">
+            <div className="left-section-ov w-full">
               <h6 className="section-title !text-left">Our Value</h6>
               <h2 className="!text-left highlight-heading">
                 Teamwork makes the dream work.
@@ -103,7 +137,7 @@ const OurValues = () => {
               <div className="site-button-primary">Learn more</div>
             </div>
             <div
-              className="flex-grow middle-section-ov relative w-full md:w-[30%] h-full bg-cover bg-center md:bg-center  mr-5 md:mr-0 transition-all duration-1000 min-h-[350px] md:min-h-[530px]"
+              className="flex-grow middle-section-ov relative w-full h-full bg-cover bg-center md:bg-center  mr-5 md:mr-0 transition-all duration-1000 min-h-[350px] md:min-h-[530px]"
               style={{
                 backgroundImage: `url("/asset/home/ayurvedic-supplement.jpg")`,
               }}
@@ -116,43 +150,52 @@ const OurValues = () => {
                 width={200}
               />
             </div>
-            <div className="right-section-ov w-full xl:w-[35%] py-[0.5rem] md:py-[2.5rem] flex flex-col md:flex-row xl:flex-col items-center gap-6 md:pt-0">
-              {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className={`flex md:flex-col xl:flex-row items-start justify-between md:justify-start lg:justify-between w-full gap-2 xl:gap-8`}
-                >
-                  <div
-                    className={`mb-4 p-6 ${
-                      index == 1
-                        ? "bg-[--e-global-color-E0A43B]"
-                        : "bg-[--e-global-color-AA218C]"
-                    }`}
-                  >
-                    {feature.icon == "Puzzle" ? (
-                      <Puzzle fill="#FFFFFF" h={35} w={35} />
-                    ) : feature.icon == "Globe" ? (
-                      <Globe fill="#FFFFFF" h={35} w={35} />
-                    ) : (
-                      <Coffee fill="#FFFFFF" h={35} w={35} />
-                    )}
-                  </div>
-                  <div>
-                    <h3
-                      className={`font-suranna text-[22px] md:text-[28px] font-[400] leading-[1.3em] text-secondary mb-2`}
-                    >
-                      {feature.title}
-                    </h3>
-                    <p
-                      className={`font-jost text-[14px] md:text-[18px] font-[400] text-left text-primary`}
-                    >
-                      {feature.text}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
+          <div className="right-section-ov w-full py-[3rem] md:py-[5.5rem] flex flex-col md:flex-row items-center gap-6 ">
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className={`flex md:flex-col xl:flex-row items-start justify-between md:justify-start lg:justify-between w-full gap-2 xl:gap-8`}
+              >
+                <div
+                  className={`mb-4 p-6 ${
+                    index == 1
+                      ? "bg-[--e-global-color-E0A43B]"
+                      : "bg-[--e-global-color-AA218C]"
+                  }`}
+                >
+                  {feature.icon == "Puzzle" ? (
+                    <Puzzle fill="#FFFFFF" h={35} w={35} />
+                  ) : feature.icon == "Globe" ? (
+                    <Globe fill="#FFFFFF" h={35} w={35} />
+                  ) : (
+                    <Coffee fill="#FFFFFF" h={35} w={35} />
+                  )}
+                </div>
+                <div>
+                  <h3
+                    className={`font-suranna text-[22px] md:text-[28px] font-[400] leading-[1.3em] text-secondary mb-2`}
+                  >
+                    {feature.title}
+                  </h3>
+                  <p
+                    className={`font-jost text-[14px] md:text-[18px] font-[400] text-left text-primary`}
+                  >
+                    {feature.text}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="bg-white py-[3rem] px-5 md:px-10 md:py-[5.5rem] w-full">
+          <p className="section-heading !text-[--voilet] font-bold !text-center text-2xl">
+            WHY US?
+          </p>
+
+          <figure>
+            <SearchOutlined />
+          </figure>
         </div>
       </div>
     </section>
