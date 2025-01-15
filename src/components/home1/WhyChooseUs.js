@@ -84,7 +84,7 @@ const WhyChooseUs = () => {
           </div>
         </div>
       </div>
-      <div className="bg-AA218C p-4">
+      <div className="bg-[--yellow] p-4">
         <div className="grid [@media(max-width:319.98px)]:grid-cols-1 grid-cols-2 md:grid-cols-4 items-center gap-8 text-center  text-white">
           <div >
             <CountUpCom id="product" end={47} suffix="K+" />

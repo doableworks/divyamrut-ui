@@ -9,54 +9,46 @@ gsap.registerPlugin(ScrollTrigger);
 
 const offers = [
   {
-    name: "Consultations",
-    location: "Jakarta",
-    image:
-      "/asset/home/ayurvedic-supplement.jpg",
+    name: "",
+    location: "",
+    image: "",
     rating: 4,
-    feedback:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
+    feedback: "",
   },
   {
-    name: "Detoxification",
-    location: "Bandung",
-    image:
-      "/asset/home/ayurvedic-supplement.jpg",
+    name: "",
+    location: "",
+    image: "",
     rating: 4,
-    feedback:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
+    feedback: "",
   },
   {
-    name: "SpaTreatments",
-    location: "Bali",
-    image: "/asset/home/ayurvedic-supplement.jpg",
-    rating: 5,
-    feedback:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
-  },
-  {
-    name: "BeautyCare",
-    location: "Bandung",
-    image: "/asset/home/ayurvedic-supplement.jpg",
+    name: "",
+    location: "",
+    image: "",
     rating: 4,
-    feedback:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
+    feedback: "",
   },
   {
-    name: "Nutrition",
-    location: "Bali",
-    image: "/asset/home/ayurvedic-supplement.jpg",
-    rating: 5,
-    feedback:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
-  },
-  {
-    name: "Workshops",
-    location: "Bandung",
-    image: "/asset/home/ayurvedic-supplement.jpg",
+    name: "",
+    location: "",
+    image: "",
     rating: 4,
-    feedback:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
+    feedback: "",
+  },
+  {
+    name: "",
+    location: "",
+    image: "",
+    rating: 4,
+    feedback: "",
+  },
+  {
+    name: "",
+    location: "",
+    image: "",
+    rating: 4,
+    feedback: "",
   },
 ];
 
@@ -101,13 +93,13 @@ const WhatWeOffer = () => {
 
   return (
     <div id="WhatWeOffer" className="w-full relative bg-FFEEE2 overflow-hidden">
-      <Image
+      {/* <Image
         className="absolute z-10 top-0 left-0 w-[150px] md:w-[200px] [@media(max-width:299.98px)]:w-[118px]"
         height={200}
         width={200}
         src={"/asset/home/img1.png"}
         alt="img"
-      />
+      /> */}
 
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] xl:w-full py-32">
         <div className="fade-up flex flex-col justify-center items-center">
@@ -120,22 +112,19 @@ const WhatWeOffer = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6 m-auto">
           {offers.map((testimonial, index) => (
-            <div
-              key={index}
-              className="relative bg-[white] shadow-lg w-full"
-            >
+            <div key={index} className="relative bg-[white] shadow-lg w-full">
               <div className="flex gap-2 justify-between overflow-hidden">
                 <strong className=" ml-6 mt-6 font-suranna text-[28px] font-[400] leading-[1.4em] text-E0A43B">
                   {testimonial.name}
                 </strong>
-                <Image
+                {/* <Image
                   src={testimonial.image}
                   width={180}
                   height={150}
                   alt={testimonial.name}
                   className="rounded-bl-[4rem] max-w-[180px]"
                   objectFit="cover"
-                />
+                /> */}
               </div>
               <div className="py-4 px-6">
                 <p className="font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-start">
@@ -143,9 +132,7 @@ const WhatWeOffer = () => {
                 </p>
 
                 <div className="border-t-[0.5px] border-q4d462f5 mt-10" />
-                <div className="site-button-primary">
-                  Learn more
-                </div>
+                <div className="site-button-primary">Learn more</div>
               </div>
             </div>
           ))}

@@ -45,6 +45,7 @@ const MobileNavbar = ({
 
   return (
     <Drawer
+    placement="left"
       open={isMobileNavOpen}
       closable={false}
       title={
