@@ -30,13 +30,13 @@ const Product = ({ item, productCategory }) => {
 
   return (
     <div
-      className="relative flex flex-col justify-between bg-[white] shadow-lg w-full cursor-pointer rounded overflow-hidden"
+      className="relative flex flex-col justify-between w-full cursor-pointer rounded overflow-hidden"
       onClick={() => router.push(`/products/${productCategory}/${item?.slug}`)}
     >
       {item?.image && (
         <Image
           src={item?.image}
-          width={180}
+          width={200}
           height={200}
           className="w-full h-[200px]"
           alt="img"
@@ -53,7 +53,7 @@ const Product = ({ item, productCategory }) => {
           {item?.currency == "USD" && "$"}&nbsp;{item?.price}
         </p>
       </div>
-      <div className="w-full text-center pb-4 px-2">
+      <div className="w-full text-center pb-4">
         <AddToCartBtn cartFun={handleAddItem} />
         {/* <BtnSection
             showAddToCartBtn={true}

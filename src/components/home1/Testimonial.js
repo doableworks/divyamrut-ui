@@ -13,32 +13,29 @@ gsap.registerPlugin(ScrollTrigger);
 
 const testimonials = [
   {
-    name: "Sarah Johnson",
-    location: "Jakarta",
-    image: "/asset/testimonial/Sarah.jpg",
+    name: "",
+    location: "",
+    image: "",
     rating: 4,
-    feedback:
-      "PranaVeda has transformed my life! The personalized Ayurvedic plan has helped me achieve a level of balance and wellness I never thought possible.",
+    feedback: "",
   },
   {
-    name: "Michael Brown",
-    location: "Bandung",
-    image: "/asset/testimonial/Michael.jpg",
+    name: "",
+    location: "",
+    image: "",
     rating: 4,
-    feedback:
-      "I’ve tried many wellness programs, but PranaVeda stands out. The natural remedies and expert guidance have truly improved my overall health.",
+    feedback: "",
   },
   {
-    name: "Emily Davis",
-    location: "Bali",
-    image: "/asset/testimonial/Emily.jpg",
-    rating: 5,
-    feedback:
-      "PranaVeda's Ayurvedic treatments have been a game-changer for me. The stress management techniques have made a huge difference in my daily life.",
+    name: "",
+    location: "",
+    image: "",
+    rating: 4,
+    feedback: "",
   },
 ];
 
-const TestimonialSlider = ({ className = '' }) => {
+const TestimonialSlider = ({ className = "" }) => {
   useEffect(() => {
     gsap.fromTo(
       ".fade-up",
@@ -95,7 +92,7 @@ const TestimonialSlider = ({ className = '' }) => {
         className
       )}
     >
-      <Image
+      {/* <Image
         className="absolute z-10 top-[40%] left-0"
         height={200}
         width={200}
@@ -108,7 +105,7 @@ const TestimonialSlider = ({ className = '' }) => {
         width={200}
         src={"/asset/home/img_5.png"}
         alt="img"
-      />
+      /> */}
 
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-14 md:py-32">
         <div>
@@ -127,17 +124,17 @@ const TestimonialSlider = ({ className = '' }) => {
           {testimonials.map((testimonial, index) => (
             <li className="flex p-4 overflow-hidden " key={index}>
               <div className="relative min-h-full testimonial-card bg-[#F9F3EB] shadow-lg p-6 rounded-lg w-full py-10 pb-20">
-                <div className="absolute top-0 right-0 bg-E0A43B p-6  rounded-bl-[10rem]">
+                {/* <div className="absolute top-0 right-0 bg-E0A43B p-6  rounded-bl-[10rem]">
                   <DoubleComma fill={"#FFFFFF"} h={30} w={30} />
-                </div>
+                </div> */}
                 <div className="flex flex-col justify-center items-center gap-4 mb-16">
-                  <Image
+                  {/* <Image
                     src={testimonial.image}
                     alt={testimonial.name}
                     width={80}
                     height={80}
                     className="rounded-full object-cover"
-                  />
+                  /> */}
                   <div className="text-center">
                     <strong className="font-suranna text-[21px] font-[400] leading-[1.4em] text-E0A43B">
                       {testimonial.name}

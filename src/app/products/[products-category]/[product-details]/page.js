@@ -56,7 +56,7 @@ const page = () => {
   return (
     <div>
       {/* <MainBanner2 heading={heading} subHeading={subHeading} date={date} comment={comment} mainType={mainType} /> */}
-      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-20 md:py-32">
+      <div className="mt-[10rem] relative z-20 mx-auto w-[90%] md:w-[85%] py-20 md:py-32">
         <div>
           {/* Main Content */}
           <ProductDetail />

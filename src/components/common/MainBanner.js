@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import React, { useEffect } from "react";
 import { gsap } from "gsap";
 
-const MainBanner = ({heading, subHeading}) => {
+const MainBanner = ({ heading, subHeading }) => {
   useEffect(() => {
     gsap.fromTo(
       ".fade-up",
@@ -50,10 +50,8 @@ const MainBanner = ({heading, subHeading}) => {
     >
       <div className="bg-[rgba(0,0,0,.4)] min-h-[250px] md:min-h-[500px] h-full w-full flex items-center justify-center text-white">
         <div className="relative z-20 mx-auto w-[90%] md:w-[85%] pb-12 pt-48   md:pb-40">
-          <h2 className="fade-up font-suranna text-[27px] md:text-[50px] font-[400] leading-[1.3em] text-text text-center mb-4 capitalize">
-            {heading}
-          </h2>
-          <h3 className="fade-down font-suranna text-[18px] md:text-[28px] font-[400] leading-[1.3em] text-text text-center mb-6 capitalize">
+          <h2 className="fade-up highlight-heading !text-white !mb-0">{heading}</h2>
+          <h3 className="fade-down highlight-heading !text-white !text-[1.5rem] !mt-0">
             {subHeading}
           </h3>
         </div>
