@@ -145,7 +145,6 @@ export default function PremiumNavbar({
                   className="cursor-pointer"
                 />
               </button>
-              <li className="navbar-li">Stores</li>
             </div>
 
             {isMobileNavOpen ? (
@@ -263,9 +262,8 @@ export default function PremiumNavbar({
                   {isSubMenu.subMenu.map(
                     (sub, index) =>
                       sub.is_published && (
-                        <Link href={`${isSubMenu.parentSlug}/${sub.slug}/`}>
+                        <Link href={`${isSubMenu.parentSlug}/${sub.slug}/`} key={index}>
                           <li
-                            key={index}
                             className="navbar-li hover:text-[--voilet]"
                           >
                             {sub.name}
