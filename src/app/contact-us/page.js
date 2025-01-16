@@ -9,7 +9,7 @@ const page = () => {
 
   return (
     <>
-    <MainBanner heading={heading} subHeading={subHeading} />
+    {/* <MainBanner heading={heading} subHeading={subHeading} /> */}
     <AboutForm />
     <GoogleMapCom />
     </>

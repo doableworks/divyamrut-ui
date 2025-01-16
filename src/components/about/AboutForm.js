@@ -29,50 +29,50 @@ const features = [
 ];
 
 const AboutForm = () => {
-  useEffect(() => {
-    gsap.fromTo(
-      ".left-section",
-      { opacity: 0, x: -1000 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 1,
-        delay: 0.5,
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: "#AboutForm",
-          start: "top 80%",
-          end: "bottom 20%",
-          // scrub: true,
-        },
-      }
-    );
+  // useEffect(() => {
+  //   gsap.fromTo(
+  //     ".left-section",
+  //     { opacity: 0, x: -1000 },
+  //     {
+  //       x: 0,
+  //       opacity: 1,
+  //       duration: 1,
+  //       delay: 0.5,
+  //       stagger: 0.2,
+  //       scrollTrigger: {
+  //         trigger: "#AboutForm",
+  //         start: "top 80%",
+  //         end: "bottom 20%",
+  //         // scrub: true,
+  //       },
+  //     }
+  //   );
 
-    gsap.fromTo(
-      ".right-section",
-      { opacity: 0, x: 1000 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 1,
-        delay: 0.5,
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: "#AboutForm",
-          start: "top 80%",
-          end: "bottom 20%",
-          // scrub: true,
-        },
-      }
-    );
-  }, []);
+  //   gsap.fromTo(
+  //     ".right-section",
+  //     { opacity: 0, x: 1000 },
+  //     {
+  //       x: 0,
+  //       opacity: 1,
+  //       duration: 1,
+  //       delay: 0.5,
+  //       stagger: 0.2,
+  //       scrollTrigger: {
+  //         trigger: "#AboutForm",
+  //         start: "top 80%",
+  //         end: "bottom 20%",
+  //         // scrub: true,
+  //       },
+  //     }
+  //   );
+  // }, []);
 
   return (
     <div
       id="AboutForm"
       className="w-full relative bg-FFEEE2 overflow-hidden"
     >
-      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-32">
+      <div className="common_page_width">
         <div className="flex flex-col md:flex-row justify-between gap-x-24 gap-y-5 ">
           <div className="left-section w-full md:w-[35%]">  
             <h6 className="font-jost text-d49ac81 text-[14px] font-[500] leading-[1.4em] uppercase text-left mb-5">
