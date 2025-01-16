@@ -8,7 +8,6 @@ import WhyChooseUs from "@/components/home1/WhyChooseUs";
 import WhoWeAre from "@/components/home1/WhoWeAre";
 import OurServices from "@/components/home1/OurServices";
 import HeroBanner from "@/components/common/reference/HeroBanner";
-import Footer from "@/components/common/reference/Footer";
 
 export default function Home() {
   return (
@@ -16,7 +15,6 @@ export default function Home() {
     //  className="relative z-10 mt-[-12rem] bg-cover bg-[url('/asset/home/caucasian-woman-having-ayurveda-shirodhara-treatment-in-india.jpg')] bg-no-repeat"
     className="bg-FFEEE2"
     >
-      {/* <Banner /> */}
       <HeroBanner />
       {/* <WhoWeAre /> */}
       {/* <HolisticHealth /> */}
@@ -24,7 +22,6 @@ export default function Home() {
       <WhatWeOffer />
       <WhyChooseUs />
       <Testimonial />
-      <Footer />
       {/* <AncientWisdomForModernLiving /> */}
     </main>
   );

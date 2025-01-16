@@ -122,7 +122,7 @@ const OurValues = () => {
       <div className="flex flex-col justify-center items-center w-screen bg-FFEEE2">
         <div class="absolute top-0 w-full bg-contain h-full opacity-5 bg-center bg-[url('/asset/home/banner-left.png')] bg-no-repeat" />
         <div className="z-20 mx-auto w-[90%] xl:w-[85%] py-20 md:py-32">
-          <div className="grid grid-cols-2 gap-x-24 gap-y-10 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-10 ">
             <div className="left-section-ov w-full">
               <h6 className="section-title !text-left">Our Value</h6>
               <h2 className="!text-left highlight-heading">

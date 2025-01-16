@@ -4,7 +4,7 @@ import FaqUnorder from "@/components/therapy/FaqUnorder";
 
 const TherapyName = () => {
   return (
-    <div className="relative flex flex-col items-center md:mt-[5rem]">
+    <div className="relative flex flex-col items-center">
       <Image
         src="https://thewhiteelephant.in/wp-content/uploads/2023/11/Rectangle-3859.png"
         alt="cover"
@@ -36,7 +36,7 @@ const TherapyName = () => {
                 className="h-full w-full object-cover"
               />
             </figure>
-            <button className="site-button-primary w-full md:!hidden h-[60px] ">Book a Session</button>
+            <button className="site-button-primary w-full md:!hidden h-[60px] capitalize">Book a Session</button>
           </section>
           
         </div>

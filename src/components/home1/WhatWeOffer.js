@@ -53,46 +53,46 @@ const offers = [
 ];
 
 const WhatWeOffer = () => {
-  useGSAP(() => {
-    gsap.fromTo(
-      ".fade-up",
-      { opacity: 0, y: 200 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.5,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: "#WhatWeOffer",
-          start: "top 80%",
-          end: "bottom 20%",
-          // scrub: true,
-        },
-      }
-    );
+  // useGSAP(() => {
+  //   gsap.fromTo(
+  //     ".fade-up",
+  //     { opacity: 0, y: 200 },
+  //     {
+  //       opacity: 1,
+  //       y: 0,
+  //       duration: 1.5,
+  //       stagger: 0.2,
+  //       ease: "power3.out",
+  //       scrollTrigger: {
+  //         trigger: "#WhatWeOffer",
+  //         start: "top 80%",
+  //         end: "bottom 20%",
+  //         // scrub: true,
+  //       },
+  //     }
+  //   );
 
-    gsap.fromTo(
-      ".card-wwo",
-      { opacity: 0 },
-      {
-        opacity: 1,
-        duration: 1.5,
-        delay: 0.5,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: "#WhatWeOffer",
-          start: "top 80%",
-          end: "bottom 20%",
-          // scrub: true,
-        },
-      }
-    );
-  }, []);
+  //   gsap.fromTo(
+  //     ".card-wwo",
+  //     { opacity: 0 },
+  //     {
+  //       opacity: 1,
+  //       duration: 1.5,
+  //       delay: 0.5,
+  //       stagger: 0.2,
+  //       ease: "power3.out",
+  //       scrollTrigger: {
+  //         trigger: "#WhatWeOffer",
+  //         start: "top 80%",
+  //         end: "bottom 20%",
+  //         // scrub: true,
+  //       },
+  //     }
+  //   );
+  // }, []);
 
   return (
-    <div id="WhatWeOffer" className="w-full relative bg-FFEEE2 overflow-hidden">
+    <div id="WhatWeOffer" className="bg-FFEEE2">
       {/* <Image
         className="absolute z-10 top-0 left-0 w-[150px] md:w-[200px] [@media(max-width:299.98px)]:w-[118px]"
         height={200}
@@ -102,7 +102,7 @@ const WhatWeOffer = () => {
       /> */}
 
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] xl:w-full py-32">
-        <div className="fade-up flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
           <h6 className="font-jost text-q3c3c3d text-[14px] font-[500] leading-[1.4em] uppercase text-center">
             What We offer
           </h6>

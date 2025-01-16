@@ -53,10 +53,10 @@ const MobileNavbar = ({
           <div className="flex justify-between items-center">
             <Image
               src={"/asset/divyamrut_transparent_logo.webp"}
-              height={70}
-              width={70}
+              height={100}
+              width={100}
               onClick={() => handleAction("/")}
-              className="cursor-pointer"
+              className="cursor-pointer h-16 w-20"
               alt="connect_image"
             />
             <button
