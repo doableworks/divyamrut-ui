@@ -100,6 +100,9 @@
 
 // export default UserProfile;
 
+
+
+"use client"
 import React from "react";
 
 const user = {

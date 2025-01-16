@@ -1,9 +1,5 @@
-"use client";
-import MainBanner from "@/components/common/MainBanner";
-import React from "react";
 import SubCategory from "@/components/proudect/SubCategory";
 import ProductBanner from "@/components/proudect/ProductBanner";
-import { useRouter } from "nextjs-toploader/app";
 
 
 // const getCategoryProducts = async (params) => {
@@ -24,7 +20,6 @@ import { useRouter } from "nextjs-toploader/app";
 // };
 
 const page = ({ params }) => {
-   const router = useRouter();
   // const heading = params["product-categ"];
   // const subHeading = "Products";
   // const products = await getCategoryProducts(params["products-category"]);
@@ -86,33 +81,8 @@ const page = ({ params }) => {
       <div className="relative h-[50vh]">
         <ProductBanner />
       </div>
-
-      <div className="mx-auto w-[90%] py-10 md:py-20">
-        <h2 className="!text-center highlight-heading">
-          Discover Our Category Range
-        </h2>
-        <div className="flex flex-wrap justify-center gap-8">
-          {categories.map((category, index) => (
-            <div key={index} className="flex flex-col items-center cursor-pointer"
-            onClick={() => router.push(`/products/${params["products-category"]}/${category.route}`)}
-            >
-              <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full bg-text overflow-hidden shadow-md">
-                <img
-                  src={category.imgSrc}
-                  // alt={category.label}
-                  className="h-full object-cover"
-                />
-              </div>
-              <p className="text-sm sm:text-base text-gray-700 font-medium mt-2 text-center">
-                {category.label}
-              </p>
-            </div>
-          ))}
-        </div>
-        
-        {/* <div className="mt-[2rem]"> */}
+      <div className="mx-auto w-[90%] py-10 md:py-20"> 
         <SubCategory categorySlug={params["products-category"]} categories={categories} />
-        {/* </div> */}
       </div>
     </div>
   );

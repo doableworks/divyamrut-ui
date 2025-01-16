@@ -1,10 +1,3 @@
-import MainBanner2 from "@/components/common/MainBanner2";
-import DetailPage from "@/components/singlePost/DetailPage";
-import ShareReview from "@/components/singlePost/ShareReview";
-import NewLatterForm from "@/components/singlePost/NewLatterForm";
-import LeaveAReply from "@/components/singlePost/LeaveAReply";
-import PopularCategories from "@/components/singlePost/PopularCategories";
-import LatestPost from "@/components/singlePost/LatestPost";
 import ProductDetail from "@/components/proudect/ProductDetail";
 
 const page = () => {
