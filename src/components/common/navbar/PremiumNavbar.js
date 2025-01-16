@@ -156,7 +156,7 @@ export default function PremiumNavbar({
                 className="[@media(min-width:1340.98px)]:hidden flex justify-center rounded-md"
               >
                 <CloseOutlined
-                  className="text-[30px]"
+                  className="text-[25px]"
                   style={{ color: "#3c3c3d" }}
                 />
               </button>
@@ -167,7 +167,7 @@ export default function PremiumNavbar({
                 className="[@media(min-width:1340.98px)]:hidden flex justify-center rounded-md"
               >
                 <MenuOutlined
-                  className="text-[32px]"
+                  className="text-[25px]"
                   style={{ color: "#3d3d3d" }}
                 />
               </button>
@@ -249,7 +249,7 @@ export default function PremiumNavbar({
         </section>
       </div>
 
-      {isSubMenu?.parentSlug && isSubMenu?.subMenu.length > 0 && (
+      {isSubMenu?.parentSlug && isSubMenu?.subMenu.length > 0 &&  (
         <section
           onMouseLeave={handleMouseLeave}
           className={twMerge(

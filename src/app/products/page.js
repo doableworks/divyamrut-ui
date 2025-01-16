@@ -573,8 +573,8 @@ const page = () => {
   };
 
   return (
-    <div className="h-screen">
-      <div className="relative h-1/2">
+    <div>
+      <div className="relative h-[50vh]">
         <ProductBanner heading={heading} subHeading={subHeading} />
       </div>
       <div className="mx-auto w-[90%] py-10 md:py-20">
