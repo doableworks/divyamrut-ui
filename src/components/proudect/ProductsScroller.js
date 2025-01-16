@@ -62,7 +62,7 @@ const ProductsScroller = ({ category }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerMode: false,
+          centerMode: true,
           dots: false,
         },
       },
@@ -72,7 +72,7 @@ const ProductsScroller = ({ category }) => {
 
   return (
     <>
-      <div className=" mt-10 py-10">
+      <div className="mb-24">
         <h2 className="!text-left highlight-heading">
           {category.title}
         </h2>

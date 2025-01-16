@@ -1,9 +1,8 @@
 "use client";
 import MainBanner from "@/components/common/MainBanner";
 import React from "react";
-import Product from "@/components/proudect/Product";
 import SubCategory from "@/components/proudect/SubCategory";
-import ProductBanner from "@/components/common/ProductBanner";
+import ProductBanner from "@/components/proudect/ProductBanner";
 import { useRouter } from "nextjs-toploader/app";
 
 
@@ -110,9 +109,10 @@ const page = ({ params }) => {
             </div>
           ))}
         </div>
-        <div className="mt-[5rem]">
+        
+        {/* <div className="mt-[2rem]"> */}
         <SubCategory categorySlug={params["products-category"]} categories={categories} />
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );
