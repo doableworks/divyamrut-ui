@@ -82,8 +82,8 @@ const page = ({ params }) => {
 
 
   return (
-    <div className="h-screen">
-      <div className="relative h-1/2">
+    <div>
+      <div className="relative h-[50vh]">
         <ProductBanner />
       </div>
 
