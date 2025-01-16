@@ -184,7 +184,6 @@ const categories = [
         "/asset/home/natural-health-support.jpg",
     }]
   },
-
   {
     route: "meditation-puja-shawls",
     title: "Meditation/Puja Shawls",

@@ -54,7 +54,9 @@ const Product = ({ item, productCategory }) => {
         </p>
       </div>
       <div className="w-full text-center pb-4">
-        <AddToCartBtn cartFun={handleAddItem} />
+        {/* <AddToCartBtn cartFun={handleAddItem} /> */}
+        <button className="site-button-primary w-full h-[60px]" onClick={handleAddItem}>ADD TO CART</button>
+
         {/* <BtnSection
             showAddToCartBtn={true}
             showBuyBtn={true}

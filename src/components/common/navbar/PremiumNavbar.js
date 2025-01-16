@@ -24,6 +24,7 @@ const initialMenuItems = [
   { label: "Health Packages", path: "/health-packages" },
   {
     label: "Products",
+    path: "/products",
     subMenu: [],
   },
   { label: "Contact Us", path: "/contact-us" },
