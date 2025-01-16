@@ -6,6 +6,8 @@ import Slider from "react-slick";
 import Product from "@/components/proudect/Product";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useRouter } from "nextjs-toploader/app";
+
 
 const categories = [
   {
@@ -16,7 +18,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -28,7 +30,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -40,7 +42,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -52,7 +54,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -64,7 +66,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -76,7 +78,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -88,7 +90,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -104,7 +106,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -116,7 +118,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -128,7 +130,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -140,7 +142,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -152,7 +154,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -164,7 +166,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -176,7 +178,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -192,7 +194,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -204,7 +206,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -216,7 +218,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -228,7 +230,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -240,7 +242,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -252,7 +254,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -264,7 +266,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -280,7 +282,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -292,7 +294,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -304,7 +306,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -316,7 +318,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -328,7 +330,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -340,7 +342,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -352,7 +354,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -368,7 +370,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -380,7 +382,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -392,7 +394,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -404,7 +406,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -416,7 +418,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -428,7 +430,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -440,7 +442,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -456,7 +458,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -468,7 +470,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -480,7 +482,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -492,7 +494,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -504,7 +506,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -516,7 +518,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -528,7 +530,7 @@ const categories = [
         "Natural Health Supplements",
       slug: "product-massage-kit",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
       date: "August 6, 2024",
       price:"10.00",
       currency:"USD",
@@ -539,6 +541,7 @@ const categories = [
 ];
 
 const page = () => {
+  const router = useRouter();
   const heading = "Bath/Aura Cleansing Salt";
   const subHeading = "Trusted by millions, validated by you.";
 
@@ -578,7 +581,9 @@ const page = () => {
         <Slider {...settings} className="custom-slick-slider">
           {categories &&
             categories?.map((cate, index) => (
-              <div className="slick-slide">
+              <div className="slick-slide cursor-pointer"
+              onClick={() => router.push(`/products/${cate.route}`)}
+              >
                 <div key={index + cate.title} className="ml-2 rounded-xl bg-text h-52 flex justify-center items-center">
                   <p>{cate.title}</p>
                 </div>

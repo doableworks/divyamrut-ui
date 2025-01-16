@@ -203,7 +203,7 @@ const ProductDetail = () => {
   return (
     <div className="relative flex flex-col md:flex-row gap-10 min-h-screen p-6">
       {/* Product Images Section */}
-      <div className="sticky self-start top-20 lg:w-1/2 flex flex-col items-center">
+      <div className="md:sticky self-start md:top-20 lg:w-1/2 flex flex-col items-center">
         <div className="w-[100%] md:w-[80%] min-w-[300px] max-w-[700px] h-auto border border-gray-300 rounded-lg overflow-hidden">
           <img
             src="/asset/home/ayurvedic-supplement.jpg"
@@ -243,9 +243,10 @@ const ProductDetail = () => {
           <p className="text-lg font-bold text-gray-900">₹28</p>
           <p className="text-sm text-gray-500">(Inclusive of all taxes)</p>
         </div>
-        <button className="w-32 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700">
-          ADD
-        </button>
+        <div className="flex flex-row gap-8">
+        <button className="site-button-primary w-1/2 h-[60px]">Add to Cart</button>
+        <button className="site-button-primary w-1/2 h-[60px]">Buy Now</button>
+        </div>
 
         {/* Long Content to Scroll */}
         <div className="mt-8 space-y-8">

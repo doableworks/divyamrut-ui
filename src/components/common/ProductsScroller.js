@@ -72,14 +72,14 @@ const ProductsScroller = ({ category }) => {
 
   return (
     <>
-      <div className="bg-[#F9F3EB] mt-10 py-10 px-10 shadow-lg">
-        <h2 className="font-suranna text-[22px] md:text-[28px] font-[400] leading-[1.4em] text-secondary mb-4">
+      <div className=" mt-10 py-10">
+        <h2 className="!text-left highlight-heading">
           {category.title}
         </h2>
         <Slider {...settings}>
           {category &&
             category?.products.map((product, index) => (
-              <div key={index + category.category} className="slick-slide px-1">
+              <div key={index + category.category} className="slick-slide px-4">
                 <Product
                   key={index}
                   item={product}

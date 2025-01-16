@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "nextjs-toploader/app";
 import BtnSection from "@/components/BtnCom/BtnSection";
 import { useSelector, useDispatch } from "react-redux";
+import { Star } from "@/icon/icons";
 import {
   addItem,
   removeItem,
@@ -33,7 +34,7 @@ const Product = ({ item, productCategory }) => {
       className="relative flex flex-col justify-between w-full cursor-pointer rounded overflow-hidden"
       onClick={() => router.push(`/products/${productCategory}/${item?.slug}`)}
     >
-      {item?.image && (
+      {/* {item?.image && (
         <Image
           src={item?.image}
           width={200}
@@ -41,17 +42,30 @@ const Product = ({ item, productCategory }) => {
           className="w-full h-[200px]"
           alt="img"
         />
-      )}
+      )} */}
+
+      <div className="w-full h-[300px] bg-[#cbd5e1] rounded-2xl">
+
+      </div>
+
+
       <div className="flex-grow flex flex-col px-6 py-4">
         <h6 className="section-title !normal-case !text-[1.5rem] !text-left hover:!text-[--yellow]">
           {item?.title}
         </h6>
-        {/* <p className="section-title !normal-case !text-[1rem] !text-left !text-gray-400">
-          {description}
-        </p> */}
+        <p className="section-title !normal-case !text-[1rem] !text-left !text-gray-400">
+          {item.description}
+        </p>
         <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-[black] mt-2">
           {item?.currency == "USD" && "$"}&nbsp;{item?.price}
         </p>
+        <div className="flex gap-1 mt-4">
+          <Star h={15} w={15} fill={"#f0ad4e"} />
+          <Star h={15} w={15} fill={"#f0ad4e"} />
+          <Star h={15} w={15} fill={"#f0ad4e"} />
+          <Star h={15} w={15} fill={"#f0ad4e"} />
+          <Star h={15} w={15} fill={"#ccd6df"} />
+        </div>
       </div>
       <div className="w-full text-center pb-4">
         {/* <AddToCartBtn cartFun={handleAddItem} /> */}

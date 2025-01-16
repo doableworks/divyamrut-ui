@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { useRouter } from "nextjs-toploader/app";
 
-const SubCategory = () => {
+const SubCategory = ({categorySlug}) => {
     const router = useRouter();
 
     const categories = [
@@ -61,7 +61,7 @@ const SubCategory = () => {
                         className="relative group"
                     >
                         <div className="relative group overflow-hidden rounded-lg shadow-md bg-white min-h-[350px] cursor-pointer"
-                            onClick={() => router.push(`/products/${category.route}`)}
+                             onClick={() => router.push(`/products/${categorySlug}/${category.route}`)}
                         >
                             {/* <img
                                 src={category.image}
@@ -70,8 +70,8 @@ const SubCategory = () => {
                             /> */}
                             <div className="absolute bottom-0 right-0 text-right">
                                 <button className="site-button-primary h-[60px]"
-                                    onClick={() => router.push(`/products/${category.route}`)}
-                                >SHOW NOW</button>
+                                    onClick={() => router.push(`/products/${categorySlug}/${category.route}`)}
+                                >Show Now</button>
                             </div>
                         </div>
                         <div className="p-4">

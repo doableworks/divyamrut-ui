@@ -5,7 +5,7 @@ import NewLatterForm from "@/components/singlePost/NewLatterForm";
 import LeaveAReply from "@/components/singlePost/LeaveAReply";
 import PopularCategories from "@/components/singlePost/PopularCategories";
 import LatestPost from "@/components/singlePost/LatestPost";
-import ProductDetail from "../../../../components/proudect/ProductDetail";
+import ProductDetail from "@/components/proudect/ProductDetail";
 
 const page = () => {
   const mainType = "Natural Health"
