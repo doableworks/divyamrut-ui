@@ -29,7 +29,7 @@ const page = async ({ params }) => {
 
 
   return (
-    <div className="mt-[11rem] h-screen">
+    <div className="h-screen">
       <div className="relative h-1/2">
         <ProductBanner />
       </div>

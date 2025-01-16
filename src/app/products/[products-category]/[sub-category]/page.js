@@ -1,8 +1,10 @@
 "use client"
+import { useState } from "react";
 import MainBanner from "@/components/common/MainBanner";
 import React from "react";
 import Product from "@/components/proudect/Product";
 import SubCategory from "@/components/proudect/SubCategory";
+import FilterSection from "@/components/proudect/FilterSection";
 
 // const getCategoryProducts = async (params) => {
 //   try {
@@ -22,6 +24,9 @@ import SubCategory from "@/components/proudect/SubCategory";
 // };
 
 const page = ({ params }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleDropdown = () => setIsOpen(!isOpen);
     // const heading = params["product-categ"];
     // const subHeading = "Products";
     // const products = await getCategoryProducts(params["products-category"]);
@@ -116,14 +121,20 @@ const page = ({ params }) => {
     return (
         <div className="mx-auto w-[90%] py-10 md:py-20">
             {products && products.length > 0 ? (
-                <div className="mt-[11rem] grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
-                    {products.map((product, index) => (
-                        <Product
-                            key={index}
-                            item={product}
-                            productCategory={`${params["products-category"]}/${params["sub-category"]}`}
-                        />
-                    ))}
+                <div className="flex flex-row">
+                    <div className="w-[15%]" >
+                        <FilterSection />
+                    </div>
+
+                    <div className="w-[85%] grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 pl-8 border-l border-gray-200">
+                        {products.map((product, index) => (
+                            <Product
+                                key={index}
+                                item={product}
+                                productCategory={`${params["products-category"]}/${params["sub-category"]}`}
+                            />
+                        ))}
+                    </div>
                 </div>
             ) : (
                 <div className="w-full py-32">
