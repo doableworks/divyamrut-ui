@@ -63,6 +63,7 @@ export default function PremiumNavbar({
       case "Products":
         return {
           label: "Products",
+          path: "/products",
           parentSlug: "/products/",
           subMenu: productSubMenu,
         };
@@ -181,13 +182,16 @@ export default function PremiumNavbar({
                 height={100}
                 className={twMerge(
                   "transition-all duration-600 ease-in-out",
-                  isScrolling ? "h-16 w-24" : "h-24 w-32"
+                  isScrolling ? "h-16 w-20" : "h-16 w-20 [@media(min-width:1340.98px)]:h-[95px] [@media(min-width:1340.98px)]:w-[115px]"
                 )}
               />
             </Link>
           </figure>
           <figure className="flex gap-5 items-center">
-            <li onClick={handleLogin} className="navbar-li [@media(max-width:1340.98px)]:hidden">
+            <li
+              onClick={handleLogin}
+              className="navbar-li [@media(max-width:1340.98px)]:hidden"
+            >
               Account
             </li>
             <NavCart count={cartCount} />
@@ -245,7 +249,7 @@ export default function PremiumNavbar({
         </section>
       </div>
 
-      {isSubMenu?.parentSlug && (
+      {isSubMenu?.parentSlug && isSubMenu?.subMenu.length > 0 && (
         <section
           onMouseLeave={handleMouseLeave}
           className={twMerge(
@@ -263,10 +267,11 @@ export default function PremiumNavbar({
                   {isSubMenu.subMenu.map(
                     (sub, index) =>
                       sub.is_published && (
-                        <Link href={`${isSubMenu.parentSlug}/${sub.slug}/`} key={index}>
-                          <li
-                            className="navbar-li hover:text-[--voilet]"
-                          >
+                        <Link
+                          href={`${isSubMenu.parentSlug}/${sub.slug}/`}
+                          key={index}
+                        >
+                          <li className="navbar-li hover:text-[--voilet]">
                             {sub.name}
                           </li>
                         </Link>

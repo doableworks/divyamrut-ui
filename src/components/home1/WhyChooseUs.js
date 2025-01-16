@@ -28,14 +28,14 @@ const WhyChooseUs = () => {
     },
   ];
 
-  useEffect(() => {
-    // GSAP Animation
-    gsap.fromTo(
-      ".hero-content",
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
-    );
-  }, []);
+  // useEffect(() => {
+  //   // GSAP Animation
+  //   gsap.fromTo(
+  //     ".hero-content",
+  //     { opacity: 0, y: 50 },
+  //     { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+  //   );
+  // }, []);
 
   return (
     <section>
@@ -47,7 +47,7 @@ const WhyChooseUs = () => {
       >
         <div className="bg-[rgba(0,0,0,.4)] w-full text-white">
           <div className="relative z-20 mx-auto flex flex-col items-center justify-center w-[90%] md:w-[85%] xl:w-full py-32">
-            <div className="fade-up max-w-xl">
+            <div className="max-w-xl">
               <h6 className="font-jost text-text text-[14px] font-[500] leading-[1.4em] uppercase text-center">
                 Why Choose Us
               </h6>

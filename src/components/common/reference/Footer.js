@@ -1,4 +1,4 @@
 export default function Footer() {
-    return <div className="bg-[--yellow] h-[60vh] w-full"></div>;
+    return <div className="relative bg-[--yellow] h-[60vh] w-full"></div>;
   }
   

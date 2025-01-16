@@ -581,15 +581,16 @@ const page = () => {
         <Slider {...settings} className="custom-slick-slider">
           {categories &&
             categories?.map((cate, index) => (
-              <div className="slick-slide cursor-pointer"
+              <div key={index + cate.title} className="slick-slide cursor-pointer"
               onClick={() => router.push(`/products/${cate.route}`)}
               >
-                <div key={index + cate.title} className="ml-2 rounded-xl bg-text h-52 flex justify-center items-center">
+                <div  className="ml-2 rounded-xl bg-text h-52 flex justify-center items-center">
                   <p>{cate.title}</p>
                 </div>
               </div>
             ))}
         </Slider>
+
         <div className="relative h-1/2">
         {categories.map((category, index) => (
           <ProductsScroller key={index + category.title} category={category} />
