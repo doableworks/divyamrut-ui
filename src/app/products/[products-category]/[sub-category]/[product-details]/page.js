@@ -4,8 +4,6 @@ const page = () => {
   const mainType = "Natural Health"
   const heading = " The Power of Ayurveda: Transforming Your Health Naturally with PranaVeda";
   const subHeading = "Trusted by millions, validated by you.";
-  const date = "August 6, 2024"
-  const comment = "No Comments"
 
   const item = {
     id: 3,
