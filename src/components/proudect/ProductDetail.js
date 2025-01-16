@@ -4,10 +4,10 @@ import React from "react";
 
 const ProductDetail = () => {
   return (
-    <div className="relative flex flex-col md:flex-row gap-10 min-h-screen p-6">
+    <div className="relative flex flex-col md:flex-row gap-10 min-h-screen">
       {/* Product Images Section */}
       <div className="md:sticky self-start md:top-20 lg:w-1/2 flex flex-col items-center">
-        <div className="w-[100%] md:w-[80%] min-w-[300px] max-w-[700px] h-auto border border-gray-300 rounded-lg overflow-hidden">
+        <div className="w-[100%] md:w-[100%] min-w-[300px] max-w-[700px] h-auto border border-gray-300 rounded-lg overflow-hidden">
           <Image
             height={200}
             width={200}

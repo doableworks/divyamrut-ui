@@ -11,7 +11,7 @@ const SubCategory = ({ categorySlug, categories }) => {
             <h2 className="!text-center highlight-heading">
                 Discover Our Category Range
             </h2>
-            <div className="flex flex-wrap justify-center gap-8">
+            <div className="flex flex-wrap justify-center gap-4 md:gap-8">
                 {categories.map((category, index) => (
                     <div key={index} className="flex flex-col items-center cursor-pointer"
                         onClick={() => router.push(`/products/${categorySlug}/${category.route}`)}
@@ -23,14 +23,14 @@ const SubCategory = ({ categorySlug, categories }) => {
                                 className="h-full object-cover"
                             />
                         </div>
-                        <p className="text-sm sm:text-base text-gray-700 font-medium mt-2 text-center">
+                        <p className="section-title mt-2 !text-center">
                             {category.label}
                         </p>
                     </div>
                 ))}
             </div>
-            <div className="py-12 px-6 ">
-                <h2 className="text-3xl font-semibold text-center mb-8">Featured Categories</h2>
+            <div className="py-12 md:px-6">
+                <h2 className="sub_heading text-center mb-8">Featured Categories</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {categories.map((category, index) => (
                         <div
@@ -52,8 +52,8 @@ const SubCategory = ({ categorySlug, categories }) => {
                                 </div>
                             </div>
                             <div className="p-4">
-                                <h3 className="text-lg font-medium text-center">{category.title}</h3>
-                                <p className="text-sm text-gray-600 mt-2">{category.description}</p>
+                                <h3 className="section-title text-center">{category.title}</h3>
+                                <p className="section-content text-center mt-2">{category.description}</p>
                             </div>
                         </div>
                     ))}

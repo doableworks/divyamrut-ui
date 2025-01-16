@@ -94,8 +94,16 @@ body {
 
 
 @layer utilities {
+  .common_page_width{
+    @apply mx-auto w-[100%] md:w-[90%] lg:w-[80%] px-5 md:px-4 py-10 md:py-20
+  }
+
+  /* heading/ text */
   .highlight-heading {
     @apply mt-[1rem] mb-[1.5rem] text-[32px] leading-[36px] md:text-[3em] md:leading-[1.3em] font-suranna  font-[400] text-E0A43B text-center 
+  }
+  .sub_heading {
+    @apply mt-[1rem] mb-[1.5rem] text-[18px] md:text-[26px] leading-[30px] md:leading-[36px] font-jost font-[600] text-center 
   }
   .section-title {
     @apply font-jost text-q3c3c3d text-[18px] font-[500] leading-[1.4em] uppercase text-center
@@ -103,19 +111,21 @@ body {
   .section-content {
     @apply font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-center
   }
+
+
+  /* Button */
   .site-button-primary {
     @apply text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-E0A43B   hover:bg-q4ca25af transition mt-10 cursor-pointer min-h-[48px] rounded
   }
   .site-button-secondary {
     @apply text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-[#AA218C]   hover:!bg-[#85186d] transition mt-10 cursor-pointer min-h-[48px] rounded
   }
+
+   /* Input */
   .input-label {
     @apply block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-[--neutral] mb-3
   }
   .input-label-required {
     @apply text-red-600
-  }
-  .common_page_width{
-    @apply mx-auto w-[100%] md:w-[90%] lg:w-[80%] px-5 md:px-4 py-10 md:py-20
   }
 }

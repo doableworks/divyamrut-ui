@@ -49,15 +49,15 @@ const Product = ({ item, productCategory }) => {
       </div>
 
 
-      <div className="flex-grow flex flex-col px-6 py-4">
+      <div className="flex-grow flex flex-col px-6 pt-4">
         <h6 className="section-title !normal-case !text-[1.5rem] !text-left hover:!text-[--yellow]">
           {item?.title}
         </h6>
-        <p className="section-title !normal-case !text-[1rem] !text-left !text-gray-400">
+        <p className="section-content !text-left">
           {item.description}
         </p>
         <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-[black] mt-2">
-          {item?.currency == "USD" && "$"}&nbsp;{item?.price}
+          {item?.currency == "USD" ? "$" :"₹"}&nbsp;{item?.price}
         </p>
         <div className="flex gap-1 mt-4">
           <Star h={15} w={15} fill={"#f0ad4e"} />
@@ -67,17 +67,7 @@ const Product = ({ item, productCategory }) => {
           <Star h={15} w={15} fill={"#ccd6df"} />
         </div>
       </div>
-      <div className="w-full text-center pb-4">
-        {/* <AddToCartBtn cartFun={handleAddItem} /> */}
-        <button className="site-button-primary w-full h-[60px]" onClick={handleAddItem}>ADD TO CART</button>
-
-        {/* <BtnSection
-            showAddToCartBtn={true}
-            showBuyBtn={true}
-            showBookBtn={false}
-            cartFun={handleAddItem}
-          /> */}
-      </div>
+        <button className="site-button-primary !mt-5 w-full" onClick={handleAddItem}>ADD TO CART</button>
     </div>
   );
 };

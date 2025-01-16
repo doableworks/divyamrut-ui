@@ -31,7 +31,7 @@ const page = ({ params }) => {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
             date: "August 6, 2024",
             price: "10.00",
-            currency: "USD",
+            currency: "Rupees",
             image:
                 "/asset/home/natural-health-support.jpg",
         },
@@ -43,7 +43,7 @@ const page = ({ params }) => {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
             date: "August 6, 2024",
             price: "10.00",
-            currency: "USD",
+            currency: "Rupees",
             image:
                 "/asset/home/natural-health-support.jpg",
         },
@@ -55,7 +55,7 @@ const page = ({ params }) => {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
             date: "August 6, 2024",
             price: "10.00",
-            currency: "USD",
+            currency: "Rupees",
             image:
                 "/asset/home/natural-health-support.jpg",
         },
@@ -67,7 +67,7 @@ const page = ({ params }) => {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
             date: "August 6, 2024",
             price: "10.00",
-            currency: "USD",
+            currency: "Rupees",
             image:
                 "/asset/home/natural-health-support.jpg",
         },
@@ -79,7 +79,7 @@ const page = ({ params }) => {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
             date: "August 6, 2024",
             price: "10.00",
-            currency: "USD",
+            currency: "Rupees",
             image:
                 "/asset/home/natural-health-support.jpg",
         },
@@ -91,7 +91,7 @@ const page = ({ params }) => {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
             date: "August 6, 2024",
             price: "10.00",
-            currency: "USD",
+            currency: "Rupees",
             image:
                 "/asset/home/natural-health-support.jpg",
         },
@@ -103,14 +103,14 @@ const page = ({ params }) => {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
             date: "August 6, 2024",
             price: "10.00",
-            currency: "USD",
+            currency: "Rupees",
             image:
                 "/asset/home/natural-health-support.jpg",
         },
     ]
 
     return (
-        <div className="mx-auto w-[90%] py-10 md:py-20">
+        <div className="common_page_width">
             {products && products.length > 0 ? (
                 <ProductList products={products} params={params} />
             ) : (

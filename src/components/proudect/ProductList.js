@@ -6,11 +6,10 @@ import FilterSection from "@/components/proudect/FilterSection";
 const ProductList = ({products, params}) => {
     return (
         <div className="flex flex-row">
-            <div className="w-[15%]" >
+            <div className="hidden md:block w-[15%]" >
                 <FilterSection />
             </div>
-
-            <div className="w-[85%] grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 pl-8 border-l border-gray-200">
+            <div className="w-full md:w-[85%] grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4  md:gap-10 md:pl-8 md:border-l border-gray-200">
                 {products.map((product, index) => (
                     <Product
                         key={index}

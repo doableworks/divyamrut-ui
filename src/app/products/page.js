@@ -543,7 +543,7 @@ const page = () => {
       <div className="relative h-[50vh]">
         <ProductBanner heading={heading} subHeading={subHeading} />
       </div>
-      <div className="mx-auto w-[100%] md:w-[90%] lg:w-[80%] px-5 md:px-4 py-10 md:py-20">
+      <div className="common_page_width">
         <ProductSlider1 categories={categories} />
         {/* <div className="relative h-1/2"> */}
           {categories.map((category, index) => (

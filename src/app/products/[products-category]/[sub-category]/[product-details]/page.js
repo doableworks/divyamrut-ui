@@ -1,4 +1,5 @@
 import ProductDetail from "@/components/proudect/ProductDetail";
+import Testimonial from "@/components/home1/Testimonial";
 
 const page = () => {
   const mainType = "Natural Health"
@@ -19,11 +20,12 @@ const page = () => {
   return (
     <div>
       {/* <MainBanner2 heading={heading} subHeading={subHeading} date={date} comment={comment} mainType={mainType} /> */}
-      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-20">
+      <div className="common_page_width relative z-20 ">
         <div>
           {/* Main Content */}
           <ProductDetail />
         </div>
+        <Testimonial />
       </div>
     </div>
   );

@@ -81,7 +81,7 @@ const page = ({ params }) => {
       <div className="relative h-[50vh]">
         <ProductBanner />
       </div>
-      <div className="mx-auto w-[90%] py-10 md:py-20"> 
+      <div className="common_page_width"> 
         <SubCategory categorySlug={params["products-category"]} categories={categories} />
       </div>
     </div>
