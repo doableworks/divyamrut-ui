@@ -545,11 +545,9 @@ const page = () => {
       </div>
       <div className="common_page_width">
         <ProductSlider1 categories={categories} />
-        {/* <div className="relative h-1/2"> */}
           {categories.map((category, index) => (
             <ProductsScroller key={index + category.title} category={category} />
           ))}
-        {/* </div> */}
       </div>
     </div>
   );
