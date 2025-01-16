@@ -182,18 +182,37 @@ export default function PremiumNavbar({
                 height={100}
                 className={twMerge(
                   "transition-all duration-600 ease-in-out",
-                  isScrolling ? "h-16 w-20" : "h-16 w-20 [@media(min-width:1340.98px)]:h-[95px] [@media(min-width:1340.98px)]:w-[115px]"
+                  isScrolling
+                    ? "h-16 w-20"
+                    : "h-16 w-20 [@media(min-width:1340.98px)]:h-[95px] [@media(min-width:1340.98px)]:w-[115px]"
                 )}
               />
             </Link>
           </figure>
           <figure className="flex gap-5 items-center">
-            <li
-              onClick={handleLogin}
-              className="navbar-li [@media(max-width:1340.98px)]:hidden"
-            >
-              Account
-            </li>
+            {!session ? (
+              <li
+                onClick={handleLogin}
+                className="navbar-li [@media(max-width:1340.98px)]:hidden"
+              >
+                Account
+              </li>
+            ) : (
+              <>
+                <li
+                  onClick={onLogOut}
+                  className="navbar-li [@media(max-width:1340.98px)]:hidden"
+                >
+                  Logout
+                </li>
+
+                <Link href="/profile">
+                  <li className="navbar-li [@media(max-width:1340.98px)]:hidden">
+                    Profile
+                  </li>
+                </Link>
+              </>
+            )}
             <NavCart count={cartCount} />
           </figure>
         </section>
@@ -249,7 +268,7 @@ export default function PremiumNavbar({
         </section>
       </div>
 
-      {isSubMenu?.parentSlug && isSubMenu?.subMenu.length > 0 &&  (
+      {isSubMenu?.parentSlug && isSubMenu?.subMenu.length > 0 && (
         <section
           onMouseLeave={handleMouseLeave}
           className={twMerge(

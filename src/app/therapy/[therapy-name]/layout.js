@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const layout = ({ children }) => {
-  return (
-    <div className="py-[6rem]">{children}</div>
-  )
-}
+  return <div className="pb-[6rem] lg:py-[6rem] ">{children}</div>;
+};
 
-export default layout
+export default layout;
