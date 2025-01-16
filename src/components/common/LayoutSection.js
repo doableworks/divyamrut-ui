@@ -59,7 +59,7 @@ export const LayoutSection = ({
         <div className="flex-grow">
           <div
             className={twMerge(
-              "h-[95px] [@media(min-width:1340.98px)]:h-[172px]",
+              "h-[65px] [@media(min-width:1340.98px)]:h-[172px]",
               pathname === "/" && "hidden"
             )}
           />
