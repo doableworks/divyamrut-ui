@@ -66,9 +66,9 @@ export const LayoutSection = ({
           {children}
         </div>
 
-        <div>
+        {/* <div>
           <NewFooter />
-        </div>
+        </div> */}
       </main>
 
       <LoginModal />

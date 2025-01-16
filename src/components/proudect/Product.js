@@ -44,7 +44,7 @@ const Product = ({ item, productCategory }) => {
         />
       )} */}
 
-      <div className="w-full h-[300px] bg-[#cbd5e1] rounded-2xl">
+      <div className="w-full h-[300px] bg-text rounded-2xl">
 
       </div>
 

@@ -38,8 +38,7 @@ const config: Config = {
         'custom-radial': 'radial-gradient(at top right, var(--e-global-color-044b931) 0%, var(--e-global-color-638d055) 100%)',
         'custom-radial2': 'radial-gradient(at top left, var(--e-global-color-044b931) 0%, var(--e-global-color-638d055) 100%)',
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       fontFamily: { 
         inter: ['var(--font-inter)'], // Add your fallback font as needed
