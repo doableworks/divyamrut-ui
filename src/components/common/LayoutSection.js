@@ -7,18 +7,37 @@ import RegisterModal from "../login/RegisterModal";
 import NewFooter from "@/components/common/reference/NewFooter";
 import { twMerge } from "tailwind-merge";
 import { usePathname } from "next/navigation";
-import CardSlider from "@/components/cartCom/CardSlider"
+import { useDispatch } from "react-redux";
+import { setMenuItems } from "@/redux/feature/menuSlice";
+import CardSlider from '@/components/cartCom/CardSlider'
 
-
-export const LayoutSection = ({
-  children,
-  sessionData,
-  therapySubmenu,
-  productSubMenu,
-}) => {
+export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
+  const dispatch = useDispatch();
   const scrollContainerRef = useRef(null);
   const [scrolled, setScrolled] = useState(0);
   const pathname = usePathname();
+
+  const initialMenuItems = [
+    { label: "Home", path: "/" },
+    { label: "About Us", path: "/about-us" },
+    { label: "Consultations", path: "/consultations" },
+    {
+      label: "Therapies",
+      path: "/therapy",
+      parentSlug: "/therapy/",
+      subMenu: navbarAPIitems?.therapy_categories,
+    },
+    { label: "Health Packages", path: "/health-packages" },
+    {
+      label: "Products",
+      path: "/products",
+      parentSlug: "/products/",
+      subMenu: navbarAPIitems?.product_categories,
+    },
+    { label: "Contact Us", path: "/contact-us" },
+  ];
+
+  dispatch(setMenuItems(initialMenuItems));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,11 +71,7 @@ export const LayoutSection = ({
         ref={scrollContainerRef}
         className="flex flex-col relative bg-[--base] text-[--neutral] overflow-y-auto overflow-x-hidden h-[100vh]"
       >
-        <PremiumNavbar
-          scrollNum={scrolled}
-          therapySubmenu={therapySubmenu}
-          productSubMenu={productSubMenu}
-        />
+        <PremiumNavbar scrollNum={scrolled} />
 
         <div className="flex-grow">
           <div
@@ -72,6 +87,7 @@ export const LayoutSection = ({
           <NewFooter />
         </div>
       </main>
+      <CardSlider />
       <CardSlider />
       <LoginModal />
       <RegisterModal />

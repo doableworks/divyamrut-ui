@@ -13,13 +13,13 @@ const mobileNavSlice = createSlice({
   initialState,
   reducers: {
     toggleNav(state: { isOpen: boolean; }) {
-      state.isOpen = !state.isOpen; // Toggles between true and false
+      state.isOpen = !state.isOpen; 
     },
     openNav(state: { isOpen: boolean; }) {
-      state.isOpen = true; // Explicitly sets to true
+      state.isOpen = true; 
     },
     closeNav(state: { isOpen: boolean; }) {
-      state.isOpen = false; // Explicitly sets to false
+      state.isOpen = false;
     },
   },
 });

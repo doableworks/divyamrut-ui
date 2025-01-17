@@ -23,28 +23,7 @@ import {
   handleCartSlider
 } from "@/redux/feature/cartSlice";
 
-const initialMenuItems = [
-  { label: "Home", path: "/" },
-  { label: "About Us", path: "/about-us" },
-  { label: "Consultations", path: "/consultations" },
-  {
-    label: "Therapies",
-    subMenu: [],
-  },
-  { label: "Health Packages", path: "/health-packages" },
-  {
-    label: "Products",
-    path: "/products",
-    subMenu: [],
-  },
-  { label: "Contact Us", path: "/contact-us" },
-];
-
-export default function PremiumNavbar({
-  scrollNum,
-  therapySubmenu,
-  productSubMenu,
-}) {
+export default function PremiumNavbar({ scrollNum }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const pathname = usePathname();
@@ -63,31 +42,7 @@ export default function PremiumNavbar({
 
   const isMobileNavOpen = useSelector((state) => state.mobileNav.isOpen);
 
-
-  const handleCartSliderfun = () => {
-      // dispatch(handleCartSlider(!isCartSliderOpen));
-      router.push('/cart')
-    };
-
-  const menuItems = initialMenuItems.map((each) => {
-    switch (each.label) {
-      case "Therapies":
-        return {
-          label: "Therapies",
-          parentSlug: "/therapy/",
-          subMenu: therapySubmenu,
-        };
-      case "Products":
-        return {
-          label: "Products",
-          path: "/products",
-          parentSlug: "/products/",
-          subMenu: productSubMenu,
-        };
-      default:
-        return each;
-    }
-  });
+  const menuItems = useSelector((state) => state.menuItems.all);
 
   useEffect(() => {
     if (scrollNum < scrollingNum && scrollNum > 50) {
@@ -105,11 +60,8 @@ export default function PremiumNavbar({
     setShowSearch(!isShowSearch);
   };
 
-  const handleMouseEnter = (subMenu, parentSlug) => {
-    setSubMenu({
-      subMenu,
-      parentSlug,
-    });
+  const handleMouseEnter = (item) => {
+    setSubMenu(item);
   };
 
   const handleMouseLeave = () => {
@@ -230,7 +182,7 @@ export default function PremiumNavbar({
                 </Link>
               </>
             )}
-            <NavCart count={cartCount} handleCartSliderfun={handleCartSliderfun} />
+            <NavCart count={cartCount} />
           </figure>
         </section>
 
@@ -243,7 +195,7 @@ export default function PremiumNavbar({
                 <Link href={item.path ? item.path : ""} key={index}>
                   <li
                     onMouseEnter={() =>
-                      handleMouseEnter(item.subMenu, item.parentSlug)
+                      handleMouseEnter(item)
                     }
                     className={twMerge(
                       "relative navbar-li h-full",
@@ -285,7 +237,7 @@ export default function PremiumNavbar({
         </section>
       </div>
 
-      {isSubMenu?.parentSlug && isSubMenu?.subMenu.length > 0 && (
+      {isSubMenu?.parentSlug && isSubMenu?.subMenu?.length > 0 && (
         <section
           onMouseLeave={handleMouseLeave}
           className={twMerge(
@@ -297,8 +249,6 @@ export default function PremiumNavbar({
             <hr />
             <figure className="p-5">
               <section>
-                {/* <p className="navbar-by-category">Shop by Category</p> */}
-                {/* <hr /> */}
                 <ul className="grid grid-cols-4 py-4 gap-4">
                   {isSubMenu.subMenu.map(
                     (sub, index) =>

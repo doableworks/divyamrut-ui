@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function NavCart({ count = 0, handleCartSliderfun }) {
+export default function NavCart({ count = 0 }) {
   const cartItems = count || 0;
 
   return (
-    // <Link href="/cart">
-      <div className="relative cursor-pointer" onClick={handleCartSliderfun}>
+    <Link href="/cart">
+      <div className="relative cursor-pointer">
         <div className="w-5 h-5">
           <Image
             src="/asset/navbar/cart-icon.png"
@@ -20,6 +20,6 @@ export default function NavCart({ count = 0, handleCartSliderfun }) {
           {cartItems}
         </span>
       </div>
-    // </Li nk>
+    </Link>
   );
 }

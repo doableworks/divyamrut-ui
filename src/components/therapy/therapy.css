@@ -1,0 +1,10 @@
+.ant-modal-content{
+    padding: 0 !important;
+}
+
+:where(.css-dev-only-do-not-override-4prkuv).ant-modal .ant-modal-close{
+    background-color: rgb(255, 255, 255) !important;
+    border-radius: 100% !important;
+    top: -10px !important;
+    right: -10px !important;
+}
