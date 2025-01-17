@@ -2,9 +2,6 @@ import ProductDetail from "@/components/proudect/ProductDetail";
 import Testimonial from "@/components/home1/Testimonial";
 
 const page = () => {
-  const mainType = "Natural Health"
-  const heading = " The Power of Ayurveda: Transforming Your Health Naturally with PranaVeda";
-  const subHeading = "Trusted by millions, validated by you.";
 
   const item = {
     id: 3,
