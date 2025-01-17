@@ -33,7 +33,7 @@ const ProductSlider1 = ({categories}) => {
 
   return (
     <>
-    <Slider {...settings}>
+    <Slider key={"all_category"} {...settings}>
           {categories &&
             categories?.map((cate, index) => (
               <div key={index + cate.title} className="px-4 cursor-pointer"

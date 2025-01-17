@@ -10,15 +10,15 @@ import { useRouter } from "nextjs-toploader/app";
 const ProductsScroller = ({ category }) => {
   const router = useRouter();
 
-  var settings = {
+  var settings1 = {
     dots: false,
     autoplay: true,
     autoplaySpeed: 3000,
     arrows: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 6,
+    slidesToShow: 5,
+    slidesToScroll: 5,
     lazyLoad: true,
     responsive: [
       {
@@ -46,7 +46,7 @@ const ProductsScroller = ({ category }) => {
         > VIEW ALL <RightArrow fill={"#64748b"} w={18} /> </span>
         </div>
 
-        <Slider {...settings}>
+        <Slider key={category?.title} {...settings1}>
           {category &&
             category?.products.map((product, index) => (
               <div key={index + category.category} className="px-4">

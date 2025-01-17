@@ -28,7 +28,7 @@ const page = ({ params }) => {
                 "Natural Health Supplements",
             slug: "product-details",
             description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             date: "August 6, 2024",
             price: "10.00",
             currency: "Rupees",
@@ -40,7 +40,7 @@ const page = ({ params }) => {
                 "Natural Health Supplements",
             slug: "product-details",
             description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             date: "August 6, 2024",
             price: "10.00",
             currency: "Rupees",
@@ -52,7 +52,7 @@ const page = ({ params }) => {
                 "Natural Health Supplements",
             slug: "product-details",
             description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             date: "August 6, 2024",
             price: "10.00",
             currency: "Rupees",
@@ -64,7 +64,7 @@ const page = ({ params }) => {
                 "Natural Health Supplements",
             slug: "product-details",
             description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             date: "August 6, 2024",
             price: "10.00",
             currency: "Rupees",
@@ -76,7 +76,7 @@ const page = ({ params }) => {
                 "Natural Health Supplements",
             slug: "product-details",
             description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             date: "August 6, 2024",
             price: "10.00",
             currency: "Rupees",
@@ -88,7 +88,7 @@ const page = ({ params }) => {
                 "Natural Health Supplements",
             slug: "product-details",
             description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             date: "August 6, 2024",
             price: "10.00",
             currency: "Rupees",
@@ -100,7 +100,7 @@ const page = ({ params }) => {
                 "Natural Health Supplements",
             slug: "product-details",
             description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             date: "August 6, 2024",
             price: "10.00",
             currency: "Rupees",
