@@ -18,7 +18,7 @@ const page = () => {
       <div className="common_page_width relative z-20 ">
         <div>
           {/* Main Content */}
-          <ProductDetail />
+          <ProductDetail item={item} />
         </div>
         <Testimonial />
       </div>

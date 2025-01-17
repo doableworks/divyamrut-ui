@@ -112,6 +112,13 @@ body {
     @apply font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-center
   }
 
+  .text-heading {
+    @apply font-jost text-q3c3c3d text-[16px] font-[500] leading-[22px] uppercase text-center
+  }
+  .text-text {
+    @apply font-jost text-primary text-[16px] font-[400] leading-[18px] text-center
+  }
+
 
   /* Button */
   .site-button-primary {

@@ -10,7 +10,7 @@ const page = () => {
 
   return (
     <div>
-      <MainBanner heading={heading} subHeading={subHeading} />
+      {/* <MainBanner heading={heading} subHeading={subHeading} /> */}
 
       <div id="pricing" className="w-full relative overflow-hidden">
         <div className="relative z-20 mx-auto w-[90%] md:w-[85%] 2xl:w-full py-32">

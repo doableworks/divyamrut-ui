@@ -65,8 +65,8 @@ export default function PremiumNavbar({
 
 
   const handleCartSliderfun = () => {
-    console.log("22 2222 handleCartSliderfun")
-      dispatch(handleCartSlider(!isCartSliderOpen));
+      // dispatch(handleCartSlider(!isCartSliderOpen));
+      router.push('/cart')
     };
 
   const menuItems = initialMenuItems.map((each) => {

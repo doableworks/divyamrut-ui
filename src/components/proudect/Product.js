@@ -5,6 +5,8 @@ import { useRouter } from "nextjs-toploader/app";
 import BtnSection from "@/components/BtnCom/BtnSection";
 import { useSelector, useDispatch } from "react-redux";
 import { Star } from "@/icon/icons";
+import CustomButton from "@/components/common/CustomButton";
+
 import {
   addItem,
   removeItem,
@@ -13,7 +15,7 @@ import {
   unSelectAllItems,
   selectItem,
   unSelectItem,
-  handleCartSlider
+  handleCartSlider,
 } from "@/redux/feature/cartSlice";
 import AddToCartBtn from "../BtnCom/AddToCart";
 
@@ -21,7 +23,8 @@ const Product = ({ item, productCategory }) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const handleAddItem = async () => {
+  const handleAddItem = async (event) => {
+    event.stopPropagation(); 
     try {
       await dispatch(addItem(item));
       dispatch(handleCartSlider(true));
@@ -46,20 +49,15 @@ const Product = ({ item, productCategory }) => {
         />
       )} */}
 
-      <div className="w-full h-[300px] bg-text rounded-2xl">
-
-      </div>
-
+      <div className="w-full h-[300px] bg-text rounded-2xl"></div>
 
       <div className="flex-grow flex flex-col px-6 pt-4">
         <h6 className="section-title !normal-case !text-[1.5rem] !text-left hover:!text-[--yellow]">
           {item?.title}
         </h6>
-        <p className="section-content !text-left">
-          {item.description}
-        </p>
+        <p className="section-content !text-left">{item.description}</p>
         <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-[black] mt-2">
-          {item?.currency == "USD" ? "$" :"₹"}&nbsp;{item?.price}
+          {item?.currency == "USD" ? "$" : "₹"}&nbsp;{item?.price}
         </p>
         <div className="flex gap-1 mt-4">
           <Star h={15} w={15} fill={"#f0ad4e"} />
@@ -69,7 +67,14 @@ const Product = ({ item, productCategory }) => {
           <Star h={15} w={15} fill={"#ccd6df"} />
         </div>
       </div>
-        <button className="site-button-primary !mt-5 w-full" onClick={handleAddItem}>ADD TO CART</button>
+      <CustomButton
+        htmlType="submit"
+        className="site-button-primary !mt-4 w-[-webkit-fill-available] capitalize"
+        title="ADD TO CART"
+        loading={false}
+        type="submit"
+        onClick={(event)=>handleAddItem(event)}
+      />
     </div>
   );
 };

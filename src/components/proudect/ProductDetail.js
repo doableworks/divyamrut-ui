@@ -1,8 +1,36 @@
 "use client";
 import Image from "next/image";
 import React from "react";
+import CustomButton from "@/components/common/CustomButton";
+import {
+  addItem,
+  removeItem,
+  clearCart,
+  selectAllItems,
+  unSelectAllItems,
+  selectItem,
+  unSelectItem,
+  handleCartSlider,
+} from "@/redux/feature/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "nextjs-toploader/app";
 
-const ProductDetail = () => {
+
+
+const ProductDetail = ({item}) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+    const handleAddItem = async () => {
+      try {
+        await dispatch(addItem(item));
+        dispatch(handleCartSlider(true));
+        // await router.push("/cart");
+      } catch (error) {
+        console.log("error 555", error);
+      }
+    };
+
   return (
     <div className="relative flex flex-col md:flex-row gap-10 min-h-screen">
       {/* Product Images Section */}
@@ -51,8 +79,23 @@ const ProductDetail = () => {
           <p className="text-sm text-gray-500">(Inclusive of all taxes)</p>
         </div>
         <div className="flex flex-row gap-8">
-          <button className="site-button-primary w-1/2 h-[60px]">Add to Cart</button>
-          <button className="site-button-primary w-1/2 h-[60px]">Buy Now</button>
+          <CustomButton
+                  htmlType="submit"
+                  className="site-button-primary !mt-4 w-[-webkit-fill-available] capitalize"
+                  title="ADD TO CART"
+                  loading={false}
+                  type="submit"
+                  onClick={handleAddItem}
+                />
+
+                <CustomButton
+                        htmlType="submit"
+                        className="site-button-secondary !mt-4 w-[-webkit-fill-available] capitalize"
+                        title="Buy Now"
+                        loading={false}
+                        type="submit"
+                        // onClick={handleAddItem}
+                      />
         </div>
 
         {/* Long Content to Scroll */}

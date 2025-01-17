@@ -6,7 +6,7 @@ interface CartItem {
   name: string; // Add properties relevant to your cart items
   quantity: number;
   selected: boolean;
-  price:number;
+  price: number;
   image: string;
   [key: string]: any; // Allow additional properties
 }
@@ -14,60 +14,56 @@ interface CartItem {
 // Define the state type
 interface CartState {
   items: CartItem[];
-  openCartSlider: boolean
+  openCartSlider: boolean;
 }
 
 const initialState: CartState = {
-//   items: [
-//     {
-//       id: 1,
-//       name: "Wireless Headphones",
-//       price: 99.99,
-//       image: "/headphones.jpg",
-//       quantity: 1,
-//     },
-//     {
-//       id: 2,
-//       name: "Smartwatch",
-//       price: 199.99,
-//       image: "/smartwatch.jpg",
-//       quantity: 2,sele
-//     },
-//   ],
-// };
+  //   items: [
+  //     {
+  //       id: 1,
+  //       name: "Wireless Headphones",
+  //       price: 99.99,
+  //       image: "/headphones.jpg",
+  //       quantity: 1,
+  //     },
+  //     {
+  //       id: 2,
+  //       name: "Smartwatch",
+  //       price: 199.99,
+  //       image: "/smartwatch.jpg",
+  //       quantity: 2,sele
+  //     },
+  //   ],
+  // };
 
-items: [],
-openCartSlider: false,
+  items: [],
+  openCartSlider: false,
 };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    selectAllItems: (state)=>{
-      state.items.map(
-        (item) => item.selected = true
-      )
+    selectAllItems: (state) => {
+      state.items.map((item) => (item.selected = true));
     },
-    unSelectAllItems: (state)=>{
-      state.items.map(
-        (item) => item.selected = false
-      )
+    unSelectAllItems: (state) => {
+      state.items.map((item) => (item.selected = false));
     },
-    selectItem: (state, action: PayloadAction<{ id: number }>)=>{
+    selectItem: (state, action: PayloadAction<{ id: number }>) => {
       const existingItem = state.items.find(
         (item) => item.id === action.payload.id
       );
       if (existingItem) {
-        existingItem.selected = true ;
+        existingItem.selected = true;
       }
     },
-    unSelectItem: (state, action: PayloadAction<{ id: number }>)=>{  
+    unSelectItem: (state, action: PayloadAction<{ id: number }>) => {
       const existingItem = state.items.find(
         (item) => item.id === action.payload.id
       );
       if (existingItem) {
-        existingItem.selected = false ;
+        existingItem.selected = false;
       }
     },
     addItem: (state, action: PayloadAction<CartItem>) => {
@@ -77,7 +73,7 @@ const cartSlice = createSlice({
       if (existingItem) {
         existingItem.quantity += 1;
       } else {
-        state.items.push({ ...action.payload, quantity: 1, selected: true});
+        state.items.push({ ...action.payload, quantity: 1, selected: true });
       }
     },
     removeItem: (state, action: PayloadAction<{ id: number }>) => {
@@ -85,20 +81,37 @@ const cartSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       if (existingItem && existingItem.quantity > 1) {
+        console.log("hhhhhhh 4444", existingItem.quantity)
         existingItem.quantity -= 1;
       } else {
-        state.items = state.items.filter((item) => item.id !== action.payload.id);
-
+        state.items = state.items.filter(
+          (item) => item.id !== action.payload.id
+        );
       }
     },
+
+    removeItemComplete: (state, action: PayloadAction<{ id: number }>) => {
+      state.items = state.items.filter((item) => item.id !== action.payload.id);
+    },
+
     clearCart: (state) => {
       state.items = [];
     },
     handleCartSlider: (state, action: PayloadAction<{ value: boolean }>) => {
-      state.openCartSlider = action.payload
+      state.openCartSlider = action.payload;
     },
   },
 });
 
-export const { addItem, removeItem, clearCart, selectAllItems, unSelectAllItems, selectItem, unSelectItem, handleCartSlider } = cartSlice.actions;
+export const {
+  addItem,
+  removeItem,
+  clearCart,
+  selectAllItems,
+  unSelectAllItems,
+  selectItem,
+  unSelectItem,
+  handleCartSlider,
+  removeItemComplete,
+} = cartSlice.actions;
 export default cartSlice.reducer;

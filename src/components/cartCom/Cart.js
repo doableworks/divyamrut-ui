@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import CustomButton from "@/components/common/CustomButton";
 import {
   addItem,
   removeItem,
@@ -47,7 +48,7 @@ const CartPage = () => {
   };
   const allSelected =
     cartItems.length > 0 && cartItems.every((item) => item.selected === true);
-  return ( 
+  return (
     <div className="flex flex-col lg:flex-row gap-10 relative z-20 mx-auto w-[90%] md:w-[85%] py-10">
       <div className="w-full lg:w-[75%] mx-auto bg-white shadow-md rounded-lg">
         <div className="p-6 h-full">
@@ -58,7 +59,7 @@ const CartPage = () => {
             {cartItems.length > 0 && (
               <span
                 onClick={() => dispatch(clearCart())}
-                className="text-cyan-400 underline cursor-pointer"
+                className="section-content underline cursor-pointer"
               >
                 Clear Cart
               </span>
@@ -67,7 +68,7 @@ const CartPage = () => {
           {cartItems.length > 0 && (
             <div className="flex justify-between items-center mb-2">
               <label
-                className="flex items-center space-x-2 text-cyan-400 underline cursor-pointer"
+                className="section-content flex items-center  underline cursor-pointer"
                 onClick={() =>
                   allSelected ? handleUnselectAll() : handleSelectAll()
                 }
@@ -112,12 +113,19 @@ const CartPage = () => {
                     className="rounded-md mt-2"
                   />
                   <div className="ml-4 flex-1">
-                    <h2 className="font-medium">{item.name}</h2>
-                    <p className="text-gray-600">Price: ₹&nbsp;{item.price}</p>
-                    <div className="mt-2">
+                    {/* <h2 className="font-medium">{item.name}</h2> */}
+                    <h2 className="text-heading !text-left w-[98%]">
+                      Lorem Ipsum is simply dummy text of the typesetting
+                      industry.
+                    </h2>
+                    <p className="text-text !text-left">
+                      Price:{" "}
+                      <span className="text-heading !text-left">₹&nbsp;{item.price}</span>
+                    </p>
+                    <div className="mt-2 flex flex ">
                       <label
                         htmlFor={`quantity-${item.id}`}
-                        className="mr-2 text-gray-700"
+                        className="mr-2 text-text !text-left"
                       >
                         Quantity:
                       </label>
@@ -128,7 +136,7 @@ const CartPage = () => {
                         >
                           -
                         </button>
-                        <span>{item.quantity}</span>
+                        <span className="text-heading !text-left">{item.quantity}</span>
                         <button
                           onClick={() => handleAddItem(item)}
                           className="px-2 py-1 bg-gray-200 rounded"
@@ -138,8 +146,8 @@ const CartPage = () => {
                       </div>
                     </div>
                   </div>
-                  <p className="text-gray-900 font-medium">
-                  ₹&nbsp;{(item.price * item.quantity).toFixed(2)}
+                  <p className="hidden md:block section-title">
+                    ₹&nbsp;{(item.price * item.quantity).toFixed(2)}
                   </p>
                 </div>
               </div>
@@ -149,21 +157,24 @@ const CartPage = () => {
           )}
         </div>
       </div>
-      <div className="w-full lg:w-[40%] xl:w-[30%] mx-auto bg-white shadow-md rounded-lg flex flex-col items-center p-6">
+      <div className="w-full lg:w-[40%] xl:w-[30%] h-fit mx-auto bg-white shadow-md rounded-lg flex flex-col items-center p-6">
         {/* Total Section */}
         <div className="text-right mt-6">
-          <h3 className="text-xl font-medium">Total: ₹&nbsp;{calculateTotal()}</h3>
+          <h3 className="section-title">
+            Total: ₹&nbsp;{calculateTotal()}
+          </h3>
         </div>
 
         {/* Checkout Button */}
         <div className="mt-6 text-right">
-          <button
+          <CustomButton
+            htmlType="submit"
+            className="site-button-primary !m-0 w-[-webkit-fill-available] capitalize"
+            title="Proceed to Checkout"
+            loading={false}
             type="submit"
-            className="w-full bg-q4ca25af text-white p-4 rounded min-w-[250px] max-w-[350px]"
-            disabled={cartItems.length > 0}
-          >
-            Proceed to Checkout
-          </button>
+            // onClick={() => MoveRoute("/products")}
+          />
         </div>
       </div>
     </div>
