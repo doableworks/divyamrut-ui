@@ -24,6 +24,7 @@ const page = ({ params }) => {
 
     const products = [
         {
+            id:1,
             title:
                 "Natural Health Supplements",
             slug: "product-details",
@@ -36,6 +37,7 @@ const page = ({ params }) => {
                 "/asset/home/natural-health-support.jpg",
         },
         {
+            id:2,
             title:
                 "Natural Health Supplements",
             slug: "product-details",
@@ -48,6 +50,7 @@ const page = ({ params }) => {
                 "/asset/home/natural-health-support.jpg",
         },
         {
+            id:3,
             title:
                 "Natural Health Supplements",
             slug: "product-details",
@@ -60,6 +63,7 @@ const page = ({ params }) => {
                 "/asset/home/natural-health-support.jpg",
         },
         {
+            id:4,
             title:
                 "Natural Health Supplements",
             slug: "product-details",
@@ -72,6 +76,7 @@ const page = ({ params }) => {
                 "/asset/home/natural-health-support.jpg",
         },
         {
+            id:5,
             title:
                 "Natural Health Supplements",
             slug: "product-details",
@@ -84,6 +89,7 @@ const page = ({ params }) => {
                 "/asset/home/natural-health-support.jpg",
         },
         {
+            id:6,
             title:
                 "Natural Health Supplements",
             slug: "product-details",
@@ -96,6 +102,7 @@ const page = ({ params }) => {
                 "/asset/home/natural-health-support.jpg",
         },
         {
+            id:7,
             title:
                 "Natural Health Supplements",
             slug: "product-details",

@@ -12,6 +12,16 @@ import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { closeNav, openNav } from "@/redux/feature/mobileNavSlice";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
+import {
+  addItem,
+  removeItem,
+  clearCart,
+  selectAllItems,
+  unSelectAllItems,
+  selectItem,
+  unSelectItem,
+  handleCartSlider
+} from "@/redux/feature/cartSlice";
 
 const initialMenuItems = [
   { label: "Home", path: "/" },
@@ -40,6 +50,7 @@ export default function PremiumNavbar({
   const pathname = usePathname();
   const cartItems = useSelector((state) => state.cart.items);
   const cartCount = Array.isArray(cartItems) ? cartItems.length : cartItems;
+  const isCartSliderOpen = useSelector((state) => state.cart.openCartSlider);
 
   const [scrollingNum, setScrollingNum] = useState(scrollNum);
   const [isScrolling, setIsScrolling] = useState(false);
@@ -51,6 +62,12 @@ export default function PremiumNavbar({
   const { data: session } = useSession();
 
   const isMobileNavOpen = useSelector((state) => state.mobileNav.isOpen);
+
+
+  const handleCartSliderfun = () => {
+    console.log("22 2222 handleCartSliderfun")
+      dispatch(handleCartSlider(!isCartSliderOpen));
+    };
 
   const menuItems = initialMenuItems.map((each) => {
     switch (each.label) {
@@ -213,7 +230,7 @@ export default function PremiumNavbar({
                 </Link>
               </>
             )}
-            <NavCart count={cartCount} />
+            <NavCart count={cartCount} handleCartSliderfun={handleCartSliderfun} />
           </figure>
         </section>
 

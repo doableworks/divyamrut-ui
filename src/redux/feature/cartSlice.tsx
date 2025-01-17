@@ -14,6 +14,7 @@ interface CartItem {
 // Define the state type
 interface CartState {
   items: CartItem[];
+  openCartSlider: boolean
 }
 
 const initialState: CartState = {
@@ -36,6 +37,7 @@ const initialState: CartState = {
 // };
 
 items: [],
+openCartSlider: false,
 };
 
 const cartSlice = createSlice({
@@ -92,8 +94,11 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.items = [];
     },
+    handleCartSlider: (state, action: PayloadAction<{ value: boolean }>) => {
+      state.openCartSlider = action.payload
+    },
   },
 });
 
-export const { addItem, removeItem, clearCart, selectAllItems, unSelectAllItems, selectItem, unSelectItem } = cartSlice.actions;
+export const { addItem, removeItem, clearCart, selectAllItems, unSelectAllItems, selectItem, unSelectItem, handleCartSlider } = cartSlice.actions;
 export default cartSlice.reducer;

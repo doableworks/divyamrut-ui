@@ -7,6 +7,8 @@ import RegisterModal from "../login/RegisterModal";
 import NewFooter from "@/components/common/reference/NewFooter";
 import { twMerge } from "tailwind-merge";
 import { usePathname } from "next/navigation";
+import CardSlider from "@/components/cartCom/CardSlider"
+
 
 export const LayoutSection = ({
   children,
@@ -70,7 +72,7 @@ export const LayoutSection = ({
           <NewFooter />
         </div>
       </main>
-
+      <CardSlider />
       <LoginModal />
       <RegisterModal />
     </SessionProvider>

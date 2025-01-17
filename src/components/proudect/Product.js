@@ -13,6 +13,7 @@ import {
   unSelectAllItems,
   selectItem,
   unSelectItem,
+  handleCartSlider
 } from "@/redux/feature/cartSlice";
 import AddToCartBtn from "../BtnCom/AddToCart";
 
@@ -23,7 +24,8 @@ const Product = ({ item, productCategory }) => {
   const handleAddItem = async () => {
     try {
       await dispatch(addItem(item));
-      await router.push("/cart");
+      dispatch(handleCartSlider(true));
+      // await router.push("/cart");
     } catch (error) {
       console.log("error 555", error);
     }

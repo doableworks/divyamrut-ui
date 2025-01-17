@@ -47,7 +47,7 @@ const CartPage = () => {
   };
   const allSelected =
     cartItems.length > 0 && cartItems.every((item) => item.selected === true);
-  return (
+  return ( 
     <div className="flex flex-col lg:flex-row gap-10 relative z-20 mx-auto w-[90%] md:w-[85%] py-10">
       <div className="w-full lg:w-[75%] mx-auto bg-white shadow-md rounded-lg">
         <div className="p-6 h-full">
@@ -113,7 +113,7 @@ const CartPage = () => {
                   />
                   <div className="ml-4 flex-1">
                     <h2 className="font-medium">{item.name}</h2>
-                    <p className="text-gray-600">Price: ${item.price}</p>
+                    <p className="text-gray-600">Price: ₹&nbsp;{item.price}</p>
                     <div className="mt-2">
                       <label
                         htmlFor={`quantity-${item.id}`}
@@ -139,7 +139,7 @@ const CartPage = () => {
                     </div>
                   </div>
                   <p className="text-gray-900 font-medium">
-                    ${(item.price * item.quantity).toFixed(2)}
+                  ₹&nbsp;{(item.price * item.quantity).toFixed(2)}
                   </p>
                 </div>
               </div>
@@ -152,7 +152,7 @@ const CartPage = () => {
       <div className="w-full lg:w-[40%] xl:w-[30%] mx-auto bg-white shadow-md rounded-lg flex flex-col items-center p-6">
         {/* Total Section */}
         <div className="text-right mt-6">
-          <h3 className="text-xl font-medium">Total: ${calculateTotal()}</h3>
+          <h3 className="text-xl font-medium">Total: ₹&nbsp;{calculateTotal()}</h3>
         </div>
 
         {/* Checkout Button */}
