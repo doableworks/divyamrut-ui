@@ -9,26 +9,22 @@ const ProductSlider1 = ({categories}) => {
     const router = useRouter();
 
     var settings = {
-        infinite: true,
+      dots: false,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      arrows: false,
+      infinite: true,
+      // speed: 500,
+      speed: 800,
+      slidesToShow: 6,
+      slidesToScroll: 1,
         lazyLoad: true,
-        // className: "center",
-        // centerMode: true,
-        // centerPadding: "0px",
-        slidesToShow: 6,
-        slidesToScroll: 1,
-        dots: false,
-        autoplay: true,
-        speed: 5000,
-        autoplaySpeed: 5000,
-        cssEase: "linear",
-        arrows: false,
         responsive: [
           {
             breakpoint: 1100,
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1,
-              centerMode: false,
               dots: false,
             },
           },
@@ -37,10 +33,10 @@ const ProductSlider1 = ({categories}) => {
 
   return (
     <>
-    <Slider {...settings} className="custom-slick-slider">
+    <Slider {...settings}>
           {categories &&
             categories?.map((cate, index) => (
-              <div key={index + cate.title} className="slick-slide cursor-pointer"
+              <div key={index + cate.title} className="px-4 cursor-pointer"
                 onClick={() => router.push(`/products/${cate.route}`)}
               >
                 <div className="ml-2 rounded-xl bg-text h-52 flex justify-center items-center px-4">
@@ -49,11 +45,11 @@ const ProductSlider1 = ({categories}) => {
               </div>
             ))}
         </Slider>
-        <style jsx global>{`
+        {/* <style jsx global>{`
         .custom-slick-slider .slick-slide {
           margin: 0 10px;
         }
-      `}</style>
+      `}</style> */}
     </>
   )
 }

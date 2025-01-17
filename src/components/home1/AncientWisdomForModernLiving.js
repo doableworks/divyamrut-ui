@@ -9,62 +9,62 @@ gsap.registerPlugin(ScrollTrigger);
 
 const AncientWisdomForModernLiving = () => {
     
-  useGSAP(() => {
-    gsap.fromTo(
-        ".left-section-awf",
-        { opacity: 0, x: -100 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.1,
-          delay: 0,
-          // stagger: 0.2,
-          scrollTrigger: {
-            trigger: "#AncientWisdomForModernLiving",
-            start: "top 80%",
-            end: "bottom 20%",
-            // scrub: true,
-          },
-        }
-      );
+  // useGSAP(() => {
+  //   gsap.fromTo(
+  //       ".left-section-awf",
+  //       { opacity: 0, x: -100 },
+  //       {
+  //         x: 0,
+  //         opacity: 1,
+  //         duration: 0.1,
+  //         delay: 0,
+  //         // stagger: 0.2,
+  //         scrollTrigger: {
+  //           trigger: "#AncientWisdomForModernLiving",
+  //           start: "top 80%",
+  //           end: "bottom 20%",
+  //           // scrub: true,
+  //         },
+  //       }
+  //     );
 
 
-      gsap.fromTo(
-        ".left-card-awf",
-        { opacity: 0, x: 300 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.1,
-          delay: 0,
-          // stagger: 0.2,
-          scrollTrigger: {
-            trigger: "#AncientWisdomForModernLiving",
-            start: "top 80%",
-            end: "bottom 20%",
-            // scrub: true,
-          },
-        }
-      );
+  //     gsap.fromTo(
+  //       ".left-card-awf",
+  //       { opacity: 0, x: 300 },
+  //       {
+  //         x: 0,
+  //         opacity: 1,
+  //         duration: 0.1,
+  //         delay: 0,
+  //         // stagger: 0.2,
+  //         scrollTrigger: {
+  //           trigger: "#AncientWisdomForModernLiving",
+  //           start: "top 80%",
+  //           end: "bottom 20%",
+  //           // scrub: true,
+  //         },
+  //       }
+  //     );
 
-      gsap.fromTo(
-        ".right-section-awf",
-        { opacity: 0, x: 300 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.1,
-          delay: 0,
-          // stagger: 0.2,
-          scrollTrigger: {
-            trigger: "#AncientWisdomForModernLiving",
-            start: "top 80%",
-            end: "bottom 20%",
-            // scrub: true,
-          },
-        }
-      );
-  }, []);
+  //     gsap.fromTo(
+  //       ".right-section-awf",
+  //       { opacity: 0, x: 300 },
+  //       {
+  //         x: 0,
+  //         opacity: 1,
+  //         duration: 0.1,
+  //         delay: 0,
+  //         // stagger: 0.2,
+  //         scrollTrigger: {
+  //           trigger: "#AncientWisdomForModernLiving",
+  //           start: "top 80%",
+  //           end: "bottom 20%",
+  //           // scrub: true,
+  //         },
+  //       }
+  //     );
+  // }, []);
 
   return (
     <div
