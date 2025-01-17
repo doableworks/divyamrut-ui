@@ -1,7 +1,5 @@
 import MainBanner from "@/components/common/MainBanner";
 import CartPage from "@/components/cartCom/Cart";
-import Image from "next/image";
-import HolisticHealth from "@/components/home1/HolisticHealth"
 
 const page = () => {
   const heading =
