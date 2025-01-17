@@ -81,7 +81,6 @@ const cartSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       if (existingItem && existingItem.quantity > 1) {
-        console.log("hhhhhhh 4444", existingItem.quantity)
         existingItem.quantity -= 1;
       } else {
         state.items = state.items.filter(
@@ -97,8 +96,8 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.items = [];
     },
-    handleCartSlider: (state, action: PayloadAction<{ value: boolean }>) => {
-      state.openCartSlider = action.payload;
+    handleCartSlider: (state, action: PayloadAction<boolean>) => {
+      state.openCartSlider = action.payload
     },
   },
 });

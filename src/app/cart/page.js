@@ -12,8 +12,7 @@ const page = () => {
     <div>
       {/* <MainBanner heading={heading} subHeading={subHeading} /> */}
 
-      <div id="pricing" className="w-full relative overflow-hidden">
-        <div className="relative z-20 mx-auto w-[90%] md:w-[85%] 2xl:w-full py-32">
+      <div id="pricing" className="common_page_width relative overflow-hidden">
           <div className="fade-up">
             <h6 className="font-jost text-d49ac81 text-[14px] font-[500] leading-[1.4em] uppercase text-center">
               Choose Package
@@ -23,7 +22,6 @@ const page = () => {
             </h2>
           </div>
           <CartPage />
-        </div>
       </div>
       {/* <HolisticHealth /> */}
     </div>

@@ -49,7 +49,7 @@ const CartPage = () => {
   const allSelected =
     cartItems.length > 0 && cartItems.every((item) => item.selected === true);
   return (
-    <div className="flex flex-col lg:flex-row gap-10 relative z-20 mx-auto w-[90%] md:w-[85%] py-10">
+    <div className="flex flex-col lg:flex-row gap-10 relative z-20 py-10">
       <div className="w-full lg:w-[75%] mx-auto bg-white shadow-md rounded-lg">
         <div className="p-6 h-full">
           <div className="flex justify-between">
