@@ -1,5 +1,5 @@
 import React from "react";
-import "./steps.css";
+import "@/styles/steps.css";
 import { Steps } from "antd";
 import { twMerge } from "tailwind-merge";
 
