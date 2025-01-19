@@ -124,7 +124,7 @@ const MobileNavbar = ({
             </div>
           ))}
         </div>
-        <div className="border-t-2 pt-3">
+        <div className="border-t-2 p-3">
           {!session && (
             <CustomButton
               className="site-button-primary !m-0 w-[-webkit-fill-available]"

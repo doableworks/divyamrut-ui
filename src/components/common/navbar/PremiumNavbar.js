@@ -45,7 +45,7 @@ export default function PremiumNavbar({ scrollNum }) {
   const menuItems = useSelector((state) => state.menuItems.all);
 
   useEffect(() => {
-    if (scrollNum < scrollingNum && scrollNum > 50) {
+    if (scrollNum < scrollingNum && scrollNum > 300) {
       setIsScrollAndUp(true);
     } else {
       setIsScrollAndUp(false);
@@ -53,7 +53,7 @@ export default function PremiumNavbar({ scrollNum }) {
 
     setScrollingNum(scrollNum);
 
-    setIsScrolling(scrollNum > 30);
+    setIsScrolling(scrollNum > 300);
   }, [scrollNum]);
 
   const handleShowSearch = () => {
@@ -101,8 +101,8 @@ export default function PremiumNavbar({ scrollNum }) {
         "relative shadow flex justify-center bg-[--base] z-30 transition-all duration-3000 ease-in-out top-0 w-full",
         isScrollAndUp
           ? "fixed translate-y-0"
-          : isScrolling
-          ? "fixed translate-y-[-100%]"
+          : isScrolling 
+          ? "absolute translate-y-[-100%]"
           : "absolute translate-y-0"
       )}
     >
