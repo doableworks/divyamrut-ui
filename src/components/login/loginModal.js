@@ -175,7 +175,7 @@ const LoginModal = () => {
 
               <div className="text-right mb-5">
                 <span
-                  className="text-sm text-right font-semibold text-right text-blue-600 cursor-pointer mb-5"
+                  className="text-sm font-semibold text-right text-blue-600 cursor-pointer mb-5"
                   onClick={handleForgetPass}
                 >
                   Forgot Password
