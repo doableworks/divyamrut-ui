@@ -48,10 +48,10 @@ const WhyChooseUs = () => {
         <div className="bg-[rgba(0,0,0,.4)] w-full text-white">
           <div className="relative z-20 mx-auto flex flex-col items-center justify-center w-[90%] md:w-[85%] xl:w-full py-32">
             <div className="max-w-xl">
-              <h6 className="font-jost text-text text-[14px] font-[500] leading-[1.4em] uppercase text-center">
+              <h6 className="section-title !text-white">
                 Why Choose Us
               </h6>
-              <h2 className="font-suranna mt-[1rem] mb-[1.5rem] text-[32px] leading-[36px] md:text-[3em] md:leading-[1.3em] font-[400] text-text text-center">
+              <h2 className="highlight-heading !text-white">
                 Medicine with the green perspective.
               </h2>
             </div>
@@ -72,10 +72,10 @@ const WhyChooseUs = () => {
                       <Help fill="#99C24A" h={35} w={35} />
                     )}
                   </div>
-                  <h3 className="font-suranna text-[20px] md:text-[21px] font-[400] leading-[1.4em] text-text mb-2">
+                  <h3 className="font-suranna text-[20px] md:text-[21px] font-[400] leading-[1.4em] mb-2">
                     {feature.title}
                   </h3>
-                  <p className="font-jost text-[11px] md:text-[16px] font-[400] text-center text-[#FFFFFF80]">
+                  <p className="section-content">
                     {feature.text}
                   </p>
                 </div>

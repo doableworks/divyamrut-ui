@@ -103,10 +103,10 @@ const WhatWeOffer = () => {
 
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] xl:w-full py-32">
         <div className="flex flex-col justify-center items-center">
-          <h6 className="font-jost text-q3c3c3d text-[14px] font-[500] leading-[1.4em] uppercase text-center">
+          <h6 className="section-title">
             What We offer
           </h6>
-          <h2 className="max-w-xl text-center font-suranna font-[400] text-E0A43B mt-[1rem] mb-[1.5rem] text-[32px] leading-[36px] md:text-[3em] md:leading-[1.3em]">
+          <h2 className="!max-w-xl highlight-heading">
             The combination of nature and science.
           </h2>
         </div>

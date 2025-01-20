@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-import { Button, Flex, Modal, Steps } from "antd";
+import { Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleBookingModal } from "@/redux/feature/therapySlice";
 import "./therapy.css";
 import Image from "next/image";
 import CustomSteps from "@/components/steps/index";
+import StaffItem, { NoStaffAvailabe } from "./StaffItem";
+import { message } from "antd";
+import CustomCalendar from "@/components/calendar/CustomCalendar";
+
+const allowedStatuses = ["wait", "process", "finish", "error"];
 
 const stepsTherapyBooking = [
   {
     id: 0,
     label: "Select Staff",
-    title: "Staff",
+    title: "Therapist",
   },
   {
     id: 1,
@@ -25,7 +30,7 @@ const stepsTherapyBooking = [
   {
     id: 3,
     label: "Confirm Details",
-    title: "Confirmation",
+    title: "Payment",
   },
 ];
 
@@ -42,77 +47,153 @@ const smallDeviceItems = [
   {
     title: "",
   },
-  {
-    title: "",
-  },
 ];
 
-export default function BookingModal({}) {
+export default function BookingModal({ therapyStaff }) {
   const dispatch = useDispatch();
-  const [activeStep, setActiveStep] = useState(stepsTherapyBooking[0]);
+  const [activeStep, setActiveStep] = useState(0);
+  const [lastStepStatus, setLastStepStatus] = useState("process");
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const [selectedStaff, setSelectedStaff] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const isBookingModal = useSelector((state) => state.therapy.isBookingModal);
 
-  const handleBookingModal = (payload) => {
-    dispatch(toggleBookingModal(payload));
+  const increaseActiveStep = () => {
+    setActiveStep(activeStep + 1);
   };
 
-  const renderActiveStep = () => {
-    switch (activeStep) {
-      case "":
-        return null;
+  const handleSetSelectedStaff = (clickedStaff) => {
+    setSelectedStaff(clickedStaff);
+    increaseActiveStep();
+  };
 
+  const decreaseActiveStep = () => {
+    setActiveStep(activeStep - 1);
+  };
+
+  const handleCancelBookingModal = () => {
+    setActiveStep(0);
+    setSelectedStaff(null);
+    dispatch(toggleBookingModal(false));
+  };
+
+  const handleCheckValidation = () => {
+    switch (activeStep) {
+      case 0:
+        if (selectedStaff) {
+          return true;
+        } else {
+          messageApi.open({
+            type: "error",
+            content: "Please choose the staff to proceed.",
+          });
+          return false;
+        }
       default:
-        return <div className="h-56 lg:h-auto"></div>;
+        return false;
     }
   };
+
+  const handleStepNext = () => {
+    const isValidated = handleCheckValidation();
+
+    if (isValidated) {
+      if (activeStep === 0) {
+        increaseActiveStep();
+      }
+    }
+  };
+
+  const renderActiveStep = (step) => {
+    switch (step) {
+      case 0:
+        return therapyStaff?.length > 0 ? (
+          <ul className="list-none grid grid-cols-1 sm:grid-cols-2 gap-3 p-5">
+            {therapyStaff.map((each) => (
+              <StaffItem
+                detail={each}
+                key={each.id}
+                selectedStaff={selectedStaff}
+                handleSetSelectedStaff={handleSetSelectedStaff}
+              />
+            ))}
+          </ul>
+        ) : (
+          <NoStaffAvailabe />
+        );
+      case 1:
+        return (
+          <div className="h-full p-5 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <p className="text-center section-title !mb-3">Date</p>
+              <CustomCalendar />
+            </div>
+            <div>
+              <p className="text-center section-title !mb-3">Time</p>
+              <div className="bg-white rounded h-full pt-3">
+                <p className="section-content !mb-3">Select Date</p>
+                <hr />
+              </div>
+            </div>
+          </div>
+        );
+      default:
+        return <div>Hello World</div>;
+    }
+  };
+
+  const activeStepDetail = stepsTherapyBooking.find(
+    (each) => each.id === activeStep
+  );
 
   return (
     <Modal
       centered
       open={isBookingModal}
-      onCancel={() => handleBookingModal(false)}
+      onCancel={handleCancelBookingModal}
       footer={null}
       width={{
         xs: "90%",
         sm: "80%",
         md: "70%",
-        lg: "60%",
-        xl: "50%",
-        xxl: "40%",
+        lg: "70%",
+        xl: "70%",
+        xxl: "70%",
       }}
     >
-      <div className="max-h-[80vh] flex flex-col lg:flex-row w-full">
-        <section className="bg-[--base] w-full lg:w-[35%] p-6">
-          <Image
-            src="/asset/divyamrut_transparent_logo.webp"
-            alt="logo"
-            height={100}
-            width={100}
-            className="site_logo m-auto mb-7"
-          />
-          <CustomSteps items={smallDeviceItems} className="block lg:hidden" />
+      <div className="flex flex-col w-full overflow-hidden">
+        <section className="bg-[--base] w-full p-6 flex-shrink-0">
           <CustomSteps
+            status={lastStepStatus}
+            current={activeStep}
             items={stepsTherapyBooking}
-            direction="vertical"
-            className="hidden lg:inline min-h-32"
+            className="hidden lg:block"
+          />
+          <CustomSteps
+            status={lastStepStatus}
+            current={activeStep}
+            items={smallDeviceItems}
+            className="block lg:hidden"
           />
         </section>
         <section className="bg-[#e1e1e18d] flex-grow flex flex-col">
-          <div className=" border-b-2 p-3">
-            <p className="section-title !text-[--voilet] !normal-case !text-left">
-              {activeStep.label}
-            </p>
+          <div className="flex-grow h-72 md:h-96 overflow-y-auto overflow-x-hidden">
+            {renderActiveStep(activeStep)}
           </div>
-          <div className="flex-grow h-full">{renderActiveStep()}</div>
-          <div className="bg-white w-full p-3 flex justify-between items-center">
-            <button className="site-button-primary !mt-0 !min-w-24 !min-h-max">
-              Cancel
-            </button>
-            <button className="site-button-secondary !mt-0 !min-w-24 !min-h-max">
+
+          <div className="w-full p-3 flex justify-end items-center border-t-2">
+            <button
+              onClick={handleStepNext}
+              className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
+            >
               Next
             </button>
           </div>
+          {contextHolder}
         </section>
       </div>
     </Modal>

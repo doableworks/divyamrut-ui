@@ -1,21 +1,9 @@
-import React from "react";
-import "@/styles/steps.css";
+import React, { useEffect, useRef } from "react";
+import "./steps.css";
 import { Steps } from "antd";
 import { twMerge } from "tailwind-merge";
 
-const intialSteps = [
-  {
-    title: "Finished",
-    description: "This will define",
-  },
-  {
-    title: "In Process",
-  },
-  {
-    title: "Waiting",
-    description: "here we are",
-  },
-];
+const intialSteps = [];
 
 const CustomSteps = ({
   current = 1,
@@ -23,14 +11,38 @@ const CustomSteps = ({
   direction = "horizontal",
   items = intialSteps,
   className,
+  onStepClick, // New prop for handling step clicks
 }) => {
+  const stepsContainerRef = useRef(null);
+  const activeStepRef = useRef(null);
+
+  useEffect(() => {
+    if (activeStepRef.current) {
+      activeStepRef.current.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+      });
+    }
+  }, [current]);
+
   return (
-    <div className={twMerge("", className)}>
+    <div
+      ref={stepsContainerRef}
+      className={twMerge("w-full overflow-x-auto no-scrollbar", className)}
+    >
       <Steps
         current={current}
         status={status}
         direction={direction}
-        items={items}
+        items={items.map((step, index) => ({
+          ...step,
+          onClick: () => {
+            console.log(`Step clicked: ${index}`);
+            if (onStepClick) onStepClick(index); 
+          },
+          ref: index === current ? activeStepRef : null,
+        }))}
+        onStepClick={onStepClick} 
       />
     </div>
   );

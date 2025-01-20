@@ -6,14 +6,32 @@ import { useDispatch, useSelector } from "react-redux";
 import BookingModal from "./BookingModal";
 import { toggleBookingModal } from "@/redux/feature/therapySlice";
 
+const initialTherapyStaff = [
+  {
+    id: 0,
+    name: "Dr. Himanshu Bhagat",
+    about: "Osteopath and Somatic Experiencing Practitioner (SEP)",
+  },
+  {
+    id: 1,
+    name: "Jayesh Jayaram Rao",
+    about: "Osteopath",
+  },
+];
+
 export default function TherapyDetail() {
   const dispatch = useDispatch();
   const [showBlockLoader, setShowBlockLoader] = useState(false);
 
+  const isBookingModal = useSelector((state) => state.therapy.isBookingModal);
+
+  const [therapyStaff, setTherapyStaff] = useState([]);
+
   const handleBookTherapy = async () => {
     setShowBlockLoader(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setTherapyStaff(initialTherapyStaff);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     setShowBlockLoader(false);
     dispatch(toggleBookingModal(true));
@@ -60,7 +78,7 @@ export default function TherapyDetail() {
         </section>
       </div>
 
-      <BookingModal />
+      {isBookingModal && <BookingModal therapyStaff={therapyStaff} />}
     </div>
   );
 }

@@ -15,7 +15,7 @@ const CountUpCom = ({id, end, suffix,decimals=0 }) => {
     );
 
   return (
-    <h5 className='font-jost text-[28px] md:text-[39px] font-[600] text-text' id={id}/>
+    <h5 className='font-jost text-[28px] md:text-[39px] font-[600]' id={id}/>
   )
 }
 
