@@ -19,10 +19,11 @@ import ProductBanner from "@/components/proudect/ProductBanner";
 //   }
 // };
 
-const page = ({ params }) => {
+const page = ({params}) => {
   // const heading = params["product-categ"];
   // const subHeading = "Products";
   // const products = await getCategoryProducts(params["products-category"]);
+
 
   const categories = [
     {
@@ -75,14 +76,34 @@ const page = ({ params }) => {
     },
 ];
 
+const OurIconicProduct = [
+  {
+    label: "item1",
+      title: "Icon product1",
+      route: "/icon-products1",
+      description:
+          "Award-winning skincare face creams made using time-tested recipes and superior Ayurvedic herbs.",
+      image: "/images/facial-moisturisers.jpg",
+  },
+  {
+    label: "item2",
+    title: "Icon product2",
+    route: "/icon-products2",
+      description:
+          "A gently purifying cleanse to start off your regime! Carefully crafted with specific ingredients to address your skin's unique needs.",
+      image: "/images/facial-cleansers.jpg",
+  },
+];
+
+
 
   return (
-    <div>
+    <div className="relative">
       <div className="relative h-[50vh]">
         <ProductBanner />
       </div>
       <div className="common_page_width"> 
-        <SubCategory categorySlug={params["products-category"]} categories={categories} />
+        <SubCategory categorySlug={params["products-category"]} categories={categories} OurIconicProduct={OurIconicProduct} />
       </div>
     </div>
   );

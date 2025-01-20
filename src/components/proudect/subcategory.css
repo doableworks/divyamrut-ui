@@ -1,0 +1,56 @@
+.sub_top_second{
+    height: 50vw;
+    /* background-color: red; */
+}
+
+
+@media screen and (min-width:1024px) and (max-width: 1200px){
+    .sub_top_second{
+        height: 300px !important;
+        /* background-color: blue; */
+    } 
+}
+
+@media screen and (min-width:1200px) and (max-width: 1347px){
+    .sub_top_second{
+        height: 366px !important;
+        /* background-color: yellow; */
+    } 
+}
+
+@media screen and (min-width: 1348px) and (max-width: 11348px){
+    .sub_top_second{
+        height: 400px !important;
+        /* background-color: orange; */
+    }
+}
+
+
+.sub_top_thrid{
+    height: 60vw;
+    /* background-color: red; */
+}
+
+
+@media screen and (min-width:1024px) and (max-width: 1200px){
+    .sub_top_thrid{
+        height: 543px !important;
+        /* background-color: blue; */
+    } 
+}
+
+@media screen and (min-width:1200px) and (max-width: 1347px){
+    .sub_top_thrid{
+        height: 296px !important;
+        /* background-color: yellow; */
+    } 
+}
+
+@media screen and (min-width: 1348px) and (max-width: 11348px){
+    .sub_top_thrid{
+        height: 390px !important;
+        /* background-color: orange; */
+    }
+}
+
+
