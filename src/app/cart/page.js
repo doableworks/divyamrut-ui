@@ -12,7 +12,7 @@ const page = () => {
 
       <div id="pricing" className="common_page_width relative overflow-hidden">
           <div className="fade-up">
-            <h6 className="font-jost text-d49ac81 text-[14px] font-[500] leading-[1.4em] uppercase text-center">
+            <h6 className="section-title">
               Choose Package
             </h6>
             <h2 className="highlight-heading">
