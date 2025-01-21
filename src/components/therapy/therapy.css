@@ -8,3 +8,11 @@
     top: -10px !important;
     right: -10px !important;
 }
+
+.ant-form-item{
+    margin-bottom: 0 !important;
+}
+
+.ant-input-outlined{
+    background: white !important;
+}

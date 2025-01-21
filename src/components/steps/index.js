@@ -11,7 +11,7 @@ const CustomSteps = ({
   direction = "horizontal",
   items = intialSteps,
   className,
-  onStepClick, // New prop for handling step clicks
+  onStepClick, 
 }) => {
   const stepsContainerRef = useRef(null);
   const activeStepRef = useRef(null);
@@ -36,10 +36,7 @@ const CustomSteps = ({
         direction={direction}
         items={items.map((step, index) => ({
           ...step,
-          onClick: () => {
-            console.log(`Step clicked: ${index}`);
-            if (onStepClick) onStepClick(index); 
-          },
+          onClick: () => onStepClick(index),
           ref: index === current ? activeStepRef : null,
         }))}
         onStepClick={onStepClick} 

@@ -26,7 +26,7 @@ export default function StaffItem({
         width={100}
         className="rounded-full h-20 w-20"
       />
-      <p className="font-jost mt-2 text-[14px]">{detail?.name}</p>
+      <p className="font-jost mt-2 text-[14px] text-center mb-1">{detail?.name}</p>
       <p className="section-content !text-[12px]">{detail?.about}</p>
     </li>
   );
