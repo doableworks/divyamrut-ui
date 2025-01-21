@@ -123,6 +123,14 @@ body {
     @apply font-jost text-primary text-[16px] font-[400] leading-[18px] text-center
   }
 
+  .section_title14 {
+    @apply font-jost text-q3c3c3d text-[14px] leading-[20px] font-[500]  uppercase text-center
+  }
+  
+  .text_text14 {
+    @apply font-jost text-primary text-[14px] font-[400] leading-[20px] text-center
+  }
+
 
   /* Button */
   .site-button-primary {

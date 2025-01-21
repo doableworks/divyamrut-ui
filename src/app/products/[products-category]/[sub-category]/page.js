@@ -117,7 +117,7 @@ const page = ({ params }) => {
     ]
 
     return (
-        <div className="common_page_width">
+        <div className="common_page_width !px-2">
             {products && products.length > 0 ? (
                 <ProductList products={products} params={params} />
             ) : (

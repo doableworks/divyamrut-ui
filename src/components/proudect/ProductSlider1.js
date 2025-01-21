@@ -21,9 +21,17 @@ const ProductSlider1 = ({categories}) => {
         lazyLoad: true,
         responsive: [
           {
-            breakpoint: 1100,
+            breakpoint: 980,
             settings: {
-              slidesToShow: 1,
+              slidesToShow: 4,
+              slidesToScroll: 1,
+              dots: false,
+            },
+          },
+          {
+            breakpoint: 580,
+            settings: {
+              slidesToShow: 3,
               slidesToScroll: 1,
               dots: false,
             },
@@ -36,11 +44,11 @@ const ProductSlider1 = ({categories}) => {
     <Slider key={"all_category"} {...settings}>
           {categories &&
             categories?.map((cate, index) => (
-              <div key={index + cate.title} className="px-4 cursor-pointer"
+              <div key={index + cate.title} className="cursor-pointer overflow-hidden"
                 onClick={() => router.push(`/products/${cate.route}`)}
               >
-                <div className="ml-2 rounded-xl bg-text h-52 flex justify-center items-center px-4">
-                  <p>{cate.title}</p>
+                <div className="ml-2 rounded-xl bg-text h-36 md:h-52 xl:h-36  flex justify-center items-center px-4">
+                  <p className='text-wrap'>{cate.title}</p>
                 </div>
               </div>
             ))}

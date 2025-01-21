@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import Product from "@/components/proudect/Product";
 import "slick-carousel/slick/slick.css";
@@ -9,6 +9,7 @@ import { useRouter } from "nextjs-toploader/app";
 
 const ProductsScroller = ({ category }) => {
   const router = useRouter();
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   var settings1 = {
     dots: false,
@@ -17,21 +18,24 @@ const ProductsScroller = ({ category }) => {
     arrows: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 5,
+    slidesToShow: 4,
+    slidesToScroll: 4,
     lazyLoad: true,
+    beforeChange: (oldIndex, newIndex) => setCurrentSlide(oldIndex),
     responsive: [
       {
         breakpoint: 1100,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 1.05, // Increased for a better partial view
           slidesToScroll: 1,
-          centerMode: true,
+          centerMode: false,  // Centering the slide
           dots: false,
         },
       },
     ],
   };
+
+
 
 
   return (
@@ -41,7 +45,7 @@ const ProductsScroller = ({ category }) => {
         <h2 className="!text-left highlight-heading">
           {category.title}
         </h2>
-        <span className={"section-content flex flex-row gap-2 cursor-pointer"}
+        <span className={"text-text flex flex-row gap-2 cursor-pointer"}
         onClick={() => router.push(`/products/${category.route}/"sub-category"/`)}
         > VIEW ALL <RightArrow fill={"#64748b"} w={18} /> </span>
         </div>
@@ -49,7 +53,7 @@ const ProductsScroller = ({ category }) => {
         <Slider key={category?.title} {...settings1}>
           {category &&
             category?.products.map((product, index) => (
-              <div key={index + category.category} className="px-4">
+              <div key={index + category?.category} className={`  pl-[20px] `}>
                 <Product
                   key={index}
                   item={product}

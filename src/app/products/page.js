@@ -535,6 +535,7 @@ const categories = [
   },
 ];
 
+
 const page = () => {
   const heading = "Bath/Aura Cleansing Salt";
   const subHeading = "Trusted by millions, validated by you.";

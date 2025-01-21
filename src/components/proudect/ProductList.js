@@ -9,7 +9,7 @@ const ProductList = ({products, params}) => {
             <div className="hidden md:block w-[15%]" >
                 <FilterSection />
             </div>
-            <div className="w-full md:w-[85%] grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4  md:gap-10 md:pl-8 md:border-l border-gray-200">
+            <div className="w-full md:w-[85%] grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-2 md:gap-4 md:pl-8 md:border-l border-gray-200">
                 {products.map((product, index) => (
                     <Product
                         key={index}

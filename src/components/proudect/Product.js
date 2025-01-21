@@ -36,7 +36,7 @@ const Product = ({ item, productCategory }) => {
 
   return (
     <div
-      className="relative flex flex-col justify-between w-full cursor-pointer rounded overflow-hidden"
+      className="relative flex flex-col justify-between cursor-pointer rounded overflow-hidden"
       onClick={() => router.push(`/products/${productCategory}/${item?.slug}`)}
     >
       {/* {item?.image && (
@@ -49,14 +49,14 @@ const Product = ({ item, productCategory }) => {
         />
       )} */}
 
-      <div className="w-full h-[300px] bg-text rounded-2xl"></div>
+      <div className="w-full h-[300px] md:h-[350px] bg-text rounded-xl"></div>
 
       <div className="flex-grow flex flex-col px-6 pt-4">
-        <h6 className="section-title !normal-case !text-[1.5rem] !text-left hover:!text-[--yellow]">
+        <h6 className="section_title14 !normal-case !text-[1.5rem] !text-left hover:!text-[--yellow]">
           {item?.title}
         </h6>
-        <p className="section-content !text-left">{item.description}</p>
-        <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-[black] mt-2">
+        <p className="text_text14 !text-left mt-1">{item.description}</p>
+        <p className="text_text14 !text-left text-[black] mt-2">
           {item?.currency == "USD" ? "$" : "₹"}&nbsp;{item?.price}
         </p>
         <div className="flex gap-1 mt-4">
