@@ -37,7 +37,7 @@ export function NoStaffAvailabe() {
     <div className="flex flex-col items-center justify-center w-full h-full p-5">
       <p className="section-title text-2xl">No Staff Availabe</p>
       <p className="section-content">
-        We didn't find staff at this time, please try again later.
+        We didn&apos;t find staff at this time, please try again later.
       </p>
     </div>
   );
