@@ -10,7 +10,8 @@ import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setMenuItems } from "@/redux/feature/menuSlice";
 import { SetIsSticky } from "@/redux/feature/productSlice";
-import CardSlider from '@/components/cartCom/CardSlider'
+import CardSlider from '@/components/cartCom/CardSlider' 
+import BuyProductModal from '@/components/proudect/BuyProductModal'
 
 export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
   const dispatch = useDispatch();
@@ -97,7 +98,7 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
           <NewFooter />
         </div>
       </main>
-      <CardSlider />
+      <BuyProductModal />
       <CardSlider />
       <LoginModal />
       <RegisterModal />
