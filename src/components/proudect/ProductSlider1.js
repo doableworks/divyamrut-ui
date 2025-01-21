@@ -10,8 +10,8 @@ const ProductSlider1 = ({categories}) => {
 
     var settings = {
       dots: false,
-      autoplay: true,
-      autoplaySpeed: 3000,
+      // autoplay: true,
+      // autoplaySpeed: 3000,
       arrows: false,
       infinite: true,
       // speed: 500,
@@ -48,7 +48,7 @@ const ProductSlider1 = ({categories}) => {
                 onClick={() => router.push(`/products/${cate.route}`)}
               >
                 <div className="ml-2 rounded-xl bg-text h-36 md:h-52 xl:h-36  flex justify-center items-center px-4">
-                  <p className='text-wrap'>{cate.title}</p>
+                  <p className='break-all'>{cate.title}</p>
                 </div>
               </div>
             ))}
