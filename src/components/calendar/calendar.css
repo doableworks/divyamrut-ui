@@ -1,0 +1,20 @@
+.day-name {
+  text-align: center;
+  font-weight: bold;
+}
+
+.day {
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  margin: 2px;
+}
+
+.day.selected {
+  background-color: #4caf50;
+  color: white;
+}
+
+.my-4 {
+  margin: 16px;
+}

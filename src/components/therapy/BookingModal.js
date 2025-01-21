@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleBookingModal } from "@/redux/feature/therapySlice";
 import "./therapy.css";
-import Image from "next/image";
 import CustomSteps from "@/components/steps/index";
 import StaffItem, { NoStaffAvailabe } from "./StaffItem";
 import { message } from "antd";
 import CustomCalendar from "@/components/calendar/CustomCalendar";
+import dayjs from "dayjs";
+import { CaretRightOutlined, CaretLeftOutlined } from "@ant-design/icons";
+import { twMerge } from "tailwind-merge";
+import { Button, Form, Input } from "antd";
 
 const allowedStatuses = ["wait", "process", "finish", "error"];
 
@@ -49,8 +52,28 @@ const smallDeviceItems = [
   },
 ];
 
+const initialTimeSlots = [
+  {
+    id: 0,
+    time: "9:00 AM",
+  },
+  {
+    id: 1,
+    time: "11:00 AM",
+  },
+  {
+    id: 2,
+    time: "1:00 PM",
+  },
+  {
+    id: 3,
+    time: "3:00 PM",
+  },
+];
+
 export default function BookingModal({ therapyStaff }) {
   const dispatch = useDispatch();
+  const [form] = Form.useForm();
   const [activeStep, setActiveStep] = useState(0);
   const [lastStepStatus, setLastStepStatus] = useState("process");
 
@@ -59,6 +82,12 @@ export default function BookingModal({ therapyStaff }) {
 
   const [selectedStaff, setSelectedStaff] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
+  const [filledUserDetails, setFilleduserDetails] = useState(null);
+
+  const [timeSlotsArray, setTimeSlotsArray] = useState(initialTimeSlots);
+
+  const [currentMonth, setCurrentMonth] = useState(dayjs().startOf("month"));
 
   const isBookingModal = useSelector((state) => state.therapy.isBookingModal);
 
@@ -93,18 +122,79 @@ export default function BookingModal({ therapyStaff }) {
           });
           return false;
         }
+      case 1:
+        if (selectedDate && selectedTimeSlot) {
+          return true;
+        } else {
+          if (!selectedDate) {
+            messageApi.open({
+              type: "error",
+              content: "Please choose a valid date.",
+            });
+            return false;
+          } else if (!selectedTimeSlot) {
+            messageApi.open({
+              type: "error",
+              content: "Please choose a valid time slot.",
+            });
+            return false;
+          }
+        }
+      case 2:
+        return true;
       default:
         return false;
     }
   };
 
-  const handleStepNext = () => {
+  const handleStepNext = async () => {
     const isValidated = handleCheckValidation();
 
     if (isValidated) {
       if (activeStep === 0) {
         increaseActiveStep();
+      } else if (activeStep === 1) {
+        increaseActiveStep();
       }
+      if (activeStep === 2) {
+        try {
+          await form.validateFields();
+          const userDetails = form.getFieldsValue();
+          setFilleduserDetails(userDetails);
+          increaseActiveStep();
+        } catch (error) {
+          console.error("Validation failed:", error);
+        }
+      } else {
+        console.log("Please define What to do ?");
+      }
+    }
+  };
+
+  const fetchMonthData = (month) => {
+    console.log(`Fetching data for month: ${month}`);
+  };
+
+  const handleGoBackMonth = () => {
+    setCurrentMonth(currentMonth.subtract(1, "month"));
+  };
+
+  const handleGoForwardMonth = () => {
+    setCurrentMonth(currentMonth.add(1, "month"));
+  };
+
+  const handleChangeSelectedDate = (value, mode) => {
+    setSelectedDate(value);
+  };
+
+  const handleChangeTimeSlot = (clicked) => {
+    setSelectedTimeSlot(clicked);
+    increaseActiveStep();
+  };
+
+  const handleClickonStep = (clickedIndex) => {
+    if (clickedIndex < activeStep) {
+      decreaseActiveStep();
     }
   };
 
@@ -112,7 +202,7 @@ export default function BookingModal({ therapyStaff }) {
     switch (step) {
       case 0:
         return therapyStaff?.length > 0 ? (
-          <ul className="list-none grid grid-cols-1 sm:grid-cols-2 gap-3 p-5">
+          <ul className="list-none grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 px-10 py-5 md:py-5">
             {therapyStaff.map((each) => (
               <StaffItem
                 detail={each}
@@ -127,22 +217,109 @@ export default function BookingModal({ therapyStaff }) {
         );
       case 1:
         return (
-          <div className="h-full p-5 grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="h-full p-5 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-3">
             <div>
               <p className="text-center section-title !mb-3">Date</p>
-              <CustomCalendar />
+              <div className="bg-white rounded pt-3 h-96">
+                <div className="flex items-center justify-center gap-4 mb-3">
+                  <button type="button" onClick={handleGoBackMonth}>
+                    <CaretLeftOutlined />
+                  </button>
+                  <p className="section-content !m-0 min-w-40">
+                    {currentMonth.format("MMMM YYYY")}
+                  </p>
+                  <button type="button" onClick={handleGoForwardMonth}>
+                    <CaretRightOutlined />
+                  </button>
+                </div>
+                <hr />
+
+                <CustomCalendar
+                  selectedDate={selectedDate}
+                  handleChangeSelectedDate={handleChangeSelectedDate}
+                  fetchMonthData={fetchMonthData}
+                  currentMonth={currentMonth}
+                />
+              </div>
             </div>
+
             <div>
               <p className="text-center section-title !mb-3">Time</p>
-              <div className="bg-white rounded h-full pt-3">
-                <p className="section-content !mb-3">Select Date</p>
+              <div className="bg-white rounded pt-3 h-96 mb-5">
+                <p className="section-content !mb-3">
+                  {selectedDate ? "Select Time" : "Select Date"}
+                </p>
                 <hr />
+
+                {selectedDate && timeSlotsArray?.length > 0 ? (
+                  <ul className="grid grid-cols-3 gap-2 m-6">
+                    {timeSlotsArray.map((each, index) => (
+                      <button
+                        key={index}
+                        onClick={() => handleChangeTimeSlot(each)}
+                        className={twMerge(
+                          "p-2 bg-gray-200 rounded-md h-11",
+                          selectedTimeSlot?.id === each?.id &&
+                            "bg-green-600 text-white"
+                        )}
+                        type="button"
+                      >
+                        <p>{each.time}</p>
+                      </button>
+                    ))}
+                  </ul>
+                ) : (
+                  selectedDate && <p>No Time Slots Found</p>
+                )}
               </div>
             </div>
           </div>
         );
+      case 2:
+        return (
+          <div className="p-6 flex flex-col gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[
+                  { required: true, message: "Email address is required." },
+                ]}
+              >
+                <Input placeholder="Enter yout email" />
+              </Form.Item>
+              <Form.Item
+                label="Number"
+                name="number"
+                rules={[
+                  { required: true, message: "Contact number is required" },
+                  {
+                    pattern: /^\d{10}$/,
+                    message: "Please enter a valid 10-digit mobile number",
+                  },
+                ]}
+              >
+                <Input placeholder="9979795588" />
+              </Form.Item>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Form.Item
+                label="Name"
+                name="name"
+                rules={[{ required: true, message: "Name is required" }]}
+              >
+                <Input placeholder="Enter first name" />
+              </Form.Item>
+              <Form.Item label="Surname" name="surname" rules={[]}>
+                <Input placeholder="Enter surname here" />
+              </Form.Item>
+            </div>
+          </div>
+        );
+      case 3:
+        return <div></div>;
       default:
-        return <div>Hello World</div>;
+        return null;
     }
   };
 
@@ -171,28 +348,57 @@ export default function BookingModal({ therapyStaff }) {
             status={lastStepStatus}
             current={activeStep}
             items={stepsTherapyBooking}
+            onStepClick={handleClickonStep}
             className="hidden lg:block"
           />
           <CustomSteps
             status={lastStepStatus}
             current={activeStep}
             items={smallDeviceItems}
+            onClick={handleClickonStep}
             className="block lg:hidden"
           />
         </section>
         <section className="bg-[#e1e1e18d] flex-grow flex flex-col">
-          <div className="flex-grow h-72 md:h-96 overflow-y-auto overflow-x-hidden">
-            {renderActiveStep(activeStep)}
-          </div>
+          <Form
+            layout="vertical"
+            form={form}
+            initialValues={{ layout: "vertical" }}
+            onFinish={handleStepNext}
+          >
+            <div className="flex-grow h-[65vh] overflow-y-auto overflow-x-hidden">
+              {renderActiveStep(activeStep)}
+            </div>
 
-          <div className="w-full p-3 flex justify-end items-center border-t-2">
-            <button
-              onClick={handleStepNext}
-              className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
-            >
-              Next
-            </button>
-          </div>
+            <div className="w-full p-3 flex justify-end items-center border-t-2">
+              {activeStep === 2 ? (
+                <Form.Item>
+                  <button
+                    className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
+                    type="primary"
+                    htmlType="submit"
+                  >
+                    Next
+                  </button>
+                </Form.Item>
+              ) : activeStep === 3 ? (
+                <button
+                  className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
+                  type="button"
+                >
+                  Confirmation
+                </button>
+              ) : (
+                <button
+                  onClick={handleStepNext}
+                  className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
+                  type="button"
+                >
+                  Next
+                </button>
+              )}
+            </div>
+          </Form>
           {contextHolder}
         </section>
       </div>
