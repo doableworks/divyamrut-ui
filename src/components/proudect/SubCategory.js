@@ -62,9 +62,9 @@ const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
         Discover Our Category Range
       </h2>
 
-      {isSticky &&
+      {/* {isSticky &&
         <div
-          id="myElementId"
+          // id="myElementId"
           className={`sticky bg-FFEEE2 top-0 z-20 flex justify-center gap-10 md:gap-8 overflow-x-scroll`}
         >
           {categories.map((category, index) => (
@@ -90,7 +90,7 @@ const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
             </div>
           ))}
         </div>
-      }
+      } */}
 
       <div
         id="myElementId"

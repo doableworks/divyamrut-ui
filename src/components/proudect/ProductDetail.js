@@ -100,7 +100,7 @@ const ProductDetail = ({item}) => {
 
         {/* Long Content to Scroll */}
         <div className="mt-8 space-y-8">
-          {[...Array(5)].map((_, index) => (
+          {/* {[...Array()].map((_, index) => (
             <div key={index}>
               <h3 className="text-lg font-semibold mb-4">Why shop from us?</h3>
               <ul className="space-y-4">
@@ -134,7 +134,7 @@ const ProductDetail = ({item}) => {
                 </li>
               </ul>
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     </div>

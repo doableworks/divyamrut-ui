@@ -20,7 +20,7 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
   const pathname = usePathname();
 
   const initialMenuItems = [
-    { label: "Home", path: "/" },
+ 
     { label: "About Us", path: "/about-us" },
     { label: "Consultations", path: "/consultations" },
     {
@@ -36,7 +36,6 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
       parentSlug: "/products/",
       subMenu: navbarAPIitems?.product_categories,
     },
-    { label: "Contact Us", path: "/contact-us" },
   ];
 
   dispatch(setMenuItems(initialMenuItems));
