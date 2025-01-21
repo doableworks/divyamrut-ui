@@ -15,7 +15,7 @@ const page = () => {
             <h6 className="font-jost text-d49ac81 text-[14px] font-[500] leading-[1.4em] uppercase text-center">
               Choose Package
             </h6>
-            <h2 className="font-suranna text-[50px] font-[400] leading-[1.3em] text-secondary text-center mb-6">
+            <h2 className="highlight-heading">
             Shopping Cart
             </h2>
           </div>
