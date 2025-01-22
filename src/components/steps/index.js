@@ -28,7 +28,7 @@ const CustomSteps = ({
   return (
     <div
       ref={stepsContainerRef}
-      className={twMerge("w-full overflow-x-auto no-scrollbar", className)}
+      className={twMerge("w-full overflow-x-auto no-scrollbar cursor-pointer", className)}
     >
       <Steps
         current={current}

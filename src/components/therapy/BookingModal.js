@@ -199,7 +199,9 @@ export default function BookingModal({ therapyStaff }) {
     }
   };
 
-  const handlePaymentStep = () => {};
+  const handlePaymentStep = () => {
+    
+  };
 
   const renderActiveStep = (step) => {
     switch (step) {
@@ -307,14 +309,14 @@ export default function BookingModal({ therapyStaff }) {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Form.Item
-                label="Name"
-                name="name"
-                rules={[{ required: true, message: "Name is required" }]}
+                label="First Name"
+                name="firstname"
+                rules={[{ required: true, message: "First name is required" }]}
               >
-                <Input placeholder="Enter first name" />
+                <Input placeholder="Enter your first name here" />
               </Form.Item>
-              <Form.Item label="Surname" name="surname" rules={[]}>
-                <Input placeholder="Enter surname here" />
+              <Form.Item label="Last name" name="lastname" rules={[]}>
+                <Input placeholder="Enter your last name here" />
               </Form.Item>
             </div>
           </div>
@@ -340,10 +342,10 @@ export default function BookingModal({ therapyStaff }) {
                 <p className="section-content !text-left">
                   Name:{" "}
                   <span className="section-content !text-left !text-[--neutral] font-bold">
-                    {filledUserDetails?.name}
+                    {filledUserDetails?.firstname}
                   </span>
-                  {filledUserDetails?.surname && (
-                    <span> {filledUserDetails?.surname}</span>
+                  {filledUserDetails?.lastname && (
+                    <span className="section-content !text-left !text-[--neutral] font-bold"> {filledUserDetails?.lastname}</span>
                   )}
                 </p>
 
@@ -364,7 +366,7 @@ export default function BookingModal({ therapyStaff }) {
 
               <div className="h-full flex-grow bg-white p-4 rounded-md grid grid-cols-1 gap-2">
                 <p className="section-title !text-gray-500 !text-left">
-                  Booking Details
+                  Allotment Details
                 </p>
                 <hr className="mb-3" />
 
@@ -483,10 +485,10 @@ export default function BookingModal({ therapyStaff }) {
               ) : activeStep === 3 ? (
                 <button
                   onClick={handlePaymentStep}
-                  className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
+                  className="site-button-primary !mt-0 !min-w-24 !min-h-max"
                   type="button"
                 >
-                  Confirmation
+                  Proceed to Payment
                 </button>
               ) : (
                 <button
