@@ -20,11 +20,11 @@ export default function StaffItem({
       )}
     >
       <Image
-        src="https://images.ctfassets.net/lh3zuq09vnm2/yBDals8aU8RWtb0xLnPkI/19b391bda8f43e16e64d40b55561e5cd/How_tracking_user_behavior_on_your_website_can_improve_customer_experience.png"
+        src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg"
         alt={detail?.id}
         height={100}
         width={100}
-        className="rounded-full h-20 w-20"
+        
       />
       <p className="font-jost mt-2 text-[14px] text-center mb-1">{detail?.name}</p>
       <p className="section-content !text-[12px]">{detail?.about}</p>
