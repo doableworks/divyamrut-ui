@@ -11,6 +11,7 @@ import dayjs from "dayjs";
 import { CaretRightOutlined, CaretLeftOutlined } from "@ant-design/icons";
 import { twMerge } from "tailwind-merge";
 import { Button, Form, Input } from "antd";
+import { formatDateToDDMMYYYY } from "@/utils/dates";
 
 const allowedStatuses = ["wait", "process", "finish", "error"];
 
@@ -198,6 +199,8 @@ export default function BookingModal({ therapyStaff }) {
     }
   };
 
+  const handlePaymentStep = () => {};
+
   const renderActiveStep = (step) => {
     switch (step) {
       case 0:
@@ -317,7 +320,103 @@ export default function BookingModal({ therapyStaff }) {
           </div>
         );
       case 3:
-        return <div></div>;
+        return filledUserDetails &&
+          selectedDate &&
+          selectedStaff &&
+          selectedTimeSlot ? (
+          <section className="p-6 h-full flex flex-col">
+            <p className="section-title !text-gray-500 !text-left !mb-3">
+              Confirm Details
+            </p>
+            <hr className="my-5 border" />
+
+            <div className="flex flex-col lg:flex-row gap-2">
+              <div className="h-full flex-grow bg-white p-4 rounded-md grid grid-cols-1 gap-2 mb-5">
+                <p className="section-title !text-gray-500 !text-left">
+                  Your Details
+                </p>
+                <hr className="mb-3" />
+
+                <p className="section-content !text-left">
+                  Name:{" "}
+                  <span className="section-content !text-left !text-[--neutral] font-bold">
+                    {filledUserDetails?.name}
+                  </span>
+                  {filledUserDetails?.surname && (
+                    <span> {filledUserDetails?.surname}</span>
+                  )}
+                </p>
+
+                <p className="section-content !text-left">
+                  Contact:{" "}
+                  <span className="section-content !text-left !text-[--neutral] font-bold">
+                    +91-{filledUserDetails?.number}
+                  </span>
+                </p>
+
+                <p className="section-content !text-left">
+                  Email:{" "}
+                  <span className="section-content !text-left !text-[--neutral] font-bold">
+                    {filledUserDetails?.email}
+                  </span>
+                </p>
+              </div>
+
+              <div className="h-full flex-grow bg-white p-4 rounded-md grid grid-cols-1 gap-2">
+                <p className="section-title !text-gray-500 !text-left">
+                  Booking Details
+                </p>
+                <hr className="mb-3" />
+
+                <p className="section-content !text-left">
+                  Date & Time:{" "}
+                  <span className="section-content !text-left !text-[--neutral] font-bold">
+                    {formatDateToDDMMYYYY(selectedDate)}
+                  </span>{" "}
+                  <span className="section-content !text-left !text-[--neutral] font-bold">
+                    {selectedTimeSlot?.time}
+                  </span>
+                </p>
+
+                <p className="section-content !text-left">
+                  Therapiest:{" "}
+                  <span className="section-content !text-left !text-[--neutral] font-bold">
+                    {selectedStaff?.name}
+                  </span>
+                </p>
+
+                <p className="section-content !text-left">
+                  Service:{" "}
+                  <span className="section-content !text-left !text-[--neutral] font-bold">
+                    Meru Chikitsa
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            <div className="rounded-md overflow-hidden bg-white border-gray-300 flex-grow my-6 flex flex-col justify-between">
+              <div className="p-6 font-jost text-[16px]">
+                <div className="flex justify-between">
+                  <p>Price:</p>
+                  <p>3000.00</p>
+                </div>
+                <div className="flex justify-between">
+                  <p>GST:</p>
+                  <p>540.00</p>
+                </div>
+              </div>
+
+              <div className="bg-green-200 py-3 px-6">
+                <div className="flex justify-between font-jost text-xl">
+                  <p>Total:</p>
+                  <p>3540.00</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        ) : (
+          <p>Oops! Please fix steps</p>
+        );
       default:
         return null;
     }
@@ -383,6 +482,7 @@ export default function BookingModal({ therapyStaff }) {
                 </Form.Item>
               ) : activeStep === 3 ? (
                 <button
+                  onClick={handlePaymentStep}
                   className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
                   type="button"
                 >
