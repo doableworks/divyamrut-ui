@@ -38,22 +38,6 @@ const smallDeviceItems = [
   },
 ];
 
-// const userAddress = {
-//   country: "United States",
-//   firstname: "John",
-//   lastname: "Doe",
-//   house: "Apt 404",
-//   street: "123 Elm Street",
-//   state: "California",
-//   city: "Los Angeles",
-//   pin_code: "90001",
-//   landmark: "Near Central Park",
-//   email: "john.doe@example.com",
-//   mobile_no: "9876543210",
-// };
-
-// const userAddress=null
-
 const BuyProductCom = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [activeStep, setActiveStep] = useState(0);
