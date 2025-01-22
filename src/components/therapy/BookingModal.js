@@ -195,13 +195,11 @@ export default function BookingModal({ therapyStaff }) {
 
   const handleClickonStep = (clickedIndex) => {
     if (clickedIndex < activeStep) {
-      decreaseActiveStep();
+      setActiveStep(clickedIndex);
     }
   };
 
-  const handlePaymentStep = () => {
-    
-  };
+  const handlePaymentStep = () => {};
 
   const renderActiveStep = (step) => {
     switch (step) {
@@ -345,7 +343,10 @@ export default function BookingModal({ therapyStaff }) {
                     {filledUserDetails?.firstname}
                   </span>
                   {filledUserDetails?.lastname && (
-                    <span className="section-content !text-left !text-[--neutral] font-bold"> {filledUserDetails?.lastname}</span>
+                    <span className="section-content !text-left !text-[--neutral] font-bold">
+                      {" "}
+                      {filledUserDetails?.lastname}
+                    </span>
                   )}
                 </p>
 
@@ -468,6 +469,12 @@ export default function BookingModal({ therapyStaff }) {
             onFinish={handleStepNext}
           >
             <div className="flex-grow h-[65vh] overflow-y-auto overflow-x-hidden">
+              <div className="lg:hidden">
+                <p className="section-title !text-gray-500 !text-left !p-6">
+                  {activeStepDetail.title}
+                </p>
+                <hr className="mb-4" />
+              </div>
               {renderActiveStep(activeStep)}
             </div>
 
