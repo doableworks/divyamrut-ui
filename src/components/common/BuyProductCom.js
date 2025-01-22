@@ -326,18 +326,26 @@ const BuyProductCom = () => {
     }
   };
 
+  const handleClickonStep = (clickedIndex) => {
+    if (clickedIndex < activeStep) {
+      setActiveStep(clickedIndex);
+    }
+  };
+
   return (
     <div className="flex flex-col w-full overflow-hidden min-h-[70vh]">
       <section className="bg-[--base] w-full p-4 flex-shrink-0">
         <CustomSteps
           status={lastStepStatus}
           current={activeStep}
+          onStepClick={handleClickonStep}
           items={stepsBuyProducts}
           className="hidden lg:block"
         />
         <CustomSteps
           status={lastStepStatus}
           current={activeStep}
+          onStepClick={handleClickonStep}
           items={smallDeviceItems}
           className="block lg:hidden"
         />
@@ -345,7 +353,7 @@ const BuyProductCom = () => {
       <section className=" flex-grow flex flex-col">
         <div>{renderActiveStep(activeStep)}</div>
 
-        <div className="w-full p-3 flex justify-end items-center">
+        <div className="w-full mt-4 flex justify-end items-center">
           {/* <button
             onClick={handleStepNext}
             className="site-button-secondary !mt-0 !min-w-24 !min-h-max"

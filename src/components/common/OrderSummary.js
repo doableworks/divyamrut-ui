@@ -39,8 +39,8 @@ const OrderSummary = ({orderList, increaseQuantity, decreaseQuantity}) => {
         <Image
           src={item.image}
           alt={item.name}
-          width={80}
-          height={80}
+          width={60}
+          height={40}
           className="rounded-md"
         />
         <div>
@@ -79,28 +79,9 @@ const OrderSummary = ({orderList, increaseQuantity, decreaseQuantity}) => {
   );
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4">
-      {/* <h2 className="text-xl font-bold text-center mb-6">YOUR ORDER</h2> */}
-      {/* <table className="w-full">
-        <thead>
-          <tr className="border-b">
-            <th className="text-left text-gray-600 font-semibold py-2">
-              PRODUCT
-            </th>
-            <th className="text-right text-gray-600 font-semibold py-2">
-              SUBTOTAL
-            </th>
-          </tr>
-        </thead>
-        <tbody style={{
-          height:"70vh",
-          overflowY:"scroll"
-        }}>
-          {orderList.map((item) => (
-            <OrderItem key={item.id} item={item} />
-          ))}
-        </tbody>
-      </table> */}
+    <div className="w-full max-w-4xl mx-auto pr-[-2rem] ">
+       <h2 className="text-xl font-bold mb-4">Order Summary</h2>
+
 
       <div className="w-full">
         <table className="w-full">
@@ -119,6 +100,9 @@ const OrderSummary = ({orderList, increaseQuantity, decreaseQuantity}) => {
           style={{
             height: "35vh",
             overflowY: "scroll",
+            paddingLeft:"5px",
+            paddingRight:"10px"
+            // width:""
           }}
         >
           <table className="w-full">
