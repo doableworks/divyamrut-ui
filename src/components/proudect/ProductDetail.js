@@ -4,6 +4,8 @@ import React, { use, useState } from "react";
 import CustomButton from "@/components/common/CustomButton";
 import ProductImage from "./ImageMagnify";
 import ImageMedium from "./ImageMedium";
+import { SetIsBuyModalOpen } from "@/redux/feature/productSlice";
+
 import ReactImageMagnify from "react-image-magnify";
 import {
   addItem,
@@ -21,14 +23,14 @@ import { useRouter } from "nextjs-toploader/app";
 const ProductDetail = ({ item }) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [selectedImage, SetSelectedImage] = useState(0)
+  const [selectedImage, SetSelectedImage] = useState(0);
 
   const imgArr = [
     "/asset/home/ayurvedic-supplement.jpg",
     "/asset/home/natural-health-support.jpg",
     "/asset/home/ayurvedic-supplement.jpg",
     "/asset/home/natural-health-support.jpg",
-  ]
+  ];
 
   const handleAddItem = async () => {
     try {
@@ -40,6 +42,10 @@ const ProductDetail = ({ item }) => {
     }
   };
 
+  const handleBuyBtn = () => {
+    dispatch(SetIsBuyModalOpen(true));
+  };
+
   return (
     <>
       <div className="relative flex flex-col md:flex-row gap-10 min-h-screen">
@@ -48,17 +54,19 @@ const ProductDetail = ({ item }) => {
           {/* <div className="w-[100%] md:w-[100%] min-w-[300px] max-w-[700px] h-auto border border-gray-300 rounded-lg overflow-hidden"> */}
           <div className="hidden md:block">
             <ProductImage imgSrc={imgArr[selectedImage]} />
-            </div>
-            <div className="block md:hidden">
+          </div>
+          <div className="block md:hidden">
             <ImageMedium imgSrc={imgArr[selectedImage]} />
-            </div>
+          </div>
           {/* </div> */}
           <div className="flex space-x-2 mt-8">
             {imgArr.map((path, index) => (
               <div
                 key={index}
-                onClick={()=>SetSelectedImage(index)}
-                className={`w-20 h-20 border border-gray-300 rounded-md overflow-hidden cursor-pointer ${selectedImage == index && 'border-2 border-slate-700'}`}
+                onClick={() => SetSelectedImage(index)}
+                className={`w-20 h-20 border border-gray-300 rounded-md overflow-hidden cursor-pointer ${
+                  selectedImage == index && "border-2 border-slate-700"
+                }`}
               >
                 <Image
                   height={200}
@@ -104,7 +112,7 @@ const ProductDetail = ({ item }) => {
               title="Buy Now"
               loading={false}
               type="submit"
-              // onClick={handleAddItem}
+              onClick={handleBuyBtn}
             />
           </div>
 

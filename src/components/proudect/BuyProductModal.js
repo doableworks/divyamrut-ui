@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleBookingModal } from "@/redux/feature/therapySlice";
+import { SetIsBuyModalOpen } from "@/redux/feature/productSlice";
 import "../therapy/therapy.css";
+import { Button, Form, Input } from "antd";
 
 import Image from "next/image";
 import CustomSteps from "@/components/steps/index";
@@ -44,10 +46,15 @@ const smallDeviceItems = [
   },
 ];
 
-export default function BookingModal({ therapyStaff }) {
+export default function BuyModal({ therapyStaff }) {
   const dispatch = useDispatch();
+  const isBuyModalOpen = useSelector(state=> state.product.isBuyModalOpen)
+
+
+
   const [activeStep, setActiveStep] = useState(0);
   const [lastStepStatus, setLastStepStatus] = useState("process");
+
 
   const [isLoading, setIsLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
@@ -55,7 +62,6 @@ export default function BookingModal({ therapyStaff }) {
   const [selectedStaff, setSelectedStaff] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
 
-  const isBookingModal = useSelector((state) => state.therapy.isBookingModal);
 
   const increaseActiveStep = () => {
     setActiveStep(activeStep + 1);
@@ -72,8 +78,7 @@ export default function BookingModal({ therapyStaff }) {
 
   const handleCancelBookingModal = () => {
     setActiveStep(0);
-    setSelectedStaff(null);
-    dispatch(toggleBookingModal(false));
+    dispatch(SetIsBuyModalOpen(false));
   };
 
   const handleCheckValidation = () => {
@@ -106,11 +111,76 @@ export default function BookingModal({ therapyStaff }) {
   const renderActiveStep = (step) => {
     switch (step) {
       case 0:
-        return  true ? (
-          <ul className="list-none grid grid-cols-1 sm:grid-cols-2 gap-3 p-5">
-            <div> delevery address</div>
-          </ul>
-        ) : (
+        return true ?(
+          <div className="p-6 flex flex-col gap-6">
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Form.Item
+                label="First name"
+                name="firstname"
+                rules={[{ required: true, message: "Name is required" }]}
+              >
+                <Input placeholder="Enter first name" />
+              </Form.Item>
+              <Form.Item label="Last name" name="lastname" rules={[]}>
+                <Input placeholder="Enter surname here" />
+              </Form.Item>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Form.Item
+                label="Apartment/suite/unit/etc"
+                name="house"
+                rules={[{ required: true, message: "Name is required" }]}
+              >
+                <Input placeholder="Apartment/suite/unit/etc" />
+              </Form.Item>
+              <Form.Item label="Street" name="street" rules={[]}>
+                <Input placeholder="Enter street address" />
+              </Form.Item>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Form.Item label="Town/City" name="city" rules={[]}>
+                <Input placeholder="Enter Town/City" />
+              </Form.Item>
+              <Form.Item label="State" name="state" rules={[]}>
+                <Input placeholder="Enter state" />
+              </Form.Item>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Form.Item label="Country" name="country" rules={[]}>
+                <Input placeholder="Enter country" />
+              </Form.Item>
+              <Form.Item label="Pin Code" name="pin_code" rules={[]}>
+                <Input placeholder="Enter pin code" />
+              </Form.Item>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[
+                  { required: true, message: "Email address is required." },
+                ]}
+              >
+                <Input placeholder="Enter yout email" />
+              </Form.Item>
+              <Form.Item
+                label="Number"
+                name="number"
+                rules={[
+                  { required: true, message: "Contact number is required" },
+                  {
+                    pattern: /^\d{10}$/,
+                    message: "Please enter a valid 10-digit mobile number",
+                  },
+                ]}
+              >
+                <Input placeholder="9979795588" />
+              </Form.Item>
+            </div>
+           
+          </div>
+        ): (
           <div>No delevery address</div>
         );
       case 1:
@@ -141,7 +211,7 @@ export default function BookingModal({ therapyStaff }) {
   return (
     <Modal
       centered
-      open={isBookingModal || true}
+      open={isBuyModalOpen}
       onCancel={handleCancelBookingModal}
       footer={null}
       width={{
