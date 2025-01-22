@@ -12,6 +12,8 @@ import { CaretRightOutlined, CaretLeftOutlined } from "@ant-design/icons";
 import { twMerge } from "tailwind-merge";
 import { Button, Form, Input } from "antd";
 import { formatDateToDDMMYYYY } from "@/utils/dates";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const allowedStatuses = ["wait", "process", "finish", "error"];
 
@@ -85,7 +87,7 @@ export default function BookingModal({ therapyStaff }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [filledUserDetails, setFilleduserDetails] = useState(null);
-
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [timeSlotsArray, setTimeSlotsArray] = useState(initialTimeSlots);
 
   const [currentMonth, setCurrentMonth] = useState(dayjs().startOf("month"));
@@ -161,7 +163,10 @@ export default function BookingModal({ therapyStaff }) {
         try {
           await form.validateFields();
           const userDetails = form.getFieldsValue();
-          setFilleduserDetails(userDetails);
+          setFilleduserDetails({
+            ...userDetails,
+            phoneNumber: phoneNumber,
+          });
           increaseActiveStep();
         } catch (error) {
           console.error("Validation failed:", error);
@@ -195,7 +200,7 @@ export default function BookingModal({ therapyStaff }) {
 
   const handleClickonStep = (clickedIndex) => {
     if (clickedIndex < activeStep) {
-      decreaseActiveStep();
+      setActiveStep(clickedIndex);
     }
   };
 
@@ -293,28 +298,34 @@ export default function BookingModal({ therapyStaff }) {
               </Form.Item>
               <Form.Item
                 label="Number"
-                name="number"
+                name="phoneNumber"
                 rules={[
                   { required: true, message: "Contact number is required" },
                   {
-                    pattern: /^\d{10}$/,
-                    message: "Please enter a valid 10-digit mobile number",
+                    pattern: /^[0-9]{7,15}$/,
+                    message: "Please enter a valid contact",
                   },
                 ]}
               >
-                <Input placeholder="9979795588" />
+                <PhoneInput
+                  country={"in"}
+                  value={phoneNumber}
+                  onChange={(phone) => setPhoneNumber("+" + phone)}
+                  inputStyle={{ width: "100%", height: "45px" }}
+                  containerStyle={{ width: "100%" }}
+                />
               </Form.Item>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Form.Item
-                label="Name"
-                name="name"
-                rules={[{ required: true, message: "Name is required" }]}
+                label="First Name"
+                name="firstname"
+                rules={[{ required: true, message: "First name is required" }]}
               >
-                <Input placeholder="Enter first name" />
+                <Input placeholder="Enter your first name here" />
               </Form.Item>
-              <Form.Item label="Surname" name="surname" rules={[]}>
-                <Input placeholder="Enter surname here" />
+              <Form.Item label="Last name" name="lastname" rules={[]}>
+                <Input placeholder="Enter your last name here" />
               </Form.Item>
             </div>
           </div>
@@ -340,17 +351,20 @@ export default function BookingModal({ therapyStaff }) {
                 <p className="section-content !text-left">
                   Name:{" "}
                   <span className="section-content !text-left !text-[--neutral] font-bold">
-                    {filledUserDetails?.name}
+                    {filledUserDetails?.firstname}
                   </span>
-                  {filledUserDetails?.surname && (
-                    <span> {filledUserDetails?.surname}</span>
+                  {filledUserDetails?.lastname && (
+                    <span className="section-content !text-left !text-[--neutral] font-bold">
+                      {" "}
+                      {filledUserDetails?.lastname}
+                    </span>
                   )}
                 </p>
 
                 <p className="section-content !text-left">
                   Contact:{" "}
                   <span className="section-content !text-left !text-[--neutral] font-bold">
-                    +91-{filledUserDetails?.number}
+                    {filledUserDetails?.phoneNumber}
                   </span>
                 </p>
 
@@ -364,7 +378,7 @@ export default function BookingModal({ therapyStaff }) {
 
               <div className="h-full flex-grow bg-white p-4 rounded-md grid grid-cols-1 gap-2">
                 <p className="section-title !text-gray-500 !text-left">
-                  Booking Details
+                  Allotment Details
                 </p>
                 <hr className="mb-3" />
 
@@ -466,6 +480,12 @@ export default function BookingModal({ therapyStaff }) {
             onFinish={handleStepNext}
           >
             <div className="flex-grow h-[65vh] overflow-y-auto overflow-x-hidden">
+              <div className="lg:hidden">
+                <p className="section-title !text-gray-500 !text-left !p-6">
+                  {activeStepDetail.title}
+                </p>
+                <hr className="mb-4" />
+              </div>
               {renderActiveStep(activeStep)}
             </div>
 
@@ -483,10 +503,10 @@ export default function BookingModal({ therapyStaff }) {
               ) : activeStep === 3 ? (
                 <button
                   onClick={handlePaymentStep}
-                  className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
+                  className="site-button-primary !mt-0 !min-w-24 !min-h-max"
                   type="button"
                 >
-                  Confirmation
+                  Proceed to Payment
                 </button>
               ) : (
                 <button

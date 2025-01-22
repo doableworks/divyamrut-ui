@@ -11,35 +11,36 @@ const CustomSteps = ({
   direction = "horizontal",
   items = intialSteps,
   className,
-  onStepClick, 
+  onStepClick,
 }) => {
-  const stepsContainerRef = useRef(null);
-  const activeStepRef = useRef(null);
-
-  useEffect(() => {
-    if (activeStepRef.current) {
-      activeStepRef.current.scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-      });
+  const transformedItems = items.map((step, index) => {
+    if (index === current) {
+      return {
+        ...step,
+        onClick: () => onStepClick(index),
+      };
+    } else {
+      return {
+        ...step,
+        title: "",
+        onClick: () => onStepClick(index),
+      };
     }
-  }, [current]);
+  });
 
   return (
     <div
-      ref={stepsContainerRef}
-      className={twMerge("w-full overflow-x-auto no-scrollbar", className)}
+      className={twMerge(
+        "w-full overflow-x-auto no-scrollbar cursor-pointer",
+        className
+      )}
     >
       <Steps
         current={current}
         status={status}
         direction={direction}
-        items={items.map((step, index) => ({
-          ...step,
-          onClick: () => onStepClick(index),
-          ref: index === current ? activeStepRef : null,
-        }))}
-        onStepClick={onStepClick} 
+        items={transformedItems}
+        onStepClick={onStepClick}
       />
     </div>
   );
