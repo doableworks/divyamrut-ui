@@ -12,6 +12,8 @@ import { CaretRightOutlined, CaretLeftOutlined } from "@ant-design/icons";
 import { twMerge } from "tailwind-merge";
 import { Button, Form, Input } from "antd";
 import { formatDateToDDMMYYYY } from "@/utils/dates";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const allowedStatuses = ["wait", "process", "finish", "error"];
 
@@ -85,7 +87,7 @@ export default function BookingModal({ therapyStaff }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [filledUserDetails, setFilleduserDetails] = useState(null);
-
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [timeSlotsArray, setTimeSlotsArray] = useState(initialTimeSlots);
 
   const [currentMonth, setCurrentMonth] = useState(dayjs().startOf("month"));
@@ -161,7 +163,10 @@ export default function BookingModal({ therapyStaff }) {
         try {
           await form.validateFields();
           const userDetails = form.getFieldsValue();
-          setFilleduserDetails(userDetails);
+          setFilleduserDetails({
+            ...userDetails,
+            phoneNumber: phoneNumber,
+          });
           increaseActiveStep();
         } catch (error) {
           console.error("Validation failed:", error);
@@ -293,16 +298,22 @@ export default function BookingModal({ therapyStaff }) {
               </Form.Item>
               <Form.Item
                 label="Number"
-                name="number"
+                name="phoneNumber"
                 rules={[
                   { required: true, message: "Contact number is required" },
                   {
-                    pattern: /^\d{10}$/,
-                    message: "Please enter a valid 10-digit mobile number",
+                    pattern: /^[0-9]{7,15}$/,
+                    message: "Please enter a valid contact",
                   },
                 ]}
               >
-                <Input placeholder="9979795588" />
+                <PhoneInput
+                  country={"in"}
+                  value={phoneNumber}
+                  onChange={(phone) => setPhoneNumber("+" + phone)}
+                  inputStyle={{ width: "100%", height: "45px" }}
+                  containerStyle={{ width: "100%" }}
+                />
               </Form.Item>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -353,7 +364,7 @@ export default function BookingModal({ therapyStaff }) {
                 <p className="section-content !text-left">
                   Contact:{" "}
                   <span className="section-content !text-left !text-[--neutral] font-bold">
-                    +91-{filledUserDetails?.number}
+                    {filledUserDetails?.phoneNumber}
                   </span>
                 </p>
 
