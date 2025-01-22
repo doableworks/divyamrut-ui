@@ -5,7 +5,6 @@ import { toggleBookingModal } from "@/redux/feature/therapySlice";
 import { SetIsBuyModalOpen } from "@/redux/feature/productSlice";
 import "../therapy/therapy.css";
 import { Button, Form, Input } from "antd";
-
 import Image from "next/image";
 import CustomSteps from "@/components/steps/index";
 import { message } from "antd";
@@ -16,8 +15,8 @@ const allowedStatuses = ["wait", "process", "finish", "error"];
 const stepsTherapyBooking = [
   {
     id: 0,
-    label: "Delevery Address",
-    title: "Delevery Address",
+    label: "delivery Address",
+    title: "delivery Address",
   },
   {
     id: 1,
@@ -81,23 +80,6 @@ export default function BuyModal({ therapyStaff }) {
     dispatch(SetIsBuyModalOpen(false));
   };
 
-  const handleCheckValidation = () => {
-    switch (activeStep) {
-      case 0:
-        if (selectedStaff) {
-          return true;
-        } else {
-          messageApi.open({
-            type: "error",
-            content: "Please choose the staff to proceed.",
-          });
-          return false;
-        }
-      default:
-        return false;
-    }
-  };
-
   const handleStepNext = () => {
     const isValidated = handleCheckValidation();
 
@@ -152,8 +134,7 @@ export default function BuyModal({ therapyStaff }) {
               <Form.Item label="Pin Code" name="pin_code" rules={[]}>
                 <Input placeholder="Enter pin code" />
               </Form.Item>
-            </div>
-            
+            </div>         
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Form.Item
                 label="Email"
@@ -178,10 +159,9 @@ export default function BuyModal({ therapyStaff }) {
                 <Input placeholder="9979795588" />
               </Form.Item>
             </div>
-           
           </div>
         ): (
-          <div>No delevery address</div>
+          <div>No delivery address</div>
         );
       case 1:
         return (
