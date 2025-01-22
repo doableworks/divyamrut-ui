@@ -264,7 +264,7 @@ const BuyProductCom = () => {
               onClick={handleStepNext}
               className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
             >
-              use this Address
+              Use this Address
             </button>
           );
         } else {

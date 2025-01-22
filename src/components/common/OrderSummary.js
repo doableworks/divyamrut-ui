@@ -119,14 +119,14 @@ const OrderSummary = ({orderList, increaseQuantity, decreaseQuantity}) => {
       <div className="mt-6 space-y-4">
         <div className="flex justify-between items-center">
           <span className="font-semibold text-gray-800">Subtotal</span>
-          <span className="text-gray-800 font-medium">
+          <span className="text-heading">
             ₹{calculateSubtotal().toFixed(2)}
           </span>
         </div>
         <div className="flex flex-col space-y-2">
           <div className="flex items-center justify-between">
             <span className="font-semibold text-gray-800">Shipping</span>
-            <span className="text-green-600 font-medium">{calculateSubtotal().toFixed(2) <= 500 ? "500" :"Free Shipping"}</span>
+            <span className="text-heading">{calculateSubtotal().toFixed(2) <= 500 ? "₹500" :"Free Shipping"}</span>
           </div>
           <div className="text-sm text-gray-600">
             Shipping Charges (Free for orders above ₹500)
@@ -135,7 +135,7 @@ const OrderSummary = ({orderList, increaseQuantity, decreaseQuantity}) => {
         <div className="flex justify-between items-center border-t pt-4">
           <span className="font-bold text-lg">TOTAL</span>
           <span className="text-lg font-bold text-gray-800">
-            ₹{calculateSubtotal().toFixed(2)}
+            ₹{Number(calculateSubtotal().toFixed(2)) + Number(calculateSubtotal().toFixed(2) <= 500 ? 500 : 0)}
           </span>
         </div>
       </div>

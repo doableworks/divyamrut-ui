@@ -77,10 +77,9 @@ const CardSlider = () => {
   };
 
   const handlecartMove = (path) => {
-    handleCartSliderClose()
+    handleCartSliderClose();
     MoveRoute(path);
   };
-
 
   return (
     <>
@@ -113,12 +112,20 @@ const CardSlider = () => {
               <div className="w-full mx-auto bg-white p-2">
                 {/* Total Section */}
 
-                <h3 className="text-xl font-medium text-center">
+                {/* <h3 className="text-xl font-medium text-center">
                   Total: ₹{calculateTotal()}
-                </h3>
+                </h3> */}
 
                 {/* Checkout Button */}
                 <div className="mt-2 text-right">
+                  <CustomButton
+                    htmlType="submit"
+                    className="site-button-secondary !m-0 !mb-2 w-[-webkit-fill-available] capitalize"
+                    title="View Cart"
+                    loading={loader}
+                    type="submit"
+                    onClick={() => handlecartMove("/cart")}
+                  />
                   {session ? (
                     <CustomButton
                       htmlType="submit"
@@ -137,14 +144,6 @@ const CardSlider = () => {
                       onClick={handleLogin}
                     />
                   )}
-                  <CustomButton
-                    htmlType="submit"
-                    className="site-button-secondary !m-0 !mt-2 w-[-webkit-fill-available] capitalize"
-                    title="View Cart"
-                    loading={loader}
-                    type="submit"
-                    onClick={() => handlecartMove("/cart")}
-                  />
                 </div>
               </div>
             )}
@@ -155,75 +154,101 @@ const CardSlider = () => {
           {/* Cart Items */}
           <div className="h-full w-full p-2 flex flex-col justify-between">
             {cartItems?.length > 0 ? (
-              cartItems?.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex items-center p-4 mb-4 border-b "
-                >
-                  {/* <input
+              <>
+                {cartItems?.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex items-center p-4 mb-4 border-b "
+                  >
+                    {/* <input
                   type="checkbox"
                   htmlFor={`cart_product ${item.id}`}
                   className="mr-4"
                   checked={item.selected || false}
                   onChange={() => handleSelectItem(item)}
                 /> */}
-                  <div className="flex flex-1 flex-row items-start">
-                    <Image
-                      src={item.image}
-                      // src={"/asset/home/ayurvedic-supplement.jpg"}
-                      alt={item.name}
-                      width={80}
-                      height={80}
-                      className="rounded-md mt-2"
-                    />
-                    <div className="ml-4 flex-1">
-                      {/* <h2 className="font-medium">{item.name}</h2> */}
-                      <h2 className="text-heading !text-left w-[98%]">
-                        Lorem Ipsum is simply dummy text of the typesetting
-                        industry.
-                      </h2>
-                      <div className="my-2 flex flex-row items-center gap-2">
-                        <label
-                          htmlFor={`quantity-${item.id}`}
-                          className="mr-2 text-text !text-left"
-                        >
-                          Quantity:
-                        </label>
-                        <div className="flex items-center space-x-2">
-                          <button
-                            onClick={() => handleRemoveItem(item)}
-                            className="px-2 py-1 bg-gray-200 rounded"
+                    <div className="flex flex-1 flex-row items-start">
+                      <Image
+                        src={item.image}
+                        // src={"/asset/home/ayurvedic-supplement.jpg"}
+                        alt={item.name}
+                        width={80}
+                        height={80}
+                        className="rounded-md mt-2"
+                      />
+                      <div className="ml-4 flex-1">
+                        {/* <h2 className="font-medium">{item.name}</h2> */}
+                        <h2 className="text-heading !text-[14px] !text-left w-[98%]">
+                          Lorem Ipsum is simply dummy text of the typesetting
+                          industry.
+                        </h2>
+                        <div className="my-2 flex flex-row items-center gap-2">
+                          <label
+                            htmlFor={`quantity-${item.id}`}
+                            className="mr-2 text-text !text-left"
                           >
-                            -
-                          </button>
-                          <span span className="text-heading !text-left">
-                            {item.quantity}
-                          </span>
-                          <button
-                            onClick={() => handleAddItem(item)}
-                            className="px-2 py-1 bg-gray-200 rounded"
-                          >
-                            +
-                          </button>
+                            Quantity:
+                          </label>
+                          <div className="flex items-center space-x-2">
+                            <button
+                              onClick={() => handleRemoveItem(item)}
+                              className="px-2 py-1 bg-gray-200 rounded"
+                            >
+                              -
+                            </button>
+                            <span span className="text-heading !text-left">
+                              {item.quantity}
+                            </span>
+                            <button
+                              onClick={() => handleAddItem(item)}
+                              className="px-2 py-1 bg-gray-200 rounded"
+                            >
+                              +
+                            </button>
+                          </div>
                         </div>
+                        <p className="text-text !text-left">
+                          Price:{" "}
+                          <span className="text-heading !text-left">
+                            ₹&nbsp;{item.price}
+                          </span>
+                        </p>
                       </div>
-                      <p className="text-text !text-left">
-                        Price:{" "}
-                        <span className="text-heading !text-left">
-                          ₹&nbsp;{item.price}
-                        </span>
-                      </p>
+                      <div
+                        className="cursor-pointer"
+                        onClick={() => handleRemoveItemComplete(item)}
+                      >
+                        <Cross h={30} w={30} />
+                      </div>
+                      {/* <Delete h={30} w={30} fill={"red"} /> */}
                     </div>
-                    <div
-                      className="cursor-pointer"
-                      onClick={() => handleRemoveItemComplete(item)}
-                    >
-                      <Cross h={30} w={30} />
+                  </div>
+                ))}
+                <div className="bg-FFEEE2 p-4 shadow-md">
+                  <h2 className="font-bold text-lg mb-4">Bill details</h2>
+                  <div className="flex justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <span>Sub total</span>
                     </div>
-                    {/* <Delete h={30} w={30} fill={"red"} /> */}
+                    <span>₹{calculateTotal()}</span>
+                  </div>
+                  <div className="flex justify-between items-center mb-2">
+                    <div className="gap-2">
+                      <div className="text-sm text-gray-600">
+                        Shipping Charges (Free for orders above ₹500)
+                      </div>
+                    </div>
+                    <span className="">{calculateTotal() <= 500 ? "₹500" :"Free Shipping"}</span>
+                  </div>
+                  <div className="flex justify-between font-bold text-lg">
+                    <span>Grand total</span>
+
+                    <h3 className="text-xl font-medium text-center">
+                      ₹{calculateTotal()}
+                    </h3>
                   </div>
                 </div>
-              ))
+              </>
             ) : (
               <div className="pt-[10rem] flex flex-col jusitify-center items-center px-4">
                 <EmptyCart h={150} w={150} fill={"#E0A43B"} />
