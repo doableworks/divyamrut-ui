@@ -10,8 +10,9 @@ import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setMenuItems } from "@/redux/feature/menuSlice";
 import { SetIsSticky } from "@/redux/feature/productSlice";
-import CardSlider from '@/components/cartCom/CardSlider' 
-import BuyProductModal from '@/components/proudect/BuyProductModal'
+import CardSlider from "@/components/cartCom/CardSlider";
+import BuyProductModal from "@/components/proudect/BuyProductModal";
+import BookingModal from "../therapy/BookingModal";
 
 export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
   const dispatch = useDispatch();
@@ -21,7 +22,6 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
   const pathname = usePathname();
 
   const initialMenuItems = [
- 
     { label: "About Us", path: "/about-us" },
     { label: "Consultations", path: "/consultations" },
     {
@@ -43,12 +43,11 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-
       const stickyElement = document.querySelector("#myElementId");
-          if (stickyElement) {
-            const isAtTop = stickyElement.getBoundingClientRect().top <= 50;
-            dispatch(SetIsSticky(isAtTop))
-          }
+      if (stickyElement) {
+        const isAtTop = stickyElement.getBoundingClientRect().top <= 50;
+        dispatch(SetIsSticky(isAtTop));
+      }
 
       if (scrollContainerRef.current) {
         const currentScrollTop = scrollContainerRef.current.scrollTop;
@@ -90,8 +89,6 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
             )}
           />
           {children}
-
-          {/* {React.cloneElement(children, { isAtTop: isSticky })} */}
         </div>
 
         <div>
@@ -102,6 +99,7 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
       <CardSlider />
       <LoginModal />
       <RegisterModal />
+      <BookingModal />
     </SessionProvider>
   );
 };

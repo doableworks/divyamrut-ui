@@ -1,15 +1,27 @@
-import TestimonialSlider from "@/components/home1/Testimonial";
 import TherapyDetail from "@/components/therapy/TherapyDetail";
-import FaqUnorder from "@/components/therapy/FaqUnorder";
 
-const TherapyName = () => {
+const apiUrl = process.env.API_URL;
+
+const fetchTherapyDetails = async (params) => {
+  try {
+    const res = await fetch(
+      `${apiUrl}/therapy/therapy-details/${params["therapy-name"]}`
+    );
+    const therapyData = await res.json();
+
+    return therapyData;
+  } catch (error) {
+    console.error("Error fetching therapy data:", error);
+    return {};
+  }
+};
+
+const TherapyName = async ({ params }) => {
+  const pageDetails = await fetchTherapyDetails(params);
+
   return (
-    <div className="relative flex flex-col items-center">
-      <TherapyDetail />
-
-      <TestimonialSlider className="bg-white" />
-
-      <FaqUnorder />
+    <div>
+      <TherapyDetail data={pageDetails} />
     </div>
   );
 };
