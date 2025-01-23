@@ -43,7 +43,7 @@ const ProductDetail = ({ item }) => {
   const handleBuyBtn = () => {
     router.push("/payment-delivery");
 
-    // dispatch(SetIsBuyModalOpen(true));
+    // dispatch(SetIsBuyModalOpen(true))
   };
 
   return (
