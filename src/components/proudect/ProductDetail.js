@@ -5,8 +5,6 @@ import CustomButton from "@/components/common/CustomButton";
 import ProductImage from "./ImageMagnify";
 import ImageMedium from "./ImageMedium";
 import { SetIsBuyModalOpen } from "@/redux/feature/productSlice";
-
-import ReactImageMagnify from "react-image-magnify";
 import {
   addItem,
   removeItem,
@@ -52,14 +50,14 @@ const ProductDetail = ({ item }) => {
     <>
       <div className="relative flex flex-col md:flex-row gap-10 min-h-screen">
         {/* Product Images Section */}
-        <div className="md:sticky self-start md:top-20 lg:w-1/2 flex flex-col items-center">
+        <div className="md:sticky self-start md:top-40 lg:w-1/2 flex flex-col items-center">
           {/* <div className="w-[100%] md:w-[100%] min-w-[300px] max-w-[700px] h-auto border border-gray-300 rounded-lg overflow-hidden"> */}
           {/* <div className="hidden md:block">
             <ProductImage imgSrc={imgArr[selectedImage]} />
           </div>
-          <div className="block md:hidden">
+          <div className="block md:hidden"> */}
             <ImageMedium imgSrc={imgArr[selectedImage]} />
-          </div> */}
+          {/* </div> */}
           {/* </div> */}
           <div className="flex space-x-2 mt-8">
             {imgArr.map((path, index) => (

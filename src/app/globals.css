@@ -95,7 +95,7 @@ body {
 
 @layer utilities {
   .common_page_width{
-    @apply mx-auto w-[100%] md:w-[90%] lg:w-[80%] px-5 md:px-4 py-10 md:py-20
+    @apply mx-auto w-[100%] md:w-[90%] lg:w-[80%] px-5 md:px-4 py-10 md:py-20 relative
   }
 
   .site_logo{

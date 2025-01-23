@@ -49,7 +49,8 @@ const CartPage = () => {
   const allSelected =
     cartItems.length > 0 && cartItems.every((item) => item.selected === true);
   return (
-    <div className="flex flex-col lg:flex-row gap-10 relative z-20 py-10">
+    <div className="relative flex flex-col lg:flex-row gap-10 z-20 py-10 min-h-screen">
+      {/* item render section */}
       <div className="w-full lg:w-[75%] mx-auto bg-white shadow-md rounded-lg">
         <div className="p-6 h-full">
           <div className="flex justify-between">
@@ -120,7 +121,9 @@ const CartPage = () => {
                     </h2>
                     <p className="text-text !text-left">
                       Price:{" "}
-                      <span className="text-heading !text-left">₹&nbsp;{item.price}</span>
+                      <span className="text-heading !text-left">
+                        ₹&nbsp;{item.price}
+                      </span>
                     </p>
                     <div className="mt-2 flex flex ">
                       <label
@@ -136,7 +139,9 @@ const CartPage = () => {
                         >
                           -
                         </button>
-                        <span className="text-heading !text-left">{item.quantity}</span>
+                        <span className="text-heading !text-left">
+                          {item.quantity}
+                        </span>
                         <button
                           onClick={() => handleAddItem(item)}
                           className="px-2 py-1 bg-gray-200 rounded"
@@ -157,15 +162,31 @@ const CartPage = () => {
           )}
         </div>
       </div>
-      <div className="w-full lg:w-[40%] xl:w-[30%] h-fit mx-auto bg-white shadow-md rounded-lg flex flex-col items-center p-6">
-        {/* Total Section */}
-        <div className="text-right mt-6">
-          <h3 className="section-title">
-            Total: ₹&nbsp;{calculateTotal()}
-          </h3>
+      {/* Checkout section */}
+      <div className="w-full lg:w-[40%] xl:w-[30%] h-fit mx-auto bg-white shadow-md rounded-lg flex flex-col p-6 lg:sticky self-start lg:top-40">
+        <div className="mt-4">
+          <h2 className="text-heading !text-left mb-4">Bill details</h2>
+          <div className="flex justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <span className="section-content !text-left">Sub total</span>
+            </div>
+            <span  className="text-heading !text-right"> ₹{calculateTotal()}</span>
+          </div>
+          <div className="flex justify-between items-center mb-2">
+            <div className="gap-2">
+              <div className="section-content !text-left">
+                Shipping Charges <br /> (Free for orders above ₹500)
+              </div>
+            </div>
+            <span className="text-heading !text-right">
+              {calculateTotal() <= 500 ? "₹500" : "Free Shipping"}
+            </span>
+          </div>
+          <div className="flex justify-between items-center font-bold">
+            <span className="section-title !text-left">Grand total</span>
+            <h3 className="sub_heading !text-right ">₹{calculateTotal()}</h3>
+          </div>
         </div>
-
-        {/* Checkout Button */}
         <div className="mt-6 text-right">
           <CustomButton
             htmlType="submit"
