@@ -10,7 +10,7 @@ const page = () => {
     <div>
       {/* <MainBanner heading={heading} subHeading={subHeading} /> */}
 
-      <div id="pricing" className="common_page_width relative overflow-hidden">
+      <div id="pricing" className="common_page_width">
           <div className="fade-up">
             <h6 className="section-title">
               Choose Package

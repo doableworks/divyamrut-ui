@@ -158,7 +158,7 @@ const CardSlider = () => {
                 {cartItems?.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center p-4 mb-4 border-b "
+                    className="flex items-center p-2 border-b "
                   >
                     {/* <input
                   type="checkbox"
@@ -176,13 +176,11 @@ const CardSlider = () => {
                         height={80}
                         className="rounded-md mt-2"
                       />
-                      <div className="ml-4 flex-1">
-                        {/* <h2 className="font-medium">{item.name}</h2> */}
-                        <h2 className="text-heading !text-[14px] !text-left w-[98%]">
-                          Lorem Ipsum is simply dummy text of the typesetting
-                          industry.
+                      <div className="ml-1 flex-1">
+                        <h2 className="text-heading !leading-[18px] !text-[14px] !text-left w-[98%]">
+                          {item.title}
                         </h2>
-                        <div className="my-2 flex flex-row items-center gap-2">
+                        <div className="my-1 flex flex-row items-center gap-2">
                           <label
                             htmlFor={`quantity-${item.id}`}
                             className="mr-2 text-text !text-left"
@@ -192,16 +190,16 @@ const CardSlider = () => {
                           <div className="flex items-center space-x-2">
                             <button
                               onClick={() => handleRemoveItem(item)}
-                              className="px-2 py-1 bg-gray-200 rounded"
+                              className="px-2 bg-gray-200 text-heading rounded"
                             >
                               -
                             </button>
-                            <span span className="text-heading !text-left">
+                            <span span className="section-title  !text-left">
                               {item.quantity}
                             </span>
                             <button
                               onClick={() => handleAddItem(item)}
-                              className="px-2 py-1 bg-gray-200 rounded"
+                              className="px-2 bg-gray-200 text-heading rounded"
                             >
                               +
                             </button>
@@ -224,26 +222,34 @@ const CardSlider = () => {
                     </div>
                   </div>
                 ))}
-                <div className="bg-FFEEE2 p-4 shadow-md">
-                  <h2 className="font-bold text-lg mb-4">Bill details</h2>
+                <div className="bg-FFEEE2 mt-4 p-4 shadow-md">
+                  <h2 className="text-heading !text-left mb-4">Bill details</h2>
                   <div className="flex justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <span>Sub total</span>
+                      <span className="section-content !text-left">
+                        Sub total
+                      </span>
                     </div>
-                    <span>₹{calculateTotal()}</span>
+                    <span className="text-heading !text-right">
+                      {" "}
+                      ₹{calculateTotal()}
+                    </span>
                   </div>
                   <div className="flex justify-between items-center mb-2">
                     <div className="gap-2">
-                      <div className="text-sm text-gray-600">
-                        Shipping Charges (Free for orders above ₹500)
+                      <div className="section-content !text-left">
+                        Shipping Charges <br /> (Free for orders above ₹500)
                       </div>
                     </div>
-                    <span className="">{calculateTotal() <= 500 ? "₹500" :"Free Shipping"}</span>
+                    <span className="text-heading !text-right">
+                      {calculateTotal() <= 500 ? "₹500" : "Free Shipping"}
+                    </span>
                   </div>
-                  <div className="flex justify-between font-bold text-lg">
-                    <span>Grand total</span>
-
-                    <h3 className="text-xl font-medium text-center">
+                  <div className="flex justify-between items-center font-bold">
+                    <span className="section-title !text-left">
+                      Grand total
+                    </span>
+                    <h3 className="sub_heading !text-right ">
                       ₹{calculateTotal()}
                     </h3>
                   </div>

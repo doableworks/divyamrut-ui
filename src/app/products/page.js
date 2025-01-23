@@ -2,7 +2,6 @@ import ProductBanner from "@/components/proudect/ProductBanner";
 import ProductsScroller from "@/components/proudect/ProductsScroller";
 import ProductSlider1 from "@/components/proudect/ProductSlider1";
 
-
 const categories = [
   {
     route: "kansa-vati-foot-massage-kit",
@@ -536,14 +535,27 @@ const categories = [
 ];
 
 
-const page = () => {
-  const heading = "Bath/Aura Cleansing Salt";
-  const subHeading = "Trusted by millions, validated by you.";
+const getAllCategoriesData = async () => {
+  try {
+    const res = await fetch(`${process.env.API_URL}/product/categories/`);
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    const data = await res.json();
+    return data.results;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+};
+
+const page = async() => {
+  const categoryData = await getAllCategoriesData();
 
   return (
     <div>
       <div className="relative h-[50vh]">
-        <ProductBanner heading={heading} subHeading={subHeading} />
+        <ProductBanner />
       </div>
       <div className="common_page_width">
         <ProductSlider1 categories={categories} />
