@@ -54,12 +54,12 @@ const ProductDetail = ({ item }) => {
         {/* Product Images Section */}
         <div className="md:sticky self-start md:top-20 lg:w-1/2 flex flex-col items-center">
           {/* <div className="w-[100%] md:w-[100%] min-w-[300px] max-w-[700px] h-auto border border-gray-300 rounded-lg overflow-hidden"> */}
-          <div className="hidden md:block">
+          {/* <div className="hidden md:block">
             <ProductImage imgSrc={imgArr[selectedImage]} />
           </div>
           <div className="block md:hidden">
             <ImageMedium imgSrc={imgArr[selectedImage]} />
-          </div>
+          </div> */}
           {/* </div> */}
           <div className="flex space-x-2 mt-8">
             {imgArr.map((path, index) => (
