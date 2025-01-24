@@ -50,7 +50,6 @@ const LoginModal = () => {
   }, [index, openLoginModal]);
 
   const onFinish = (values) => {
-    console.log("values 555", values);
     setLoading(true);
     setErrorMessage("");
     signIn("credentials", {

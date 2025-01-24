@@ -68,7 +68,6 @@ const RegisterModal = () => {
         },
       });
 
-      console.log("vlaues register response", response);
 
       const responseData = await response.json();
       setLoading(false);
