@@ -254,7 +254,7 @@ export default function PremiumNavbar({ scrollNum }) {
                     (sub, index) =>
                       sub.is_published && (
                         <Link
-                          href={sub.sub_categories?.length > 0 ? `/products/${sub.slug}/`: `/products-list/${sub.slug}/`}
+                          href={isSubMenu?.parentSlug === "/products/" && sub.sub_categories?.length > 0 ? `/products-list/${sub.slug}/` : `${isSubMenu.parentSlug}/${sub.slug}/`}
                           key={index}
                         >
                           <li className="navbar-li hover:text-[--voilet]">
