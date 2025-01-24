@@ -2,27 +2,27 @@ import SubCategory from "@/components/proudect/SubCategory";
 import ProductBanner from "@/components/proudect/ProductBanner";
 
 
-// const getCategoryProducts = async (params) => {
-//   try {
-//     const res = await fetch(
-//       process.env.API_URL + `product/products/?category=${params}`
-//     );
-//     if (res.status == 200) {
-//       const data = await res.json();
-//       return data?.results;
-//     } else {
-//       return null;
-//     }
-//   } catch (error) {
-//     console.log("getTypes error", error);
-//     return null;
-//   }
-// };
+const getSubCategoryProducts = async (params) => {
+  try {
+    const res = await fetch(
+      process.env.API_URL + `product/products/?category=${params}`
+    );
+    if (res.status == 200) {
+      const data = await res.json();
+      return data?.results;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.log("getTypes error", error);
+    return null;
+  }
+};
 
-const page = ({params}) => {
+const page = async({params}) => {
   // const heading = params["product-categ"];
   // const subHeading = "Products";
-  // const products = await getCategoryProducts(params["products-category"]);
+  const products = await getSubCategoryProducts(params["products-category"]);
 
 
   const categories = [
