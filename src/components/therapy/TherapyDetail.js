@@ -7,27 +7,42 @@ import TestimonialSlider from "@/components/home1/Testimonial";
 import FaqUnorder from "@/components/therapy/FaqUnorder";
 import CommonNoTherapy from "@/components/therapy/CommonNoTherapy";
 
-export default function TherapyDetail({ data }) {
+export default function TherapyDetail({ created,
+  description,
+  id,
+  faqs,
+  image,
+  is_published,
+  name,
+  price,
+  sku,
+  slug,
+  testimonials,
+  therapy_category,
+  title,
+  uid,
+  updated,
+  video }) {
   const dispatch = useDispatch();
 
-  const {
-    created,
-    description,
-    id,
-    faqs,
-    image,
-    is_published,
-    name,
-    price,
-    sku,
-    slug,
-    testimonials,
-    therapy_category,
-    title,
-    uid,
-    updated,
-    video,
-  } = data;
+  // const {
+  //   created,
+  //   description,
+  //   id,
+  //   faqs,
+  //   image,
+  //   is_published,
+  //   name,
+  //   price,
+  //   sku,
+  //   slug,
+  //   testimonials,
+  //   therapy_category,
+  //   title,
+  //   uid,
+  //   updated,
+  //   video,
+  // } = data;
 
   const handleBookTherapy = async () => {
     dispatch(toggleBookingModal(true));
@@ -39,7 +54,7 @@ export default function TherapyDetail({ data }) {
 
   return (
     <div>
-      {data.is_published ? (
+      {is_published ? (
         <div>
           <div className="!mt-0 common_page_width">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 lg:gap-40 items-center">
