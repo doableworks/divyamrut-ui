@@ -21,7 +21,7 @@ export default function TherapyDetail({ data }) {
     price,
     sku,
     slug,
-    testimonial,
+    testimonials,
     therapy_category,
     title,
     uid,
@@ -58,17 +58,18 @@ export default function TherapyDetail({ data }) {
                   Book A Session
                 </button>
               </figure>
-              <section className="relative h-[550px]">
-                <figure className="relative z-10 flex rounded-tr-full rounded-tl-full overflow-hidden min-h-[400px] md:min-h-[500px] border">
+              <section className="relative lg:h-[550px]">
+                <figure className="relative z-10 flex rounded-tr-full rounded-tl-full overflow-hidden h-[550px] border-2">
                   <Image
                     src={!!image ? image : NoImageAvailabe}
                     alt="therapy"
                     layout="responsive"
                     width={100}
                     height={100}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110"
                   />
                 </figure>
+
                 <button
                   onClick={handleBookTherapy}
                   className="site-button-primary w-full md:!hidden h-[60px] !capitalize"
@@ -79,11 +80,23 @@ export default function TherapyDetail({ data }) {
             </div>
           </div>
 
-          {testimonial?.length > 0 && (
-            <TestimonialSlider className="bg-white" details={testimonial} />
-          )}
+          <div>
+            {testimonials?.length > 0 && (
+              <>
+                <TestimonialSlider
+                  className="bg-white hidden lg:block"
+                  data={testimonials}
+                  slidesToShow={3}
+                />
+                <TestimonialSlider
+                  className="bg-white lg:hidden"
+                  data={testimonials}
+                />
+              </>
+            )}
+          </div>
 
-          {faqs.length > 0 && <FaqUnorder details={faqs} />}
+          {faqs?.length > 0 && <FaqUnorder details={faqs} />}
         </div>
       ) : (
         <div className="flex justify-center items-center p-5">

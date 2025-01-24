@@ -12,8 +12,8 @@ import HeroBanner from "@/components/common/reference/HeroBanner";
 export default function Home() {
   return (
     <main
-    //  className="relative z-10 mt-[-12rem] bg-cover bg-[url('/asset/home/caucasian-woman-having-ayurveda-shirodhara-treatment-in-india.jpg')] bg-no-repeat"
-    className="bg-FFEEE2"
+      //  className="relative z-10 mt-[-12rem] bg-cover bg-[url('/asset/home/caucasian-woman-having-ayurveda-shirodhara-treatment-in-india.jpg')] bg-no-repeat"
+      className="bg-FFEEE2"
     >
       <HeroBanner />
       {/* <WhoWeAre /> */}
@@ -21,7 +21,8 @@ export default function Home() {
       {/* <OurServices /> */}
       <WhatWeOffer />
       <WhyChooseUs />
-      <Testimonial />
+      <Testimonial slidesToShow={3} className="hidden lg:block" />
+      <Testimonial slidesToShow={1} className=" lg:hidden" />
       {/* <AncientWisdomForModernLiving /> */}
     </main>
   );
