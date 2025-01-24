@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "nextjs-toploader/app";
 import { usePathname } from "next/navigation";
@@ -19,12 +18,16 @@ export default function FooterCom() {
   ];
 
   const exploreLinks = [
-    { label: "Shipping Policy", route: "/about-us" },
-    { label: "Payment Policy", route: "/disclaimer" },
+    { label: "Shipping Policy", route: "/shipping-policy" },
+    { label: "Payment Policy", route: "/payment-policy" },
     { label: "Privacy Policy", route: "/privacy-policy" },
-    { label: "Refund Policy", route: "/copyright" },
-    { label: "Cancellation Policy", route: "/contact-us" },
+    { label: "Refund Policy", route: "/refund-policy" },
+    { label: "Cancellation Policy", route: "/cancellation-policy" },
   ];
+
+  const handleMoveRoute =(path)=>{
+    router.push(path)
+  }
 
   return (
     <>
@@ -38,6 +41,7 @@ export default function FooterCom() {
               {PagesLink.map((item, index) => (
                 <p
                   key={index}
+                  onClick={()=>handleMoveRoute(item.route)}
                   className="section_title14!capitalize !text-center [@media(min-width:420px)]:!text-left !text-white mb-4 cursor-pointer hover:!text-[--voilet]"
                 >
                   {item.label}
@@ -51,6 +55,7 @@ export default function FooterCom() {
               {exploreLinks.map((item, index) => (
                 <p
                   key={index}
+                  onClick={()=>handleMoveRoute(item.route)}
                   className="section_title14 !capitalize [@media(min-width:420px)]:!text-left !text-white  mb-2 cursor-pointer hover:!text-[--voilet]"
                 >
                   {item.label}
@@ -86,7 +91,7 @@ export default function FooterCom() {
                 },
                 {
                   label: "Instagram",
-                  url: "https://www.instagram.com/parmartham.zucol/",
+                  url: "https://www.instagram.com/divyamrut_ayurcare/",
                 },
                 {
                   label: "Twitter",

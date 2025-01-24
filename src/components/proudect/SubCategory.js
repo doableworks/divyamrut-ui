@@ -58,9 +58,9 @@ const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
 
   return (
     <div className="">
-      <h2 className="!text-center highlight-heading">
+      {/* <h2 className="!text-center highlight-heading">
         Discover Our Category Range
-      </h2>
+      </h2> */}
 
       {/* {isSticky &&
         <div
@@ -92,7 +92,7 @@ const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
         </div>
       } */}
 
-      <div
+      {/* <div
         id="myElementId"
         className={`relative top-0 flex flex-wrap justify-center gap-4 md:gap-8`}
       >
@@ -116,9 +116,9 @@ const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
             <p className="section-title mt-2 !text-center">{category.label}</p>
           </div>
         ))}
-      </div>
+      </div> */}
 
-      <div className="pt-12 md:px-6">
+      {/* <div className="pt-12 md:px-6">
         <h2 className="sub_heading !text-left mb-8">Featured Categories</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {categories.slice(0, 2).map((category, index) => (
@@ -129,11 +129,11 @@ const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
                   router.push(`/products/${categorySlug}/${category.route}`)
                 }
               >
-                {/* <img
+                <img
                                 src={category.image}
                                 alt={category.title}
                                 className="w-full h-64 object-cover transform group-hover:scale-105 transition duration-300"
-                            /> */}
+                            />
                 <div className="absolute w-full md:w-auto  bottom-0 right-0 text-right">
                   <button
                     className="site-button-primary w-full !px-5 !rounded-none"
@@ -154,8 +154,9 @@ const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
       <div className="py-4 md:px-6">
+      <h2 className="sub_heading !text-left mb-8">Featured Categories</h2>
         <Slider key={"sub-category-slider"} {...settings1}>
           {categories &&
             categories.map((category, index) => (
@@ -163,7 +164,7 @@ const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
                 <div
                   className="sub_top_thrid relative group overflow-hidden shadow-md bg-white cursor-pointer"
                   onClick={() =>
-                    router.push(`/products/${categorySlug}/${category.route}`)
+                    router.push(`/products-list/${category.route}`)
                   }
                 >
                   <div className="absolute bottom-0 right-0 text-right">
@@ -171,7 +172,7 @@ const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
                       className="site-button-primary !px-5 !rounded-none"
                       onClick={() =>
                         router.push(
-                          `/products/${categorySlug}/${category.route}`
+                          router.push(`/products-list/${category.route}`)
                         )
                       }
                     >
@@ -192,14 +193,14 @@ const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
         </Slider>
       </div>
       <div className="md:px-6">
-        <h2 className="sub_heading !text-left mb-8">Our Iconic Products</h2>
+        <h2 className="sub_heading !text-left mb-8">similar Products</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {OurIconicProduct.slice(0, 2).map((category, index) => (
             <div key={index} className="relative group">
               <div
                 className="sub_top_second relative  group overflow-hidden shadow-md bg-white cursor-pointer"
                 onClick={() =>
-                  router.push(`/products/${categorySlug}/${category.route}`)
+                  router.push(`/products-list/${category.route}`)
                 }
               >
                 {/* <img
@@ -211,7 +212,7 @@ const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
                   <button
                     className="site-button-primary w-full !px-5 !rounded-none"
                     onClick={() =>
-                      router.push(`/products/${categorySlug}/${category.route}`)
+                      router.push(`/products-list/${category.route}`)
                     }
                   >
                     Shop Now
@@ -227,6 +228,20 @@ const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
             </div>
           ))}
         </div>
+      </div>
+      <div className="mt-20">
+        <h1 className="highlight-heading">What is Lorem Ipsum?</h1>
+        <p className="section-content">
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book. It has survived not only
+          five centuries, but also the leap into electronic typesetting,
+          remaining essentially unchanged. It was popularised in the 1960s with
+          the release of Letraset sheets containing Lorem Ipsum passages, and
+          more recently with desktop publishing software like Aldus PageMaker
+          including versions of Lorem Ipsum.
+        </p>
       </div>
     </div>
   );

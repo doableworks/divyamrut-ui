@@ -9,7 +9,7 @@ import { useRouter } from "nextjs-toploader/app";
 
 const ProductsScroller = ({ category }) => {
   const router = useRouter();
-  const [currentSlide, setCurrentSlide] = useState(0)
+  // const [currentSlide, setCurrentSlide] = useState(0)
 
   var settings1 = {
     dots: false,
@@ -21,7 +21,7 @@ const ProductsScroller = ({ category }) => {
     slidesToShow: 4,
     slidesToScroll: 4,
     lazyLoad: true,
-    beforeChange: (oldIndex, newIndex) => setCurrentSlide(oldIndex),
+    // beforeChange: (oldIndex, newIndex) => setCurrentSlide(oldIndex),
     responsive: [
       {
         breakpoint: 1100,
@@ -36,6 +36,11 @@ const ProductsScroller = ({ category }) => {
   };
 
 
+  const handleMoveRoute = (cate)=>{
+    router.push(`/products-list/${cate.route}`)
+  }
+
+
 
 
   return (
@@ -46,7 +51,7 @@ const ProductsScroller = ({ category }) => {
           {category.title}
         </h2>
         <span className={"text-text flex flex-row gap-2 cursor-pointer"}
-        onClick={() => router.push(`/products/${category.route}/"sub-category"/`)}
+        onClick={() => handleMoveRoute(category)}
         > VIEW ALL <RightArrow fill={"#64748b"} w={18} /> </span>
         </div>
 
@@ -57,7 +62,7 @@ const ProductsScroller = ({ category }) => {
                 <Product
                   key={index}
                   item={product}
-                  productCategory={`${category.route}/sub-category`}
+                  productCategory={category.hasSubCategory ? category.subCategory : category.category}
                 />
               </div>
             ))}

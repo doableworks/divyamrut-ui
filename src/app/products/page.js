@@ -6,6 +6,7 @@ const categories = [
   {
     route: "kansa-vati-foot-massage-kit",
     title: "Kansa Vati Foot Massage Kit",
+    hasSubCategory:false,
     products: [{
       title:
         "Natural Health Supplements",
@@ -94,6 +95,7 @@ const categories = [
   {
     route: "meditation-puja-asans",
     title: "Meditation/Puja Asans",
+    hasSubCategory:true,
     products: [{
       title:
         "Natural Health Supplements",
@@ -182,6 +184,7 @@ const categories = [
   {
     route: "meditation-puja-shawls",
     title: "Meditation/Puja Shawls",
+    hasSubCategory:true,
     products: [{
       title:
         "Natural Health Supplements",
@@ -270,6 +273,7 @@ const categories = [
   {
     route: "chandan-kumkum-bindi-kit",
     title: "Chandan-Kumkum Bindi Kit",
+    hasSubCategory:false,
     products: [{
       title:
         "Natural Health Supplements",
@@ -358,6 +362,7 @@ const categories = [
   {
     route: "bath-aura-cleansing-salt",
     title: "Bath/Aura Cleansing Salt",
+    hasSubCategory:false,
     products: [{
       title:
         "Natural Health Supplements",
@@ -446,6 +451,7 @@ const categories = [
   {
     route: "diya",
     title: "Diya",
+    hasSubCategory:false,
     products: [
       {
       title:
