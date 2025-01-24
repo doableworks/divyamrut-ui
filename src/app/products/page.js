@@ -552,6 +552,8 @@ const getAllCategoriesData = async () => {
 const page = async() => {
   const categoryData = await getAllCategoriesData();
 
+  console.log("categoryData 555", categoryData)
+
   return (
     <div>
       <div className="relative h-[50vh]">
