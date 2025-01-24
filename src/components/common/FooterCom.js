@@ -56,7 +56,7 @@ export default function FooterCom() {
                 <p
                   key={index}
                   onClick={()=>handleMoveRoute(item.route)}
-                  className="section_title14 !capitalize [@media(min-width:420px)]:!text-left !text-white  mb-2 cursor-pointer hover:!text-[--voilet]"
+                  className="section_title14 w-full [@media(min-width:420px)]:w-fit !capitalize [@media(min-width:420px)]:!text-left !text-white  mb-2 cursor-pointer hover:!text-[--voilet]"
                 >
                   {item.label}
                 </p>
@@ -66,7 +66,7 @@ export default function FooterCom() {
               <h4 className="section-title [@media(min-width:420px)]:!text-left  mb-4">
                 Contact US
               </h4>
-              <p className="text-text [@media(min-width:420px)]:!text-left">
+              <p className="text-text !leading-[28px] [@media(min-width:420px)]:!text-left">
                 413, Sai Arcade, N.S. Road, Mulund West,
                 <br />
                 Mumbai – 400 080
