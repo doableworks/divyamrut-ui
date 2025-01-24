@@ -5,6 +5,7 @@ import PremiumNavbar from "@/components/common/navbar/PremiumNavbar";
 import LoginModal from "../login/loginModal";
 import RegisterModal from "../login/RegisterModal";
 import NewFooter from "@/components/common/reference/NewFooter";
+import Footer from "@/components/common/FooterCom";
 import { twMerge } from "tailwind-merge";
 import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
@@ -95,7 +96,8 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
         </div>
 
         <div>
-          <NewFooter />
+          {/* <NewFooter /> */}
+          <Footer />
         </div>
       </main>
       <BuyProductModal />
