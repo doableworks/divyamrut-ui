@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { toggleBookingModal } from "@/redux/feature/therapySlice";
 import { NoImageAvailabe } from "@/contants/contants";
-import TestimonialSlider from "@/components/home1/Testimonial";
+import Testimonial from "@/components/home1/Testimonial";
 import FaqUnorder from "@/components/therapy/FaqUnorder";
 import CommonNoTherapy from "@/components/therapy/CommonNoTherapy";
 import { useEffect, useState } from "react";
@@ -66,19 +66,15 @@ export default function TherapyDetail({ details }) {
           </div>
 
           <div>
-            {testimonials?.length > 0 && (
-              <>
-                <TestimonialSlider
-                  className="bg-white hidden lg:block"
-                  data={testimonials}
-                  slidesToShow={3}
-                />
-                <TestimonialSlider
-                  className="bg-white lg:hidden"
-                  data={testimonials}
-                />
-              </>
-            )}
+            <Testimonial
+              className="bg-white hidden lg:block"
+              data={testimonials}
+              slidesToShow={3}
+            />
+            <Testimonial
+              className="bg-white block lg:hidden"
+              data={testimonials}
+            />
           </div>
 
           {faqs?.length > 0 && <FaqUnorder details={faqs} />}
