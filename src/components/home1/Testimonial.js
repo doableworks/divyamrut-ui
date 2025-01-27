@@ -32,7 +32,7 @@ const initialTestimonial = [
 
 const TestimonialSlider = ({
   className = "",
-  data,
+  data = initialTestimonial,
   slidesToShow = 1,
 }) => {
   
