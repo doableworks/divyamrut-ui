@@ -11,6 +11,7 @@ import {
 } from "@/redux/feature/authModalSlice";
 import { useRouter } from "nextjs-toploader/app";
 import CustomButton from "@/components/common/CustomButton";
+import { NoImageAvailabe } from "@/contants/contants";
 
 const LoginModal = () => {
   const dispatch = useDispatch();
@@ -49,7 +50,6 @@ const LoginModal = () => {
   }, [index, openLoginModal]);
 
   const onFinish = (values) => {
-    console.log("values 555", values);
     setLoading(true);
     setErrorMessage("");
     signIn("credentials", {
@@ -95,95 +95,82 @@ const LoginModal = () => {
         open={openLoginModal}
         onCancel={handleCancel}
         footer={null}
-        className="login_modal"
+        width={{
+          xs: "90%",
+          sm: "80%",
+          md: "70%",
+          lg: "70%",
+          xl: "70%",
+          xxl: "70%",
+        }}
       >
-        <Row justify="center" className="h-full mt-6">
-          <Col xs={0} sm={0} md={0} lg={12} xl={12} xxl={12}>
-            <Image
-              src="/asset/home/img1.png"
-              alt="Login"
-              className="h-auto w-full rounded-2xl"
-              fill
-            />
-          </Col>
-          <Col
-            xs={{
-              span: 24,
-        
-            }}
-            sm={{
-              span: 24,
-            
-            }}
-            md={{
-              span: 24,
-            
-            }}
-            lg={{
-              span: 11,
-              offset: 1,
-            }}
-            xl={{
-              span: 11,
-              offset: 1,
-            }}
-            xxl={{
-              span: 11,
-              offset: 1,
-            }}
-            // span={11}
-            className="flex flex-col items-center pb-5 w-full"
-          >
-            <div className="w-full">
-              <h3 className="font-semibold text-lg text-left">
-                {text || "Hello Again!"}
-              </h3>
-              <p className="text-sm font-medium text-left mb-5">
-                Welcome back you&apos;ve been missed!
-              </p>
-            </div>
-            <Form
-              name="basic"
-              wrapperCol={{ span: 24 }}
-              onFinish={onFinish}
-              autoComplete="off"
-              className="w-full"
-            >
-              <Form.Item
-                name="email"
-                rules={[
-                  {
-                    type: "email",
-                    message: "Invalid email!",
-                  },
-                  { required: true, message: "Please input your email!" },
-                ]}
-                className="w-full"
-              >
-                <Input placeholder="Email" />
-              </Form.Item>
-
-              <Form.Item
-                name="password"
-                rules={[
-                  { required: true, message: "Please input your password!" },
-                ]}
-                className="w-full"
-              >
-                <Input.Password placeholder="Enter Password" />
-              </Form.Item>
-
-              <div className="text-right mb-5">
-                <span
-                  className="text-sm font-semibold text-right text-blue-600 cursor-pointer mb-5"
-                  onClick={handleForgetPass}
-                >
-                  Forgot Password
-                </span>
+        <div className="grid grid-cols-1 lg:grid-cols-2 rounded overflow-hidden h-auto lg:min-h-[70vh]">
+          <Image
+            src={NoImageAvailabe}
+            alt="Login"
+            height={100}
+            width={100}
+            className="w-full h-full hidden lg:flex object-cover"
+          />
+          <div className="flex flex-col p-11 justify-center items">
+            <div>
+              <div className="w-full">
+                <h3 className="highlight-heading !text-left !mb-2 !mt-0">
+                  {text || "Hello Again!"}
+                </h3>
+                <p className="section-title !normal-case !text-gray-500 !text-left mb-10">
+                  Welcome back you&apos;ve been missed!
+                </p>
               </div>
+              <Form
+                name="basic"
+                wrapperCol={{ span: 24 }}
+                onFinish={onFinish}
+                autoComplete="off"
+                className="w-full"
+              >
+                <div className="mb-6">
+                  <Form.Item
+                    name="email"
+                    rules={[
+                      {
+                        type: "email",
+                        message: "Invalid email!",
+                      },
+                      { required: true, message: "Please input your email!" },
+                    ]}
+                    className="w-full"
+                  >
+                    <Input placeholder="Email" />
+                  </Form.Item>
+                </div>
 
-              <Form.Item className="w-full">
-                {/* <Button
+                <div className="mb-6">
+                  <Form.Item
+                    name="password"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input your password!",
+                      },
+                    ]}
+                    className="w-full"
+                  >
+                    <Input.Password placeholder="Enter Password" />
+                  </Form.Item>
+                </div>
+
+                <div className="text-right mb-5">
+                  <span
+                    className="text-sm font-semibold text-right text-blue-600 cursor-pointer mb-5"
+                    onClick={handleForgetPass}
+                  >
+                    Forgot Password
+                  </span>
+                </div>
+
+                <Form.Item className="w-full">
+                  {/* <Button
                   htmlType="submit"
                   loading={loading}
                   size={"large"}
@@ -193,15 +180,16 @@ const LoginModal = () => {
                   Login
                 </Button> */}
 
-                <CustomButton
-                  htmlType="submit"
-                  className="site-button-primary !m-0 w-[-webkit-fill-available]"
-                  title="Login"
-                  loading={loading}
-                  type="submit"
-                />
-              </Form.Item>
-            </Form>
+                  <CustomButton
+                    htmlType="submit"
+                    className="site-button-primary !m-0 w-[-webkit-fill-available]"
+                    title="Login"
+                    loading={loading}
+                    type="submit"
+                  />
+                </Form.Item>
+              </Form>
+            </div>
 
             {/* <div className="w-full flex items-center justify-center mt-4">
               <div className="h-px bg-gray-200 w-1/3"></div>
@@ -232,8 +220,8 @@ const LoginModal = () => {
                 Create an account
               </span>
             </p>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </Modal>
     </>
   );

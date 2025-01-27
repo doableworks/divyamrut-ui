@@ -74,7 +74,20 @@ const initialTimeSlots = [
   },
 ];
 
-export default function BookingModal({ therapyStaff }) {
+const therapyStaff = [
+  {
+    id: 0,
+    name: "Dr. Himanshu Bhagat",
+    about: "Osteopath and Somatic Experiencing Practitioner (SEP)",
+  },
+  {
+    id: 1,
+    name: "Jayesh Jayaram Rao",
+    about: "Osteopath",
+  },
+];
+
+export default function BookingModal() {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [activeStep, setActiveStep] = useState(0);

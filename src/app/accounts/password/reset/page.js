@@ -6,8 +6,9 @@ import { useDispatch } from "react-redux";
 import { Input, Form, message, Skeleton, Row, Col } from "antd";
 import OTPModal from "../../../../components/modals/OtpModal";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
-import CONSTANTS from "../../../../contants/contants";
 import CustomButton from "@/components/common/CustomButton";
+
+const apiUrl = process.env.API_URL;
 
 const Page = () => {
   const router = useRouter();
@@ -26,7 +27,7 @@ const Page = () => {
     try {
       setLoading2(true);
       const res = await axios.post(
-        CONSTANTS.NGROK_URL + `api/auth/forgot-password/`,
+        apiUrl + `/api/auth/forgot-password/`,
         data
       );
       if (res.status === 200) {
@@ -56,7 +57,7 @@ const Page = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        CONSTANTS.NGROK_URL + `api/auth/verify-otp/`,
+        apiUrl + `/api/auth/verify-otp/`,
         data
       );
       if (res.status === 200) {
@@ -87,7 +88,7 @@ const Page = () => {
 
       setLoading(true);
       const res = await axios.post(
-        CONSTANTS.NGROK_URL + `api/auth/reset-password/`,
+        apiUrl + `/api/auth/reset-password/`,
         data
       );
       if (res.status === 200) {

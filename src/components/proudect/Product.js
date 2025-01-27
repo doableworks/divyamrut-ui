@@ -23,10 +23,10 @@ const Product = ({ item, productCategory }) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const handleAddItem = async (event) => {
+  const handleAddItem =  (event) => {
     event.stopPropagation(); 
     try {
-      await dispatch(addItem(item));
+      dispatch(addItem(item));
       dispatch(handleCartSlider(true));
       // await router.push("/cart");
     } catch (error) {
@@ -49,11 +49,21 @@ const Product = ({ item, productCategory }) => {
         />
       )} */}
 
-      <div className="w-full h-[300px] md:h-[350px] bg-text rounded-xl"></div>
+      {/* <div className="w-full h-[300px] md:h-[350px] rounded-xl"> */}
+      {item?.image && (
+        <img
+          src={item?.image}
+          // width={200}
+          // height={200}
+          className="w-full h-full cover"
+          alt="img"
+        />
+      )}
+      {/* </div> */}
 
       <div className="flex-grow flex flex-col px-6 pt-4">
         <h6 className="section_title14 !normal-case !text-[1.5rem] !text-left hover:!text-[--yellow]">
-          {item?.title}
+          {item?.name}
         </h6>
         <p className="text_text14 !text-left mt-1">{item.description}</p>
         <p className="text_text14 !text-left text-[black] mt-2">

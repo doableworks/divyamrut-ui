@@ -1,84 +1,101 @@
 "use client";
-import Image from "next/image";
-import BlockPageLoader from "@/components/loader/BlockPageLoader";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import BookingModal from "./BookingModal";
+import { useDispatch } from "react-redux";
 import { toggleBookingModal } from "@/redux/feature/therapySlice";
+import { NoImageAvailabe } from "@/contants/contants";
+import Testimonial from "@/components/home1/Testimonial";
+import FaqUnorder from "@/components/therapy/FaqUnorder";
+import CommonNoTherapy from "@/components/therapy/CommonNoTherapy";
+import { useEffect, useState } from "react";
 
-const initialTherapyStaff = [
-  {
-    id: 0,
-    name: "Dr. Himanshu Bhagat",
-    about: "Osteopath and Somatic Experiencing Practitioner (SEP)",
-  },
-  {
-    id: 1,
-    name: "Jayesh Jayaram Rao",
-    about: "Osteopath",
-  },
-];
+export default function TherapyDetail({ details }) {
+  const [data, setData] = useState({
+    description: "",
+    faqs: [],
+    image: "",
+    is_published: true,
+    name: "",
+    testimonials: [],
+  });
 
-export default function TherapyDetail() {
-  const dispatch = useDispatch();
-  const [showBlockLoader, setShowBlockLoader] = useState(false);
-
-  const isBookingModal = useSelector((state) => state.therapy.isBookingModal);
-
-  const [therapyStaff, setTherapyStaff] = useState([]);
+  useEffect(() => {
+    if (details) {
+      setData(details);
+    }
+  }, [details]);
 
   const handleBookTherapy = async () => {
-    setShowBlockLoader(true);
-
-    setTherapyStaff(initialTherapyStaff);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    setShowBlockLoader(false);
     dispatch(toggleBookingModal(true));
   };
 
+  const { description, faqs, image, is_published, name, testimonials } = data;
+
+  const noTitle = "Details are unavailable, or the therapy is unpublished";
+  const noDescription =
+    "Currently, there is no data available to display. Please check back soon as we continue to update our offerings. If you have specific therapy needs or questions, feel free to contact us—we’re here to assist you on your wellness journey.";
+
   return (
-    <div className="common_page_width !pt-0">
-      {showBlockLoader && <BlockPageLoader />}
+    <div>
+      {is_published ? (
+        <div>
+          <div className="!mt-0 common_page_width">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 lg:gap-40 items-center">
+              <figure className="p-3 flex flex-col justify-center md:items-start">
+                <h1 className="highlight-heading md:!m-0 md:!text-left !mb-2">
+                  {name}
+                </h1>
+                <p
+                  className="section-content md:!text-left"
+                  dangerouslySetInnerHTML={{ __html: description }}
+                ></p>
+                <button
+                  onClick={handleBookTherapy}
+                  className="site-button-primary !mt-6 !hidden md:!inline !capitalize"
+                >
+                  Book A Session
+                </button>
+              </figure>
+              <section className="relative lg:h-[550px]">
+                <figure className="relative z-10 flex rounded-tr-full rounded-tl-full overflow-hidden h-[550px] border-2">
+                  <img
+                    src={image || NoImageAvailabe}
+                    alt="therapy"
+                    className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:simagecale-110"
+                  />
+                </figure>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 lg:gap-40 items-center">
-        <figure className="p-3 flex flex-col justify-center md:items-start">
-          <h1 className="highlight-heading md:!m-0 md:!text-left !mb-2">
-            Meru Chikitsa
-          </h1>
-          <p className="section-content md:!text-left">
-            Meru Chikitsa, also known as Spinal Manipulation, is a therapeutic
-            technique that involves the manual adjustment of the spine and
-            musculoskeletal system.
-          </p>
-          <button
-            onClick={handleBookTherapy}
-            className="site-button-primary !mt-6 !hidden md:!inline !capitalize"
-          >
-            Book a Session
-          </button>
-        </figure>
-        <section className="relative h-[550px]">
-          <figure className="relative z-10 flex rounded-tr-full rounded-tl-full overflow-hidden min-h-[400px] md:min-h-[500px] border">
-            <Image
-              src="/asset/home/ayurvedic-supplement.jpg"
-              alt="therapy"
-              layout="responsive"
-              width={100}
-              height={100}
-              className="h-full w-full object-cover"
+                <button
+                  onClick={handleBookTherapy}
+                  className="site-button-primary w-full md:!hidden h-[60px] !capitalize"
+                >
+                  Book A Session
+                </button>
+              </section>
+            </div>
+          </div>
+
+          <div>
+            <Testimonial
+              className="bg-white hidden lg:block"
+              data={testimonials}
+              slidesToShow={3}
             />
-          </figure>
-          <button
-            onClick={handleBookTherapy}
-            className="site-button-primary w-full md:!hidden h-[60px] !capitalize"
-          >
-            Book A Session
-          </button>
-        </section>
-      </div>
+            <Testimonial
+              className="bg-white block lg:hidden"
+              data={testimonials}
+            />
+          </div>
 
-      {isBookingModal && <BookingModal therapyStaff={therapyStaff} />}
+          {faqs?.length > 0 && <FaqUnorder details={faqs} />}
+        </div>
+      ) : (
+        <div className="flex justify-center items-center p-5">
+          <CommonNoTherapy
+            title={noTitle}
+            description={noDescription}
+            containerClass="min-h-[40vh] lg:min-h-[60vh]"
+          />
+        </div>
+      )}
     </div>
   );
 }

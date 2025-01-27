@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import CONSTANTS from "@/contants/contants";
+import { NoImageAvailabe } from "@/contants/contants";
 import { signIn } from "next-auth/react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -14,6 +14,7 @@ import Image from "next/image";
 import { Button, Form, message, Input, Row, Col, Modal } from "antd";
 import CustomButton from "@/components/common/CustomButton";
 
+const apiUrl = process.env.API_URL;
 
 const RegisterModal = () => {
   const [form] = Form.useForm();
@@ -55,12 +56,12 @@ const RegisterModal = () => {
       };
 
       console.log(
-        CONSTANTS.NGROK_URL + `api/auth/register/`,
+        apiUrl + `/api/auth/register/`,
         "vlaues register",
         data
       );
 
-      const response = await fetch(CONSTANTS.NGROK_URL + `api/auth/register/`, {
+      const response = await fetch(apiUrl + `/api/auth/register/`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -69,7 +70,6 @@ const RegisterModal = () => {
         },
       });
 
-      console.log("vlaues register response", response);
 
       const responseData = await response.json();
       setLoading(false);
@@ -117,26 +117,24 @@ const RegisterModal = () => {
         open={openRegisterModal}
         onCancel={handleCancel}
         footer={null}
-        className="login_modal"
+        width={{
+          xs: "90%",
+          sm: "80%",
+          md: "70%",
+          lg: "70%",
+          xl: "70%",
+          xxl: "70%",
+        }}
       >
-        <Row justify="center" className="h-full mt-6">
-          <Col xs={0} sm={0} md={0} lg={12} xl={12} xxl={12}>
-            <Image
-              src="/asset/home/img1.png"
-              alt="Login"
-              className="h-auto w-full rounded-2xl"
-              fill
-            />
-          </Col>
-          <Col
-            xs={24}
-            sm={24}
-            md={24}
-            lg={12}
-            xl={12}
-            xxl={12}
-            className="flex flex-col justify-center"
-          >
+        <div className="grid grid-cols-1 lg:grid-cols-2 rounded overflow-hidden h-auto lg:min-h-[70vh]">
+          <Image
+            src={NoImageAvailabe}
+            alt="Login"
+            height={100}
+            width={100}
+            className="w-full h-full hidden lg:flex object-cover"
+          />
+          <div className="flex flex-col p-11 justify-center items">
             <Form
               name="register"
               onFinish={onSubmit}
@@ -144,11 +142,11 @@ const RegisterModal = () => {
               className="w-full"
               autoComplete="off"
             >
-              <h2 className="text-xl font-semibold text-left">
+              <h2 className="highlight-heading !text-left !mt-0 !mb-2">
                 Create an Account
               </h2>
-              <Row gutter={[16, 16]} className="mt-4">
-                <Col span={12}>
+              <div>
+                <div className="mb-6">
                   <Form.Item
                     name="firstName"
                     rules={[
@@ -167,8 +165,8 @@ const RegisterModal = () => {
                       className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
                     /> */}
                   </Form.Item>
-                </Col>
-                <Col span={12}>
+                </div>
+                <div className="mb-6">
                   <Form.Item
                     name="lastName"
                     rules={[
@@ -186,84 +184,90 @@ const RegisterModal = () => {
                       className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
                     /> */}
                   </Form.Item>
-                </Col>
-              </Row>
-              <Form.Item
-                name="email"
-                rules={[
-                  {
-                    type: "email",
-                    message: "Invalid email!",
-                  },
-                  {
-                    required: true,
-                    message: "Please input your email!",
-                  },
-                ]}
-              >
-                <Input placeholder="Email Address" />
+                </div>
+              </div>
+              <div className="mb-6">
+                <Form.Item
+                  name="email"
+                  rules={[
+                    {
+                      type: "email",
+                      message: "Invalid email!",
+                    },
+                    {
+                      required: true,
+                      message: "Please input your email!",
+                    },
+                  ]}
+                >
+                  <Input placeholder="Email Address" />
 
-                {/* <input
+                  {/* <input
                   type="email"
                   id="email"
                   placeholder="Email Address"
                   className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
                 /> */}
-              </Form.Item>
-              <Form.Item
-                name="password"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your password!",
-                  },
-                ]}
-                hasFeedback
-              >
-                <Input.Password placeholder="Password" />
-                {/* <input
+                </Form.Item>
+              </div>
+              <div className="mb-6">
+                <Form.Item
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input your password!",
+                    },
+                  ]}
+                  hasFeedback
+                >
+                  <Input.Password placeholder="Password" />
+                  {/* <input
                   type="password"
                   id="password"
                   placeholder="Password"
                   className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
                 /> */}
-              </Form.Item>
-              <Form.Item
-                name="confirm"
-                dependencies={["password"]}
-                hasFeedback
-                rules={[
-                  {
-                    required: true,
-                    message: "Please confirm your password!",
-                  },
-                  ({ getFieldValue }) => ({
-                    validator(_, value) {
-                      if (!value || getFieldValue("password") === value) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(
-                        new Error("The passwords do not match!")
-                      );
-                    },
-                  }),
-                ]}
-              >
-                <Input.Password
-                  placeholder="Confirm Password"
-                  className="pass_input"
-                />
+                </Form.Item>
+              </div>
 
-                {/* <input
+              <div className="mb-6">
+                <Form.Item
+                  name="confirm"
+                  dependencies={["password"]}
+                  hasFeedback
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please confirm your password!",
+                    },
+                    ({ getFieldValue }) => ({
+                      validator(_, value) {
+                        if (!value || getFieldValue("password") === value) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(
+                          new Error("The passwords do not match!")
+                        );
+                      },
+                    }),
+                  ]}
+                >
+                  <Input.Password
+                    placeholder="Confirm Password"
+                    className="pass_input"
+                  />
+
+                  {/* <input
                   type="password"
                   id="password"
                   placeholder="Confirm Password"
                   className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
                 /> */}
-              </Form.Item>
+                </Form.Item>
+              </div>
               {/* <Form.Item className="captcha">
                 <ReCAPTCHA
-                  sitekey={CONSTANTS.SITE_KEY}
                   onChange={onCaptchaChange}
                   ref={recaptcha}
                 />
@@ -302,8 +306,8 @@ const RegisterModal = () => {
                 </span>
               </p>
             </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </Modal>
     </>
   );

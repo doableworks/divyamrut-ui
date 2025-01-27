@@ -37,7 +37,7 @@ const ProductsScroller = ({ category }) => {
 
 
   const handleMoveRoute = (cate)=>{
-    router.push(`/products-list/${cate.route}`)
+    router.push(`/products-list/${cate.slug}`)
   }
 
 
@@ -48,21 +48,21 @@ const ProductsScroller = ({ category }) => {
       <div className="my-24">
         <div className={"flex flex-row justify-between items-center px-4"}>
         <h2 className="!text-left highlight-heading">
-          {category.title}
+          {category.name}
         </h2>
         <span className={"text-text flex flex-row gap-2 cursor-pointer"}
         onClick={() => handleMoveRoute(category)}
         > VIEW ALL <RightArrow fill={"#64748b"} w={18} /> </span>
         </div>
 
-        <Slider key={category?.title} {...settings1}>
+        <Slider key={category?.name} {...settings1}>
           {category &&
             category?.products.map((product, index) => (
-              <div key={index + category?.category} className={`  pl-[20px] `}>
+              <div key={index + category?.name} className={` pl-[20px] `}>
                 <Product
                   key={index}
                   item={product}
-                  productCategory={category.hasSubCategory ? category.subCategory : category.category}
+                  productCategory={category.hasSubCategory || false ? category.subCategory : category.name}
                 />
               </div>
             ))}
