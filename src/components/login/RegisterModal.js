@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import CONSTANTS, { NoImageAvailabe } from "@/contants/contants";
+import { NoImageAvailabe } from "@/contants/contants";
 import { signIn } from "next-auth/react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -13,6 +13,8 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button, Form, message, Input, Row, Col, Modal } from "antd";
 import CustomButton from "@/components/common/CustomButton";
+
+const apiUrl = process.env.API_URL;
 
 const RegisterModal = () => {
   const [form] = Form.useForm();
@@ -54,12 +56,12 @@ const RegisterModal = () => {
       };
 
       console.log(
-        CONSTANTS.NGROK_URL + `api/auth/register/`,
+        apiUrl + `/api/auth/register/`,
         "vlaues register",
         data
       );
 
-      const response = await fetch(CONSTANTS.NGROK_URL + `api/auth/register/`, {
+      const response = await fetch(apiUrl + `/api/auth/register/`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -266,7 +268,6 @@ const RegisterModal = () => {
               </div>
               {/* <Form.Item className="captcha">
                 <ReCAPTCHA
-                  sitekey={CONSTANTS.SITE_KEY}
                   onChange={onCaptchaChange}
                   ref={recaptcha}
                 />

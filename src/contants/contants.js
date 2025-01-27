@@ -1,12 +1,4 @@
-export const NoImageAvailabe = 'https://i.sstatic.net/y9DpT.jpg'
+export const NoImageAvailabe = "/asset/common/noimage.jpg";
 
-export const NoProfileImage = 'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg'
+export const NoProfileImage = "/asset/common/nouser.jpeg";
 
-
-
-const CONSTANTS = {
-    NoImageAvailabe,
-    NoProfileImage
-};
-
-export default CONSTANTS;

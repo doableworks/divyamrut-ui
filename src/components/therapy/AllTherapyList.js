@@ -1,8 +1,8 @@
 "use client";
-import Image from "next/image";
 import { useSelector } from "react-redux";
 import CommonNoTherapy from "./CommonNoTherapy";
 import Link from "next/link";
+import { NoImageAvailabe } from "@/contants/contants";
 
 export default function AllTherapyList() {
   const navbar = useSelector((state) => state.menuItems.all);
@@ -22,14 +22,11 @@ export default function AllTherapyList() {
                 >
                   <li className="list-none flex flex-col gap-5 rounded-lg overflow-hidden">
                     <div className="flex rounded-lg overflow-hidden h-64 w-full bg-white">
-                      {subItem.image && (
-                        <Image
-                          src={subItem.image}
-                          alt={subItem.id}
-                          width={100}
-                          height={100}
-                        />
-                      )}
+                      <img
+                        src={subItem.image || NoImageAvailabe}
+                        alt={subItem.id}
+                        className="object-cover w-full h-full"
+                      />
                     </div>
                     <p className="section-title">{subItem.name}</p>
                   </li>

@@ -21,7 +21,7 @@ const TherapyName = async ({ params }) => {
 
   return (
     <div>
-      <TherapyDetail {...pageDetails} />
+      <TherapyDetail details={pageDetails} />
     </div>
   );
 };
