@@ -5,9 +5,15 @@ import { NoImageAvailabe } from "@/contants/contants";
 import TestimonialSlider from "@/components/home1/Testimonial";
 import FaqUnorder from "@/components/therapy/FaqUnorder";
 import CommonNoTherapy from "@/components/therapy/CommonNoTherapy";
+import { useEffect, useState } from "react";
 
-export default function TherapyDetail({ data }) {
+export default function TherapyDetail({ details }) {
+  const [data, setData] = useState({ is_published: true });
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setData(details);
+  }, []);
 
   const handleBookTherapy = async () => {
     dispatch(toggleBookingModal(true));
