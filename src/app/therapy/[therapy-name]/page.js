@@ -4,10 +4,14 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const fetchTherapyDetails = async (therapyName) => {
   try {
-    const res = await fetch(`${apiUrl}/therapy/therapy-details/${therapyName}`);
+    const res = await fetch(`${apiUrl}/therapy/therapy-details/${therapyName}`, {
+      next: { revalidate: 60 }, // Revalidate the cache every 60 seconds
+    });
+
     if (!res.ok) {
       throw new Error("Failed to fetch data");
     }
+
     const therapyData = await res.json();
     return therapyData;
   } catch (error) {
@@ -15,6 +19,7 @@ const fetchTherapyDetails = async (therapyName) => {
     return null;
   }
 };
+
 
 const TherapyName = async ({ params }) => {
   console.log("Hellllllllllllll", params)
