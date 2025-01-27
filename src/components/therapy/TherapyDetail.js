@@ -1,5 +1,5 @@
 "use client";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toggleBookingModal } from "@/redux/feature/therapySlice";
 import { NoImageAvailabe } from "@/contants/contants";
 import Testimonial from "@/components/home1/Testimonial";
@@ -8,12 +8,20 @@ import CommonNoTherapy from "@/components/therapy/CommonNoTherapy";
 import { useEffect, useState } from "react";
 
 export default function TherapyDetail({ details }) {
-  const [data, setData] = useState({ is_published: true });
-  const dispatch = useDispatch();
+  const [data, setData] = useState({
+    description: "",
+    faqs: [],
+    image: "",
+    is_published: true,
+    name: "",
+    testimonials: [],
+  });
 
   useEffect(() => {
-    setData(details);
-  }, []);
+    if (details) {
+      setData(details);
+    }
+  }, [details]);
 
   const handleBookTherapy = async () => {
     dispatch(toggleBookingModal(true));
