@@ -8,7 +8,7 @@ import OTPModal from "../../../../components/modals/OtpModal";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import CustomButton from "@/components/common/CustomButton";
 
-const apiUrl = process.env.API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const Page = () => {
   const router = useRouter();

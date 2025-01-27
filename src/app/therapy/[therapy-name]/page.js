@@ -1,23 +1,28 @@
 import TherapyDetail from "@/components/therapy/TherapyDetail";
 
-const apiUrl = process.env.API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-const fetchTherapyDetails = async (params) => {
+const fetchTherapyDetails = async (therapyName) => {
   try {
-    const res = await fetch(
-      `${apiUrl}/therapy/therapy-details/${params["therapy-name"]}`
-    );
+    const res = await fetch(`${apiUrl}/therapy/therapy-details/${therapyName}`);
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
     const therapyData = await res.json();
-
     return therapyData;
   } catch (error) {
     console.error("Error fetching therapy data:", error);
-    return {};
+    return null;
   }
 };
 
 const TherapyName = async ({ params }) => {
-  const pageDetails = await fetchTherapyDetails(params);
+  const therapyName = params["therapy-name"];
+  const pageDetails = await fetchTherapyDetails(therapyName);
+
+  if (!pageDetails) {
+    return <div>Error loading therapy details</div>;
+  }
 
   return (
     <div>

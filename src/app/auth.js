@@ -23,7 +23,7 @@ export const authOptions = {
                     password: credentials.password,
                 };
 
-                const res = await fetch(process.env.API_URL + 'api/auth/login/', {
+                const res = await fetch(process.env.NEXT_PUBLIC_API_URL + 'api/auth/login/', {
                     method: 'POST',
                     body: JSON.stringify(payload),
                     headers: {
@@ -79,7 +79,7 @@ export const authOptions = {
             if (account.provider === "google" && user) {
                 try {
                     const data = {'access_token': account.access_token, 'id_token': account.id_token, 'code': 'test'}
-                    const response = await fetch(process.env.API_URL + 'api/account/social-login/google/', {
+                    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + 'api/account/social-login/google/', {
                         method: 'POST',
                         body: JSON.stringify(data),
                         headers: {
@@ -104,7 +104,7 @@ export const authOptions = {
                         'id_token': account.providerAccountId,
                         'code': 'fbtest'
                     }
-                    const response = await fetch(process.env.API_URL + 'api/account/social-login/facebook/', {
+                    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + 'api/account/social-login/facebook/', {
                         method: 'POST',
                         body: JSON.stringify(data),
                         headers: {

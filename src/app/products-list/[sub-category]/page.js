@@ -3,7 +3,7 @@ import ProductList from "@/components/proudect/ProductList";
 // const getCategoryProducts = async (params) => {
 //   try {
 //     const res = await fetch(
-//       process.env.API_URL + `product/products/?category=${params}`
+//       process.env.NEXT_PUBLIC_API_URL + `product/products/?category=${params}`
 //     );
 //     if (res.status == 200) {
 //       const data = await res.json();

@@ -20,7 +20,14 @@ export default function StaffItem({
           "outline outline-2 outline-green-400"
       )}
     >
-      <Image src={NoProfileImage} alt={detail?.id} height={100} width={100} />
+      <Image
+        src={NoProfileImage}
+        alt={detail?.id}
+        height={100}
+        width={100}
+        className="rounded-full h-28 w-28"
+
+      />
       <p className="font-jost mt-2 text-[14px] text-center mb-1">
         {detail?.name}
       </p>

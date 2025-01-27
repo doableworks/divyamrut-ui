@@ -14,7 +14,7 @@ import Image from "next/image";
 import { Button, Form, message, Input, Row, Col, Modal } from "antd";
 import CustomButton from "@/components/common/CustomButton";
 
-const apiUrl = process.env.API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const RegisterModal = () => {
   const [form] = Form.useForm();
@@ -25,6 +25,8 @@ const RegisterModal = () => {
   const router = useRouter();
   const recaptcha = useRef(null);
   const [messageApi, contextHolder] = message.useMessage();
+
+  console.log(apiUrl)
 
   const showResponseMessage = (type, content) => {
     messageApi.open({

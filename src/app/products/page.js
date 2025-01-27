@@ -543,7 +543,7 @@ const categories = [
 
 // const getAllCategoriesData = async () => {
 //   try {
-//     const res = await fetch(`${process.env.API_URL}/product/categories/`);
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/categories/`);
 //     if (!res.ok) {
 //       throw new Error("Failed to fetch data");
 //     }
