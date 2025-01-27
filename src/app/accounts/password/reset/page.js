@@ -26,10 +26,7 @@ const Page = () => {
   const sendOtp = async (data) => {
     try {
       setLoading2(true);
-      const res = await axios.post(
-        apiUrl + `/api/auth/forgot-password/`,
-        data
-      );
+      const res = await axios.post(apiUrl + `/api/auth/forgot-password/`, data);
       if (res.status === 200) {
         setEmail(data.email);
         setIsOptSendSuccessful(true);
@@ -56,10 +53,7 @@ const Page = () => {
     };
     try {
       setLoading(true);
-      const res = await axios.post(
-        apiUrl + `/api/auth/verify-otp/`,
-        data
-      );
+      const res = await axios.post(apiUrl + `/api/auth/verify-otp/`, data);
       if (res.status === 200) {
         setOtp({ value: data.otp, verified: true });
         setIsOptSendSuccessful(false);
@@ -87,10 +81,7 @@ const Page = () => {
       };
 
       setLoading(true);
-      const res = await axios.post(
-        apiUrl + `/api/auth/reset-password/`,
-        data
-      );
+      const res = await axios.post(apiUrl + `/api/auth/reset-password/`, data);
       if (res.status === 200) {
         setIsPasswordResetSuccessfully(true);
         showResponseMessage("success", "Password has been reset successfully");
@@ -140,12 +131,13 @@ const Page = () => {
                   fontSize: "20px",
                 }}
               >
-                <h1 className="reset_heading">Reset Password </h1>
-                <p className="reset_sub_text mb-10">
-                  Forgotten your password? <br />
+                <h1 className="highlight-heading !mb-2">Reset Password </h1>
+                <p className="section-title !capitalize !text-gray-700 !mb-2">Forgotten your password?</p>
+                <p className="section-content !mb-4">
                   Enter your e-mail address below, and we&apos;ll send you an
                   OTP on e-mail allowing you to reset it.
                 </p>
+
                 <Form
                   name="basic"
                   wrapperCol={{
@@ -154,38 +146,40 @@ const Page = () => {
                   onFinish={sendOtp}
                   autoComplete="off"
                 >
-                  <Form.Item
-                    name="email"
-                    rules={[
-                      {
-                        type: "email",
-                        message: "Invalid email!",
-                      },
-                      {
-                        required: true,
-                        message: "Please input your email",
-                      },
-                    ]}
-                    className="text-start"
-                  >
-                    <Input placeholder="email" />
-                  </Form.Item>
-                  <Form.Item
-                    wrapperCol={{
-                      span: 24,
-                    }}
-                  >
-                    {/* <Button htmlType="submit" size={"large"} loading={loading2}>
-                      Send OTP
-                    </Button> */}
-                    <CustomButton
-                      htmlType="submit"
-                      className="site-button-primary !m-0 w-[-webkit-fill-available]"
-                      title="Send OTP"
-                      loading={loading2}
-                      type="submit"
-                    />
-                  </Form.Item>
+                  <div className="mb-4">
+                    <Form.Item
+                      name="email"
+                      rules={[
+                        {
+                          type: "email",
+                          message: "Invalid email!",
+                        },
+                        {
+                          required: true,
+                          message: "Please input your email",
+                        },
+                      ]}
+                      className="text-start"
+                    >
+                      <Input placeholder="email" />
+                    </Form.Item>
+                  </div>
+
+                  <div className="mb-3">
+                    <Form.Item
+                      wrapperCol={{
+                        span: 24,
+                      }}
+                    >
+                      <CustomButton
+                        htmlType="submit"
+                        className="site-button-primary !m-0 w-[-webkit-fill-available]"
+                        title="Send OTP"
+                        loading={loading2}
+                        type="submit"
+                      />
+                    </Form.Item>
+                  </div>
                 </Form>
               </div>
             ) : otp.verified && !isPasswordResetSuccessfully ? (
@@ -254,12 +248,12 @@ const Page = () => {
                     Submit
                   </Button> */}
                   <CustomButton
-                      htmlType="submit"
-                      className="site-button-primary !m-0 w-[-webkit-fill-available]"
-                      title="Submit"
-                      loading={loading}
-                      type="submit"
-                    />
+                    htmlType="submit"
+                    className="site-button-primary !m-0 w-[-webkit-fill-available]"
+                    title="Submit"
+                    loading={loading}
+                    type="submit"
+                  />
                 </Form.Item>
               </Form>
             ) : isPasswordResetSuccessfully ? (
