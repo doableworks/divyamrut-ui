@@ -35,6 +35,7 @@ export default function TherapyDetail({ details }) {
 
   return (
     <div>
+      {console.log("____details", details)}
       <div className="!mt-0 common_page_width">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 lg:gap-40 items-center">
           <figure className="p-3 flex flex-col justify-center md:items-start">
