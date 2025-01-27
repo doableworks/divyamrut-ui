@@ -17,8 +17,10 @@ const fetchTherapyDetails = async (therapyName) => {
 };
 
 const TherapyName = async ({ params }) => {
+  console.log("Hellllllllllllll", params)
   const therapyName = params["therapy-name"];
   const pageDetails = await fetchTherapyDetails(therapyName);
+  console.log("New data", pageDetails)
 
 
   return (
