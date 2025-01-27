@@ -541,32 +541,48 @@ const categories = [
 ];
 
 
-// const getAllCategoriesData = async () => {
-//   try {
-//     const res = await fetch(`${process.env.API_URL}/product/categories/`);
-//     if (!res.ok) {
-//       throw new Error("Failed to fetch data");
-//     }
-//     const data = await res.json();
-//     return data.results;
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     return [];
-//   }
-// };
+const getAllCategoriesData = async () => {
+  try {
+    const res = await fetch(`${process.env.API_URL}/product/categories-list/`);
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    const data = await res.json();
+    return data
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+};
 
 const page = async() => {
-  // const categoryData = await getAllCategoriesData();
+  const categoryData = await getAllCategoriesData();
+
+  console.log("temp data 222", categoryData)
+
+  // return (
+  //   <div>
+  //     <div className="relative h-[50vh]">
+  //       <ProductBanner categoryData={categoryData} />
+  //     </div>
+  //     <div className="common_page_width">
+  //       <ProductSlider1 categories={categories} />
+  //         {categories.map((category, index) => (
+  //           <ProductsScroller key={index + category.title} category={category} />
+  //         ))}
+  //     </div>
+  //   </div>
+  // );
 
   return (
     <div>
       <div className="relative h-[50vh]">
-        <ProductBanner />
+        <ProductBanner categoryData={categoryData} />
       </div>
       <div className="common_page_width">
         <ProductSlider1 categories={categories} />
-          {categories.map((category, index) => (
-            <ProductsScroller key={index + category.title} category={category} />
+          {categoryData.map((category, index) => (
+            <ProductsScroller key={index + category.name} category={category} />
           ))}
       </div>
     </div>

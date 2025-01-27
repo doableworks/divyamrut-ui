@@ -1,7 +1,9 @@
 "use client"
 import React, { useEffect } from "react";
 
-const ProductBanner = ({heading, subHeading}) => {
+const ProductBanner = ({categoryData}) => {
+
+  console.log("ProductBanner 4444", categoryData)
 
   return (
     <div
