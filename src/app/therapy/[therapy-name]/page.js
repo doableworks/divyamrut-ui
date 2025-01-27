@@ -19,8 +19,6 @@ const fetchTherapyDetails = async (params) => {
 const TherapyName = async ({ params }) => {
   const pageDetails = await fetchTherapyDetails(params);
 
-  console.log("pageDetails 4444 555", pageDetails)
-
   return (
     <div>
       <TherapyDetail {...pageDetails} />
