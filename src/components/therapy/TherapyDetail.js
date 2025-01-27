@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleBookingModal } from "@/redux/feature/therapySlice";
 import { NoImageAvailabe } from "@/contants/contants";
@@ -7,46 +6,14 @@ import TestimonialSlider from "@/components/home1/Testimonial";
 import FaqUnorder from "@/components/therapy/FaqUnorder";
 import CommonNoTherapy from "@/components/therapy/CommonNoTherapy";
 
-export default function TherapyDetail({ created,
-  description,
-  id,
-  faqs,
-  image,
-  is_published,
-  name,
-  price,
-  sku,
-  slug,
-  testimonials,
-  therapy_category,
-  title,
-  uid,
-  updated,
-  video }) {
+export default function TherapyDetail({ data }) {
   const dispatch = useDispatch();
-
-  // const {
-  //   created,
-  //   description,
-  //   id,
-  //   faqs,
-  //   image,
-  //   is_published,
-  //   name,
-  //   price,
-  //   sku,
-  //   slug,
-  //   testimonials,
-  //   therapy_category,
-  //   title,
-  //   uid,
-  //   updated,
-  //   video,
-  // } = data;
 
   const handleBookTherapy = async () => {
     dispatch(toggleBookingModal(true));
   };
+
+  const { description, faqs, image, is_published, name, testimonials } = data;
 
   const noTitle = "Details are unavailable, or the therapy is unpublished";
   const noDescription =
@@ -75,13 +42,10 @@ export default function TherapyDetail({ created,
               </figure>
               <section className="relative lg:h-[550px]">
                 <figure className="relative z-10 flex rounded-tr-full rounded-tl-full overflow-hidden h-[550px] border-2">
-                  <Image
-                    src={!!image ? image : NoImageAvailabe}
+                  <img
+                    src={image || NoImageAvailabe}
                     alt="therapy"
-                    layout="responsive"
-                    width={100}
-                    height={100}
-                    className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110"
+                    className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:simagecale-110"
                   />
                 </figure>
 

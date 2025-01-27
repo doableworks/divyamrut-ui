@@ -4,7 +4,10 @@ import Image from "next/image";
 import { Star } from "@/icon/icons";
 import { twMerge } from "tailwind-merge";
 import { NoProfileImage } from "@/contants/contants";
-import { Carousel } from "antd";
+import dynamic from "next/dynamic";
+const Carousel = dynamic(() => import("antd").then((mod) => mod.Carousel), {
+  ssr: false,
+});
 
 const initialTestimonial = [
   {
@@ -32,6 +35,7 @@ const TestimonialSlider = ({
   data = initialTestimonial,
   slidesToShow = 1,
 }) => {
+  
   return (
     <div
       id="testimonials"
@@ -59,6 +63,7 @@ const TestimonialSlider = ({
               <div className="relative min-h-full testimonial-card bg-[#F9F3EB] shadow-lg p-6 rounded-lg w-full py-12">
                 <Image
                   src={testimonial?.image || NoProfileImage}
+                  alt={index}
                   height={100}
                   width={100}
                   className="rounded-full h-24 w-24 mx-auto mb-3"

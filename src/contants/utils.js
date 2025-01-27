@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import axios from "axios";
-import CONSTANTS from "./contants"
+
+const apiUrl = process.env.API_URL;
 
 
 export const isJwtExpired = (token) => {
@@ -29,7 +30,7 @@ export const refreshToken = async function (token) {
     try {
         const response = await axios.post(
             // "http://localhost:8000/api/auth/token/refresh/",
-            CONSTANTS.NGROK_URL + `api/auth/token/refresh/`,
+            apiUrl + `/api/auth/token/refresh/`,
 
             {
                 refresh: token.refreshToken,
