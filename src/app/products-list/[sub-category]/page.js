@@ -8,7 +8,7 @@ const getCategoryProducts = async (link) => {
 
     if(temp.length > 0 && false){
       const res = await fetch(
-        process.env.API_URL + `/product/${temp[0]}/${temp[1]}/`
+        process.env.NEXT_PUBLIC_API_URL + `/product/${temp[0]}/${temp[1]}/`
       );
       if (res.status == 200) {
         const data = await res.json();
@@ -20,12 +20,12 @@ const getCategoryProducts = async (link) => {
       let res;
       if(temp.length > 0){
          res = await fetch(
-          process.env.API_URL + `/product/category/${temp[0]}/`
+          process.env.NEXT_PUBLIC_API_URL + `/product/category/${temp[0]}/`
         );
       }
       else{
          res = await fetch(
-          process.env.API_URL + `/product/category/${link}/`
+          process.env.NEXT_PUBLIC_API_URL + `/product/category/${link}/`
         );
       }
       if (res.status == 200) {

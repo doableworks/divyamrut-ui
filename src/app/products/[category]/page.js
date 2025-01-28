@@ -5,7 +5,7 @@ import ProductBanner from "@/components/proudect/ProductBanner";
 const getSubCategoryProducts = async (category) => {
   try {
     const res = await fetch(
-      process.env.API_URL + `/product/sub-categories-list/${category}/`
+      process.env.NEXT_PUBLIC_API_URL + `/product/sub-categories-list/${category}/`
     );
     if (res.status == 200) {
       const data = await res.json();
