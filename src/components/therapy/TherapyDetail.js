@@ -15,7 +15,6 @@ export default function TherapyDetail({ data }) {
 
   const { description, faqs, image, name, testimonials } = data;
 
-
   const noTitle = "Details are unavailable, or the therapy is unpublished";
   const noDescription =
     "Currently, there is no data available to display. Please check back soon as we continue to update our offerings. If you have specific therapy needs or questions, feel free to contact us—we’re here to assist you on your wellness journey.";
@@ -58,14 +57,19 @@ export default function TherapyDetail({ data }) {
         </div>
       </div>
 
-      <div>
-        <Testimonial
-          className="bg-white hidden lg:block"
-          data={testimonials}
-          slidesToShow={3}
-        />
-        <Testimonial className="bg-white block lg:hidden" data={testimonials} />
-      </div>
+      {testimonials.length > 0 && (
+        <div>
+          <Testimonial
+            className="bg-white hidden lg:block"
+            data={testimonials}
+            slidesToShow={3}
+          />
+          <Testimonial
+            className="bg-white block lg:hidden"
+            data={testimonials}
+          />
+        </div>
+      )}
 
       {faqs?.length > 0 && <FaqUnorder details={faqs} />}
     </div>

@@ -35,10 +35,7 @@ const TestimonialSlider = ({
   data = initialTestimonial,
   slidesToShow = 1,
 }) => {
-  const infiniteData = Array.from(
-    { length: Math.ceil((slidesToShow * 2) / data.length) },
-    () => data
-  ).flat();
+  const infiniteData = Array.from({ length: 5 }, () => data).flat();
 
   return (
     <div
