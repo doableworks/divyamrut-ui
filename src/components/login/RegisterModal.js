@@ -26,7 +26,6 @@ const RegisterModal = () => {
   const recaptcha = useRef(null);
   const [messageApi, contextHolder] = message.useMessage();
 
-  console.log(apiUrl)
 
   const showResponseMessage = (type, content) => {
     messageApi.open({

@@ -5,7 +5,7 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const fetchTherapyDetails = async (therapyName) => {
   try {
     const res = await fetch(`${apiUrl}/therapy/therapy-details/${therapyName}`, {
-      next: { revalidate: 60 }, // Revalidate the cache every 60 seconds
+      next: { revalidate: 60 }, 
     });
 
     if (!res.ok) {
@@ -22,16 +22,13 @@ const fetchTherapyDetails = async (therapyName) => {
 
 
 const TherapyName = async ({ params }) => {
-  console.log("Hellllllllllllll", params)
   const therapyName = params["therapy-name"];
   const pageDetails = await fetchTherapyDetails(therapyName);
-  console.log("New data", pageDetails)
-
 
   return (
     <div>
       {pageDetails?(
-       <TherapyDetail details={pageDetails} />
+       <TherapyDetail data={pageDetails} />
       ):null}
     </div>
   );

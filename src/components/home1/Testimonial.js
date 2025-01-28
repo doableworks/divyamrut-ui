@@ -35,7 +35,11 @@ const TestimonialSlider = ({
   data = initialTestimonial,
   slidesToShow = 1,
 }) => {
-  
+  const infiniteData = Array.from(
+    { length: Math.ceil((slidesToShow * 2) / data.length) },
+    () => data
+  ).flat();
+
   return (
     <div
       id="testimonials"
@@ -58,7 +62,7 @@ const TestimonialSlider = ({
         </div>
 
         <Carousel autoplay dots={false} slidesToShow={slidesToShow}>
-          {data.map((testimonial, index) => (
+          {infiniteData.map((testimonial, index) => (
             <li className="flex p-4 overflow-hidden list-none" key={index}>
               <div className="relative min-h-full testimonial-card bg-[#F9F3EB] shadow-lg p-6 rounded-lg w-full py-12">
                 <Image

@@ -6,30 +6,15 @@ import Testimonial from "@/components/home1/Testimonial";
 import FaqUnorder from "@/components/therapy/FaqUnorder";
 import { useEffect, useState } from "react";
 
-export default function TherapyDetail({ details }) {
+export default function TherapyDetail({ data }) {
   const dispatch = useDispatch();
-  const [data, setData] = useState({
-    description: "",
-    faqs: [],
-    image: "",
-    is_published: true,
-    name: "",
-    testimonials: [],
-  });
-
-  useEffect(() => {
-    if (details) {
-      setData(details);
-    }
-  }, [details]);
 
   const handleBookTherapy = async () => {
     dispatch(toggleBookingModal(true));
   };
 
-  const { description, faqs, image, is_published, name, testimonials } = data;
+  const { description, faqs, image, name, testimonials } = data;
 
-  console.log("____data", data)
 
   const noTitle = "Details are unavailable, or the therapy is unpublished";
   const noDescription =
@@ -37,7 +22,6 @@ export default function TherapyDetail({ details }) {
 
   return (
     <div>
-      {console.log("____details", details)}
       <div className="!mt-0 common_page_width">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 lg:gap-40 items-center">
           <figure className="p-3 flex flex-col justify-center md:items-start">
