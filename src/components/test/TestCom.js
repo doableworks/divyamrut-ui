@@ -8,7 +8,6 @@ const TestCom = ({params}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(`http://139.59.13.134:8000/therapy/therapy-details/meru-chikitsa`,"params", params);
         const res = await fetch(`http://139.59.13.134:8000/therapy/therapy-details/${params.therapy}`)
         const therapyData = await res.json();
         console.log("therapyData 5555 ", therapyData)

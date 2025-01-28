@@ -1,120 +1,47 @@
 import ProductList from "@/components/proudect/ProductList";
 
-// const getCategoryProducts = async (params) => {
-//   try {
-//     const res = await fetch(
-//       process.env.API_URL + `product/products/?category=${params}`
-//     );
-//     if (res.status == 200) {
-//       const data = await res.json();
-//       return data?.results;
-//     } else {
-//       return null;
-//     }
-//   } catch (error) {
-//     console.log("getTypes error", error);
-//     return null;
-//   }
-// };
+const getCategoryProducts = async (link) => {
+  try {
+    // console.log("params 555555 77777 link", link)
+    const temp = link.split("-%40-")
+    // console.log("params 555555 77777", temp)
 
-const page = ({ params }) => {
-    // const heading = params["product-categ"];
-    // const subHeading = "Products";
-    // const products = await getCategoryProducts(params["products-category"]);
+    if(temp.length > 0 && false){
+      const res = await fetch(
+        process.env.API_URL + `/product/${temp[0]}/${temp[1]}/`
+      );
+      if (res.status == 200) {
+        const data = await res.json();
+        // console.log("sub data 555555555555555555555555555", data)
+        return data?.products;
+      }   
+    }
+    else{
+      let res;
+      if(temp.length > 0){
+         res = await fetch(
+          process.env.API_URL + `/product/category/${temp[0]}/`
+        );
+      }
+      else{
+         res = await fetch(
+          process.env.API_URL + `/product/category/${link}/`
+        );
+      }
+      if (res.status == 200) {
+        const data = await res.json();
+        // console.log("cate data 777777777777777777", data)
+        return data?.products;
+      }
+    } 
+  } catch (error) {
+    console.log("getTypes error", error);
+    return null;
+  }
+};
 
-    const products = [
-        {
-            id:1,
-            title:
-                "Natural Health Supplements",
-            slug: "product-details",
-            description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            date: "August 6, 2024",
-            price: "10.00",
-            currency: "Rupees",
-            image:
-                "/asset/home/natural-health-support.jpg",
-        },
-        {
-            id:2,
-            title:
-                "Natural Health Supplements",
-            slug: "product-details",
-            description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            date: "August 6, 2024",
-            price: "10.00",
-            currency: "Rupees",
-            image:
-                "/asset/home/natural-health-support.jpg",
-        },
-        {
-            id:3,
-            title:
-                "Natural Health Supplements",
-            slug: "product-details",
-            description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            date: "August 6, 2024",
-            price: "10.00",
-            currency: "Rupees",
-            image:
-                "/asset/home/natural-health-support.jpg",
-        },
-        {
-            id:4,
-            title:
-                "Natural Health Supplements",
-            slug: "product-details",
-            description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            date: "August 6, 2024",
-            price: "10.00",
-            currency: "Rupees",
-            image:
-                "/asset/home/natural-health-support.jpg",
-        },
-        {
-            id:5,
-            title:
-                "Natural Health Supplements",
-            slug: "product-details",
-            description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            date: "August 6, 2024",
-            price: "10.00",
-            currency: "Rupees",
-            image:
-                "/asset/home/natural-health-support.jpg",
-        },
-        {
-            id:6,
-            title:
-                "Natural Health Supplements",
-            slug: "product-details",
-            description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            date: "August 6, 2024",
-            price: "10.00",
-            currency: "Rupees",
-            image:
-                "/asset/home/natural-health-support.jpg",
-        },
-        {
-            id:7,
-            title:
-                "Natural Health Supplements",
-            slug: "product-details",
-            description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            date: "August 6, 2024",
-            price: "10.00",
-            currency: "Rupees",
-            image:
-                "/asset/home/natural-health-support.jpg",
-        },
-    ]
+const page = async ({ params }) => {
+    const products = await getCategoryProducts(params["sub-category"]);
 
     return (
         <div className="common_page_width !px-2">

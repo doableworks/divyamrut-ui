@@ -23,11 +23,13 @@ const ProductDetail = ({ item }) => {
   const dispatch = useDispatch();
   const [selectedImage, SetSelectedImage] = useState(0);
 
+  // console.log("99999999999999999999 item", item)
+
   const imgArr = [
-    "/asset/home/ayurvedic-supplement.jpg",
-    "/asset/home/natural-health-support.jpg",
-    "/asset/home/ayurvedic-supplement.jpg",
-    "/asset/home/natural-health-support.jpg",
+    item.image,
+    item.image,
+    item.image,
+    item.image,
   ];
 
   const handleAddItem = async () => {
@@ -42,7 +44,6 @@ const ProductDetail = ({ item }) => {
 
   const handleBuyBtn = () => {
     router.push("/payment-delivery");
-
     // dispatch(SetIsBuyModalOpen(true))
   };
 
@@ -56,10 +57,14 @@ const ProductDetail = ({ item }) => {
             <ProductImage imgSrc={imgArr[selectedImage]} />
           </div>
           <div className="block md:hidden"> */}
+          <div className="relative h-[40vh] md:h-[50vh] w-[40vh] md:w-[50vh]">
             <ImageMedium imgSrc={imgArr[selectedImage]} />
+              </div>
+            {/* <ImageMedium imgSrc={item.uploaded_images[selectedImage]} /> */}
           {/* </div> */}
           {/* </div> */}
           <div className="flex space-x-2 mt-8">
+            {/* {item.uploaded_images.map((path, index) => ( */}
             {imgArr.map((path, index) => (
               <div
                 key={index}
@@ -71,7 +76,7 @@ const ProductDetail = ({ item }) => {
                 <Image
                   height={200}
                   width={200}
-                  src={path}
+                  src={item?.image}
                   alt={`Thumbnail ${index}`}
                   className="w-full h-full object-cover"
                 />
@@ -83,17 +88,17 @@ const ProductDetail = ({ item }) => {
         {/* Product Details Section */}
         <div className="lg:w-1/2 flex flex-col">
           <div className="mb-4">
-            <h1 className="text-2xl font-bold text-gray-800 mt-2">
-              Ayurvedic Supplement
+            <h1 className="sub_heading !text-left !captilize mt-2">
+              {item.name}
             </h1>
-            <p className="text-sm text-gray-600">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry&apos;s standard dummy
-              text ever since the 1500s.
-            </p>
+            <p className="text-sm text-gray-600"
+            dangerouslySetInnerHTML={{ __html: item?.description }} />
+            {/* <p className="text-sm text-gray-600">
+               {item.description}
+            </p> */}
           </div>
           <div className="mb-4">
-            <p className="text-lg font-bold text-gray-900">₹28</p>
+            <p className="text-lg font-bold text-gray-900"> {item?.currency == "USD" ? "$" : "₹"}&nbsp;{item?.price}</p>
             <p className="text-sm text-gray-500">(Inclusive of all taxes)</p>
           </div>
           <div className="flex flex-row gap-8">

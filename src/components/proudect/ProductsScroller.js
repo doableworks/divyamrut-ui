@@ -62,7 +62,7 @@ const ProductsScroller = ({ category }) => {
                 <Product
                   key={index}
                   item={product}
-                  productCategory={category.hasSubCategory || false ? category.subCategory : category.name}
+                  productCategory={category.hasSubCategory && false ? category.subCategory : category.slug}
                 />
               </div>
             ))}

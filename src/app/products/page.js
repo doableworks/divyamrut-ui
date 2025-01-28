@@ -557,8 +557,7 @@ const getAllCategoriesData = async () => {
 
 const page = async() => {
   const categoryData = await getAllCategoriesData();
-
-  console.log("temp data 222", categoryData)
+  const bannerImgArr = categoryData.map(item=>item.image)
 
   // return (
   //   <div>
@@ -577,10 +576,10 @@ const page = async() => {
   return (
     <div>
       <div className="relative h-[50vh]">
-        <ProductBanner categoryData={categoryData} />
+        <ProductBanner srcUrl={bannerImgArr[0]} />
       </div>
       <div className="common_page_width">
-        <ProductSlider1 categories={categories} />
+        <ProductSlider1 categories={categoryData} />
           {categoryData.map((category, index) => (
             <ProductsScroller key={index + category.name} category={category} />
           ))}

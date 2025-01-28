@@ -6,6 +6,7 @@ import BtnSection from "@/components/BtnCom/BtnSection";
 import { useSelector, useDispatch } from "react-redux";
 import { Star } from "@/icon/icons";
 import CustomButton from "@/components/common/CustomButton";
+import "./product.css";
 
 import {
   addItem,
@@ -39,33 +40,25 @@ const Product = ({ item, productCategory }) => {
       className="relative flex flex-col justify-between cursor-pointer rounded overflow-hidden"
       onClick={() => router.push(`/products-list/${productCategory}/${item?.slug}`)}
     >
-      {/* {item?.image && (
+      <div className="w-full h-[300px] md:h-[350px] rounded-xl">
+      {item?.image && (
         <Image
           src={item?.image}
           width={200}
           height={200}
-          className="w-full h-[200px]"
-          alt="img"
-        />
-      )} */}
-
-      {/* <div className="w-full h-[300px] md:h-[350px] rounded-xl"> */}
-      {item?.image && (
-        <img
-          src={item?.image}
-          // width={200}
-          // height={200}
           className="w-full h-full cover"
-          alt="img"
+          alt={item?.image}
         />
       )}
-      {/* </div> */}
+      </div>
 
       <div className="flex-grow flex flex-col px-6 pt-4">
-        <h6 className="section_title14 !normal-case !text-[1.5rem] !text-left hover:!text-[--yellow]">
-          {item?.name}
+        <h6 className="product_name text-heading !text-[24px] !leading-[30px] !normal-case !text-left hover:!text-[--yellow]" >
+          {item?.name}  
         </h6>
-        <p className="text_text14 !text-left mt-1">{item.description}</p>
+        <p className="product_name text_text14 !text-left mt-1" 
+        dangerouslySetInnerHTML={{ __html: item?.description }} />
+        {/* <p className="text_text14 !text-left mt-1" >{item.description}</p> */}
         <p className="text_text14 !text-left text-[black] mt-2">
           {item?.currency == "USD" ? "$" : "₹"}&nbsp;{item?.price}
         </p>

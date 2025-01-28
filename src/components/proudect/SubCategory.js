@@ -8,9 +8,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./subcategory.css";
 
-const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
+const SubCategory = ({ data }) => {
   const router = useRouter();
-  const isSticky = useSelector((state) => state.product.isSticky);
+  // const isSticky = useSelector((state) => state.product.isSticky);
 
   var settings1 = {
     dots: false,
@@ -55,6 +55,24 @@ const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
       //   },
     ],
   };
+
+  const handleMoveRoute = (slug) => {
+    try {
+      // const queryData = { id: 1, categorySlug: data.slug,  subCategorySlug: slug };
+
+      router.push(`/products-list/${data.slug}-%40-${slug}`);
+
+      // router.push({
+      //   pathname: `/products-list/${slug}`,
+      //   query: JSON.stringify(queryData) ,
+      // });
+    } catch (error) {
+      console.log("sub-category error", error);
+    }
+  };
+
+
+    // router.push(`/products-list/${slug}`);
 
   return (
     <div className="">
@@ -156,24 +174,74 @@ const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
         </div>
       </div> */}
       <div className="py-4 md:px-6">
-      <h2 className="sub_heading !text-left mb-8">Featured Categories</h2>
+        <h2 className="sub_heading !text-left mb-8">Featured Categories</h2>
         <Slider key={"sub-category-slider"} {...settings1}>
-          {categories &&
-            categories.map((category, index) => (
+          {data?.subcategory_data?.length > 0 &&
+            data?.subcategory_data.map((category, index) => (
               <div key={index} className="relative group px-[5px]">
                 <div
                   className="sub_top_thrid relative group overflow-hidden shadow-md bg-white cursor-pointer"
                   onClick={() =>
-                    router.push(`/products-list/${category.route}`)
+                    // router.push(`/products-list/${category.slug}`)
+                    handleMoveRoute(category.slug)
                   }
+                  style={{
+                    backgroundImage: `url(${category.image})`,
+                  }}
                 >
                   <div className="absolute bottom-0 right-0 text-right">
                     <button
                       className="site-button-primary !px-5 !rounded-none"
                       onClick={() =>
-                        router.push(
-                          router.push(`/products-list/${category.route}`)
-                        )
+                        // router.push(`/products-list/${category.slug}`)
+                        handleMoveRoute(category.slug)
+                      }
+                    >
+                      Shop Now
+                    </button>
+                </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="section-title text-center">{category.name}</h3>
+                  <p
+                    className="section-content text-center mt-2"
+                    dangerouslySetInnerHTML={{ __html: category?.description }}
+                  />
+                  {/* <p className="section-content text-center mt-2">
+                    {category.description}
+                  </p> */}
+                </div>
+              </div>
+            ))}
+        </Slider>
+      </div>
+      <div className="md:px-6">
+        <h2 className="sub_heading !text-left mb-8">Similar Products</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          {data?.subcategory_data?.length > 0 &&
+            data?.subcategory_data.slice(0, 2).map((category, index) => (
+              <div key={index} className="relative group">
+                <div
+                  className="sub_top_second relative  group overflow-hidden shadow-md bg-white cursor-pointer"
+                  onClick={
+                    () => handleMoveRoute(category.slug)
+                    // router.push(`/products-list/${category.slug}`)
+                  }
+                  style={{
+                    backgroundImage: `url(${category.image})`,
+                  }}
+                >
+                  {/* <img
+                                src={category.image}
+                                alt={category.title}
+                                className="w-full h-64 object-cover transform group-hover:scale-105 transition duration-300"
+                            /> */}
+                  <div className="absolute w-full md:w-auto  bottom-0 right-0 text-right">
+                    <button
+                      className="site-button-primary w-full !px-5 !rounded-none"
+                      onClick={
+                        () => handleMoveRoute(category.slug)
+                        // router.push(`/products-list/${category.slug}`)
                       }
                     >
                       Shop Now
@@ -181,62 +249,24 @@ const SubCategory = ({ categorySlug, categories, OurIconicProduct }) => {
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="section-title text-center">
-                    {category.title}
-                  </h3>
-                  <p className="section-content text-center mt-2">
-                    {category.description}
-                  </p>
+                  <h3 className="section-title text-center">{category.name}</h3>
+                  <p
+                    className="section-content text-center mt-2"
+                    dangerouslySetInnerHTML={{ __html: category?.description }}
+                  />
                 </div>
               </div>
             ))}
-        </Slider>
-      </div>
-      <div className="md:px-6">
-        <h2 className="sub_heading !text-left mb-8">similar Products</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          {OurIconicProduct.slice(0, 2).map((category, index) => (
-            <div key={index} className="relative group">
-              <div
-                className="sub_top_second relative  group overflow-hidden shadow-md bg-white cursor-pointer"
-                onClick={() =>
-                  router.push(`/products-list/${category.route}`)
-                }
-              >
-                {/* <img
-                                src={category.image}
-                                alt={category.title}
-                                className="w-full h-64 object-cover transform group-hover:scale-105 transition duration-300"
-                            /> */}
-                <div className="absolute w-full md:w-auto  bottom-0 right-0 text-right">
-                  <button
-                    className="site-button-primary w-full !px-5 !rounded-none"
-                    onClick={() =>
-                      router.push(`/products-list/${category.route}`)
-                    }
-                  >
-                    Shop Now
-                  </button>
-                </div>
-              </div>
-              <div className="p-4">
-                <h3 className="section-title text-center">{category.title}</h3>
-                <p className="section-content text-center mt-2">
-                  {category.description}
-                </p>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
       <div className="mt-20">
         <h1 className="highlight-heading">What is Lorem Ipsum?</h1>
         <p className="section-content">
           Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
+          industry. Lorem Ipsum has been the industry&apos;s standard dummy text
+          ever since the 1500s, when an unknown printer took a galley of type
+          and scrambled it to make a type specimen book. It has survived not
+          only five centuries, but also the leap into electronic typesetting,
           remaining essentially unchanged. It was popularised in the 1960s with
           the release of Letraset sheets containing Lorem Ipsum passages, and
           more recently with desktop publishing software like Aldus PageMaker
