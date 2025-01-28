@@ -1,7 +1,7 @@
 import { ConfigProvider } from "antd";
 import { LayoutSection } from "@/components/common/LayoutSection";
 
-const apiUrl = process.env.API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const getNavbarItems = async () => {
   try {

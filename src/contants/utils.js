@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import axios from "axios";
 
-const apiUrl = process.env.API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 
 export const isJwtExpired = (token) => {
