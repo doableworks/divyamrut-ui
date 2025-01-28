@@ -23,6 +23,7 @@ const SubCategory = ({ data }) => {
     slidesToShow: 4,
     slidesToScroll: 1,
     lazyLoad: true,
+    vertical: false,
     responsive: [
       {
         breakpoint: 1200,
@@ -177,7 +178,7 @@ const SubCategory = ({ data }) => {
         <h2 className="sub_heading !text-left mb-8">Featured Categories</h2>
         <Slider key={"sub-category-slider"} {...settings1}>
           {data?.subcategory_data?.length > 0 &&
-            data?.subcategory_data.map((category, index) => (
+            [...data?.subcategory_data].map((category, index) => (
               <div key={index} className="relative group px-[5px]">
                 <div
                   className="sub_top_thrid relative group overflow-hidden shadow-md bg-white cursor-pointer"
@@ -185,9 +186,9 @@ const SubCategory = ({ data }) => {
                     // router.push(`/products-list/${category.slug}`)
                     handleMoveRoute(category.slug)
                   }
-                  style={{
-                    backgroundImage: `url(${category.image})`,
-                  }}
+                  // style={{
+                  //   backgroundImage: `url(${category.image})`,
+                  // }}
                 >
                   <div className="absolute bottom-0 right-0 text-right">
                     <button
