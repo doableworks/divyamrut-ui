@@ -14,6 +14,11 @@ import { Button, Form, Input } from "antd";
 import { formatDateToDDMMYYYY } from "@/utils/dates";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import ProfileCardSkeleton from "@/components/loader/therapy-spinners/ProfileCardSkeleton";
+import { usePathname } from "next/navigation";
+import axios from "axios";
+
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const allowedStatuses = ["wait", "process", "finish", "error"];
 
@@ -74,26 +79,17 @@ const initialTimeSlots = [
   },
 ];
 
-const therapyStaff = [
-  {
-    id: 0,
-    name: "Dr. Himanshu Bhagat",
-    about: "Osteopath and Somatic Experiencing Practitioner (SEP)",
-  },
-  {
-    id: 1,
-    name: "Jayesh Jayaram Rao",
-    about: "Osteopath",
-  },
-];
-
 export default function BookingModal() {
   const dispatch = useDispatch();
+  const pathname = usePathname();
+  const currentPath = pathname.split("/");
   const [form] = Form.useForm();
   const [activeStep, setActiveStep] = useState(0);
   const [lastStepStatus, setLastStepStatus] = useState("process");
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [therapyStaffList, setTherapyStaffList] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(true);
   const [messageApi, contextHolder] = message.useMessage();
 
   const [selectedStaff, setSelectedStaff] = useState(null);
@@ -217,14 +213,49 @@ export default function BookingModal() {
     }
   };
 
+  const fetchTherapyStaffList = async () => {
+    try {
+      const url = `${apiUrl}/therapy/therapy-profile/${currentPath[2]}/`;
+
+      const response = await axios.get(url, {
+        next: { revalidate: 60 },
+      });
+
+      const data = response.data;
+      setTherapyStaffList(data);
+    } catch (err) {
+      console.log(err);
+      messageApi.open({
+        type: "error",
+        content:
+          err?.response?.message ||
+          "Unable to proceed, please try again later!",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isBookingModal && activeStep === 0) {
+      fetchTherapyStaffList();
+    }
+  }, [isBookingModal]);
+
   const handlePaymentStep = () => {};
 
   const renderActiveStep = (step) => {
     switch (step) {
       case 0:
-        return therapyStaff?.length > 0 ? (
+        return isLoading ? (
+          <div className="list-none grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 px-10 py-5 md:py-5">
+            {Array.from({ length: 2 }).map(() => (
+              <ProfileCardSkeleton />
+            ))}
+          </div>
+        ) : therapyStaffList?.length > 0 ? (
           <ul className="list-none grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 px-10 py-5 md:py-5">
-            {therapyStaff.map((each) => (
+            {therapyStaffList.map((each) => (
               <StaffItem
                 detail={each}
                 key={each.id}

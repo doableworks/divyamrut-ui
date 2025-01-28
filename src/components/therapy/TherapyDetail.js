@@ -43,7 +43,7 @@ export default function TherapyDetail({ data }) {
               <img
                 src={image || NoImageAvailabe}
                 alt="therapy"
-                className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:simagecale-110"
+                className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110"
               />
             </figure>
 
