@@ -249,8 +249,8 @@ export default function BookingModal() {
       case 0:
         return isLoading ? (
           <div className="list-none grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 px-10 py-5 md:py-5">
-            {Array.from({ length: 2 }).map(() => (
-              <ProfileCardSkeleton />
+            {Array.from({ length: 2 }).map((_, index) => (
+              <ProfileCardSkeleton key={index}/>
             ))}
           </div>
         ) : therapyStaffList?.length > 0 ? (
