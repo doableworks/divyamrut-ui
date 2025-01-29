@@ -541,7 +541,6 @@ const categories = [
 ];
 
 
-<<<<<<< HEAD
 const getAllCategoriesData = async () => {
   try {
     const res = await fetch(`${process.env.API_URL}/product/categories-list/`);
@@ -555,21 +554,6 @@ const getAllCategoriesData = async () => {
     return [];
   }
 };
-=======
-// const getAllCategoriesData = async () => {
-//   try {
-//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/categories/`);
-//     if (!res.ok) {
-//       throw new Error("Failed to fetch data");
-//     }
-//     const data = await res.json();
-//     return data.results;
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     return [];
-//   }
-// };
->>>>>>> 58fc3dac6a8f24d87db75610599eeb1bc0c548ad
 
 const page = async() => {
   const categoryData = await getAllCategoriesData();
