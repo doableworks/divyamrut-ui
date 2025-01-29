@@ -24,7 +24,7 @@ const page = async({params}) => {
 
 
   return (
-    <div className="relative">
+    <div className="">
       <div className="relative h-[50vh]">
         <ProductBanner  srcUrl={data?.image}/>
       </div>

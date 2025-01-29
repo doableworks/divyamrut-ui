@@ -37,7 +37,7 @@ const page = async() => {
 
 
   return (
-    <div>
+    <>
       <div className="relative h-[50vh]">
         <ProductBanner srcUrl={bannerImgArr[0]} />
       </div>
@@ -47,7 +47,7 @@ const page = async() => {
             <ProductsScroller key={index + category.name} category={category} />
           ))}
       </div>
-    </div>
+    </>
   );
 };
 
