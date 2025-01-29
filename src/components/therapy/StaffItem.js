@@ -11,20 +11,31 @@ export default function StaffItem({
     handleSetSelectedStaff(detail);
   };
 
+  console.log(detail);
+
   return (
     <li
       onClick={setStaff}
       className={twMerge(
         "bg-white p-6 rounded-lg flex flex-col items-center cursor-pointer",
-        selectedStaff?.id === detail?.id &&
+        selectedStaff?.uid === detail?.uid &&
           "outline outline-2 outline-green-400"
       )}
     >
-      <Image src={NoProfileImage} alt={detail?.id} height={100} width={100} />
-      <p className="font-jost mt-2 text-[14px] text-center mb-1">
-        {detail?.name}
+      <Image
+        src={NoProfileImage}
+        alt={detail?.id}
+        height={100}
+        width={100}
+        className="rounded-full h-28 w-28"
+      />
+      <p className="font-jost mt-2 text-[14px] text-center mb-1 capitalize">
+        {detail?.user_firstname} {detail?.user_lastname}
       </p>
-      <p className="section-content !text-[12px]">{detail?.about}</p>
+      <p
+        className="section-content !text-[12px]"
+        dangerouslySetInnerHTML={{ __html: detail?.description }}
+      ></p>
     </li>
   );
 }

@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { Button, Form, message, Input, Row, Col, Modal } from "antd";
 import CustomButton from "@/components/common/CustomButton";
 
-
 export default function OTPModal({ email, sendOtpAgain, loading, VerifyOtp }) {
   const [open, setOpen] = useState(true);
   const [seconds, setSeconds] = useState(60);
@@ -26,9 +25,10 @@ export default function OTPModal({ email, sendOtpAgain, loading, VerifyOtp }) {
 
   return (
     <Modal open={open} onCancel={handleCancel} footer={null}>
-      <div className="bg-white w-full">
-        <p className="text-sm text-gray-600 text-center my-2">
-          An OTP has been sent to <span className="font-medium">{email}</span>.
+      <div className="bg-white w-full p-6">
+        <p className="section-title !normal-case !mb-6 !text-gray-500">
+          An OTP has been sent to{" "}
+          <span className="!font-medium !text-gray-700">{email}</span>.
         </p>
         <Form
           name="basic"
@@ -38,25 +38,27 @@ export default function OTPModal({ email, sendOtpAgain, loading, VerifyOtp }) {
           onFinish={VerifyOtp}
           autoComplete="off"
         >
-          <Form.Item
-            name="otp"
-            rules={[
-              {
-                required: true,
-                message: "Please enter the 6-digit OTP",
-              },
-              {
-                len: 6,
-                message: "OTP must be exactly 6 digits",
-              },
-            ]}
-          >
-            <Input.OTP
-              type="text"
-              maxLength={6}
-              placeholder="Enter 6-digit OTP"
-            />
-          </Form.Item>
+          <div className="w-full mb-4 text-center">
+            <Form.Item
+              name="otp"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter the 6-digit OTP",
+                },
+                {
+                  len: 6,
+                  message: "OTP must be exactly 6 digits",
+                },
+              ]}
+            >
+              <Input.OTP
+                type="text"
+                maxLength={6}
+                placeholder="Enter 6-digit OTP"
+              />
+            </Form.Item>
+          </div>
           {seconds > 0 ? (
             <h2 className="text-[14px] leading-[20px] font-[400] mb-4">
               {" "}

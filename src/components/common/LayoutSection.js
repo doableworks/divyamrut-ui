@@ -38,6 +38,7 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
       parentSlug: "/products/",
       subMenu: navbarAPIitems?.product_categories,
     },
+    { label: "Contact Us", path: "/contact-us" },
   ];
 
   dispatch(setMenuItems(initialMenuItems));
