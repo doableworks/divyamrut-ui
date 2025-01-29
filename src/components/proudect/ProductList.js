@@ -4,6 +4,7 @@ import Product from "@/components/proudect/Product";
 import FilterSection from "@/components/proudect/FilterSection";
 
 const ProductList = ({ products, params }) => {
+
   return (
     <div className="">
       {/* <div className="hidden md:block w-[15%]" >

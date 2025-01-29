@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Star } from "@/icon/icons";
 import CustomButton from "@/components/common/CustomButton";
 import "./product.css";
-
+import { NoImageAvailabe } from "@/contants/contants";
 import {
   addItem,
   removeItem,
@@ -24,8 +24,8 @@ const Product = ({ item, productCategory }) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const handleAddItem =  (event) => {
-    event.stopPropagation(); 
+  const handleAddItem = (event) => {
+    event.stopPropagation();
     try {
       dispatch(addItem(item));
       dispatch(handleCartSlider(true));
@@ -38,26 +38,28 @@ const Product = ({ item, productCategory }) => {
   return (
     <div
       className="relative flex flex-col justify-between cursor-pointer rounded overflow-hidden"
-      onClick={() => router.push(`/products-list/${productCategory}/${item?.slug}`)}
+      onClick={() =>
+        router.push(`/products-list/${productCategory}/${item?.slug}`)
+      }
     >
       <div className="w-full h-[300px] md:h-[350px] rounded-xl">
-      {item?.image && (
         <Image
-          src={item?.image}
+          src={item?.image ? item?.image : NoImageAvailabe}
           width={200}
           height={200}
           className="w-full h-full cover"
-          alt={item?.image}
+          alt={item?.name}
         />
-      )}
       </div>
 
       <div className="flex-grow flex flex-col px-6 pt-4">
-        <h6 className="product_name text-heading !text-[24px] !leading-[30px] !normal-case !text-left hover:!text-[--yellow]" >
-          {item?.name}  
+        <h6 className="product_name text-heading !text-[24px] !leading-[30px] !normal-case !text-left hover:!text-[--yellow]">
+          {item?.name}
         </h6>
-        <p className="product_name text_text14 !text-left mt-1" 
-        dangerouslySetInnerHTML={{ __html: item?.description }} />
+        <p
+          className="product_name text_text14 !text-left mt-1"
+          dangerouslySetInnerHTML={{ __html: item?.description }}
+        />
         {/* <p className="text_text14 !text-left mt-1" >{item.description}</p> */}
         <p className="text_text14 !text-left text-[black] mt-2">
           {item?.currency == "USD" ? "$" : "₹"}&nbsp;{item?.price}
@@ -76,7 +78,7 @@ const Product = ({ item, productCategory }) => {
         title="ADD TO CART"
         loading={false}
         type="submit"
-        onClick={(event)=>handleAddItem(event)}
+        onClick={(event) => handleAddItem(event)}
       />
     </div>
   );

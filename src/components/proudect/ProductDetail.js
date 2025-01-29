@@ -5,6 +5,7 @@ import CustomButton from "@/components/common/CustomButton";
 import ProductImage from "./ImageMagnify";
 import ImageMedium from "./ImageMedium";
 import { SetIsBuyModalOpen } from "@/redux/feature/productSlice";
+import { NoImageAvailabe } from "@/contants/contants";
 import {
   addItem,
   removeItem,
@@ -22,8 +23,6 @@ const ProductDetail = ({ item }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [selectedImage, SetSelectedImage] = useState(0);
-
-  // console.log("99999999999999999999 item", item)
 
   const imgArr = [
     item.image,
@@ -76,7 +75,7 @@ const ProductDetail = ({ item }) => {
                 <Image
                   height={200}
                   width={200}
-                  src={item?.image}
+                  src={item?.image ? item?.image : NoImageAvailabe}
                   alt={`Thumbnail ${index}`}
                   className="w-full h-full object-cover"
                 />
