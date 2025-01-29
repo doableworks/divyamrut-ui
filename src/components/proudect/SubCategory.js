@@ -11,7 +11,6 @@ const Carousel = dynamic(() => import("antd").then((mod) => mod.Carousel), {
   ssr: false,
 });
 import { Grid } from "antd";
-
 const { useBreakpoint } = Grid;
 
 const SubCategory = ({ data }) => {

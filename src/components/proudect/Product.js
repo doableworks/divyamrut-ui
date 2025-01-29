@@ -37,11 +37,12 @@ const Product = ({ item, productCategory }) => {
 
   return (
     <div
-      className="relative flex flex-col justify-between cursor-pointer rounded overflow-hidden"
+      className="relative h-full flex flex-col justify-between cursor-pointer rounded overflow-hidden"
       onClick={() =>
         router.push(`/products-list/${productCategory}/${item?.slug}`)
       }
     >
+      <div>
       <div className="w-full h-[300px] md:h-[350px] rounded-xl">
         <Image
           src={item?.image ? item?.image : NoImageAvailabe}
@@ -53,14 +54,13 @@ const Product = ({ item, productCategory }) => {
       </div>
 
       <div className="flex-grow flex flex-col px-6 pt-4">
-        <h6 className="product_name text-heading !text-[24px] !leading-[30px] !normal-case !text-left hover:!text-[--yellow]">
+        <h6 className="product_name text-heading !text-[24px] !leading-[30px] !normal-case !text-left hover:!text-[--yellow] h-[4rem]">
           {item?.name}
         </h6>
         <p
-          className="product_name text_text14 !text-left mt-1"
+          className="product_name text_text14 !text-left mt-1 h-[2.5rem]"
           dangerouslySetInnerHTML={{ __html: item?.description }}
         />
-        {/* <p className="text_text14 !text-left mt-1" >{item.description}</p> */}
         <p className="text_text14 !text-left text-[black] mt-2">
           {item?.currency == "USD" ? "$" : "₹"}&nbsp;{item?.price}
         </p>
@@ -71,6 +71,7 @@ const Product = ({ item, productCategory }) => {
           <Star h={15} w={15} fill={"#f0ad4e"} />
           <Star h={15} w={15} fill={"#ccd6df"} />
         </div>
+      </div>
       </div>
       <CustomButton
         htmlType="submit"
