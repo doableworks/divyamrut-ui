@@ -42,10 +42,10 @@ const ProductSlider1 = ({categories}) => {
       const handleMoveRoute = (cate)=>{
 
         if(cate.hasSubCategory){
-          router.push(`/products/${cate.route}`)
+          router.push(`/products/${cate.slug}`)
         }
         else{
-          router.push(`/products-list/${cate.route}`)
+          router.push(`/products-list/${cate.slug}`)
         }
       }
 
@@ -54,11 +54,15 @@ const ProductSlider1 = ({categories}) => {
     <Slider key={"all_category"} {...settings}>
           {categories &&
             categories?.map((cate, index) => (
-              <div key={index + cate.title} className="cursor-pointer overflow-hidden"
+              <div key={index + cate.name} className="cursor-pointer overflow-hidden"
                 onClick={() => handleMoveRoute(cate)}
               >
-                <div className="ml-2 rounded-xl bg-text h-36 md:h-52 xl:h-36  flex justify-center items-center px-4">
-                  <p className='break-all'>{cate.title}</p>
+                <div className="ml-2 rounded-xl bg-text h-36 md:h-52 xl:h-36  flex justify-center items-center px-4"
+                style={{
+                  backgroundImage:`url(${cate.image})`
+                }}
+                >
+                  <p className='break-all'>{cate.name}</p>
                 </div>
               </div>
             ))}

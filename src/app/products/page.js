@@ -2,6 +2,7 @@ import ProductBanner from "@/components/proudect/ProductBanner";
 import ProductsScroller from "@/components/proudect/ProductsScroller";
 import ProductSlider1 from "@/components/proudect/ProductSlider1";
 
+<<<<<<< HEAD
 const categories = [
   {
     route: "kansa-vati-foot-massage-kit",
@@ -541,9 +542,11 @@ const categories = [
 ];
 
 
+=======
+>>>>>>> 0e043b365ee8c046f2911e3e55b69f487e1765d6
 const getAllCategoriesData = async () => {
   try {
-    const res = await fetch(`${process.env.API_URL}/product/categories-list/`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/categories-list/`);
     if (!res.ok) {
       throw new Error("Failed to fetch data");
     }
@@ -557,8 +560,7 @@ const getAllCategoriesData = async () => {
 
 const page = async() => {
   const categoryData = await getAllCategoriesData();
-
-  console.log("temp data 222", categoryData)
+  const bannerImgArr = categoryData.map(item=>item.image)
 
   // return (
   //   <div>
@@ -573,19 +575,21 @@ const page = async() => {
   //     </div>
   //   </div>
   // );
+  // ?
+
 
   return (
-    <div>
+    <>
       <div className="relative h-[50vh]">
-        <ProductBanner categoryData={categoryData} />
+        <ProductBanner srcUrl={bannerImgArr[0]} />
       </div>
       <div className="common_page_width">
-        <ProductSlider1 categories={categories} />
+        <ProductSlider1 categories={categoryData} />
           {categoryData.map((category, index) => (
             <ProductsScroller key={index + category.name} category={category} />
           ))}
       </div>
-    </div>
+    </>
   );
 };
 

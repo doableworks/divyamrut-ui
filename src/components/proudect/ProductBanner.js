@@ -1,16 +1,14 @@
 "use client"
-import React, { useEffect } from "react";
+import React from "react";
 
-const ProductBanner = ({categoryData}) => {
-
-  console.log("ProductBanner 4444", categoryData)
+const ProductBanner = ({srcUrl}) => {
 
   return (
     <div
       className="bg-cover bg-center h-full bg-text w-[100%] overflow-hidden"
-      // style={{
-      //   backgroundImage: "url('/asset/home/ayurvedic-supplement.jpg')",
-      // }}
+      style={{
+        backgroundImage:`url(${srcUrl})`
+      }}
     >
     </div>
   );

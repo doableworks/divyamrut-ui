@@ -1,16 +1,29 @@
 import ProductDetail from "@/components/proudect/ProductDetail";
 import Testimonial from "@/components/home1/Testimonial";
 
-const page = () => {
 
-  const item = {
-    id: 3,
-    name: "product",
-    price: 99.99,
-    image: "/asset/home/ayurvedic-supplement.jpg",
-    quantity: 1,
-    type:"product"
-  }
+const getProdectDetails = async (params) => {
+try {
+  // console.log("444444 444 process.env.NEXT_PUBLIC_API_URL + `/product/${params}/`", process.env.NEXT_PUBLIC_API_URL + `/product/${params}/`)
+  // console.log("params params params", params)
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_API_URL + `/product/${params}/`
+  );
+  if (res.status == 200) {
+    const data = await res.json();
+    // console.log("33333333333333333333333 9999999999999999 data", data)
+    return data;
+  } else {
+    return null;
+  }   
+} catch (error) {
+  console.log("getTypes error", error);
+  return null;
+}
+};
+
+const page = async ({ params }) => {
+  const item = await getProdectDetails(params["product-details"]);
 
   return (
     <div>
@@ -20,7 +33,8 @@ const page = () => {
           {/* Main Content */}
           <ProductDetail item={item} />
         </div>
-        <Testimonial />
+        <Testimonial slidesToShow={3} className="hidden lg:block" />
+      <Testimonial slidesToShow={1} className=" lg:hidden" />
       </div>
     </div>
   );
