@@ -52,7 +52,8 @@ const MobileNavbar = ({
         <>
           <div className="flex justify-between items-center">
             <Image
-              src={"/asset/divyamrut_transparent_logo.webp"}
+              // src={"/asset/divyamrut_transparent_logo.webp"}
+                src="/asset/logo/Logo-mobile.png"
               height={100}
               width={100}
               onClick={() => handleAction("/")}

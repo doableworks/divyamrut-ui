@@ -145,12 +145,28 @@ export default function PremiumNavbar({ scrollNum }) {
           <figure>
             <Link href="/">
               <Image
-                src="/asset/divyamrut_transparent_logo.webp"
+                // src="/asset/divyamrut_transparent_logo.webp"
+                src="/asset/logo/Logo-mobile.png"
                 alt="Divyamrut Logo"
-                width={100}
-                height={100}
+                width={400}
+                height={400}
+                quality={100}
                 className={twMerge(
-                  "transition-all duration-600 ease-in-out",
+                  "transition-all duration-600 ease-in-out block lg:hidden",
+                  isScrolling
+                    ? "h-16 w-20"
+                    : "h-16 w-20 [@media(min-width:1340.98px)]:h-[95px] [@media(min-width:1340.98px)]:w-[115px]"
+                )}
+              />
+              <Image
+                // src="/asset/divyamrut_transparent_logo.webp"
+                src="/asset/logo/Logo-large-device.png"
+                alt="Divyamrut Logo"
+                width={400}
+                height={400}
+                quality={100}
+                className={twMerge(
+                  "transition-all duration-600 ease-in-out hidden lg:block",
                   isScrolling
                     ? "h-16 w-20"
                     : "h-16 w-20 [@media(min-width:1340.98px)]:h-[95px] [@media(min-width:1340.98px)]:w-[115px]"
