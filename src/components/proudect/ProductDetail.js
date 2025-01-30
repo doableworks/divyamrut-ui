@@ -62,7 +62,7 @@ const ProductDetail = ({ item }) => {
             {/* <ImageMedium imgSrc={item.uploaded_images[selectedImage]} /> */}
           {/* </div> */}
           {/* </div> */}
-          <div className="flex space-x-2 mt-8">
+          <div className="flex flex-row flex-wrap gap-2 space-x-2 mt-8">
             {/* {item.uploaded_images.map((path, index) => ( */}
             {item.uploaded_images.map((path, index) => (
               <div
