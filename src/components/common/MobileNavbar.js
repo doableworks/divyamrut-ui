@@ -14,7 +14,6 @@ import {
 import CustomButton from "@/components/common/CustomButton";
 import InitialAvatar from "./InitialAvatar";
 import UserProfileModalComp from "./UserProfileModalComp";
-import { CartIcon } from "@/icon/icons";
 
 const MobileNavbar = ({
   menuItems,

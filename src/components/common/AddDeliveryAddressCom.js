@@ -1,19 +1,9 @@
-// import React from 'react'
-
-// const Address = ({useAddress}) => {
-//   return (
-//     <div>AddressCom</div>
-//   )
-// }
-
-// export default DeliveryAddress
-
 "use client";
 
 import React, { useState } from "react";
 import { Form, Input, Button } from "antd";
 
-const DeliveryAddress = ({ userAddress, onEdit, onFillAddressFinish }) => {
+const AddDeliveryAddress = ({ userAddress, onEdit, onFillAddressFinish }) => {
   const [form] = Form.useForm();
 
   return (
@@ -240,4 +230,4 @@ const DeliveryAddress = ({ userAddress, onEdit, onFillAddressFinish }) => {
   );
 };
 
-export default DeliveryAddress;
+export default AddDeliveryAddress;

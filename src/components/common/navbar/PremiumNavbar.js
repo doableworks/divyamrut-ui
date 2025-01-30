@@ -147,6 +147,7 @@ export default function PremiumNavbar({ scrollNum }) {
               <Image
                 // src="/asset/divyamrut_transparent_logo.webp"
                 src="/asset/logo/Logo-mobile.png"
+                // src="/asset/logo/Logo-large-device.png"
                 alt="Divyamrut Logo"
                 width={400}
                 height={400}
