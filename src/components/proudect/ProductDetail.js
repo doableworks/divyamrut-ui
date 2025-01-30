@@ -56,15 +56,15 @@ const ProductDetail = ({ item }) => {
             <ProductImage imgSrc={imgArr[selectedImage]} />
           </div>
           <div className="block md:hidden"> */}
-          <div className="relative h-[40vh] md:h-[50vh] w-[40vh] md:w-[50vh]">
-            <ImageMedium imgSrc={imgArr[selectedImage]} />
+          <div className="relative h-[40vh] md:h-[50vh] w-[40vh] md:w-[50vh]">  
+            <ImageMedium imgSrc={item?.uploaded_images[selectedImage]?.image ? item?.uploaded_images[selectedImage]?.image : NoImageAvailabe} />
               </div>
             {/* <ImageMedium imgSrc={item.uploaded_images[selectedImage]} /> */}
           {/* </div> */}
           {/* </div> */}
           <div className="flex space-x-2 mt-8">
             {/* {item.uploaded_images.map((path, index) => ( */}
-            {imgArr.map((path, index) => (
+            {item.uploaded_images.map((path, index) => (
               <div
                 key={index}
                 onClick={() => SetSelectedImage(index)}
@@ -75,7 +75,7 @@ const ProductDetail = ({ item }) => {
                 <Image
                   height={200}
                   width={200}
-                  src={item?.image ? item?.image : NoImageAvailabe}
+                  src={path?.image ? path?.image : NoImageAvailabe}
                   alt={`Thumbnail ${index}`}
                   className="w-full h-full object-cover"
                 />

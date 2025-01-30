@@ -29,7 +29,7 @@ const page = async() => {
       <div className="common_page_width">
         <ProductSlider1 categories={categoryData} />
           {categoryData.map((category, index) => (
-            <ProductsScroller key={index + category.name} category={category} />
+            category?.products?.length > 0 && <ProductsScroller key={index + category.name} category={category} />
           ))}
       </div>
     </>
