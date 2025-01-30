@@ -85,7 +85,7 @@ const ProductDetail = ({ item }) => {
         </div>
 
         {/* Product Details Section */}
-        <div className="lg:w-1/2 flex flex-col">
+        <div className="lg:w-1/2 flex flex-col md:mt-8">
           <div className="mb-4">
             <h1 className="sub_heading !text-left !captilize mt-2">
               {item.name}

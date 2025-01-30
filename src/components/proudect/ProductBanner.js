@@ -6,9 +6,9 @@ const ProductBanner = ({srcUrl}) => {
   return (
     <div
       className="bg-cover bg-center h-full bg-text w-[100%] overflow-hidden"
-      style={{
-        backgroundImage:`url(${srcUrl})`
-      }}
+      // style={{
+      //   backgroundImage:`url(${srcUrl})`
+      // }}
     >
     </div>
   );
