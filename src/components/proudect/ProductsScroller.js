@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Slider from "react-slick";
 import Product from "@/components/proudect/Product";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -16,31 +15,6 @@ const { useBreakpoint } = Grid;
 const ProductsScroller = ({ category }) => {
   const screens = useBreakpoint();
   const router = useRouter();
-  // const [currentSlide, setCurrentSlide] = useState(0)
-
-  var settings1 = {
-    dots: false,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    arrows: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    lazyLoad: true,
-    // beforeChange: (oldIndex, newIndex) => setCurrentSlide(oldIndex),
-    responsive: [
-      {
-        breakpoint: 1100,
-        settings: {
-          slidesToShow: 1.05, // Increased for a better partial view
-          slidesToScroll: 1,
-          centerMode: false, // Centering the slide
-          dots: false,
-        },
-      },
-    ],
-  };
 
   const handleMoveRoute = (cate) => {
     router.push(`/products-list/${cate.slug}`);
@@ -93,11 +67,6 @@ const ProductsScroller = ({ category }) => {
             )}
         </Carousel>
       </div>
-      {/* <style jsx global>{`
-        .custom-slick-slider1 .slick-slide {
-          margin: 0 10px;
-        }
-      `}</style> */}
     </>
   );
 };
