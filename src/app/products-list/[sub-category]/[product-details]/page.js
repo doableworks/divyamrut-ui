@@ -4,14 +4,11 @@ import Testimonial from "@/components/home1/Testimonial";
 
 const getProdectDetails = async (params) => {
 try {
-  // console.log("444444 444 process.env.NEXT_PUBLIC_API_URL + `/product/${params}/`", process.env.NEXT_PUBLIC_API_URL + `/product/${params}/`)
-  // console.log("params params params", params)
   const res = await fetch(
     process.env.NEXT_PUBLIC_API_URL + `/product/${params}/`
   );
   if (res.status == 200) {
     const data = await res.json();
-    // console.log("33333333333333333333333 9999999999999999 data", data)
     return data;
   } else {
     return null;
