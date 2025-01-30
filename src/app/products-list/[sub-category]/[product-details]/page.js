@@ -5,7 +5,9 @@ import Testimonial from "@/components/home1/Testimonial";
 const getProdectDetails = async (params) => {
 try {
   const res = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + `/product/${params}/`
+    process.env.NEXT_PUBLIC_API_URL + `/product/${params}/`, {
+      next: { revalidate: 60 }, 
+    }
   );
   if (res.status == 200) {
     const data = await res.json();

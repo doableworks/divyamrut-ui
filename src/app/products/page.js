@@ -4,7 +4,9 @@ import ProductSlider1 from "@/components/proudect/ProductSlider1";
 
 const getAllCategoriesData = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/categories-list/`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/categories-list/`, {
+      next: { revalidate: 60 }, 
+    });
     if (!res.ok) {
       throw new Error("Failed to fetch data");
     }
