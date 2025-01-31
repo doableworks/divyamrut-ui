@@ -17,6 +17,7 @@ import "react-phone-input-2/lib/style.css";
 import ProfileCardSkeleton from "@/components/loader/therapy-spinners/ProfileCardSkeleton";
 import { usePathname } from "next/navigation";
 import axios from "axios";
+import CalendarSkeleton from "@/components/loader/therapy-spinners/CalendarSkeleton.js";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -88,8 +89,13 @@ export default function BookingModal() {
   const [lastStepStatus, setLastStepStatus] = useState("process");
 
   const [therapyStaffList, setTherapyStaffList] = useState([]);
+  const [calendarList, setCalendarList] = useState({
+    message: "",
+  });
+  const [timeSlotsArray, setTimeSlotsArray] = useState(initialTimeSlots);
 
   const [isLoading, setIsLoading] = useState(true);
+
   const [messageApi, contextHolder] = message.useMessage();
 
   const [selectedStaff, setSelectedStaff] = useState(null);
@@ -97,7 +103,6 @@ export default function BookingModal() {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [filledUserDetails, setFilleduserDetails] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [timeSlotsArray, setTimeSlotsArray] = useState(initialTimeSlots);
 
   const [currentMonth, setCurrentMonth] = useState(dayjs().startOf("month"));
 
@@ -118,8 +123,57 @@ export default function BookingModal() {
 
   const handleCancelBookingModal = () => {
     setActiveStep(0);
+
     setSelectedStaff(null);
+    setSelectedDate(null);
+    setSelectedDate(null);
+    setFilleduserDetails(null);
+    setPhoneNumber("");
+
+    setTherapyStaffList([]);
+    setCalendarList({
+      message: "",
+    });
+    setTimeSlotsArray([]);
+
+    setLastStepStatus("process");
+    setIsLoading(true);
     dispatch(toggleBookingModal(false));
+  };
+
+  const fetchCalendarDetails = async () => {
+    setIsLoading(true);
+    try {
+      const month = currentMonth.month() + 1;
+      const year = currentMonth.year();
+      const url = `${apiUrl}/therapy/therapist/availability/${selectedStaff.uid}/`;
+
+      const body = {
+        year: year,
+        month: month,
+      };
+
+      const headers = {
+        "Content-Type": "application/json",
+      };
+
+      const response = await axios.post(url, body, {
+        headers,
+        next: { revalidate: 60 },
+      });
+
+      const data = response.data;
+      setCalendarList(data);
+    } catch (err) {
+      console.log(err);
+      setLastStepStatus("error");
+      messageApi.open({
+        type: "error",
+        content: "Unable to get slots information, please try again!",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCheckValidation = () => {
@@ -186,8 +240,8 @@ export default function BookingModal() {
     }
   };
 
-  const fetchMonthData = (month) => {
-    console.log(`Fetching data for month: ${month}`);
+  const fetchMonthData = () => {
+    fetchCalendarDetails();
   };
 
   const handleGoBackMonth = () => {
@@ -198,7 +252,9 @@ export default function BookingModal() {
     setCurrentMonth(currentMonth.add(1, "month"));
   };
 
-  const handleChangeSelectedDate = (value, mode) => {
+  const handleChangeSelectedDate = (value, timeSlots) => {
+    setTimeSlotsArray(timeSlots);
+    setSelectedTimeSlot(null);
     setSelectedDate(value);
   };
 
@@ -209,11 +265,13 @@ export default function BookingModal() {
 
   const handleClickonStep = (clickedIndex) => {
     if (clickedIndex < activeStep) {
+      setLastStepStatus("process");
       setActiveStep(clickedIndex);
     }
   };
 
   const fetchTherapyStaffList = async () => {
+    setIsLoading(true);
     try {
       const url = `${apiUrl}/therapy/therapy-profile/${currentPath[2]}/`;
 
@@ -225,11 +283,10 @@ export default function BookingModal() {
       setTherapyStaffList(data);
     } catch (err) {
       console.log(err);
+      setLastStepStatus("error");
       messageApi.open({
         type: "error",
-        content:
-          err?.response?.message ||
-          "Unable to proceed, please try again later!",
+        content: "Unable to get therapiest details, Please try again!",
       });
     } finally {
       setIsLoading(false);
@@ -239,8 +296,16 @@ export default function BookingModal() {
   useEffect(() => {
     if (isBookingModal && activeStep === 0) {
       fetchTherapyStaffList();
+    } else if (isBookingModal && activeStep === 1) {
+      fetchCalendarDetails();
     }
-  }, [isBookingModal]);
+  }, [isBookingModal, activeStep]);
+
+  useEffect(() => {
+    if (activeStep === 1 && isBookingModal) {
+      fetchCalendarDetails();
+    }
+  }, [currentMonth]);
 
   const handlePaymentStep = () => {};
 
@@ -250,15 +315,15 @@ export default function BookingModal() {
         return isLoading ? (
           <div className="list-none grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 px-10 py-5 md:py-5">
             {Array.from({ length: 2 }).map((_, index) => (
-              <ProfileCardSkeleton key={index}/>
+              <ProfileCardSkeleton key={index} />
             ))}
           </div>
         ) : therapyStaffList?.length > 0 ? (
           <ul className="list-none grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 px-10 py-5 md:py-5">
-            {therapyStaffList.map((each) => (
+            {therapyStaffList.map((each, index) => (
               <StaffItem
                 detail={each}
-                key={each.id}
+                key={index}
                 selectedStaff={selectedStaff}
                 handleSetSelectedStaff={handleSetSelectedStaff}
               />
@@ -274,24 +339,36 @@ export default function BookingModal() {
               <p className="text-center section-title !mb-3">Date</p>
               <div className="bg-white rounded pt-3 h-96">
                 <div className="flex items-center justify-center gap-4 mb-3">
-                  <button type="button" onClick={handleGoBackMonth}>
+                  <button
+                    disabled={isLoading}
+                    type="button"
+                    onClick={handleGoBackMonth}
+                  >
                     <CaretLeftOutlined />
                   </button>
                   <p className="section-content !m-0 min-w-40">
                     {currentMonth.format("MMMM YYYY")}
                   </p>
-                  <button type="button" onClick={handleGoForwardMonth}>
+                  <button
+                    disabled={isLoading}
+                    type="button"
+                    onClick={handleGoForwardMonth}
+                  >
                     <CaretRightOutlined />
                   </button>
                 </div>
                 <hr />
-
-                <CustomCalendar
-                  selectedDate={selectedDate}
-                  handleChangeSelectedDate={handleChangeSelectedDate}
-                  fetchMonthData={fetchMonthData}
-                  currentMonth={currentMonth}
-                />
+                {isLoading ? (
+                  <CalendarSkeleton />
+                ) : (
+                  <CustomCalendar
+                    calendarList={calendarList}
+                    selectedDate={selectedDate}
+                    handleChangeSelectedDate={handleChangeSelectedDate}
+                    fetchMonthData={fetchMonthData}
+                    currentMonth={currentMonth}
+                  />
+                )}
               </div>
             </div>
 
@@ -311,12 +388,12 @@ export default function BookingModal() {
                         onClick={() => handleChangeTimeSlot(each)}
                         className={twMerge(
                           "p-2 bg-gray-200 rounded-md h-11",
-                          selectedTimeSlot?.id === each?.id &&
-                            "bg-green-600 text-white"
+                          selectedTimeSlot?.start_time_format ===
+                            each?.start_time_format && "bg-green-600 text-white"
                         )}
                         type="button"
                       >
-                        <p>{each.time}</p>
+                        <p>{each.start_time_format}</p>
                       </button>
                     ))}
                   </ul>

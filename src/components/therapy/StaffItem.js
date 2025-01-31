@@ -11,8 +11,6 @@ export default function StaffItem({
     handleSetSelectedStaff(detail);
   };
 
-  console.log(detail);
-
   return (
     <li
       onClick={setStaff}
@@ -24,7 +22,7 @@ export default function StaffItem({
     >
       <Image
         src={NoProfileImage}
-        alt={detail?.id}
+        alt={detail.id}
         height={100}
         width={100}
         className="rounded-full h-28 w-28"
