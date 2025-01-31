@@ -252,7 +252,9 @@ export default function BookingModal() {
     setCurrentMonth(currentMonth.add(1, "month"));
   };
 
-  const handleChangeSelectedDate = (value, mode) => {
+  const handleChangeSelectedDate = (value, timeSlots) => {
+    setTimeSlotsArray(timeSlots);
+    setSelectedTimeSlot(null);
     setSelectedDate(value);
   };
 
@@ -386,12 +388,12 @@ export default function BookingModal() {
                         onClick={() => handleChangeTimeSlot(each)}
                         className={twMerge(
                           "p-2 bg-gray-200 rounded-md h-11",
-                          selectedTimeSlot?.id === each?.id &&
-                            "bg-green-600 text-white"
+                          selectedTimeSlot?.start_time_format ===
+                            each?.start_time_format && "bg-green-600 text-white"
                         )}
                         type="button"
                       >
-                        <p>{each.time}</p>
+                        <p>{each.start_time_format}</p>
                       </button>
                     ))}
                   </ul>

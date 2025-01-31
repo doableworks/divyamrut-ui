@@ -35,7 +35,10 @@ const CustomCalendar = ({
   }, [currentMonth]);
 
   const handleDateSelect = (date) => {
-    handleChangeSelectedDate(date);
+    const formattedDate = date.format("YYYY-MM-DD");
+    const selectedData = calendarList.data.dates[formattedDate]
+    
+    handleChangeSelectedDate(date, selectedData);
   };
 
   const isDisabled = (day) => {
