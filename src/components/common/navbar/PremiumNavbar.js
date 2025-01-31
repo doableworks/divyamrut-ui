@@ -274,7 +274,6 @@ export default function PremiumNavbar({ scrollNum }) {
                           href={isSubMenu?.parentSlug == "/products/" && sub.sub_categories?.length == 0 ? `/products-list/${sub.slug}/` : `${isSubMenu.parentSlug}/${sub.slug}/`}
                           key={index}
                         >
-                          {console.log("isSubMenu?.parentSlug",isSubMenu?.parentSlug, sub.sub_categories?.length,"product category", sub)}
                           <li className="navbar-li hover:text-[--voilet]">
                             {sub.name}
                           </li>

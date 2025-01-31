@@ -15,9 +15,10 @@ import { formatDateToDDMMYYYY } from "@/utils/dates";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import ProfileCardSkeleton from "@/components/loader/therapy-spinners/ProfileCardSkeleton";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import axios from "axios";
 import CalendarSkeleton from "@/components/loader/therapy-spinners/CalendarSkeleton.js";
+import { useSession } from "next-auth/react";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -81,7 +82,9 @@ const initialTimeSlots = [
 ];
 
 export default function BookingModal() {
+  const { data: session, status } = useSession();
   const dispatch = useDispatch();
+  const router = useRouter();
   const pathname = usePathname();
   const currentPath = pathname.split("/");
   const [form] = Form.useForm();
@@ -103,6 +106,8 @@ export default function BookingModal() {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [filledUserDetails, setFilleduserDetails] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
+
+  const [confirmationDetails, setConfirmationDetails] = useState(null);
 
   const [currentMonth, setCurrentMonth] = useState(dayjs().startOf("month"));
 
@@ -128,6 +133,9 @@ export default function BookingModal() {
     setSelectedDate(null);
     setSelectedDate(null);
     setFilleduserDetails(null);
+    setConfirmationDetails(null);
+
+    form.resetFields();
     setPhoneNumber("");
 
     setTherapyStaffList([]);
@@ -139,6 +147,51 @@ export default function BookingModal() {
     setLastStepStatus("process");
     setIsLoading(true);
     dispatch(toggleBookingModal(false));
+  };
+
+  const logModalInfomation = async () => {
+    setIsLoading(true);
+    try {
+      const url = `${apiUrl}/therapy/book-appointment/`;
+
+      const body = {
+        therapist_id: selectedStaff.uid,
+        date: selectedTimeSlot.date,
+        start_time: selectedTimeSlot.start_time_format,
+        end_time: selectedTimeSlot.end_time_format,
+        first_name: filledUserDetails.firstname,
+        last_name: filledUserDetails.lastname,
+        email: filledUserDetails.email,
+        phone_no: filledUserDetails.phoneNumber,
+        slug: currentPath[2],
+      };
+
+      const headers = {
+        "Content-Type": "application/json",
+      };
+
+      const response = await axios.post(url, body, {
+        headers,
+        next: { revalidate: 60 },
+      });
+
+      const data = response.data;
+      messageApi.open({
+        type: "success",
+        content: "Confirm your booking details and proceed to payment",
+      });
+      setConfirmationDetails(data);
+    } catch (err) {
+      console.log("Error while log user details", err);
+      setLastStepStatus("error");
+      messageApi.open({
+        type: "error",
+        content:
+          "Getting error with slots confirmation, please try again later!",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const fetchCalendarDetails = async () => {
@@ -294,10 +347,27 @@ export default function BookingModal() {
   };
 
   useEffect(() => {
+    form.setFieldsValue({
+      email: session?.user?.user?.email,
+      firstname: session?.user?.user?.first_name,
+      lastname: session?.user?.user?.last_name,
+      phoneNumber: session?.user?.user?.phoneNumber,
+    });
+  }, [session, form]);
+
+  useEffect(() => {
+    if (session && session.user?.user?.phoneNumber) {
+      setPhoneNumber(session.user?.user?.phoneNumber);
+    }
+  }, [session]);
+
+  useEffect(() => {
     if (isBookingModal && activeStep === 0) {
       fetchTherapyStaffList();
     } else if (isBookingModal && activeStep === 1) {
       fetchCalendarDetails();
+    } else if (isBookingModal && activeStep === 3) {
+      logModalInfomation();
     }
   }, [isBookingModal, activeStep]);
 
@@ -307,7 +377,10 @@ export default function BookingModal() {
     }
   }, [currentMonth]);
 
-  const handlePaymentStep = () => {};
+  const handlePaymentStep = () => {
+    dispatch(toggleBookingModal(false));
+    router.push("/payment-status");
+  };
 
   const renderActiveStep = (step) => {
     switch (step) {
@@ -413,6 +486,10 @@ export default function BookingModal() {
                 name="email"
                 rules={[
                   { required: true, message: "Email address is required." },
+                  {
+                    type: "email",
+                    message: "Please enter a valid email address.",
+                  },
                 ]}
               >
                 <Input placeholder="Enter yout email" />
@@ -452,10 +529,7 @@ export default function BookingModal() {
           </div>
         );
       case 3:
-        return filledUserDetails &&
-          selectedDate &&
-          selectedStaff &&
-          selectedTimeSlot ? (
+        return confirmationDetails ? (
           <section className="p-6 h-full flex flex-col">
             <p className="section-title !text-gray-500 !text-left !mb-3">
               Confirm Details
@@ -473,12 +547,12 @@ export default function BookingModal() {
                   <p className="section-content !text-left">
                     Name:{" "}
                     <span className="section-content !text-left !text-[--neutral] font-bold">
-                      {filledUserDetails?.firstname}
+                      {confirmationDetails?.user_info?.first_name}
                     </span>
                     {filledUserDetails?.lastname && (
                       <span className="section-content !text-left !text-[--neutral] font-bold">
                         {" "}
-                        {filledUserDetails?.lastname}
+                        {confirmationDetails?.user_info?.last_name}
                       </span>
                     )}
                   </p>
@@ -486,14 +560,14 @@ export default function BookingModal() {
                   <p className="section-content !text-left">
                     Contact:{" "}
                     <span className="section-content !text-left !text-[--neutral] font-bold">
-                      {filledUserDetails?.phoneNumber}
+                      {confirmationDetails?.user_info?.phone_no}
                     </span>
                   </p>
 
                   <p className="section-content !text-left">
                     Email:{" "}
                     <span className="section-content !text-left !text-[--neutral] font-bold">
-                      {filledUserDetails?.email}
+                      {confirmationDetails?.user_info?.email}
                     </span>
                   </p>
                 </div>
@@ -507,52 +581,58 @@ export default function BookingModal() {
                   <p className="section-content !text-left">
                     Date & Time:{" "}
                     <span className="section-content !text-left !text-[--neutral] font-bold">
-                      {formatDateToDDMMYYYY(selectedDate)}
+                      {confirmationDetails?.allotment_info?.therapy_date}
                     </span>{" "}
                     <span className="section-content !text-left !text-[--neutral] font-bold">
-                      {selectedTimeSlot?.time}
+                      {confirmationDetails?.allotment_info?.therapy_start_time}
                     </span>
                   </p>
 
                   <p className="section-content !text-left">
                     Therapiest:{" "}
                     <span className="section-content !text-left !text-[--neutral] font-bold">
-                      {selectedStaff?.name}
+                      {confirmationDetails?.allotment_info?.therapist_name}
                     </span>
                   </p>
 
                   <p className="section-content !text-left">
                     Service:{" "}
                     <span className="section-content !text-left !text-[--neutral] font-bold">
-                      Meru Chikitsa
+                      {confirmationDetails?.allotment_info?.therapy_name}
                     </span>
                   </p>
                 </div>
               </div>
 
               <div className="rounded-md overflow-hidden bg-white border-gray-300 flex-grow my-6 flex flex-col justify-between">
-                <div className="p-6 font-jost text-[16px]">
+                <div className="p-6 font-jost text-[18px]">
                   <div className="flex justify-between">
                     <p>Price:</p>
-                    <p>3000.00</p>
+                    <p>{confirmationDetails?.allotment_info?.therapy_price}</p>
                   </div>
                   <div className="flex justify-between">
                     <p>GST:</p>
-                    <p>540.00</p>
+                    <p>NA</p>
                   </div>
                 </div>
 
                 <div className="bg-green-200 py-3 px-6">
                   <div className="flex justify-between font-jost text-xl">
                     <p>Total:</p>
-                    <p>3540.00</p>
+                    <p>
+                      {confirmationDetails?.allotment_info?.therapy_price}/-
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
           </section>
         ) : (
-          <p>Oops! Please fix steps</p>
+          <div className="h-full flex justify-center items-center p-6">
+            <p className="section-title !text-gray-500">
+              Unable to get Slot Details
+            </p>
+          </div>
         );
       default:
         return null;
