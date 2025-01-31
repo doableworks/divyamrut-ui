@@ -52,6 +52,7 @@ const LoginModal = () => {
   const onFinish = (values) => {
     setLoading(true);
     setErrorMessage("");
+    console.log("logon credientials", values)
     signIn("credentials", {
       redirect: false,
       email: values.email,
