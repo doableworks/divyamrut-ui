@@ -24,13 +24,6 @@ const ProductDetail = ({ item }) => {
   const dispatch = useDispatch();
   const [selectedImage, SetSelectedImage] = useState(0);
 
-  const imgArr = [
-    item.image,
-    item.image,
-    item.image,
-    item.image,
-  ];
-
   const handleAddItem = async () => {
     try {
       await dispatch(addItem(item));
