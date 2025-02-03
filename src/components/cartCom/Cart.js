@@ -38,7 +38,6 @@ const CartPage = () => {
       console.log("handleIncreaseCartItem response111", response);
       if (session == null || (session && response)) {
         const itemData = session ? response?.data : item
-        console.log("imteffffff", itemData)
         dispatch(increaseOrDecreaseItemQuantity({uid:itemData.product.uid, action:action}));
       }
     } catch (error) {
