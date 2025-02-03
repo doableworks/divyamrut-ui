@@ -10,11 +10,13 @@ const Carousel = dynamic(() => import("antd").then((mod) => mod.Carousel), {
   ssr: false,
 });
 import { Grid } from "antd";
+import { useSession } from "next-auth/react";
 const { useBreakpoint } = Grid;
 
 const ProductsScroller = ({ category }) => {
   const screens = useBreakpoint();
   const router = useRouter();
+  const {data:session} = useSession()
 
   const handleMoveRoute = (cate) => {
     router.push(`/products-list/${cate.slug}`);
@@ -61,6 +63,7 @@ const ProductsScroller = ({ category }) => {
                           ? category.subCategory
                           : category.slug
                       }
+                      session={session}
                     />
                   </div>
                 )

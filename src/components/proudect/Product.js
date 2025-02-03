@@ -2,49 +2,42 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "nextjs-toploader/app";
-import BtnSection from "@/components/BtnCom/BtnSection";
 import { useSelector, useDispatch } from "react-redux";
 import { Star } from "@/icon/icons";
 import CustomButton from "@/components/common/CustomButton";
-import "./product.css";
 import { NoImageAvailabe } from "@/contants/contants";
-import {
-  addItem,
-  removeItem,
-  clearCart,
-  selectAllItems,
-  unSelectAllItems,
-  selectItem,
-  unSelectItem,
-  handleCartSlider,
-} from "@/redux/feature/cartSlice";
-import AddToCartBtn from "../BtnCom/AddToCart";
-import useCartAction from "@/components/CartAction";
+import { addItem } from "@/redux/feature/cartSlice";
+import useCartActions from "@/components/cartCom/useCartActions";
+import "./product.css";
 
-const Product = ({ item, productCategory }) => {
+
+const Product = ({ item, productCategory, session }) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { AddCartItem } = useCartAction();
+  const { AddCartItem } = useCartActions();
 
-  // const handleAddItem = (event) => {
-  //   event.stopPropagation();
-  //   try {
-  //     dispatch(addItem(item));
-  //     dispatch(handleCartSlider(true));
-  //     // await router.push("/cart");
-  //   } catch (error) {
-  //     console.log("error 555", error);
-  //   }
-  // };
+  let tempItem = {
+    created: "",
+    updated: "",
+    is_select: false,
+    quantity: 1,
+    uid: "",
+    product_detail: item,
+  }
+
 
   const handleAddItem = async (event) => {
     event.stopPropagation();
     try {
-      const response = await AddCartItem(item);
-      if (response.statu == 201) {
-        dispatch(addItem(response.data.data));
-        dispatch(handleCartSlider(true));
-        // await router.push("/cart");
+      console.log("handleAddItem session", session);
+      let response;
+      if (session) {
+        response = await await AddCartItem([item]);
+      }
+      console.log("handleAddItem response", response);
+      if (session == null || (session && response)) {
+        const itemData = session ? response?.data : tempItem
+        dispatch(addItem(itemData));
       }
     } catch (error) {
       console.log("error 555", error);
