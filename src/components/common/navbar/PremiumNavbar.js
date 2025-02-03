@@ -12,6 +12,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { closeNav, openNav } from "@/redux/feature/mobileNavSlice";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
+import useCartAction from "@/components/CartAction";
 import {
   addItem,
   removeItem,
@@ -20,13 +21,15 @@ import {
   unSelectAllItems,
   selectItem,
   unSelectItem,
-  handleCartSlider
+  handleCartSlider,
 } from "@/redux/feature/cartSlice";
+import axiosInstance from "@/lib/axios";
 
 export default function PremiumNavbar({ scrollNum }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const pathname = usePathname();
+  const { AddCartItem } = useCartAction();
   const cartItems = useSelector((state) => state.cart.items);
   const cartCount = Array.isArray(cartItems) ? cartItems.length : cartItems;
   const isCartSliderOpen = useSelector((state) => state.cart.openCartSlider);
@@ -34,15 +37,46 @@ export default function PremiumNavbar({ scrollNum }) {
   const [scrollingNum, setScrollingNum] = useState(scrollNum);
   const [isScrolling, setIsScrolling] = useState(false);
   const [isScrollAndUp, setIsScrollAndUp] = useState(false);
-
   const [isShowSearch, setShowSearch] = useState(false);
   const [isSubMenu, setSubMenu] = useState(null);
-
   const { data: session } = useSession();
-
   const isMobileNavOpen = useSelector((state) => state.mobileNav.isOpen);
+  const [loading, setLoading] = useState(false);
 
   const menuItems = useSelector((state) => state.menuItems.all);
+
+  useEffect(() => {
+    const getCartDetails = async () => {
+      try {
+        setLoading(true);
+        let data = {
+          session: session,
+        };
+        const response = await axiosInstance.get("/product/cart/", {
+          session,
+        });
+        if (response?.status == 200) {
+          console.log("getCartDetails response", response.data.data);
+          response.data.data.map(item=>{
+            dispatch(addItem(item));
+          })
+          dispatch(addItem(response.data.data));
+        }
+      } catch (error) {
+        console.log("getCartDetails error", error);
+        // showResponseMessage(
+        //   "error",
+        //   "Something went wrong, please try again later!"
+        // );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (session) {
+      getCartDetails();
+    }
+  }, [session]);
 
   useEffect(() => {
     if (scrollNum < scrollingNum && scrollNum > 300) {
@@ -55,6 +89,10 @@ export default function PremiumNavbar({ scrollNum }) {
 
     setIsScrolling(scrollNum > 300);
   }, [scrollNum]);
+
+  const handleAddItem = (item) => {
+    dispatch(addItem(item));
+  };
 
   const handleShowSearch = () => {
     setShowSearch(!isShowSearch);
@@ -101,7 +139,7 @@ export default function PremiumNavbar({ scrollNum }) {
         "relative shadow flex justify-center bg-[--base] z-30 transition-all duration-3000 ease-in-out top-0 w-full",
         isScrollAndUp
           ? "fixed translate-y-0"
-          : isScrolling 
+          : isScrolling
           ? "absolute translate-y-[-100%]"
           : "absolute translate-y-0"
       )}
@@ -211,9 +249,7 @@ export default function PremiumNavbar({ scrollNum }) {
               {menuItems.map((item, index) => (
                 <Link href={item.path ? item.path : ""} key={index}>
                   <li
-                    onMouseEnter={() =>
-                      handleMouseEnter(item)
-                    }
+                    onMouseEnter={() => handleMouseEnter(item)}
                     className={twMerge(
                       "relative navbar-li h-full",
                       item.path &&
@@ -271,10 +307,14 @@ export default function PremiumNavbar({ scrollNum }) {
                     (sub, index) =>
                       sub.is_published && (
                         <Link
-                          href={isSubMenu?.parentSlug == "/products/" && sub.sub_categories?.length == 0 ? `/products-list/${sub.slug}/` : `${isSubMenu.parentSlug}/${sub.slug}/`}
+                          href={
+                            isSubMenu?.parentSlug == "/products/" &&
+                            sub.sub_categories?.length == 0
+                              ? `/products-list/${sub.slug}/`
+                              : `${isSubMenu.parentSlug}/${sub.slug}/`
+                          }
                           key={index}
                         >
-                          {console.log("isSubMenu?.parentSlug",isSubMenu?.parentSlug, sub.sub_categories?.length,"product category", sub)}
                           <li className="navbar-li hover:text-[--voilet]">
                             {sub.name}
                           </li>

@@ -12,17 +12,39 @@ import {
   selectItem,
   unSelectItem,
 } from "@/redux/feature/cartSlice";
+import useCartAction from "@/components/CartAction";
 
 const CartPage = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
+  const {
+    GetCartItem,
+    AddCartItem,
+    RemoveCartItem,
+    IncreAndDecreCartItemQuantity,
+  } = useCartAction();
 
-  const handleAddItem = (item) => {
-    dispatch(addItem(item));
+  const handleAddItem = async (item) => {
+    try {
+      const response = await AddCartItem(item);
+      if (response.statu == 201) {
+        dispatch(addItem(response.data.data));
+      }
+    } catch (error) {
+      console.log("error 555", error);
+    }
   };
 
-  const handleRemoveItem = (item) => {
-    dispatch(removeItem({ id: item.id }));
+  const handleRemoveItem = async (item) => {
+    try {
+      const response = await RemoveCartItem(item.uid);
+      if (response.statu == 201) {
+        // dispatch(addItem(response.data.data));
+        dispatch(removeItem({ id: item.id }));
+      }
+    } catch (error) {
+      console.log("error 555", error);
+    }
   };
 
   const handleSelectAll = (item) => {
@@ -170,7 +192,10 @@ const CartPage = () => {
             <div className="flex items-center gap-2">
               <span className="section-content !text-left">Sub total</span>
             </div>
-            <span  className="text-heading !text-right"> ₹{calculateTotal()}</span>
+            <span className="text-heading !text-right">
+              {" "}
+              ₹{calculateTotal()}
+            </span>
           </div>
           <div className="flex justify-between items-center mb-2">
             <div className="gap-2">

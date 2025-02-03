@@ -19,17 +19,33 @@ import {
   handleCartSlider,
 } from "@/redux/feature/cartSlice";
 import AddToCartBtn from "../BtnCom/AddToCart";
+import useCartAction from "@/components/CartAction";
 
 const Product = ({ item, productCategory }) => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const { AddCartItem } = useCartAction();
 
-  const handleAddItem = (event) => {
+  // const handleAddItem = (event) => {
+  //   event.stopPropagation();
+  //   try {
+  //     dispatch(addItem(item));
+  //     dispatch(handleCartSlider(true));
+  //     // await router.push("/cart");
+  //   } catch (error) {
+  //     console.log("error 555", error);
+  //   }
+  // };
+
+  const handleAddItem = async (event) => {
     event.stopPropagation();
     try {
-      dispatch(addItem(item));
-      dispatch(handleCartSlider(true));
-      // await router.push("/cart");
+      const response = await AddCartItem(item);
+      if (response.statu == 201) {
+        dispatch(addItem(response.data.data));
+        dispatch(handleCartSlider(true));
+        // await router.push("/cart");
+      }
     } catch (error) {
       console.log("error 555", error);
     }
@@ -43,35 +59,35 @@ const Product = ({ item, productCategory }) => {
       }
     >
       <div>
-      <div className="w-full h-[300px] md:h-[350px] rounded-xl">
-        <Image
-          src={item?.image ? item?.image : NoImageAvailabe}
-          width={200}
-          height={200}
-          className="w-full h-full cover"
-          alt={item?.name}
-        />
-      </div>
-
-      <div className="flex-grow flex flex-col px-6 pt-4">
-        <h6 className="product_name text-heading !text-[24px] !leading-[30px] !normal-case !text-left hover:!text-[--yellow] h-[4rem]">
-          {item?.name}
-        </h6>
-        <p
-          className="product_name text_text14 !text-left mt-1 h-[2.5rem]"
-          dangerouslySetInnerHTML={{ __html: item?.description }}
-        />
-        <p className="text_text14 !text-left text-[black] mt-2">
-          {item?.currency == "USD" ? "$" : "₹"}&nbsp;{item?.price}
-        </p>
-        <div className="flex gap-1 mt-4">
-          <Star h={15} w={15} fill={"#f0ad4e"} />
-          <Star h={15} w={15} fill={"#f0ad4e"} />
-          <Star h={15} w={15} fill={"#f0ad4e"} />
-          <Star h={15} w={15} fill={"#f0ad4e"} />
-          <Star h={15} w={15} fill={"#ccd6df"} />
+        <div className="w-full h-[300px] md:h-[350px] rounded-xl">
+          <Image
+            src={item?.image ? item?.image : NoImageAvailabe}
+            width={200}
+            height={200}
+            className="w-full h-full cover"
+            alt={item?.name}
+          />
         </div>
-      </div>
+
+        <div className="flex-grow flex flex-col px-6 pt-4">
+          <h6 className="product_name text-heading !text-[24px] !leading-[30px] !normal-case !text-left hover:!text-[--yellow] h-[4rem]">
+            {item?.name}
+          </h6>
+          <p
+            className="product_name text_text14 !text-left mt-1 h-[2.5rem]"
+            dangerouslySetInnerHTML={{ __html: item?.description }}
+          />
+          <p className="text_text14 !text-left text-[black] mt-2">
+            {item?.currency == "USD" ? "$" : "₹"}&nbsp;{item?.price}
+          </p>
+          <div className="flex gap-1 mt-4">
+            <Star h={15} w={15} fill={"#f0ad4e"} />
+            <Star h={15} w={15} fill={"#f0ad4e"} />
+            <Star h={15} w={15} fill={"#f0ad4e"} />
+            <Star h={15} w={15} fill={"#f0ad4e"} />
+            <Star h={15} w={15} fill={"#ccd6df"} />
+          </div>
+        </div>
       </div>
       <CustomButton
         htmlType="submit"

@@ -34,9 +34,6 @@ interface RootLayoutProps {
 
 export default async function RootLayout({ children, navProducts }: RootLayoutProps) {
   const session = await getServerSession(authOptions as AuthOptions);
-
-  console.log("session 44444444444444", session)
-
   return (
     <html lang="en">
       <body className={`${inter.variable} ${jost.variable} ${suranna.variable}`}>

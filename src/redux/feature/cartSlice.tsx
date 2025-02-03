@@ -3,6 +3,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // Define the types for an item in the cart
 interface CartItem {
   id: number; // Or use `number` if IDs are numeric
+  created: string,
+  updated: string,
+  is_select: boolean,
+  uid:string,
+  product:number,
+  user:number,
   name: string; // Add properties relevant to your cart items
   quantity: number;
   selected: boolean;
@@ -15,6 +21,8 @@ interface CartItem {
 interface CartState {
   items: CartItem[];
   openCartSlider: boolean;
+  cartLoader: boolean;
+
 }
 
 const initialState: CartState = {
@@ -38,6 +46,7 @@ const initialState: CartState = {
 
   items: [],
   openCartSlider: false,
+  cartLoader: false
 };
 
 const cartSlice = createSlice({
@@ -99,6 +108,9 @@ const cartSlice = createSlice({
     handleCartSlider: (state, action: PayloadAction<boolean>) => {
       state.openCartSlider = action.payload
     },
+    setCartLoader: (state, action: PayloadAction<{ loader: boolean }>) => {
+      state.cartLoader = action.payload.loader
+    },
   },
 });
 
@@ -112,5 +124,6 @@ export const {
   unSelectItem,
   handleCartSlider,
   removeItemComplete,
+  setCartLoader,
 } = cartSlice.actions;
 export default cartSlice.reducer;
