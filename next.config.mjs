@@ -8,6 +8,11 @@ const nextConfig = {
         port: '8000',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.dribbble.com',
+        pathname: '/**',
+      },
     ],
     // domains: ['desklib.com', 'sgp1.digitaloceanspaces.com', 'staging-ai.desklib.com'],
   }
