@@ -12,9 +12,11 @@ import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { closeNav, openNav } from "@/redux/feature/mobileNavSlice";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
-import useCartAction from "@/components/CartAction";
+import useCartActions from "@/components/cartCom/useCartActions"
 import {
   addItem,
+  addItemsAfterLogin,
+  setCartLoader,
   removeItem,
   clearCart,
   selectAllItems,
@@ -29,11 +31,10 @@ export default function PremiumNavbar({ scrollNum }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const pathname = usePathname();
-  const { AddCartItem } = useCartAction();
+  const { AddCartItem } = useCartActions();
   const cartItems = useSelector((state) => state.cart.items);
   const cartCount = Array.isArray(cartItems) ? cartItems.length : cartItems;
-  const isCartSliderOpen = useSelector((state) => state.cart.openCartSlider);
-
+  const {isCartSliderOpen, cartLoader } = useSelector((state) => state.cart);
   const [scrollingNum, setScrollingNum] = useState(scrollNum);
   const [isScrolling, setIsScrolling] = useState(false);
   const [isScrollAndUp, setIsScrollAndUp] = useState(false);
@@ -42,32 +43,18 @@ export default function PremiumNavbar({ scrollNum }) {
   const { data: session } = useSession();
   const isMobileNavOpen = useSelector((state) => state.mobileNav.isOpen);
   const [loading, setLoading] = useState(false);
-
   const menuItems = useSelector((state) => state.menuItems.all);
 
   useEffect(() => {
     const getCartDetails = async () => {
       try {
-        setLoading(true);
-        let data = {
-          session: session,
-        };
-        const response = await axiosInstance.get("/product/cart/", {
-          session,
-        });
-        if (response?.status == 200) {
-          console.log("getCartDetails response", response.data.data);
-          response.data.data.map(item=>{
-            dispatch(addItem(item));
-          })
-          dispatch(addItem(response.data.data));
+        setLoading(true)
+        if (session && session?.user?.user?.cart_items) {
+          console.log("getCartDetails response 3333", session?.user?.user?.cart_items);
+          dispatch(addItemsAfterLogin({cart_items :session?.user?.user?.cart_items}));
         }
       } catch (error) {
         console.log("getCartDetails error", error);
-        // showResponseMessage(
-        //   "error",
-        //   "Something went wrong, please try again later!"
-        // );
       } finally {
         setLoading(false);
       }
@@ -128,6 +115,7 @@ export default function PremiumNavbar({ scrollNum }) {
       await signOut();
       dispatch(closeNav());
       dispatch(setOpenLoginModal(true));
+      dispatch(clearCart())
     } catch (error) {
       console.log("onLogOut error", error);
     }
@@ -237,7 +225,7 @@ export default function PremiumNavbar({ scrollNum }) {
                 </Link>
               </>
             )}
-            <NavCart count={cartCount} />
+            <NavCart count={cartCount} cartLoader={cartLoader} />
           </figure>
         </section>
 
@@ -343,3 +331,9 @@ export default function PremiumNavbar({ scrollNum }) {
     </nav>
   );
 }
+
+
+
+
+
+

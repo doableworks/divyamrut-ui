@@ -1,20 +1,34 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+interface ProductInterface {
+  colour: string;
+  currency: string;
+  description: string;
+  discount: string;
+  image: string;
+  is_published: boolean;
+  name: string;
+  price: string;
+  product_identity: string;
+  video: string;
+  sku: string;
+  slug: string;
+  title: string;
+  created: string;
+  updated: string;
+  is_select: boolean;
+  quantity: number;
+  uid: string;
+}
+
 // Define the types for an item in the cart
 interface CartItem {
-  id: number; // Or use `number` if IDs are numeric
-  created: string,
-  updated: string,
-  is_select: boolean,
-  uid:string,
-  product:number,
-  user:number,
-  name: string; // Add properties relevant to your cart items
+  created: string;
+  updated: string;
+  is_select: boolean;
   quantity: number;
-  selected: boolean;
-  price: number;
-  image: string;
-  [key: string]: any; // Allow additional properties
+  uid: string;
+  product_detail: ProductInterface;
 }
 
 // Define the state type
@@ -22,31 +36,12 @@ interface CartState {
   items: CartItem[];
   openCartSlider: boolean;
   cartLoader: boolean;
-
 }
 
 const initialState: CartState = {
-  //   items: [
-  //     {
-  //       id: 1,
-  //       name: "Wireless Headphones",
-  //       price: 99.99,
-  //       image: "/headphones.jpg",
-  //       quantity: 1,
-  //     },
-  //     {
-  //       id: 2,
-  //       name: "Smartwatch",
-  //       price: 199.99,
-  //       image: "/smartwatch.jpg",
-  //       quantity: 2,sele
-  //     },
-  //   ],
-  // };
-
   items: [],
   openCartSlider: false,
-  cartLoader: false
+  cartLoader: false,
 };
 
 const cartSlice = createSlice({
@@ -54,68 +49,100 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     selectAllItems: (state) => {
-      state.items.map((item) => (item.selected = true));
+      state.items.map((item) => (item.is_select = true));
     },
     unSelectAllItems: (state) => {
-      state.items.map((item) => (item.selected = false));
+      state.items.map((item) => (item.is_select = false));
     },
-    selectItem: (state, action: PayloadAction<{ id: number }>) => {
+    selectItem: (state, action: PayloadAction<{ uid: string }>) => {
       const existingItem = state.items.find(
-        (item) => item.id === action.payload.id
+        (item) => item.product_detail.uid === action.payload.uid
       );
       if (existingItem) {
-        existingItem.selected = true;
+        existingItem.is_select = true;
       }
     },
-    unSelectItem: (state, action: PayloadAction<{ id: number }>) => {
+    unSelectItem: (state, action: PayloadAction<{ uid: string }>) => {
       const existingItem = state.items.find(
-        (item) => item.id === action.payload.id
+        (item) => item.uid === action.payload.uid
       );
       if (existingItem) {
-        existingItem.selected = false;
+        existingItem.is_select = false;
       }
+    },
+    addItemsAfterLogin: (
+      state,
+      action: PayloadAction<{ cart_items: CartItem[] }>
+    ) => {
+      state.items = [];
+      state.items = action.payload.cart_items;
     },
     addItem: (state, action: PayloadAction<CartItem>) => {
       const existingItem = state.items.find(
-        (item) => item.id === action.payload.id
+        (item) => item.product_detail.uid === action.payload.uid
       );
       if (existingItem) {
         existingItem.quantity += 1;
       } else {
-        state.items.push({ ...action.payload, quantity: 1, selected: true });
+        state.items.push({ ...action.payload, quantity: 1, is_select: true });
       }
     },
-    removeItem: (state, action: PayloadAction<{ id: number }>) => {
+    increaseOrDecreaseItemQuantity: (
+      state,
+      action: PayloadAction<{ uid: string; action: string }>
+    ) => {
       const existingItem = state.items.find(
-        (item) => item.id === action.payload.id
+        (item) => item.product_detail.uid  === action.payload.uid
+      );
+      console.log("dddddd", action.payload.uid,"action444444", action.payload.action, " existingItem", existingItem)
+      if (action.payload.action == "increase" && existingItem) {
+        existingItem.quantity += 1;
+      } else if (action.payload.action == "decrease") {
+        if (existingItem && existingItem.quantity > 1) {
+          existingItem.quantity -= 1;
+        } else {
+          state.items = state.items.filter(
+            (item) => item.product_detail.uid !== action.payload.uid
+          );
+        }
+      }
+    },
+
+    removeItem: (state, action: PayloadAction<{ uid: string }>) => {
+      const existingItem = state.items.find(
+        (item) => item.uid === action.payload.uid
       );
       if (existingItem && existingItem.quantity > 1) {
         existingItem.quantity -= 1;
       } else {
         state.items = state.items.filter(
-          (item) => item.id !== action.payload.id
+          (item) => item.uid !== action.payload.uid
         );
       }
     },
-
-    removeItemComplete: (state, action: PayloadAction<{ id: number }>) => {
-      state.items = state.items.filter((item) => item.id !== action.payload.id);
+    removeItemComplete: (state, action: PayloadAction<{ uid: string }>) => {
+      state.items = state.items.filter(
+        (item) => item.uid !== action.payload.uid
+      );
     },
-
     clearCart: (state) => {
       state.items = [];
+      state.openCartSlider = false;
+      state.cartLoader = false;
     },
     handleCartSlider: (state, action: PayloadAction<boolean>) => {
-      state.openCartSlider = action.payload
+      state.openCartSlider = action.payload;
     },
     setCartLoader: (state, action: PayloadAction<{ loader: boolean }>) => {
-      state.cartLoader = action.payload.loader
+      state.cartLoader = action.payload.loader;
     },
   },
 });
 
 export const {
+  addItemsAfterLogin,
   addItem,
+  increaseOrDecreaseItemQuantity,
   removeItem,
   clearCart,
   selectAllItems,

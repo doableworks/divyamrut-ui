@@ -2,8 +2,10 @@
 import React from "react";
 import Product from "@/components/proudect/Product";
 import FilterSection from "@/components/proudect/FilterSection";
+import { useSession } from "next-auth/react";
 
 const ProductList = ({ products, params }) => {
+  const {data:session} = useSession()
 
   return (
     <div className="">
@@ -20,6 +22,7 @@ const ProductList = ({ products, params }) => {
                     key={index}
                     item={product}
                     productCategory={`${params["sub-category"]}`}
+                    session={session}
                   />
                 )
             )}
