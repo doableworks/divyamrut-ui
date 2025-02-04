@@ -471,10 +471,11 @@ export default function BookingModal() {
         },
         handler: async (response) => {
           if (response && response.razorpay_payment_id) {
+            setIsLoading(true);
             console.log("Payment Success:", response);
             messageApi.open({
               type: "success",
-              content: "Payment successful!",
+              content: "Payment successful, Redirecting...", 
             });
             dispatch(toggleBookingModal(false));
             router.push(
@@ -487,17 +488,16 @@ export default function BookingModal() {
               content: "Payment was cancelled or failed.",
             });
           }
-          setIsLoading(false);
         },
         theme: orderDetails.theme,
       };
 
+      setIsLoading(true)
       const razorpay = new window.Razorpay(options);
       razorpay.open();
 
       razorpay.on("payment.cancelled", function (response) {
         console.log("Payment Cancelled:", response);
-        setIsLoading(false);
         messageApi.open({
           type: "info",
           content: "Payment cancelled by user.",
@@ -509,7 +509,6 @@ export default function BookingModal() {
         type: "error",
         content: "Payment process error.",
       });
-      setIsLoading(false);
     } finally {
       setIsLoading(false);
     }
