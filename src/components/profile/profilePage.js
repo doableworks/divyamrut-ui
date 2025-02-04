@@ -88,8 +88,8 @@ const UserProfileList = () => {
       case "Therapy":
         return (
           <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {Array.from({ length: 6 }).map((each) => (
-              <li className="border rounded p-3 px-4 flex flex-col gap-2">
+            {Array.from({ length: 6 }).map((each, index) => (
+              <li key={index} className="border rounded p-3 px-4 flex flex-col gap-2">
                 <div className="flex flex-col xl:flex-row xl:items-center justify-between">
                   <p className="section-content !text-[14px] !text-left">
                     Date: 02/02/2025
@@ -189,8 +189,8 @@ const UserProfileList = () => {
       case "Orders":
         return (
           <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {Array.from({ length: 6 }).map((each) => (
-              <li className="border rounded p-3 px-4 flex flex-row gap-2">
+            {Array.from({ length: 6 }).map((each, index) => (
+              <li key={index} className="border rounded p-3 px-4 flex flex-row gap-2">
                 <div className="w-[30%]">
                   <img
                     src={NoImageAvailabe}
@@ -203,7 +203,7 @@ const UserProfileList = () => {
                   <p className="section-content !text-left !text-[15px]">
                     Product:{" "}
                     <span className="!text-gray-900 !font-medium">
-                      Diya 2 Set of 14"
+                      Diya 2 Set of 14
                     </span>
                   </p>
                   <p className="section-content !text-left !text-[15px]">
@@ -291,10 +291,10 @@ const UserProfileList = () => {
 
                   {each.subItems.length > 0 && activeTab.id === each.id && (
                     <ul className="pl-8 gap-3 flex flex-col">
-                      {each.subItems.map((subItem) => (
+                      {each.subItems.map((subItem, index) => (
                         <button
                           type="button"
-                          key={subItem.id}
+                          key={index}
                           className="flex items-center gap-2 group"
                         >
                           {subItem?.filter && (
