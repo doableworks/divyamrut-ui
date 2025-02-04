@@ -19,6 +19,7 @@ import { usePathname, useRouter } from "next/navigation";
 import axios from "axios";
 import CalendarSkeleton from "@/components/loader/therapy-spinners/CalendarSkeleton.js";
 import { useSession } from "next-auth/react";
+import BlockPageLoader from "@/components/loader/BlockPageLoader";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -106,6 +107,7 @@ export default function BookingModal() {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [filledUserDetails, setFilleduserDetails] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [orderDetails, setOrderDetails] = useState(null);
 
   const [confirmationDetails, setConfirmationDetails] = useState(null);
 
@@ -134,6 +136,7 @@ export default function BookingModal() {
     setSelectedDate(null);
     setFilleduserDetails(null);
     setConfirmationDetails(null);
+    setOrderDetails(null);
 
     form.resetFields();
     setPhoneNumber("");
@@ -377,10 +380,146 @@ export default function BookingModal() {
     }
   }, [currentMonth]);
 
-  const handlePaymentStep = () => {
-    dispatch(toggleBookingModal(false));
-    router.push("/payment-status");
+  const loadRazorpayScript = async () => {
+    return new Promise((resolve) => {
+      if (window.Razorpay) {
+        resolve(true);
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
   };
+
+  const handlePaymentStep = async () => {
+    setIsLoading(true);
+    try {
+      const url = `${apiUrl}/payment/create-order/`;
+
+      const body = {
+        amount: confirmationDetails.allotment_info.therapy_price,
+        receipt: filledUserDetails.firstname,
+        currency: "INR",
+        notes: {
+          therapist_id: selectedStaff.uid,
+          date: selectedTimeSlot.date,
+          start_time: selectedTimeSlot.start_time_format,
+          end_time: selectedTimeSlot.end_time_format,
+          first_name: filledUserDetails.firstname,
+          last_name: filledUserDetails.lastname,
+          email: filledUserDetails.email,
+          phone_no: filledUserDetails.phoneNumber,
+          slug: currentPath[2],
+        },
+      };
+
+      const headers = {
+        "Content-Type": "application/json",
+      };
+
+      const response = await axios.post(url, body, {
+        headers,
+        next: { revalidate: 60 },
+      });
+      setLastStepStatus("finish");
+      const data = response.data;
+      setOrderDetails(data);
+    } catch (err) {
+      console.log("Error while Create order", err);
+      setLastStepStatus("error");
+      messageApi.open({
+        type: "error",
+        content: "Unable to create order, Please try after sometime.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const proceedToOrderFnCall = async () => {
+    setIsLoading(true);
+    try {
+      const isRazorpayLoaded = await loadRazorpayScript();
+      if (!isRazorpayLoaded) {
+        messageApi.open({
+          type: "error",
+          content: "Failed to load Razorpay. Please refresh and try again.",
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: orderDetails.amount_due,
+        currency: orderDetails.currency,
+        name: orderDetails.notes.first_name,
+        description: `therapy Booking for Therapy id: ${orderDetails.notes.therapist_id}`,
+        order_id: orderDetails.id,
+        notes: orderDetails.notes,
+        prefill: {
+          name: orderDetails.notes.first_name,
+          email: orderDetails.notes.email,
+          contact: orderDetails.notes.phone_no,
+        },
+        modal: {
+          escape: true,
+          backdropclose: true,
+        },
+        handler: async (response) => {
+          if (response && response.razorpay_payment_id) {
+            console.log("Payment Success:", response);
+            messageApi.open({
+              type: "success",
+              content: "Payment successful!",
+            });
+            dispatch(toggleBookingModal(false));
+            router.push(
+              `/payment-status?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}`
+            );
+          } else {
+            console.log("Payment Failed or Cancelled:", response);
+            messageApi.open({
+              type: "info",
+              content: "Payment was cancelled or failed.",
+            });
+          }
+          setIsLoading(false);
+        },
+        theme: orderDetails.theme,
+      };
+
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+
+      razorpay.on("payment.cancelled", function (response) {
+        console.log("Payment Cancelled:", response);
+        setIsLoading(false);
+        messageApi.open({
+          type: "info",
+          content: "Payment cancelled by user.",
+        });
+      });
+    } catch (err) {
+      console.error("Error during payment:", err);
+      messageApi.open({
+        type: "error",
+        content: "Payment process error.",
+      });
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isBookingModal && activeStep === 3) {
+      proceedToOrderFnCall();
+    }
+  }, [orderDetails]);
 
   const renderActiveStep = (step) => {
     switch (step) {
@@ -536,7 +675,7 @@ export default function BookingModal() {
             </p>
             <hr className="mb-3 border" />
 
-            <div className="overflow-y-auto px-3">
+            <div className="lg:overflow-y-auto px-3">
               <div className="flex flex-col lg:flex-row gap-2">
                 <div className="h-full flex-grow bg-white p-4 rounded-md grid grid-cols-1 gap-2 mb-5">
                   <p className="section-title !text-gray-500 !text-left">
@@ -671,7 +810,7 @@ export default function BookingModal() {
             status={lastStepStatus}
             current={activeStep}
             items={smallDeviceItems}
-            onClick={handleClickonStep}
+            onStepClick={handleClickonStep}
             className="block lg:hidden"
           />
         </section>
@@ -683,12 +822,14 @@ export default function BookingModal() {
             onFinish={handleStepNext}
           >
             <div className="flex-grow h-[65vh] overflow-y-auto overflow-x-hidden">
-              <div className="lg:hidden">
-                <p className="section-title !text-gray-500 !text-left !p-6">
-                  {activeStepDetail.title}
-                </p>
-                <hr className="mb-4" />
-              </div>
+              {activeStep !== 3 && (
+                <div className="lg:hidden">
+                  <p className="section-title !text-gray-500 !text-left !p-6">
+                    {activeStepDetail.title}
+                  </p>
+                  <hr className="mb-4" />
+                </div>
+              )}
               {renderActiveStep(activeStep)}
             </div>
 
@@ -725,6 +866,7 @@ export default function BookingModal() {
           {contextHolder}
         </section>
       </div>
+      {isLoading && activeStep === 3 && <BlockPageLoader />}
     </Modal>
   );
 }
