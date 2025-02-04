@@ -11,18 +11,50 @@ import {
   unSelectAllItems,
   selectItem,
   unSelectItem,
+  increaseOrDecreaseItemQuantity
 } from "@/redux/feature/cartSlice";
+import useCartActions from "@/components/cartCom/useCartActions";
+import { useSession } from "next-auth/react";
 
 const CartPage = () => {
-  const cartItems = useSelector((state) => state.cart.items);
+  const { items, cartLoader, openCartSlider } = useSelector(
+    (state) => state.cart
+  );
   const dispatch = useDispatch();
+  const { data: session } = useSession();
+  const {
+    GetCartItem,
+    AddCartItem,
+    RemoveCartItem,
+    IncreAndDecreCartItemQuantity,
+  } = useCartActions();
 
-  const handleAddItem = (item) => {
-    dispatch(addItem(item));
+  const handleIncreaseCartItem = async (item, action) => {
+    try {
+      let response;
+      if (session) {
+        response = await IncreAndDecreCartItemQuantity(action, item.product_detail.uid);
+      }
+      console.log("handleIncreaseCartItem response111", response);
+      if (session == null || (session && response)) {
+        const itemData = session ? response?.data : item
+        dispatch(increaseOrDecreaseItemQuantity({uid:itemData.product_detail.uid, action:action}));
+      }
+    } catch (error) {
+      console.log("error 555", error);
+    }
   };
 
-  const handleRemoveItem = (item) => {
-    dispatch(removeItem({ id: item.id }));
+  const handleRemoveItem = async (item) => {
+    try {
+      const response = await RemoveCartItem(item.uid);
+      if (response.statu == 201) {
+        // dispatch(addItem(response.data.data));
+        dispatch(removeItem({ id: item.id }));
+      }
+    } catch (error) {
+      console.log("error 555", error);
+    }
   };
 
   const handleSelectAll = (item) => {
@@ -34,8 +66,12 @@ const CartPage = () => {
   };
 
   const calculateTotal = () => {
-    return cartItems
-      ?.reduce((total, item) => total + item.price * item.quantity, 0)
+    return items
+      ?.reduce(
+        (total, item) =>
+          total + parseFloat(item.product_detail.price.replace(/,/g, "")) * Number(item.quantity),
+        0
+      )
       .toFixed(2);
   };
 
@@ -46,8 +82,9 @@ const CartPage = () => {
         : dispatch(selectItem({ id: item.id }));
     } catch (error) {}
   };
+
   const allSelected =
-    cartItems.length > 0 && cartItems.every((item) => item.selected === true);
+    items.length > 0 && items.every((item) => item.is_select === true);
   return (
     <div className="relative flex flex-col lg:flex-row gap-10 z-20 py-10 min-h-screen">
       {/* item render section */}
@@ -57,7 +94,7 @@ const CartPage = () => {
             <h2 className="text-[18px] leading-[24px] font-semibold mb-4">
               Cart Items
             </h2>
-            {cartItems.length > 0 && (
+            {items.length > 0 && (
               <span
                 onClick={() => dispatch(clearCart())}
                 className="section-content underline cursor-pointer"
@@ -66,7 +103,7 @@ const CartPage = () => {
               </span>
             )}{" "}
           </div>
-          {cartItems.length > 0 && (
+          {items.length > 0 && (
             <div className="flex justify-between items-center mb-2">
               <label
                 className="section-content flex items-center  underline cursor-pointer"
@@ -91,22 +128,22 @@ const CartPage = () => {
           )}
 
           {/* Cart Items */}
-          {cartItems?.length > 0 ? (
-            cartItems?.map((item) => (
+          {items?.length > 0 ? (
+            items?.map((item) => (
               <div
-                key={item.id}
+                key={item.uid}
                 className="flex items-center border-b pb-4 mb-4 last:border-none"
               >
                 <input
                   type="checkbox"
-                  htmlFor={`cart_product ${item.id}`}
+                  htmlFor={`cart_product ${item.uid}`}
                   className="mr-4"
-                  checked={item.selected || false}
+                  checked={item.is_select || false}
                   onChange={() => handleSelectItem(item)}
                 />
                 <div className="flex flex-1 flex-row items-start">
                   <Image
-                    src={item.image}
+                    src={item.product_detail.image}
                     // src={"/asset/home/ayurvedic-supplement.jpg"}
                     alt={item.name}
                     width={80}
@@ -116,13 +153,12 @@ const CartPage = () => {
                   <div className="ml-4 flex-1">
                     {/* <h2 className="font-medium">{item.name}</h2> */}
                     <h2 className="text-heading !text-left w-[98%]">
-                      Lorem Ipsum is simply dummy text of the typesetting
-                      industry.
+                      {item.product_detail.title}
                     </h2>
                     <p className="text-text !text-left">
                       Price:{" "}
                       <span className="text-heading !text-left">
-                        ₹&nbsp;{item.price}
+                        ₹&nbsp;{item.product_detail.price}
                       </span>
                     </p>
                     <div className="mt-2 flex flex ">
@@ -134,7 +170,8 @@ const CartPage = () => {
                       </label>
                       <div className="flex items-center space-x-2">
                         <button
-                          onClick={() => handleRemoveItem(item)}
+                          // onClick={() => handleRemoveItem(item)}
+                          onClick={() => handleIncreaseCartItem(item, "decrease")}
                           className="px-2 py-1 bg-gray-200 rounded"
                         >
                           -
@@ -143,7 +180,7 @@ const CartPage = () => {
                           {item.quantity}
                         </span>
                         <button
-                          onClick={() => handleAddItem(item)}
+                          onClick={() => handleIncreaseCartItem(item, "increase")}
                           className="px-2 py-1 bg-gray-200 rounded"
                         >
                           +
@@ -152,7 +189,10 @@ const CartPage = () => {
                     </div>
                   </div>
                   <p className="hidden md:block section-title">
-                    ₹&nbsp;{(item.price * item.quantity).toFixed(2)}
+                    ₹&nbsp;
+                    {(
+                     parseFloat(item.product_detail.price.replace(/,/g, "")) * Number(item.quantity)
+                    ).toFixed(2)}
                   </p>
                 </div>
               </div>
@@ -170,7 +210,10 @@ const CartPage = () => {
             <div className="flex items-center gap-2">
               <span className="section-content !text-left">Sub total</span>
             </div>
-            <span  className="text-heading !text-right"> ₹{calculateTotal()}</span>
+            <span className="text-heading !text-right">
+              {" "}
+              ₹{calculateTotal()}
+            </span>
           </div>
           <div className="flex justify-between items-center mb-2">
             <div className="gap-2">

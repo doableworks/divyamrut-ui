@@ -30,6 +30,7 @@ export const authOptions = {
                         'Content-Type': 'application/json',
                         'Accept-Language': 'en-US',
                     },
+                    next: { revalidate: 60 },
                 });
 
                 const status = res.status;

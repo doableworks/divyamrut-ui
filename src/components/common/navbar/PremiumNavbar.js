@@ -12,37 +12,58 @@ import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { closeNav, openNav } from "@/redux/feature/mobileNavSlice";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
+import useCartActions from "@/components/cartCom/useCartActions"
 import {
   addItem,
+  addItemsAfterLogin,
+  setCartLoader,
   removeItem,
   clearCart,
   selectAllItems,
   unSelectAllItems,
   selectItem,
   unSelectItem,
-  handleCartSlider
+  handleCartSlider,
 } from "@/redux/feature/cartSlice";
+import axiosInstance from "@/lib/axios";
 
 export default function PremiumNavbar({ scrollNum }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const pathname = usePathname();
+  const { AddCartItem } = useCartActions();
   const cartItems = useSelector((state) => state.cart.items);
   const cartCount = Array.isArray(cartItems) ? cartItems.length : cartItems;
-  const isCartSliderOpen = useSelector((state) => state.cart.openCartSlider);
-
+  const {isCartSliderOpen, cartLoader } = useSelector((state) => state.cart);
   const [scrollingNum, setScrollingNum] = useState(scrollNum);
   const [isScrolling, setIsScrolling] = useState(false);
   const [isScrollAndUp, setIsScrollAndUp] = useState(false);
-
   const [isShowSearch, setShowSearch] = useState(false);
   const [isSubMenu, setSubMenu] = useState(null);
-
   const { data: session } = useSession();
-
   const isMobileNavOpen = useSelector((state) => state.mobileNav.isOpen);
-
+  const [loading, setLoading] = useState(false);
   const menuItems = useSelector((state) => state.menuItems.all);
+
+  useEffect(() => {
+    const getCartDetails = async () => {
+      try {
+        setLoading(true)
+        if (session && session?.user?.user?.cart_items) {
+          console.log("getCartDetails response 3333", session?.user?.user?.cart_items);
+          dispatch(addItemsAfterLogin({cart_items :session?.user?.user?.cart_items}));
+        }
+      } catch (error) {
+        console.log("getCartDetails error", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (session) {
+      getCartDetails();
+    }
+  }, [session]);
 
   useEffect(() => {
     if (scrollNum < scrollingNum && scrollNum > 300) {
@@ -55,6 +76,10 @@ export default function PremiumNavbar({ scrollNum }) {
 
     setIsScrolling(scrollNum > 300);
   }, [scrollNum]);
+
+  const handleAddItem = (item) => {
+    dispatch(addItem(item));
+  };
 
   const handleShowSearch = () => {
     setShowSearch(!isShowSearch);
@@ -90,6 +115,7 @@ export default function PremiumNavbar({ scrollNum }) {
       await signOut();
       dispatch(closeNav());
       dispatch(setOpenLoginModal(true));
+      dispatch(clearCart())
     } catch (error) {
       console.log("onLogOut error", error);
     }
@@ -101,7 +127,7 @@ export default function PremiumNavbar({ scrollNum }) {
         "relative shadow flex justify-center bg-[--base] z-30 transition-all duration-3000 ease-in-out top-0 w-full",
         isScrollAndUp
           ? "fixed translate-y-0"
-          : isScrolling 
+          : isScrolling
           ? "absolute translate-y-[-100%]"
           : "absolute translate-y-0"
       )}
@@ -199,7 +225,7 @@ export default function PremiumNavbar({ scrollNum }) {
                 </Link>
               </>
             )}
-            <NavCart count={cartCount} />
+            <NavCart count={cartCount} cartLoader={cartLoader} />
           </figure>
         </section>
 
@@ -211,9 +237,7 @@ export default function PremiumNavbar({ scrollNum }) {
               {menuItems.map((item, index) => (
                 <Link href={item.path ? item.path : ""} key={index}>
                   <li
-                    onMouseEnter={() =>
-                      handleMouseEnter(item)
-                    }
+                    onMouseEnter={() => handleMouseEnter(item)}
                     className={twMerge(
                       "relative navbar-li h-full",
                       item.path &&
@@ -271,7 +295,12 @@ export default function PremiumNavbar({ scrollNum }) {
                     (sub, index) =>
                       sub.is_published && (
                         <Link
-                          href={isSubMenu?.parentSlug == "/products/" && sub.sub_categories?.length == 0 ? `/products-list/${sub.slug}/` : `${isSubMenu.parentSlug}/${sub.slug}/`}
+                          href={
+                            isSubMenu?.parentSlug == "/products/" &&
+                            sub.sub_categories?.length == 0
+                              ? `/products-list/${sub.slug}/`
+                              : `${isSubMenu.parentSlug}/${sub.slug}/`
+                          }
                           key={index}
                         >
                           <li className="navbar-li hover:text-[--voilet]">
@@ -302,3 +331,9 @@ export default function PremiumNavbar({ scrollNum }) {
     </nav>
   );
 }
+
+
+
+
+
+

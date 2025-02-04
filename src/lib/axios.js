@@ -1,9 +1,7 @@
 import axios from 'axios';
-import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
-// import { store } from "@/redux/store";
 
 const axiosInstance = axios.create({
-  baseURL: "https://app2.desklib.com/", // Set your API base URL here
+  baseURL: process.env.NEXT_PUBLIC_API_URL, // Set your API base URL here
 });
 
 const setAuthorizationHeader = (config, session) => {

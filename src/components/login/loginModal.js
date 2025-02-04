@@ -9,6 +9,9 @@ import {
   setOpenLoginModal,
   setOpenRegisterModal,
 } from "@/redux/feature/authModalSlice";
+import {
+  setCartLoader,
+} from "@/redux/feature/cartSlice";
 import { useRouter } from "nextjs-toploader/app";
 import CustomButton from "@/components/common/CustomButton";
 import { NoImageAvailabe } from "@/contants/contants";
@@ -52,14 +55,14 @@ const LoginModal = () => {
   const onFinish = (values) => {
     setLoading(true);
     setErrorMessage("");
-    console.log("logon credientials", values)
+    dispatch(setCartLoader(true))
     signIn("credentials", {
       redirect: false,
       email: values.email,
       password: values.password,
     })
       .then(({ ok, error }) => {
-        console.log("ok", ok, "error", error);
+        console.log("ok", ok, "error", error, "session", session);
         setLoading(false);
         if (ok) {
           // router.push("/home");
@@ -72,6 +75,9 @@ const LoginModal = () => {
       .catch(() => {
         setLoading(false);
         showResponseMessage("error", "Bad Credentials!");
+      })
+      .finally(() => {
+        dispatch(setCartLoader(true))
       });
   };
 

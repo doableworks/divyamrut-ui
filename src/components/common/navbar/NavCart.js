@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function NavCart({ count = 0 }) {
+export default function NavCart({ count = 0, cartLoader }) {
   const cartItems = count || 0;
 
   return (
