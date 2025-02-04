@@ -78,7 +78,7 @@ const CustomCalendar = ({
     }
 
     return calendarList.message === "Success" ? (
-      <div className="my-4">
+      <div className="my-4 pb-4">
         <div className="grid grid-cols-7 gap-1">
           {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
             (day, index) => (

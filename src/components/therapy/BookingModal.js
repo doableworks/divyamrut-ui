@@ -548,7 +548,7 @@ export default function BookingModal() {
           <div className="h-full p-5 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-3">
             <div>
               <p className="text-center section-title !mb-3">Date</p>
-              <div className="bg-white rounded pt-3 h-96">
+              <div className="bg-white rounded pt-3 lg:h-96">
                 <div className="flex items-center justify-center gap-4 mb-3">
                   <button
                     disabled={isLoading}
@@ -585,14 +585,14 @@ export default function BookingModal() {
 
             <div>
               <p className="text-center section-title !mb-3">Time</p>
-              <div className="bg-white rounded pt-3 h-96 mb-5">
+              <div className="bg-white rounded pt-3 lg:h-96 pb-4 mb-5">
                 <p className="section-content !mb-3">
                   {selectedDate ? "Select Time" : "Select Date"}
                 </p>
                 <hr />
 
                 {selectedDate && timeSlotsArray?.length > 0 ? (
-                  <ul className="grid grid-cols-3 gap-2 m-6">
+                  <ul className="grid grid-cols-1 md:grid-cols-3 gap-2 m-6">
                     {timeSlotsArray.map((each, index) => (
                       <button
                         key={index}

@@ -18,3 +18,13 @@
 .my-4 {
   margin: 16px;
 }
+
+@media all and (max-width: 499.98px){
+  .day {
+    text-align: center;
+    padding: 3px;
+    cursor: pointer;
+    margin: 2px;
+    font-size: 12px;
+  }
+}
