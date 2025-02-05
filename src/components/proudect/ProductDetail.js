@@ -18,6 +18,8 @@ import {
 } from "@/redux/feature/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "nextjs-toploader/app";
+import { twMerge } from "tailwind-merge";
+import Divider from "@/components/common/Divider";
 
 const ProductDetail = ({ item }) => {
   const router = useRouter();
@@ -26,9 +28,8 @@ const ProductDetail = ({ item }) => {
 
   const handleAddItem = async () => {
     try {
-      await dispatch(addItem(item));
+      dispatch(addItem(item));
       dispatch(handleCartSlider(true));
-      // await router.push("/cart");
     } catch (error) {
       console.log("error 555", error);
     }
@@ -36,64 +37,77 @@ const ProductDetail = ({ item }) => {
 
   const handleBuyBtn = () => {
     router.push("/payment-delivery");
-    // dispatch(SetIsBuyModalOpen(true))
   };
 
   return (
     <>
-      <div className="relative flex flex-col md:flex-row gap-10 min-h-screen">
-        {/* Product Images Section */}
-        <div className="md:sticky self-start md:top-40 lg:w-1/2 flex flex-col items-center">
-          {/* <div className="w-[100%] md:w-[100%] min-w-[300px] max-w-[700px] h-auto border border-gray-300 rounded-lg overflow-hidden"> */}
-          {/* <div className="hidden md:block">
-            <ProductImage imgSrc={imgArr[selectedImage]} />
+      <div className="relative flex flex-col lg:flex-row gap-10 min-h-[80vh]">
+        <div className="lg:sticky w-full self-start md:top-10 lg:w-1/2 flex flex-col items-center">
+          <div className="bg-white relative w-full h-[50vh] md:h-[60vh] lg:w-[40vw]">
+            <ImageMedium
+              imgSrc={
+                item?.uploaded_images[selectedImage]?.image
+                  ? item?.uploaded_images[selectedImage]?.image
+                  : NoImageAvailabe
+              }
+            />
           </div>
-          <div className="block md:hidden"> */}
-          <div className="relative h-[40vh] md:h-[50vh] w-[40vh] md:w-[50vh]">  
-            <ImageMedium imgSrc={item?.uploaded_images[selectedImage]?.image ? item?.uploaded_images[selectedImage]?.image : NoImageAvailabe} />
-              </div>
-            {/* <ImageMedium imgSrc={item.uploaded_images[selectedImage]} /> */}
-          {/* </div> */}
-          {/* </div> */}
-          <div className="flex flex-row flex-wrap gap-2 space-x-2 mt-8">
-            {/* {item.uploaded_images.map((path, index) => ( */}
+          <div className="flex flex-row overflow-x-auto gap-2 w-full mt-8 pb-4">
             {item.uploaded_images.map((path, index) => (
               <div
                 key={index}
                 onClick={() => SetSelectedImage(index)}
-                className={`w-20 h-20 border border-gray-300 rounded-md overflow-hidden cursor-pointer ${
+                className={`border border-gray-300 rounded-md overflow-hidden cursor-pointer flex-shrink-0 w-20 h-20 ${
                   selectedImage == index && "border-2 border-slate-700"
                 }`}
               >
                 <Image
-                  height={200}
-                  width={200}
+                  height={100}
+                  width={100}
                   src={path?.image ? path?.image : NoImageAvailabe}
                   alt={`Thumbnail ${index}`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               </div>
             ))}
           </div>
         </div>
 
-        {/* Product Details Section */}
-        <div className="lg:w-1/2 flex flex-col md:mt-8">
+        <div className="flex flex-col w-full lg:w-1/2">
+          <h1 className={twMerge("product_title", "mb-4")}>{item.name}</h1>
+          <Divider className="mb-4" />
           <div className="mb-4">
-            <h1 className="sub_heading !text-left !captilize mt-2">
-              {item.name}
-            </h1>
-            <p className="text-sm text-gray-600"
-            dangerouslySetInnerHTML={{ __html: item?.description }} />
-            {/* <p className="text-sm text-gray-600">
-               {item.description}
-            </p> */}
-          </div>
-          <div className="mb-4">
-            <p className="text-lg font-bold text-gray-900"> {item?.currency == "USD" ? "$" : "₹"}&nbsp;{item?.price}</p>
+            <p className="text-2xl font-bold text-gray-900">
+              {item?.currency == "USD" ? "$" : "₹"}&nbsp;{item?.price}
+            </p>
             <p className="text-sm text-gray-500">(Inclusive of all taxes)</p>
           </div>
-          <div className="flex flex-row gap-8">
+          <Divider className="mb-4" />
+          {item?.feature_1 && (
+            <div>
+              <p className="text-xl font-jost normal-case font-bold ">
+                About the Item
+              </p>
+              <ul className="list-disc list-outside my-6 flex flex-col gap-3 md:ml-6 text-base">
+                {item?.feature_1 && (
+                  <li dangerouslySetInnerHTML={{ __html: item?.feature_1 }} />
+                )}
+                {item?.feature_2 && (
+                  <li dangerouslySetInnerHTML={{ __html: item?.feature_2 }} />
+                )}
+                {item?.feature_3 && (
+                  <li dangerouslySetInnerHTML={{ __html: item?.feature_3 }} />
+                )}
+                {item?.feature_4 && (
+                  <li dangerouslySetInnerHTML={{ __html: item?.feature_4 }} />
+                )}
+                {item?.feature_5 && (
+                  <li dangerouslySetInnerHTML={{ __html: item?.feature_5 }} />
+                )}
+              </ul>
+            </div>
+          )}
+          <div className="flex flex-col lg:flex-row gap-1 lg:gap-5">
             <CustomButton
               htmlType="submit"
               className="site-button-primary !mt-4 w-[-webkit-fill-available] capitalize"
@@ -112,47 +126,47 @@ const ProductDetail = ({ item }) => {
               onClick={handleBuyBtn}
             />
           </div>
-
-          {/* Long Content to Scroll */}
-          <div className="mt-8 space-y-8">
-            {/* {[...Array()].map((_, index) => (
-            <div key={index}>
-              <h3 className="text-lg font-semibold mb-4">Why shop from us?</h3>
-              <ul className="space-y-4">
-                <li className="flex items-start space-x-4">
-                  <span className="text-yellow-500 text-lg">🚀</span>
-                  <div>
-                    <p className="text-sm font-bold">Superfast Delivery</p>
-                    <p className="text-sm text-gray-600">
-                      Get your order delivered to your doorstep at the earliest.
-                    </p>
-                  </div>
-                </li>
-                <li className="flex items-start space-x-4">
-                  <span className="text-yellow-500 text-lg">💰</span>
-                  <div>
-                    <p className="text-sm font-bold">Best Prices & Offers</p>
-                    <p className="text-sm text-gray-600">
-                      Best price destination with offers directly from
-                      manufacturers.
-                    </p>
-                  </div>
-                </li>
-                <li className="flex items-start space-x-4">
-                  <span className="text-yellow-500 text-lg">🛒</span>
-                  <div>
-                    <p className="text-sm font-bold">Wide Assortment</p>
-                    <p className="text-sm text-gray-600">
-                      Choose from a wide range of products across categories.
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          ))} */}
-          </div>
         </div>
       </div>
+
+      {item?.product_benefits && (
+        <div className="mb-10">
+          <p className="text-xl font-jost normal-case font-bold mt-6">
+            Benefits of {item?.title}
+          </p>
+          <Divider className="mb-4 mt-4" />
+          <p
+            className="list-disc list-outside my-6 flex flex-col gap-3 text-base leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: item?.product_benefits }}
+          />
+        </div>
+      )}
+
+      {item?.method_of_preparation && (
+        <div className="mb-10">
+          <p className="text-xl font-jost normal-case font-bold mt-6">
+            Methods of Preperation
+          </p>
+          <Divider className="mb-4 mt-4" />
+          <p
+            className="list-disc list-outside my-6 flex flex-col gap-3 text-base leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: item?.method_of_preparation }}
+          />
+        </div>
+      )}
+
+      {item?.description && (
+        <div className="mb-10">
+          <p className="text-xl font-jost normal-case font-bold mt-6">
+            Additional Information
+          </p>
+          <Divider className="mb-4 mt-4" />
+          <p
+            className="text-base font-jost leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: item?.description }}
+          />
+        </div>
+      )}
     </>
   );
 };

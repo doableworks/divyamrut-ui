@@ -14,16 +14,12 @@ const ImageMedium = ({ imgSrc }) => {
 
   return (
     <ControlledZoom isZoomed={isZoomed} onZoomChange={handleZoom}>
-      
       <Image
         alt="img"
-        src={imgSrc ? imgSrc :NoImageAvailabe}
-        // width={800}
-        // height={800}
+        src={imgSrc ? imgSrc : NoImageAvailabe}
         fill={true}
-        //  className="w-auto h-full hidden lg:flex object-cover"
+        className="object-contain h-full w-full"
       />
-    
     </ControlledZoom>
   );
 };

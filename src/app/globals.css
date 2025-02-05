@@ -102,6 +102,10 @@ body {
     @apply w-20 h-16 md:w-[115px] md:h-[95px]
   }
 
+  .product_title {
+    @apply font-jost text-[--yellow] text-[1.8rem] font-semibold capitalize mb-4
+  }
+
   /* heading/ text */
   .highlight-heading {
     @apply mt-[1rem] mb-[1.5rem] text-[32px] leading-[36px] md:text-[3em] md:leading-[1.3em] font-suranna  font-[400] text-E0A43B text-center 

@@ -1,0 +1,21 @@
+"use client";
+import RelatedProductSlider from "./RelatedProductSlider";
+import Divider from "../common/Divider";
+import { usePathname } from "next/navigation";
+const RelatedProduct = ({ slidesData }) => {
+  const pathname = usePathname();
+  const productCategory = pathname.split("/");
+
+  return (
+    <div className="my-12">
+      <p className="highlight-heading !text-left">Related Products</p>
+      <Divider className="mb-10" />
+
+      <RelatedProductSlider
+        productCategory={`${productCategory[2]}`}
+        slideData={Array.from({ length: 8 }, () => slidesData).flat()}
+      />
+    </div>
+  );
+};
+export default RelatedProduct;
