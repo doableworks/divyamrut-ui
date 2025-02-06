@@ -401,18 +401,22 @@ export default function BookingModal() {
 
       const body = {
         amount: confirmationDetails.allotment_info.therapy_price,
-        receipt: filledUserDetails.firstname,
+        receipt: "Therapy",
         currency: "INR",
         notes: {
+          user_email: session?.user?.user?.email || "",
+          email: filledUserDetails.email,
           therapist_id: selectedStaff.uid,
+          therapist_email: selectedStaff.email,
+          therapy_slug: currentPath[2],
+          product_id: "",
+          product_slug: "",
           date: selectedTimeSlot.date,
           start_time: selectedTimeSlot.start_time_format,
           end_time: selectedTimeSlot.end_time_format,
           first_name: filledUserDetails.firstname,
           last_name: filledUserDetails.lastname,
-          email: filledUserDetails.email,
           phone_no: filledUserDetails.phoneNumber,
-          slug: currentPath[2],
         },
       };
 
@@ -475,7 +479,7 @@ export default function BookingModal() {
             console.log("Payment Success:", response);
             messageApi.open({
               type: "success",
-              content: "Payment successful, Redirecting...", 
+              content: "Payment successful, Redirecting...",
             });
             dispatch(toggleBookingModal(false));
             router.push(
@@ -492,7 +496,7 @@ export default function BookingModal() {
         theme: orderDetails.theme,
       };
 
-      setIsLoading(true)
+      setIsLoading(true);
       const razorpay = new window.Razorpay(options);
       razorpay.open();
 

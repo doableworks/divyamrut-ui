@@ -13,7 +13,7 @@ const RelatedProduct = ({ slidesData }) => {
 
       <RelatedProductSlider
         productCategory={`${productCategory[2]}`}
-        slideData={Array.from({ length: 8 }, () => slidesData).flat()}
+        slideData={slidesData}
       />
     </div>
   );

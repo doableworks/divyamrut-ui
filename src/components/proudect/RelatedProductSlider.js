@@ -8,24 +8,26 @@ export default function RelatedProductSlider({ slideData, productCategory }) {
   const screens = useBreakpoint();
   const { data: session } = useSession();
 
-  const shouldUseCarousel = slideData && slideData.length > 1;
+  const shouldUseCarousel = slideData && slideData.length > 5;
+
+  const infiniteData = Array.from({ length: 8 }, () => slideData).flat();
 
   return shouldUseCarousel ? (
     <Carousel
       autoplay
       dots={false}
       slidesToShow={
-        screens.xl || screens.xxl || screens.lg
-          ? 6
-          : screens.md
+        screens.xl || screens.xxl
+          ? 5
+          : screens.md || screens.lg
           ? 3
           : screens.xs && window.innerWidth < 350
           ? 1
           : 2
       }
     >
-      {slideData.map((product, index) => (
-        <div key={index} className="p-2">
+      {infiniteData.map((product, index) => (
+        <div key={index} className="px-3">
           <RelatedProductOverview
             item={product}
             productCategory={productCategory}
@@ -35,15 +37,16 @@ export default function RelatedProductSlider({ slideData, productCategory }) {
       ))}
     </Carousel>
   ) : (
-    <div className="p-2">
+    <ul className="flex gap-3 overflow-x-auto pb-4 narrow-scrollbar">
       {slideData.map((product, index) => (
         <RelatedProductOverview
           key={index}
           item={product}
           productCategory={false}
           session={session}
+          className="w-52 flex-shrink-0"
         />
       ))}
-    </div>
+    </ul>
   );
 }

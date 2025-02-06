@@ -25,6 +25,8 @@ const ProductDetail = ({ item }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [selectedImage, SetSelectedImage] = useState(0);
+  const [buyNowLoading, setBuyNowLoading] = useState(false);
+  const [addToCartLoading, setAddtoCartLoading] = useState(false);
 
   const handleAddItem = async () => {
     try {
@@ -36,6 +38,7 @@ const ProductDetail = ({ item }) => {
   };
 
   const handleBuyBtn = () => {
+    setBuyNowLoading(true);
     router.push("/payment-delivery");
   };
 
@@ -52,7 +55,7 @@ const ProductDetail = ({ item }) => {
               }
             />
           </div>
-          <div className="flex flex-row overflow-x-auto gap-2 w-full mt-8 pb-4">
+          <div className="flex flex-row gap-2 w-full mt-8 overflow-x-auto narrow-scrollbar pb-2">
             {item.uploaded_images.map((path, index) => (
               <div
                 key={index}
@@ -113,7 +116,6 @@ const ProductDetail = ({ item }) => {
               className="site-button-primary !mt-4 w-[-webkit-fill-available] capitalize"
               title="ADD TO CART"
               loading={false}
-              type="submit"
               onClick={handleAddItem}
             />
 
@@ -121,8 +123,7 @@ const ProductDetail = ({ item }) => {
               htmlType="submit"
               className="site-button-secondary !mt-4 w-[-webkit-fill-available] capitalize"
               title="Buy Now"
-              loading={false}
-              type="submit"
+              loading={buyNowLoading}
               onClick={handleBuyBtn}
             />
           </div>
