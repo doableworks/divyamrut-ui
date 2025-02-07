@@ -9,12 +9,9 @@ const CustomCalendar = ({
   calendarList,
 }) => {
   const [daysInMonth, setDaysInMonth] = useState([]);
-
   const data = currentMonth?.data;
-
   const firstDayOfMonth = currentMonth.startOf("month");
   const firstDayOfWeek = firstDayOfMonth.day();
-
   const disabledDates = ["2025-01-25", "2025-01-26"];
 
   useEffect(() => {
