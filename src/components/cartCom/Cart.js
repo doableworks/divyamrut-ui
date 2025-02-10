@@ -33,12 +33,12 @@ const CartPage = () => {
     try {
       let response;
       if (session) {
-        response = await IncreAndDecreCartItemQuantity(action, item.product_detail.uid);
+        response = await IncreAndDecreCartItemQuantity(action, item?.product_detail.uid);
       }
       console.log("handleIncreaseCartItem response111", response);
       if (session == null || (session && response)) {
         const itemData = session ? response?.data : item
-        dispatch(increaseOrDecreaseItemQuantity({uid:itemData.product_detail.uid, action:action}));
+        dispatch(increaseOrDecreaseItemQuantity({uid:itemData?.product_detail?.uid, action:action}));
       }
     } catch (error) {
       console.log("error 555", error);
@@ -69,7 +69,7 @@ const CartPage = () => {
     return items
       ?.reduce(
         (total, item) =>
-          total + parseFloat(item.product_detail.price.replace(/,/g, "")) * Number(item.quantity),
+          total + parseFloat(item?.product_detail?.price.replace(/,/g, "")) * Number(item.quantity),
         0
       )
       .toFixed(2);
@@ -138,12 +138,12 @@ const CartPage = () => {
                   type="checkbox"
                   htmlFor={`cart_product ${item.uid}`}
                   className="mr-4"
-                  checked={item.is_select || false}
+                  checked={item?.is_select || false}
                   onChange={() => handleSelectItem(item)}
                 />
                 <div className="flex flex-1 flex-row items-start">
                   <Image
-                    src={item.product_detail.image}
+                    src={item?.product_detail?.image}
                     // src={"/asset/home/ayurvedic-supplement.jpg"}
                     alt={item.name}
                     width={80}
@@ -153,12 +153,12 @@ const CartPage = () => {
                   <div className="ml-4 flex-1">
                     {/* <h2 className="font-medium">{item.name}</h2> */}
                     <h2 className="text-heading !text-left w-[98%]">
-                      {item.product_detail.title}
+                      {item?.product_detail?.title}
                     </h2>
                     <p className="text-text !text-left">
                       Price:{" "}
                       <span className="text-heading !text-left">
-                        ₹&nbsp;{item.product_detail.price}
+                        ₹&nbsp;{item?.product_detail?.price}
                       </span>
                     </p>
                     <div className="mt-2 flex flex ">
@@ -191,7 +191,7 @@ const CartPage = () => {
                   <p className="hidden md:block section-title">
                     ₹&nbsp;
                     {(
-                     parseFloat(item.product_detail.price.replace(/,/g, "")) * Number(item.quantity)
+                     parseFloat(item?.product_detail?.price.replace(/,/g, "")) * Number(item.quantity)
                     ).toFixed(2)}
                   </p>
                 </div>

@@ -50,7 +50,7 @@ export default function PremiumNavbar({ scrollNum }) {
       try {
         setLoading(true)
         if (session && session?.user?.user?.cart_items) {
-          console.log("getCartDetails response 3333", session?.user?.user?.cart_items);
+          // console.log("getCartDetails response 3333", session?.user?.user?.cart_items);
           dispatch(addItemsAfterLogin({cart_items :session?.user?.user?.cart_items}));
         }
       } catch (error) {

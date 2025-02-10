@@ -53,6 +53,7 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { persistStore, persistReducer, PersistConfig } from 'redux-persist';
 import authModalSlice from './feature/authModalSlice';
 import cartSlice from './feature/cartSlice'; 
+import buyProductSlice from './feature/buyProductSlice'; 
 import productSlice from './feature/productSlice'; 
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 import type { Middleware } from 'redux';
@@ -90,7 +91,8 @@ const rootReducer = combineReducers({
   mobileNav: mobileNavSlice,
   menuItems: menuSlice,
   therapy: therapySlice,
-  product: productSlice
+  product: productSlice,
+  buyProduct: buyProductSlice
 });
 
 const persistConfig: PersistConfig<ReturnType<typeof rootReducer>> = {

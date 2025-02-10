@@ -5,6 +5,7 @@ import CustomButton from "@/components/common/CustomButton";
 import ProductImage from "./ImageMagnify";
 import ImageMedium from "./ImageMedium";
 import { SetIsBuyModalOpen } from "@/redux/feature/productSlice";
+import { setBuyProduct } from "@/redux/feature/buyProductSlice";
 import { NoImageAvailabe } from "@/contants/contants";
 import {
   addItem,
@@ -37,9 +38,10 @@ const ProductDetail = ({ item }) => {
     }
   };
 
-  const handleBuyBtn = () => {
+  const handleBuyBtn = async(item) => {
     setBuyNowLoading(true);
-    router.push("/payment-delivery");
+    await dispatch(setBuyProduct(item))
+    await router.push("/payment-delivery");
   };
 
   return (

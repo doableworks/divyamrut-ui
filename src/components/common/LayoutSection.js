@@ -12,7 +12,6 @@ import { useDispatch } from "react-redux";
 import { setMenuItems } from "@/redux/feature/menuSlice";
 import { SetIsSticky } from "@/redux/feature/productSlice";
 import CardSlider from "@/components/cartCom/CardSlider";
-import BuyProductModal from "@/components/proudect/BuyProductModal";
 import BookingModal from "../therapy/BookingModal";
 
 export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
@@ -98,7 +97,6 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
           <Footer />
         </div>
       </main>
-      <BuyProductModal />
       <CardSlider />
       <LoginModal />
       <RegisterModal />

@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import CustomSteps from "@/components/steps/index";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input, message } from "antd";
+import axiosInstance from "@/lib/axios";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 import Payment from "@/components/common/PaymentCom";
 import OrderSummary from "@/components/common/OrderSummary";
 import AddDeliveryAddressCom from "@/components/common/AddDeliveryAddressCom";
@@ -33,59 +35,60 @@ const smallDeviceItems = [
 
 const addresses = [
   {
-    id: 1,
+    uid: 1,
     label: "Home",
-    address: {
-      country: "United States",
-      firstname: "John",
-      lastname: "Doe",
-      house: "Apt 404",
-      street: "123 Elm Street",
-      state: "California",
-      city: "Los Angeles",
-      pin_code: "90001",
-      landmark: "Near Central Park",
-      email: "john.doe@example.com",
-      mobile_no: "9876543210",
-    },
+    country: "United States",
+    firstname: "John",
+    lastname: "Doe",
+    house: "Apt 404",
+    street: "123 Elm Street",
+    state: "California",
+    city: "Los Angeles",
+    pin_code: "90001",
+    landmark: "Near Central Park",
+    email: "john.doe@example.com",
+    mobile_no: "9876543210",
   },
   {
-    id: 2,
-    label: "Office",
-    address: {
-      country: "Australia",
-      firstname: "Liam",
-      lastname: "Williams",
-      house: "Villa 8",
-      street: "654 Sunset Boulevard",
-      state: "New South Wales",
-      city: "Sydney",
-      pin_code: "2000",
-      landmark: "Near Opera House",
-      email: "liam.williams@example.com.au",
-      mobile_no: "0412345678",
-    },
+    uid: 1,
+    label: "office",
+    country: "United States",
+    firstname: "John",
+    lastname: "Doe",
+    house: "Apt 404",
+    street: "123 Elm Street",
+    state: "California",
+    city: "Los Angeles",
+    pin_code: "90001",
+    landmark: "Near Central Park",
+    email: "john.doe@example.com",
+    mobile_no: "9876543210",
   },
   {
-    id: 3,
-    label: "Other",
-    address: {
-      country: "United Kingdom",
-      firstname: "Emma",
-      lastname: "Brown",
-      house: "Flat 5A",
-      street: "321 Baker Street",
-      state: "London",
-      city: "London",
-      pin_code: "NW1 6XE",
-      landmark: "Near Sherlock Museum",
-      email: "emma.brown@example.co.uk",
-      mobile_no: "07567891234",
-    },
+    uid: 3,
+    label: "other",
+    country: "United States",
+    firstname: "John",
+    lastname: "Doe",
+    house: "Apt 404",
+    street: "123 Elm Street",
+    state: "California",
+    city: "Los Angeles",
+    pin_code: "90001",
+    landmark: "Near Central Park",
+    email: "john.doe@example.com",
+    mobile_no: "9876543210",
   },
 ];
 
-const BuyProductCom = () => {
+const BuyProductCom = ({ allAddressData }) => {
+  const { items, buyLoader, hasBuy } = useSelector(
+    (state) => state.buyProduct
+  );
+  const { data: session } = useSession();
+  // console.log("session", session)
+  // console.log("items, buyLoader, hasBuy", items, buyLoader, hasBuy)
+
   const [messageApi, contextHolder] = message.useMessage();
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -155,20 +158,121 @@ const BuyProductCom = () => {
     },
   ]);
 
-  const [addOrEditAddre, setADDorEditAddre] = useState({ open: false, data: null });
-  const [addressList, setAddressList] = useState(addresses);
+  const [addOrEditAddre, setADDorEditAddre] = useState({ open: false, address: null });
+  const [addressList, setAddressList] = useState(allAddressData);
   const [SelectedDeliveryAddre, setSelectedDeliveryAddre] = useState(null);
-
   const [lastStepStatus, setLastStepStatus] = useState("process");
 
-  const handleAddNeworEditAddre = ({ open, value }) => {
-    setADDorEditAddre({ open: open, data: value }); // Enable editing mode
+  const handleAddNeworEditAddre = (open = false, address = null) => {
+    setADDorEditAddre({ open: open, address: address }); // Enable editing mode
   };
 
-  const onFillAddressFinish = (values) => {
-    setSelectedDeliveryAddre(values); // Save address
-    setADDorEditAddre({ open: false, data: null }); // Exit editing mode
+  const onFillAddressFinish = async (values) => {
+    console.log("onFillAddressFinish", values)
+    // setSelectedDeliveryAddre(values); // Save address
+    // setADDorEditAddre({ open: false, address: null }); // Exit editing mode
+
+    // const data ={
+    //   first_name: values.first_name,
+    //   last_name:  values.last_name,
+    //   company_name: "ABC Ltd",
+    //   country: values.country,
+    //   address: "123 Main Street",
+    //   apartment: values.house,
+    //   street: values.street,
+    //   city: values.city,
+    //   state: values.state,
+    //   pin_code: values.pin_code,
+    //   phone: values.mobile_no,
+    //   landmark: values.landmark,
+    //   address_type: values.address_type,
+    //   email: values.email,
+    //   is_billing: true,
+    //   is_shipping: false,
+    //   order_notes: "Leave at the door."
+    // }
+
+    const data = {
+      address: "123 Main Street",
+      address_type: "dfgdg",
+      apartment: "rert",
+      city: "hhh",
+      company_name: "ABC Ltd",
+      country: "India",
+      created_at: "2025-02-07T17:41:27.375766+05:30",
+      email: "test@gmail.com",
+      first_name: "vijay",
+      id: 7,
+      is_billing: true,
+      is_shipping: false,
+      landmark: "dfd",
+      last_name: "test",
+      order_notes: "Leave at the door.",
+      phone: "0987654345",
+      pin_code: "123123",
+      state: "Mizoram",
+      street: "101"
+    }
+
+    try {
+      const response = await axiosInstance.post("/product/shipping/address/", data, {
+        session,
+      });
+      console.log(" cart response api", response);
+      if (response.status === 200) {
+        const data = response?.data?.data
+        // const isExsitAddress = addressList.find(item=> item.uid == data.uid)
+        // console.log(data,"isexistAddress", isExsitAddress)
+        // if (isExsitAddress){
+
+        // }else{
+        //   setAddressList([...addressList, data])
+        // }
+
+        setAddressList([...addressList, data])
+
+        setADDorEditAddre({ open: false, address: null });
+
+      } else {
+        message.error("Something went wrong, please try again later!");
+      }
+    } catch (error) {
+      console.log("getCartDetails error", error);
+      message.error("Something went wrong, please try again later!");
+    } finally {
+      // dispatch(setCartLoader(false));
+    }
   };
+
+  const onDeleteAddress = async (uid) => {
+    console.log("onDeleteAddress", uid)
+    try {
+      const response = await axiosInstance.delete(`/product/shipping/address/${uid}/`, {
+        session,
+      });
+      console.log(response, "onDeleteAddress response api", response?.data);
+      if (response.status === 200) {
+        const data = response?.data?.data
+        const remainAddress = addressList.find(item => item.uid == data.uid)
+        setAddressList([...remainAddress])
+        setADDorEditAddre({ open: false, address: null });
+      } else {
+        message.error("Something went wrong, please try again later!");
+      }
+    } catch (error) {
+      console.log("getCartDetails error", error);
+      message.error("Something went wrong, please try again later!");
+    } finally {
+      // dispatch(setCartLoader(false));
+    }
+  };
+
+  const onSelectAddress = (address)=>{
+    console.log("onSelectAddress run 2123",address)
+    setSelectedDeliveryAddre(address)
+  }
+  
+
 
   const increaseActiveStep = () => {
     setActiveStep(activeStep + 1);
@@ -180,10 +284,6 @@ const BuyProductCom = () => {
       existingItem.quantity += 1;
       setOrderList([...orderList, existingItem]);
     }
-  };
-
-  const handleAddressDelete = (id) => {
-    setAddressList(addressList.filter((addr) => addr.id !== id));
   };
 
   const decreaseQuantity = (id, quantity) => {
@@ -203,17 +303,18 @@ const BuyProductCom = () => {
       case 0:
         return addOrEditAddre?.open ? (
           <AddDeliveryAddressCom
-            userAddress={userAddress}
-            onEdit={onEdit}
+            Address={addOrEditAddre.address}
+            userData={session?.user?.user}
             onFillAddressFinish={onFillAddressFinish}
           />
         ) : (
           <>
             <SelectDeliveryAddress
               addressList={addressList}
-              handleAddressDelete={handleAddressDelete}
-              onFillAddressFinish={onFillAddressFinish}
+              SelectedDeliveryAddre={SelectedDeliveryAddre}
               handleAddNeworEditAddre={handleAddNeworEditAddre}
+              onDeleteAddress={onDeleteAddress}
+              onSelectAddress={onSelectAddress}
             />
           </>
         );
@@ -225,8 +326,7 @@ const BuyProductCom = () => {
             increaseQuantity={increaseQuantity}
           />
         );
-      // case 2:
-      //   return <Payment />;
+
       default:
         return <div>Hello World</div>;
     }
@@ -349,46 +449,3 @@ const BuyProductCom = () => {
 };
 
 export default BuyProductCom;
-
-//  <div className="max-w-lg mx-auto">
-// <h2 className="text-xl font-bold mb-4">Delivery Address</h2>
-// <div className="flex justify-end">
-//   <button
-//     className="text-blue-600 hover:underline text-sm"
-//     // onClick={onEdit}
-//   >
-//     Change
-//   </button>
-// </div>
-// <div className="mt-3 text-gray-700 space-y-1">
-//   <p className="section-content !text-left">{`${userAddress?.firstname} ${userAddress?.lastname}`}</p>
-//   <p className="section-content !text-left">{`${userAddress?.house}, ${userAddress?.street}`}</p>
-//   <p className="section-content !text-left">{`${userAddress?.area}, ${userAddress?.sector}`}</p>
-//   <p className="section-content !text-left">
-//     {userAddress?.landmark}
-//   </p>
-//   <p className="section-content !text-left">{`${userAddress?.city}, ${userAddress?.state}`}</p>
-//   <p className="section-content !text-left">{`${userAddress?.city} ${userAddress?.state},  ${userAddress?.pin_code}`}</p>
-//   <p className="section-content !text-left">{`email : ${userAddress?.email}`}</p>
-//   <p className="section-content !text-left">{`Phone number :  ${userAddress?.mobile_no}`}</p>
-// </div>
-
-// {/* <div className="space-y-2">
-//         <p>
-//           <strong>Name:</strong> {userAddress?.fullName}
-//         </p>
-//         <p>
-//           <strong>Address:</strong> {userAddress?.addressLine1},{" "}
-//           {userAddress?.addressLine2}
-//         </p>
-//         <p>
-//           <strong>City:</strong> {userAddress?.city}
-//         </p>
-//         <p>
-//           <strong>Postal Code:</strong> {userAddress?.postalCode}
-//         </p>
-//         <p>
-//           <strong>Country:</strong> {userAddress?.country}
-//         </p>
-//       </div>  */}
-// </div>
