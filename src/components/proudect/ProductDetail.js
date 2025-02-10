@@ -43,7 +43,7 @@ const ProductDetail = ({ item }) => {
     await dispatch(setBuyProduct(item))
     await router.push("/payment-delivery");
   };
-
+  setBuyProduct
   return (
     <>
       <div className="relative flex flex-col lg:flex-row gap-10 min-h-[80vh]">

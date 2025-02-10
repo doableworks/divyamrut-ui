@@ -169,50 +169,48 @@ const BuyProductCom = ({ allAddressData }) => {
 
   const onFillAddressFinish = async (values) => {
     console.log("onFillAddressFinish", values)
-    // setSelectedDeliveryAddre(values); // Save address
-    // setADDorEditAddre({ open: false, address: null }); // Exit editing mode
-
-    // const data ={
-    //   first_name: values.first_name,
-    //   last_name:  values.last_name,
-    //   company_name: "ABC Ltd",
-    //   country: values.country,
-    //   address: "123 Main Street",
-    //   apartment: values.house,
-    //   street: values.street,
-    //   city: values.city,
-    //   state: values.state,
-    //   pin_code: values.pin_code,
-    //   phone: values.mobile_no,
-    //   landmark: values.landmark,
-    //   address_type: values.address_type,
-    //   email: values.email,
-    //   is_billing: true,
-    //   is_shipping: false,
-    //   order_notes: "Leave at the door."
-    // }
-
-    const data = {
-      address: "123 Main Street",
-      address_type: "dfgdg",
-      apartment: "rert",
-      city: "hhh",
+    setIsLoading(true)
+    const data ={
+      first_name: values.first_name,
+      last_name:  values.last_name,
       company_name: "ABC Ltd",
-      country: "India",
-      created_at: "2025-02-07T17:41:27.375766+05:30",
-      email: "test@gmail.com",
-      first_name: "vijay",
-      id: 7,
+      country: values.country,
+      address: "123 Main Street",
+      apartment: values.apartment,
+      street: values.street,
+      city: values.city,
+      state: values.state,
+      pin_code: values.pin_code,
+      phone: values.phone,
+      landmark: values.landmark,
+      address_type: values.address_type,
+      email: values.email,
       is_billing: true,
       is_shipping: false,
-      landmark: "dfd",
-      last_name: "test",
-      order_notes: "Leave at the door.",
-      phone: "0987654345",
-      pin_code: "123123",
-      state: "Mizoram",
-      street: "101"
+      order_notes: "Leave at the door."
     }
+
+    // const data = {
+    //   address: "123 Main Street",
+    //   address_type: "dfgdg",
+    //   apartment: "rert",
+    //   city: "hhh",
+    //   company_name: "ABC Ltd",
+    //   country: "India",
+    //   created_at: "2025-02-07T17:41:27.375766+05:30",
+    //   email: "test@gmail.com",
+    //   first_name: "vijay",
+    //   id: 7,
+    //   is_billing: true,
+    //   is_shipping: false,
+    //   landmark: "dfd",
+    //   last_name: "test",
+    //   order_notes: "Leave at the door.",
+    //   phone: "0987654345",
+    //   pin_code: "123123",
+    //   state: "Mizoram",
+    //   street: "101"
+    // }
 
     try {
       const response = await axiosInstance.post("/product/shipping/address/", data, {
@@ -221,18 +219,8 @@ const BuyProductCom = ({ allAddressData }) => {
       console.log(" cart response api", response);
       if (response.status === 200) {
         const data = response?.data?.data
-        // const isExsitAddress = addressList.find(item=> item.uid == data.uid)
-        // console.log(data,"isexistAddress", isExsitAddress)
-        // if (isExsitAddress){
-
-        // }else{
-        //   setAddressList([...addressList, data])
-        // }
-
         setAddressList([...addressList, data])
-
         setADDorEditAddre({ open: false, address: null });
-
       } else {
         message.error("Something went wrong, please try again later!");
       }
@@ -240,22 +228,65 @@ const BuyProductCom = ({ allAddressData }) => {
       console.log("getCartDetails error", error);
       message.error("Something went wrong, please try again later!");
     } finally {
-      // dispatch(setCartLoader(false));
+      setIsLoading(false)
+    }
+  };
+
+  const onEditAddress = async (values) => {
+    setIsLoading(true)
+    const data ={
+      first_name: values.first_name,
+      last_name:  values.last_name,
+      company_name: "ABC Ltd",
+      country: values.country,
+      address: "123 Main Street",
+      apartment: values.apartment,
+      street: values.street,
+      city: values.city,
+      state: values.state,
+      pin_code: values.pin_code,
+      phone: values.phone,
+      landmark: values.landmark,
+      address_type: values.address_type,
+      email: values.email,
+      is_billing: true,
+      is_shipping: false,
+      order_notes: "Leave at the door."
+    }
+
+    try {
+      const response = await axiosInstance.put(`/product/shipping/address/${addOrEditAddre.address.uid}/`, data, {
+        session,
+      });
+      if (response.status === 200) {
+        const data = response?.data?.data
+        const remainAddress = addressList.filter(item=> item.uid != addOrEditAddre.address.uid)
+        setAddressList([...remainAddress, data])
+        setADDorEditAddre({ open: false, address: null });
+      } else {
+        message.error("Something went wrong, please try again later!");
+      }
+    } catch (error) {
+      console.log("getCartDetails error", error);
+      message.error("Something went wrong, please try again later!");
+    } finally {
+      setIsLoading(true)
     }
   };
 
   const onDeleteAddress = async (uid) => {
-    console.log("onDeleteAddress", uid)
     try {
       const response = await axiosInstance.delete(`/product/shipping/address/${uid}/`, {
         session,
       });
-      console.log(response, "onDeleteAddress response api", response?.data);
-      if (response.status === 200) {
-        const data = response?.data?.data
-        const remainAddress = addressList.find(item => item.uid == data.uid)
+      console.log(response, "onDeleteAddress response api", response);
+      if (response.status == 204) {
+        console.log("addressList ddddd", addressList)
+        const remainAddress = addressList.filter(item => item.uid != uid)
+        console.log("resmabd ddddd", remainAddress)
         setAddressList([...remainAddress])
         setADDorEditAddre({ open: false, address: null });
+        setSelectedDeliveryAddre(null)
       } else {
         message.error("Something went wrong, please try again later!");
       }
@@ -267,12 +298,9 @@ const BuyProductCom = ({ allAddressData }) => {
     }
   };
 
-  const onSelectAddress = (address)=>{
-    console.log("onSelectAddress run 2123",address)
+  const onSelectAddress = (address) => {
     setSelectedDeliveryAddre(address)
   }
-  
-
 
   const increaseActiveStep = () => {
     setActiveStep(activeStep + 1);
@@ -298,14 +326,21 @@ const BuyProductCom = ({ allAddressData }) => {
     }
   };
 
+  const onCancel = ()=>{
+    setADDorEditAddre({ open: false, address: null })
+  }
+
   const renderActiveStep = (step) => {
     switch (step) {
       case 0:
         return addOrEditAddre?.open ? (
           <AddDeliveryAddressCom
-            Address={addOrEditAddre.address}
+          isLoading={isLoading}
+            userAddress={addOrEditAddre.address}
             userData={session?.user?.user}
             onFillAddressFinish={onFillAddressFinish}
+            onEditAddress={onEditAddress}
+            onCancel={onCancel}
           />
         ) : (
           <>
@@ -335,7 +370,7 @@ const BuyProductCom = ({ allAddressData }) => {
   const handleCheckValidation = () => {
     switch (activeStep) {
       case 0:
-        if (SelectedDeliveryAddre || true) {
+        if (SelectedDeliveryAddre) {
           return true;
         } else {
           messageApi.open({
@@ -345,7 +380,7 @@ const BuyProductCom = ({ allAddressData }) => {
           return false;
         }
       case 1:
-        if (orderList?.length > 0) {
+        if (orderList?.length > 0 && SelectedDeliveryAddre) {
           return true;
         } else {
           messageApi.open({

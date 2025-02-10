@@ -3,14 +3,16 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Select, Space } from "antd";
 import axios from "axios";
+import CustomButton from "@/components/common/CustomButton";
 
-const AddDeliveryAddress = ({ userAddress, userData, onEdit, onFillAddressFinish }) => {
+
+const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFinish, onEditAddress, onCancel }) => {
   const [form] = Form.useForm();
   const [loader, setloader] = useState({ country: false, state: false })
   const [stateList, setStateList] = useState(null)
   const [countryList, setCountryList] = useState(null)
   const [state, setState] = useState(null)
-  const [country, setCountry] = useState({ code:"IN", value: 'India', label: 'India' })
+  const [country, setCountry] = useState({ code: "IN", value: 'India', label: 'India' })
 
   useEffect(() => {
     getCountryListData()
@@ -30,11 +32,11 @@ const AddDeliveryAddress = ({ userAddress, userData, onEdit, onFillAddressFinish
       });
 
       // console.log("getCountryListData response", response)
-      if(response.status == 200){
+      if (response.status == 200) {
         const data = response.data;
         setCountryList(data)
       }
-      else{
+      else {
         throw new Error("Failed to fetch country data");
       }
     } catch (err) {
@@ -58,11 +60,11 @@ const AddDeliveryAddress = ({ userAddress, userData, onEdit, onFillAddressFinish
         next: { revalidate: 60 },
       });
       // console.log("getSateData response", response)
-      if(response.status == 200){
+      if (response.status == 200) {
         const data = response.data;
         setStateList(data)
       }
-      else{
+      else {
         throw new Error("Failed to fetch country data");
       }
     } catch (err) {
@@ -77,16 +79,12 @@ const AddDeliveryAddress = ({ userAddress, userData, onEdit, onFillAddressFinish
 
 
   const handleCountryChange = (value, option) => {
-    console.log("value", value, "option", option)
     setCountry(option)
-  }; 
-
-  const handleStateChange = (value, option) => {
-    console.log("value", value, "option", option,"userData", userData)
-    setState(option)
   };
 
-  // console.log("stateList", stateList)
+  const handleStateChange = (value, option) => {
+    setState(option)
+  };
 
   return (
     <div className="max-w-3xl mx-auto p-4">
@@ -96,7 +94,7 @@ const AddDeliveryAddress = ({ userAddress, userData, onEdit, onFillAddressFinish
         </h2>
         <Form
           form={form}
-          onFinish={onFillAddressFinish}
+          onFinish={userAddress ? onEditAddress : onFillAddressFinish}
           // initialValues={userAddress || {}}
           initialValues={{
             ...userAddress,
@@ -118,7 +116,7 @@ const AddDeliveryAddress = ({ userAddress, userData, onEdit, onFillAddressFinish
             <Select
               // defaultValue={country.value}
               style={{ width: "100%" }}
-              onChange={(value, option)=>handleCountryChange(value, option)}
+              onChange={(value, option) => handleCountryChange(value, option)}
               disabled
               showSearch
               value={country.value}
@@ -144,7 +142,7 @@ const AddDeliveryAddress = ({ userAddress, userData, onEdit, onFillAddressFinish
           {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}
           <Form.Item
             label="Apartment/suite/unit/etc"
-            name="house"
+            name="apartment"
             rules={[{ required: true, message: "this is required" }]}
           >
             <Input placeholder="Apartment/suite/unit/etc" />
@@ -165,10 +163,10 @@ const AddDeliveryAddress = ({ userAddress, userData, onEdit, onFillAddressFinish
           >
             {/* <Input placeholder="Enter state" /> */}
             <Select
-            placeholder="Select your state"
+              placeholder="Select your state"
               // defaultValue={state.value}
               style={{ width: "100%" }}
-              onChange={(value, option)=>handleStateChange(value, option)}
+              onChange={(value, option) => handleStateChange(value, option)}
               // disabled
               showSearch
               // loading={true}
@@ -219,7 +217,7 @@ const AddDeliveryAddress = ({ userAddress, userData, onEdit, onFillAddressFinish
             </Form.Item>
             <Form.Item
               label="Number"
-              name="mobile_no"
+              name="phone"
               rules={[
                 { required: true, message: "Contact number is required" },
                 {
@@ -325,18 +323,37 @@ const AddDeliveryAddress = ({ userAddress, userData, onEdit, onFillAddressFinish
               ></textarea>
             </div> */}
 
-          <div className="flex justify-end space-x-2">
-            {userAddress && (
-              <button
-                className="site-button-primary"
-                onClick={() => onEdit()}
-              >
-                Cancel
-              </button>
-            )}
-            <button className="site-button-primary" htmlType="submit">
+          <div className="flex justify-end gap-5 space-x-2">
+
+            {/* <button
+              className="site-button-primary"
+              onClick={() => onCancel()}
+            >
+              Cancel
+            </button> */}
+
+            <CustomButton
+              // htmlType="submit"
+              className="site-button-primary !m-0 capitalize"
+              title={"Cancel"}
+              loading={isLoading}
+              onClick={() => onCancel()}
+              // type="submit"
+            />
+
+
+            {/* <button className="site-button-primary" htmlType="submit">
               {userAddress ? "Update Address" : "Save Address"}
-            </button>
+            </button> */}
+
+            <CustomButton
+              htmlType="submit"
+              className="site-button-primary !m-0 capitalize"
+              title={userAddress ? "Update Address" : "Save Address"}
+              loading={isLoading}
+              type="submit"
+            />
+
           </div>
         </Form>
       </div>
