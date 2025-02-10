@@ -270,7 +270,7 @@ const BuyProductCom = ({ allAddressData }) => {
       console.log("getCartDetails error", error);
       message.error("Something went wrong, please try again later!");
     } finally {
-      setIsLoading(true)
+      setIsLoading(false)
     }
   };
 
