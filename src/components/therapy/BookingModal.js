@@ -407,7 +407,6 @@ export default function BookingModal() {
           user_email: session?.user?.user?.email || "",
           email: filledUserDetails.email,
           therapist_id: selectedStaff.uid,
-          therapist_email: selectedStaff.email,
           therapy_slug: currentPath[2],
           product_id: "",
           product_slug: "",
@@ -417,6 +416,7 @@ export default function BookingModal() {
           first_name: filledUserDetails.firstname,
           last_name: filledUserDetails.lastname,
           phone_no: filledUserDetails.phoneNumber,
+          user_appointment_id: confirmationDetails.appointment_id,
         },
       };
 
