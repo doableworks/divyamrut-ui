@@ -87,7 +87,7 @@ const BuyProductCom = ({ allAddressData }) => {
   );
   const { data: session } = useSession();
   // console.log("session", session)
-  // console.log("items, buyLoader, hasBuy", items, buyLoader, hasBuy)
+  console.log("items, buyLoader, hasBuy", items, buyLoader, hasBuy)
 
   const [messageApi, contextHolder] = message.useMessage();
   const [activeStep, setActiveStep] = useState(0);
@@ -157,7 +157,6 @@ const BuyProductCom = ({ allAddressData }) => {
       price: 3.0,
     },
   ]);
-
   const [addOrEditAddre, setADDorEditAddre] = useState({ open: false, address: null });
   const [addressList, setAddressList] = useState(allAddressData);
   const [SelectedDeliveryAddre, setSelectedDeliveryAddre] = useState(null);

@@ -38,12 +38,12 @@ const ProductDetail = ({ item }) => {
     }
   };
 
-  const handleBuyBtn = async(item) => {
+  const handleBuyBtn = async() => {
     setBuyNowLoading(true);
-    await dispatch(setBuyProduct(item))
+    await dispatch(setBuyProduct({items:item, source:"direct-buy"}))
     await router.push("/payment-delivery");
   };
-  setBuyProduct
+  
   return (
     <>
       <div className="relative flex flex-col lg:flex-row gap-10 min-h-[80vh]">
