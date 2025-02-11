@@ -9,19 +9,9 @@ import CustomButton from "@/components/common/CustomButton";
 import { useSession } from "next-auth/react";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import { closeNav, openNav, toggleNav } from "@/redux/feature/mobileNavSlice";
-
-import {
-  addItem,
-  removeItem,
-  clearCart,
-  selectAllItems,
-  unSelectAllItems,
-  selectItem,
-  unSelectItem,
-  openCartSlider,
-  removeItemComplete,
-} from "@/redux/feature/cartSlice";
 import { CloseOutlined, DownOutlined } from "@ant-design/icons";
+import useCartActions from "@/components/cartCom/useCartActions";
+
 
 const CardSlider = () => {
   const { data: session } = useSession();
@@ -30,6 +20,10 @@ const CardSlider = () => {
   const isCartSliderOpen = useSelector((state) => state.cart.openCartSlider);
   const cartItems = useSelector((state) => state.cart.items);
   const [loader, setLoader] = useState();
+  const {
+    onRemoveItem,
+    onIncreaseOrDecreaseItem
+  } = useCartActions();
 
   const CartSliderClose = () => {
     dispatch(openCartSlider(false));
@@ -54,23 +48,16 @@ const CardSlider = () => {
     }
   };
 
-  const handleAddItem = (item) => {
-    dispatch(addItem(item));
-  };
-
-  const handleRemoveItem = (item) => {
-    dispatch(removeItem({ id: item.id }));
-  };
-
-  const handleRemoveItemComplete = (item) => {
-    dispatch(removeItemComplete({ id: item.id }));
-  };
-
   const calculateTotal = () => {
     return cartItems
-      ?.reduce((total, item) => total + item.price * item.quantity, 0)
+      ?.reduce(
+        (total, item) =>
+          total + parseFloat(item?.product_detail?.price.replace(/,/g, "")) * Number(item.quantity),
+        0
+      )
       .toFixed(2);
   };
+
 
   const MoveRoute = (path) => {
     router.push(path);
@@ -79,6 +66,19 @@ const CardSlider = () => {
   const handlecartMove = (path) => {
     CartSliderClose();
     MoveRoute(path);
+  };
+
+  const handleIncreaseCartItem = async (item, action) => {
+    try {
+      console.log("handleIncreaseCartItem", item, action)
+      onIncreaseOrDecreaseItem(action, item?.product_detail.uid);
+    } catch (error) {
+      console.log("handleIncreaseCartItem cart error", error);
+    }
+  };
+
+  const handleRemoveItemComplete = (item) => {
+    onRemoveItem(item.uid)
   };
 
   return (
@@ -169,27 +169,27 @@ const CardSlider = () => {
                 /> */}
                     <div className="flex flex-1 flex-row items-start">
                       <Image
-                        src={item.image}
+                        src={item.product_detail.image}
                         // src={"/asset/home/ayurvedic-supplement.jpg"}
-                        alt={item.name}
+                        alt={item.product_detail.title}
                         width={80}
                         height={80}
                         className="rounded-md mt-2"
                       />
                       <div className="ml-1 flex-1">
                         <h2 className="text-heading !leading-[18px] !text-[14px] !text-left w-[98%]">
-                          {item.title}
+                          {item.product_detail.title}
                         </h2>
                         <div className="my-1 flex flex-row items-center gap-2">
                           <label
-                            htmlFor={`quantity-${item.id}`}
+                            htmlFor={`quantity-${item.uid}`}
                             className="mr-2 text-text !text-left"
                           >
                             Quantity:
                           </label>
                           <div className="flex items-center space-x-2">
                             <button
-                              onClick={() => handleRemoveItem(item)}
+                                                       onClick={() => handleIncreaseCartItem(item, "decrease")}
                               className="px-2 bg-gray-200 text-heading rounded"
                             >
                               -
@@ -198,7 +198,7 @@ const CardSlider = () => {
                               {item.quantity}
                             </span>
                             <button
-                              onClick={() => handleAddItem(item)}
+                              onClick={() => handleIncreaseCartItem(item, "increase")}
                               className="px-2 bg-gray-200 text-heading rounded"
                             >
                               +
@@ -208,7 +208,7 @@ const CardSlider = () => {
                         <p className="text-text !text-left">
                           Price:{" "}
                           <span className="text-heading !text-left">
-                            ₹&nbsp;{item.price}
+                            ₹&nbsp;{item.product_detail.price}
                           </span>
                         </p>
                       </div>

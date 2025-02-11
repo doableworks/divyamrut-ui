@@ -282,7 +282,6 @@ const CartPage = () => {
   const { items, cartLoader } = useSelector(
     (state) => state.cart
   );
-
   // console.log("cart.js items", items)
   const dispatch = useDispatch();
   const router = useRouter();
@@ -351,14 +350,14 @@ const CartPage = () => {
             <h2 className="text-[18px] leading-[24px] font-semibold mb-4">
               Cart Items
             </h2>
-            {items.length > 0 && (
+            {/* {items.length > 0 && (
               <span
                 onClick={() => dispatch(clearCart())}
                 className="section-content underline cursor-pointer"
               >
                 Clear Cart
               </span>
-            )}{" "}
+            )}{" "} */}
           </div>
           {/* {items.length > 0 && (
             <div className="flex justify-between items-center mb-2">
