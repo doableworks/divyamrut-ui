@@ -101,7 +101,7 @@ const WhatWeOffer = () => {
         alt="img"
       /> */}
 
-      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] xl:w-full py-32">
+      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] xl:w-full pb-32 mt-16">
         <div className="flex flex-col justify-center items-center">
           <h6 className="section-title">
             What We offer

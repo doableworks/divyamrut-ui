@@ -28,7 +28,15 @@ export default function AllTherapyList() {
                         className="object-cover w-full h-full"
                       />
                     </div>
-                    <p className="section-title">{subItem.name}</p>
+                    <div>
+                      <p className="section-title">{subItem.name}</p>
+                      <p
+                        className="section-content !line-clamp-4 !m-0 !text-sm"
+                        dangerouslySetInnerHTML={{
+                          __html: subItem.description,
+                        }}
+                      ></p>
+                    </div>
                   </li>
                 </Link>
               )
