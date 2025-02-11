@@ -2,48 +2,26 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "nextjs-toploader/app";
-import { useSelector, useDispatch } from "react-redux";
 import { Star } from "@/icon/icons";
 import CustomButton from "@/components/common/CustomButton";
 import { NoImageAvailabe } from "@/contants/contants";
-import { addItem, handleCartSlider } from "@/redux/feature/cartSlice";
 import useCartActions from "@/components/cartCom/useCartActions";
 import "./product.css";
 
 
 const Product = ({ item, productCategory, session }) => {
   const router = useRouter();
-  const dispatch = useDispatch();
-  const { AddApiCartItem } = useCartActions();
-
-  let tempItem = {
-    created: "",
-    updated: "",
-    is_select: false,
-    quantity: 1,
-    uid: "",
-    product_detail: item,
-  }
-
+  const { onAddItem } = useCartActions();
 
   const handleAddItem = async (event) => {
     event.stopPropagation();
     try {
-      let response;
-      if (session) {
-        response = await AddApiCartItem([item]);
-      }
-      console.log("handleAddItem response", response);
-      if (session == null || (session && response)) {
-        const itemData = session ? response?.data : tempItem
-        dispatch(addItem(itemData));
-        dispatch(handleCartSlider(true));
-      }
+      onAddItem(item)
     } catch (error) {
-      console.log("error 555", error);
+      console.log("handleAddItem error", error);
     }
   };
-  
+
 
   return (
     <div

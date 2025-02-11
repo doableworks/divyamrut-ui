@@ -8,24 +8,17 @@ import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import MobileNavbar from "../MobileNavbar";
 import { useSession } from "next-auth/react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { closeNav, openNav } from "@/redux/feature/mobileNavSlice";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import useCartActions from "@/components/cartCom/useCartActions"
 import {
-  addItem,
   addCartItemsAfterLogin,
-  setCartLoader,
-  removeItem,
   clearCart,
-  selectAllItems,
-  unSelectAllItems,
-  selectItem,
-  unSelectItem,
-  handleCartSlider,
 } from "@/redux/feature/cartSlice";
 import axiosInstance from "@/lib/axios";
+
 
 export default function PremiumNavbar({ scrollNum }) {
   const router = useRouter();
@@ -34,7 +27,7 @@ export default function PremiumNavbar({ scrollNum }) {
   const { AddApiCartItem } = useCartActions();
   const cartItems = useSelector((state) => state.cart.items);
   const cartCount = Array.isArray(cartItems) ? cartItems.length : cartItems;
-  const {isCartSliderOpen, cartLoader } = useSelector((state) => state.cart);
+  const { isCartSliderOpen, cartLoader } = useSelector((state) => state.cart);
   const [scrollingNum, setScrollingNum] = useState(scrollNum);
   const [isScrolling, setIsScrolling] = useState(false);
   const [isScrollAndUp, setIsScrollAndUp] = useState(false);
@@ -44,14 +37,31 @@ export default function PremiumNavbar({ scrollNum }) {
   const isMobileNavOpen = useSelector((state) => state.mobileNav.isOpen);
   const [loading, setLoading] = useState(false);
   const menuItems = useSelector((state) => state.menuItems.all);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    try {
+      const loginPopup = searchParams.get("loginpopup");
+      const nextUrl = searchParams.get("next");
+
+      if (loginPopup === "true" && !session) {
+        dispatch(setOpenLoginModal(true));
+      }
+      if (nextUrl && session) {
+        router.push(`${nextUrl}`);
+      }
+    } catch (error) {
+      console.log("redirect error", error);
+    }
+  }, [session]);
 
   useEffect(() => {
     const getCartDetails = async () => {
       try {
         setLoading(true)
         if (session && session?.user?.user?.cart_items) {
-          // console.log("getCartDetails response 3333", session?.user?.user?.cart_items);
-          dispatch(addCartItemsAfterLogin({cart_items :session?.user?.user?.cart_items}));
+          console.log("getCartDetails response 3333", session?.user?.user?.cart_items);
+          dispatch(addCartItemsAfterLogin({ cart_items: session?.user?.user?.cart_items }));
         }
       } catch (error) {
         console.log("getCartDetails error", error);
@@ -76,10 +86,6 @@ export default function PremiumNavbar({ scrollNum }) {
 
     setIsScrolling(scrollNum > 300);
   }, [scrollNum]);
-
-  const handleAddItem = (item) => {
-    dispatch(addItem(item));
-  };
 
   const handleShowSearch = () => {
     setShowSearch(!isShowSearch);
@@ -128,8 +134,8 @@ export default function PremiumNavbar({ scrollNum }) {
         isScrollAndUp
           ? "fixed translate-y-0"
           : isScrolling
-          ? "absolute translate-y-[-100%]"
-          : "absolute translate-y-0"
+            ? "absolute translate-y-[-100%]"
+            : "absolute translate-y-0"
       )}
     >
       <div className="max-w-7xl flex-grow px-5 [@media(min-width:1340.98px)]:pt-3">
@@ -241,7 +247,7 @@ export default function PremiumNavbar({ scrollNum }) {
                     className={twMerge(
                       "relative navbar-li h-full",
                       item.path &&
-                        "hover:border-b-2 border-b-[--yellow] box-border"
+                      "hover:border-b-2 border-b-[--yellow] box-border"
                     )}
                   >
                     {item.isNew && (
@@ -297,7 +303,7 @@ export default function PremiumNavbar({ scrollNum }) {
                         <Link
                           href={
                             isSubMenu?.parentSlug == "/products/" &&
-                            sub.sub_categories?.length == 0
+                              sub.sub_categories?.length == 0
                               ? `/products-list/${sub.slug}/`
                               : `${isSubMenu.parentSlug}/${sub.slug}/`
                           }

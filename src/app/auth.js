@@ -29,8 +29,10 @@ export const authOptions = {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept-Language': 'en-US',
+                        'Cache-Control': 'no-cache', // Bypass browser cache
                     },
-                    next: { revalidate: 60 },
+                    // next: { revalidate: 60 },
+                    cache: 'no-store',
                 });
 
                 const status = res.status;

@@ -18,7 +18,7 @@ import {
   unSelectAllItems,
   selectItem,
   unSelectItem,
-  handleCartSlider,
+  openCartSlider,
   removeItemComplete,
 } from "@/redux/feature/cartSlice";
 import { CloseOutlined, DownOutlined } from "@ant-design/icons";
@@ -31,8 +31,8 @@ const CardSlider = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const [loader, setLoader] = useState();
 
-  const handleCartSliderClose = () => {
-    dispatch(handleCartSlider(false));
+  const CartSliderClose = () => {
+    dispatch(openCartSlider(false));
   };
 
   // const handleLogin = async() => {
@@ -77,7 +77,7 @@ const CardSlider = () => {
   };
 
   const handlecartMove = (path) => {
-    handleCartSliderClose();
+    CartSliderClose();
     MoveRoute(path);
   };
 
@@ -88,7 +88,7 @@ const CardSlider = () => {
         open={isCartSliderOpen}
         closable={false}
         destroyOnClose={true}
-        onClose={handleCartSliderClose}
+        onClose={CartSliderClose}
         // width={500}
         title={
           <>
@@ -98,7 +98,7 @@ const CardSlider = () => {
               </h2>
               <button
                 type="button"
-                onClick={handleCartSliderClose}
+                onClick={CartSliderClose}
                 className="flex justify-center p-3 backdrop-blur-lg rounded-md"
               >
                 <CloseOutlined className="text-[28px]" />

@@ -8,6 +8,7 @@ const setAuthorizationHeader = (config, session) => {
   if (session) {
     config.headers.Authorization = `Bearer ${session.accessToken}`; // Set the token from session
   }
+
   return config;
 };
 

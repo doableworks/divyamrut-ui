@@ -7,12 +7,13 @@ import RegisterModal from "../login/RegisterModal";
 import NewFooter from "@/components/common/reference/NewFooter";
 import Footer from "@/components/common/FooterCom";
 import { twMerge } from "tailwind-merge";
-import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setMenuItems } from "@/redux/feature/menuSlice";
 import { SetIsSticky } from "@/redux/feature/productSlice";
 import CardSlider from "@/components/cartCom/CardSlider";
 import BookingModal from "../therapy/BookingModal";
+import { usePathname } from "next/navigation";
+
 
 export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
   const [scrolled, setScrolled] = useState(0);
   const [isSticky, setIsSticky] = useState(false);
   const pathname = usePathname();
+
 
   const initialMenuItems = [
     { label: "About Us", path: "/about-us" },
@@ -41,6 +43,8 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
   ];
 
   dispatch(setMenuItems(initialMenuItems));
+
+
 
   useEffect(() => {
     const handleScroll = () => {

@@ -7,39 +7,28 @@ import ImageMedium from "./ImageMedium";
 import { SetIsBuyModalOpen } from "@/redux/feature/productSlice";
 import { setBuyProduct } from "@/redux/feature/buyProductSlice";
 import { NoImageAvailabe } from "@/contants/contants";
-import {
-  addItem,
-  removeItem,
-  clearCart,
-  selectAllItems,
-  unSelectAllItems,
-  selectItem,
-  unSelectItem,
-  handleCartSlider,
-} from "@/redux/feature/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "nextjs-toploader/app";
 import { twMerge } from "tailwind-merge";
 import Divider from "@/components/common/Divider";
+import useCartActions from "@/components/cartCom/useCartActions";
+
 
 const ProductDetail = ({ item }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [selectedImage, SetSelectedImage] = useState(0);
-  const [buyNowLoading, setBuyNowLoading] = useState(false);
-  const [addToCartLoading, setAddtoCartLoading] = useState(false);
+  const { onAddItem } = useCartActions();
 
   const handleAddItem = async () => {
     try {
-      dispatch(addItem(item));
-      dispatch(handleCartSlider(true));
+      onAddItem(item)
     } catch (error) {
-      console.log("error 555", error);
+      console.log("handleAddItem error", error);
     }
   };
 
   const handleBuyBtn = async() => {
-    setBuyNowLoading(true);
     await dispatch(setBuyProduct({items:item, source:"direct-buy"}))
     await router.push("/payment-delivery");
   };
@@ -125,7 +114,7 @@ const ProductDetail = ({ item }) => {
               htmlType="submit"
               className="site-button-secondary !mt-4 w-[-webkit-fill-available] capitalize"
               title="Buy Now"
-              loading={buyNowLoading}
+              loading={false}
               onClick={handleBuyBtn}
             />
           </div>
