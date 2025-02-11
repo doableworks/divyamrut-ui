@@ -19,7 +19,7 @@ const RelatedProductOverview = ({
 }) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { AddCartItem } = useCartActions();
+  const { AddApiCartItem } = useCartActions();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleAddItem = async (event) => {
@@ -28,7 +28,7 @@ const RelatedProductOverview = ({
     try {
       let response;
       if (session) {
-        response = await AddCartItem([item]);
+        response = await AddApiCartItem([item]);
       }
       console.log("handleAddItem response", response);
       if (session == null || (session && response)) {

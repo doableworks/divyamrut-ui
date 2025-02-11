@@ -22,7 +22,7 @@ const useCartActions = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const GetCartItem = async () => {
+  const GetApiCartItem = async () => {
     try {
       dispatch(setCartLoader(true));
       const response = await axiosInstance.post("/product/cart/", {
@@ -42,7 +42,7 @@ const useCartActions = () => {
     }
   };
 
-  const AddCartItem = async (items) => {
+  const AddApiCartItem = async (items) => {
     try {
       dispatch(setCartLoader(true));
       let data = {
@@ -66,7 +66,7 @@ const useCartActions = () => {
     }
   };
 
-  const RemoveCartItem = async (product_uid) => {
+  const RemoveApiCartItem = async (product_uid) => {
     try {
       dispatch(setCartLoader(true));
       const response = await axiosInstance.delete(
@@ -89,7 +89,7 @@ const useCartActions = () => {
     }
   };
 
-  const IncreAndDecreCartItemQuantity = async (action, product_uid) => {
+  const IncreAndDecreApiCartItemQuantity = async (action, product_uid) => {
     try {
         console.log("uid", product_uid,"actiopn", action)
       dispatch(setCartLoader(true));
@@ -116,10 +116,10 @@ const useCartActions = () => {
   };
 
   return {
-    GetCartItem,
-    AddCartItem,
-    RemoveCartItem,
-    IncreAndDecreCartItemQuantity,
+    GetApiCartItem,
+    RemoveApiCartItem,
+    AddApiCartItem,
+    IncreAndDecreApiCartItemQuantity
   };
 };
 

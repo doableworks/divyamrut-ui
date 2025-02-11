@@ -15,7 +15,7 @@ import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import useCartActions from "@/components/cartCom/useCartActions"
 import {
   addItem,
-  addItemsAfterLogin,
+  addCartItemsAfterLogin,
   setCartLoader,
   removeItem,
   clearCart,
@@ -31,7 +31,7 @@ export default function PremiumNavbar({ scrollNum }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const pathname = usePathname();
-  const { AddCartItem } = useCartActions();
+  const { AddApiCartItem } = useCartActions();
   const cartItems = useSelector((state) => state.cart.items);
   const cartCount = Array.isArray(cartItems) ? cartItems.length : cartItems;
   const {isCartSliderOpen, cartLoader } = useSelector((state) => state.cart);
@@ -51,7 +51,7 @@ export default function PremiumNavbar({ scrollNum }) {
         setLoading(true)
         if (session && session?.user?.user?.cart_items) {
           // console.log("getCartDetails response 3333", session?.user?.user?.cart_items);
-          dispatch(addItemsAfterLogin({cart_items :session?.user?.user?.cart_items}));
+          dispatch(addCartItemsAfterLogin({cart_items :session?.user?.user?.cart_items}));
         }
       } catch (error) {
         console.log("getCartDetails error", error);

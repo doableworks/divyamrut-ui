@@ -191,11 +191,11 @@ const cartSlice = createSlice({
         existingItem.is_select = false;
       }
     },
-    addItemsAfterLogin: (state, action) => {
+    addCartItemsAfterLogin: (state, action) => {
       state.items = [];
       state.items = action.payload.cart_items;
     },
-    addItem: (state, action) => {
+    addCartItem: (state, action) => {
       const existingItem = state.items.find(
         (item) => item.product_detail.uid === action.payload.uid
       );
@@ -253,8 +253,8 @@ const cartSlice = createSlice({
 });
 
 export const {
-  addItemsAfterLogin,
-  addItem,
+  addCartItemsAfterLogin,
+  addCartItem,
   increaseOrDecreaseItemQuantity,
   removeItem,
   clearCart,

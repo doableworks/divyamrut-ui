@@ -26,17 +26,17 @@ const CartPage = () => {
   const router = useRouter();
   const { data: session } = useSession();
   const {
-    GetCartItem,
-    AddCartItem,
-    RemoveCartItem,
-    IncreAndDecreCartItemQuantity,
+    GetApiCartItem,
+    AddApiCartItem,
+    RemoveApiCartItem,
+    IncreAndDecreApiCartItemQuantity,
   } = useCartActions();
 
   const handleIncreaseCartItem = async (item, action) => {
     try {
       let response;
       if (session) {
-        response = await IncreAndDecreCartItemQuantity(action, item?.product_detail.uid);
+        response = await IncreAndDecreApiCartItemQuantity(action, item?.product_detail.uid);
       }
       console.log("handleIncreaseCartItem response111", response);
       if (session == null || (session && response)) {
@@ -50,7 +50,7 @@ const CartPage = () => {
 
   const handleRemoveItem = async (item) => {
     try {
-      const response = await RemoveCartItem(item.uid);
+      const response = await RemoveApiCartItem(item.uid);
       if (response.statu == 201) {
         // dispatch(addItem(response.data.data));
         dispatch(removeItem({ id: item.id }));
