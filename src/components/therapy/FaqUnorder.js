@@ -9,7 +9,7 @@ export default function FaqsUnorder({ details }) {
     <div className="p-10 py-24 w-full">
       <p className="section-title">FAQs</p>
       <p className="highlight-heading md:!mt-0">
-        Essential information <br className="md:hidden" /> at a glance.
+        Essential information <br /> at a glance.
       </p>
       <ul className="flex flex-col items-center list-none gap-9 mt-10">
         {details.map(

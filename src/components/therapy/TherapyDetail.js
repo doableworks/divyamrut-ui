@@ -5,6 +5,34 @@ import { NoImageAvailabe } from "@/contants/contants";
 import Testimonial from "@/components/home1/Testimonial";
 import FaqUnorder from "@/components/therapy/FaqUnorder";
 import { useEffect, useState } from "react";
+import TherapyHighlight from "./TherapyHighlight";
+import BenefitsOfTherapy from "./BenefitsOfTherapy";
+
+const benefitsInitial = [
+  {
+    uid: "abc",
+    title: "Correction of Misalignments",
+    description:
+      "Meru Chikitsa aims to correct misalignments, known as subluxations, in the spine. These misalignments can cause pain, restrict movement, and affect nerve function. By applying controlled force to specific areas of the spine, practitioners seek to restore proper alignment, improve joint function, and alleviate pain.",
+  },
+  {
+    uid: "abcdfe",
+    title: "Treat Musculoskeletal Conditions",
+    description:
+      "Meru Chikitsa is typically used to treat musculoskeletal conditions such as back pain, neck pain, and headaches. Chiropractors and osteopaths perform spinal manipulation in clinical settings, while physical therapists may incorporate it into rehabilitation programs.",
+  },
+  {
+    uid: "abcdfedff",
+    title: "Boosting Immunity",
+    description:
+      "Cleansing the body through detoxification and restoring balance in doshas contribute to strengthening the immune system. A balanced body is better equipped to ward off illnesses and infections. It also improves digestion and helps in nutrient absorption leading to good health.",
+  },{
+    uid: "abcdfedffdsds",
+    title: "Managing Chronic Conditions",
+    description:
+      "Meru Chikitsa is also known to be effective in managing chronic conditions like arthritis, hypertension, and skin disorders by addressing the root cause, reducing inflammation, and solving major issues by strengthening the nervous system.",
+  },
+];
 
 export default function TherapyDetail({ data }) {
   const dispatch = useDispatch();
@@ -57,17 +85,13 @@ export default function TherapyDetail({ data }) {
         </div>
       </div>
 
+      <TherapyHighlight />
+
+      <BenefitsOfTherapy details={benefitsInitial} />
+
       {testimonials.length > 0 && (
         <div>
-          <Testimonial
-            className="bg-white hidden lg:block"
-            data={testimonials}
-            slidesToShow={3}
-          />
-          <Testimonial
-            className="bg-white block lg:hidden"
-            data={testimonials}
-          />
+          <Testimonial className="bg-white" data={testimonials} />
         </div>
       )}
 

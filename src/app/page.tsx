@@ -8,6 +8,8 @@ import WhyChooseUs from "@/components/home1/WhyChooseUs";
 import WhoWeAre from "@/components/home1/WhoWeAre";
 import OurServices from "@/components/home1/OurServices";
 import HeroBanner from "@/components/common/reference/HeroBanner";
+import HomeAboutUs from "@/components/home1/HomeAboutUs";
+import HomeEnquiry from "@/components/home1/HomeEnquiry";
 
 export default function Home() {
   return (
@@ -16,13 +18,14 @@ export default function Home() {
       className="bg-FFEEE2"
     >
       <HeroBanner />
+      <HomeAboutUs />
       {/* <WhoWeAre /> */}
       {/* <HolisticHealth /> */}
       {/* <OurServices /> */}
       <WhatWeOffer />
       <WhyChooseUs />
-      <Testimonial slidesToShow={3} className="hidden lg:block" />
-      <Testimonial slidesToShow={1} className=" lg:hidden" />
+      <Testimonial />
+      <HomeEnquiry />
       {/* <AncientWisdomForModernLiving /> */}
     </main>
   );

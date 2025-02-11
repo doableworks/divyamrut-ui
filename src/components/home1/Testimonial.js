@@ -5,9 +5,7 @@ import { Star } from "@/icon/icons";
 import { twMerge } from "tailwind-merge";
 import { NoProfileImage } from "@/contants/contants";
 import dynamic from "next/dynamic";
-const Carousel = dynamic(() => import("antd").then((mod) => mod.Carousel), {
-  ssr: false,
-});
+import { Grid, Carousel } from "antd";
 
 const initialTestimonial = [
   {
@@ -30,11 +28,10 @@ const initialTestimonial = [
   },
 ];
 
-const TestimonialSlider = ({
-  className = "",
-  data = initialTestimonial,
-  slidesToShow = 1,
-}) => {
+const TestimonialSlider = ({ className = "", data = initialTestimonial }) => {
+  const { useBreakpoint } = Grid;
+  const screens = useBreakpoint();
+
   const infiniteData = Array.from({ length: 5 }, () => data).flat();
 
   return (
@@ -58,7 +55,13 @@ const TestimonialSlider = ({
           </div>
         </div>
 
-        <Carousel autoplay dots={false} slidesToShow={slidesToShow}>
+        <Carousel
+          autoplay
+          dots={false}
+          slidesToShow={
+            screens.xl || screens.xxl || screens.lg ? 3 : screens.md ? 2 : 1
+          }
+        >
           {infiniteData.map((testimonial, index) => (
             <li className="flex p-4 overflow-hidden list-none" key={index}>
               <div className="relative min-h-full testimonial-card bg-[#F9F3EB] shadow-lg p-6 rounded-lg w-full py-12">
