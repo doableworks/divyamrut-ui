@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CustomButton from "@/components/common/CustomButton";
+import { useRouter } from "nextjs-toploader/app";
 import {
   addItem,
   removeItem,
@@ -13,6 +14,7 @@ import {
   unSelectItem,
   increaseOrDecreaseItemQuantity
 } from "@/redux/feature/cartSlice";
+import { setBuyProduct } from "@/redux/feature/buyProductSlice";
 import useCartActions from "@/components/cartCom/useCartActions";
 import { useSession } from "next-auth/react";
 
@@ -21,6 +23,7 @@ const CartPage = () => {
     (state) => state.cart
   );
   const dispatch = useDispatch();
+  const router = useRouter();
   const { data: session } = useSession();
   const {
     GetCartItem,
@@ -82,6 +85,12 @@ const CartPage = () => {
         : dispatch(selectItem({ id: item.id }));
     } catch (error) {}
   };
+
+    const onCheckout = async() => {
+      const selectedItems = items.filter(item=>item.is_select)
+      await dispatch(setBuyProduct({items:selectedItems, source:"cart"}))
+      await router.push("/payment-delivery");
+    };
 
   const allSelected =
     items.length > 0 && items.every((item) => item.is_select === true);
@@ -237,7 +246,7 @@ const CartPage = () => {
             title="Proceed to Checkout"
             loading={false}
             type="submit"
-            // onClick={() => MoveRoute("/products")}
+            onClick={onCheckout}
           />
         </div>
       </div>

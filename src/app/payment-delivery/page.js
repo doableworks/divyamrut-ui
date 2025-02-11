@@ -29,7 +29,7 @@ const page = async() => {
   const allAddressData = await getUserAddress(session);
 
   return (
-    <div className="common_page_width !pl-4 !pr-4 !pt-0">
+    <div className="common_page_width relative !pl-4 !pr-4 !pt-0">
       <BuyProductCom allAddressData={allAddressData} />
     </div>
   );

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import CustomSteps from "@/components/steps/index";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Form, Input, message } from "antd";
+import { message } from "antd";
 import axiosInstance from "@/lib/axios";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
@@ -10,6 +10,7 @@ import Payment from "@/components/common/PaymentCom";
 import OrderSummary from "@/components/common/OrderSummary";
 import AddDeliveryAddressCom from "@/components/common/AddDeliveryAddressCom";
 import SelectDeliveryAddress from "@/components/common/SelectDeliveryAddress";
+import { setBuyProduct, increOrDecreQuantity } from "@/redux/feature/buyProductSlice";
 
 const stepsBuyProducts = [
   {
@@ -33,130 +34,19 @@ const smallDeviceItems = [
   },
 ];
 
-const addresses = [
-  {
-    uid: 1,
-    label: "Home",
-    country: "United States",
-    firstname: "John",
-    lastname: "Doe",
-    house: "Apt 404",
-    street: "123 Elm Street",
-    state: "California",
-    city: "Los Angeles",
-    pin_code: "90001",
-    landmark: "Near Central Park",
-    email: "john.doe@example.com",
-    mobile_no: "9876543210",
-  },
-  {
-    uid: 1,
-    label: "office",
-    country: "United States",
-    firstname: "John",
-    lastname: "Doe",
-    house: "Apt 404",
-    street: "123 Elm Street",
-    state: "California",
-    city: "Los Angeles",
-    pin_code: "90001",
-    landmark: "Near Central Park",
-    email: "john.doe@example.com",
-    mobile_no: "9876543210",
-  },
-  {
-    uid: 3,
-    label: "other",
-    country: "United States",
-    firstname: "John",
-    lastname: "Doe",
-    house: "Apt 404",
-    street: "123 Elm Street",
-    state: "California",
-    city: "Los Angeles",
-    pin_code: "90001",
-    landmark: "Near Central Park",
-    email: "john.doe@example.com",
-    mobile_no: "9876543210",
-  },
-];
 
 const BuyProductCom = ({ allAddressData }) => {
   const { items, buyLoader, hasBuy } = useSelector(
     (state) => state.buyProduct
   );
+    const dispatch = useDispatch();
   const { data: session } = useSession();
   // console.log("session", session)
-  console.log("items, buyLoader, hasBuy", items, buyLoader, hasBuy)
+  // console.log("items, buyLoader, hasBuy", items, buyLoader, hasBuy)
 
   const [messageApi, contextHolder] = message.useMessage();
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [orderList, setOrderList] = useState([
-    {
-      id: 1,
-      image: "/asset/home/ayurvedic-supplement.jpg",
-      name: "Pahadi Zipper Hoodie in Comfy Style - Black - X-Large",
-      quantity: 1,
-      price: 11.0,
-    },
-    {
-      id: 2,
-      image: "/asset/home/ayurvedic-supplement.jpg",
-      name: "Artisan-Crafted Kullu Women's Shawl - Sheep Wool Beauty",
-      quantity: 3,
-      price: 4.0,
-    },
-    {
-      id: 3,
-      image: "/asset/home/ayurvedic-supplement.jpg",
-      name: "Hand woven Wool Meditation Prayer Scarf Wrap Blanket",
-      quantity: 1,
-      price: 48.0,
-    },
-    {
-      id: 4,
-      image: "/asset/home/ayurvedic-supplement.jpg",
-      name: "Pahadi Zipper Hoodie in Comfy Style - Black - X-Large",
-      quantity: 1,
-      price: 150.0,
-    },
-    {
-      id: 5,
-      image: "/asset/home/ayurvedic-supplement.jpg",
-      name: "Artisan-Crafted Kullu Women's Shawl - Sheep Wool Beauty",
-      quantity: 3,
-      price: 50.0,
-    },
-    {
-      id: 6,
-      image: "/asset/home/ayurvedic-supplement.jpg",
-      name: "Hand woven Wool Meditation Prayer Scarf Wrap Blanket",
-      quantity: 1,
-      price: 8.0,
-    },
-    {
-      id: 7,
-      image: "/asset/home/ayurvedic-supplement.jpg",
-      name: "Pahadi Zipper Hoodie in Comfy Style - Black - X-Large",
-      quantity: 1,
-      price: 1.0,
-    },
-    {
-      id: 8,
-      image: "/asset/home/ayurvedic-supplement.jpg",
-      name: "Artisan-Crafted Kullu Women's Shawl - Sheep Wool Beauty",
-      quantity: 3,
-      price: 2.0,
-    },
-    {
-      id: 9,
-      image: "/asset/home/ayurvedic-supplement.jpg",
-      name: "Hand woven Wool Meditation Prayer Scarf Wrap Blanket",
-      quantity: 1,
-      price: 3.0,
-    },
-  ]);
   const [addOrEditAddre, setADDorEditAddre] = useState({ open: false, address: null });
   const [addressList, setAddressList] = useState(allAddressData);
   const [SelectedDeliveryAddre, setSelectedDeliveryAddre] = useState(null);
@@ -305,24 +195,12 @@ const BuyProductCom = ({ allAddressData }) => {
     setActiveStep(activeStep + 1);
   };
 
-  const increaseQuantity = (id) => {
-    const existingItem = orderList.find((item) => item.id === id);
-    if (existingItem) {
-      existingItem.quantity += 1;
-      setOrderList([...orderList, existingItem]);
-    }
+  const increaseQuantity = (uid) => {
+    dispatch(increOrDecreQuantity({uid, action:"increase"}));
   };
 
-  const decreaseQuantity = (id, quantity) => {
-    if (quantity <= 1) {
-      const remainItem = orderList.map((item) => item.id != id);
-      setOrderList([remainItem]);
-    } else {
-      const existingItem = orderList.find((item) => item.id === id);
-
-      existingItem.quantity -= 1;
-      setOrderList([...orderList, existingItem]);
-    }
+  const decreaseQuantity = (uid) => {
+    dispatch(increOrDecreQuantity({uid, action:"decrease"}));
   };
 
   const onCancel = ()=>{
@@ -355,7 +233,8 @@ const BuyProductCom = ({ allAddressData }) => {
       case 1:
         return (
           <OrderSummary
-            orderList={orderList}
+            orderList={items}
+            deliveryAddress={SelectedDeliveryAddre}
             decreaseQuantity={decreaseQuantity}
             increaseQuantity={increaseQuantity}
           />
@@ -379,7 +258,7 @@ const BuyProductCom = ({ allAddressData }) => {
           return false;
         }
       case 1:
-        if (orderList?.length > 0 && SelectedDeliveryAddre) {
+        if (items?.length > 0 && SelectedDeliveryAddre) {
           return true;
         } else {
           messageApi.open({
@@ -448,7 +327,7 @@ const BuyProductCom = ({ allAddressData }) => {
   };
 
   return (
-    <div className="flex flex-col w-full overflow-hidden min-h-[70vh]">
+    <div className="relative flex flex-col w-full overflow-hidden min-h-[70vh]">
       <section className="bg-[--base] w-full p-4 flex-shrink-0">
         <CustomSteps
           status={lastStepStatus}
@@ -465,7 +344,7 @@ const BuyProductCom = ({ allAddressData }) => {
           className="block lg:hidden"
         />
       </section>
-      <section className=" flex-grow flex flex-col">
+      <section className="flex-grow flex flex-col">
         <div>{renderActiveStep(activeStep)}</div>
 
         <div className="w-full mt-4 flex justify-end items-center">
