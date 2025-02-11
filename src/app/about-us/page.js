@@ -12,8 +12,6 @@ const page = () => {
       {/* <MainBanner heading={heading}  /> */}
       <OurValues />
       <WhyUsSection />
-      <TestimonialSlider slidesToShow={3} className="hidden lg:block" />
-      <TestimonialSlider slidesToShow={1} className="lg:hidden" />
     </div>
   );
 };
