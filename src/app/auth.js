@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
-import {isJwtExpired, refreshToken} from "@/contants/utils";
+import { isJwtExpired, refreshToken } from "@/contants/utils";
 
 
 export const authOptions = {
@@ -15,7 +15,7 @@ export const authOptions = {
                     type: 'email',
                     placeholder: 'Email Address',
                 },
-                password: {label: 'Password', type: 'password'},
+                password: { label: 'Password', type: 'password' },
             },
             async authorize(credentials, req) {
                 const payload = {
@@ -38,8 +38,18 @@ export const authOptions = {
                 // If no error and we have user data, return it
                 if (res.ok) {
                     const user = await res.json();
-                    return user;
+                    // return user;
+
+                    return {
+                        id: user.id,
+                        email: user.email,
+                        name: user.name,
+                        access: user.access,
+                        refresh: user.refresh,
+                    }
                 }
+
+
                 const responseData = await res.json();
                 console.log("responseData auth.js", responseData)
                 throw new Error(JSON.stringify(responseData));
@@ -75,11 +85,11 @@ export const authOptions = {
         encryption: true,
     },
     callbacks: {
-        async signIn({user, account, profile, email, credentials}) {
-            console.log("signIn user", user,"account", account)
+        async signIn({ user, account, profile, email, credentials }) {
+            console.log("signIn user", user, "account", account)
             if (account.provider === "google" && user) {
                 try {
-                    const data = {'access_token': account.access_token, 'id_token': account.id_token, 'code': 'test'}
+                    const data = { 'access_token': account.access_token, 'id_token': account.id_token, 'code': 'test' }
                     const response = await fetch(process.env.NEXT_PUBLIC_API_URL + 'api/account/social-login/google/', {
                         method: 'POST',
                         body: JSON.stringify(data),
@@ -93,7 +103,7 @@ export const authOptions = {
                     user.refreshToken = responseData.refresh_token;
                     return true;
                 } catch (error) {
-                    console.log("GOOGLE ERORR",error)
+                    console.log("GOOGLE ERORR", error)
                     return false;
                 }
             } else if (account.provider === "credentials" && user) {
@@ -124,7 +134,7 @@ export const authOptions = {
             }
             return false
         },
-        jwt: async ({token, user, account, trigger, session}) => {
+        jwt: async ({ token, user, account, trigger, session }) => {
             if (trigger === 'update') {
                 token.user.user = session.user.user
                 token.accessToken = session.accessToken;
@@ -180,7 +190,7 @@ export const authOptions = {
             return token;
 
         },
-        session: async ({session, user, token}) => {
+        session: async ({ session, user, token }) => {
             session.user = {
                 ...session.user,
                 ...token.user,
