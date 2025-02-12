@@ -35,16 +35,13 @@ export const authOptions = {
                     cache: 'no-store',
                 });
 
-                const status = res.status;
-                const statusText = res.statusText;
-
-
                 // If no error and we have user data, return it
                 if (res.ok) {
                     const user = await res.json();
                     return user;
                 }
                 const responseData = await res.json();
+                console.log("responseData auth.js", responseData)
                 throw new Error(JSON.stringify(responseData));
 
                 // Return null if user data could not be retrieved
@@ -142,6 +139,7 @@ export const authOptions = {
                     token.user = user;
                     return token;
                 } else if (account.provider === "credentials") {
+                    console.log("user if condition", user)
                     // const { access_token, refresh_token, ...rest } = user;
                     token.accessToken = user.access;
                     token.refreshToken = user.refresh;
