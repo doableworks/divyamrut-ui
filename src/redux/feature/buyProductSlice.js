@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { increaseOrDecreaseItemQuantity } from "./cartSlice";
 
 const initialState = {
   items: [],
@@ -12,7 +11,6 @@ const buyProductSlice = createSlice({
   initialState,
   reducers: {
     setBuyProduct: (state, action) => {
-      console.log("action.payload 555", action.payload)
       state.items = [];
       if (action.payload.source == 'cart') {
         state.items = action.payload.items;

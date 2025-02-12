@@ -138,7 +138,7 @@ import {
   addCartItem,
   removeCartItem,
   increaseOrDecreaseCartItemQuantity,
-  openCartSlider,
+  openCartSliderFun,
   setCartLoader,
 } from "@/redux/feature/cartSlice";
 
@@ -197,12 +197,13 @@ const useCartActions = () => {
     try {
       dispatch(setCartLoader(true));
       const response = await axiosInstance.delete(
-        `/update/cart/${product_uid}/`,
+        `/product/update/cart/${product_uid}/`,
         {
           session,
         }
       );
-      if (response.status == 201) {
+      console.log("response RemoveApiCartItem", response)
+      if (response.status == 200 || response.statusText == 'OK') {
         return response.data;
       }
       message.error("Something went wrong, please try again later!");
@@ -268,7 +269,7 @@ const useCartActions = () => {
           }
         }
         dispatch(addCartItem(itemData));
-        dispatch(openCartSlider(true));
+        dispatch(openCartSliderFun(true));
       }
     } catch (error) {
       console.log("error 555", error);
@@ -281,11 +282,12 @@ const useCartActions = () => {
       if (session) {
         response = await RemoveApiCartItem(uid);
       }
+      console.log(uid,"onRemoveItem response", response)
       if (session == null || (session && response)) {
-        dispatch(removeCartItem({ id: uid }));
+        dispatch(removeCartItem({ uid }));
       }
     } catch (error) {
-      console.log("error 555", error);
+      console.log("onRemoveItem error", error);
     }
   };
 
@@ -293,7 +295,7 @@ const useCartActions = () => {
     try {
       let response;
       if (session) {
-        response = await IncreAndDecreApiCartItemQuantity(action, item?.product_detail.uid);
+        response = await IncreAndDecreApiCartItemQuantity(action, product_uid);
       }
       console.log("handleIncreaseCartItem response111", response);
       if (session == null || (session && response)) {

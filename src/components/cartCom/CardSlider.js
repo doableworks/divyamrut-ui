@@ -11,6 +11,9 @@ import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import { closeNav, openNav, toggleNav } from "@/redux/feature/mobileNavSlice";
 import { CloseOutlined, DownOutlined } from "@ant-design/icons";
 import useCartActions from "@/components/cartCom/useCartActions";
+import {
+  openCartSliderFun,
+} from "@/redux/feature/cartSlice";
 
 
 const CardSlider = () => {
@@ -26,7 +29,7 @@ const CardSlider = () => {
   } = useCartActions();
 
   const CartSliderClose = () => {
-    dispatch(openCartSlider(false));
+    dispatch(openCartSliderFun(false));
   };
 
   // const handleLogin = async() => {
@@ -78,8 +81,11 @@ const CardSlider = () => {
   };
 
   const handleRemoveItemComplete = (item) => {
-    onRemoveItem(item.uid)
+    onRemoveItem(item?.product_detail?.uid)
   };
+
+
+  console.log("cartItems", cartItems)
 
   return (
     <>
@@ -171,7 +177,7 @@ const CardSlider = () => {
                       <Image
                         src={item.product_detail.image}
                         // src={"/asset/home/ayurvedic-supplement.jpg"}
-                        alt={item.product_detail.title}
+                        alt={"image"}
                         width={80}
                         height={80}
                         className="rounded-md mt-2"

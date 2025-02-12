@@ -47,9 +47,11 @@ const cartSlice = createSlice({
       }
     },
     increaseOrDecreaseCartItemQuantity: (state, action) => {
-      const existingItem = state.items.find(
-        (item) => item.product_detail.uid === action.payload.uid
-      );
+      console.log("action.payload", action.payload)
+      const existingItem = state.items.find((item) =>{ 
+        return item.product_detail.uid == action.payload.uid
+      });
+      console.log("existingItem", existingItem)
       if (action.payload.action === "increase" && existingItem) {
         existingItem.quantity += 1;
       } else if (action.payload.action === "decrease") {
@@ -62,17 +64,22 @@ const cartSlice = createSlice({
         }
       }
     },
+    // removeCartItem: (state, action) => {
+    //   const existingItem = state.items.find(
+    //     (item) => item.product_detail.uid === action.payload.uid
+    //   );
+    //   if (existingItem && existingItem.quantity > 1) {
+    //     existingItem.quantity -= 1;
+    //   } else {
+    //     state.items = state.items.filter(
+    //       (item) => item.product_detail.uid !== action.payload.uid
+    //     );
+    //   }
+    // },
     removeCartItem: (state, action) => {
-      const existingItem = state.items.find(
-        (item) => item.uid === action.payload.uid
+      state.items = state.items.filter(
+        (item) => item.product_detail.uid !== action.payload.uid
       );
-      if (existingItem && existingItem.quantity > 1) {
-        existingItem.quantity -= 1;
-      } else {
-        state.items = state.items.filter(
-          (item) => item.uid !== action.payload.uid
-        );
-      }
     },
     removeItemCartComplete: (state, action) => {
       state.items = state.items.filter(
@@ -84,7 +91,7 @@ const cartSlice = createSlice({
       state.openCartSlider = false;
       state.cartLoader = false;
     },
-    openCartSlider: (state, action) => {
+    openCartSliderFun: (state, action) => {
       state.openCartSlider = action.payload;
     },
     setCartLoader: (state, action) => {
@@ -103,7 +110,7 @@ export const {
   unSelectAllCartItems,
   selectCartItem,
   unSelectCartItem,
-  openCartSlider,
+  openCartSliderFun,
   removeItemComplete,
   setCartLoader,
 } = cartSlice.actions;

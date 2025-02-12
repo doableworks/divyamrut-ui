@@ -282,7 +282,6 @@ const CartPage = () => {
   const { items, cartLoader } = useSelector(
     (state) => state.cart
   );
-  // console.log("cart.js items", items)
   const dispatch = useDispatch();
   const router = useRouter();
   const { data: session } = useSession();
