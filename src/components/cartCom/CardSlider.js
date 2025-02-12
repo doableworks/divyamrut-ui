@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import { closeNav, openNav, toggleNav } from "@/redux/feature/mobileNavSlice";
 import { CloseOutlined, DownOutlined } from "@ant-design/icons";
+import { setBuyProduct } from "@/redux/feature/buyProductSlice";
 import useCartActions from "@/components/cartCom/useCartActions";
 import {
   openCartSliderFun,
@@ -42,7 +43,7 @@ const CardSlider = () => {
   const handleLogin = async () => {
     setLoader(true); // Set the loader to true before starting
     try {
-      await dispatch(closeNav()); // Close the navigation menu
+      // await dispatch(closeNav()); // Close the navigation menu
       await dispatch(setOpenLoginModal(true)); // Open the login modal
     } catch (error) {
       console.error("An error occurred:", error);
@@ -85,7 +86,18 @@ const CardSlider = () => {
   };
 
 
-  console.log("cartItems", cartItems)
+    const onCheckout = async () => {
+      if (session) {
+        const selectedItems = cartItems.filter(item => item.is_select)
+        await dispatch(setBuyProduct({ items: selectedItems, source: "cart" }))
+        await router.push("/payment-delivery");
+      }
+      else {
+        dispatch(setOpenLoginModal(true))
+      }
+    };
+
+
 
   return (
     <>
@@ -132,24 +144,14 @@ const CardSlider = () => {
                     type="submit"
                     onClick={() => handlecartMove("/cart")}
                   />
-                  {session ? (
                     <CustomButton
                       htmlType="submit"
                       className="site-button-primary !m-0 w-[-webkit-fill-available] capitalize"
-                      title="Proceed to Checkout"
+                      title={session ?"Proceed to Checkout" : "Login to Proceed"}
                       loading={loader}
                       type="submit"
+                      onClick={onCheckout}
                     />
-                  ) : (
-                    <CustomButton
-                      htmlType="submit"
-                      className="site-button-primary !m-0 w-[-webkit-fill-available] capitalize"
-                      title="Login to Proceed"
-                      loading={loader}
-                      type="submit"
-                      onClick={handleLogin}
-                    />
-                  )}
                 </div>
               </div>
             )}

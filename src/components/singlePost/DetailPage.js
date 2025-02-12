@@ -1,33 +1,26 @@
 'use client';
 import React from "react";
 import BtnSection from "@/components/BtnCom/BtnSection";
-import {
-  addItem,
-  removeItem,
-  clearCart,
-  selectAllItems,
-  unSelectAllItems,
-  selectItem,
-  unSelectItem,
-} from "@/redux/feature/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "nextjs-toploader/app";
-
+import useCartActions from "@/components/cartCom/useCartActions";
 
 
 const DetailPage = ({item}) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const { onAddItem } = useCartActions();
+
 
   const handleAddItem = async () => {
-    try{
-      await dispatch(addItem(item));
+    try {
+      await onAddItem(item)
       await router.push('/cart')
-    }
-    catch(error){
-      console.log("error 555", error)
+    } catch (error) {
+      console.log("handleAddItem error", error);
     }
   };
+
 
   
   return (

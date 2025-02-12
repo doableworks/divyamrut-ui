@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Star } from "@/icon/icons";
 import CustomButton from "@/components/common/CustomButton";
 import { NoImageAvailabe } from "@/contants/contants";
-import { addItem } from "@/redux/feature/cartSlice";
+import { addCartItem } from "@/redux/feature/cartSlice";
 import useCartActions from "@/components/cartCom/useCartActions";
 import "./product.css";
 import { twMerge } from "tailwind-merge";
@@ -21,22 +21,17 @@ const RelatedProductOverview = ({
   const dispatch = useDispatch();
   const { AddApiCartItem } = useCartActions();
   const [isLoading, setIsLoading] = useState(false);
+  const { onAddItem } = useCartActions();
+
 
   const handleAddItem = async (event) => {
     event.stopPropagation();
-    setIsLoading(true);
     try {
-      let response;
-      if (session) {
-        response = await AddApiCartItem([item]);
-      }
-      console.log("handleAddItem response", response);
-      if (session == null || (session && response)) {
-        const itemData = session ? response?.data : tempItem;
-        dispatch(addItem(itemData));
-      }
+      setIsLoading(true);
+      console.log("vvvvv rrrr", item)
+      onAddItem(item)
     } catch (error) {
-      console.log("error 555", error);
+      console.log("handleAddItem error", error);
     } finally {
       setIsLoading(false);
     }

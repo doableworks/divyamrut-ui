@@ -12,11 +12,16 @@ import { useRouter } from "nextjs-toploader/app";
 import { twMerge } from "tailwind-merge";
 import Divider from "@/components/common/Divider";
 import useCartActions from "@/components/cartCom/useCartActions";
+import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
+import { useSession } from "next-auth/react";
+
+
 
 
 const ProductDetail = ({ item }) => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const { data: session } = useSession();
   const [selectedImage, SetSelectedImage] = useState(0);
   const { onAddItem } = useCartActions();
 
@@ -28,11 +33,17 @@ const ProductDetail = ({ item }) => {
     }
   };
 
-  const handleBuyBtn = async() => {
-    await dispatch(setBuyProduct({items:item, source:"direct-buy"}))
-    await router.push("/payment-delivery");
+  const handleBuyBtn = async () => {
+    if (session) {
+      await dispatch(setBuyProduct({ items: item, source: "direct-buy" }))
+      await router.push("/payment-delivery");
+    }
+    else {
+      dispatch(setOpenLoginModal(true))
+    }
+
   };
-  
+
   return (
     <>
       <div className="relative flex flex-col lg:flex-row gap-10 min-h-[80vh]">
@@ -51,9 +62,8 @@ const ProductDetail = ({ item }) => {
               <div
                 key={index}
                 onClick={() => SetSelectedImage(index)}
-                className={`border border-gray-300 rounded-md overflow-hidden cursor-pointer flex-shrink-0 w-20 h-20 ${
-                  selectedImage == index && "border-2 border-slate-700"
-                }`}
+                className={`border border-gray-300 rounded-md overflow-hidden cursor-pointer flex-shrink-0 w-20 h-20 ${selectedImage == index && "border-2 border-slate-700"
+                  }`}
               >
                 <Image
                   height={100}

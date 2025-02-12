@@ -86,7 +86,7 @@ const cartSlice = createSlice({
         (item) => item.uid !== action.payload.uid
       );
     },
-    clearCartCart: (state) => {
+    clearCart: (state) => {
       state.items = [];
       state.openCartSlider = false;
       state.cartLoader = false;
@@ -105,7 +105,7 @@ export const {
   addCartItem,
   increaseOrDecreaseCartItemQuantity,
   removeCartItem,
-  clearCartCart,
+  clearCart,
   selectAllCartItems,
   unSelectAllCartItems,
   selectCartItem,
