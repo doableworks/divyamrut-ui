@@ -38,15 +38,8 @@ export const authOptions = {
                 // If no error and we have user data, return it
                 if (res.ok) {
                     const user = await res.json();
-                    // return user;
-
-                    return {
-                        id: user.id,
-                        email: user.email,
-                        name: user.name,
-                        access: user.access,
-                        refresh: user.refresh,
-                    }
+                    console.log("after login user", user)
+                    return user;
                 }
 
 
