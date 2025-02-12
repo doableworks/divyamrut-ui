@@ -18,7 +18,7 @@ const buyProductSlice = createSlice({
       else if (action.payload.source == 'direct-buy') {
         state.items = [{
           id: "1",
-          uid: "proudct_" + action.payload.items.uid,
+          uid: "proudct_" + action.payload.product_detail.uid,
           product_detail: action.payload.items,
           created: "",
           updated: "",
@@ -31,7 +31,7 @@ const buyProductSlice = createSlice({
     increOrDecreQuantity: (state, action) => {
       if(action.payload.uid && action.payload.action == "increase"){
         const updatedItems = state.items.map((item) => {
-          if (item.uid === uid) {
+          if (item.uid === action.payload.uid) {
             // Increase the quantity if the item exists
             return { ...item, quantity: item.quantity + 1 };
           }
@@ -41,14 +41,14 @@ const buyProductSlice = createSlice({
       }
       else if(action.payload.uid && action.payload.action == "decrease"){
 
-        const ItemData = items.find((item) => item.uid === uid);
+        const ItemData = state.items.find((item) => item.uid === action.payload.uid);
         if (ItemData.quantity == 1){
-          const remainItems = state.items.filter(item =>item.uid == uid); 
+          const remainItems = state.items.filter(item =>item.uid == action.payload.uid); 
           state.items = remainItems
         }
         else{
           const updatedItems = state.items.map((item) => { 
-            if (item.uid === uid) {
+            if (item.uid === action.payload.uid) {
               // Increase the quantity if the item exists
               return { ...item, quantity: item.quantity - 1 };
             }

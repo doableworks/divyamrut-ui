@@ -189,11 +189,12 @@ const BuyProductCom = ({ allAddressData }) => {
   };
 
   const increaseQuantity = (uid) => {
-    dispatch(increOrDecreQuantity({uid, action:"increase"}));
+ 
+    dispatch(increOrDecreQuantity({uid:uid, action:"increase"}));
   };
 
   const decreaseQuantity = (uid) => {
-    dispatch(increOrDecreQuantity({uid, action:"decrease"}));
+    dispatch(increOrDecreQuantity({uid:uid, action:"decrease"}));
   };
 
   const onCancel = ()=>{

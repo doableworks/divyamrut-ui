@@ -35,7 +35,7 @@ const OrderSummary = ({
               htmlFor={`quantity-${item.uid}`}
               className="mr-2 text-text !text-left"
             >
-              Quantity:
+              Quantity: 
             </label>
             <div className="flex items-center space-x-2">
               <button
