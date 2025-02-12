@@ -10,6 +10,7 @@ import {
   increaseOrDecreaseCartItemQuantity,
   openCartSliderFun,
   setCartLoader,
+  addCartItemsAfterLogin
 } from "@/redux/feature/cartSlice";
 
 const useCartActions = () => {
@@ -20,14 +21,20 @@ const useCartActions = () => {
 
   const GetApiCartItem = async () => {
     try {
+
+      if(!session){
+        message.error("Something went wrong, please try again later!!!");
+        return 
+      }
+
       dispatch(setCartLoader(true));
-      const response = await axiosInstance.post("/product/cart/", {
+      const response = await axiosInstance.get("/product/cart/",{
         session,
       });
-      console.log(" cart response api", response);
       if (response.status === 200) {
+        dispatch(addCartItemsAfterLogin({ cart_items: response.data.data }));
       } else {
-        message.error("Something went wrong, please try again later!");
+        message.error("Something went wrong, please try again later!!!");
       }
       return response;
     } catch (error) {
@@ -45,7 +52,6 @@ const useCartActions = () => {
       let data = {
         product_uids: items.map((i) => i.uid),
       };
-      console.log("cart api data", data);
       const response = await axiosInstance.post("/product/cart/", data, {
         session,
       });
@@ -72,7 +78,6 @@ const useCartActions = () => {
           session,
         }
       );
-      console.log("response RemoveApiCartItem", response)
       if (response.status == 200 || response.statusText == 'OK') {
         return response.data;
       }
@@ -89,7 +94,6 @@ const useCartActions = () => {
 
   const IncreAndDecreApiCartItemQuantity = async (action, product_uid) => {
     try {
-      console.log("uid", product_uid, "actiopn", action)
       dispatch(setCartLoader(true));
       const response = await axiosInstance.put(
         `/product/update/cart/${product_uid}/`,
@@ -98,7 +102,6 @@ const useCartActions = () => {
           session,
         }
       );
-      console.log("IncreAndDecreCartItemQuantity response", response);
       if (response.status == 200 || response.status == 201) {
         return response.data;
       }
@@ -119,7 +122,6 @@ const useCartActions = () => {
       if (session) {
         response = await AddApiCartItem([item]);
       }
-      console.log("handleAddItem response", response);
       if (session == null || (session && response)) {
         let itemData
         if (session) {
@@ -152,7 +154,6 @@ const useCartActions = () => {
       if (session) {
         response = await RemoveApiCartItem(uid);
       }
-      console.log(uid,"onRemoveItem response", response)
       if (session == null || (session && response)) {
         dispatch(removeCartItem({ uid }));
       }
@@ -167,7 +168,6 @@ const useCartActions = () => {
       if (session) {
         response = await IncreAndDecreApiCartItemQuantity(action, product_uid);
       }
-      console.log("handleIncreaseCartItem response111", response);
       if (session == null || (session && response)) {
         const itemData = session ? response?.data : item
         dispatch(increaseOrDecreaseCartItemQuantity({ uid: product_uid, action: action }));

@@ -62,7 +62,6 @@ const LoginModal = () => {
       password: values.password,
     })
       .then(({ ok, error }) => {
-        console.log("ok", ok, "error", error, "session", session);
         setLoading(false);
         if (ok) {
           // router.push("/home");

@@ -3,9 +3,7 @@ import Link from "next/link";
 
 const getCategoryProducts = async (link) => {
   try {
-    // console.log("params 555555 77777 link", link)
     const temp = link.split("-%40-");
-    // console.log("params 555555 77777", temp)
 
     if (temp.length > 1) {
       const res = await fetch(

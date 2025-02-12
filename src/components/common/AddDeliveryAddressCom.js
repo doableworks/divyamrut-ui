@@ -30,8 +30,6 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
       const response = await axios.get(url, {
         next: { revalidate: 60 },
       });
-
-      // console.log("getCountryListData response", response)
       if (response.status == 200) {
         const data = response.data;
         setCountryList(data)
@@ -59,7 +57,6 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
       const response = await axios.get(url, {
         next: { revalidate: 60 },
       });
-      // console.log("getSateData response", response)
       if (response.status == 200) {
         const data = response.data;
         setStateList(data)

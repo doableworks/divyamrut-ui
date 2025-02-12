@@ -74,7 +74,6 @@ const CardSlider = () => {
 
   const handleIncreaseCartItem = async (item, action) => {
     try {
-      console.log("handleIncreaseCartItem", item, action)
       onIncreaseOrDecreaseItem(action, item?.product_detail.uid);
     } catch (error) {
       console.log("handleIncreaseCartItem cart error", error);

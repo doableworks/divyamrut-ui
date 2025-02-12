@@ -41,8 +41,6 @@ const BuyProductCom = ({ allAddressData }) => {
   );
     const dispatch = useDispatch();
   const { data: session } = useSession();
-  // console.log("session", session)
-  // console.log("items, buyLoader, hasBuy", items, buyLoader, hasBuy)
 
   const [messageApi, contextHolder] = message.useMessage();
   const [activeStep, setActiveStep] = useState(0);
@@ -57,7 +55,6 @@ const BuyProductCom = ({ allAddressData }) => {
   };
 
   const onFillAddressFinish = async (values) => {
-    console.log("onFillAddressFinish", values)
     setIsLoading(true)
     const data ={
       first_name: values.first_name,
@@ -105,7 +102,6 @@ const BuyProductCom = ({ allAddressData }) => {
       const response = await axiosInstance.post("/product/shipping/address/", data, {
         session,
       });
-      console.log(" cart response api", response);
       if (response.status === 200) {
         const data = response?.data?.data
         setAddressList([...addressList, data])
@@ -168,11 +164,8 @@ const BuyProductCom = ({ allAddressData }) => {
       const response = await axiosInstance.delete(`/product/shipping/address/${uid}/`, {
         session,
       });
-      console.log(response, "onDeleteAddress response api", response);
       if (response.status == 204) {
-        console.log("addressList ddddd", addressList)
         const remainAddress = addressList.filter(item => item.uid != uid)
-        console.log("resmabd ddddd", remainAddress)
         setAddressList([...remainAddress])
         setADDorEditAddre({ open: false, address: null });
         setSelectedDeliveryAddre(null)

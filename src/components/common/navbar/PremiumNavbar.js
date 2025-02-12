@@ -19,12 +19,11 @@ import {
 } from "@/redux/feature/cartSlice";
 import axiosInstance from "@/lib/axios";
 
-
 export default function PremiumNavbar({ scrollNum }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const pathname = usePathname();
-  const { AddApiCartItem } = useCartActions();
+  const { GetApiCartItem } = useCartActions();
   const cartItems = useSelector((state) => state.cart.items);
   const cartCount = Array.isArray(cartItems) ? cartItems.length : cartItems;
   const { isCartSliderOpen, cartLoader } = useSelector((state) => state.cart);
@@ -56,22 +55,8 @@ export default function PremiumNavbar({ scrollNum }) {
   }, [session]);
 
   useEffect(() => {
-    const getCartDetails = async () => {
-      try {
-        setLoading(true)
-        if (session && session?.user?.user?.cart_items) {
-          console.log("getCartDetails response 3333", session?.user?.user?.cart_items);
-          dispatch(addCartItemsAfterLogin({ cart_items: session?.user?.user?.cart_items }));
-        }
-      } catch (error) {
-        console.log("getCartDetails error", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     if (session) {
-      getCartDetails();
+      GetApiCartItem()
     }
   }, [session]);
 
