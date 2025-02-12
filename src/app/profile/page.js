@@ -51,9 +51,32 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/auth";
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
+// const fetchUser = async (accessToken) => {
+//   try {
+//     const res = await fetch(`${apiUrl}/api/auth/user/`, {
+//       method: "GET",
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`, 
+//       },
+//       next: { revalidate: 60 },
+//     });
+
+//     if (!res.ok) {
+//       throw new Error("Failed to fetch data");
+//     }
+
+//     const profileData = await res.json();
+//     return profileData;
+//   } catch (error) {
+//     console.error("Error fetching user data:", error);
+//     return null;
+//   }
+// };
+
+
 const fetchUser = async (accessToken) => {
   try {
-    const res = await fetch(`${apiUrl}/api/auth/user/`, {
+    const res = await fetch(`${apiUrl}/api/user-details/`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`, 
@@ -72,6 +95,9 @@ const fetchUser = async (accessToken) => {
     return null;
   }
 };
+
+
+
 
 const page = async () => {
   const session = await getServerSession(authOptions);

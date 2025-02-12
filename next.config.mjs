@@ -6,9 +6,13 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: "https",
+        hostname: "register.nityanava.com",
+        pathname: "/**",
+      },
+      {
         protocol: "http",
-        hostname: "139.59.13.134",
-        port: "8000",
+        hostname: "register.nityanava.com",
         pathname: "/**",
       },
       {
