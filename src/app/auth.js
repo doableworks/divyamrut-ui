@@ -76,6 +76,7 @@ export const authOptions = {
     },
     callbacks: {
         async signIn({user, account, profile, email, credentials}) {
+            console.log("signIn user", user,"account", account)
             if (account.provider === "google" && user) {
                 try {
                     const data = {'access_token': account.access_token, 'id_token': account.id_token, 'code': 'test'}
@@ -139,7 +140,7 @@ export const authOptions = {
                     token.user = user;
                     return token;
                 } else if (account.provider === "credentials") {
-                    console.log("user if condition", user)
+                    console.log("user jwt", user)
                     // const { access_token, refresh_token, ...rest } = user;
                     token.accessToken = user.access;
                     token.refreshToken = user.refresh;
