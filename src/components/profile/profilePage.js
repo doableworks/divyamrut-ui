@@ -9,16 +9,7 @@ import {
   UserIcon,
 } from "@heroicons/react/24/solid";
 import { twMerge } from "tailwind-merge";
-import { NoImageAvailabe } from "@/contants/contants";
-const user = {
-  username: "@jennywilson",
-  firstName: "Jenny",
-  lastName: "Wilson",
-  email: "jenny@gmail.com ",
-  mobile: "+1234567890",
-  image: "/asset/home/ayurvedic-supplement.jpg",
-  address: "New York, USA",
-};
+import { NoImageAvailabe, NoProfileImage } from "@/contants/contants";
 
 const initialLeftbar = [
   {
@@ -80,7 +71,7 @@ const initialLeftbar = [
   },
 ];
 
-const UserProfileList = () => {
+const UserProfileList = ({ userProfileData }) => {
   const [activeTab, setActiveTab] = useState(initialLeftbar[1]);
 
   const renderActiveTabContent = () => {
@@ -88,30 +79,30 @@ const UserProfileList = () => {
       case "Therapy":
         return (
           <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {Array.from({ length: 6 }).map((each, index) => (
-              <li key={index} className="border rounded p-3 px-4 flex flex-col gap-2">
+            {userProfileData.user_appointments.map((each, index) => (
+              <li
+                key={index}
+                className="border rounded p-3 px-4 flex flex-col gap-2"
+              >
                 <div className="flex flex-col xl:flex-row xl:items-center justify-between">
                   <p className="section-content !text-[14px] !text-left">
-                    Date: 02/02/2025
-                  </p>
-                  <p className="section-content !text-[14px] !text-left">
-                    Time: 11:00 AM - 12:00 PM
+                    Date & Time: {each?.slot_details}
                   </p>
                 </div>
                 <p className="section-content !text-left !text-[15px]">
                   Therapiest Name:{" "}
                   <span className="!text-gray-900 !font-medium">
-                    Dr. Santosh
+                    {each.therapist_name}
                   </span>
                 </p>
                 <p className="section-content !text-left !text-[15px]">
                   Therapy:{" "}
                   <span className="!text-gray-900 !font-medium">
-                    Meru Chikitsa
+                    {each.therapy}
                   </span>
                 </p>
                 <p className="section-content !text-left !text-[15px]">
-                  Status: <span>Completed</span>
+                  Status: <span>{each.status}</span>
                 </p>
               </li>
             ))}
@@ -124,7 +115,7 @@ const UserProfileList = () => {
               <div className="flex flex-col items-center space-y-3">
                 <div className="relative w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center">
                   <img
-                    src={user.image}
+                    src={NoProfileImage}
                     alt="Profile"
                     className="w-24 h-24 rounded-full object-cover"
                   />
@@ -142,10 +133,10 @@ const UserProfileList = () => {
 
                 <div className="text-center">
                   <h2 className="text-xl font-semibold text-gray-800">
-                    {`${user.firstName} ${user.lastName}`}
+                    {userProfileData?.full_name}
                   </h2>
                   <p className="text-gray-500 flex items-center justify-center space-x-2">
-                    <span>{user.username}</span>
+                    @<span>{userProfileData?.username}</span>
                   </p>
                 </div>
               </div>
@@ -158,28 +149,36 @@ const UserProfileList = () => {
                 <div className="flex items-center justify-between py-3 border-b border-gray-100">
                   <span className="text-gray-600">Username</span>
                   <div className="flex items-center space-x-2">
-                    <span className="text-gray-500">{user.username}</span>
+                    <span className="text-gray-500">
+                      @{userProfileData?.username}
+                    </span>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between py-3 border-b border-gray-100">
                   <span className="text-gray-600">Email</span>
                   <div className="flex items-center space-x-2">
-                    <span className="text-gray-500">{user.email}</span>
+                    <span className="text-gray-500">
+                      {userProfileData?.email}
+                    </span>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between py-3 border-b border-gray-100">
                   <span className="text-gray-600">Address</span>
                   <div className="flex items-center space-x-2">
-                    <span className="text-gray-500">{user.address}</span>
+                    <span className="text-gray-500">
+                      {userProfileData?.address}
+                    </span>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between py-3 border-b border-gray-100">
                   <span className="text-gray-600">Mobile no.</span>
                   <div className="flex items-center space-x-2">
-                    <span className="text-gray-500">{user.mobile}</span>
+                    <span className="text-gray-500">
+                      {userProfileData?.mobile}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -189,35 +188,49 @@ const UserProfileList = () => {
       case "Orders":
         return (
           <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {Array.from({ length: 6 }).map((each, index) => (
-              <li key={index} className="border rounded p-3 px-4 flex flex-row gap-2">
-                <div className="w-[30%]">
-                  <img
-                    src={NoImageAvailabe}
-                    alt="product"
-                    className="w-full h-full"
-                  />
-                </div>
+            {userProfileData.orders.map((order, orderIndex) =>
+              order.order_items.map((item, itemIndex) => (
+                <li
+                  key={`${orderIndex}-${itemIndex}`}
+                  className="border rounded p-3 px-4 flex flex-row gap-2"
+                >
+                  <div className="w-[30%]">
+                    <img
+                      src={item.product.image}
+                      alt={item.product.name}
+                      className="w-full h-full object-cover rounded"
+                    />
+                  </div>
 
-                <div>
-                  <p className="section-content !text-left !text-[15px]">
-                    Product:{" "}
-                    <span className="!text-gray-900 !font-medium">
-                      Diya 2 Set of 14
-                    </span>
-                  </p>
-                  <p className="section-content !text-left !text-[15px]">
-                    Price:{" "}
-                    <span className="!text-gray-900 !font-medium">
-                      Rs. 335.00/-
-                    </span>
-                  </p>
-                  <p className="section-content !text-left !text-[15px]">
-                    Status: <span>Completed</span>
-                  </p>
-                </div>
-              </li>
-            ))}
+                  <div>
+                    <p className="section-content !text-left !text-[15px]">
+                      Product:{" "}
+                      <span className="!text-gray-900 !font-medium">
+                        {item.product.name}
+                      </span>
+                    </p>
+                    <p className="section-content !text-left !text-[15px]">
+                      Price:{" "}
+                      <span className="!text-gray-900 !font-medium">
+                        Rs. {item.product_price}/-
+                      </span>
+                    </p>
+                    <p className="section-content !text-left !text-[15px]">
+                      Quantity:{" "}
+                      <span className="!text-gray-900 !font-medium">
+                        {item.quantity}
+                      </span>
+                    </p>
+                    <p className="section-content !text-left !text-[15px]">
+                      Status:{" "}
+                      <span className="!text-gray-900 !font-medium">
+                        {item.status}
+                      </span>
+                    </p>
+                  </div>
+                </li>
+              ))
+            )}
           </ul>
         );
       default:
@@ -236,7 +249,7 @@ const UserProfileList = () => {
           <div className="bg-white p-3 rounded flex gap-4 items-center shadow-md">
             <div className="relative w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center">
               <img
-                src={user.image}
+                src={NoProfileImage}
                 alt="Profile"
                 className="w-16 h-16 rounded-full object-cover"
               />
@@ -256,11 +269,16 @@ const UserProfileList = () => {
                 <p className="section-content !text-left !text-[15px]">
                   Hello,
                 </p>
-                <p className="section-title !text-left !normal-case">
-                  Jenny Wilson
+                <p className="section-title !text-left !capitalize">
+                  {userProfileData.full_name}
                 </p>
               </div>
-              <button className="site-button-primary !m-0 lg:hidden" type="button">Edit</button>
+              <button
+                className="site-button-primary !m-0 lg:hidden"
+                type="button"
+              >
+                Edit
+              </button>
             </div>
           </div>
 
