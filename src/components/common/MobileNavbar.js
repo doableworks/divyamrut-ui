@@ -44,7 +44,7 @@ const MobileNavbar = ({
 
   return (
     <Drawer
-    placement="left"
+      placement="left"
       open={isMobileNavOpen}
       closable={false}
       title={
@@ -52,7 +52,7 @@ const MobileNavbar = ({
           <div className="flex justify-between items-center">
             <Image
               // src={"/asset/divyamrut_transparent_logo.webp"}
-                src="/asset/logo/Logo-mobile.png"
+              src="/asset/logo/Logo-mobile.png"
               height={100}
               width={100}
               onClick={() => handleAction("/")}
@@ -75,11 +75,10 @@ const MobileNavbar = ({
           {menuItems.map((item, index) => (
             <div key={index} className="mb-2">
               <div
-                className={`${
-                  pathname === item.path
-                    ? "text-[--e-global-color-E0A43B] font-bold"
-                    : "text-[#3E3E3E]"
-                } flex justify-between items-center hover:bg-[--e-global-color-E0A43B] hover:text-white cursor-pointer
+                className={`${pathname === item.path
+                  ? "text-[--e-global-color-E0A43B] font-bold"
+                  : "text-[#3E3E3E]"
+                  } flex justify-between items-center hover:bg-[--e-global-color-E0A43B] hover:text-white cursor-pointer
                 font-suse text-[16px] font-[500] leading-[22px] text-left
                 px-5 py-2 rounded`}
                 onClick={() =>
@@ -104,14 +103,17 @@ const MobileNavbar = ({
                       subItem.is_published && (
                         <p
                           key={subIndex}
-                          className={`${
-                            pathname === subItem?.slug
-                              ? "text-[--e-global-color-E0A43B] font-bold"
-                              : "text-[#3E3E3E]"
-                          } hover:text-[#FF5400] cursor-pointer px-5 py-2`}
+                          className={`${pathname === subItem?.slug
+                            ? "text-[--e-global-color-E0A43B] font-bold"
+                            : "text-[#3E3E3E]"
+                            } hover:text-[#FF5400] cursor-pointer px-5 py-2`}
                           onClick={() =>
+
                             handleAction(
-                              `${item.parentSlug}/${subItem.slug}/`
+                              item?.parentSlug == "/products/" &&
+                                subItem.sub_categories?.length == 0
+                                ? `/products-list/${subItem.slug}/`
+                                : `${item.parentSlug}/${subItem.slug}/`
                             )
                           }
                         >

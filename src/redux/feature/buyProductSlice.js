@@ -18,7 +18,7 @@ const buyProductSlice = createSlice({
       else if (action.payload.source == 'direct-buy') {
         state.items = [{
           id: "1",
-          uid: "proudct_" + action.payload.product_detail.uid,
+          uid: "proudct_" + action.payload.items.uid,
           product_detail: action.payload.items,
           created: "",
           updated: "",

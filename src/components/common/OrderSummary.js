@@ -9,12 +9,15 @@ const OrderSummary = ({
   increaseQuantity,
   decreaseQuantity,
 }) => {
-  const calculateSubtotal = () =>
-    orderList.reduce(
-      (total, item) =>
-        total + item.product_detail.price * item.quantity,
-      0
-    );
+  const calculateTotal = () => {
+    return orderList
+      ?.reduce(
+        (total, item) =>
+          total + parseFloat(item?.product_detail?.price.replace(/,/g, "")) * Number(item.quantity),
+        0
+      )
+      .toFixed(2);
+  };
 
   const OrderItem = ({ item }) => (
     <tr className="border-b">
@@ -58,7 +61,10 @@ const OrderSummary = ({
         </div>
       </td>
       <td className="text-right text-gray-800 font-medium">
-        ₹{(item.product_detail.price * item.quantity).toFixed(2)}
+        {/* ₹{(item.product_detail.price * item.quantity).toFixed(2)} */}
+        ₹{(
+                      parseFloat(item?.product_detail?.price.replace(/,/g, "")) * Number(item.quantity)
+                    ).toFixed(2)}
       </td>
     </tr>
   );
@@ -134,14 +140,14 @@ const OrderSummary = ({
           <div className="flex justify-between items-center">
             <span className="font-semibold text-gray-800">Subtotal</span>
             <span className="text-heading">
-              ₹{calculateSubtotal().toFixed(2)}
+              ₹{calculateTotal()}
             </span>
           </div>
           <div className="flex flex-col space-y-2">
             <div className="flex items-center justify-between">
               <span className="font-semibold text-gray-800">Shipping</span>
               <span className="text-heading">
-                {calculateSubtotal().toFixed(2) <= 500
+                {calculateTotal() <= 500
                   ? "₹500"
                   : "Free Shipping"}
               </span>
@@ -154,9 +160,9 @@ const OrderSummary = ({
             <span className="font-bold text-lg">TOTAL</span>
             <span className="text-lg font-bold text-gray-800">
               ₹
-              {Number(calculateSubtotal().toFixed(2)) +
+              {Number(calculateTotal()) +
                 Number(
-                  calculateSubtotal().toFixed(2) <= 500 ? 500 : 0
+                  calculateTotal() <= 500 ? 500 : 0
                 )}
             </span>
           </div>
