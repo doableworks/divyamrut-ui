@@ -163,7 +163,8 @@ export default function PremiumNavbar({ scrollNum }) {
             <Link href="/">
               <Image
                 // src="/asset/divyamrut_transparent_logo.webp"
-                src="/asset/logo/Logo-mobile.png"
+                // src="/asset/logo/Logo-mobile.png"
+                src="/asset/logo/logo.svg"
                 // src="/asset/logo/Logo-large-device.png"
                 alt="Divyamrut Logo"
                 width={400}
@@ -178,7 +179,8 @@ export default function PremiumNavbar({ scrollNum }) {
               />
               <Image
                 // src="/asset/divyamrut_transparent_logo.webp"
-                src="/asset/logo/Logo-large-device.png"
+                // src="/asset/logo/Logo-large-device.png"
+                src="/asset/logo/logo.svg"
                 alt="Divyamrut Logo"
                 width={400}
                 height={400}

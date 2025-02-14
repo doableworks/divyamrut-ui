@@ -10,7 +10,7 @@ const page = () => {
         </h2>
         <div className="space-y-6 text-gray-700">
           <p>
-            <strong>Divyamrut Naturals</strong> believes in helping its
+            <strong>Nityanava Naturals</strong> believes in helping its
             customers as far as possible and has therefore a liberal
             cancellation policy.
           </p>
