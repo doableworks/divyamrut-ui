@@ -57,19 +57,34 @@ const CartPage = () => {
 
   const handleSelectItem = (item) => {
     try {
-      item.selected
-        ? dispatch(unSelectCartItem({ id: item.id }))
-        : dispatch(selectCartItem({ id: item.id }));
+      item.is_select
+        ? dispatch(unSelectCartItem({ uid: item.uid }))
+        : dispatch(selectCartItem({ uid: item.uid }));
     } catch (error) { }
   };
 
+  // const calculateTotal = () => {
+  //   return items
+  //     ?.reduce(
+  //       (total, item) =>
+  //         total + parseFloat(item?.product_detail?.price.replace(/,/g, "")) * Number(item.quantity),
+  //       0
+  //     )
+  //     .toFixed(2);
+  // };
+
   const calculateTotal = () => {
     return items
-      ?.reduce(
-        (total, item) =>
-          total + parseFloat(item?.product_detail?.price.replace(/,/g, "")) * Number(item.quantity),
-        0
-      )
+      ?.reduce((total, item) => {
+        if (item.is_select) {
+          return (
+            total +
+            parseFloat(item?.product_detail?.price.replace(/,/g, "")) *
+              Number(item.quantity)
+          );
+        }
+        return total; // Skip adding to total if is_select is false
+      }, 0)
       .toFixed(2);
   };
 

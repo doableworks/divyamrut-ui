@@ -18,7 +18,7 @@ const cartSlice = createSlice({
     },
     selectCartItem: (state, action) => {
       const existingItem = state.items.find(
-        (item) => item.product_detail.uid === action.payload.uid
+        (item) => item.uid === action.payload.uid
       );
       if (existingItem) {
         existingItem.is_select = true;
