@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
+  source: "",
   hasBuy: false,
   buyLoader: false,
 };
@@ -13,9 +14,11 @@ const buyProductSlice = createSlice({
     setBuyProduct: (state, action) => {
       state.items = [];
       if (action.payload.source == 'cart') {
+        state.source = 'cart'
         state.items = action.payload.items;
       }
       else if (action.payload.source == 'direct-buy') {
+        state.source = 'direct-buy'
         state.items = [{
           id: "1",
           uid: "proudct_" + action.payload.items.uid,
@@ -26,6 +29,11 @@ const buyProductSlice = createSlice({
           quantity: 1
         },]
       }
+    },
+
+    clearBuyProduct: (state) => {
+      state.items = [];
+      state.source = ""
     },
 
     increOrDecreQuantity: (state, action) => {
@@ -73,7 +81,8 @@ export const {
   setBuyProduct,
   increOrDecreQuantity,
   setBuyLoader,
-  setBuyHasbuy
+  setBuyHasbuy,
+  clearBuyProduct
 } = buyProductSlice.actions;
 
 export default buyProductSlice.reducer;

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomSteps from "@/components/steps/index";
 import { useDispatch, useSelector } from "react-redux";
 import { message } from "antd";
@@ -11,6 +11,8 @@ import OrderSummary from "@/components/common/OrderSummary";
 import AddDeliveryAddressCom from "@/components/common/AddDeliveryAddressCom";
 import SelectDeliveryAddress from "@/components/common/SelectDeliveryAddress";
 import { setBuyProduct, increOrDecreQuantity } from "@/redux/feature/buyProductSlice";
+import { useRouter } from "nextjs-toploader/app";
+import { clearCart } from '@/redux/feature/cartSlice'
 
 const stepsBuyProducts = [
   {
@@ -36,12 +38,12 @@ const smallDeviceItems = [
 
 
 const BuyProductCom = ({ allAddressData }) => {
-  const { items, buyLoader, hasBuy } = useSelector(
+  const { items: orderList, buyLoader, hasBuy, source } = useSelector(
     (state) => state.buyProduct
   );
-    const dispatch = useDispatch();
+  const router = useRouter()
+  const dispatch = useDispatch();
   const { data: session } = useSession();
-
   const [messageApi, contextHolder] = message.useMessage();
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -49,6 +51,14 @@ const BuyProductCom = ({ allAddressData }) => {
   const [addressList, setAddressList] = useState(allAddressData);
   const [SelectedDeliveryAddre, setSelectedDeliveryAddre] = useState(null);
   const [lastStepStatus, setLastStepStatus] = useState("process");
+  const [orderDetails, setOrderDetails] = useState(null)
+
+
+  useEffect(() => {
+    if (orderDetails && activeStep === 1) {
+      proceedToOrderFnCall();
+    }
+  }, [orderDetails]);
 
   const handleAddNeworEditAddre = (open = false, address = null) => {
     setADDorEditAddre({ open: open, address: address }); // Enable editing mode
@@ -56,9 +66,9 @@ const BuyProductCom = ({ allAddressData }) => {
 
   const onFillAddressFinish = async (values) => {
     setIsLoading(true)
-    const data ={
+    const data = {
       first_name: values.first_name,
-      last_name:  values.last_name,
+      last_name: values.last_name,
       company_name: "ABC Ltd",
       country: values.country,
       address: "123 Main Street",
@@ -119,9 +129,9 @@ const BuyProductCom = ({ allAddressData }) => {
 
   const onEditAddress = async (values) => {
     setIsLoading(true)
-    const data ={
+    const data = {
       first_name: values.first_name,
-      last_name:  values.last_name,
+      last_name: values.last_name,
       company_name: "ABC Ltd",
       country: values.country,
       address: "123 Main Street",
@@ -145,7 +155,7 @@ const BuyProductCom = ({ allAddressData }) => {
       });
       if (response.status === 200) {
         const data = response?.data?.data
-        const remainAddress = addressList.filter(item=> item.uid != addOrEditAddre.address.uid)
+        const remainAddress = addressList.filter(item => item.uid != addOrEditAddre.address.uid)
         setAddressList([...remainAddress, data])
         setADDorEditAddre({ open: false, address: null });
       } else {
@@ -189,24 +199,224 @@ const BuyProductCom = ({ allAddressData }) => {
   };
 
   const increaseQuantity = (uid) => {
- 
-    dispatch(increOrDecreQuantity({uid:uid, action:"increase"}));
+    dispatch(increOrDecreQuantity({ uid: uid, action: "increase" }));
   };
 
   const decreaseQuantity = (uid) => {
-    dispatch(increOrDecreQuantity({uid:uid, action:"decrease"}));
+    dispatch(increOrDecreQuantity({ uid: uid, action: "decrease" }));
   };
 
-  const onCancel = ()=>{
+  const onCancel = () => {
     setADDorEditAddre({ open: false, address: null })
   }
+
+  const handlePaymentStep = async () => {
+    setIsLoading(true);
+    setOrderDetails(null)
+    try {
+      console.log("orderList", orderList)
+      console.log("SelectedDeliveryAddre", SelectedDeliveryAddre)
+
+      const pro_uid_list = orderList.map(item => {
+        return {
+          uid: item.product_detail.uid,
+          quantity: item.quantity,
+          price: item.product_detail.price
+        }
+      })
+
+      const calculateTotal = () => {
+        return orderList
+          ?.reduce(
+            (total, item) =>
+              total + parseFloat(item?.product_detail?.price.replace(/,/g, "")) * Number(item.quantity),
+            0
+          )
+          .toFixed(2);
+      };
+
+      const body = {
+        "total_amount": calculateTotal(),
+        "currency": "INR",
+        "shipping_address": SelectedDeliveryAddre.uid,
+        "product_list": pro_uid_list
+      }
+      console.log("total body", body)
+      const response = await axiosInstance.post('/product/orders/', body, {
+        session,
+        next: { revalidate: 60 },
+      });
+      console.log("create order response", response)
+
+      if(response.status == 201){
+        const data = response.data;
+        handleCreateOrder(data)
+      }
+    } catch (err) {
+      console.log("Error while Create order", err);
+      // setLastStepStatus("error");
+      messageApi.open({
+        type: "error",
+        content: "Unable to create order, Please try after sometime.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
+  const handleCreateOrder = async (data) => {
+    setIsLoading(true);
+    console.log("data 5555555", data)
+    const pro_uid_list = data.order_items.map(item => item.uid)
+    console.log("pro_uid_list 555555", pro_uid_list)
+
+
+    try {
+
+      const requestData = {
+        amount: Number(data.total_price),
+        receipt: "Product",
+        currency: data.currency,
+        notes: {
+          user_email: session?.user?.user?.email,
+          email: session?.user?.user?.email,
+          therapist_id: "",
+          product_id: "",
+          therapy_slug: "",
+          user_appointment_id: "",
+          order_uid: "",
+          order_items_uid: pro_uid_list
+        }
+      }
+      const response = await axiosInstance.post('/payment/create-order/', requestData, {
+        session,
+        next: { revalidate: 60 },
+      });
+      console.log("payment-object", response)
+      if(response.status == 201){
+        const obj = response.data;
+      setOrderDetails(obj);
+      }
+    } catch (err) {
+      console.log("Error while Create order", err);
+      // setLastStepStatus("error");
+      messageApi.open({
+        type: "error",
+        content: "Unable to create order, Please try after sometime.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const loadRazorpayScript = async () => {
+    return new Promise((resolve) => {
+      if (window.Razorpay) {
+        resolve(true);
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+
+  const proceedToOrderFnCall = async () => {
+    console.log("orderDetails 555555", orderDetails)
+    console.log("process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID", process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)
+    setIsLoading(true);
+    try {
+      const isRazorpayLoaded = await loadRazorpayScript();
+      if (!isRazorpayLoaded) {
+        messageApi.open({
+          type: "error",
+          content: "Failed to load Razorpay. Please refresh and try again.",
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: orderDetails.amount_due,
+        currency: orderDetails.currency,
+        name: session?.user?.user?.first_name,
+        description: `Buy Products`,
+        order_id: orderDetails.id,
+        notes: orderDetails.notes,
+        prefill: {
+          name: session?.user?.user?.first_name,
+          email: session?.user?.user?.email,
+          // contact: orderDetails.notes.phone_no,
+          contact: ""
+        },
+        modal: {
+          escape: true,
+          backdropclose: true,
+        },
+        handler: async (response) => {
+          console.log("VVVVVVVVVVVVVVVVVVV", response)
+          if (response && response.razorpay_payment_id) {
+            setIsLoading(true);
+            if(source == 'cart'){
+              dispatch(clearCart())
+            }
+            dispatch(setBuyProduct({ items: [], source: "cart" }))
+            console.log("Payment Success:", response);
+            router.push('/profile')
+            messageApi.open({
+              type: "success",
+              content: "Payment successful, Redirecting...",
+            });
+            // router.push(
+            //   `/payment-status?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}`
+            // );
+          } else {
+            console.log("Payment Failed or Cancelled:", response);
+            messageApi.open({
+              type: "info",
+              content: "Payment was cancelled or failed.",
+            });
+          }
+        },
+        theme: orderDetails?.theme,
+      };
+
+      console.log("product options", options)
+
+      setIsLoading(true);
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+
+      razorpay.on("payment.cancelled", function (response) {
+        console.log("Payment Cancelled:", response);
+        messageApi.open({
+          type: "info",
+          content: "Payment cancelled by user.",
+        });
+      });
+
+    } catch (err) {
+      console.error("Error during proudct payment:", err);
+      messageApi.open({
+        type: "error",
+        content: "Payment process error.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const renderActiveStep = (step) => {
     switch (step) {
       case 0:
         return addOrEditAddre?.open ? (
           <AddDeliveryAddressCom
-          isLoading={isLoading}
+            isLoading={isLoading}
             userAddress={addOrEditAddre.address}
             userData={session?.user?.user}
             onFillAddressFinish={onFillAddressFinish}
@@ -227,7 +437,7 @@ const BuyProductCom = ({ allAddressData }) => {
       case 1:
         return (
           <OrderSummary
-            orderList={items}
+            orderList={orderList}
             deliveryAddress={SelectedDeliveryAddre}
             decreaseQuantity={decreaseQuantity}
             increaseQuantity={increaseQuantity}
@@ -252,7 +462,7 @@ const BuyProductCom = ({ allAddressData }) => {
           return false;
         }
       case 1:
-        if (items?.length > 0 && SelectedDeliveryAddre) {
+        if (orderList?.length > 0 && SelectedDeliveryAddre) {
           return true;
         } else {
           messageApi.open({
@@ -284,7 +494,8 @@ const BuyProductCom = ({ allAddressData }) => {
       case 1:
         return (
           <button
-            onClick={handleStepNext}
+            // onClick={handleStepNext}
+            onClick={handlePaymentStep}
             className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
           >
             Pay Now

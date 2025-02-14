@@ -444,6 +444,7 @@ export default function BookingModal() {
   };
 
   const proceedToOrderFnCall = async () => {
+    console.log("orderDetails 4444",orderDetails )
     setIsLoading(true);
     try {
       const isRazorpayLoaded = await loadRazorpayScript();
@@ -495,6 +496,8 @@ export default function BookingModal() {
         },
         theme: orderDetails.theme,
       };
+
+      console.log("options therapy", options)
 
       setIsLoading(true);
       const razorpay = new window.Razorpay(options);

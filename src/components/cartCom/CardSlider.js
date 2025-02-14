@@ -21,8 +21,7 @@ const CardSlider = () => {
   const { data: session } = useSession();
   const dispatch = useDispatch();
   const router = useRouter();
-  const isCartSliderOpen = useSelector((state) => state.cart.openCartSlider);
-  const cartItems = useSelector((state) => state.cart.items);
+  const {items : cartItems, openCartSlider } = useSelector((state) => state.cart);
   const [loader, setLoader] = useState();
   const {
     onRemoveItem,
@@ -97,12 +96,11 @@ const CardSlider = () => {
     };
 
 
-
   return (
     <>
       <Drawer
         placement="right"
-        open={isCartSliderOpen}
+        open={openCartSlider}
         closable={false}
         destroyOnClose={true}
         onClose={CartSliderClose}
