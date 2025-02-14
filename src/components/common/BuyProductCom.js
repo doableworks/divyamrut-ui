@@ -12,7 +12,10 @@ import AddDeliveryAddressCom from "@/components/common/AddDeliveryAddressCom";
 import SelectDeliveryAddress from "@/components/common/SelectDeliveryAddress";
 import { setBuyProduct, increOrDecreQuantity } from "@/redux/feature/buyProductSlice";
 import { useRouter } from "nextjs-toploader/app";
-import { clearCart } from '@/redux/feature/cartSlice'
+import useCartActions from "@/components/cartCom/useCartActions";
+import BlockPageLoader from "@/components/loader/BlockPageLoader"
+import { Cross, Delete, EmptyCart } from "@/icon/icons";
+import CustomButton from "@/components/common/CustomButton";
 
 const stepsBuyProducts = [
   {
@@ -38,7 +41,7 @@ const smallDeviceItems = [
 
 
 const BuyProductCom = ({ allAddressData }) => {
-  const { items: orderList, buyLoader, hasBuy, source } = useSelector(
+  const { items: orderList, buyLoader, hasBuy, source: BuyProductSoruce } = useSelector(
     (state) => state.buyProduct
   );
   const router = useRouter()
@@ -52,6 +55,7 @@ const BuyProductCom = ({ allAddressData }) => {
   const [SelectedDeliveryAddre, setSelectedDeliveryAddre] = useState(null);
   const [lastStepStatus, setLastStepStatus] = useState("process");
   const [orderDetails, setOrderDetails] = useState(null)
+  const { onRemoveItem } = useCartActions();
 
 
   useEffect(() => {
@@ -203,6 +207,7 @@ const BuyProductCom = ({ allAddressData }) => {
   };
 
   const decreaseQuantity = (uid) => {
+    console.log("decreaseQuantity uid", uid)
     dispatch(increOrDecreQuantity({ uid: uid, action: "decrease" }));
   };
 
@@ -211,12 +216,14 @@ const BuyProductCom = ({ allAddressData }) => {
   }
 
   const handlePaymentStep = async () => {
+    const nextStep = await handleCheckValidation()
+    if (!nextStep) {
+      return
+    }
+
     setIsLoading(true);
     setOrderDetails(null)
     try {
-      console.log("orderList", orderList)
-      console.log("SelectedDeliveryAddre", SelectedDeliveryAddre)
-
       const pro_uid_list = orderList.map(item => {
         return {
           uid: item.product_detail.uid,
@@ -241,18 +248,20 @@ const BuyProductCom = ({ allAddressData }) => {
         "shipping_address": SelectedDeliveryAddre.uid,
         "product_list": pro_uid_list
       }
-      console.log("total body", body)
       const response = await axiosInstance.post('/product/orders/', body, {
         session,
         next: { revalidate: 60 },
       });
-      console.log("create order response", response)
 
-      if(response.status == 201){
+      if (response.status == 201) {
         const data = response.data;
         handleCreateOrder(data)
       }
+      else {
+        setIsLoading(false);
+      }
     } catch (err) {
+      setIsLoading(false);
       console.log("Error while Create order", err);
       // setLastStepStatus("error");
       messageApi.open({
@@ -260,20 +269,16 @@ const BuyProductCom = ({ allAddressData }) => {
         content: "Unable to create order, Please try after sometime.",
       });
     } finally {
-      setIsLoading(false);
+      // setIsLoading(false);
     }
   };
 
 
   const handleCreateOrder = async (data) => {
     setIsLoading(true);
-    console.log("data 5555555", data)
-    const pro_uid_list = data.order_items.map(item => item.uid)
-    console.log("pro_uid_list 555555", pro_uid_list)
-
+    const pro_uid_list = data.order_items.map(i => i.product_uid)
 
     try {
-
       const requestData = {
         amount: Number(data.total_price),
         receipt: "Product",
@@ -293,10 +298,9 @@ const BuyProductCom = ({ allAddressData }) => {
         session,
         next: { revalidate: 60 },
       });
-      console.log("payment-object", response)
-      if(response.status == 201){
+      if (response.status == 201) {
         const obj = response.data;
-      setOrderDetails(obj);
+        setOrderDetails(obj);
       }
     } catch (err) {
       console.log("Error while Create order", err);
@@ -325,9 +329,23 @@ const BuyProductCom = ({ allAddressData }) => {
   };
 
 
+  const handleActionOnPaymentSuccessfully = (order_items_uid) => {
+    console.log("handleActionOnPaymentSuccessfully uids", order_items_uid)
+    try {
+      dispatch(setBuyProduct({ items: [], source: "cart" }))
+      if (BuyProductSoruce == 'cart') {
+        dispatch(onRemoveItem(order_items_uid))
+      }
+    }
+    catch (error) {
+      console.log("handleActionOnPaymentSuccessfully error", error)
+    }
+
+
+  }
+
+
   const proceedToOrderFnCall = async () => {
-    console.log("orderDetails 555555", orderDetails)
-    console.log("process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID", process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID)
     setIsLoading(true);
     try {
       const isRazorpayLoaded = await loadRazorpayScript();
@@ -339,6 +357,10 @@ const BuyProductCom = ({ allAddressData }) => {
         setIsLoading(false);
         return;
       }
+
+      const order_product_uids = orderDetails.notes.order_items_uid
+
+      
 
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
@@ -359,22 +381,21 @@ const BuyProductCom = ({ allAddressData }) => {
           backdropclose: true,
         },
         handler: async (response) => {
-          console.log("VVVVVVVVVVVVVVVVVVV", response)
           if (response && response.razorpay_payment_id) {
-            setIsLoading(true);
-            if(source == 'cart'){
-              dispatch(clearCart())
-            }
-            dispatch(setBuyProduct({ items: [], source: "cart" }))
             console.log("Payment Success:", response);
-            router.push('/profile')
+            handleActionOnPaymentSuccessfully(order_product_uids)
+            setOrderDetails(null)
+            // if (BuyProductSoruce == 'cart') {
+            //   dispatch(onRemoveItem(order_items_uid))
+            // }
+            // dispatch(setBuyProduct({ items: [], source: "cart" }))
             messageApi.open({
               type: "success",
               content: "Payment successful, Redirecting...",
             });
-            // router.push(
-            //   `/payment-status?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}`
-            // );
+            router.push(
+              `/payment-status?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}&order_type=Product`
+            );
           } else {
             console.log("Payment Failed or Cancelled:", response);
             messageApi.open({
@@ -385,10 +406,6 @@ const BuyProductCom = ({ allAddressData }) => {
         },
         theme: orderDetails?.theme,
       };
-
-      console.log("product options", options)
-
-      setIsLoading(true);
       const razorpay = new window.Razorpay(options);
       razorpay.open();
 
@@ -435,14 +452,27 @@ const BuyProductCom = ({ allAddressData }) => {
           </>
         );
       case 1:
-        return (
-          <OrderSummary
-            orderList={orderList}
-            deliveryAddress={SelectedDeliveryAddre}
-            decreaseQuantity={decreaseQuantity}
-            increaseQuantity={increaseQuantity}
-          />
-        );
+        return orderList.length > 0 ? <OrderSummary
+          orderList={orderList}
+          deliveryAddress={SelectedDeliveryAddre}
+          decreaseQuantity={decreaseQuantity}
+          increaseQuantity={increaseQuantity}
+        /> :
+          <div className="pt-[10rem] flex flex-col jusitify-center items-center px-4">
+            <EmptyCart h={150} w={150} fill={"#E0A43B"} />
+            <p className="sub_heading mb-4">Oops! Your cart is empty!</p>
+            <p className="section-content mb-4">
+              Start adding products now.
+            </p>
+            <CustomButton
+              htmlType="submit"
+              className="site-button-primary !m-0  capitalize"
+              title="Browse Products"
+              loading={false}
+              type="submit"
+              onClick={() => router.push("/products")}
+            />
+          </div>
 
       default:
         return <div>Hello World</div>;
@@ -492,26 +522,13 @@ const BuyProductCom = ({ allAddressData }) => {
           return;
         }
       case 1:
-        return (
-          <button
-            // onClick={handleStepNext}
-            onClick={handlePaymentStep}
-            className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
-          >
-            Pay Now
-          </button>
-        );
-
-      case 2:
-        return (
-          <button
-            // onClick={handleStepNext}
-            className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
-          >
-            Pay Now
-          </button>
-        );
-
+        return orderList.length > 0 && <button
+          // onClick={handleStepNext}
+          onClick={handlePaymentStep}
+          className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
+        >
+          Pay Now
+        </button>
       default:
         return;
     }
@@ -530,6 +547,8 @@ const BuyProductCom = ({ allAddressData }) => {
       setActiveStep(clickedIndex);
     }
   };
+
+  if (isLoading) return <BlockPageLoader />;
 
   return (
     <div className="relative flex flex-col w-full overflow-hidden min-h-[70vh]">

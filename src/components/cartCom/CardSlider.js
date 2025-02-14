@@ -80,13 +80,14 @@ const CardSlider = () => {
   };
 
   const handleRemoveItemComplete = (item) => {
-    onRemoveItem(item?.product_detail?.uid)
+    onRemoveItem([item?.product_detail?.uid])
   };
 
 
     const onCheckout = async () => {
       if (session) {
         const selectedItems = cartItems.filter(item => item.is_select)
+        await dispatch(openCartSliderFun(false))
         await dispatch(setBuyProduct({ items: selectedItems, source: "cart" }))
         await router.push("/payment-delivery");
       }

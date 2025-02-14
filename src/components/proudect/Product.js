@@ -16,7 +16,6 @@ const Product = ({ item, productCategory, session }) => {
   const handleAddItem = async (event) => {
     event.stopPropagation();
     try {
-      console.log("vvvvv rrrr", item)
       onAddItem(item)
     } catch (error) {
       console.log("handleAddItem error", error);

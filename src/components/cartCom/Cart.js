@@ -41,7 +41,7 @@ const CartPage = () => {
 
   const handleRemoveItem = async (item) => {
     try {
-      onRemoveItem(item.uid);
+      onRemoveItem([item.uid]);
     } catch (error) {
       console.log("handleRemoveItem cart error", error);
     }

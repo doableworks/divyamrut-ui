@@ -444,7 +444,6 @@ export default function BookingModal() {
   };
 
   const proceedToOrderFnCall = async () => {
-    console.log("orderDetails 4444",orderDetails )
     setIsLoading(true);
     try {
       const isRazorpayLoaded = await loadRazorpayScript();
@@ -484,7 +483,7 @@ export default function BookingModal() {
             });
             dispatch(toggleBookingModal(false));
             router.push(
-              `/payment-status?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}`
+              `/payment-status?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}&order_type=Therapy`
             );
           } else {
             console.log("Payment Failed or Cancelled:", response);
@@ -496,8 +495,6 @@ export default function BookingModal() {
         },
         theme: orderDetails.theme,
       };
-
-      console.log("options therapy", options)
 
       setIsLoading(true);
       const razorpay = new window.Razorpay(options);

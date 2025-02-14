@@ -14,6 +14,7 @@ const Page = () => {
   const paymentId = searchParams.get("payment_id");
   const orderId = searchParams.get("order_id");
   const signature = searchParams.get("signature");
+  const order_type = searchParams.get("order_type");
 
   useEffect(() => {
     if (!paymentId || !orderId || !signature) {
@@ -52,7 +53,7 @@ const Page = () => {
 
   if (isLoading) return <BlockPageLoader />;
 
-  return paymentDetail?.status ? (
+  return paymentDetail?.status && order_type == "Therapy" ? (
     <div className="common_page_width">
       <div className="py-8">
         <div className="mb-8 flex flex-col justify-center items-center">
@@ -74,29 +75,50 @@ const Page = () => {
         </div>
       </div>
     </div>
-  ) : (
+  ) : paymentDetail?.status && order_type == "Product" ?
     <div className="common_page_width">
       <div className="py-8">
         <div className="mb-8 flex flex-col justify-center items-center">
           <LottieShowcase
-            source="https://lottie.host/embed/aecf4c7f-4b5f-43ba-b414-baa199d45078/rUEKgJhvaI.lottie"
+            source="https://lottie.host/embed/34db972f-7afa-42de-a78f-a65f2c1bec27/y1OW9bi51L.lottie"
             height="150px"
             width="150px"
           />
-
           <h2 className="highlight-heading !text-[24px] !mt-0 !mb-2">
-            Oops!! something went wrong
+            Payment Successful & Product Verified
           </h2>
           <p className="section-content !max-w-lg !text-[16px]">
-            We encountered an issue while verifying your payment. This could be
-            due to an invalid key or other technical reasons. Please check your
-            payment details and try again. If the problem persists, contact our
-            support team for assistance.
+            Your payment has been successfully processed, and your product has been verified.
+            The product will be delivered to your provided address shortly.
+            Please ensure someone is available to receive the product and verify it upon arrival.
+            For any issues or further assistance, feel free to reach out to our support team.
           </p>
         </div>
       </div>
     </div>
-  );
+    : (
+      <div className="common_page_width">
+        <div className="py-8">
+          <div className="mb-8 flex flex-col justify-center items-center">
+            <LottieShowcase
+              source="https://lottie.host/embed/aecf4c7f-4b5f-43ba-b414-baa199d45078/rUEKgJhvaI.lottie"
+              height="150px"
+              width="150px"
+            />
+
+            <h2 className="highlight-heading !text-[24px] !mt-0 !mb-2">
+              Oops!! something went wrong
+            </h2>
+            <p className="section-content !max-w-lg !text-[16px]">
+              We encountered an issue while verifying your payment. This could be
+              due to an invalid key or other technical reasons. Please check your
+              payment details and try again. If the problem persists, contact our
+              support team for assistance.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
 };
 
 export default Page;

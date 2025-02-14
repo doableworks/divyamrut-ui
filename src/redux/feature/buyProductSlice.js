@@ -48,10 +48,9 @@ const buyProductSlice = createSlice({
         state.items = updatedItems
       }
       else if(action.payload.uid && action.payload.action == "decrease"){
-
         const ItemData = state.items.find((item) => item.uid === action.payload.uid);
-        if (ItemData.quantity == 1){
-          const remainItems = state.items.filter(item =>item.uid == action.payload.uid); 
+        if (ItemData && ItemData?.quantity == 1){
+          const remainItems = state.items.filter(item =>item.uid != action.payload.uid); 
           state.items = remainItems
         }
         else{

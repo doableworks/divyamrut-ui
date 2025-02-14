@@ -69,11 +69,12 @@ const useCartActions = () => {
     }
   };
 
-  const RemoveApiCartItem = async (product_uid) => {
+  const RemoveApiCartItem = async (product_uids) => {
     try {
+      const data = {product_uids}
       dispatch(setCartLoader(true));
-      const response = await axiosInstance.delete(
-        `/product/update/cart/${product_uid}/`,
+      const response = await axiosInstance.post(
+        `/product/delete-cart/`, data,
         {
           session,
         }
@@ -148,14 +149,14 @@ const useCartActions = () => {
     }
   };
 
-  const onRemoveItem = async (uid) => {
+  const onRemoveItem = async (uids) => {
     try {
       let response;
       if (session) {
-        response = await RemoveApiCartItem(uid);
+        response = await RemoveApiCartItem(uids);
       }
       if (session == null || (session && response)) {
-        dispatch(removeCartItem({ uid }));
+        dispatch(removeCartItem({ uids }));
       }
     } catch (error) {
       console.log("onRemoveItem error", error);

@@ -47,11 +47,9 @@ const cartSlice = createSlice({
       }
     },
     increaseOrDecreaseCartItemQuantity: (state, action) => {
-      console.log("action.payload", action.payload)
       const existingItem = state.items.find((item) =>{ 
         return item.product_detail.uid == action.payload.uid
       });
-      console.log("existingItem", existingItem)
       if (action.payload.action === "increase" && existingItem) {
         existingItem.quantity += 1;
       } else if (action.payload.action === "decrease") {
@@ -64,21 +62,9 @@ const cartSlice = createSlice({
         }
       }
     },
-    // removeCartItem: (state, action) => {
-    //   const existingItem = state.items.find(
-    //     (item) => item.product_detail.uid === action.payload.uid
-    //   );
-    //   if (existingItem && existingItem.quantity > 1) {
-    //     existingItem.quantity -= 1;
-    //   } else {
-    //     state.items = state.items.filter(
-    //       (item) => item.product_detail.uid !== action.payload.uid
-    //     );
-    //   }
-    // },
     removeCartItem: (state, action) => {
       state.items = state.items.filter(
-        (item) => item.product_detail.uid !== action.payload.uid
+        (item) =>  !action.payload.uids.includes(item.product_detail.uid)
       );
     },
     removeItemCartComplete: (state, action) => {
