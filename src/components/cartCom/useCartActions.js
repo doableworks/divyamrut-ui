@@ -170,7 +170,8 @@ const useCartActions = () => {
         response = await IncreAndDecreApiCartItemQuantity(action, product_uid);
       }
       if (session == null || (session && response)) {
-        const itemData = session ? response?.data : item
+        // const itemData = session ? response?.data : item
+        const itemData = session ? response?.data : { uid: product_uid, action: action }
         dispatch(increaseOrDecreaseCartItemQuantity({ uid: product_uid, action: action }));
       }
     } catch (error) {

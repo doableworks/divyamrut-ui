@@ -45,7 +45,7 @@ const CardSlider = () => {
       // await dispatch(closeNav()); // Close the navigation menu
       await dispatch(setOpenLoginModal(true)); // Open the login modal
     } catch (error) {
-      console.error("An error occurred:", error);
+      console.log("An error occurred:", error);
     } finally {
       setLoader(false); // Ensure the loader is stopped regardless of success or failure
     }
