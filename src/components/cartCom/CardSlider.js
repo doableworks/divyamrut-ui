@@ -15,6 +15,7 @@ import useCartActions from "@/components/cartCom/useCartActions";
 import {
   openCartSliderFun,
 } from "@/redux/feature/cartSlice";
+import { LoadingOutlined } from "@ant-design/icons";
 
 
 const CardSlider = () => {
@@ -23,6 +24,7 @@ const CardSlider = () => {
   const router = useRouter();
   const {items : cartItems, openCartSlider } = useSelector((state) => state.cart);
   const [loader, setLoader] = useState();
+  const [loading, setLoading] = useState(null) 
   const {
     onRemoveItem,
     onIncreaseOrDecreaseItem
@@ -31,13 +33,6 @@ const CardSlider = () => {
   const CartSliderClose = () => {
     dispatch(openCartSliderFun(false));
   };
-
-  // const handleLogin = async() => {
-  //    setLoader(true)
-  //  await dispatch(closeNav());
-  //  await dispatch(setOpenLoginModal(true));
-  //   await setLoader(false)
-  // };
 
   const handleLogin = async () => {
     setLoader(true); // Set the loader to true before starting
@@ -73,9 +68,12 @@ const CardSlider = () => {
 
   const handleIncreaseCartItem = async (item, action) => {
     try {
-      onIncreaseOrDecreaseItem(action, item?.product_detail.uid);
+      setLoading(item.uid)
+      await onIncreaseOrDecreaseItem(action, item?.product_detail.uid);
     } catch (error) {
       console.log("handleIncreaseCartItem cart error", error);
+    }finally{
+      setLoading(null)
     }
   };
 
@@ -138,7 +136,7 @@ const CardSlider = () => {
                     htmlType="submit"
                     className="site-button-secondary !m-0 !mb-2 w-[-webkit-fill-available] capitalize"
                     title="View Cart"
-                    loading={loader}
+                    loading={false}
                     type="submit"
                     onClick={() => handlecartMove("/cart")}
                   />
@@ -146,7 +144,7 @@ const CardSlider = () => {
                       htmlType="submit"
                       className="site-button-primary !m-0 w-[-webkit-fill-available] capitalize"
                       title={session ?"Proceed to Checkout" : "Login to Proceed"}
-                      loading={loader}
+                      loading={false}
                       type="submit"
                       onClick={onCheckout}
                     />
@@ -198,7 +196,7 @@ const CardSlider = () => {
                                                        onClick={() => handleIncreaseCartItem(item, "decrease")}
                               className="px-2 bg-gray-200 text-heading rounded"
                             >
-                              -
+                              { loading == item.uid ? <LoadingOutlined spin /> :'-'}
                             </button>
                             <span span className="section-title  !text-left">
                               {item.quantity}
@@ -207,7 +205,7 @@ const CardSlider = () => {
                               onClick={() => handleIncreaseCartItem(item, "increase")}
                               className="px-2 bg-gray-200 text-heading rounded"
                             >
-                              +
+                              { loading == item.uid ? <LoadingOutlined spin /> : '+'}
                             </button>
                           </div>
                         </div>

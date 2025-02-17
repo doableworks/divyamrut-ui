@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CustomButton from "@/components/common/CustomButton";
 import { useRouter } from "nextjs-toploader/app";
@@ -18,6 +18,7 @@ import { setBuyProduct } from "@/redux/feature/buyProductSlice";
 import useCartActions from "@/components/cartCom/useCartActions";
 import { useSession } from "next-auth/react";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const CartPage = () => {
   const { items, cartLoader } = useSelector(
@@ -25,6 +26,7 @@ const CartPage = () => {
   );
   const dispatch = useDispatch();
   const router = useRouter();
+  const [loading, setLoading] = useState(null) 
   const { data: session } = useSession();
   const {
     onRemoveItem,
@@ -33,9 +35,12 @@ const CartPage = () => {
 
   const handleIncreaseCartItem = async (item, action) => {
     try {
-      onIncreaseOrDecreaseItem(action, item?.product_detail.uid);
+      setLoading(item.uid)
+      await onIncreaseOrDecreaseItem(action, item?.product_detail.uid);
     } catch (error) {
       console.log("handleIncreaseCartItem cart error", error);
+    }finally{
+      setLoading(null)
     }
   };
 
@@ -190,7 +195,7 @@ const CartPage = () => {
                           onClick={() => handleIncreaseCartItem(item, "decrease")}
                           className="px-2 py-1 bg-gray-200 rounded"
                         >
-                          -
+                          { loading == item.uid ? <LoadingOutlined spin /> :'-'}
                         </button>
                         <span className="text-heading !text-left">
                           {item.quantity}
@@ -199,7 +204,7 @@ const CartPage = () => {
                           onClick={() => handleIncreaseCartItem(item, "increase")}
                           className="px-2 py-1 bg-gray-200 rounded"
                         >
-                          +
+                          { loading == item.uid ? <LoadingOutlined spin /> : '+'}
                         </button>
                       </div>
                     </div>
