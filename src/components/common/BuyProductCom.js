@@ -340,12 +340,11 @@ const BuyProductCom = ({ allAddressData }) => {
     catch (error) {
       console.log("handleActionOnPaymentSuccessfully error", error)
     }
-
-
   }
 
 
   const proceedToOrderFnCall = async () => {
+    // console.log("orderDetails 5555", orderDetails)
     setIsLoading(true);
     try {
       const isRazorpayLoaded = await loadRazorpayScript();
@@ -358,9 +357,7 @@ const BuyProductCom = ({ allAddressData }) => {
         return;
       }
 
-      const order_product_uids = orderDetails.notes.order_items_uid
-
-      
+      const order_product_uids = orderDetails.notes.order_items_uid      
 
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
