@@ -23,13 +23,17 @@ const ProductDetail = ({ item }) => {
   const dispatch = useDispatch();
   const { data: session } = useSession();
   const [selectedImage, SetSelectedImage] = useState(0);
+  const [loading, setLoading] = useState(false);
   const { onAddItem } = useCartActions();
 
   const handleAddItem = async () => {
     try {
-      onAddItem(item)
+      setLoading(true)
+     await onAddItem(item)
     } catch (error) {
       console.log("handleAddItem error", error);
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -116,7 +120,7 @@ const ProductDetail = ({ item }) => {
               htmlType="submit"
               className="site-button-primary !mt-4 w-[-webkit-fill-available] capitalize"
               title="ADD TO CART"
-              loading={false}
+              loading={loading}
               onClick={handleAddItem}
             />
 
