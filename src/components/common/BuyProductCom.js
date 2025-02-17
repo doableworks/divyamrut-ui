@@ -75,19 +75,19 @@ const BuyProductCom = ({ allAddressData }) => {
       last_name: values.last_name,
       company_name: "ABC Ltd",
       country: values.country,
-      address: "123 Main Street",
-      apartment: values.apartment,
-      street: values.street,
+      address: values.address,
+      apartment: "",
+      street: "",
       city: values.city,
       state: values.state,
       pin_code: values.pin_code,
       phone: values.phone,
-      landmark: values.landmark,
-      address_type: values.address_type,
+      landmark: values.landmark || "",
+      address_type: values.address_type || "Home",
       email: values.email,
-      is_billing: true,
+      is_billing: false,
       is_shipping: false,
-      order_notes: "Leave at the door."
+      order_notes: values.order_notes
     }
 
     // const data = {

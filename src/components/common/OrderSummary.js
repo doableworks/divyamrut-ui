@@ -38,7 +38,7 @@ const OrderSummary = ({
               htmlFor={`quantity-${item.uid}`}
               className="mr-2 text-text !text-left"
             >
-              Quantity: 
+              Quantity:
             </label>
             <div className="flex items-center space-x-2">
               <button
@@ -63,8 +63,8 @@ const OrderSummary = ({
       <td className="text-right text-gray-800 font-medium">
         {/* ₹{(item.product_detail.price * item.quantity).toFixed(2)} */}
         ₹{(
-                      parseFloat(item?.product_detail?.price.replace(/,/g, "")) * Number(item.quantity)
-                    ).toFixed(2)}
+          parseFloat(item?.product_detail?.price.replace(/,/g, "")) * Number(item.quantity)
+        ).toFixed(2)}
       </td>
     </tr>
   );
@@ -115,20 +115,25 @@ const OrderSummary = ({
           <div className="flex items-start justify-between">
             <div className="flex items-start gap-3">
               <div>
-              <span className="font-bold text-lg">Delivery Address</span>
+                <span className="font-bold text-lg">Delivery Address</span>
                 <p className="section-title !text-left">
                   {deliveryAddress.address_type}
                 </p>
                 <div className="mt-3 text-gray-700 space-y-1">
                   <span className="section-content !text-left">{`${deliveryAddress?.first_name} ${deliveryAddress?.last_name}`}</span>
-                  <span className="section-content !text-left">{`${deliveryAddress?.apartment}, ${deliveryAddress?.street}`}</span>
-                  <span className="section-content !text-left">{`${deliveryAddress?.address}, ${deliveryAddress?.sector}`}</span>
-                  <span className="section-content !text-left">
-                    {deliveryAddress?.landmark}
-                  </span>
-                  <span className="section-content !text-left">{`${deliveryAddress?.city} ${deliveryAddress?.state},  ${deliveryAddress?.pin_code}`}</span>
-                  <p className="section-content !text-left">{`email : ${deliveryAddress?.email}`}</p>
-                  <p className="section-content !text-left">{`Phone number :  ${deliveryAddress?.phone}`}</p>
+                  <span className="section-content !text-left">{`${deliveryAddress?.address}, ${deliveryAddress?.city}`}</span>
+                  <span className="section-content !text-left">{`${deliveryAddress?.state}, ${deliveryAddress?.country}, ${deliveryAddress?.pin_code}`}</span>
+                  <p className="section-content !text-left">
+                    <strong>landmark:</strong>  {deliveryAddress?.landmark}
+                  </p>
+                  <p className="section-content !text-left">
+                    <strong>note:</strong>  {deliveryAddress?.order_notes}
+                  </p>
+                  <p className="section-content !text-left">
+                    <strong>email:</strong>  {deliveryAddress?.email}
+                  </p>
+                  <p className="section-content !text-left">
+                    <strong>Phone number:</strong>  {deliveryAddress?.phone}</p>
                 </div>
               </div>
             </div>

@@ -35,14 +35,19 @@ const SelectDeliveryAddress = ({ addressList, SelectedDeliveryAddre, handleAddNe
                   <p className="section-title !text-left">{addr.address_type}</p>
                   <div className="mt-3 text-gray-700 space-y-1">
                     <p className="section-content !text-left">{`${addr?.first_name} ${addr?.last_name}`}</p>
-                    <p className="section-content !text-left">{`${addr?.apartment}, ${addr?.street}`}</p>
-                    <p className="section-content !text-left">{`${addr?.address}, ${addr?.sector}`}</p>
+                    <p className="section-content !text-left">{`${addr?.address}, ${addr?.city}`}</p>
+                    <p className="section-content !text-left">{`${addr?.state}, ${addr?.country},  ${addr?.pin_code}`}</p>
                     <p className="section-content !text-left">
-                      {addr?.landmark}
+                   <strong>landmark:</strong>  {addr?.landmark}
                     </p>
-                    <p className="section-content !text-left">{`${addr?.city} ${addr?.state},  ${addr?.pin_code}`}</p>
-                    <p className="section-content !text-left">{`email : ${addr?.email}`}</p>
-                    <p className="section-content !text-left">{`Phone number :  ${addr?.phone}`}</p>
+                    <p className="section-content !text-left">
+                   <strong>note:</strong>  {addr?.order_notes}
+                    </p>
+                    <p className="section-content !text-left">
+                    <strong>email:</strong>  {addr?.email}
+                    </p>
+                    <p className="section-content !text-left">
+                    <strong>Phone number:</strong>  {addr?.phone}</p>
                   </div>
                 </div>
               </div>

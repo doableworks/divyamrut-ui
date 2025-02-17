@@ -124,35 +124,49 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
             <Form.Item
               label="First name"
               name="first_name"
-              rules={[{ required: true, message: "First name is required" }]}
+              // rules={[{ required: true, message: "First name is required" }]}
             >
               <Input placeholder="Enter first name" value={userData?.first_name} disabled />
             </Form.Item>
             <Form.Item
               label="Last name"
               name="last_name"
-              rules={[{ required: true, message: "Last name is required" }]}
+              // rules={[{ required: true, message: "Last name is required" }]}
             >
               <Input placeholder="Enter surname here" value={userData?.last_name} disabled />
             </Form.Item>
           </div>
           {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}
           <Form.Item
+            label="Address"
+            name="address"
+            rules={[{ required: true, message: "this is required" }]}
+          >
+            <Input placeholder="Apartment/unit/street/etc" />
+          </Form.Item>
+          {/* <Form.Item
             label="Apartment/suite/unit/etc"
             name="apartment"
             rules={[{ required: true, message: "this is required" }]}
           >
             <Input placeholder="Apartment/suite/unit/etc" />
-          </Form.Item>
-          <Form.Item
+          </Form.Item> */}
+          {/* <Form.Item
             label="Street"
             name="street"
             rules={[{ required: true, message: "Street is required" }]}
           >
             <Input placeholder="Enter street address" />
-          </Form.Item>
+          </Form.Item> */}
           {/* </div> */}
           {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}
+          <Form.Item
+            label="Town/City"
+            name="city"
+            rules={[{ required: true, message: "Name is required" }]}
+          >
+            <Input placeholder="Enter Town/City" />
+          </Form.Item>
           <Form.Item
             label="State"
             name="state"
@@ -171,13 +185,6 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
             />
           </Form.Item>
           <Form.Item
-            label="Town/City"
-            name="city"
-            rules={[{ required: true, message: "Name is required" }]}
-          >
-            <Input placeholder="Enter Town/City" />
-          </Form.Item>
-          <Form.Item
             label="Pin Code"
             name="pin_code"
             rules={[{ required: true, message: "Name is required" }]}
@@ -187,16 +194,22 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
           <Form.Item
             label="Landmark"
             name="landmark"
-            rules={[{ required: true, message: "Name is required" }]}
+            // rules={[{ required: true, message: "Name is required" }]}
           >
-            <Input placeholder="E.g. near build/hospital/school" />
+            <Input placeholder="E.g. near build/hospital/school (optional)" />
           </Form.Item>
           <Form.Item
             label="AddressType"
             name="address_type"
-            rules={[{ required: true, message: "This is required" }]}
+            // rules={[{ required: true, message: "This is required" }]}
           >
-            <Input placeholder="E.g. Home/Office/Other" />
+            <Input placeholder="E.g. Home/Office/Other (optional)" />
+          </Form.Item>
+          <Form.Item
+            label="Order note"
+            name="order_notes"
+          >
+            <Input placeholder="E.g. enter a note for order (optional)" />
           </Form.Item>
           {/* </div> */}
           {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}
