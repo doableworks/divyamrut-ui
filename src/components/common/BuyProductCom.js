@@ -264,10 +264,10 @@ const BuyProductCom = ({ allAddressData }) => {
       setIsLoading(false);
       console.log("Error while Create order", err);
       // setLastStepStatus("error");
-      messageApi.open({
+      setTimeout(()=> messageApi.open({
         type: "error",
-        content: "Unable to create order, Please try after sometime.",
-      });
+        content: err?.response?.data?.error || "Unable to create order, Please try after sometime.",
+      }),300)
     } finally {
       // setIsLoading(false);
     }
@@ -275,7 +275,7 @@ const BuyProductCom = ({ allAddressData }) => {
 
 
   const handleCreateOrder = async (data) => {
-    setIsLoading(true);
+    // setIsLoading(true);
     const pro_uid_list = data.order_items.map(i => i.product_uid)
 
     try {
@@ -305,10 +305,10 @@ const BuyProductCom = ({ allAddressData }) => {
     } catch (err) {
       console.log("Error while Create order", err);
       // setLastStepStatus("error");
-      messageApi.open({
+      setTimeout(()=> messageApi.open({
         type: "error",
-        content: "Unable to create order, Please try after sometime.",
-      });
+        content: err?.response?.data?.error || "Unable to create order, Please try after sometime.",
+      }),300)
     } finally {
       setIsLoading(false);
     }
