@@ -210,8 +210,6 @@ const ProductDetail = ({ item }) => {
   const [quantity, setQuantity] = useState(1);
   const { onAddItem, onIncreaseOrDecreaseItem } = useCartActions();
 
-  console.log("item 444", item)
-
   const handleAddItem = async () => {
     try {
       setLoading(true)
@@ -234,23 +232,9 @@ const ProductDetail = ({ item }) => {
 
   };
 
-  // const handleIncreaseCartItem = async (item, action) => {
-  //   try {
-  //     setLoading(true)
-  //     await onIncreaseOrDecreaseItem(action, item?.product_detail.uid);
-  //   } catch (error) {
-  //     console.log("handleIncreaseCartItem cart error", error);
-  //   } finally {
-  //     setLoading(null)
-  //   }
-  // };
-
-
   const handleIncreaseCartItem = async (action) => {
     setQuantity(action == 'increase' ? quantity + 1 : quantity - 1)
   };
-
-
 
   return (
     <>
