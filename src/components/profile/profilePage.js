@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import { ChevronRightIcon, PencilIcon } from "@heroicons/react/24/outline";
 import {
   ArrowsUpDownIcon,
   FaceSmileIcon,
@@ -14,6 +14,7 @@ import { signOut } from "next-auth/react";
 import { closeNav } from "@/redux/feature/mobileNavSlice";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import { clearCart } from "@/redux/feature/cartSlice";
+import ConsentForm from "./ConsentForm";
 
 const initialLeftbar = [
   {
@@ -77,6 +78,7 @@ const initialLeftbar = [
 
 const UserProfileList = ({ userProfileData }) => {
   const [activeTab, setActiveTab] = useState(initialLeftbar[1]);
+  const [openConsentForm, setOpenConsentForm] = useState(false);
 
   const onLogOut = async () => {
     try {
@@ -87,6 +89,14 @@ const UserProfileList = ({ userProfileData }) => {
     } catch (error) {
       console.log("onLogOut error", error);
     }
+  };
+
+  const handleOpenConsentForm = () => {
+    setOpenConsentForm(true);
+  };
+
+  const handleCloseConsentForm = () => {
+    setOpenConsentForm(false);
   };
 
   const renderActiveTabContent = () => {
@@ -116,9 +126,14 @@ const UserProfileList = ({ userProfileData }) => {
                     {each.therapy}
                   </span>
                 </p>
-                <p className="section-content !text-left !text-[15px]">
-                  Status: <span>{each.status}</span>
-                </p>
+                <div className="flex items-center justify-between">
+                  <p className="section-content !text-left !text-[15px]">
+                    Status: <span>{each.status}</span>
+                  </p>
+                  <button type="button" onClick={handleOpenConsentForm}>
+                    <PencilIcon className="h-5 w-5 text-primary" />
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
@@ -256,7 +271,7 @@ const UserProfileList = ({ userProfileData }) => {
   const handleSetActiveTab = (clickedId) => {
     setActiveTab(clickedId);
   };
-  console.log(userProfileData);
+
   return (
     <div>
       <div className="common_page_width !pt-10 flex flex-col lg:flex-row gap-4">
@@ -392,6 +407,13 @@ const UserProfileList = ({ userProfileData }) => {
           </li>
         ))}
       </ul>
+
+      {openConsentForm && (
+        <ConsentForm
+          isOpen={openConsentForm}
+          handleCloseConsentForm={handleCloseConsentForm}
+        />
+      )}
     </div>
   );
 };
