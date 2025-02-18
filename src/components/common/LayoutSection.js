@@ -90,7 +90,7 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
           <div
             className={twMerge(
               "h-[65px] [@media(min-width:1340.98px)]:h-[172px]",
-              pathname === "/" && "hidden"
+              // pathname === "/" && "hidden"
             )}
           />
           {children}
