@@ -124,16 +124,20 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
             <Form.Item
               label="First name"
               name="first_name"
-              // rules={[{ required: true, message: "First name is required" }]}
+              rules={[{ required: true, message: "First name is required" }]}
             >
-              <Input placeholder="Enter first name" value={userData?.first_name} disabled />
+              <Input placeholder="Enter first name" value={userData?.first_name}
+               disabled={userData ? true : false}
+                />
             </Form.Item>
             <Form.Item
               label="Last name"
               name="last_name"
-              // rules={[{ required: true, message: "Last name is required" }]}
+              rules={[{ required: true, message: "Last name is required" }]}
             >
-              <Input placeholder="Enter surname here" value={userData?.last_name} disabled />
+              <Input placeholder="Enter surname here" value={userData?.last_name} 
+              disabled={userData ? true : false}
+              />
             </Form.Item>
           </div>
           {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}

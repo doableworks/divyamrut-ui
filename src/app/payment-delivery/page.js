@@ -26,7 +26,7 @@ const getUserAddress = async (session) => {
 
 const page = async() => {
   const session = await getServerSession(authOptions);
-  const allAddressData = await getUserAddress(session);
+  const allAddressData = session ? await getUserAddress(session) : []
 
   return (
     <div className="common_page_width relative !pl-4 !pr-4 !pt-0">
