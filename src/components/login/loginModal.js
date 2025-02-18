@@ -105,7 +105,7 @@ const LoginModal = () => {
   };
 
   const handleLoginWithOTPStepOne = async (values) => {
-    if (!values.emal) {
+    if (!values.email) {
       showResponseMessage("error", "Please enter a valid email");
       return;
     }
@@ -133,7 +133,30 @@ const LoginModal = () => {
     }
   };
 
-  const handleLoginWithOTPStepTwo = () => {};
+  const handleLoginWithOTPStepTwo = (values) => {
+    setLoading(true);
+    signIn("credentials", {
+      redirect: false,
+      email: loginWithOTStepOne.data,
+      otp: values.otp,
+    })
+      .then(({ ok, error }) => {
+        setLoading(false);
+        if (ok) {
+          dispatch(setOpenLoginModal(false));
+          showResponseMessage("success", "Login successfully!");
+        } else {
+          showResponseMessage("error", "The OTP is either expired or invalid");
+        }
+      })
+      .catch(() => {
+        setLoading(false);
+        showResponseMessage("error", "Bad Credentials!");
+      })
+      .finally(() => {
+        dispatch(setCartLoader(true));
+      });
+  };
 
   const toggleLoginWithOTP = () => {
     setLoginWithOTP(!loginWithOTP);
@@ -144,7 +167,6 @@ const LoginModal = () => {
       data: null,
       isCompleted: false,
     });
-    setText("Confirm OTP");
   };
 
   return (
@@ -175,10 +197,14 @@ const LoginModal = () => {
             <div>
               <div className="w-full">
                 <h3 className="highlight-heading !text-left !mb-2 !mt-0">
-                  {text || "Hello Again!"}
+                  {loginWithOTStepOne.isCompleted
+                    ? "Confirm OTP"
+                    : text || "Hello Again!"}
                 </h3>
                 <p className="section-title !normal-case !text-gray-500 !text-left mb-10">
-                  Welcome back you&apos;ve been missed!
+                  {loginWithOTStepOne.isCompleted
+                    ? `We have sent you a confirmation email to ${loginWithOTStepOne.data}`
+                    : "Welcome back you&apos;ve been missed!"}
                 </p>
               </div>
               {loginWithOTP ? (
@@ -233,7 +259,7 @@ const LoginModal = () => {
                   </Form>
                 ) : (
                   <Form
-                    name="loginwithOTPOne"
+                    name="loginwithOTPTwo"
                     wrapperCol={{ span: 24 }}
                     onFinish={handleLoginWithOTPStepTwo}
                     autoComplete="off"
@@ -277,7 +303,7 @@ const LoginModal = () => {
                       <CustomButton
                         htmlType="submit"
                         className="site-button-primary !m-0 w-[-webkit-fill-available]"
-                        title="Next"
+                        title="Submit"
                         loading={loading}
                         type="submit"
                       />
