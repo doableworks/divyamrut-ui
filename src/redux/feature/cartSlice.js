@@ -41,9 +41,9 @@ const cartSlice = createSlice({
         (item) => item.product_detail.uid === action.payload.product_detail.uid
       );
       if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity = action.payload.quantity;
       } else {
-        state.items.push({ ...action.payload, quantity: 1, is_select: true });
+        state.items.push({ ...action.payload, is_select: true });
       }
     },
     increaseOrDecreaseCartItemQuantity: (state, action) => {
