@@ -9,12 +9,13 @@ import {
   setOpenLoginModal,
   setOpenRegisterModal,
 } from "@/redux/feature/authModalSlice";
-import {
-  setCartLoader,
-} from "@/redux/feature/cartSlice";
+import { setCartLoader } from "@/redux/feature/cartSlice";
 import { useRouter } from "nextjs-toploader/app";
 import CustomButton from "@/components/common/CustomButton";
 import { NoImageAvailabe } from "@/contants/contants";
+import axios from "axios";
+
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const LoginModal = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,11 @@ const LoginModal = () => {
   const [text, setText] = useState("");
   const fullText = "Hello Again!";
   const [index, setIndex] = useState(0);
+  const [loginWithOTP, setLoginWithOTP] = useState(true);
+  const [loginWithOTStepOne, setLoginWithOTPStepOne] = useState({
+    data: null,
+    isCompleted: false,
+  });
 
   const showRegisterModal = () => {
     dispatch(setOpenLoginModal(false));
@@ -55,7 +61,7 @@ const LoginModal = () => {
   const onFinish = (values) => {
     setLoading(true);
     setErrorMessage("");
-    dispatch(setCartLoader(true))
+    dispatch(setCartLoader(true));
     signIn("credentials", {
       redirect: false,
       email: values.email,
@@ -76,7 +82,7 @@ const LoginModal = () => {
         showResponseMessage("error", "Bad Credentials!");
       })
       .finally(() => {
-        dispatch(setCartLoader(true))
+        dispatch(setCartLoader(true));
       });
   };
 
@@ -92,6 +98,53 @@ const LoginModal = () => {
 
   const showResponseMessage = (type, content) => {
     messageApi.open({ type, content });
+  };
+
+  const headers = {
+    "Content-Type": "application/json",
+  };
+
+  const handleLoginWithOTPStepOne = async (values) => {
+    if (!values.emal) {
+      showResponseMessage("error", "Please enter a valid email");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const url = `${apiUrl}/api/auth/signup-otp/`;
+      const body = { email: values.email };
+
+      const response = await axios.post(url, body, { headers });
+
+      if (response.status === 200) {
+        setLoginWithOTPStepOne({ data: values.email, isCompleted: true });
+        showResponseMessage("success", "OTP sent successfully");
+      } else {
+        showResponseMessage("error", "Unable to send OTP, Please try again");
+      }
+    } catch (err) {
+      console.log("Error sending OTP", err);
+      const errorMessage =
+        err?.response?.data?.message || "Unable to send OTP, Please try again";
+      showResponseMessage("error", errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLoginWithOTPStepTwo = () => {};
+
+  const toggleLoginWithOTP = () => {
+    setLoginWithOTP(!loginWithOTP);
+  };
+
+  const handleChangeOTPStepOne = () => {
+    setLoginWithOTPStepOne({
+      data: null,
+      isCompleted: false,
+    });
+    setText("Confirm OTP");
   };
 
   return (
@@ -128,94 +181,178 @@ const LoginModal = () => {
                   Welcome back you&apos;ve been missed!
                 </p>
               </div>
-              <Form
-                name="basic"
-                wrapperCol={{ span: 24 }}
-                onFinish={onFinish}
-                autoComplete="off"
-                className="w-full"
-              >
-                <div className="mb-6">
-                  <Form.Item
-                    name="email"
-                    rules={[
-                      {
-                        type: "email",
-                        message: "Invalid email!",
-                      },
-                      { required: true, message: "Please input your email!" },
-                    ]}
+              {loginWithOTP ? (
+                !loginWithOTStepOne.isCompleted ? (
+                  <Form
+                    name="loginwithOTPOne"
+                    wrapperCol={{ span: 24 }}
+                    onFinish={handleLoginWithOTPStepOne}
+                    autoComplete="off"
                     className="w-full"
                   >
-                    <Input placeholder="Email" />
-                  </Form.Item>
-                </div>
+                    <div className="mb-6">
+                      <Form.Item
+                        name="email"
+                        rules={[
+                          {
+                            type: "email",
+                            message: "Invalid email!",
+                          },
+                          {
+                            required: true,
+                            message: "Please input your email!",
+                          },
+                        ]}
+                        className="w-full"
+                      >
+                        <Input placeholder="Email" />
+                      </Form.Item>
+                    </div>
 
-                <div className="mb-6">
-                  <Form.Item
-                    name="password"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input your password!",
-                      },
-                    ]}
+                    <div className="flex justify-between items-center w-full mb-8">
+                      <div></div>
+
+                      <button
+                        className="text-sm text-[--yellow] cursor-pointer font-medium "
+                        onClick={toggleLoginWithOTP}
+                        type="button"
+                      >
+                        Login with Password
+                      </button>
+                    </div>
+
+                    <Form.Item className="w-full">
+                      <CustomButton
+                        htmlType="submit"
+                        className="site-button-primary !m-0 w-[-webkit-fill-available]"
+                        title="Next"
+                        loading={loading}
+                        type="submit"
+                      />
+                    </Form.Item>
+                  </Form>
+                ) : (
+                  <Form
+                    name="loginwithOTPOne"
+                    wrapperCol={{ span: 24 }}
+                    onFinish={handleLoginWithOTPStepTwo}
+                    autoComplete="off"
                     className="w-full"
                   >
-                    <Input.Password placeholder="Enter Password" />
-                  </Form.Item>
-                </div>
+                    <div className="mb-6 flex justify-center items-center">
+                      <Form.Item
+                        name="otp"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please enter the 6-digit OTP",
+                          },
+                          {
+                            len: 6,
+                            message: "OTP must be exactly 6 digits",
+                          },
+                        ]}
+                      >
+                        <Input.OTP
+                          type="text"
+                          maxLength={6}
+                          placeholder="Enter 6-digit OTP"
+                        />
+                      </Form.Item>
+                    </div>
 
-                <div className="text-right mb-5">
-                  <span
-                    className="text-sm font-semibold text-right text-blue-600 cursor-pointer mb-5"
-                    onClick={handleForgetPass}
-                  >
-                    Forgot Password
-                  </span>
-                </div>
+                    <div className="flex justify-between items-center w-full mb-8">
+                      <div></div>
 
-                <Form.Item className="w-full">
-                  {/* <Button
-                  htmlType="submit"
-                  loading={loading}
-                  size={"large"}
-                  // className="w-full h-12 rounded-md bg-blue-600 text-white font-semibold"
+                      <button
+                        className="text-sm text-[--yellow] cursor-pointer font-medium "
+                        onClick={handleChangeOTPStepOne}
+                        type="button"
+                      >
+                        Change Email
+                      </button>
+                    </div>
+
+                    <Form.Item className="w-full">
+                      <CustomButton
+                        htmlType="submit"
+                        className="site-button-primary !m-0 w-[-webkit-fill-available]"
+                        title="Next"
+                        loading={loading}
+                        type="submit"
+                      />
+                    </Form.Item>
+                  </Form>
+                )
+              ) : (
+                <Form
+                  name="basic"
+                  wrapperCol={{ span: 24 }}
+                  onFinish={onFinish}
+                  autoComplete="off"
                   className="w-full"
                 >
-                  Login
-                </Button> */}
+                  <div className="mb-6">
+                    <Form.Item
+                      name="email"
+                      rules={[
+                        {
+                          type: "email",
+                          message: "Invalid email!",
+                        },
+                        { required: true, message: "Please input your email!" },
+                      ]}
+                      className="w-full"
+                    >
+                      <Input placeholder="Email" />
+                    </Form.Item>
+                  </div>
 
-                  <CustomButton
-                    htmlType="submit"
-                    className="site-button-primary !m-0 w-[-webkit-fill-available]"
-                    title="Login"
-                    loading={loading}
-                    type="submit"
-                  />
-                </Form.Item>
-              </Form>
+                  <div className="mb-6">
+                    <Form.Item
+                      name="password"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your password!",
+                        },
+                      ]}
+                      className="w-full"
+                    >
+                      <Input.Password placeholder="Enter Password" />
+                    </Form.Item>
+                  </div>
+
+                  <div className="flex justify-between items-center w-full mb-8">
+                    <button
+                      className="text-sm text-[--yellow] cursor-pointer font-medium "
+                      onClick={toggleLoginWithOTP}
+                      type="button"
+                    >
+                      Login with OTP
+                    </button>
+
+                    <button
+                      type="button"
+                      className="text-sm font-medium text-blue-600 cursor-pointer"
+                      onClick={handleForgetPass}
+                    >
+                      Forgot Password
+                    </button>
+                  </div>
+
+                  <Form.Item className="w-full">
+                    <CustomButton
+                      htmlType="submit"
+                      className="site-button-primary !m-0 w-[-webkit-fill-available]"
+                      title="Login"
+                      loading={loading}
+                      type="submit"
+                    />
+                  </Form.Item>
+                </Form>
+              )}
             </div>
-
-            {/* <div className="w-full flex items-center justify-center mt-4">
-              <div className="h-px bg-gray-200 w-1/3"></div>
-              <p className="mx-4 text-sm">Or</p>
-              <div className="h-px bg-gray-200 w-1/3"></div>
-            </div>
-
-            <div
-              className="flex items-center justify-center w-full bg-white border border-gray-200 rounded-md p-3 mt-4 cursor-pointer"
-              onClick={onGoogle}
-            >
-              <Image
-                src="/asset/home/loginModalGoogle.png"
-                alt="Google icon"
-                className="w-6 h-6"
-                width={24}
-                height={24}
-              />
-              <p className="ml-3 font-medium text-sm">Continue with Google</p>
-            </div> */}
 
             <p className="mt-5 text-sm text-center">
               Not a member? &nbsp;
