@@ -199,8 +199,6 @@ import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import { useSession } from "next-auth/react";
 
 
-
-
 const ProductDetail = ({ item }) => {
   const router = useRouter();
   const dispatch = useDispatch();

@@ -93,15 +93,22 @@ const CartPage = () => {
       .toFixed(2);
   };
 
+  // const onCheckout = async () => {
+  //   if (session) {
+  //     const selectedItems = items.filter(item => item.is_select)
+  //     await dispatch(setBuyProduct({ items: selectedItems, source: "cart" }))
+  //     await router.push("/payment-delivery");
+  //   }
+  //   else {
+  //     dispatch(setOpenLoginModal(true))
+  //   }
+  // };
+
+
   const onCheckout = async () => {
-    if (session) {
       const selectedItems = items.filter(item => item.is_select)
       await dispatch(setBuyProduct({ items: selectedItems, source: "cart" }))
       await router.push("/payment-delivery");
-    }
-    else {
-      dispatch(setOpenLoginModal(true))
-    }
   };
 
   const allSelected =
@@ -267,4 +274,3 @@ const CartPage = () => {
 };
 
 export default CartPage;
-

@@ -6,7 +6,6 @@ import { useRouter } from "nextjs-toploader/app";
 import { useSelector, useDispatch } from "react-redux";
 import { Cross, Delete, EmptyCart } from "@/icon/icons";
 import CustomButton from "@/components/common/CustomButton";
-import { useSession } from "next-auth/react";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import { closeNav, openNav, toggleNav } from "@/redux/feature/mobileNavSlice";
 import { CloseOutlined, DownOutlined } from "@ant-design/icons";
@@ -19,7 +18,6 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 
 const CardSlider = () => {
-  const { data: session } = useSession();
   const dispatch = useDispatch();
   const router = useRouter();
   const {items : cartItems, openCartSlider } = useSelector((state) => state.cart);
@@ -82,16 +80,24 @@ const CardSlider = () => {
   };
 
 
-    const onCheckout = async () => {
-      if (session) {
+    // const onCheckout = async () => {
+    //   if (session) {
+    //     const selectedItems = cartItems.filter(item => item.is_select)
+    //     await dispatch(openCartSliderFun(false))
+    //     await dispatch(setBuyProduct({ items: selectedItems, source: "cart" }))
+    //     await router.push("/payment-delivery");
+    //   }
+    //   else {
+    //     dispatch(setOpenLoginModal(true))
+    //   }
+    // };
+
+
+     const onCheckout = async () => {
         const selectedItems = cartItems.filter(item => item.is_select)
         await dispatch(openCartSliderFun(false))
         await dispatch(setBuyProduct({ items: selectedItems, source: "cart" }))
         await router.push("/payment-delivery");
-      }
-      else {
-        dispatch(setOpenLoginModal(true))
-      }
     };
 
 
@@ -143,7 +149,7 @@ const CardSlider = () => {
                     <CustomButton
                       htmlType="submit"
                       className="site-button-primary !m-0 w-[-webkit-fill-available] capitalize"
-                      title={session ?"Proceed to Checkout" : "Login to Proceed"}
+                      title={"Proceed to Checkout"}
                       loading={false}
                       type="submit"
                       onClick={onCheckout}

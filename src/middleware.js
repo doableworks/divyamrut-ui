@@ -13,7 +13,7 @@ export default async function middleware(req) {
   ];
 
   const protectedRoutes = [
-    "/payment-delivery",
+    // "/payment-delivery",
     "/profile",
   ];
 

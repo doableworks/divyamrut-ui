@@ -119,7 +119,6 @@ const useCartActions = () => {
   };
 
   const onAddItem = async (item, quantity=1) => {
-    console.log("")
     try {
       let response;
       if (session) {

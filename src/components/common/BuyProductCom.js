@@ -16,6 +16,7 @@ import useCartActions from "@/components/cartCom/useCartActions";
 import BlockPageLoader from "@/components/loader/BlockPageLoader"
 import { Cross, Delete, EmptyCart } from "@/icon/icons";
 import CustomButton from "@/components/common/CustomButton";
+import axios from "axios";
 
 const stepsBuyProducts = [
   {
@@ -41,22 +42,21 @@ const smallDeviceItems = [
 
 
 const BuyProductCom = ({ allAddressData }) => {
+  const { data: session } = useSession();
   const { items: orderList, buyLoader, hasBuy, source: BuyProductSoruce } = useSelector(
     (state) => state.buyProduct
   );
   const router = useRouter()
   const dispatch = useDispatch();
-  const { data: session } = useSession();
   const [messageApi, contextHolder] = message.useMessage();
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [addOrEditAddre, setADDorEditAddre] = useState({ open: false, address: null });
+  const [addOrEditAddre, setADDorEditAddre] = useState({ open: allAddressData.length> 0 ? false : true, address: null });
   const [addressList, setAddressList] = useState(allAddressData);
   const [SelectedDeliveryAddre, setSelectedDeliveryAddre] = useState(null);
   const [lastStepStatus, setLastStepStatus] = useState("process");
   const [orderDetails, setOrderDetails] = useState(null)
   const { onRemoveItem } = useCartActions();
-
 
   useEffect(() => {
     if (orderDetails && activeStep === 1) {
@@ -87,7 +87,7 @@ const BuyProductCom = ({ allAddressData }) => {
       email: values.email,
       is_billing: false,
       is_shipping: false,
-      order_notes: values.order_notes
+      order_notes: values.order_notes || ""
     }
 
     // const data = {
@@ -113,13 +113,12 @@ const BuyProductCom = ({ allAddressData }) => {
     // }
 
     try {
-      const response = await axiosInstance.post("/product/shipping/address/", data, {
-        session,
-      });
+      const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/product/shipping/address/", data);
       if (response.status === 200) {
         const data = response?.data?.data
         setAddressList([...addressList, data])
         setADDorEditAddre({ open: false, address: null });
+        onSelectAddress(data)
       } else {
         message.error("Something went wrong, please try again later!");
       }
@@ -136,11 +135,11 @@ const BuyProductCom = ({ allAddressData }) => {
     const data = {
       first_name: values.first_name,
       last_name: values.last_name,
-      company_name: "ABC Ltd",
+      company_name: "",
       country: values.country,
-      address: "123 Main Street",
-      apartment: values.apartment,
-      street: values.street,
+      address: values.address,
+      apartment: "",
+      street: "",
       city: values.city,
       state: values.state,
       pin_code: values.pin_code,
@@ -150,18 +149,17 @@ const BuyProductCom = ({ allAddressData }) => {
       email: values.email,
       is_billing: true,
       is_shipping: false,
-      order_notes: "Leave at the door."
+      order_notes: values.order_notes
     }
 
     try {
-      const response = await axiosInstance.put(`/product/shipping/address/${addOrEditAddre.address.uid}/`, data, {
-        session,
-      });
+      const response = await axios.put(process.env.NEXT_PUBLIC_API_URL + `/product/shipping/address/${addOrEditAddre.address.uid}/`, data);
       if (response.status === 200) {
         const data = response?.data?.data
         const remainAddress = addressList.filter(item => item.uid != addOrEditAddre.address.uid)
         setAddressList([...remainAddress, data])
         setADDorEditAddre({ open: false, address: null });
+        onSelectAddress(data)
       } else {
         message.error("Something went wrong, please try again later!");
       }
@@ -173,12 +171,11 @@ const BuyProductCom = ({ allAddressData }) => {
     }
   };
 
-  const onDeleteAddress = async (uid) => {
+  const onDeleteAddress = async (uid,email) => {
     try {
-      const response = await axiosInstance.delete(`/product/shipping/address/${uid}/`, {
-        session,
-      });
-      if (response.status == 204) {
+      const data = {email: email}
+      const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + `/product/shipping/address/delete/${uid}/`, data);
+      if (response.status === 204) {
         const remainAddress = addressList.filter(item => item.uid != uid)
         setAddressList([...remainAddress])
         setADDorEditAddre({ open: false, address: null });
@@ -207,11 +204,11 @@ const BuyProductCom = ({ allAddressData }) => {
   };
 
   const decreaseQuantity = (uid) => {
-    console.log("decreaseQuantity uid", uid)
     dispatch(increOrDecreQuantity({ uid: uid, action: "decrease" }));
   };
 
   const onCancel = () => {
+
     setADDorEditAddre({ open: false, address: null })
   }
 
@@ -243,13 +240,13 @@ const BuyProductCom = ({ allAddressData }) => {
       };
 
       const body = {
+        "email": SelectedDeliveryAddre?.email,
         "total_amount": calculateTotal(),
         "currency": "INR",
         "shipping_address": SelectedDeliveryAddre.uid,
         "product_list": pro_uid_list
       }
       const response = await axiosInstance.post('/product/orders/', body, {
-        session,
         next: { revalidate: 60 },
       });
 
@@ -284,8 +281,8 @@ const BuyProductCom = ({ allAddressData }) => {
         receipt: "Product",
         currency: data.currency,
         notes: {
-          user_email: session?.user?.user?.email,
-          email: session?.user?.user?.email,
+          user_email: session?.user?.user?.email || SelectedDeliveryAddre?.email,
+          email: SelectedDeliveryAddre?.email,
           therapist_id: "",
           product_id: "",
           therapy_slug: "",
@@ -363,15 +360,14 @@ const BuyProductCom = ({ allAddressData }) => {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: orderDetails.amount_due,
         currency: orderDetails.currency,
-        name: session?.user?.user?.first_name,
+        name: session?.user?.user?.first_name || SelectedDeliveryAddre?.first_name,
         description: `Buy Products`,
         order_id: orderDetails.id,
         notes: orderDetails.notes,
         prefill: {
-          name: session?.user?.user?.first_name,
-          email: session?.user?.user?.email,
-          // contact: orderDetails.notes.phone_no,
-          contact: ""
+          name: session?.user?.user?.first_name || SelectedDeliveryAddre?.first_name +  SelectedDeliveryAddre?.last_name ,
+          email: session?.user?.user?.email || SelectedDeliveryAddre?.email,
+          contact: SelectedDeliveryAddre?.phone || ""
         },
         modal: {
           escape: true,
