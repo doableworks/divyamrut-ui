@@ -28,7 +28,6 @@ const RelatedProductOverview = ({
     event.stopPropagation();
     try {
       setIsLoading(true);
-      console.log("vvvvv rrrr", item)
       onAddItem(item)
     } catch (error) {
       console.log("handleAddItem error", error);

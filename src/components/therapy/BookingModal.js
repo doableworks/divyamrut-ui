@@ -476,7 +476,7 @@ export default function BookingModal() {
         handler: async (response) => {
           if (response && response.razorpay_payment_id) {
             setIsLoading(true);
-            console.log("Payment Success:", response);
+            // console.log("Payment Success:", response);
             messageApi.open({
               type: "success",
               content: "Payment successful, Redirecting...",
