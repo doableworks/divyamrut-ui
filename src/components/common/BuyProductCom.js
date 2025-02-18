@@ -171,10 +171,11 @@ const BuyProductCom = ({ allAddressData }) => {
     }
   };
 
-  const onDeleteAddress = async (uid) => {
+  const onDeleteAddress = async (uid,email) => {
     try {
-      const response = await axios.delete(process.env.NEXT_PUBLIC_API_URL + `/product/shipping/address/${uid}/`);
-      if (response.status == 204) {
+      const data = {email: email}
+      const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + `/product/shipping/address/delete/${uid}/`, data);
+      if (response.status === 204) {
         const remainAddress = addressList.filter(item => item.uid != uid)
         setAddressList([...remainAddress])
         setADDorEditAddre({ open: false, address: null });
@@ -359,15 +360,14 @@ const BuyProductCom = ({ allAddressData }) => {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: orderDetails.amount_due,
         currency: orderDetails.currency,
-        name: session?.user?.user?.first_name,
+        name: session?.user?.user?.first_name || SelectedDeliveryAddre?.first_name,
         description: `Buy Products`,
         order_id: orderDetails.id,
         notes: orderDetails.notes,
         prefill: {
-          name: session?.user?.user?.first_name,
-          email: session?.user?.user?.email,
-          // contact: orderDetails.notes.phone_no,
-          contact: ""
+          name: session?.user?.user?.first_name || SelectedDeliveryAddre?.first_name +  SelectedDeliveryAddre?.last_name ,
+          email: session?.user?.user?.email || SelectedDeliveryAddre?.email,
+          contact: SelectedDeliveryAddre?.phone || ""
         },
         modal: {
           escape: true,

@@ -62,7 +62,7 @@ const SelectDeliveryAddress = ({ addressList, SelectedDeliveryAddre, handleAddNe
                   type="text"
                   icon={<DeleteOutlined />}
                   onClick={(e) => {
-                    onDeleteAddress(addr.uid)
+                    onDeleteAddress(addr.uid, addr.email)
                     e.stopPropagation();
                   }}
                   danger
