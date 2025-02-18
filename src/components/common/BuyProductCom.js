@@ -87,7 +87,7 @@ const BuyProductCom = ({ allAddressData }) => {
       email: values.email,
       is_billing: false,
       is_shipping: false,
-      order_notes: values.order_notes
+      order_notes: values.order_notes || ""
     }
 
     // const data = {
@@ -113,7 +113,7 @@ const BuyProductCom = ({ allAddressData }) => {
     // }
 
     try {
-      const response = await axios.post("/product/shipping/address/", data);
+      const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/product/shipping/address/", data);
       if (response.status === 200) {
         const data = response?.data?.data
         setAddressList([...addressList, data])
@@ -153,7 +153,7 @@ const BuyProductCom = ({ allAddressData }) => {
     }
 
     try {
-      const response = await axios.put(`/product/shipping/address/${addOrEditAddre.address.uid}/`, data);
+      const response = await axios.put(process.env.NEXT_PUBLIC_API_URL + `/product/shipping/address/${addOrEditAddre.address.uid}/`, data);
       if (response.status === 200) {
         const data = response?.data?.data
         const remainAddress = addressList.filter(item => item.uid != addOrEditAddre.address.uid)
@@ -173,7 +173,7 @@ const BuyProductCom = ({ allAddressData }) => {
 
   const onDeleteAddress = async (uid) => {
     try {
-      const response = await axios.delete(`/product/shipping/address/${uid}/`);
+      const response = await axios.delete(process.env.NEXT_PUBLIC_API_URL + `/product/shipping/address/${uid}/`);
       if (response.status == 204) {
         const remainAddress = addressList.filter(item => item.uid != uid)
         setAddressList([...remainAddress])
@@ -203,7 +203,6 @@ const BuyProductCom = ({ allAddressData }) => {
   };
 
   const decreaseQuantity = (uid) => {
-    console.log("decreaseQuantity uid", uid)
     dispatch(increOrDecreQuantity({ uid: uid, action: "decrease" }));
   };
 
@@ -273,7 +272,6 @@ const BuyProductCom = ({ allAddressData }) => {
 
   const handleCreateOrder = async (data) => {
     // setIsLoading(true);
-    console.log("SelectedDeliveryAddre 77777", SelectedDeliveryAddre)
     const pro_uid_list = data.order_items.map(i => i.product_uid)
 
     try {
@@ -282,7 +280,7 @@ const BuyProductCom = ({ allAddressData }) => {
         receipt: "Product",
         currency: data.currency,
         notes: {
-          user_email: SelectedDeliveryAddre?.email,
+          user_email: session?.user?.user?.email || SelectedDeliveryAddre?.email,
           email: SelectedDeliveryAddre?.email,
           therapist_id: "",
           product_id: "",

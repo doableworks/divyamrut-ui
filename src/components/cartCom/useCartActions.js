@@ -46,11 +46,12 @@ const useCartActions = () => {
     }
   };
 
-  const AddApiCartItem = async (items) => {
+  const AddApiCartItem = async (items, quantity) => {
     try {
       dispatch(setCartLoader(true));
       let data = {
         product_uids: items.map((i) => i.uid),
+        quantity: quantity
       };
       const response = await axiosInstance.post("/product/cart/", data, {
         session,
@@ -117,11 +118,12 @@ const useCartActions = () => {
     }
   };
 
-  const onAddItem = async (item) => {
+  const onAddItem = async (item, quantity=1) => {
+    console.log("")
     try {
       let response;
       if (session) {
-        response = await AddApiCartItem([item]);
+        response = await AddApiCartItem([item], quantity);
       }
       if (session == null || (session && response)) {
         let itemData
@@ -135,7 +137,7 @@ const useCartActions = () => {
             is_select: true,
             product: 117,
             product_detail: item,
-            quantity: 4,
+            quantity: quantity,
             uid: `product_ + ${item.uid}`,
             updated: "",
             user: 3,

@@ -95,8 +95,9 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
           // initialValues={userAddress || {}}
           initialValues={{
             ...userAddress,
-            first_name: userData?.first_name,
-            last_name: userData?.last_name,
+            first_name:userData ? userData?.first_name : userAddress?.first_name,
+            last_name:userData ? userData?.last_name : userAddress?.last_name,
+            email:userData ? userData?.email : userAddress?.email,
             country: country.value
           }}
 
@@ -127,7 +128,7 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
               rules={[{ required: true, message: "First name is required" }]}
             >
               <Input placeholder="Enter first name" value={userData?.first_name}
-               disabled={userData ? true : false}
+              //  disabled={userData ? true : false}
                 />
             </Form.Item>
             <Form.Item
@@ -136,7 +137,7 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
               rules={[{ required: true, message: "Last name is required" }]}
             >
               <Input placeholder="Enter surname here" value={userData?.last_name} 
-              disabled={userData ? true : false}
+              // disabled={userData ? true : false}
               />
             </Form.Item>
           </div>
@@ -227,7 +228,7 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
                 { required: true, message: "Email address is required." },
               ]}
             >
-              <Input placeholder="Enter yout email" />
+              <Input placeholder="Enter yout email" disabled={userData || userAddress?.email} />
             </Form.Item>
             <Form.Item
               label="Number"
