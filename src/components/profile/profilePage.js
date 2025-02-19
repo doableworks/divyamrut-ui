@@ -10,6 +10,10 @@ import {
 } from "@heroicons/react/24/solid";
 import { twMerge } from "tailwind-merge";
 import { NoImageAvailabe, NoProfileImage } from "@/contants/contants";
+import { signOut } from "next-auth/react";
+import { closeNav } from "@/redux/feature/mobileNavSlice";
+import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
+import { clearCart } from "@/redux/feature/cartSlice";
 
 const initialLeftbar = [
   {
@@ -71,11 +75,19 @@ const initialLeftbar = [
   },
 ];
 
-
-
 const UserProfileList = ({ userProfileData }) => {
   const [activeTab, setActiveTab] = useState(initialLeftbar[1]);
-  
+
+  const onLogOut = async () => {
+    try {
+      await signOut();
+      dispatch(closeNav());
+      dispatch(setOpenLoginModal(true));
+      dispatch(clearCart());
+    } catch (error) {
+      console.log("onLogOut error", error);
+    }
+  };
 
   const renderActiveTabContent = () => {
     switch (activeTab.id) {
@@ -244,7 +256,7 @@ const UserProfileList = ({ userProfileData }) => {
   const handleSetActiveTab = (clickedId) => {
     setActiveTab(clickedId);
   };
-
+  console.log(userProfileData);
   return (
     <div>
       <div className="common_page_width !pt-10 flex flex-col lg:flex-row gap-4">
@@ -342,7 +354,13 @@ const UserProfileList = ({ userProfileData }) => {
                 </li>
               ))}
             </ul>
-            <button className="site-button-primary w-full">Logout</button>
+            <button
+              type="button"
+              onClick={onLogOut}
+              className="site-button-primary w-full"
+            >
+              Logout
+            </button>
           </div>
         </div>
         <div className="bg-white p-3 rounded shadow-md flex-grow">

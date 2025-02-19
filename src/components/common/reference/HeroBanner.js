@@ -8,24 +8,24 @@ const HeroBanner = () => {
   return (
     <div
       className="relative w-full overflow-hidden bg-gradient-to-t from-[#EAB64F] via-[#D79F34] to-[#D0861A]
-      h-[calc(100vh-65px)] [@media(min-width:1340.98px)]:h-[calc(100vh-172px)] flex flex-col items-center justify-start"
+       flex flex-col items-center justify-center"
     >
       <img
         src="/asset/home/Hero for Large.png"
         alt="hero"
-        className="hidden [@media(min-width:1340.98px)]:block w-full h-full absolute bottom-0"
+        className="hidden md:block w-full"
       />
 
       <img
         src="/asset/home/Hero for mobile.png"
         alt="hero"
-        className="block [@media(min-width:1340.98px)]:hidden absolute bottom-0 h-full w-full"
+        className="block md:hidden w-full"
       />
 
-      <div className="relative mt-20 lg:mt-8 p-7">
+      <div className="absolute p-7 mb-32">
         <p className=" font-playfair lg:leading-[76px] font-medium text-[30px] lg:text-[64px] text-center text-white">
-          Committed to
-          <br /> Physical, Mental, Emotional,
+          Committed to Physical,
+          <br /> Mental, Emotional,
           <br /> Financial & Spiritual
           <br />
           Well-being
