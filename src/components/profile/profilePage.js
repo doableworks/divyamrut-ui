@@ -28,6 +28,11 @@ const initialLeftbar = [
     icon: <ShoppingBagIcon className="size-5 text-[--yellow]" />,
     subItems: [
       {
+        id: "All",
+        label: "All",
+        filter: true,
+      },
+      {
         id: "Inprogress_Orders",
         label: "On the way",
         filter: true,
@@ -51,6 +56,11 @@ const initialLeftbar = [
     icon: <FaceSmileIcon className="size-5 text-[--yellow]" />,
     subItems: [
       {
+        id: "All",
+        label: "All",
+        filter: true,
+      },
+      {
         id: "Scheduled_therapy",
         label: "Scheduled",
         filter: true,
@@ -58,6 +68,16 @@ const initialLeftbar = [
       {
         id: "Completed_therapy",
         label: "Completed",
+        filter: true,
+      },
+      {
+        id: "Started_therapy",
+        label: "Started",
+        filter: true,
+      },
+      {
+        id: "Cancelled_therapy",
+        label: "Cancelled",
         filter: true,
       },
     ],
@@ -84,7 +104,7 @@ const UserProfileList = ({ userProfileData }) => {
   const [activeTab, setActiveTab] = useState(initialLeftbar[1]);
   const [openConsentForm, setOpenConsentForm] = useState(false);
   const [consentFormData, setConsentFormData] = useState(null);
-
+  const [selectedFilter, setSelectedFilter] = useState("All");
   const [therapyBookedData, setTherapyBookedData] = useState(
     userProfileData.user_appointments
   );
@@ -121,63 +141,83 @@ const UserProfileList = ({ userProfileData }) => {
     setTherapyBookedData(newData);
   };
 
+  const filteredTherapy = therapyBookedData.filter((each) => {
+    if (selectedFilter === "All") return true;
+    return (
+      each.status.toLowerCase() ===
+      selectedFilter.replace("_therapy", "").toLowerCase()
+    );
+  });
+
   const renderActiveTabContent = () => {
     switch (activeTab.id) {
       case "Therapy":
         return (
           <>
-            <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              {therapyBookedData.map((each, index) => (
-                <li
-                  key={index}
-                  className="border rounded p-3 px-4 flex flex-col gap-2"
-                >
-                  <div className="flex flex-col xl:flex-row xl:items-center justify-between">
-                    <p className="section-content !text-[14px] !text-left">
-                      Date & Time: {each?.slot_details}
-                    </p>
-                  </div>
-                  <p className="section-content !text-left !text-[15px]">
-                    Therapiest Name:{" "}
-                    <span className="!text-gray-900 !font-medium">
-                      {each.therapist_name}
-                    </span>
-                  </p>
-                  <p className="section-content !text-left !text-[15px]">
-                    Therapy:{" "}
-                    <span className="!text-gray-900 !font-medium">
-                      {each.therapy}
-                    </span>
-                  </p>
-                  <div className="flex items-end justify-between">
-                    <p className="section-content !text-left !text-[15px]">
-                      Status: <span>{each.status}</span>
-                    </p>
-                    <div className="relative">
-                      <button
-                        className={twMerge(
-                          "px-4 py-1 rounded-md text-sm bg-[--yellow] flex items-center gap-2 text-white",
-                          each.consent_form && "bg-[--green]"
-                        )}
-                        type="button"
-                        onClick={() => handleOpenConsentForm(each)}
-                        disabled={each.consent_form}
-                      >
-                        <span className="font-normal">Consent</span>
-                        <span className="group">
-                          <InformationCircleIcon className="h-4" />
-
-                          <span className="w-[150%] absolute -left-5 -top-20 opacity-0 group-hover:opacity-100 bg-gray-600 text-white text-xs rounded-md py-1 px-2 transition-all">
-                            The consent form is a mandatory step to start
-                            therapy. Click to begin filling it out!
-                          </span>
-                        </span>
-                      </button>
+            {filteredTherapy.length > 0 ? (
+              <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {filteredTherapy.map((each, index) => (
+                  <li
+                    key={index}
+                    className="border rounded p-3 px-4 flex flex-col gap-2"
+                  >
+                    <div className="flex flex-col xl:flex-row xl:items-center justify-between">
+                      <p className="section-content !text-[14px] !text-left">
+                        Date & Time: {each?.slot_details}
+                      </p>
                     </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                    <p className="section-content !text-left !text-[15px]">
+                      Therapiest Name:{" "}
+                      <span className="!text-gray-900 !font-medium">
+                        {each.therapist_name}
+                      </span>
+                    </p>
+                    <p className="section-content !text-left !text-[15px]">
+                      Therapy:{" "}
+                      <span className="!text-gray-900 !font-medium">
+                        {each?.therapy_name}
+                      </span>
+                    </p>
+                    <div className="flex items-end justify-between">
+                      <p className="section-content !text-left !text-[15px]">
+                        Status: <span>{each.status}</span>
+                      </p>
+                      <div className="relative">
+                        <button
+                          className={twMerge(
+                            "px-4 py-1 rounded-md text-sm bg-[--yellow] flex items-center gap-2 text-white",
+                            each.consent_form &&
+                              "bg-[--green] cursor-not-allowed"
+                          )}
+                          type="button"
+                          onClick={() => handleOpenConsentForm(each)}
+                          disabled={each.consent_form}
+                        >
+                          <span className="font-normal">
+                            {each.consent_form ? "Filled" : "Consent"}
+                          </span>
+                          <span className="group">
+                            <InformationCircleIcon className="h-4" />
+
+                            <span className="w-[150%] absolute -left-5 -top-20 opacity-0 group-hover:opacity-100 bg-gray-600 text-white text-xs rounded-md py-1 px-2 transition-all">
+                              {each.consent_form
+                                ? "The consent form can be filled out once per therapy session."
+                                : "The consent form is a mandatory step to start therapy. Click to begin filling it out!"}
+                            </span>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div>
+                <p className="section-title !text-gray-400 min-h-12 my-16">
+                  No Therapy Found
+                </p>
+              </div>
+            )}
             {openConsentForm && (
               <ConsentForm
                 isOpen={openConsentForm}
@@ -322,10 +362,26 @@ const UserProfileList = ({ userProfileData }) => {
     setActiveTab(clickedId);
   };
 
+  const getActiveTabData = () => {
+    const activeInitialBar = initialLeftbar.find(
+      (each) => each.id === activeTab.id
+    );
+    return activeInitialBar;
+  };
+
+  const handleChangedFilter = (id) => {
+    setSelectedFilter(id);
+  };
+
+  const handleChangeActiveTab = (clickedData) => {
+    handleSetActiveTab(clickedData);
+    setSelectedFilter(clickedData.subItems[0].id);
+  };
+
   return (
     <div>
-      <div className="common_page_width !pt-10 flex flex-col lg:flex-row gap-4">
-        <div className="lg:w-[30%] flex flex-col gap-4 flex-shrink-0">
+      <div className="common_page_width !pt-10 flex flex-col items-start lg:flex-row gap-4">
+        <div className="w-full lg:!w-[35%] lg:sticky lg:top-5 flex flex-col gap-4">
           <div className="bg-white p-3 rounded flex gap-4 items-center shadow-md">
             <div className="relative w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center">
               <img
@@ -362,12 +418,28 @@ const UserProfileList = ({ userProfileData }) => {
             </div>
           </div>
 
-          <div className="hidden lg:flex bg-white p-5 rounded shadow-md  min-h-screen flex-col justify-between">
+          <ul className="flex gap-4 overflow-x-auto py-4 rounded lg:hidden">
+            {getActiveTabData().subItems.map((each, index) => (
+              <li
+                onClick={() => handleChangedFilter(each.id)}
+                className={twMerge(
+                  "flex-shrink-0 bg-gray-200 px-5 py-2 rounded-full text-gray-500 text-md font-normal",
+                  selectedFilter === each.id &&
+                    "bg-[--yellow] text-white font-semibold"
+                )}
+                key={index}
+              >
+                {each.label}
+              </li>
+            ))}
+          </ul>
+
+          <div className="hidden min-h-[60vh] lg:flex bg-white p-5 rounded shadow-md flex-col justify-between">
             <ul className=" flex flex-col gap-4 items-center list-none">
               {initialLeftbar.map((each, index) => (
                 <li key={index} className="w-full flex flex-col gap-4">
                   <button
-                    onClick={() => handleSetActiveTab(each)}
+                    onClick={() => handleChangeActiveTab(each)}
                     className="flex justify-between items-center w-full group"
                   >
                     <figure className="flex gap-4 items-center">
@@ -399,12 +471,19 @@ const UserProfileList = ({ userProfileData }) => {
                             <input
                               type="checkbox"
                               id={subItem.id}
-                              className="w-3 h-3"
+                              className="w-3 h-3 outline-none"
+                              name={each.label}
+                              checked={selectedFilter === subItem.id}
+                              onClick={() => handleChangedFilter(subItem.id)}
                             />
                           )}
                           <label
                             htmlFor={subItem.id}
-                            className="section-content !text-[13px] group-hover:!text-[--voilet] group-hover:!font-medium !cursor-pointer"
+                            className={twMerge(
+                              "section-content !text-[13px] group-hover:!text-[--voilet] group-hover:!font-medium !cursor-pointer",
+                              selectedFilter === subItem.id &&
+                                "!text-[--yellow] !font-semibold"
+                            )}
                           >
                             {subItem.label}
                           </label>
@@ -428,18 +507,20 @@ const UserProfileList = ({ userProfileData }) => {
             </button>
           </div>
         </div>
-        <div className="bg-white p-3 rounded shadow-md flex-grow">
+        <div className="bg-white p-3 rounded shadow-md flex-grow w-full">
           <p className="highlight-heading !text-[1.5rem] !text-left !border-b-2 !pb-3">
             {activeTab.label}
           </p>
-          <div className="pb-5">{renderActiveTabContent()}</div>
+          <div className="pb-5 min-h-[calc(100vh-65px)] lg:min-h-[calc(100vh-192px)]">
+            {renderActiveTabContent()}
+          </div>
         </div>
       </div>
       <ul className="lg:hidden bg-white flex items-center justify-around p-4 fixed bottom-0 w-full shadow-md border-t-2 list-none">
         {initialLeftbar.map((each, index) => (
           <li key={index} className="flex flex-col gap-4">
             <button
-              onClick={() => handleSetActiveTab(each)}
+              onClick={() => handleChangeActiveTab(each)}
               className="flex justify-between items-center w-full group"
             >
               <figure className="flex w-full gap-[5px] items-center">
