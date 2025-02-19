@@ -1,6 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { ChevronRightIcon, PencilIcon } from "@heroicons/react/24/outline";
+import {
+  ChevronRightIcon,
+  InformationCircleIcon,
+  PencilIcon,
+} from "@heroicons/react/24/outline";
 import {
   ArrowsUpDownIcon,
   FaceSmileIcon,
@@ -79,6 +83,11 @@ const initialLeftbar = [
 const UserProfileList = ({ userProfileData }) => {
   const [activeTab, setActiveTab] = useState(initialLeftbar[1]);
   const [openConsentForm, setOpenConsentForm] = useState(false);
+  const [consentFormData, setConsentFormData] = useState(null);
+
+  const [therapyBookedData, setTherapyBookedData] = useState(
+    userProfileData.user_appointments
+  );
 
   const onLogOut = async () => {
     try {
@@ -91,7 +100,8 @@ const UserProfileList = ({ userProfileData }) => {
     }
   };
 
-  const handleOpenConsentForm = () => {
+  const handleOpenConsentForm = (data) => {
+    setConsentFormData(data);
     setOpenConsentForm(true);
   };
 
@@ -99,44 +109,84 @@ const UserProfileList = ({ userProfileData }) => {
     setOpenConsentForm(false);
   };
 
+  const setSuccessedConsentForm = (uniqueId) => {
+    const newData = therapyBookedData.map((each) => {
+      if (each.uid === uniqueId) {
+        return { ...each, consent_form: true };
+      } else {
+        return each;
+      }
+    });
+
+    setTherapyBookedData(newData);
+  };
+
   const renderActiveTabContent = () => {
     switch (activeTab.id) {
       case "Therapy":
         return (
-          <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {userProfileData.user_appointments.map((each, index) => (
-              <li
-                key={index}
-                className="border rounded p-3 px-4 flex flex-col gap-2"
-              >
-                <div className="flex flex-col xl:flex-row xl:items-center justify-between">
-                  <p className="section-content !text-[14px] !text-left">
-                    Date & Time: {each?.slot_details}
-                  </p>
-                </div>
-                <p className="section-content !text-left !text-[15px]">
-                  Therapiest Name:{" "}
-                  <span className="!text-gray-900 !font-medium">
-                    {each.therapist_name}
-                  </span>
-                </p>
-                <p className="section-content !text-left !text-[15px]">
-                  Therapy:{" "}
-                  <span className="!text-gray-900 !font-medium">
-                    {each.therapy}
-                  </span>
-                </p>
-                <div className="flex items-center justify-between">
+          <>
+            <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {therapyBookedData.map((each, index) => (
+                <li
+                  key={index}
+                  className="border rounded p-3 px-4 flex flex-col gap-2"
+                >
+                  <div className="flex flex-col xl:flex-row xl:items-center justify-between">
+                    <p className="section-content !text-[14px] !text-left">
+                      Date & Time: {each?.slot_details}
+                    </p>
+                  </div>
                   <p className="section-content !text-left !text-[15px]">
-                    Status: <span>{each.status}</span>
+                    Therapiest Name:{" "}
+                    <span className="!text-gray-900 !font-medium">
+                      {each.therapist_name}
+                    </span>
                   </p>
-                  <button type="button" onClick={handleOpenConsentForm}>
-                    <PencilIcon className="h-5 w-5 text-primary" />
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
+                  <p className="section-content !text-left !text-[15px]">
+                    Therapy:{" "}
+                    <span className="!text-gray-900 !font-medium">
+                      {each.therapy}
+                    </span>
+                  </p>
+                  <div className="flex items-end justify-between">
+                    <p className="section-content !text-left !text-[15px]">
+                      Status: <span>{each.status}</span>
+                    </p>
+                    <div className="relative">
+                      <button
+                        className={twMerge(
+                          "px-4 py-1 rounded-md text-sm bg-[--yellow] flex items-center gap-2 text-white",
+                          each.consent_form && "bg-[--green]"
+                        )}
+                        type="button"
+                        onClick={() => handleOpenConsentForm(each)}
+                        disabled={each.consent_form}
+                      >
+                        <span className="font-normal">Consent</span>
+                        <span className="group">
+                          <InformationCircleIcon className="h-4" />
+
+                          <span className="w-[150%] absolute -left-5 -top-20 opacity-0 group-hover:opacity-100 bg-gray-600 text-white text-xs rounded-md py-1 px-2 transition-all">
+                            The consent form is a mandatory step to start
+                            therapy. Click to begin filling it out!
+                          </span>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            {openConsentForm && (
+              <ConsentForm
+                isOpen={openConsentForm}
+                handleCloseConsentForm={handleCloseConsentForm}
+                consentFormData={consentFormData}
+                setSuccessedConsentForm={setSuccessedConsentForm}
+              />
+            )}
+          </>
         );
       case "Profile":
         return (
@@ -407,13 +457,6 @@ const UserProfileList = ({ userProfileData }) => {
           </li>
         ))}
       </ul>
-
-      {openConsentForm && (
-        <ConsentForm
-          isOpen={openConsentForm}
-          handleCloseConsentForm={handleCloseConsentForm}
-        />
-      )}
     </div>
   );
 };
