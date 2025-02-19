@@ -66,7 +66,7 @@ export default function FooterCom() {
               <h4 className="section-title [@media(min-width:420px)]:!text-left  mb-4">
                 Contact US
               </h4>
-              <p className="text-text !leading-[28px] [@media(min-width:420px)]:!text-left">
+              <p className="text-text !text-[#000000] !leading-[28px] [@media(min-width:420px)]:!text-left">
                 413, Sai Arcade, N.S. Road, Mulund West,
                 <br />
                 Mumbai – 400 080
@@ -79,7 +79,7 @@ export default function FooterCom() {
           </div>
           {/* Bottom Bar */}
           <div className="flex flex-col md:flex-row justify-between items-center border-t border-[#FFFFFF2B] py-2  text-center text-green-100 ">
-            <p className="text_text14">
+            <p className="text_text14 !text-[#000000]">
               Copyright © {new Date().getFullYear()} Divyamrut Naturals |
               Powered by [canwwwas].
             </p>
