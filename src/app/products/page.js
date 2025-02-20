@@ -25,7 +25,7 @@ const page = async() => {
 
   return (
     <>
-      <div className="relative h-[50vh]">
+      <div className="relative h-[350px]">
         <ProductBanner srcUrl={bannerImgArr[0]} />
       </div>
       <div className="common_page_width">

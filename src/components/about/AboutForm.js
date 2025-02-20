@@ -35,43 +35,6 @@ const features = [
 ];
 
 const AboutForm = () => {
-  // useEffect(() => {
-  //   gsap.fromTo(
-  //     ".left-section",
-  //     { opacity: 0, x: -1000 },
-  //     {
-  //       x: 0,
-  //       opacity: 1,
-  //       duration: 1,
-  //       delay: 0.5,
-  //       stagger: 0.2,
-  //       scrollTrigger: {
-  //         trigger: "#AboutForm",
-  //         start: "top 80%",
-  //         end: "bottom 20%",
-  //         // scrub: true,
-  //       },
-  //     }
-  //   );
-
-  //   gsap.fromTo(
-  //     ".right-section",
-  //     { opacity: 0, x: 1000 },
-  //     {
-  //       x: 0,
-  //       opacity: 1,
-  //       duration: 1,
-  //       delay: 0.5,
-  //       stagger: 0.2,
-  //       scrollTrigger: {
-  //         trigger: "#AboutForm",
-  //         start: "top 80%",
-  //         end: "bottom 20%",
-  //         // scrub: true,
-  //       },
-  //     }
-  //   );
-  // }, []);
 
   return (
     <div id="AboutForm" className="w-full relative bg-FFEEE2 overflow-hidden">

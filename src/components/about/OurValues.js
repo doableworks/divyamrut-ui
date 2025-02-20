@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Puzzle, Globe, Coffee } from "@/icon/icons";
 import { useGSAP } from "@gsap/react";
 import { SearchOutlined } from "@ant-design/icons";
-import WhyUsSection from './WhyUsSection';
+import WhyUsSection from "./WhyUsSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,62 +29,6 @@ const features = [
 ];
 
 const OurValues = () => {
-  // useGSAP(() => {
-  //   gsap.fromTo(
-  //     ".left-section-ov",
-  //     { opacity: 0, x: -300 },
-  //     {
-  //       x: 0,
-  //       opacity: 1,
-  //       duration: 0.5,
-  //       delay: 0.2,
-  //       stagger: 0.2,
-  //       scrollTrigger: {
-  //         trigger: "#OurValues",
-  //         start: "top 80%",
-  //         end: "bottom 20%",
-  //         // scrub: true,
-  //       },
-  //     }
-  //   );
-
-  //   gsap.fromTo(
-  //     ".middle-section-ov",
-  //     { opacity: 0, x: 300 },
-  //     {
-  //       x: 0,
-  //       opacity: 1,
-  //       duration: 0.5,
-  //       delay: 0.2,
-  //       stagger: 0.2,
-  //       scrollTrigger: {
-  //         trigger: "#OurValues",
-  //         start: "top 80%",
-  //         end: "bottom 20%",
-  //         // scrub: true,
-  //       },
-  //     }
-  //   );
-
-  //   gsap.fromTo(
-  //     ".right-section-ov",
-  //     { opacity: 0, x: 300 },
-  //     {
-  //       x: 0,
-  //       opacity: 1,
-  //       duration: 1,
-  //       delay: 0.5,
-  //       stagger: 0.2,
-  //       scrollTrigger: {
-  //         trigger: "#OurValues",
-  //         start: "top 80%",
-  //         end: "bottom 20%",
-  //         // scrub: true,
-  //       },
-  //     }
-  //   );
-  // }, []);
-
   return (
     <section id="OurValues" className="relative bg-text overflow-hidden">
       <div className="flex flex-col justify-center items-center w-screen bg-FFEEE2">
@@ -109,12 +53,7 @@ const OurValues = () => {
                 libero congue malesuada.
               </p>
             </div>
-            <div
-              className="flex-grow middle-section-ov relative w-full h-full bg-cover bg-center md:bg-center  mr-5 md:mr-0 transition-all duration-1000 min-h-[350px] md:min-h-[530px]"
-              style={{
-                backgroundImage: `url("/asset/home/ayurvedic-supplement.jpg")`,
-              }}
-            >
+            <div className="bg-white flex-grow middle-section-ov relative w-full h-full bg-center md:bg-center  mr-5 md:mr-0 transition-all duration-1000 min-h-[350px] md:min-h-[530px]">
               <Image
                 className="absolute bottom-[-2rem] md:bottom-[-4rem] left-[-1rem] md:left-[-2rem]"
                 src={"/asset/home/leaf-icon.png"}
