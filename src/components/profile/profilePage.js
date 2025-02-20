@@ -14,11 +14,15 @@ import {
 } from "@heroicons/react/24/solid";
 import { twMerge } from "tailwind-merge";
 import { NoImageAvailabe, NoProfileImage } from "@/contants/contants";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { closeNav } from "@/redux/feature/mobileNavSlice";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import { clearCart } from "@/redux/feature/cartSlice";
 import ConsentForm from "./ConsentForm";
+import { Button, Form, Input, Modal, Row, Col, message } from "antd";
+import Divider from "../common/Divider";
+import CustomButton from "../common/CustomButton";
+import axiosInstance from "@/lib/axios";
 
 const initialLeftbar = [
   {
@@ -33,18 +37,33 @@ const initialLeftbar = [
         filter: true,
       },
       {
-        id: "Inprogress_Orders",
-        label: "On the way",
+        id: "Confirmed_orders",
+        label: "Confirmed",
         filter: true,
       },
       {
-        id: "Pending_Orders",
+        id: "Shipped_orders",
+        label: "Shipped",
+        filter: true,
+      },
+      {
+        id: "Delivered_orders",
+        label: "Delivered",
+        filter: true,
+      },
+      {
+        id: "Cancelled_orders",
+        label: "Cancelled",
+        filter: true,
+      },
+      {
+        id: "Refunded_orders",
+        label: "Refunded",
+        filter: true,
+      },
+      {
+        id: "Pending_orders",
         label: "Pending",
-        filter: true,
-      },
-      {
-        id: "Completed_Order",
-        label: "Completed",
         filter: true,
       },
     ],
@@ -92,15 +111,25 @@ const initialLeftbar = [
         id: "Profile_information",
         label: "Profile Infomartion",
       },
-      {
-        id: "profile_address",
-        label: "Manage Address",
-      },
     ],
   },
 ];
 
+const allowedKeys = [
+  "first_name",
+  "last_name",
+  "height",
+  "weight",
+  "age",
+  "gender",
+  "address",
+  "medical_condition",
+  "phone_no",
+];
+
 const UserProfileList = ({ userProfileData }) => {
+  const [form] = Form.useForm();
+  const { data: session } = useSession();
   const [activeTab, setActiveTab] = useState(initialLeftbar[1]);
   const [openConsentForm, setOpenConsentForm] = useState(false);
   const [consentFormData, setConsentFormData] = useState(null);
@@ -108,6 +137,15 @@ const UserProfileList = ({ userProfileData }) => {
   const [therapyBookedData, setTherapyBookedData] = useState(
     userProfileData.user_appointments
   );
+  const [loading, setLoading] = useState(false);
+
+  const [userProfileDetails, setUserProfileDetails] = useState(
+    userProfileData.profile
+  );
+  const [isEditProfile, setIsEditProfile] = useState({
+    status: false,
+    image: userProfileData.profile.image,
+  });
 
   const onLogOut = async () => {
     try {
@@ -148,6 +186,70 @@ const UserProfileList = ({ userProfileData }) => {
       selectedFilter.replace("_therapy", "").toLowerCase()
     );
   });
+
+  const filteredProducts = userProfileData.orders.filter((each) => {
+    if (selectedFilter === "All") return true;
+    return (
+      each.status.toLowerCase() ===
+      selectedFilter.replace("_orders", "").toLowerCase()
+    );
+  });
+
+  const handleSubmit = async (values) => {
+    setLoading(true);
+    const formData = new FormData();
+
+    // Append text fields
+    Object.keys(values).forEach((key) => {
+      if (
+        values[key] !== null &&
+        values[key] !== undefined &&
+        values[key] !== ""
+      ) {
+        formData.append(key, values[key]);
+      }
+    });
+
+    // Append first_name & last_name if missing
+    formData.append(
+      "first_name",
+      values.first_name || userProfileData.first_name
+    );
+    formData.append("last_name", values.last_name || userProfileData.last_name);
+
+    // Append image file if updated
+    if (isEditProfile.file) {
+      formData.append("image", isEditProfile.file);
+    }
+
+    try {
+      const response = await axiosInstance.post(
+        "/api/profile-update/",
+        formData,
+        { session }
+      );
+
+      const result = await response.data;
+
+      if (response.status >= 200 && response.status < 300) {
+        message.success("Profile updated successfully!");
+        setUserProfileDetails((prev) => ({
+          ...prev,
+          ...values,
+          image: isEditProfile.file
+            ? URL.createObjectURL(isEditProfile.file)
+            : prev.image,
+        }));
+        setIsEditProfile({ status: false });
+      } else {
+        message.error(result.message || "Profile update failed");
+      }
+    } catch (error) {
+      message.error("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const renderActiveTabContent = () => {
     switch (activeTab.id) {
@@ -235,86 +337,129 @@ const UserProfileList = ({ userProfileData }) => {
               <div className="flex flex-col items-center space-y-3">
                 <div className="relative w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center">
                   <img
-                    src={NoProfileImage}
+                    src={
+                      isEditProfile.status
+                        ? isEditProfile?.image ||
+                          userProfileDetails?.image ||
+                          NoProfileImage
+                        : userProfileDetails?.image || NoProfileImage
+                    }
                     alt="Profile"
-                    className="w-24 h-24 rounded-full object-cover"
+                    className="w-full h-full rounded-full"
                   />
-                  <button className="absolute bottom-0 right-0 bg-blue-500 rounded-full p-1 text-white">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />{" "}
-                    </svg>
-                  </button>
+
+                  {isEditProfile.status && (
+                    <>
+                      <label
+                        htmlFor="profilePictureChange"
+                        className="cursor-pointer absolute bottom-0 right-0 bg-blue-500 rounded-full p-1 text-white"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />{" "}
+                        </svg>
+                      </label>
+                      <input
+                        type="file"
+                        accept="image/jpeg, image/png, image/webp"
+                        id="profilePictureChange"
+                        className="!hidden"
+                        onChange={handleFileChange}
+                      />
+                    </>
+                  )}
                 </div>
 
                 <div className="text-center">
-                  <h2 className="text-xl font-semibold text-gray-800">
-                    {userProfileData?.full_name}
+                  <h2 className="text-xl font-semibold text-gray-800 capitalize">
+                    {userProfileDetails?.first_name}{" "}
+                    {userProfileData?.last_name}
                   </h2>
-                  <p className="text-gray-500 flex items-center justify-center space-x-2">
-                    @<span>{userProfileData?.username}</span>
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <div className="text-right text-cyan-400 underline cursor-pointer">
-                  Edit Details
-                </div>
-
-                <div className="flex items-center justify-between py-3 border-b border-gray-100">
-                  <span className="text-gray-600">Username</span>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-gray-500">
-                      @{userProfileData?.username}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between py-3 border-b border-gray-100">
-                  <span className="text-gray-600">Email</span>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-gray-500">
-                      {userProfileData?.email}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between py-3 border-b border-gray-100">
-                  <span className="text-gray-600">Address</span>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-gray-500">
-                      {userProfileData?.address}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between py-3 border-b border-gray-100">
-                  <span className="text-gray-600">Mobile no.</span>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-gray-500">
-                      {userProfileData?.mobile}
-                    </span>
+                  <div className="flex items-center flex-col w-full my-2">
+                    <p className="text-gray-500">
+                      Email:{" "}
+                      <span className="font-semibold">
+                        {userProfileData?.email}
+                      </span>
+                    </p>
+                    <p className="text-gray-500">
+                      username:{" "}
+                      <span className="font-semibold">
+                        @{userProfileData?.username}
+                      </span>
+                    </p>
                   </div>
                 </div>
               </div>
+
+              <ul className="flex flex-col gap-2">
+                {!isEditProfile.status &&
+                  Object.keys(userProfileDetails)
+                    .filter((key) => allowedKeys.includes(key))
+                    .map((key, index) => (
+                      <li key={index}>
+                        <div className="flex items-center justify-between py-3 border-b border-gray-100">
+                          <span className="text-gray-600 capitalize">
+                            {key.replace(/_/g, " ")}
+                          </span>
+
+                          <div className="flex items-center space-x-2">
+                            <span className="text-gray-500 capitalize">
+                              {userProfileDetails[key] || "-"}
+                            </span>
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+
+                {isEditProfile.status && (
+                  <div className="overflow-y-auto overflow-x-hidden p-6">
+                    <Row gutter={[16, 16]}>
+                      {allowedKeys.map((field, index) => (
+                        <Col xs={24} lg={12} key={index}>
+                          <Form.Item
+                            name={field}
+                            label={field.replace(/_/g, " ").toUpperCase()}
+                            rules={[
+                              {
+                                required: ["first_name", "last_name"].includes(
+                                  field
+                                ),
+                                message: `Please enter your ${field
+                                  .replace(/_/g, " ")
+                                  .toLowerCase()}!`,
+                              },
+                            ]}
+                          >
+                            <Input
+                              placeholder={`Enter ${field
+                                .replace(/_/g, " ")
+                                .toLowerCase()}`}
+                            />
+                          </Form.Item>
+                        </Col>
+                      ))}
+                    </Row>
+                  </div>
+                )}
+              </ul>
             </div>
           </div>
         );
       case "Orders":
-        return (
+        return filteredProducts?.length > 0 ? (
           <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {userProfileData.orders.map((order, orderIndex) =>
+            {filteredProducts.map((order, orderIndex) =>
               order.order_items.map((item, itemIndex) => (
                 <li
                   key={`${orderIndex}-${itemIndex}`}
-                  className="border rounded p-3 px-4 flex flex-row gap-2"
+                  className="border rounded p-3 px-4 flex flex-row items-center gap-2"
                 >
-                  <div className="w-[30%]">
+                  <div className="w-28 h-28 flex-shrink-0">
                     <img
                       src={item.product_image}
                       alt={item.proudct_title}
@@ -326,7 +471,7 @@ const UserProfileList = ({ userProfileData }) => {
                     <p className="section-content !text-left !text-[15px]">
                       Product:{" "}
                       <span className="!text-gray-900 !font-medium">
-                        {item.proudct_name}
+                        {item.product_title}
                       </span>
                     </p>
                     <p className="section-content !text-left !text-[15px]">
@@ -352,6 +497,12 @@ const UserProfileList = ({ userProfileData }) => {
               ))
             )}
           </ul>
+        ) : (
+          <div>
+            <p className="section-title !text-gray-400 min-h-12 my-16">
+              No Products Found
+            </p>
+          </div>
         );
       default:
         return null;
@@ -378,42 +529,57 @@ const UserProfileList = ({ userProfileData }) => {
     setSelectedFilter(clickedData.subItems[0].id);
   };
 
+  const handleToggleEditProfile = (newStatus) => {
+    const newObj = {
+      ...isEditProfile,
+      status: newStatus,
+    };
+    setIsEditProfile(newObj);
+  };
+
+  const handleFileChange = (event) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setIsEditProfile({
+        ...isEditProfile,
+        file: event.target.files[0],
+        image: URL.createObjectURL(event.target.files[0]),
+      });
+    }
+  };
+
   return (
     <div>
       <div className="common_page_width !pt-10 flex flex-col items-start lg:flex-row gap-4">
         <div className="w-full lg:!w-[35%] lg:sticky lg:top-5 flex flex-col gap-4">
           <div className="bg-white p-3 rounded flex gap-4 items-center shadow-md">
-            <div className="relative w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center">
+            <div className="relative w-16 h-16 flex-shrink-0 rounded-full bg-gray-200 flex items-center justify-center">
               <img
-                src={NoProfileImage}
+                src={
+                  isEditProfile.status
+                    ? isEditProfile?.image ||
+                      userProfileDetails?.image ||
+                      NoProfileImage
+                    : userProfileDetails?.image || NoProfileImage
+                }
                 alt="Profile"
                 className="w-16 h-16 rounded-full object-cover"
               />
-              <button className="absolute bottom-0 right-0 bg-blue-500 rounded-full p-1 text-white">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />{" "}
-                </svg>
-              </button>
             </div>
-            <div className="flex-grow flex justify-between items-start">
+            <div className="flex-grow gap-4 flex justify-between items-start">
               <div>
                 <p className="section-content !text-left !text-[15px]">
                   Hello,
                 </p>
                 <p className="section-title !text-left !capitalize">
-                  {userProfileData.full_name}
+                  {userProfileDetails?.first_name} {userProfileData?.last_name}
                 </p>
               </div>
               <button
-                className="site-button-primary !m-0 lg:hidden"
                 type="button"
+                onClick={onLogOut}
+                className="site-button-primary !m-0 lg:hidden"
               >
-                Edit
+                Logout
               </button>
             </div>
           </div>
@@ -507,14 +673,55 @@ const UserProfileList = ({ userProfileData }) => {
             </button>
           </div>
         </div>
-        <div className="bg-white p-3 rounded shadow-md flex-grow w-full">
-          <p className="highlight-heading !text-[1.5rem] !text-left !border-b-2 !pb-3">
-            {activeTab.label}
-          </p>
-          <div className="pb-5 min-h-[calc(100vh-65px)] lg:min-h-[calc(100vh-192px)]">
-            {renderActiveTabContent()}
+        <Form
+          name="editprofileForm"
+          wrapperCol={{ span: 24 }}
+          onFinish={handleSubmit}
+          autoComplete="off"
+          className="w-full"
+          form={form}
+          layout="vertical"
+          initialValues={userProfileDetails}
+        >
+          <div className="bg-white p-3 rounded shadow-md flex-grow w-full">
+            <div className="flex items-center justify-between mb-3 p-3">
+              <p className="highlight-heading !text-[1.5rem] !p-0 !m-0">
+                {activeTab.label}
+              </p>
+              {activeTab.id === "Profile" &&
+                (isEditProfile.status ? (
+                  <div className="flex items-center gap-3">
+                    <CustomButton
+                      htmlType="submit"
+                      className="site-button-primary !m-0"
+                      title="Update"
+                      loading={loading}
+                      type="submit"
+                    />
+                    <button
+                      onClick={() => handleToggleEditProfile(false)}
+                      type="button"
+                      className="site-button-secondary !m-0 "
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => handleToggleEditProfile(true)}
+                    type="button"
+                    className="site-button-primary !m-0 "
+                  >
+                    Edit
+                  </button>
+                ))}
+            </div>
+            <Divider className="mb-5" />
+            <div className="pb-5 min-h-[calc(100vh-65px)] lg:min-h-[calc(100vh-192px)]">
+              {renderActiveTabContent()}
+            </div>
           </div>
-        </div>
+        </Form>
       </div>
       <ul className="lg:hidden bg-white flex items-center justify-around p-4 fixed bottom-0 w-full shadow-md border-t-2 list-none">
         {initialLeftbar.map((each, index) => (

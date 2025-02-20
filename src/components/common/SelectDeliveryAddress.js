@@ -12,7 +12,7 @@ const SelectDeliveryAddress = ({ addressList, SelectedDeliveryAddre, handleAddNe
 
       <CustomButton
         htmlType="submit"
-        className="site-button-primary !w-[200px] !mt-4 w-[-webkit-fill-available] capitalize"
+        className="site-button-primary !w-[200px] !mt-4 capitalize"
         title="Add New Address"
         loading={false}
         icon={<PlusOutlined />}

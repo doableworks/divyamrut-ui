@@ -15,9 +15,6 @@
 // import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 // import { useSession } from "next-auth/react";
 
-
-
-
 // const ProductDetail = ({ item }) => {
 //   const router = useRouter();
 //   const dispatch = useDispatch();
@@ -179,7 +176,6 @@
 
 // export default ProductDetail;
 
-
 "use client";
 import Image from "next/image";
 import React, { use, useState } from "react";
@@ -198,7 +194,6 @@ import useCartActions from "@/components/cartCom/useCartActions";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import { useSession } from "next-auth/react";
 
-
 const ProductDetail = ({ item }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -210,28 +205,26 @@ const ProductDetail = ({ item }) => {
 
   const handleAddItem = async () => {
     try {
-      setLoading(true)
-      await onAddItem(item, quantity)
+      setLoading(true);
+      await onAddItem(item, quantity);
     } catch (error) {
       console.log("handleAddItem error", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
   const handleBuyBtn = async () => {
     if (session) {
-      await dispatch(setBuyProduct({ items: item, source: "direct-buy" }))
+      await dispatch(setBuyProduct({ items: item, source: "direct-buy" }));
       await router.push("/payment-delivery");
+    } else {
+      dispatch(setOpenLoginModal(true));
     }
-    else {
-      dispatch(setOpenLoginModal(true))
-    }
-
   };
 
   const handleIncreaseCartItem = async (action) => {
-    setQuantity(action == 'increase' ? quantity + 1 : quantity - 1)
+    setQuantity(action == "increase" ? quantity + 1 : quantity - 1);
   };
 
   return (
@@ -252,8 +245,9 @@ const ProductDetail = ({ item }) => {
               <div
                 key={index}
                 onClick={() => SetSelectedImage(index)}
-                className={`border border-gray-300 rounded-md overflow-hidden cursor-pointer flex-shrink-0 w-20 h-20 ${selectedImage == index && "border-2 border-slate-700"
-                  }`}
+                className={`border border-gray-300 rounded-md overflow-hidden cursor-pointer flex-shrink-0 w-20 h-20 ${
+                  selectedImage == index && "border-2 border-slate-700"
+                }`}
               >
                 <Image
                   height={100}
@@ -282,17 +276,46 @@ const ProductDetail = ({ item }) => {
               <Star h={25} w={25} fill={"#f0ad4e"} />
               <Star h={25} w={25} fill={"#f0ad4e"} />
               <Star h={25} w={25} fill={"#ccd6df"} />
-              <span className="ml-5"><strong>Review</strong></span>
+              <span className="ml-5">
+                <strong>Review</strong>
+              </span>
             </div>
-
           </div>
           <Divider className="mb-4" />
+
+          <div className="flex flex-col lg:flex-row gap-1 lg:gap-5">
+            <div className="flex items-end space-x-2">
+              <button
+                // onClick={() => handleRemoveItem(item)}
+                onClick={() => handleIncreaseCartItem("decrease")}
+                className="px-5 py-1 bg-gray-200 h-12 rounded"
+                disabled={quantity == 1}
+              >
+                {loading == item.uid ? <LoadingOutlined spin /> : "-"}
+              </button>
+              <div className="px-5 text-heading h-8 !text-left">{quantity}</div>
+              <button
+                onClick={() => handleIncreaseCartItem("increase")}
+                className="px-5 py-1 bg-gray-200 h-12 rounded"
+              >
+                {loading == item.uid ? <LoadingOutlined spin /> : "+"}
+              </button>
+            </div>
+
+            <CustomButton
+              htmlType="submit"
+              className="site-button-primary !mt-4 w-[-webkit-fill-available] capitalize"
+              title="ADD TO CART"
+              loading={loading}
+              onClick={handleAddItem}
+            />
+          </div>
           {item?.feature_1 && (
-            <div>
-              <p className="text-xl font-jost normal-case font-bold ">
+            <div className="my-5">
+              <p className="text-xl font-jost normal-case font-bold mb-3">
                 About the Item
               </p>
-              <ul className="list-disc list-outside my-6 flex flex-col gap-3 md:ml-6 text-base">
+              <ul className="list-disc list-outside flex flex-col gap-3 md:ml-6 text-base">
                 {item?.feature_1 && (
                   <li dangerouslySetInnerHTML={{ __html: item?.feature_1 }} />
                 )}
@@ -311,55 +334,6 @@ const ProductDetail = ({ item }) => {
               </ul>
             </div>
           )}
-          <div className="flex flex-col lg:flex-row gap-1 lg:gap-5">
-            <div className="flex items-end space-x-2">
-              <button
-                // onClick={() => handleRemoveItem(item)}
-                onClick={() => handleIncreaseCartItem("decrease")}
-                className="px-5 py-1 bg-gray-200 h-12 rounded"
-                disabled={quantity == 1}
-              >
-                {loading == item.uid ? <LoadingOutlined spin /> : '-'}
-              </button>
-              <div className="px-5 text-heading h-8 !text-left">
-                {quantity}
-              </div>
-              <button
-                onClick={() => handleIncreaseCartItem("increase")}
-                className="px-5 py-1 bg-gray-200 h-12 rounded"
-              >
-                {loading == item.uid ? <LoadingOutlined spin /> : '+'}
-              </button>
-            </div>
-
-            <CustomButton
-              htmlType="submit"
-              className="site-button-primary !mt-4 w-[-webkit-fill-available] capitalize"
-              title="ADD TO CART"
-              loading={loading}
-              onClick={handleAddItem}
-            />
-
-            {/* <CustomButton
-              htmlType="submit"
-              className="site-button-secondary !mt-4 w-[-webkit-fill-available] capitalize"
-              title="Buy Now"
-              loading={false}
-              onClick={handleBuyBtn}
-            /> */}
-          </div>
-          {item?.description && (
-        <div className="mt-10">
-          <p className="text-xl font-jost normal-case font-bold mt-6">
-            Additional Information
-          </p>
-          <Divider className="mb-4 mt-4" />
-          <p
-            className="text-base font-jost leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: item?.description }}
-          />
-        </div>
-      )}
         </div>
       </div>
 
@@ -388,9 +362,21 @@ const ProductDetail = ({ item }) => {
           />
         </div>
       )}
+
+      {item?.description && (
+        <div className="mt-10">
+          <p className="text-xl font-jost normal-case font-bold mt-6">
+            Additional Information
+          </p>
+          <Divider className="mb-4 mt-4" />
+          <p
+            className="text-base font-jost leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: item?.description }}
+          />
+        </div>
+      )}
     </>
   );
 };
 
 export default ProductDetail;
-

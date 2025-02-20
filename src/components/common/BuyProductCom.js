@@ -272,7 +272,8 @@ const BuyProductCom = ({ allAddressData }) => {
 
 
   const handleCreateOrder = async (data) => {
-    // setIsLoading(true);
+    setIsLoading(true);
+
     const pro_uid_list = data.order_items.map(i => i.product_uid)
 
     try {
@@ -287,7 +288,7 @@ const BuyProductCom = ({ allAddressData }) => {
           product_id: "",
           therapy_slug: "",
           user_appointment_id: "",
-          order_uid: "",
+          order_uid: data.uid,
           order_items_uid: pro_uid_list
         }
       }
