@@ -4,23 +4,34 @@ import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Select, Space } from "antd";
 import axios from "axios";
 import CustomButton from "@/components/common/CustomButton";
+import Divider from "./Divider";
 
-
-const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFinish, onEditAddress, onCancel }) => {
+const AddDeliveryAddress = ({
+  isLoading,
+  userAddress,
+  userData,
+  onFillAddressFinish,
+  onEditAddress,
+  onCancel,
+}) => {
   const [form] = Form.useForm();
-  const [loader, setloader] = useState({ country: false, state: false })
-  const [stateList, setStateList] = useState(null)
-  const [countryList, setCountryList] = useState(null)
-  const [state, setState] = useState(null)
-  const [country, setCountry] = useState({ code: "IN", value: 'India', label: 'India' })
+  const [loader, setloader] = useState({ country: false, state: false });
+  const [stateList, setStateList] = useState(null);
+  const [countryList, setCountryList] = useState(null);
+  const [state, setState] = useState(null);
+  const [country, setCountry] = useState({
+    code: "IN",
+    value: "India",
+    label: "India",
+  });
 
   useEffect(() => {
-    getCountryListData()
-  }, [])
+    getCountryListData();
+  }, []);
 
   useEffect(() => {
-    getSateData()
-  }, [state])
+    getSateData();
+  }, [state]);
 
   const getCountryListData = async () => {
     setloader({ ...loader, country: true });
@@ -32,9 +43,8 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
       });
       if (response.status == 200) {
         const data = response.data;
-        setCountryList(data)
-      }
-      else {
+        setCountryList(data);
+      } else {
         throw new Error("Failed to fetch country data");
       }
     } catch (err) {
@@ -47,10 +57,9 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
     }
   };
 
-
   const getSateData = async () => {
     setloader({ ...loader, state: true });
-    const countryCode = country.code
+    const countryCode = country.code;
     try {
       const url = `${process.env.NEXT_PUBLIC_API_URL}/api/states/${countryCode}/`;
 
@@ -59,9 +68,8 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
       });
       if (response.status == 200) {
         const data = response.data;
-        setStateList(data)
-      }
-      else {
+        setStateList(data);
+      } else {
         throw new Error("Failed to fetch country data");
       }
     } catch (err) {
@@ -74,164 +82,52 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
     }
   };
 
-
   const handleCountryChange = (value, option) => {
-    setCountry(option)
+    setCountry(option);
   };
 
   const handleStateChange = (value, option) => {
-    setState(option)
+    setState(option);
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-4">
-      <div>
-        <h2 className="text-xl font-bold mb-4">
-          {userAddress ? "Edit Address" : "Add Delivery Address"}
-        </h2>
+    <div className="space-y-4">
+      <div className="md:w-[80%] m-auto py-5 space-y-8">
         <Form
           form={form}
           onFinish={userAddress ? onEditAddress : onFillAddressFinish}
-          // initialValues={userAddress || {}}
           initialValues={{
             ...userAddress,
-            first_name:userData ? userData?.first_name : userAddress?.first_name,
-            last_name:userData ? userData?.last_name : userAddress?.last_name,
-            email:userData ? userData?.email : userAddress?.email,
-            country: country.value
+            first_name: userData
+              ? userData?.first_name
+              : userAddress?.first_name,
+            last_name: userData ? userData?.last_name : userAddress?.last_name,
+            email: userData ? userData?.email : userAddress?.email,
+            country: country.value,
           }}
-
           name="validateOnly"
           layout="vertical"
           autoComplete="off"
-          className="space-y-4"
+          className="space-y-6"
         >
-          <Form.Item
-            label="Country"
-            name="country"
-            rules={[{ required: true, message: "Country is required" }]}
-          >
-            <Select
-              // defaultValue={country.value}
-              style={{ width: "100%" }}
-              onChange={(value, option) => handleCountryChange(value, option)}
-              disabled
-              showSearch
-              value={country.value}
-              options={countryList}
-            />
-          </Form.Item>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Form.Item
-              label="First name"
-              name="first_name"
-              rules={[{ required: true, message: "First name is required" }]}
-            >
-              <Input placeholder="Enter first name" value={userData?.first_name}
-              //  disabled={userData ? true : false}
-                />
-            </Form.Item>
-            <Form.Item
-              label="Last name"
-              name="last_name"
-              rules={[{ required: true, message: "Last name is required" }]}
-            >
-              <Input placeholder="Enter surname here" value={userData?.last_name} 
-              // disabled={userData ? true : false}
-              />
-            </Form.Item>
-          </div>
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}
-          <Form.Item
-            label="Address"
-            name="address"
-            rules={[{ required: true, message: "this is required" }]}
-          >
-            <Input placeholder="Apartment/unit/street/etc" />
-          </Form.Item>
-          {/* <Form.Item
-            label="Apartment/suite/unit/etc"
-            name="apartment"
-            rules={[{ required: true, message: "this is required" }]}
-          >
-            <Input placeholder="Apartment/suite/unit/etc" />
-          </Form.Item> */}
-          {/* <Form.Item
-            label="Street"
-            name="street"
-            rules={[{ required: true, message: "Street is required" }]}
-          >
-            <Input placeholder="Enter street address" />
-          </Form.Item> */}
-          {/* </div> */}
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}
-          <Form.Item
-            label="Town/City"
-            name="city"
-            rules={[{ required: true, message: "Name is required" }]}
-          >
-            <Input placeholder="Enter Town/City" />
-          </Form.Item>
-          <Form.Item
-            label="State"
-            name="state"
-            rules={[{ required: true, message: "State is required" }]}
-          >
-            {/* <Input placeholder="Enter state" /> */}
-            <Select
-              placeholder="Select your state"
-              // defaultValue={state.value}
-              style={{ width: "100%" }}
-              onChange={(value, option) => handleStateChange(value, option)}
-              // disabled
-              showSearch
-              // loading={true}
-              options={stateList}
-            />
-          </Form.Item>
-          <Form.Item
-            label="Pin Code"
-            name="pin_code"
-            rules={[{ required: true, message: "Name is required" }]}
-          >
-            <Input placeholder="Enter pin code" />
-          </Form.Item>
-          <Form.Item
-            label="Landmark"
-            name="landmark"
-            // rules={[{ required: true, message: "Name is required" }]}
-          >
-            <Input placeholder="E.g. near build/hospital/school (optional)" />
-          </Form.Item>
-          <Form.Item
-            label="AddressType"
-            name="address_type"
-            // rules={[{ required: true, message: "This is required" }]}
-          >
-            <Input placeholder="E.g. Home/Office/Other (optional)" />
-          </Form.Item>
-          <Form.Item
-            label="Order note"
-            name="order_notes"
-          >
-            <Input placeholder="E.g. enter a note for order (optional)" />
-          </Form.Item>
-          {/* </div> */}
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}
+          <h2 className="text-xl font-semibold text-[--neutral]">
+            Contact Information
+          </h2>
+          <Divider />
 
-          {/* </div> */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-8">
             <Form.Item
-              label="Email"
               name="email"
               rules={[
                 { required: true, message: "Email address is required." },
               ]}
             >
-              <Input placeholder="Enter yout email" disabled={userData || userAddress?.email} />
+              <Input
+                placeholder="Enter yout email"
+                disabled={userData || userAddress?.email}
+              />
             </Form.Item>
             <Form.Item
-              label="Number"
               name="phone"
               rules={[
                 { required: true, message: "Contact number is required" },
@@ -241,125 +137,102 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
                 },
               ]}
             >
-              <Input placeholder="9979795588" />
+              <Input placeholder="Enter contact number" />
             </Form.Item>
           </div>
 
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.5em] text-primary"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="Name"
-                  className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
-                  // style={{
-                  //   fontFamily:"jost",
-                  //   fontSize:"16px",
-                  //   color: "#4A5C24",
-                  //   backgroundColor:"#F9F3EB",
-                  //   borderColor:"#F9F3EB",
-                  // }}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="company"
-                  className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.5em] text-primary"
-                >
-                  Company
-                </label>
-                <input
-                  type="text"
-                  id="company"
-                  placeholder="Company"
-                  className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.5em] text-primary"
-                >
-                  Phone
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  placeholder="Phone"
-                  className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.5em] text-primary"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="Email"
-                  className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
-                />
-              </div>
-            </div>
-            <div>
-              <label
-                htmlFor="subject"
-                className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.5em] text-primary"
-              >
-                Subject
-              </label>
-              <input
-                type="text"
-                id="subject"
-                placeholder="Subject"
-                className="w-full p-3 font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="message"
-                className="block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.5em] text-primary"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                placeholder="Message"
-                className="w-full p-3  h-32 resize-none font-jost text-[12px] md:text-[16px] font-[400] leading-[1.4em] focus:bg-text focus:border-[#99C24A] text-secondary bg-[#F9F3EB] border-[#F9F3EB]"
-              ></textarea>
-            </div> */}
+          <h2 className="text-xl font-semibold text-[--yellow]">
+            {userAddress ? "Edit Delivery Address" : "Add Delivery Address"}
+          </h2>
+          <Divider />
 
-          <div className="flex justify-end gap-5 space-x-2">
-
-            {/* <button
-              className="site-button-primary"
-              onClick={() => onCancel()}
+          <Form.Item
+            name="country"
+            rules={[{ required: true, message: "Country is required" }]}
+          >
+            <Select
+              style={{ width: "100%" }}
+              onChange={(value, option) => handleCountryChange(value, option)}
+              disabled
+              showSearch
+              value={country.value}
+              options={countryList}
+              size="large"
+            />
+          </Form.Item>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Form.Item
+              name="first_name"
+              rules={[{ required: true, message: "First name is required" }]}
             >
-              Cancel
-            </button> */}
+              <Input
+                placeholder="Enter first name"
+                value={userData?.first_name}
+              />
+            </Form.Item>
+            <Form.Item
+              name="last_name"
+              rules={[{ required: true, message: "Last name is required" }]}
+            >
+              <Input
+                placeholder="Enter lastname here"
+                value={userData?.last_name}
+              />
+            </Form.Item>
+          </div>
+          <Form.Item
+            name="address"
+            rules={[{ required: true, message: "this is required" }]}
+          >
+            <Input.TextArea placeholder="Apartment/unit/street/etc" />
+          </Form.Item>
 
+          <Form.Item
+            name="city"
+            rules={[{ required: true, message: "Name is required" }]}
+          >
+            <Input placeholder="Enter Town/City" />
+          </Form.Item>
+          <Form.Item
+            name="state"
+            rules={[{ required: true, message: "State is required" }]}
+          >
+            <Select
+              placeholder="Select your state"
+              style={{ width: "100%" }}
+              onChange={(value, option) => handleStateChange(value, option)}
+              showSearch
+              options={stateList}
+              size="large"
+            />
+          </Form.Item>
+          <Form.Item
+            name="pin_code"
+            rules={[{ required: true, message: "Name is required" }]}
+          >
+            <Input placeholder="Enter pin code" />
+          </Form.Item>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Form.Item name="landmark">
+              <Input placeholder="Landmark e.g. near build/hospital/school (optional)" />
+            </Form.Item>
+            <Form.Item name="address_type">
+              <Input placeholder="Address Type e.g. Home/Office" />
+            </Form.Item>
+          </div>
+
+          <Form.Item name="order_notes">
+            <Input.TextArea placeholder="E.g. enter a note for order (optional)" />
+          </Form.Item>
+
+          <div className="flex justify-end mt-4 gap-5">
             <CustomButton
-              // htmlType="submit"
               className="site-button-primary !m-0 capitalize"
               title={"Cancel"}
               loading={isLoading}
               onClick={() => onCancel()}
-              // type="submit"
             />
-
-
-            {/* <button className="site-button-primary" htmlType="submit">
-              {userAddress ? "Update Address" : "Save Address"}
-            </button> */}
 
             <CustomButton
               htmlType="submit"
@@ -368,7 +241,6 @@ const AddDeliveryAddress = ({ isLoading, userAddress, userData, onFillAddressFin
               loading={isLoading}
               type="submit"
             />
-
           </div>
         </Form>
       </div>

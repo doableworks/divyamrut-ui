@@ -1,7 +1,13 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "antd/dist/reset.css";
 import { ReduxProvider } from "../redux/provider";
-import { Suranna, Jost, Inter, Poppins, Playfair_Display } from "next/font/google";
+import {
+  Suranna,
+  Jost,
+  Inter,
+  Poppins,
+  Playfair_Display,
+} from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/auth";
@@ -29,7 +35,7 @@ const jost = Jost({
 
 const poppins = Poppins({
   subsets: [],
-  weight: ["400", "500", "600", "700"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-poppins",
 });
 
@@ -44,17 +50,20 @@ interface RootLayoutProps {
   navProducts?: any;
 }
 
-export default async function RootLayout({ children, navProducts }: RootLayoutProps) {
+export default async function RootLayout({
+  children,
+  navProducts,
+}: RootLayoutProps) {
   const session = await getServerSession(authOptions as AuthOptions);
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${jost.variable} ${suranna.variable} ${poppins.variable} ${playfair.variable}`}>
+      <body
+        className={`${inter.variable} ${jost.variable} ${suranna.variable} ${poppins.variable} ${playfair.variable}`}
+      >
         <NextTopLoader />
         <ReduxProvider>
           <AntdRegistry>
-            <MainLayout session={session}>
-              {children}
-            </MainLayout>
+            <MainLayout session={session}>{children}</MainLayout>
           </AntdRegistry>
         </ReduxProvider>
       </body>

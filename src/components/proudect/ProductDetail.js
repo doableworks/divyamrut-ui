@@ -216,8 +216,8 @@ const ProductDetail = ({ item }) => {
 
   const handleBuyBtn = async () => {
     if (session) {
-      await dispatch(setBuyProduct({ items: item, source: "direct-buy" }));
-      await router.push("/payment-delivery");
+      dispatch(setBuyProduct({ items: item, source: "direct-buy" }));
+      router.push("/payment-delivery");
     } else {
       dispatch(setOpenLoginModal(true));
     }
@@ -263,40 +263,31 @@ const ProductDetail = ({ item }) => {
 
         <div className="flex flex-col w-full lg:w-1/2">
           <h1 className={twMerge("product_title", "mb-4")}>{item.name}</h1>
-          <Divider className="mb-4" />
           <div className="mb-4">
-            <p className="text-2xl font-bold text-gray-900">
+            <p className="text-2xl font-semibold">
               {item?.currency == "USD" ? "$" : "₹"}&nbsp;{item?.price}
-            </p>
-            <p className="text-sm text-gray-500">(Inclusive of all taxes)</p>
-
-            <div className="flex gap-2 items-center mt-4">
-              <Star h={25} w={25} fill={"#f0ad4e"} />
-              <Star h={25} w={25} fill={"#f0ad4e"} />
-              <Star h={25} w={25} fill={"#f0ad4e"} />
-              <Star h={25} w={25} fill={"#f0ad4e"} />
-              <Star h={25} w={25} fill={"#ccd6df"} />
-              <span className="ml-5">
-                <strong>Review</strong>
+              <span className="text-sm ml-2 font-normal">
+                (Inclusive of all taxes)
               </span>
-            </div>
+            </p>
           </div>
-          <Divider className="mb-4" />
+         
 
           <div className="flex flex-col lg:flex-row gap-1 lg:gap-5">
             <div className="flex items-end space-x-2">
               <button
-                // onClick={() => handleRemoveItem(item)}
                 onClick={() => handleIncreaseCartItem("decrease")}
-                className="px-5 py-1 bg-gray-200 h-12 rounded"
+                className="px-5 py-1 border border-gray-300 h-12 rounded font-semibold text-lg"
                 disabled={quantity == 1}
               >
                 {loading == item.uid ? <LoadingOutlined spin /> : "-"}
               </button>
-              <div className="px-5 text-heading h-8 !text-left">{quantity}</div>
+              <p className="font-bold border border-gray-300 h-12 w-14 rounded flex justify-center items-center">
+                {quantity}
+              </p>
               <button
                 onClick={() => handleIncreaseCartItem("increase")}
-                className="px-5 py-1 bg-gray-200 h-12 rounded"
+                className="px-5 py-1 border border-gray-300 h-12 rounded font-semibold text-lg"
               >
                 {loading == item.uid ? <LoadingOutlined spin /> : "+"}
               </button>
@@ -310,6 +301,8 @@ const ProductDetail = ({ item }) => {
               onClick={handleAddItem}
             />
           </div>
+
+
           {item?.feature_1 && (
             <div className="my-5">
               <p className="text-xl font-jost normal-case font-bold mb-3">

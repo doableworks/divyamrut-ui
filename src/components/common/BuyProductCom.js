@@ -17,6 +17,7 @@ import BlockPageLoader from "@/components/loader/BlockPageLoader"
 import { Cross, Delete, EmptyCart } from "@/icon/icons";
 import CustomButton from "@/components/common/CustomButton";
 import axios from "axios";
+import Divider from "./Divider";
 
 const stepsBuyProducts = [
   {
@@ -65,7 +66,7 @@ const BuyProductCom = ({ allAddressData }) => {
   }, [orderDetails]);
 
   const handleAddNeworEditAddre = (open = false, address = null) => {
-    setADDorEditAddre({ open: open, address: address }); // Enable editing mode
+    setADDorEditAddre({ open: open, address: address }); 
   };
 
   const onFillAddressFinish = async (values) => {
@@ -89,28 +90,6 @@ const BuyProductCom = ({ allAddressData }) => {
       is_shipping: false,
       order_notes: values.order_notes || ""
     }
-
-    // const data = {
-    //   address: "123 Main Street",
-    //   address_type: "dfgdg",
-    //   apartment: "rert",
-    //   city: "hhh",
-    //   company_name: "ABC Ltd",
-    //   country: "India",
-    //   created_at: "2025-02-07T17:41:27.375766+05:30",
-    //   email: "test@gmail.com",
-    //   first_name: "vijay",
-    //   id: 7,
-    //   is_billing: true,
-    //   is_shipping: false,
-    //   landmark: "dfd",
-    //   last_name: "test",
-    //   order_notes: "Leave at the door.",
-    //   phone: "0987654345",
-    //   pin_code: "123123",
-    //   state: "Mizoram",
-    //   street: "101"
-    // }
 
     try {
       const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/product/shipping/address/", data);
@@ -273,8 +252,9 @@ const BuyProductCom = ({ allAddressData }) => {
 
   const handleCreateOrder = async (data) => {
     setIsLoading(true);
+    console.log(data.order_items.map(i => i.uid))
 
-    const pro_uid_list = data.order_items.map(i => i.product_uid)
+    const pro_uid_list = data.order_items.map(i => i.uid)
 
     try {
       const requestData = {
@@ -546,7 +526,7 @@ const BuyProductCom = ({ allAddressData }) => {
 
   return (
     <div className="relative flex flex-col w-full overflow-hidden min-h-[70vh]">
-      <section className="bg-[--base] w-full p-4 flex-shrink-0">
+      <section className="bg-[--base] w-full p-4 flex-shrink-0 my-4">
         <CustomSteps
           status={lastStepStatus}
           current={activeStep}
@@ -566,12 +546,7 @@ const BuyProductCom = ({ allAddressData }) => {
         <div>{renderActiveStep(activeStep)}</div>
 
         <div className="w-full mt-4 flex justify-end items-center">
-          {/* <button
-            onClick={handleStepNext}
-            className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
-          > */}
           {handleRenderBtnText()}
-          {/* </button> */}
         </div>
         {contextHolder}
       </section>

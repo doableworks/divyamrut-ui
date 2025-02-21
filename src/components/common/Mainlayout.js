@@ -39,7 +39,7 @@ export default async function MainLayout({ children, session }) {
     },
     token: {
       colorPrimary: "#3F4FE4",
-      fontFamily: '"Inter", sans-serif',
+      fontFamily: '"Poppins", sans-serif',
     },
   };
 

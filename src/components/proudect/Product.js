@@ -8,22 +8,22 @@ import { NoImageAvailabe } from "@/contants/contants";
 import useCartActions from "@/components/cartCom/useCartActions";
 import "./product.css";
 
-
 const Product = ({ item, productCategory, session }) => {
   const router = useRouter();
   const { onAddItem } = useCartActions();
-  const [loading, setLoader] = useState(false)
+  const [loading, setLoader] = useState(false);
 
   const handleAddItem = async (event) => {
     event.stopPropagation();
     try {
-       setLoader(true)
-       await onAddItem(item)
+      setLoader(true);
+      await onAddItem(item);
     } catch (error) {
       console.log("handleAddItem error", error);
-    } finally { setLoader(false) }
+    } finally {
+      setLoader(false);
+    }
   };
-
 
   return (
     <div
@@ -33,34 +33,28 @@ const Product = ({ item, productCategory, session }) => {
       }
     >
       <div>
-        <div className="w-full h-[300px] md:h-[350px] rounded-xl">
+        <div className="h-64 rounded-xl overflow-hidden bg-white flex justify-center items-center">
           <Image
             src={item?.image ? item?.image : NoImageAvailabe}
-            width={200}
-            height={200}
-            className="w-full h-full cover"
+            width={100}
+            height={100}
+            className="w-full h-full object-contain"
             alt={item?.name}
           />
         </div>
 
-        <div className="flex-grow flex flex-col px-6 pt-4">
-          <h6 className="product_name text-heading !text-[24px] !leading-[30px] !normal-case !text-left hover:!text-[--yellow] h-[4rem]">
+        <div className="flex flex-col gap-1 py-4 h-44 overflow-hidden">
+          <h6 className="line-clamp-2 uppercase font-semibold text-sm text-[--neutral] font-poppins">
             {item?.name}
           </h6>
           <p
-            className="product_name text_text14 !text-left mt-1 h-[2.5rem]"
+            className="line-clamp-3 text-[12px] text-gray-500 font-extralight font-poppins"
             dangerouslySetInnerHTML={{ __html: item?.description }}
           />
-          <p className="text_text14 !text-left text-[black] mt-2">
+          <p className="line-clamp-2 uppercase font-semibold text-lg mt-4 text-[--neutral] font-poppins">
             {item?.currency == "USD" ? "$" : "₹"}&nbsp;{item?.price}
           </p>
-          <div className="flex gap-1 mt-4">
-            <Star h={15} w={15} fill={"#f0ad4e"} />
-            <Star h={15} w={15} fill={"#f0ad4e"} />
-            <Star h={15} w={15} fill={"#f0ad4e"} />
-            <Star h={15} w={15} fill={"#f0ad4e"} />
-            <Star h={15} w={15} fill={"#ccd6df"} />
-          </div>
+
         </div>
       </div>
       <CustomButton

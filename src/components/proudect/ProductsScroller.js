@@ -16,16 +16,11 @@ const { useBreakpoint } = Grid;
 const ProductsScroller = ({ category }) => {
   const screens = useBreakpoint();
   const router = useRouter();
-  const {data:session} = useSession()
+  const { data: session } = useSession();
 
   const handleMoveRoute = (cate) => {
     router.push(`/products-list/${cate.slug}`);
   };
-
-  const infiniteData = Array.from(
-    { length: 4 },
-    () => category?.products
-  ).flat();
 
   return (
     <>
@@ -41,33 +36,50 @@ const ProductsScroller = ({ category }) => {
           </span>
         </div>
         <Carousel
-          // autoplay
+          autoplay
+          autoplaySpeed={4000}
           dots={false}
           slidesToShow={
             screens.xl || screens.xxl ? 4 : screens.md || screens.lg ? 2 : 1
           }
+          infinite={
+            screens.xl || screens.xxl
+              ? category?.products.length > 4
+              : screens.md || screens.lg
+              ? category?.products.length > 2
+              : category?.products.length > 1
+          }
+          draggable={
+            screens.xl || screens.xxl
+              ? category?.products.length > 4
+              : screens.md || screens.lg
+              ? category?.products.length > 2
+              : category?.products.length > 1
+          }
+          swipe={
+            screens.xl || screens.xxl
+              ? category?.products.length > 4
+              : screens.md || screens.lg
+              ? category?.products.length > 2
+              : category?.products.length > 1
+          }
+          className="custom-carousel"
         >
           {category &&
-            category?.products.map(
-              (product, index) =>
-                product.is_published && (
-                  <div
-                    key={index + category?.name}
-                    className={`h-full pl-[20px] `}
-                  >
-                    <Product
-                      key={index}
-                      item={product}
-                      productCategory={
-                        category.hasSubCategory && false
-                          ? category.subCategory
-                          : category.slug
-                      }
-                      session={session}
-                    />
-                  </div>
-                )
-            )}
+            category?.products.map((product, index) => (
+              <div key={index + category?.name} className={`h-full pl-[20px] `}>
+                <Product
+                  key={index}
+                  item={product}
+                  productCategory={
+                    category.hasSubCategory && false
+                      ? category.subCategory
+                      : category.slug
+                  }
+                  session={session}
+                />
+              </div>
+            ))}
         </Carousel>
       </div>
     </>

@@ -82,7 +82,7 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
     >
       <main
         ref={scrollContainerRef}
-        className="flex flex-col relative bg-[--base] text-[--neutral] overflow-y-auto overflow-x-hidden h-[100vh]"
+        className="flex flex-col relative bg-[--base] text-[--neutral] overflow-y-auto overflow-x-hidden h-[100vh] font-poppins"
       >
         <PremiumNavbar scrollNum={scrolled} />
 
@@ -90,7 +90,7 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
           <div
             className={twMerge(
               "h-[65px] [@media(min-width:1340.98px)]:h-[172px]",
-              // pathname === "/" && "hidden"
+              pathname === "/" && "hidden"
             )}
           />
           {children}

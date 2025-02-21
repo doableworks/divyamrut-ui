@@ -134,13 +134,13 @@ body {
 
   /* heading/ text */
   .highlight-heading {
-    @apply mt-[1rem] mb-[1.5rem] text-[32px] leading-[36px] md:text-[3em] md:leading-[1.3em] font-suranna  font-[400] text-E0A43B text-center;
+    @apply mt-[1rem] mb-[1.5rem] text-[32px] leading-[36px] md:text-[3em] md:leading-[1.3em] font-playfair  font-[400] text-E0A43B text-center;
   }
   .sub_heading {
     @apply mt-[1rem] mb-[1.5rem] text-[18px] md:text-[26px] leading-[30px] md:leading-[36px] font-jost font-[600] text-center;
   }
   .section-title {
-    @apply font-jost text-q3c3c3d text-[18px] font-[500] leading-[1.4em] uppercase text-center;
+    @apply font-jost text-[--neutral] text-[18px] font-[500] leading-[1.4em] uppercase text-center;
   }
   .section-content {
     @apply font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-center;

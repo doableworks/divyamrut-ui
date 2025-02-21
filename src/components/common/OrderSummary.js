@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Card } from "antd";
+import Divider from "./Divider";
 
 const OrderSummary = ({
   orderList,
@@ -30,7 +31,7 @@ const OrderSummary = ({
           className="rounded-md"
         />
         <div>
-          <p className="font-semibold text-gray-800">
+          <p className="font-semibold text-[--neutral]">
             {item.product_detail.title}
           </p>
           <div className="my-2 flex flex-row items-center gap-2">
@@ -75,7 +76,8 @@ const OrderSummary = ({
     <div className="relative w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Order Summary Section */}
       <div className="lg:col-span-2">
-        <h2 className="text-xl font-bold mb-4">Order Summary</h2>
+        <h2 className="section-title !text-left !mb-4">Order Summary</h2>
+        <Divider className="mb-5"/>
         <div className="w-full">
           <table className="w-full">
             <thead>
@@ -91,8 +93,6 @@ const OrderSummary = ({
           </table>
           <div
             style={{
-              // height: "35vh",
-              // overflowY: "scroll",
               paddingLeft: "5px",
               paddingRight: "10px",
             }}
@@ -108,18 +108,18 @@ const OrderSummary = ({
         </div>
       </div>
 
-      {/* Sticky Section for Delivery Address and Payment Amount */}
       <div className="lg:sticky lg:top-4 space-y-6">
-        {/* Delivery Address Section */}
         <Card className="p-8 border rounded-lg shadow-md">
           <div className="flex items-start justify-between">
             <div className="flex items-start gap-3">
               <div>
-                <span className="font-bold text-lg">Delivery Address</span>
-                <p className="section-title !text-left">
+                <span className="section-title !text-left">Delivery Address</span>
+                <Divider className="my-2"/>
+
+                <p className="section-content !text-left !font-semibold !mt-4">
                   {deliveryAddress.address_type}
                 </p>
-                <div className="mt-3 text-gray-700 space-y-1">
+                <div className="section-content !text-left">
                   <span className="section-content !text-left">{`${deliveryAddress?.first_name} ${deliveryAddress?.last_name}`}</span>
                   <span className="section-content !text-left">{`${deliveryAddress?.address}, ${deliveryAddress?.city}`}</span>
                   <span className="section-content !text-left">{`${deliveryAddress?.state}, ${deliveryAddress?.country}, ${deliveryAddress?.pin_code}`}</span>

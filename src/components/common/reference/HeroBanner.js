@@ -13,7 +13,13 @@ const HeroBanner = () => {
       <img
         src="/asset/home/Hero for Large.png"
         alt="hero"
-        className="hidden md:block w-full"
+        className="hidden lg:block w-full"
+      />
+
+      <img
+        src="/asset/home/Hero for Medium.png"
+        alt="hero"
+        className="hidden md:block lg:hidden w-full"
       />
 
       <img
@@ -22,18 +28,18 @@ const HeroBanner = () => {
         className="block md:hidden w-full"
       />
 
-      <div className="absolute p-7 mb-32">
-        <p className=" font-playfair lg:leading-[76px] font-medium text-[30px] lg:text-[64px] text-center text-white">
-          Committed to Physical,
-          <br /> Mental, Emotional,
-          <br /> Financial & Spiritual
+      <div className="absolute p-7 mb-56 md:mb-0">
+        <p className=" font-playfair md:leading-[76px] font-medium text-[30px] md:text-[64px] text-center text-white">
+          Committed to <br className="md:hidden"/> Physical,
+          <br /> Mental,<br className="md:hidden"/> Emotional,
+          <br /> Financial<br className="md:hidden"/> & Spiritual
           <br />
           Well-being
         </p>
 
         <div className="flex justify-center items-center mt-5">
           <button
-            className="font-sans border border-1 mx-auto text-white px-8 py-2 rounded-lg border-white font-semibold text-sm lg:text-xl"
+            className="font-sans border border-1 mx-auto text-white px-8 py-2 rounded-lg border-white font-semibold text-sm md:text-xl"
             type="button"
           >
             Check More

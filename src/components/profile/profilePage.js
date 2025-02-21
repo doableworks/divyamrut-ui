@@ -61,11 +61,6 @@ const initialLeftbar = [
         label: "Refunded",
         filter: true,
       },
-      {
-        id: "Pending_orders",
-        label: "Pending",
-        filter: true,
-      },
     ],
   },
   {
