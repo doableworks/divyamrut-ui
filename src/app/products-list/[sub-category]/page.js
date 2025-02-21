@@ -38,7 +38,7 @@ const page = async ({ params }) => {
   const products = await getCategoryProducts(params["sub-category"]);
 
   return (
-    <div className="common_page_width !px-2">
+    <div className="common_page_width">
       {products && products.length > 0 ? (
         <ProductList products={products} params={params} />
       ) : (
