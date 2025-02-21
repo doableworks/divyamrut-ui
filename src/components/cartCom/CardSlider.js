@@ -11,22 +11,20 @@ import { closeNav, openNav, toggleNav } from "@/redux/feature/mobileNavSlice";
 import { CloseOutlined, DownOutlined } from "@ant-design/icons";
 import { setBuyProduct } from "@/redux/feature/buyProductSlice";
 import useCartActions from "@/components/cartCom/useCartActions";
-import {
-  openCartSliderFun,
-} from "@/redux/feature/cartSlice";
+import { openCartSliderFun } from "@/redux/feature/cartSlice";
 import { LoadingOutlined } from "@ant-design/icons";
-
+import Divider from "../common/Divider";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 const CardSlider = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const {items : cartItems, openCartSlider } = useSelector((state) => state.cart);
+  const { items: cartItems, openCartSlider } = useSelector(
+    (state) => state.cart
+  );
   const [loader, setLoader] = useState();
-  const [loading, setLoading] = useState(null) 
-  const {
-    onRemoveItem,
-    onIncreaseOrDecreaseItem
-  } = useCartActions();
+  const [loading, setLoading] = useState(null);
+  const { onRemoveItem, onIncreaseOrDecreaseItem } = useCartActions();
 
   const CartSliderClose = () => {
     dispatch(openCartSliderFun(false));
@@ -48,12 +46,13 @@ const CardSlider = () => {
     return cartItems
       ?.reduce(
         (total, item) =>
-          total + parseFloat(item?.product_detail?.price.replace(/,/g, "")) * Number(item.quantity),
+          total +
+          parseFloat(item?.product_detail?.price.replace(/,/g, "")) *
+            Number(item.quantity),
         0
       )
       .toFixed(2);
   };
-
 
   const MoveRoute = (path) => {
     router.push(path);
@@ -66,40 +65,37 @@ const CardSlider = () => {
 
   const handleIncreaseCartItem = async (item, action) => {
     try {
-      setLoading(item.uid)
+      setLoading(item.uid);
       await onIncreaseOrDecreaseItem(action, item?.product_detail.uid);
     } catch (error) {
       console.log("handleIncreaseCartItem cart error", error);
-    }finally{
-      setLoading(null)
+    } finally {
+      setLoading(null);
     }
   };
 
   const handleRemoveItemComplete = (item) => {
-    onRemoveItem([item?.product_detail?.uid])
+    onRemoveItem([item?.product_detail?.uid]);
   };
 
+  // const onCheckout = async () => {
+  //   if (session) {
+  //     const selectedItems = cartItems.filter(item => item.is_select)
+  //     await dispatch(openCartSliderFun(false))
+  //     await dispatch(setBuyProduct({ items: selectedItems, source: "cart" }))
+  //     await router.push("/payment-delivery");
+  //   }
+  //   else {
+  //     dispatch(setOpenLoginModal(true))
+  //   }
+  // };
 
-    // const onCheckout = async () => {
-    //   if (session) {
-    //     const selectedItems = cartItems.filter(item => item.is_select)
-    //     await dispatch(openCartSliderFun(false))
-    //     await dispatch(setBuyProduct({ items: selectedItems, source: "cart" }))
-    //     await router.push("/payment-delivery");
-    //   }
-    //   else {
-    //     dispatch(setOpenLoginModal(true))
-    //   }
-    // };
-
-
-     const onCheckout = async () => {
-        const selectedItems = cartItems.filter(item => item.is_select)
-        await dispatch(openCartSliderFun(false))
-        await dispatch(setBuyProduct({ items: selectedItems, source: "cart" }))
-        await router.push("/payment-delivery");
-    };
-
+  const onCheckout = async () => {
+    const selectedItems = cartItems.filter((item) => item.is_select);
+    await dispatch(openCartSliderFun(false));
+    await dispatch(setBuyProduct({ items: selectedItems, source: "cart" }));
+    await router.push("/payment-delivery");
+  };
 
   return (
     <>
@@ -112,7 +108,7 @@ const CardSlider = () => {
         // width={500}
         title={
           <>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-end">
               <h2 className="text-[18px] leading-[24px] font-semibold mb-4">
                 Cart Items
               </h2>
@@ -121,7 +117,7 @@ const CardSlider = () => {
                 onClick={CartSliderClose}
                 className="flex justify-center p-3 backdrop-blur-lg rounded-md"
               >
-                <CloseOutlined className="text-[28px]" />
+                <XMarkIcon className="h-8 w-8"/>
               </button>
             </div>
           </>
@@ -130,13 +126,6 @@ const CardSlider = () => {
           <>
             {cartItems?.length > 0 && (
               <div className="w-full mx-auto bg-white p-2">
-                {/* Total Section */}
-
-                {/* <h3 className="text-xl font-medium text-center">
-                  Total: ₹{calculateTotal()}
-                </h3> */}
-
-                {/* Checkout Button */}
                 <div className="mt-2 text-right">
                   <CustomButton
                     htmlType="submit"
@@ -146,14 +135,14 @@ const CardSlider = () => {
                     type="submit"
                     onClick={() => handlecartMove("/cart")}
                   />
-                    <CustomButton
-                      htmlType="submit"
-                      className="site-button-primary !m-0 w-[-webkit-fill-available] capitalize"
-                      title={"Proceed to Checkout"}
-                      loading={false}
-                      type="submit"
-                      onClick={onCheckout}
-                    />
+                  <CustomButton
+                    htmlType="submit"
+                    className="site-button-primary !m-0 w-[-webkit-fill-available] capitalize"
+                    title={"Proceed to Checkout"}
+                    loading={false}
+                    type="submit"
+                    onClick={onCheckout}
+                  />
                 </div>
               </div>
             )}
@@ -162,77 +151,82 @@ const CardSlider = () => {
       >
         <div className=" w-full flex flex-col justify-between">
           {/* Cart Items */}
-          <div className="h-full w-full p-2 flex flex-col justify-between">
+          <div className="h-full w-full flex flex-col justify-between">
             {cartItems?.length > 0 ? (
               <>
-                {cartItems?.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex items-center p-2 border-b "
-                  >
-                    {/* <input
-                  type="checkbox"
-                  htmlFor={`cart_product ${item.id}`}
-                  className="mr-4"
-                  checked={item.selected || false}
-                  onChange={() => handleSelectItem(item)}
-                /> */}
-                    <div className="flex flex-1 flex-row items-start">
-                      <Image
-                        src={item.product_detail.image}
-                        // src={"/asset/home/ayurvedic-supplement.jpg"}
-                        alt={"image"}
-                        width={80}
-                        height={80}
-                        className="rounded-md mt-2"
-                      />
-                      <div className="ml-1 flex-1">
-                        <h2 className="text-heading !leading-[18px] !text-[14px] !text-left w-[98%]">
-                          {item.product_detail.title}
-                        </h2>
-                        <div className="my-1 flex flex-row items-center gap-2">
-                          <label
-                            htmlFor={`quantity-${item.uid}`}
-                            className="mr-2 text-text !text-left"
-                          >
-                            Quantity:
-                          </label>
-                          <div className="flex items-center space-x-2">
-                            <button
-                                                       onClick={() => handleIncreaseCartItem(item, "decrease")}
-                              className="px-2 bg-gray-200 text-heading rounded"
-                            >
-                              { loading == item.uid ? <LoadingOutlined spin /> :'-'}
-                            </button>
-                            <span span className="section-title  !text-left">
-                              {item.quantity}
-                            </span>
-                            <button
-                              onClick={() => handleIncreaseCartItem(item, "increase")}
-                              className="px-2 bg-gray-200 text-heading rounded"
-                            >
-                              { loading == item.uid ? <LoadingOutlined spin /> : '+'}
-                            </button>
-                          </div>
+                {cartItems?.map((item, index) => (
+                  <>
+                    <div key={item.id} className="flex items-center p-4">
+                      <div className="flex flex-1 flex-row items-start gap-4">
+                        <div className="w-28 h-28 rounded-md bg-white flex-shrink-0 flex justify-center items-center border">
+                          <Image
+                            src={item.product_detail.image}
+                            alt={"image"}
+                            width={80}
+                            height={80}
+                            className="object-contain h-full"
+                          />
                         </div>
-                        <p className="text-text !text-left">
-                          Price:{" "}
-                          <span className="text-heading !text-left">
-                            ₹&nbsp;{item.product_detail.price}
-                          </span>
-                        </p>
+                        <div className="ml-1 flex-1">
+                          <h2 className="section-title !text-sm !text-left line-clamp-3 !mb-4">
+                            {item.product_detail.title}
+                          </h2>
+                          <div className="my-1 flex flex-row items-center gap-2 mb-4">
+                            <label
+                              htmlFor={`quantity-${item.uid}`}
+                              className="mr-2 text-text !text-left"
+                            >
+                              Quantity:
+                            </label>
+                            <div className="flex items-center space-x-2">
+                              <button
+                                onClick={() =>
+                                  handleIncreaseCartItem(item, "decrease")
+                                }
+                                className="px-2 bg-gray-200 text-heading rounded"
+                              >
+                                {loading == item.uid ? (
+                                  <LoadingOutlined spin />
+                                ) : (
+                                  "-"
+                                )}
+                              </button>
+                              <span span className="section-title  !text-left">
+                                {item.quantity}
+                              </span>
+                              <button
+                                onClick={() =>
+                                  handleIncreaseCartItem(item, "increase")
+                                }
+                                className="px-2 bg-gray-200 text-heading rounded"
+                              >
+                                {loading == item.uid ? (
+                                  <LoadingOutlined spin />
+                                ) : (
+                                  "+"
+                                )}
+                              </button>
+                            </div>
+                          </div>
+                          <p className="text-text !text-left">
+                            Price:{" "}
+                            <span className="text-heading !text-left">
+                              ₹&nbsp;{item.product_detail.price}
+                            </span>
+                          </p>
+                        </div>
+                        <div
+                          className="cursor-pointer"
+                          onClick={() => handleRemoveItemComplete(item)}
+                        >
+                          <XMarkIcon className="w-5 h-5 "/>
+                        </div>
                       </div>
-                      <div
-                        className="cursor-pointer"
-                        onClick={() => handleRemoveItemComplete(item)}
-                      >
-                        <Cross h={30} w={30} />
-                      </div>
-                      {/* <Delete h={30} w={30} fill={"red"} /> */}
                     </div>
-                  </div>
+                    {item.length - 1 !== length && <Divider  className="my-4"/>}
+                  </>
                 ))}
-                <div className="bg-FFEEE2 mt-4 p-4 shadow-md">
+                <div className="bg-FFEEE2 mt-4 p-4 m-5 rounded-lg">
                   <h2 className="text-heading !text-left mb-4">Bill details</h2>
                   <div className="flex justify-between mb-2">
                     <div className="flex items-center gap-2">
@@ -259,7 +253,7 @@ const CardSlider = () => {
                     <span className="section-title !text-left">
                       Grand total
                     </span>
-                    <h3 className="sub_heading !text-right ">
+                    <h3 className="section-title !text-right !text-2xl !my-4">
                       ₹{calculateTotal()}
                     </h3>
                   </div>

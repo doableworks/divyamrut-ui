@@ -12,35 +12,31 @@ import {
   unSelectAllItems,
   selectCartItem,
   unSelectCartItem,
-  increaseOrDecreaseItemQuantity
+  increaseOrDecreaseItemQuantity,
 } from "@/redux/feature/cartSlice";
 import { setBuyProduct } from "@/redux/feature/buyProductSlice";
 import useCartActions from "@/components/cartCom/useCartActions";
 import { useSession } from "next-auth/react";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import { LoadingOutlined } from "@ant-design/icons";
+import { EmptyCart } from "@/icon/icons";
 
 const CartPage = () => {
-  const { items, cartLoader } = useSelector(
-    (state) => state.cart
-  );
+  const { items, cartLoader } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const router = useRouter();
-  const [loading, setLoading] = useState(null) 
+  const [loading, setLoading] = useState(null);
   const { data: session } = useSession();
-  const {
-    onRemoveItem,
-    onIncreaseOrDecreaseItem
-  } = useCartActions();
+  const { onRemoveItem, onIncreaseOrDecreaseItem } = useCartActions();
 
   const handleIncreaseCartItem = async (item, action) => {
     try {
-      setLoading(item.uid)
+      setLoading(item.uid);
       await onIncreaseOrDecreaseItem(action, item?.product_detail.uid);
     } catch (error) {
       console.log("handleIncreaseCartItem cart error", error);
-    }finally{
-      setLoading(null)
+    } finally {
+      setLoading(null);
     }
   };
 
@@ -52,31 +48,13 @@ const CartPage = () => {
     }
   };
 
-  // const handleSelectAll = (item) => {
-  //   dispatch(selectAllItems(item));
-  // };
-
-  // const handleUnselectAll = (item) => {
-  //   dispatch(unSelectAllItems(item));
-  // };
-
   const handleSelectItem = (item) => {
     try {
       item.is_select
         ? dispatch(unSelectCartItem({ uid: item.uid }))
         : dispatch(selectCartItem({ uid: item.uid }));
-    } catch (error) { }
+    } catch (error) {}
   };
-
-  // const calculateTotal = () => {
-  //   return items
-  //     ?.reduce(
-  //       (total, item) =>
-  //         total + parseFloat(item?.product_detail?.price.replace(/,/g, "")) * Number(item.quantity),
-  //       0
-  //     )
-  //     .toFixed(2);
-  // };
 
   const calculateTotal = () => {
     return items
@@ -93,69 +71,24 @@ const CartPage = () => {
       .toFixed(2);
   };
 
-  // const onCheckout = async () => {
-  //   if (session) {
-  //     const selectedItems = items.filter(item => item.is_select)
-  //     await dispatch(setBuyProduct({ items: selectedItems, source: "cart" }))
-  //     await router.push("/payment-delivery");
-  //   }
-  //   else {
-  //     dispatch(setOpenLoginModal(true))
-  //   }
-  // };
-
-
   const onCheckout = async () => {
-      const selectedItems = items.filter(item => item.is_select)
-      await dispatch(setBuyProduct({ items: selectedItems, source: "cart" }))
-      await router.push("/payment-delivery");
+    const selectedItems = items.filter((item) => item.is_select);
+    await dispatch(setBuyProduct({ items: selectedItems, source: "cart" }));
+    await router.push("/payment-delivery");
   };
 
   const allSelected =
     items.length > 0 && items.every((item) => item.is_select === true);
   return (
-    <div className="relative flex flex-col lg:flex-row gap-10 z-20 py-10 min-h-screen">
-      {/* item render section */}
-      <div className="w-full lg:w-[75%] mx-auto bg-white shadow-md rounded-lg">
-        <div className="p-6 h-full">
+    <div className="relative flex flex-col lg:flex-row gap-10 z-20 py-10">
+      <div className="w-full lg:w-[75%] mx-auto bg-white shadow-md rounded-lg h-auto">
+        <div className="p-6">
           <div className="flex justify-between">
             <h2 className="text-[18px] leading-[24px] font-semibold mb-4">
               Cart Items
             </h2>
-            {/* {items.length > 0 && (
-              <span
-                onClick={() => dispatch(clearCart())}
-                className="section-content underline cursor-pointer"
-              >
-                Clear Cart
-              </span>
-            )}{" "} */}
           </div>
-          {/* {items.length > 0 && (
-            <div className="flex justify-between items-center mb-2">
-              <label
-                className="section-content flex items-center  underline cursor-pointer"
-                onClick={() =>
-                  allSelected ? handleUnselectAll() : handleSelectAll()
-                }
-              >
-                <input
-                  type="checkbox"
-                  onChange={(e) =>
-                    allSelected ? handleUnselectAll() : handleSelectAll()
-                  }
-                  checked={allSelected}
-                /> 
-                {allSelected ? (
-                  <span>UnSelect all items</span>
-                ) : (
-                  <span>Select all items</span>
-                )}
-              </label>
-            </div>
-          )} */}
 
-          {/* Cart Items */}
           {items?.length > 0 ? (
             items?.map((item) => (
               <div
@@ -199,19 +132,23 @@ const CartPage = () => {
                       <div className="flex items-center space-x-2">
                         <button
                           // onClick={() => handleRemoveItem(item)}
-                          onClick={() => handleIncreaseCartItem(item, "decrease")}
+                          onClick={() =>
+                            handleIncreaseCartItem(item, "decrease")
+                          }
                           className="px-2 py-1 bg-gray-200 rounded"
                         >
-                          { loading == item.uid ? <LoadingOutlined spin /> :'-'}
+                          {loading == item.uid ? <LoadingOutlined spin /> : "-"}
                         </button>
                         <span className="text-heading !text-left">
                           {item.quantity}
                         </span>
                         <button
-                          onClick={() => handleIncreaseCartItem(item, "increase")}
+                          onClick={() =>
+                            handleIncreaseCartItem(item, "increase")
+                          }
                           className="px-2 py-1 bg-gray-200 rounded"
                         >
-                          { loading == item.uid ? <LoadingOutlined spin /> : '+'}
+                          {loading == item.uid ? <LoadingOutlined spin /> : "+"}
                         </button>
                       </div>
                     </div>
@@ -219,56 +156,72 @@ const CartPage = () => {
                   <p className="hidden md:block section-title">
                     ₹&nbsp;
                     {(
-                      parseFloat(item?.product_detail?.price.replace(/,/g, "")) * Number(item.quantity)
+                      parseFloat(
+                        item?.product_detail?.price.replace(/,/g, "")
+                      ) * Number(item.quantity)
                     ).toFixed(2)}
                   </p>
                 </div>
               </div>
             ))
           ) : (
-            <p className="text-center my-20">Your cart is empty.</p>
+            <div className="flex flex-col jusitify-center items-center m-auto">
+              <EmptyCart h={150} w={150} fill={"#E0A43B"} />
+              <p className="sub_heading mb-4">Oops! Your cart is empty!</p>
+              <p className="section-content mb-4">Start adding products now.</p>
+              <CustomButton
+                htmlType="submit"
+                className="site-button-primary !m-0 capitalize"
+                title="Browse Products"
+                loading={false}
+                type="submit"
+                onClick={() => router.push("/products")}
+              />
+            </div>
           )}
         </div>
       </div>
       {/* Checkout section */}
-      <div className="w-full lg:w-[40%] xl:w-[30%] h-fit mx-auto bg-white shadow-md rounded-lg flex flex-col p-6 lg:sticky self-start lg:top-40">
-        <div className="mt-4">
-          <h2 className="text-heading !text-left mb-4">Bill details</h2>
-          <div className="flex justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <span className="section-content !text-left">Sub total</span>
-            </div>
-            <span className="text-heading !text-right">
-              {" "}
-              ₹{calculateTotal()}
-            </span>
-          </div>
-          <div className="flex justify-between items-center mb-2">
-            <div className="gap-2">
-              <div className="section-content !text-left">
-                Shipping Charges <br /> (Free for orders above ₹500)
+      {items?.length > 0 && (
+        <div className="w-full lg:w-[40%] xl:w-[30%] h-fit mx-auto bg-white shadow-md rounded-lg flex flex-col p-6 lg:sticky self-start lg:top-40">
+          <div className="mt-4">
+            <h2 className="text-heading !text-left mb-4">Bill details</h2>
+            <div className="flex justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <span className="section-content !text-left">Sub total</span>
               </div>
+              <span className="text-heading !text-right">
+                {" "}
+                ₹{calculateTotal()}
+              </span>
             </div>
-            <span className="text-heading !text-right">
-              {calculateTotal() <= 500 ? "₹500" : "Free Shipping"}
-            </span>
+            <div className="flex justify-between items-center mb-2">
+              <div className="gap-2">
+                <div className="section-content !text-left">
+                  Shipping Charges <br /> (Free for orders above ₹500)
+                </div>
+              </div>
+              <span className="text-heading !text-right">
+                {calculateTotal() <= 500 ? "₹500" : "Free Shipping"}
+              </span>
+            </div>
+            <div className="flex justify-between items-center font-bold">
+              <span className="section-title !text-left">Grand total</span>
+              <h3 className="sub_heading !text-right ">₹{calculateTotal()}</h3>
+            </div>
           </div>
-          <div className="flex justify-between items-center font-bold">
-            <span className="section-title !text-left">Grand total</span>
-            <h3 className="sub_heading !text-right ">₹{calculateTotal()}</h3>
+          <div className="mt-6 text-right">
+            <CustomButton
+              htmlType="submit"
+              className="site-button-primary !m-0 w-[-webkit-fill-available] capitalize"
+              title="Proceed to Checkout"
+              loading={false}
+              type="submit"
+              onClick={onCheckout}
+            />
           </div>
         </div>
-        <div className="mt-6 text-right">
-          <CustomButton
-            htmlType="submit"
-            className="site-button-primary !m-0 w-[-webkit-fill-available] capitalize"
-            title="Proceed to Checkout"
-            loading={false}
-            type="submit"
-            onClick={onCheckout}
-          />
-        </div>
-      </div>
+      )}
     </div>
   );
 };
