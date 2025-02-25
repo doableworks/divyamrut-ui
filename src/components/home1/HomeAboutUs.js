@@ -26,20 +26,30 @@ export default function HomeAboutUs() {
           </div>
           <div className="h-full flex flex-col justify-between items-start gap-5">
             <div>
-              <p className="highlight-heading !text-left !text-3xl !mb-3 !mt-0">
+              <p className="mb-3 text-3xl font-playfair text-[--yellow] font-medium">
                 About who we are
               </p>
               <Divider className="mb-4" />
-              <p className="section-content !text-left">
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
-                The point of using Lorem Ipsum is that it has a more-or-less
-                normal distribution of letters, as opposed to using 'Content
-                here, content here', making it look like readable English.
+              <p className="font-poppins text-sm leading-relaxed text-primary">
+                We humans co-exist amidst the most wonderful Divine Nature that
+                is encompassed with all that’s necessary for a healthy and
+                benevolent life.  <br className="mb-2"/>
+                When ancient traditional modalities get harmoniously interwoven
+                with modern lifestyle a synergistic outcome of holistic
+                well-being dawns.
+                <br className="mb-2"/>
+                At Nityanava by Divyamrut Naturals we honour our ancient roots
+                to bring the nectar of the Divine… Divya Amrut; in forms of
+                various health care therapies, life enhancing daily use products
+                and transformative programs all together to achieve physical,
+                mental, emotional and spiritual well-being.
               </p>
             </div>
 
-            <button onClick={handleGoToAbout} className="site-button-primary !mt-0">
+            <button
+              onClick={handleGoToAbout}
+              className="site-button-primary !mt-0"
+            >
               Know More
             </button>
           </div>
