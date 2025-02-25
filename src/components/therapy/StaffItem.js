@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 import { NoProfileImage } from "@/contants/contants";
+import { CalendarIcon } from "@heroicons/react/24/outline";
 
 export default function StaffItem({
   detail,
@@ -15,7 +16,7 @@ export default function StaffItem({
     <li
       onClick={setStaff}
       className={twMerge(
-        "bg-white p-6 rounded-lg flex flex-col items-center cursor-pointer",
+        "bg-white rounded-lg flex flex-col items-center cursor-pointer py-4",
         selectedStaff?.uid === detail?.uid &&
           "outline outline-2 outline-green-400"
       )}
@@ -27,11 +28,23 @@ export default function StaffItem({
         width={100}
         className="rounded-full h-28 w-28"
       />
-      <p className="font-jost mt-2 text-[14px] text-center mb-1 capitalize">
-        {detail?.user_firstname} {detail?.user_lastname}
-      </p>
+      <div className="px-6 py-2 space-y-1">
+        <p className="font-semibold text-sm font-poppins text-[--neutral] text-center mt-1 capitalize">
+          {detail?.user_firstname} {detail?.user_lastname}
+        </p>
+        <p className="text-[10px] font-normal uppercase font-poppins text-center text-gray-500">
+          EXECUTIVE CHAIRMAN FORTIS C DOC | Fortis C-Doc
+        </p>
+        <div className="text-gray-600 flex gap-2 items-center justify-center">
+          <CalendarIcon className="h-4 w-4" />
+          <p>
+            <span className="font-semibold">5+ Years</span>
+            {" "}Experience
+          </p>
+        </div>
+      </div>
       <p
-        className="section-content !text-[12px]"
+        className="text-gray-500 font-poppins font-medium text-[10px] bg-[#fff6f0] p-2 mx-2 rounded-md my-2 text-center"
         dangerouslySetInnerHTML={{ __html: detail?.description }}
       ></p>
     </li>
