@@ -1,6 +1,6 @@
 import ProductDetail from "@/components/proudect/ProductDetail";
 import RelatedProducts from "@/components/proudect/RelatedProducts";
-import { notFound } from "next/navigation"; 
+import { notFound } from "next/navigation";
 
 const getProductDetails = async (params) => {
   try {
@@ -27,7 +27,7 @@ const getProductDetails = async (params) => {
 };
 
 const Page = async ({ params }) => {
-  const item = await getProductDetails(params["product-details"]);
+  const item = await getProductDetails(`${params["sub-category"]}/${params["product-details"]}`);
 
   if (!item) {
     notFound();

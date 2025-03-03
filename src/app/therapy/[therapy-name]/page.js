@@ -1,12 +1,16 @@
 import TherapyDetail from "@/components/therapy/TherapyDetail";
+import { notFound } from "next/navigation";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const fetchTherapyDetails = async (therapyName) => {
   try {
-    const res = await fetch(`${apiUrl}/therapy/therapy-details/${therapyName}`, {
-      next: { revalidate: 60 }, 
-    });
+    const res = await fetch(
+      `${apiUrl}/therapy/therapy-details/${therapyName}`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
 
     if (!res.ok) {
       throw new Error("Failed to fetch data");
@@ -20,19 +24,16 @@ const fetchTherapyDetails = async (therapyName) => {
   }
 };
 
-
 const TherapyName = async ({ params }) => {
   const therapyName = params["therapy-name"];
   const pageDetails = await fetchTherapyDetails(therapyName);
 
-  return (
-    <div>
-      {pageDetails?(
-       <TherapyDetail data={pageDetails} />
-      ):null}
-    </div>
-  );
+  if (!pageDetails) {
+    notFound();
+    return null;
+  }
+
+  return <div>{pageDetails ? <TherapyDetail data={pageDetails} /> : null}</div>;
 };
 
 export default TherapyName;
-
