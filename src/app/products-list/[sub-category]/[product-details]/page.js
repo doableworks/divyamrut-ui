@@ -1,8 +1,8 @@
 import ProductDetail from "@/components/proudect/ProductDetail";
-import Link from "next/link";
 import RelatedProducts from "@/components/proudect/RelatedProducts";
+import { notFound } from "next/navigation"; 
 
-const getProdectDetails = async (params) => {
+const getProductDetails = async (params) => {
   try {
     const res = await fetch(
       process.env.NEXT_PUBLIC_API_URL + `/product/detail/${params}/`,
@@ -10,47 +10,38 @@ const getProdectDetails = async (params) => {
         next: { revalidate: 60 },
       }
     );
-    if (res.status == 200) {
-      const data = await res.json();
-      return data;
-    } else {
+
+    if (res.status === 404) {
       return null;
     }
+
+    if (!res.ok) {
+      throw new Error(`API Error: ${res.status}`);
+    }
+
+    return await res.json();
   } catch (error) {
-    console.log("getTypes error", error);
+    console.log("getProductDetails error", error);
     return null;
   }
 };
 
-const page = async ({ params }) => {
-  const item = await getProdectDetails(params["product-details"]);
+const Page = async ({ params }) => {
+  const item = await getProductDetails(params["product-details"]);
+
+  if (!item) {
+    notFound();
+    return null;
+  }
 
   return (
-    <div>
-      {item ? (
-        <div className="common_page_width relative z-20 ">
-          <ProductDetail item={item} />
-          {item?.related_products?.length > 0 && (
-            <RelatedProducts slidesData={item?.related_products} />
-          )}
-        </div>
-      ) : (
-        <div className="w-full py-32 flex flex-col items-center justify-center gap-5">
-          <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-primary text-center">
-            No Product Found.
-          </p>
-          <Link
-            href="/products"
-            className="site-button-primary !m-0 w-[-webkit-fill-available] capitalize"
-          >
-            <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-white text-center">
-              Browse products
-            </p>
-          </Link>
-        </div>
+    <div className="common_page_width relative z-20">
+      <ProductDetail item={item} />
+      {item?.related_products?.length > 0 && (
+        <RelatedProducts slidesData={item?.related_products} />
       )}
     </div>
   );
 };
 
-export default page;
+export default Page;

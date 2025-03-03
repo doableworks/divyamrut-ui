@@ -1,0 +1,31 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 1.5rem;
+  width: 100%;
+}
+
+.error-code {
+  background: linear-gradient(to bottom, var(--yellow), var(--voilet));
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-size: 8rem;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.error-message {
+  text-align: center;
+  color: var(--neutral);
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.error-description {
+  color: var(--neutral);
+  text-align: center;
+}

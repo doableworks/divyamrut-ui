@@ -46,7 +46,7 @@ const page = async ({ params }) => {
           <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-primary text-center">
             No Products Found. Coming soon 
           </p>
-          <Link href="/products" className="site-button-primary w-fit !m-0 w-[-webkit-fill-available] capitalize">
+          <Link href="/products" className="site-button-primary !m-0 w-[-webkit-fill-available] capitalize">
             <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-white text-center">
               Browse products
             </p>
