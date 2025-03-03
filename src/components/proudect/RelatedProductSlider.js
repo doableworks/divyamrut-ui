@@ -42,7 +42,7 @@ export default function RelatedProductSlider({ slideData, productCategory }) {
         <RelatedProductOverview
           key={index}
           item={product}
-          productCategory={false}
+          productCategory={productCategory}
           session={session}
           className="w-52 flex-shrink-0"
         />

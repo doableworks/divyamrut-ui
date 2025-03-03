@@ -2,7 +2,7 @@
 import RelatedProductSlider from "./RelatedProductSlider";
 import Divider from "../common/Divider";
 import { usePathname } from "next/navigation";
-const RelatedProduct = ({ slidesData }) => {
+const RelatedProduct = ({ slidesData, subCategory }) => {
   const pathname = usePathname();
   const productCategory = pathname.split("/");
 
@@ -12,7 +12,7 @@ const RelatedProduct = ({ slidesData }) => {
       <Divider className="mb-10" />
 
       <RelatedProductSlider
-        productCategory={`${productCategory[2]}`}
+        productCategory={subCategory}
         slideData={slidesData}
       />
     </div>

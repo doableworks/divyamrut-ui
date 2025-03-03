@@ -38,7 +38,7 @@ const Page = async ({ params }) => {
     <div className="common_page_width relative z-20">
       <ProductDetail item={item} />
       {item?.related_products?.length > 0 && (
-        <RelatedProducts slidesData={item?.related_products} />
+        <RelatedProducts subCategory={params["sub-category"]} slidesData={item?.related_products} />
       )}
     </div>
   );

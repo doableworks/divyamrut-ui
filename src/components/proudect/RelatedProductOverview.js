@@ -23,12 +23,11 @@ const RelatedProductOverview = ({
   const [isLoading, setIsLoading] = useState(false);
   const { onAddItem } = useCartActions();
 
-
   const handleAddItem = async (event) => {
     event.stopPropagation();
     try {
       setIsLoading(true);
-      onAddItem(item)
+      onAddItem(item);
     } catch (error) {
       console.log("handleAddItem error", error);
     } finally {
@@ -37,8 +36,14 @@ const RelatedProductOverview = ({
   };
 
   return (
-    <div className={twMerge("", className)}>
-      <section className="bg-white w-full h-48 rounded-xl overflow-hidden mb-4">
+    <div className={twMerge("group", className)}>
+      <button
+        type="button"
+        onClick={() =>
+          router.push(`/products-list/${productCategory}/${item.slug}`)
+        }
+        className="bg-white w-full h-48 rounded-xl overflow-hidden mb-4"
+      >
         <Image
           src={item?.image ? item?.image : NoImageAvailabe}
           width={100}
@@ -46,15 +51,16 @@ const RelatedProductOverview = ({
           className="w-full h-full object-contain"
           alt={item?.name}
         />
-      </section>
+      </button>
 
       <section className="h-60 flex flex-col justify-between">
         <button
+          type="button"
           onClick={() =>
-            router.push(`/products-list/${productCategory}/${item?.slug}`)
+            router.push(`/products-list/${productCategory}/${item.slug}`)
           }
         >
-          <p className="text-lg font-bold text-left line-clamp-2">
+          <p className="text-lg font-bold text-left line-clamp-2 group-hover:text-[--yellow]">
             {item?.name}
           </p>
           <div className="flex gap-1 mt-4">
