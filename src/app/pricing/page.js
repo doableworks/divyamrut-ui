@@ -1,7 +1,6 @@
 import MainBanner from "@/components/common/MainBanner";
 import PricingPlans from "@/components/pricing/Pricing";
 import Image from "next/image";
-import HolisticHealth from "@/components/home1/HolisticHealth"
 
 const page = () => {
   const heading =
