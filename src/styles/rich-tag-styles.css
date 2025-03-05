@@ -1,0 +1,34 @@
+.rich-content a {
+  @apply text-blue-600 underline hover:text-blue-800;
+}
+
+.rich-content h1 {
+  @apply text-4xl leading-relaxed font-prata text-[--yellow] my-2;
+}
+
+.rich-content h2,
+h3 {
+  @apply font-prata text-[--yellow] text-2xl leading-relaxed capitalize my-2;
+}
+
+.rich-content h4,
+h5,
+h6 {
+  @apply font-prata text-[--yellow] text-xl leading-relaxed capitalize my-2;
+}
+
+.rich-content img {
+  @apply w-full;
+}
+
+.rich-content p {
+  @apply text-primary text-sm leading-relaxed;
+}
+
+.rich-content div {
+  @apply my-2;
+}
+
+.rich-content li, ul{
+    @apply ml-2 list-outside list-disc text-primary text-sm leading-relaxed;
+  }

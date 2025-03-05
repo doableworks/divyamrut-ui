@@ -7,6 +7,7 @@ import {
   Inter,
   Poppins,
   Playfair_Display,
+  Prata,
 } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import { getServerSession } from "next-auth/next";
@@ -15,34 +16,16 @@ import MainLayout from "@/components/common/Mainlayout";
 import "@/app/globals.css";
 import { AuthOptions } from "next-auth";
 
-const suranna = Suranna({
-  subsets: [],
-  weight: ["400"],
-  variable: "--font-suranna",
-});
-
-const inter = Inter({
-  subsets: [],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-inter",
-});
-
-const jost = Jost({
-  subsets: [],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-jost",
-});
-
 const poppins = Poppins({
   subsets: [],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-poppins",
 });
 
-const playfair = Playfair_Display({
+const prata = Prata({
   subsets: [],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-playfair",
+  weight: ["400"],
+  variable: "--font-prata",
 });
 
 interface RootLayoutProps {
@@ -58,7 +41,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${jost.variable} ${suranna.variable} ${poppins.variable} ${playfair.variable}`}
+        className={`${poppins.variable} ${prata.variable}`}
       >
         <NextTopLoader />
         <ReduxProvider>

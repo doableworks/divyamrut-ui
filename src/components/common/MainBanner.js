@@ -1,60 +1,28 @@
 "use client";
-import React, { useEffect } from "react";
-import { gsap } from "gsap";
+import React from "react";
+import { twMerge } from "tailwind-merge";
 
-const MainBanner = ({ heading, subHeading }) => {
-  useEffect(() => {
-    gsap.fromTo(
-      ".fade-up",
-      { opacity: 0, y: 100 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.5,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: "#WhatWeOffer",
-          start: "top 80%",
-          end: "bottom 20%",
-          // scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      ".fade-down",
-      { opacity: 0, y: -100 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.5,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: "#WhatWeOffer",
-          start: "top 80%",
-          end: "bottom 20%",
-          // scrub: true,
-        },
-      }
-    );
-  }, []);
-
+const MainBanner = ({
+  heading,
+  subHeading,
+  image = "https://media.istockphoto.com/id/1315443779/photo/young-woman-talking-about-her-mental-health-problems.jpg?s=612x612&w=0&k=20&c=Bb2aaD_2egsY2pmO9ns8wlik6FvazMj6yBZnO6JWZls=",
+  className = "",
+}) => {
   return (
     <section
-      className="relative bg-cover bg-center min-h-[250px] md:max-h-[500px] w-[100%] overflow-hidden"
+      className={twMerge(
+        "relative bg-cover bg-center h-96 w-full overflow-hidden",
+        className
+      )}
       style={{
-        backgroundImage: "url('/asset/home/natural-health-support.jpg')",
+        backgroundImage: `url(${image})`,
       }}
     >
-      <div className="bg-[rgba(0,0,0,.4)] min-h-[250px] md:min-h-[500px] h-full w-full flex items-center justify-center text-white">
-        <div className="relative z-20 mx-auto w-[90%] md:w-[85%] pb-12 pt-48   md:pb-40">
-          <h2 className="fade-up highlight-heading !text-white !mb-0">{heading}</h2>
-          <h3 className="fade-down highlight-heading !text-white !text-[1.5rem] !mt-0">
-            {subHeading}
-          </h3>
-        </div>
+      <div className="absolute inset-0 bg-[rgba(0,0,0,.4)] flex flex-col justify-center items-center">
+        <h2 className="highlight-heading !leading-relaxed !capitalize !text-[--base] !max-w-4xl">
+          {heading}
+        </h2>
+        <h3 className="section-title !text-[--base]">{subHeading}</h3>
       </div>
     </section>
   );

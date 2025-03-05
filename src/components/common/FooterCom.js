@@ -15,6 +15,7 @@ export default function FooterCom() {
     { label: "About", route: "/about-us" },
     { label: "Contact", route: "/contact-us" },
     { label: "Cart", route: "/cart" },
+    { label: "Blogs", route: "/blogs" },
   ];
 
   const exploreLinks = [
@@ -80,8 +81,7 @@ export default function FooterCom() {
           {/* Bottom Bar */}
           <div className="flex flex-col md:flex-row justify-between items-center border-t border-[#FFFFFF2B] py-2  text-center text-green-100 ">
             <p className="text_text14 !text-[#000000]">
-              Copyright © {new Date().getFullYear()} Divyamrut Naturals |
-              Powered by [canwwwas].
+              Copyright © {new Date().getFullYear()} Divyamrut Naturals
             </p>
             <div className="flex space-x-2 mt-4">
               {[

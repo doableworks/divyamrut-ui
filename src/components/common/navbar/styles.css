@@ -1,8 +1,8 @@
 .navbar-li {
-    @apply uppercase list-none text-[12px] font-sans cursor-pointer
+    @apply uppercase list-none text-sm cursor-pointer
   }
 
 .navbar-by-category{
-  @apply list-none text-[14px] font-sans font-bold pb-3
+  @apply list-none text-sm font-bold pb-3
 }
   

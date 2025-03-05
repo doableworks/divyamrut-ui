@@ -36,7 +36,6 @@ const config: Config = {
         AA218C: "var(--e-global-color-AA218C)",
         q45B29D: "var(--e-global-color-45B29D)",
         E0A43B: "var(--e-global-color-E0A43B)",
-        // q3c3c3d :"var(--e-global-color-3c3c3d)",
         q3c3c3d: "var(--e-global-color-f83c760)",
       },
       backgroundImage: {
@@ -49,11 +48,8 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       fontFamily: {
-        inter: ["var(--font-inter)"],
-        jost: ["var(--font-jost)"], 
-        suranna: ["var(--font-suranna)"],
         poppins: ["var(--font-poppins)"],
-        playfair: ["var(--font-playfair)"],
+        prata: ["var(--font-prata)"],
       },
     },
   },

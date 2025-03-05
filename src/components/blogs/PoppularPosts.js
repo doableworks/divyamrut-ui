@@ -37,10 +37,10 @@ const blogPosts = [
   ];
   
 
-const LatestPost = () => {
+const PoppularPosts = () => {
   return (
     <section className="p-4 bg-white shadow-md">
-    <h2 className="highlight-heading !text-left !text-[2rem]">Latest Posts</h2>
+    <h2 className="highlight-heading !text-left !text-[2rem]">Poppular Posts</h2>
     <div className="grid grid-cols-1 gap-4">
       {blogPosts.map((post, index) => (
         <div key={index + 11} className="flex gap-4">
@@ -62,4 +62,4 @@ const LatestPost = () => {
   )
 }
 
-export default LatestPost
+export default PoppularPosts

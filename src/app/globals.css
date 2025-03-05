@@ -40,15 +40,10 @@
 html,
 body {
   overflow-x: hidden;
+  font-family: var(--font-poppins);
+  background-color: var(--base);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -129,36 +124,36 @@ body {
   }
 
   .product_title {
-    @apply font-jost text-[--yellow] text-[1.8rem] font-semibold capitalize mb-4;
+    @apply text-[--yellow] text-[1.8rem] font-semibold capitalize mb-4;
   }
 
   /* heading/ text */
   .highlight-heading {
-    @apply mt-[1rem] mb-[1.5rem] text-[32px] leading-[36px] md:text-[3em] md:leading-[1.3em] font-playfair  font-[400] text-E0A43B text-center;
+    @apply mt-[1rem] mb-[1.5rem] text-4xl leading-relaxed font-prata text-[--yellow] text-center;
   }
   .sub_heading {
-    @apply mt-[1rem] mb-[1.5rem] text-[18px] md:text-[26px] leading-[30px] md:leading-[36px] font-jost font-[600] text-center;
+    @apply mt-[1rem] mb-[1.5rem] text-[18px] md:text-[26px] leading-[30px] md:leading-[36px] font-[600] text-center;
   }
   .section-title {
-    @apply font-jost text-[--neutral] text-[18px] font-[500] leading-[1.4em] uppercase text-center;
+    @apply text-[--neutral] text-[18px] font-[500] leading-[1.4em] uppercase text-center;
   }
   .section-content {
-    @apply font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-center;
+    @apply text-primary text-sm leading-relaxed text-center;
   }
 
   .text-heading {
-    @apply font-jost text-q3c3c3d text-[16px] font-[500] leading-[22px] uppercase text-center;
+    @apply text-q3c3c3d text-[16px] font-[500] leading-[22px] uppercase text-center;
   }
   .text-text {
-    @apply font-jost text-primary text-[16px] font-[400] leading-[18px] text-center;
+    @apply text-primary text-sm leading-relaxed text-center;
   }
 
   .section_title14 {
-    @apply font-jost text-q3c3c3d text-[14px] leading-[20px] font-[500]  uppercase text-center;
+    @apply text-q3c3c3d text-[14px] leading-[20px] font-[500]  uppercase text-center;
   }
 
   .text_text14 {
-    @apply font-jost text-primary text-[14px] font-[400] leading-[20px] text-center;
+    @apply text-primary text-[14px] font-[400] leading-[20px] text-center;
   }
 
   /* Button */
@@ -171,7 +166,7 @@ body {
 
   /* Input */
   .input-label {
-    @apply block font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-[--neutral] mb-3;
+    @apply block text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-[--neutral] mb-3;
   }
   .input-label-required {
     @apply text-red-600;

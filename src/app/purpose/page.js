@@ -1,10 +1,10 @@
 import MainBanner2 from "@/components/common/MainBanner2";
-import DetailPage from "@/components/singlePost/DetailPage";
-import ShareReview from "@/components/singlePost/ShareReview";
-import NewLatterForm from "@/components/singlePost/NewLatterForm";
-import LeaveAReply from "@/components/singlePost/LeaveAReply";
-import PopularCategories from "@/components/singlePost/PopularCategories";
-import LatestPost from "@/components/singlePost/LatestPost";
+import DetailPage from "@/components/blogs/DetailPage";
+import ShareReview from "@/components/blogs/ShareReview";
+import NewLatterForm from "@/components/blogs/NewLatterForm";
+import LeaveAReply from "@/components/blogs/LeaveAReply";
+import PopularCategories from "@/components/blogs/PopularCategories";
+import LatestPost from "@/components/blogs/PoppularPosts";
 
 const page = () => {
   const mainType = "Natural Health"
