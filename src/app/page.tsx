@@ -41,7 +41,6 @@ export const metadata = {
   alternates: {
     canonical: siteUrl,
   },
-  
 };
 
 export default function Home() {

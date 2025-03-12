@@ -2,6 +2,7 @@ import TherapyDetail from "@/components/therapy/TherapyDetail";
 import { notFound } from "next/navigation";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
 const fetchTherapyDetails = async (therapyName) => {
   try {
@@ -28,21 +29,40 @@ export async function generateMetadata({ params }) {
   if (!pageDetails) return { title: "Therapy Not Found" };
 
   return {
-    title: pageDetails?.seo_title || "Therapy Details",
-    description: pageDetails?.seo_description || "Learn more about this therapy.",
+    title: pageDetails.seo_title || pageDetails.name,
+    description: pageDetails.seo_description,
+    datePublished: pageDetails.created,
+    dateModified: pageDetails.updated,
+    robots: "index, nofollow",
+    author: "Nityanava",
+    seo_keywords: pageDetails.seo_keywords,
     openGraph: {
-      title: pageDetails?.seo_title || "Therapy Details",
-      description: pageDetails?.seo_description || "Learn more about this therapy.",
+      type: "article",
+      title: pageDetails.seo_title,
+      description: pageDetails.seo_description,
       images: [
         {
-          url: pageDetails?.banner || "https://www.ozassignments.com/assets/OZLogo.png",
+          url: pageDetails.image,
+          width: 1200,
+          height: 630,
+          alt: pageDetails.name,
         },
       ],
-      url: `https://oz-assignments.com/${pageDetails?.slug || ""}`,
-      type: "website",
+      url: `${siteUrl}/therapy/${pageDetails.slug}`,
+      site_name: "Nityanava",
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "",
+      title: pageDetails.seo_title,
+      description: pageDetails.seo_description,
+      image: {
+        url: pageDetails.image,
+        alt: pageDetails.name,
+      },
     },
     alternates: {
-      canonical: `https://oz-assignments.com/${pageDetails?.slug || ""}`,
+      canonical: `${siteUrl}/therapy/${pageDetails.slug}`,
     },
   };
 }
