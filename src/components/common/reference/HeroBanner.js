@@ -29,7 +29,7 @@ const HeroBanner = () => {
       />
 
       <div className="absolute p-7 mb-56 md:mb-0">
-        <p className="font-prata md:leading-[76px] font-medium text-[30px] md:text-[64px] text-center text-white">
+        <h1 className="font-prata md:leading-[76px] font-medium text-[30px] md:text-[64px] text-center text-white">
           Committed to <br className="md:hidden" /> Physical,
           <br /> Mental,
           <br className="md:hidden" /> Emotional,
@@ -37,7 +37,7 @@ const HeroBanner = () => {
           <br className="md:hidden" /> & Spiritual
           <br />
           Well-being
-        </p>
+        </h1>
 
         <div className="flex justify-center items-center mt-5">
           <button
