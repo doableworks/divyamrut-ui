@@ -28,7 +28,7 @@ const HeroBanner = () => {
         className="block md:hidden w-full"
       />
 
-      <div className="absolute p-7 mb-56 md:mb-0">
+      <div className="hidden md:block absolute p-7 mb-56 md:mb-0">
         <h1 className="font-prata md:leading-[76px] font-medium text-[30px] md:text-[64px] text-center text-white">
           Committed to <br className="md:hidden" /> Physical,
           <br /> Mental,
