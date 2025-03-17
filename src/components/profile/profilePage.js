@@ -23,6 +23,9 @@ import { Button, Form, Input, Modal, Row, Col, message } from "antd";
 import Divider from "../common/Divider";
 import CustomButton from "../common/CustomButton";
 import axiosInstance from "@/lib/axios";
+import Image from "next/image";
+
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const initialLeftbar = [
   {
@@ -123,7 +126,7 @@ const allowedKeys = [
 ];
 
 const UserProfileList = ({ userProfileData }) => {
-  const [form] = Form.useForm();
+  const [form, returnForm] = Form.useForm();
   const { data: session } = useSession();
   const [activeTab, setActiveTab] = useState(initialLeftbar[1]);
   const [openConsentForm, setOpenConsentForm] = useState(false);
@@ -132,7 +135,11 @@ const UserProfileList = ({ userProfileData }) => {
   const [therapyBookedData, setTherapyBookedData] = useState(
     userProfileData.user_appointments
   );
+
   const [loading, setLoading] = useState(false);
+  const [isReturnModalOpen, setIsReturnModalOpen] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+  const [returnData, setReturnData] = useState(null);
 
   const [userProfileDetails, setUserProfileDetails] = useState(
     userProfileData.profile
@@ -141,6 +148,13 @@ const UserProfileList = ({ userProfileData }) => {
     status: false,
     image: userProfileData.profile.image,
   });
+
+  const showResponseMessage = (type, content) => {
+    messageApi.open({
+      type: type,
+      content: content,
+    });
+  };
 
   const onLogOut = async () => {
     try {
@@ -227,7 +241,7 @@ const UserProfileList = ({ userProfileData }) => {
       const result = await response.data;
 
       if (response.status >= 200 && response.status < 300) {
-        message.success("Profile updated successfully!");
+        showResponseMessage("success", "Profile updated successfully!");
         setUserProfileDetails((prev) => ({
           ...prev,
           ...values,
@@ -237,10 +251,62 @@ const UserProfileList = ({ userProfileData }) => {
         }));
         setIsEditProfile({ status: false });
       } else {
-        message.error(result.message || "Profile update failed");
+        throw new Error();
       }
     } catch (error) {
-      message.error("An error occurred. Please try again.");
+      showResponseMessage(
+        "error",
+        "An error occurred while updating. Please try again!"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleOpenReturnModal = (item) => {
+    setReturnData(item);
+    setIsReturnModalOpen(true);
+  };
+
+  const handleCancelReturnModal = () => {
+    setReturnData(null);
+    setIsReturnModalOpen(false);
+  };
+
+  const handleReturnSubmit = async (values) => {
+    if (!returnData) {
+      showResponseMessage("error", "Please select a valid item to return");
+      return;
+    }
+    console.log(values, returnData);
+    if (!values.reason?.trim()) {
+      showResponseMessage("error", "Please provide a reason for return!");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await axiosInstance.post(
+        "/product/return-request/",
+        {
+          order_item_uid: returnData.uid,
+          reason: values.reason,
+        },
+        {
+          session,
+        }
+      );
+
+      if (response.status >= 200 && response.status < 300) {
+        showResponseMessage("success", "Return request processed successfully");
+        handleCancelReturnModal();
+      }
+    } catch (err) {
+      console.error("Return request Error", err);
+      showResponseMessage(
+        "error",
+        err?.response?.data?.error || "Something went wrong!"
+      );
     } finally {
       setLoading(false);
     }
@@ -483,13 +549,73 @@ const UserProfileList = ({ userProfileData }) => {
                     </p>
                     <p className="section-content !text-left !text-[15px]">
                       Status:{" "}
-                      <span className="!text-gray-900 !font-medium">
+                      <span className="text-gray-900 font-medium capitalize">
                         {item.status}
                       </span>
                     </p>
+                    {item.status === "delivered" && item.is_return && (
+                      <button
+                        onClick={() => handleOpenReturnModal(item)}
+                        className="bg-[--voilet] text-white mt-2 p-1 px-4 rounded text-xs font-poppins"
+                        type="button"
+                      >
+                        Request for Return
+                      </button>
+                    )}
                   </div>
                 </li>
               ))
+            )}
+            {isReturnModalOpen && returnData && (
+              <Modal
+                open={isReturnModalOpen}
+                footer={null}
+                onCancel={handleCancelReturnModal}
+              >
+                <div className="p-6">
+                  <div className="flex gap-2 mb-4">
+                    <div className="w-14 h-14">
+                      <Image
+                        className="w-full h-full object-cover"
+                        src={returnData?.product_image}
+                        height={56}
+                        width={56}
+                        alt="Product Image"
+                      />
+                    </div>
+                    <p className="section-title !capitalize !text-left">
+                      {returnData?.product_title}
+                    </p>
+                  </div>
+                  <Form
+                    name="returnProductForm"
+                    form={returnForm}
+                    layout="vertical"
+                    onFinish={handleReturnSubmit}
+                  >
+                    <Form.Item
+                      label="Reason for Return"
+                      name="reason"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please provide a reason for return!",
+                        },
+                      ]}
+                    >
+                      <Input.TextArea placeholder="Enter your reason..." />
+                    </Form.Item>
+                    <CustomButton
+                      htmlType="submit"
+                      className="site-button-primary !m-0 w-[-webkit-fill-available] !mt-2"
+                      title="Submit"
+                      loading={loading}
+                      disabled={loading}
+                      type="submit"
+                    />
+                  </Form>
+                </div>
+              </Modal>
             )}
           </ul>
         ) : (
@@ -740,6 +866,7 @@ const UserProfileList = ({ userProfileData }) => {
           </li>
         ))}
       </ul>
+      {contextHolder}
     </div>
   );
 };
