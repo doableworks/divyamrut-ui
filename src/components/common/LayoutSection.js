@@ -14,14 +14,11 @@ import CardSlider from "@/components/cartCom/CardSlider";
 import BookingModal from "../therapy/BookingModal";
 import { usePathname } from "next/navigation";
 
-
 export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
   const dispatch = useDispatch();
   const scrollContainerRef = useRef(null);
   const [scrolled, setScrolled] = useState(0);
-  const [isSticky, setIsSticky] = useState(false);
   const pathname = usePathname();
-
 
   const initialMenuItems = [
     { label: "About Us", path: "/about-us" },
@@ -42,9 +39,10 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
     { label: "Contact Us", path: "/contact-us" },
   ];
 
-  dispatch(setMenuItems(initialMenuItems));
-
-
+  // ✅ Run Redux dispatch inside useEffect to prevent infinite loop
+  useEffect(() => {
+    dispatch(setMenuItems(initialMenuItems));
+  }, [dispatch, navbarAPIitems]); // Dependency array ensures it runs only when navbarAPIitems changes
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,13 +54,11 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
 
       if (scrollContainerRef.current) {
         const currentScrollTop = scrollContainerRef.current.scrollTop;
-
         setScrolled(currentScrollTop);
       }
     };
 
     const container = scrollContainerRef.current;
-
     if (container) {
       container.addEventListener("scroll", handleScroll);
     }
@@ -72,7 +68,7 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
         container.removeEventListener("scroll", handleScroll);
       }
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <SessionProvider
@@ -97,7 +93,6 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
         </div>
 
         <div>
-          {/* <NewFooter /> */}
           <Footer />
         </div>
       </main>

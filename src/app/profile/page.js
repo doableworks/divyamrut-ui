@@ -11,7 +11,7 @@ const fetchUser = async (accessToken) => {
       headers: {
         Authorization: `Bearer ${accessToken}`, 
       },
-      next: { revalidate: 60 },
+      cache: "no-store",
     });
 
     if (!res.ok) {
@@ -30,11 +30,10 @@ const fetchUser = async (accessToken) => {
 const page = async () => {
   const session = await getServerSession(authOptions);
 
-  if (!session || !session.accessToken) {
+   if (!session || !session.accessToken) {
     console.error("No session or access token found");
-    return null;
+    return redirect("/");
   }
-
   const userProfileData = await fetchUser(session.accessToken);
 
   return !!userProfileData ? (

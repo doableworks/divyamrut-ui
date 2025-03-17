@@ -10,6 +10,7 @@ const Page = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [paymentDetail, setPaymentDetail] = useState(null);
+  const [countdown, setCountdown] = useState(5); // Start countdown from 5
 
   const paymentId = searchParams.get("payment_id");
   const orderId = searchParams.get("order_id");
@@ -50,10 +51,25 @@ const Page = () => {
     fetchPaymentStatus();
   }, []);
 
+  useEffect(() => {
+    if (paymentDetail?.status) {
+      const interval = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev === 1) {
+            clearInterval(interval);
+            router.push("/profile");
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [paymentDetail, router]);
 
   if (isLoading) return <BlockPageLoader />;
 
-  return paymentDetail?.status && order_type == "Therapy" ? (
+  return paymentDetail?.status ? (
     <div className="common_page_width">
       <div className="py-8">
         <div className="mb-8 flex flex-col justify-center items-center">
@@ -63,62 +79,59 @@ const Page = () => {
             width="150px"
           />
 
-          <h2 className="highlight-heading !text-[24px] !mt-0 !mb-2">
-            Your Session is Scheduled
-          </h2>
-          <p className="section-content !max-w-lg !text-[16px]">
-            You have successfully booked a slot with our therapist. Please
-            ensure you are available on time to avoid any inconvenience. You can
-            check your booking details in the profile section within the next
-            hour.
-          </p>
+          {order_type === "Therapy" ? (
+            <>
+              <h2 className="highlight-heading !text-[24px] !mt-0 !mb-2">
+                Your Session is Scheduled
+              </h2>
+              <p className="section-content !max-w-lg !text-[16px]">
+                You have successfully booked a slot with our therapist. Please
+                ensure you are available on time to avoid any inconvenience. You can
+                check your booking details in the profile section within the next
+                hour.
+              </p>
+            </>
+          ) : order_type === "Product" ? (
+            <>
+              <h2 className="highlight-heading !text-[24px] !mt-0 !mb-2">
+                Payment Successful & Product Verified
+              </h2>
+              <p className="section-content !max-w-lg !text-[16px]">
+                Your payment has been successfully processed, and your product has been verified.
+                The product will be delivered to your provided address shortly.
+                Please ensure someone is available to receive the product and verify it upon arrival.
+                For any issues or further assistance, feel free to reach out to our support team.
+              </p>
+            </>
+          ) : null}
+
+          <p className="mt-4 text-gray-500">Redirecting in <strong>{countdown}</strong> seconds...</p>
         </div>
       </div>
     </div>
-  ) : paymentDetail?.status && order_type == "Product" ?
+  ) : (
     <div className="common_page_width">
       <div className="py-8">
         <div className="mb-8 flex flex-col justify-center items-center">
           <LottieShowcase
-            source="https://lottie.host/embed/34db972f-7afa-42de-a78f-a65f2c1bec27/y1OW9bi51L.lottie"
+            source="https://lottie.host/embed/aecf4c7f-4b5f-43ba-b414-baa199d45078/rUEKgJhvaI.lottie"
             height="150px"
             width="150px"
           />
+
           <h2 className="highlight-heading !text-[24px] !mt-0 !mb-2">
-            Payment Successful & Product Verified
+            Oops!! Something Went Wrong
           </h2>
           <p className="section-content !max-w-lg !text-[16px]">
-            Your payment has been successfully processed, and your product has been verified.
-            The product will be delivered to your provided address shortly.
-            Please ensure someone is available to receive the product and verify it upon arrival.
-            For any issues or further assistance, feel free to reach out to our support team.
+            We encountered an issue while verifying your payment. This could be
+            due to an invalid key or other technical reasons. Please check your
+            payment details and try again. If the problem persists, contact our
+            support team for assistance.
           </p>
         </div>
       </div>
     </div>
-    : (
-      <div className="common_page_width">
-        <div className="py-8">
-          <div className="mb-8 flex flex-col justify-center items-center">
-            <LottieShowcase
-              source="https://lottie.host/embed/aecf4c7f-4b5f-43ba-b414-baa199d45078/rUEKgJhvaI.lottie"
-              height="150px"
-              width="150px"
-            />
-
-            <h2 className="highlight-heading !text-[24px] !mt-0 !mb-2">
-              Oops!! something went wrong
-            </h2>
-            <p className="section-content !max-w-lg !text-[16px]">
-              We encountered an issue while verifying your payment. This could be
-              due to an invalid key or other technical reasons. Please check your
-              payment details and try again. If the problem persists, contact our
-              support team for assistance.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
+  );
 };
 
 export default Page;
