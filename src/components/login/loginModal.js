@@ -204,7 +204,7 @@ const LoginModal = () => {
                 <p className="section-title !normal-case !text-gray-500 !text-left mb-10">
                   {loginWithOTStepOne.isCompleted
                     ? `We have sent you a confirmation email to ${loginWithOTStepOne.data}`
-                    : "Welcome back you&apos;ve been missed!"}
+                    : "Welcome back you've been missed!"}
                 </p>
               </div>
               {loginWithOTP ? (

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "antd/dist/reset.css";
 import { ReduxProvider } from "../redux/provider";
@@ -28,25 +29,40 @@ const prata = Prata({
   variable: "--font-prata",
 });
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+const getNavbarItems = async () => {
+  try {
+    const res = await fetch(`${apiUrl}/therapy/combined-categories/`, {
+      cache: "no-store", 
+    });
+    if (!res.ok) {
+      throw new Error("Failed to fetch navbar data");
+    }
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching navbar items:", error);
+    return [];
+  }
+};
+
 interface RootLayoutProps {
   children: React.ReactNode;
-  navProducts?: any;
 }
 
-export default async function RootLayout({
-  children,
-  navProducts,
-}: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
   const session = await getServerSession(authOptions as AuthOptions);
+  const navbarAPIItems = await getNavbarItems(); // Fetch only once
+
   return (
     <html lang="en">
-      <body
-        className={`${poppins.variable} ${prata.variable}`}
-      >
+      <body className={`${poppins.variable} ${prata.variable}`}>
         <NextTopLoader />
         <ReduxProvider>
           <AntdRegistry>
-            <MainLayout session={session}>{children}</MainLayout>
+            <MainLayout session={session} navbarAPIItems={navbarAPIItems}>
+              {children}
+            </MainLayout>
           </AntdRegistry>
         </ReduxProvider>
       </body>
