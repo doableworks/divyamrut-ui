@@ -137,7 +137,7 @@ const useCartActions = () => {
             product: 117,
             product_detail: item,
             quantity: quantity,
-            uid: `product_ + ${item.uid}`,
+            uid: item.uid,
             updated: "",
             user: 3,
           }
@@ -171,7 +171,6 @@ const useCartActions = () => {
         response = await IncreAndDecreApiCartItemQuantity(action, product_uid);
       }
       if (session == null || (session && response)) {
-        // const itemData = session ? response?.data : item
         const itemData = session ? response?.data : { uid: product_uid, action: action }
         dispatch(increaseOrDecreaseCartItemQuantity({ uid: product_uid, action: action }));
       }

@@ -8,8 +8,6 @@ const page = () => {
 
   return (
     <div>
-      {/* <MainBanner heading={heading} subHeading={subHeading} /> */}
-
       <div id="pricing" className="common_page_width">
           <div className="fade-up">
             <h6 className="section-title">
@@ -21,7 +19,6 @@ const page = () => {
           </div>
           <CartPage />
       </div>
-      {/* <HolisticHealth /> */}
     </div>
   );
 };

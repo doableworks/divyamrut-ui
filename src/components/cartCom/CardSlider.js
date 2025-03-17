@@ -15,6 +15,7 @@ import { openCartSliderFun } from "@/redux/feature/cartSlice";
 import { LoadingOutlined } from "@ant-design/icons";
 import Divider from "../common/Divider";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { message } from "antd";
 
 const CardSlider = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const CardSlider = () => {
   const [loader, setLoader] = useState();
   const [loading, setLoading] = useState(null);
   const { onRemoveItem, onIncreaseOrDecreaseItem } = useCartActions();
+  const [messageApi, contextHolder] = message.useMessage();
 
   const CartSliderClose = () => {
     dispatch(openCartSliderFun(false));
@@ -64,6 +66,15 @@ const CardSlider = () => {
   };
 
   const handleIncreaseCartItem = async (item, action) => {
+    if (
+      action === "increase" &&
+      item.quantity >= item.product_detail.quantity
+    ) {
+      messageApi.info(
+        `The item was not added as you've exceeded the cart limit. You can add up to ${item.product_detail.quantity} nos`
+      );
+      return;
+    }
     try {
       setLoading(item.uid);
       await onIncreaseOrDecreaseItem(action, item?.product_detail.uid);
@@ -117,7 +128,7 @@ const CardSlider = () => {
                 onClick={CartSliderClose}
                 className="flex justify-center p-3 backdrop-blur-lg rounded-md"
               >
-                <XMarkIcon className="h-8 w-8"/>
+                <XMarkIcon className="h-8 w-8" />
               </button>
             </div>
           </>
@@ -180,10 +191,11 @@ const CardSlider = () => {
                             </label>
                             <div className="flex items-center space-x-2">
                               <button
+                                disabled={loading}
                                 onClick={() =>
                                   handleIncreaseCartItem(item, "decrease")
                                 }
-                                className="px-2 bg-gray-200 text-heading rounded"
+                                className="px-2 bg-gray-200 text-heading rounded w-7 h-7 overflow-hidden"
                               >
                                 {loading == item.uid ? (
                                   <LoadingOutlined spin />
@@ -191,14 +203,15 @@ const CardSlider = () => {
                                   "-"
                                 )}
                               </button>
-                              <span span className="section-title  !text-left">
+                              <span span className="flex justify-center items-center text-center w-10 h-7 overflow-hidden">
                                 {item.quantity}
                               </span>
                               <button
+                                disabled={loading}
                                 onClick={() =>
                                   handleIncreaseCartItem(item, "increase")
                                 }
-                                className="px-2 bg-gray-200 text-heading rounded"
+                                className="px-2 bg-gray-200 text-heading rounded w-7 h-7 overflow-hidden"
                               >
                                 {loading == item.uid ? (
                                   <LoadingOutlined spin />
@@ -219,11 +232,11 @@ const CardSlider = () => {
                           className="cursor-pointer"
                           onClick={() => handleRemoveItemComplete(item)}
                         >
-                          <XMarkIcon className="w-5 h-5 "/>
+                          <XMarkIcon className="w-5 h-5 " />
                         </div>
                       </div>
                     </div>
-                    {item.length - 1 !== length && <Divider  className="my-4"/>}
+                    {item.length - 1 !== length && <Divider className="my-4" />}
                   </>
                 ))}
                 <div className="bg-FFEEE2 mt-4 p-4 m-5 rounded-lg">
@@ -278,6 +291,7 @@ const CardSlider = () => {
             )}
           </div>
         </div>
+        {contextHolder}
       </Drawer>
       <style jsx global>{`
         .ant-drawer .ant-drawer-body {

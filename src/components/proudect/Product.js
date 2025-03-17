@@ -26,13 +26,14 @@ const Product = ({ item, productCategory, session }) => {
   };
 
   return (
-    <div
-      className="relative h-full flex flex-col justify-between cursor-pointer rounded overflow-hidden"
-      onClick={() =>
-        router.push(`/products-list/${productCategory}/${item?.slug}`)
-      }
-    >
-      <div>
+    <div className="relative h-full flex flex-col justify-between cursor-pointer rounded overflow-hidden">
+      <button
+        type="button"
+        onClick={() =>
+          router.push(`/products-list/${productCategory}/${item?.slug}`)
+        }
+        className="text-left"
+      >
         <div className="h-64 rounded-xl overflow-hidden bg-white flex justify-center items-center">
           <Image
             src={item?.image ? item?.image : NoImageAvailabe}
@@ -54,17 +55,23 @@ const Product = ({ item, productCategory, session }) => {
           <p className="line-clamp-2 uppercase font-semibold text-lg mt-4 text-[--neutral] font-poppins">
             {item?.currency == "USD" ? "$" : "₹"}&nbsp;{item?.price}
           </p>
-
         </div>
-      </div>
-      <CustomButton
-        htmlType="submit"
-        className="site-button-primary !mt-4 w-[-webkit-fill-available] capitalize"
-        title="ADD TO CART"
-        loading={loading}
-        type="submit"
-        onClick={(event) => handleAddItem(event)}
-      />
+      </button>
+      {parseInt(item.quantity) > 0 ? (
+        <CustomButton
+          htmlType="submit"
+          className="site-button-primary !mt-4 w-[-webkit-fill-available] capitalize"
+          title="ADD TO CART"
+          loading={loading}
+          type="submit"
+          onClick={(event) => handleAddItem(event)}
+        />
+      ) : (
+        <CustomButton
+          className="site-button-primary !mt-4 w-[-webkit-fill-available] !bg-gray-400 cursor-not-allowed"
+          title="Out of Stock"
+        />
+      )}
     </div>
   );
 };

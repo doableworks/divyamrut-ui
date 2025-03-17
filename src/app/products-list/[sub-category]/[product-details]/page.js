@@ -9,7 +9,7 @@ const getProductDetails = async (params) => {
     const res = await fetch(
       process.env.NEXT_PUBLIC_API_URL + `/product/detail/${params}/`,
       {
-        next: { revalidate: 60 },
+        cache: "no-store",
       }
     );
 
@@ -29,12 +29,14 @@ const getProductDetails = async (params) => {
 };
 
 export async function generateMetadata({ params }) {
-  const pageDetails = await getProductDetails(`${params["sub-category"]}/${params["product-details"]}`)
+  const pageDetails = await getProductDetails(
+    `${params["sub-category"]}/${params["product-details"]}`
+  );
 
-  if (!pageDetails) return { title: "Therapy Not Found" };
+  if (!pageDetails) return { title: "Product Not Found" };
 
   return {
-    title: pageDetails.seo_title ,
+    title: pageDetails.seo_title,
     description: pageDetails.seo_description,
     datePublished: pageDetails.created,
     dateModified: pageDetails.updated,
@@ -73,18 +75,22 @@ export async function generateMetadata({ params }) {
 }
 
 const Page = async ({ params }) => {
-  const item = await getProductDetails(`${params["sub-category"]}/${params["product-details"]}`);
+  const item = await getProductDetails(
+    `${params["sub-category"]}/${params["product-details"]}`
+  );
 
   if (!item) {
     notFound();
     return null;
   }
-
   return (
     <div className="common_page_width relative z-20">
       <ProductDetail item={item} />
       {item?.related_products?.length > 0 && (
-        <RelatedProducts subCategory={params["sub-category"]} slidesData={item?.related_products} />
+        <RelatedProducts
+          subCategory={params["sub-category"]}
+          slidesData={item?.related_products}
+        />
       )}
     </div>
   );
