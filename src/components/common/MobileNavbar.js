@@ -107,7 +107,7 @@ const MobileNavbar = ({
                           className={`${pathname === subItem?.slug
                             ? "text-[--e-global-color-E0A43B] font-bold"
                             : "text-[#3E3E3E]"
-                            } hover:text-[#FF5400] cursor-pointer px-5 py-2`}
+                            } hover:text-[--voilet] cursor-pointer px-5 py-2`}
                           onClick={() =>
 
                             handleAction(
