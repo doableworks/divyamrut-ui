@@ -57,7 +57,9 @@ const Page = () => {
         setCountdown((prev) => {
           if (prev === 1) {
             clearInterval(interval);
-            router.push("/profile");
+            router.push(
+              `/profile?tab=${order_type === "Therapy" ? "Therapy" : "Orders"}`
+            );
           }
           return prev - 1;
         });
@@ -86,9 +88,9 @@ const Page = () => {
               </h2>
               <p className="section-content !max-w-lg !text-[16px]">
                 You have successfully booked a slot with our therapist. Please
-                ensure you are available on time to avoid any inconvenience. You can
-                check your booking details in the profile section within the next
-                hour.
+                ensure you are available on time to avoid any inconvenience. You
+                can check your booking details in the profile section within the
+                next hour.
               </p>
             </>
           ) : order_type === "Product" ? (
@@ -97,15 +99,19 @@ const Page = () => {
                 Payment Successful & Product Verified
               </h2>
               <p className="section-content !max-w-lg !text-[16px]">
-                Your payment has been successfully processed, and your product has been verified.
-                The product will be delivered to your provided address shortly.
-                Please ensure someone is available to receive the product and verify it upon arrival.
-                For any issues or further assistance, feel free to reach out to our support team.
+                Your payment has been successfully processed, and your product
+                has been verified. The product will be delivered to your
+                provided address shortly. Please ensure someone is available to
+                receive the product and verify it upon arrival. For any issues
+                or further assistance, feel free to reach out to our support
+                team.
               </p>
             </>
           ) : null}
 
-          <p className="mt-4 text-gray-500">Redirecting in <strong>{countdown}</strong> seconds...</p>
+          <p className="mt-4 text-gray-500">
+            Redirecting in <strong>{countdown}</strong> seconds...
+          </p>
         </div>
       </div>
     </div>

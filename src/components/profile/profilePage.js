@@ -24,6 +24,7 @@ import Divider from "../common/Divider";
 import CustomButton from "../common/CustomButton";
 import axiosInstance from "@/lib/axios";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -40,27 +41,27 @@ const initialLeftbar = [
         filter: true,
       },
       {
-        id: "Confirmed_orders",
+        id: "Confirmed",
         label: "Confirmed",
         filter: true,
       },
       {
-        id: "Shipped_orders",
+        id: "shipped",
         label: "Shipped",
         filter: true,
       },
       {
-        id: "Delivered_orders",
+        id: "delivered",
         label: "Delivered",
         filter: true,
       },
       {
-        id: "Cancelled_orders",
+        id: "cancelled",
         label: "Cancelled",
         filter: true,
       },
       {
-        id: "Refunded_orders",
+        id: "refunded",
         label: "Refunded",
         filter: true,
       },
@@ -97,6 +98,11 @@ const initialLeftbar = [
         label: "Cancelled",
         filter: true,
       },
+      {
+        id: "Missed_therapy",
+        label: "Missed",
+        filter: true,
+      },
     ],
   },
   {
@@ -104,12 +110,7 @@ const initialLeftbar = [
     label: "Profile Settings",
     mobileLabel: "Profile",
     icon: <UserIcon className="size-5 text-[--yellow]" />,
-    subItems: [
-      {
-        id: "Profile_information",
-        label: "Profile Infomartion",
-      },
-    ],
+    subItems: [],
   },
 ];
 
@@ -128,7 +129,13 @@ const allowedKeys = [
 const UserProfileList = ({ userProfileData }) => {
   const [form, returnForm] = Form.useForm();
   const { data: session } = useSession();
-  const [activeTab, setActiveTab] = useState(initialLeftbar[1]);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const tab = searchParams.get("tab");
+  const initialSelectedTab = tab
+    ? initialLeftbar.find((each) => each.id.toLowerCase() === tab.toLowerCase())
+    : initialLeftbar[2];
+  const [activeTab, setActiveTab] = useState(initialSelectedTab);
   const [openConsentForm, setOpenConsentForm] = useState(false);
   const [consentFormData, setConsentFormData] = useState(null);
   const [selectedFilter, setSelectedFilter] = useState("All");
@@ -196,13 +203,22 @@ const UserProfileList = ({ userProfileData }) => {
     );
   });
 
-  const filteredProducts = userProfileData.orders.filter((each) => {
-    if (selectedFilter === "All") return true;
-    return (
-      each.status.toLowerCase() ===
-      selectedFilter.replace("_orders", "").toLowerCase()
-    );
-  });
+  const filteredProducts = userProfileData.orders
+    .map((order) => {
+      if (selectedFilter === "All") {
+        return order;
+      } else {
+        const filteredOrderItems = order.order_items.filter(
+          (item) => item.status.toLowerCase() === selectedFilter.toLowerCase()
+        );
+        if (filteredOrderItems.length > 0) {
+          return { ...order, order_items: filteredOrderItems };
+        } else {
+          return null;
+        }
+      }
+    })
+    .filter(Boolean);
 
   const handleSubmit = async (values) => {
     setLoading(true);
@@ -278,7 +294,6 @@ const UserProfileList = ({ userProfileData }) => {
       showResponseMessage("error", "Please select a valid item to return");
       return;
     }
-    console.log(values, returnData);
     if (!values.reason?.trim()) {
       showResponseMessage("error", "Please provide a reason for return!");
       return;
@@ -630,8 +645,10 @@ const UserProfileList = ({ userProfileData }) => {
     }
   };
 
-  const handleSetActiveTab = (clickedId) => {
-    setActiveTab(clickedId);
+  const handleSetActiveTab = (clickedItem) => {
+    if (!clickedItem?.id) return;
+    setActiveTab(clickedItem);
+    router.replace(`?tab=${clickedItem.id}`, { scroll: false });
   };
 
   const getActiveTabData = () => {
@@ -647,7 +664,9 @@ const UserProfileList = ({ userProfileData }) => {
 
   const handleChangeActiveTab = (clickedData) => {
     handleSetActiveTab(clickedData);
-    setSelectedFilter(clickedData.subItems[0].id);
+    if (clickedData.subItems.length > 0) {
+      setSelectedFilter(clickedData.subItems[0].id);
+    }
   };
 
   const handleToggleEditProfile = (newStatus) => {
@@ -735,15 +754,17 @@ const UserProfileList = ({ userProfileData }) => {
                         {each.label}
                       </p>
                     </figure>
-                    <span
-                      className={twMerge(
-                        "",
-                        activeTab.id === each.id &&
-                          "rotate-90 transition-all duration-300 ease-in-out"
-                      )}
-                    >
-                      <ChevronRightIcon className="size-4" />
-                    </span>
+                    {each.subItems?.length > 0 && (
+                      <span
+                        className={twMerge(
+                          "",
+                          activeTab.id === each.id &&
+                            "rotate-90 transition-all duration-300 ease-in-out"
+                        )}
+                      >
+                        <ChevronRightIcon className="size-4" />
+                      </span>
+                    )}
                   </button>
 
                   {each.subItems.length > 0 && activeTab.id === each.id && (

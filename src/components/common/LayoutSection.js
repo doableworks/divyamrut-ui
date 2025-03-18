@@ -1,10 +1,9 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { SessionProvider } from "next-auth/react";
 import PremiumNavbar from "@/components/common/navbar/PremiumNavbar";
 import LoginModal from "../login/loginModal";
 import RegisterModal from "../login/RegisterModal";
-import NewFooter from "@/components/common/reference/NewFooter";
 import Footer from "@/components/common/FooterCom";
 import { twMerge } from "tailwind-merge";
 import { useDispatch } from "react-redux";
@@ -39,10 +38,9 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
     { label: "Contact Us", path: "/contact-us" },
   ];
 
-  // ✅ Run Redux dispatch inside useEffect to prevent infinite loop
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(setMenuItems(initialMenuItems));
-  }, [dispatch, navbarAPIitems]); // Dependency array ensures it runs only when navbarAPIitems changes
+  }, [dispatch, navbarAPIitems]);
 
   useEffect(() => {
     const handleScroll = () => {
