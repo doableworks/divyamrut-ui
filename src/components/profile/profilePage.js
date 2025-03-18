@@ -142,6 +142,9 @@ const UserProfileList = ({ userProfileData }) => {
   const [therapyBookedData, setTherapyBookedData] = useState(
     userProfileData.user_appointments
   );
+  const [purchaseProductsData, setPurchaseProductData] = useState(
+    userProfileData.orders
+  );
 
   const [loading, setLoading] = useState(false);
   const [isReturnModalOpen, setIsReturnModalOpen] = useState(false);
@@ -203,7 +206,7 @@ const UserProfileList = ({ userProfileData }) => {
     );
   });
 
-  const filteredProducts = userProfileData.orders
+  const filteredProducts = purchaseProductsData
     .map((order) => {
       if (selectedFilter === "All") {
         return order;
@@ -314,6 +317,25 @@ const UserProfileList = ({ userProfileData }) => {
 
       if (response.status >= 200 && response.status < 300) {
         showResponseMessage("success", "Return request processed successfully");
+
+        const updatedPurchaseProductsData = purchaseProductsData.map(
+          (order) => ({
+            ...order,
+            order_items: order.order_items.map((item) =>
+              item.uid === returnData.uid
+                ? {
+                    ...item,
+                    return_request: {
+                      uid: "9abde081-6553-4b47-9659-8c6039c4091b",
+                      status: "pending",
+                    },
+                  }
+                : item
+            ),
+          })
+        );
+
+        setPurchaseProductData(updatedPurchaseProductsData);
         handleCancelReturnModal();
       }
     } catch (err) {
@@ -326,7 +348,7 @@ const UserProfileList = ({ userProfileData }) => {
       setLoading(false);
     }
   };
-
+  console.log(purchaseProductsData);
   const renderActiveTabContent = () => {
     switch (activeTab.id) {
       case "Therapy":
@@ -568,14 +590,32 @@ const UserProfileList = ({ userProfileData }) => {
                         {item.status}
                       </span>
                     </p>
-                    {item.status === "delivered" && item.is_return && (
-                      <button
-                        onClick={() => handleOpenReturnModal(item)}
-                        className="bg-[--voilet] text-white mt-2 p-1 px-4 rounded text-xs font-poppins"
-                        type="button"
-                      >
-                        Request for Return
-                      </button>
+                    {item.status === "delivered" &&
+                      item.is_return &&
+                      !item.return_request && (
+                        <button
+                          onClick={() => handleOpenReturnModal(item)}
+                          className="bg-[--voilet] text-white mt-2 p-1 px-4 rounded text-xs font-poppins"
+                          type="button"
+                        >
+                          Request for Return
+                        </button>
+                      )}
+                    {item.return_request && (
+                      <p className="text-xs mt-2 text-[--voilet] font-poppins">
+                        {item.return_request.status.toLowerCase() === "pending"
+                          ? "Your return request is being processed. Please wait approximately 2-3 working days for an update."
+                          : item.return_request.status.toLowerCase() ===
+                            "approved"
+                          ? "Your return request has been approved by the admin. Please wait 5-7 working days for the refund to be initiated."
+                          : item.return_request.status.toLowerCase() ===
+                            "rejected"
+                          ? "Your return request has been rejected by the admin as the product may not be eligible for an easy return. Please contact us for more details."
+                          : item.return_request.status.toLowerCase() ===
+                            "completed"
+                          ? "Your refund for this return has been successfully initiated."
+                          : ""}
+                      </p>
                     )}
                   </div>
                 </li>
@@ -587,7 +627,7 @@ const UserProfileList = ({ userProfileData }) => {
                 footer={null}
                 onCancel={handleCancelReturnModal}
               >
-                <div className="p-6">
+                <div className="p-6 font-poppins">
                   <div className="flex gap-2 mb-4">
                     <div className="w-14 h-14">
                       <Image
@@ -598,9 +638,16 @@ const UserProfileList = ({ userProfileData }) => {
                         alt="Product Image"
                       />
                     </div>
-                    <p className="section-title !capitalize !text-left">
-                      {returnData?.product_title}
-                    </p>
+                    <div>
+                      <p className="section-title !capitalize !text-left">
+                        {returnData?.product_title}
+                      </p>
+                      <div className="text-gray-500 text-sm">
+                        <p>Quantity: {returnData.quantity}</p>
+                        <p>Refundable amount: {returnData.product_price}</p>
+                      </div>
+                    </div>
+                    {console.log(returnData, "returnData")}
                   </div>
                   <Form
                     name="returnProductForm"
@@ -628,6 +675,11 @@ const UserProfileList = ({ userProfileData }) => {
                       disabled={loading}
                       type="submit"
                     />
+
+                    <p className="text-gray-500 text-sm mt-3 font-poppins">
+                      After approving the return request, the pickup will take
+                      approximately 5-7 days.
+                    </p>
                   </Form>
                 </div>
               </Modal>

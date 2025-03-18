@@ -215,19 +215,17 @@ const BuyProductCom = ({ allAddressData }) => {
   };
 
   const handlePaymentStep = async () => {
-    const nextStep = await handleCheckValidation();
+    const nextStep = handleCheckValidation();
     if (!nextStep) {
       return;
     }
-
     setIsLoading(true);
-    setOrderDetails(null);
     try {
       const pro_uid_list = orderList.map((item) => {
         return {
           uid: item.product_detail.uid,
           quantity: item.quantity,
-          price: item.product_detail.price,
+          price: parseInt(item.product_detail.price)*item.quantity,
         };
       });
 
@@ -251,14 +249,14 @@ const BuyProductCom = ({ allAddressData }) => {
         product_list: pro_uid_list,
       };
       const response = await axiosInstance.post("/product/orders/", body, {
-        next: { revalidate: 60 },
+        cache: "no-store",
       });
 
-      if (response.status == 201) {
+      if (response.status >= 200 && response.status < 300) {
         const data = response.data;
         handleCreateOrder(data);
       } else {
-        setIsLoading(false);
+        throw new Error("Create order response status error");
       }
     } catch (err) {
       setIsLoading(false);
@@ -304,12 +302,15 @@ const BuyProductCom = ({ allAddressData }) => {
         requestData,
         {
           session,
-          next: { revalidate: 60 },
+          cache: "no-store",
         }
       );
-      if (response.status == 201) {
+      if (response.status >= 200 && response.status < 300) {
         const obj = response.data;
+        
         setOrderDetails(obj);
+      } else {
+        throw new Error();
       }
     } catch (err) {
       console.log("Error while Create order", err);
@@ -341,7 +342,6 @@ const BuyProductCom = ({ allAddressData }) => {
       document.body.appendChild(script);
     });
   };
-
 
   const proceedToOrderFnCall = async () => {
     setIsLoading(true);
@@ -385,7 +385,6 @@ const BuyProductCom = ({ allAddressData }) => {
         },
         handler: async (response) => {
           if (response && response.razorpay_payment_id) {
-            setOrderDetails(null);
             await removeCartItemAPI(productUids);
             await updateInventoryOnPurchaseAPI(inventoryData);
             messageApi.open({
@@ -537,7 +536,7 @@ const BuyProductCom = ({ allAddressData }) => {
   };
 
   const handleStepNext = async () => {
-    const isValidated = await handleCheckValidation();
+    const isValidated = handleCheckValidation();
 
     if (isValidated) {
       increaseActiveStep();
