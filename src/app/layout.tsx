@@ -52,7 +52,7 @@ interface RootLayoutProps {
 
 export default async function RootLayout({ children }: RootLayoutProps) {
   const session = await getServerSession(authOptions as AuthOptions);
-  const navbarAPIItems = await getNavbarItems(); // Fetch only once
+  const navbarAPIItems = await getNavbarItems(); 
 
   return (
     <html lang="en">

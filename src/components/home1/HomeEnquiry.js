@@ -8,18 +8,16 @@ export default function HomeEnquiry() {
   const handleFormSubmit = () => {};
 
   return (
-    <section className="bg-[#F9F3EB]">
+    <section className="bg-[#ffffff82]">
       <div className="common_page_width">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
-            <p className="section-title !text-left">Let's Talk</p>
             <p className="highlight-heading !text-left !mb-3">
-              We’d love to talk to you.
+              Let’s work together
             </p>
-            <p className="section-content !text-left">
-              Please provide your contact details and let us know what you're
-              interested in learning more about. We will respond as quickly as
-              possible.
+            <p className="section-content !text-left !text-lg">
+              The combination of ancient knowledge with scientific therapies for
+              holistic well-being.
             </p>
           </div>
           <Form

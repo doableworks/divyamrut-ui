@@ -9,114 +9,51 @@ gsap.registerPlugin(ScrollTrigger);
 
 const offers = [
   {
-    name: "",
-    location: "",
-    image: "",
-    rating: 4,
-    feedback: "",
+    name: "Transformational Health Coaching",
+    feedback:
+      "A safe space to open up and discuss all your health concerns in depth for us to help you discover the root cause based in your emotions.",
   },
   {
-    name: "",
-    location: "",
-    image: "",
-    rating: 4,
-    feedback: "",
+    name: "Varied Holistic Therapies",
+    feedback:
+      "A wide range of alternative and advanced therapies that bring depth to the healing process by uprooting the cause from its core and restoring the innate immune and health mechanism of an individual",
   },
   {
-    name: "",
-    location: "",
-    image: "",
-    rating: 4,
-    feedback: "",
+    name: "Concern Specific Health and Wellbeing packages",
+    feedback:
+      "A comprehensive approach to find an optimum health plan by curating a tailored made package by working one on one to discover what would work best for you.",
   },
   {
-    name: "",
-    location: "",
-    image: "",
-    rating: 4,
-    feedback: "",
+    name: "Wellness Products",
+    feedback:
+      " Shuddhi… an uplifting range of everyday essentials rooted in ancient Indian Culture to purify your mind body and environment.",
   },
   {
-    name: "",
-    location: "",
-    image: "",
-    rating: 4,
-    feedback: "",
+    name: "Yoga Therapy and Mindfulness Practices",
+    feedback:
+      "Incorporating the transformative path of Yoga and Meditation practices with knowledge of medical science to deliver health and well-being at atomic as well as causal levels.",
   },
   {
-    name: "",
-    location: "",
-    image: "",
-    rating: 4,
-    feedback: "",
+    name: "Sacred Support Group",
+    feedback:
+      "A community to support and inspire each other to achieve holistic well-being. Bi-monthly sessions by field experts to impart knowledge and formulas to hasten the healing process with fun and enthusiasm",
   },
 ];
 
 const WhatWeOffer = () => {
-  // useGSAP(() => {
-  //   gsap.fromTo(
-  //     ".fade-up",
-  //     { opacity: 0, y: 200 },
-  //     {
-  //       opacity: 1,
-  //       y: 0,
-  //       duration: 1.5,
-  //       stagger: 0.2,
-  //       ease: "power3.out",
-  //       scrollTrigger: {
-  //         trigger: "#WhatWeOffer",
-  //         start: "top 80%",
-  //         end: "bottom 20%",
-  //         // scrub: true,
-  //       },
-  //     }
-  //   );
-
-  //   gsap.fromTo(
-  //     ".card-wwo",
-  //     { opacity: 0 },
-  //     {
-  //       opacity: 1,
-  //       duration: 1.5,
-  //       delay: 0.5,
-  //       stagger: 0.2,
-  //       ease: "power3.out",
-  //       scrollTrigger: {
-  //         trigger: "#WhatWeOffer",
-  //         start: "top 80%",
-  //         end: "bottom 20%",
-  //         // scrub: true,
-  //       },
-  //     }
-  //   );
-  // }, []);
-
   return (
     <div id="WhatWeOffer" className="bg-FFEEE2">
-      {/* <Image
-        className="absolute z-10 top-0 left-0 w-[150px] md:w-[200px] [@media(max-width:299.98px)]:w-[118px]"
-        height={200}
-        width={200}
-        src={"/asset/home/img1.png"}
-        alt="img"
-      /> */}
-
-      <div className="relative z-20 mx-auto w-[90%] md:w-[85%] xl:w-full pb-32 mt-16">
+      <div className="my-16 md:px-9">
         <div className="flex flex-col justify-center items-center">
-          <h6 className="section-title">
-            What We offer
-          </h6>
+          <h6 className="section-title">What We offer</h6>
           <h2 className="!max-w-xl highlight-heading">
             The combination of nature and science.
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6 m-auto">
           {offers.map((testimonial, index) => (
-            <div key={index} className="relative bg-[white] shadow-lg w-full">
+            <div key={index} className="bg-white shadow-md rounded-md">
               <div className="flex gap-2 justify-between overflow-hidden">
-                <strong className=" ml-6 mt-6 font-suranna text-[28px] font-[400] leading-[1.4em] text-E0A43B">
-                  {testimonial.name}
-                </strong>
                 {/* <Image
                   src={testimonial.image}
                   width={180}
@@ -126,13 +63,14 @@ const WhatWeOffer = () => {
                   objectFit="cover"
                 /> */}
               </div>
-              <div className="py-4 px-6">
-                <p className="font-jost text-primary text-[18px] font-[400] leading-[1.4em] text-start">
-                  {testimonial.feedback}
-                </p>
-
-                <div className="border-t-[0.5px] border-q4d462f5 mt-10" />
-                <div className="site-button-primary">Learn more</div>
+              <div className="p-8 flex flex-col items-center justify-between h-full">
+                <div className="grow">
+                  <p className="text-2xl font-prata leading-relaxed text-center capitalize mb-4 text-[--yellow]">
+                    {testimonial.name}
+                  </p>
+                  <p className="section-content">{testimonial.feedback}</p>
+                </div>
+                <div className="site-button-primary !mt-6">Learn more</div>
               </div>
             </div>
           ))}
