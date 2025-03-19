@@ -54,13 +54,12 @@ export default function Home() {
     <main>
       <HeroBanner />
       <HomeAboutUs />
-      <Divider />
-      <WhatWeOffer />
       <PathPurposeGoal />
+      <WhatWeOffer />
       <HomeIllustration />
+      <Testimonial />
       <HomeEnquiry />
       {/* <WhyChooseUs /> */}
-      {/* <Testimonial /> */}
     </main>
   );
 }
