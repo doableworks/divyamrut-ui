@@ -1,11 +1,44 @@
 "use client";
 
 import { Input, Form, message, Skeleton, Row, Col } from "antd";
+import SocialConnect from "./SocialConnect";
+import { useState } from "react";
+import axios from "axios";
+import CustomButton from "../common/CustomButton";
+
+const apIUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function HomeEnquiry() {
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
 
-  const handleFormSubmit = () => {};
+  const handleFormSubmit = async (values) => {
+    setLoading(true);
+    try {
+      const url = `${apIUrl}/api/enquiries/`;
+      const body = {
+        name: values.yourname,
+        email: values.email,
+        message: values.message,
+      };
+
+      const response = await axios.post(url, body);
+      if (response.status >= 200 && response.status < 300) {
+        messageApi.success(
+          "Thank you for reaching out! Our team will get back to you shortly."
+        );
+        form.resetFields();
+      } else {
+        throw new Error("Response status error");
+      }
+    } catch (err) {
+      console.log(err);
+      messageApi.error("Oops! Something went wrong. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="bg-[#ffffff82]">
@@ -58,18 +91,20 @@ export default function HomeEnquiry() {
                 />
               </Form.Item>
               <Form.Item>
-                <button
-                  className="site-button-primary !mt-0 !min-w-24 !min-h-max"
-                  type="primary"
-                  htmlType="submit"
-                >
-                  Submit
-                </button>
+                <CustomButton
+                  type="submit"
+                  title="Submit"
+                  loading={loading}
+                  disabled={loading}
+                  className="site-button-primary !mt-0"
+                />
               </Form.Item>
             </div>
           </Form>
         </div>
       </div>
+      {/* <SocialConnect /> */}
+      {contextHolder}
     </section>
   );
 }
