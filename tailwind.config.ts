@@ -50,6 +50,8 @@ const config: Config = {
       fontFamily: {
         poppins: ["var(--font-poppins)"],
         prata: ["var(--font-prata)"],
+        playfair: ["var(--font-playfair)"],
+        opensans: ["var(--font-opensans)"]
       },
     },
   },

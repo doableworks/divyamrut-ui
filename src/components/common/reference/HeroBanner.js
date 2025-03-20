@@ -29,19 +29,17 @@ const HeroBanner = () => {
       />
 
       <div className="hidden md:block absolute p-7 mb-56 md:mb-0">
-        <h1 className="font-prata md:leading-[76px] font-medium text-[30px] md:text-[64px] text-center text-white">
-          Committed to <br className="md:hidden" /> Physical,
-          <br /> Mental,
-          <br className="md:hidden" /> Emotional,
-          <br /> Financial
-          <br className="md:hidden" /> & Spiritual
+        <h1 className="font-playfair md:leading-[76px] font-medium text-[30px] md:text-[64px] text-center text-white">
+          Unveil the newness in
           <br />
-          Well-being
+          your being to be...
+          <br />
+          <span className="italic">ever new</span>
         </h1>
 
-        <div className="flex justify-center items-center mt-5">
+        <div className="flex justify-center items-center mt-8">
           <button
-            className="border border-1 mx-auto text-white px-8 py-2 rounded-lg border-white font-medium text-sm md:text-xl"
+            className="font-opensans border border-1 mx-auto text-white px-8 py-2 rounded border-white font-medium text-sm md:text-xl uppercase"
             type="button"
           >
             Check More
