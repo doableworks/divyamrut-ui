@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal } from "antd";
+import { Modal, Select, Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleBookingModal } from "@/redux/feature/therapySlice";
 import "./therapy.css";
@@ -10,8 +10,7 @@ import CustomCalendar from "@/components/calendar/CustomCalendar";
 import dayjs from "dayjs";
 import { CaretRightOutlined, CaretLeftOutlined } from "@ant-design/icons";
 import { twMerge } from "tailwind-merge";
-import { Button, Form, Input } from "antd";
-import { formatDateToDDMMYYYY } from "@/utils/dates";
+import { Form, Input } from "antd";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import ProfileCardSkeleton from "@/components/loader/therapy-spinners/ProfileCardSkeleton";
@@ -28,27 +27,35 @@ const allowedStatuses = ["wait", "process", "finish", "error"];
 const stepsTherapyBooking = [
   {
     id: 0,
+    label: "Select Location",
+    title: "Location",
+  },
+  {
+    id: 1,
     label: "Select Staff",
     title: "Therapist",
   },
   {
-    id: 1,
+    id: 2,
     label: "Select Date & Time",
     title: "Date & Time",
   },
   {
-    id: 2,
+    id: 3,
     label: "Fill Information",
     title: "Information",
   },
   {
-    id: 3,
+    id: 4,
     label: "Confirm Details",
     title: "Payment",
   },
 ];
 
 const smallDeviceItems = [
+  {
+    title: "",
+  },
   {
     title: "",
   },
@@ -108,6 +115,13 @@ export default function BookingModal() {
   const [filledUserDetails, setFilleduserDetails] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [orderDetails, setOrderDetails] = useState(null);
+  const [countryList, setCountryList] = useState([]);
+  const [stateList, setStateList] = useState([]);
+  const [cityList, setCityList] = useState([]);
+
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedState, setSelectedState] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null);
 
   const [confirmationDetails, setConfirmationDetails] = useState(null);
 
@@ -167,6 +181,9 @@ export default function BookingModal() {
         email: filledUserDetails.email,
         phone_no: filledUserDetails.phoneNumber,
         slug: currentPath[2],
+        country: selectedCountry.value,
+        state: selectedState.value,
+        city: selectedCity.value,
       };
 
       const headers = {
@@ -235,6 +252,8 @@ export default function BookingModal() {
   const handleCheckValidation = () => {
     switch (activeStep) {
       case 0:
+        return true;
+      case 1:
         if (selectedStaff) {
           return true;
         } else {
@@ -244,7 +263,7 @@ export default function BookingModal() {
           });
           return false;
         }
-      case 1:
+      case 2:
         if (selectedDate && selectedTimeSlot) {
           return true;
         } else {
@@ -262,7 +281,7 @@ export default function BookingModal() {
             return false;
           }
         }
-      case 2:
+      case 3:
         return true;
       default:
         return false;
@@ -274,11 +293,24 @@ export default function BookingModal() {
 
     if (isValidated) {
       if (activeStep === 0) {
-        increaseActiveStep();
+        try {
+          await form.validateFields();
+          const userLocation = form.getFieldsValue();
+          console.log(userLocation);
+          increaseActiveStep();
+        } catch (error) {
+          console.error("Validation failed:", error);
+          messageApi.open({
+            type: "error",
+            content: "All fields are mandetory",
+          });
+        }
       } else if (activeStep === 1) {
         increaseActiveStep();
+      } else if (activeStep === 2) {
+        increaseActiveStep();
       }
-      if (activeStep === 2) {
+      if (activeStep === 3) {
         try {
           await form.validateFields();
           const userDetails = form.getFieldsValue();
@@ -289,6 +321,10 @@ export default function BookingModal() {
           increaseActiveStep();
         } catch (error) {
           console.error("Validation failed:", error);
+          messageApi.open({
+            type: "error",
+            content: "All fields are mandetory",
+          });
         }
       } else {
         console.log("Please define What to do ?");
@@ -329,10 +365,17 @@ export default function BookingModal() {
   const fetchTherapyStaffList = async () => {
     setIsLoading(true);
     try {
-      const url = `${apiUrl}/therapy/therapy-profile/${currentPath[2]}/`;
+      const url = `${apiUrl}/therapy/therapy-profile/`;
 
-      const response = await axios.get(url, {
-        next: { revalidate: 60 },
+      const body = {
+        slug: currentPath[2],
+        country: selectedCountry.value,
+        state: selectedState.value,
+        city: selectedCity.value,
+      };
+
+      const response = await axios.post(url, body, {
+        cache: "no-store",
       });
 
       const data = response.data;
@@ -364,18 +407,97 @@ export default function BookingModal() {
     }
   }, [session]);
 
+  const fetchCountriesData = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(`${apiUrl}/api/countries/`);
+      setCountryList(response.data);
+    } catch (error) {
+      notification.error({
+        message: "Failed to Load Countries",
+        description: "Could not fetch country data. Try again later.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchStatesData = async (countryCode) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(`${apiUrl}/api/states/${countryCode}/`);
+      setStateList(response.data);
+    } catch (error) {
+      notification.error({
+        message: "Failed to Load States",
+        description: "Could not fetch state data. Try again later.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchCitiesData = async (countryCode, stateCode) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(
+        `${apiUrl}/api/cities/${countryCode}/${stateCode}/`
+      );
+      setCityList(response.data);
+    } catch (error) {
+      notification.error({
+        message: "Failed to Load Cities",
+        description: "Could not fetch city data. Try again later.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleCountryChange = (value) => {
+    form.setFieldsValue({ state: undefined, city: undefined });
+    setStateList([]);
+    setCityList([]);
+
+    const selected = countryList.find((item) => item.value === value);
+    setSelectedCountry(selected || null);
+
+    if (selected) {
+      fetchStatesData(selected.code);
+    }
+  };
+
+  const handleStateChange = (value) => {
+    form.setFieldsValue({ city: undefined });
+    setCityList([]);
+
+    const selected = stateList.find((item) => item.value === value);
+    setSelectedState(selected || null);
+
+    if (selectedCountry && selected) {
+      fetchCitiesData(selectedCountry.code, selected.code);
+    }
+  };
+
+  const handleCityChange = (value) => {
+    const selected = cityList.find((item) => item.value === value);
+    setSelectedCity(selected || null);
+  };
+
   useEffect(() => {
     if (isBookingModal && activeStep === 0) {
-      fetchTherapyStaffList();
+      fetchCountriesData();
     } else if (isBookingModal && activeStep === 1) {
+      fetchTherapyStaffList();
+    } else if (isBookingModal && activeStep === 2) {
       fetchCalendarDetails();
-    } else if (isBookingModal && activeStep === 3) {
+    } else if (isBookingModal && activeStep === 4) {
       logModalInfomation();
     }
   }, [isBookingModal, activeStep]);
 
   useEffect(() => {
-    if (activeStep === 1 && isBookingModal) {
+    if (activeStep === 2 && isBookingModal) {
       fetchCalendarDetails();
     }
   }, [currentMonth]);
@@ -408,8 +530,6 @@ export default function BookingModal() {
           email: filledUserDetails.email,
           therapist_id: selectedStaff.uid,
           therapy_slug: currentPath[2],
-          product_id: "",
-          product_slug: "",
           date: selectedTimeSlot.date,
           start_time: selectedTimeSlot.start_time_format,
           end_time: selectedTimeSlot.end_time_format,
@@ -417,6 +537,9 @@ export default function BookingModal() {
           last_name: filledUserDetails.lastname,
           phone_no: filledUserDetails.phoneNumber,
           user_appointment_id: confirmationDetails.appointment_id,
+          country: selectedCountry.value,
+          state: selectedState.value,
+          city: selectedCity.value,
         },
       };
 
@@ -476,7 +599,6 @@ export default function BookingModal() {
         handler: async (response) => {
           if (response && response.razorpay_payment_id) {
             setIsLoading(true);
-            // console.log("Payment Success:", response);
             messageApi.open({
               type: "success",
               content: "Payment successful, Redirecting...",
@@ -519,7 +641,7 @@ export default function BookingModal() {
   };
 
   useEffect(() => {
-    if (isBookingModal && activeStep === 3) {
+    if (isBookingModal && activeStep === 4) {
       proceedToOrderFnCall();
     }
   }, [orderDetails]);
@@ -527,6 +649,69 @@ export default function BookingModal() {
   const renderActiveStep = (step) => {
     switch (step) {
       case 0:
+        return (
+          <div className="p-4">
+            <Spin spinning={isLoading}>
+              <div className="space-y-6">
+                <Form.Item
+                  name="country"
+                  label="Select Country"
+                  rules={[
+                    { required: true, message: "Please select a country" },
+                  ]}
+                >
+                  <Select
+                    placeholder="Select a country"
+                    onChange={handleCountryChange}
+                  >
+                    {countryList.map((item) => (
+                      <Option key={item.value} value={item.value}>
+                        {item.label}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+
+                <Form.Item
+                  name="state"
+                  label="Select State"
+                  rules={[{ required: true, message: "Please select a state" }]}
+                >
+                  <Select
+                    placeholder="Select a state"
+                    disabled={!selectedCountry}
+                    onChange={handleStateChange}
+                  >
+                    {stateList.map((item) => (
+                      <Option key={item.value} value={item.value}>
+                        {item.label}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+
+                <Form.Item
+                  name="city"
+                  label="Select City"
+                  rules={[{ required: true, message: "Please select a city" }]}
+                >
+                  <Select
+                    placeholder="Select a city"
+                    disabled={!selectedState}
+                    onChange={handleCityChange}
+                  >
+                    {cityList.map((item) => (
+                      <Option key={item.value} value={item.value}>
+                        {item.label}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+              </div>
+            </Spin>
+          </div>
+        );
+      case 1:
         return isLoading ? (
           <div className="list-none grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 px-10 py-5 md:py-5">
             {Array.from({ length: 2 }).map((_, index) => (
@@ -547,7 +732,7 @@ export default function BookingModal() {
         ) : (
           <NoStaffAvailabe />
         );
-      case 1:
+      case 2:
         return (
           <div className="h-full p-5 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-3">
             <div>
@@ -619,7 +804,7 @@ export default function BookingModal() {
             </div>
           </div>
         );
-      case 2:
+      case 3:
         return (
           <div className="p-6 flex flex-col gap-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -670,7 +855,7 @@ export default function BookingModal() {
             </div>
           </div>
         );
-      case 3:
+      case 4:
         return confirmationDetails ? (
           <section className="p-6 h-full flex flex-col">
             <p className="section-title !text-gray-500 !text-left !mb-3">
@@ -825,7 +1010,7 @@ export default function BookingModal() {
             onFinish={handleStepNext}
           >
             <div className="flex-grow h-[65vh] overflow-y-auto overflow-x-hidden">
-              {activeStep !== 3 && (
+              {activeStep !== 4 && (
                 <div className="lg:hidden">
                   <p className="section-title !text-gray-500 !text-left !p-6">
                     {activeStepDetail.title}
@@ -837,7 +1022,7 @@ export default function BookingModal() {
             </div>
 
             <div className="w-full p-3 flex justify-end items-center border-t-2">
-              {activeStep === 2 ? (
+              {activeStep === 3 ? (
                 <Form.Item>
                   <button
                     className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
@@ -847,7 +1032,7 @@ export default function BookingModal() {
                     Next
                   </button>
                 </Form.Item>
-              ) : activeStep === 3 ? (
+              ) : activeStep === 4 ? (
                 <button
                   onClick={handlePaymentStep}
                   className="site-button-primary !mt-0 !min-w-24 !min-h-max"
