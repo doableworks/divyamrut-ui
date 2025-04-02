@@ -24,6 +24,7 @@ export default function FooterCom() {
     { label: "Privacy Policy", route: "/privacy-policy" },
     { label: "Refund Policy", route: "/refund-policy" },
     { label: "Cancellation Policy", route: "/cancellation-policy" },
+    { label: "Terms & Conditions", route: "/terms-conditions" },
   ];
 
   const handleMoveRoute =(path)=>{
