@@ -9,7 +9,7 @@ const TermsAndConditions = () => {
           <section>
             <p className="font-semibold">Introduction</p>
             <p>
-              Welcome to Nityanava. By accessing and using our website, you agree to comply with and be bound by the following terms and conditions. If you do not agree with any part of these terms, please do not use our website.
+              Welcome to Nityanava by Divyamrut Naturals. By accessing and using our website, you agree to comply with and be bound by the following terms and conditions. If you do not agree with any part of these terms, please do not use our website.
             </p>
           </section>
 
