@@ -42,10 +42,10 @@ const ProductSlider1 = ({categories}) => {
       const handleMoveRoute = (cate)=>{
 
         if(cate.hasSubCategory){
-          router.push(`/products/${cate.slug}`)
+          router.push(`/productss/${cate.slug}`)
         }
         else{
-          router.push(`/products-list/${cate.slug}`)
+          router.push(`/products/${cate.slug}`)
         }
       }
 

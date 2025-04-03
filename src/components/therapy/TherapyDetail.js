@@ -43,10 +43,6 @@ export default function TherapyDetail({ data }) {
 
   const { description, faqs, image, name, testimonials } = data;
 
-  const noTitle = "Details are unavailable, or the therapy is unpublished";
-  const noDescription =
-    "Currently, there is no data available to display. Please check back soon as we continue to update our offerings. If you have specific therapy needs or questions, feel free to contact us—we’re here to assist you on your wellness journey.";
-
   return (
     <div>
       <div className="!mt-0 common_page_width">

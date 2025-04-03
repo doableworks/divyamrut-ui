@@ -19,7 +19,7 @@ const SubCategory = ({ data }) => {
   // const isSticky = useSelector((state) => state.product.isSticky);
 
   const handleMoveRoute = (slug) => {
-    router.push(`/products-list/${data.slug}-%40-${slug}`);
+    router.push(`/products/${data.slug}-%40-${slug}`);
   };
 
   const infiniteData = Array.from(

@@ -19,7 +19,7 @@ const ProductsScroller = ({ category }) => {
   const { data: session } = useSession();
 
   const handleMoveRoute = (cate) => {
-    router.push(`/products-list/${cate.slug}`);
+    router.push(`/products/${cate.slug}`);
   };
 
   return (

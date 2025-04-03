@@ -2,7 +2,15 @@
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
-    trailingSlash:true,
+  },
+  trailingSlash: true,
+  rewrites: async () => {
+    return [
+      {
+        source: "/sitemap.xml",
+        destination: "https://app.ozassignments.com/sitemap.xml",
+      },
+    ];
   },
   images: {
     remotePatterns: [
@@ -22,8 +30,17 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
-    // domains: ['desklib.com', 'sgp1.digitaloceanspaces.com', 'staging-ai.desklib.com'],
   },
+
+  // async redirects() {
+  //   [
+  //     {
+  //       source: "",
+  //       destination: "",
+  //       permanent: "boolean",
+  //     },
+  //   ];
+  // },
 };
 
 export default nextConfig;

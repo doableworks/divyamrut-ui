@@ -30,7 +30,7 @@ const Product = ({ item, productCategory, session }) => {
       <button
         type="button"
         onClick={() =>
-          router.push(`/products-list/${productCategory}/${item?.slug}`)
+          router.push(`/products/${productCategory}/${item?.slug}`)
         }
         className="text-left"
       >

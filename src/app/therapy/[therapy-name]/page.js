@@ -1,5 +1,6 @@
 import TherapyDetail from "@/components/therapy/TherapyDetail";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
@@ -33,7 +34,7 @@ export async function generateMetadata({ params }) {
     description: pageDetails.seo_description,
     datePublished: pageDetails.created,
     dateModified: pageDetails.updated,
-    robots: "index, nofollow",
+    robots: "index, follow",
     author: "Nityanava",
     seo_keywords: pageDetails.seo_keywords,
     openGraph: {
@@ -71,12 +72,75 @@ const TherapyName = async ({ params }) => {
   const therapyName = params["therapy-name"];
   const pageDetails = await fetchTherapyDetails(therapyName);
 
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "MedicalTherapy",
+    name: pageDetails.name,
+    url: `${siteUrl}/therapy/${pageDetails.slug}`,
+    image: pageDetails.image,
+    description: pageDetails.description.replace(/<[^>]+>/g, ""),
+    alternateName: pageDetails.seo_keywords
+      ? pageDetails.seo_keywords.split(", ").map((keyword) => keyword.trim())
+      : [],
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "INR",
+      price: pageDetails.price,
+      seller: {
+        "@type": "MedicalOrganization",
+        name: "Nityanava",
+        url: siteUrl,
+      },
+    },
+    review: pageDetails.testimonials?.length
+      ? pageDetails.testimonials.map((testimonial) => ({
+          "@type": "Review",
+          author: {
+            "@type": "Person",
+            name: testimonial.name,
+          },
+          reviewBody: testimonial.description.replace(/<[^>]+>/g, ""),
+          datePublished: testimonial.created,
+        }))
+      : undefined,
+    mainEntity: {
+      "@type": "FAQPage",
+      mainEntity: pageDetails.faqs?.length
+        ? pageDetails.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.title,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.description.replace(/<[^>]+>/g, ""),
+            },
+          }))
+        : undefined,
+    },
+    dateCreated: pageDetails.created,
+    dateModified: pageDetails.updated,
+  };
+
   if (!pageDetails) {
     notFound();
     return null;
   }
 
-  return <TherapyDetail data={pageDetails} />;
+  const cleanedSchemaData = JSON.parse(JSON.stringify(schemaData));
+
+  return (
+    <>
+      <Script
+        id="json-ld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(cleanedSchemaData, null, 2),
+        }}
+      />
+      
+      <TherapyDetail data={pageDetails} />
+    </>
+  );
 };
 
 export default TherapyName;

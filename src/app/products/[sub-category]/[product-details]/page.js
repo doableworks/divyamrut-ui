@@ -1,6 +1,7 @@
 import ProductDetail from "@/components/proudect/ProductDetail";
 import RelatedProducts from "@/components/proudect/RelatedProducts";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }) {
     description: pageDetails.seo_description,
     datePublished: pageDetails.created,
     dateModified: pageDetails.updated,
-    robots: "index, nofollow",
+    robots: "index, follow",
     author: "Nityanava",
     seo_keywords: pageDetails.seo_keywords,
     openGraph: {
@@ -55,7 +56,7 @@ export async function generateMetadata({ params }) {
           alt: pageDetails.name,
         },
       ],
-      url: `${siteUrl}/products-list//${params["sub-category"]}/${params["product-details"]}`,
+      url: `${siteUrl}/products/${params["sub-category"]}/${params["product-details"]}`,
       site_name: "Nityanava",
     },
     twitter: {
@@ -69,7 +70,7 @@ export async function generateMetadata({ params }) {
       },
     },
     alternates: {
-      canonical: `${siteUrl}/products-list//${params["sub-category"]}/${params["product-details"]}`,
+      canonical: `${siteUrl}/products//${params["sub-category"]}/${params["product-details"]}`,
     },
   };
 }
@@ -81,18 +82,52 @@ const Page = async ({ params }) => {
 
   if (!item) {
     notFound();
-    return null;
   }
+
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: item?.name,
+    image: item?.image,
+    description: item?.seo_description,
+    sku: item?.product_identity,
+    brand: {
+      "@type": "Brand",
+      name: "Nityanava",
+    },
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "INR",
+      price: item.price,
+      itemCondition: "https://schema.org/NewCondition",
+      availability: "https://schema.org/InStock",
+      seller: {
+        "@type": "Organization",
+        name: "Nityanava",
+      },
+    },
+  };
+
   return (
-    <div className="common_page_width relative z-20">
-      <ProductDetail item={item} />
-      {item?.related_products?.length > 0 && (
-        <RelatedProducts
-          subCategory={params["sub-category"]}
-          slidesData={item?.related_products}
-        />
-      )}
-    </div>
+    <>
+      <Script
+        id="json-ld"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schemaData, null, 2),
+        }}
+      />
+      <div className="common_page_width relative z-20">
+        <ProductDetail item={item} />
+        {item?.related_products?.length > 0 && (
+          <RelatedProducts
+            subCategory={params["sub-category"]}
+            slidesData={item?.related_products}
+          />
+        )}
+      </div>
+    </>
   );
 };
 

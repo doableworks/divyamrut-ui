@@ -40,7 +40,7 @@ const RelatedProductOverview = ({
       <button
         type="button"
         onClick={() =>
-          router.push(`/products-list/${productCategory}/${item.slug}`)
+          router.push(`/products/${productCategory}/${item.slug}`)
         }
         className="bg-white w-full h-48 rounded-xl overflow-hidden mb-4"
       >
@@ -57,7 +57,7 @@ const RelatedProductOverview = ({
         <button
           type="button"
           onClick={() =>
-            router.push(`/products-list/${productCategory}/${item.slug}`)
+            router.push(`/products/${productCategory}/${item.slug}`)
           }
         >
           <p className="text-lg font-bold text-left line-clamp-2 group-hover:text-[--yellow]">

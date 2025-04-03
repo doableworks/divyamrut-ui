@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /wp-admin/
+Disallow: /payment/
+Disallow: /accounts/
+Disallow: /
+
+Sitemap: https://nityanava.com/sitemap.xml

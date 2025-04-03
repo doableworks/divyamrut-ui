@@ -127,12 +127,12 @@ export default function PremiumNavbar({ scrollNum }) {
         <section className="flex justify-between items-center">
           <figure>
             <div className="hidden [@media(min-width:1340.98px)]:flex gap-5">
-              <button onClick={handleShowSearch} type="button">
+              {/* <button onClick={handleShowSearch} type="button">
                 <SearchOutlined
                   style={{ fontSize: "18px" }}
                   className="cursor-pointer"
                 />
-              </button>
+              </button> */}
             </div>
 
             {isMobileNavOpen ? (
@@ -291,7 +291,7 @@ export default function PremiumNavbar({ scrollNum }) {
                           href={
                             isSubMenu?.parentSlug == "/products/" &&
                               sub.sub_categories?.length == 0
-                              ? `/products-list/${sub.slug}/`
+                              ? `/products/${sub.slug}/`
                               : `${isSubMenu.parentSlug}/${sub.slug}/`
                           }
                           key={index}

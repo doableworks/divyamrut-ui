@@ -20,14 +20,15 @@ const AddDeliveryAddress = ({
   const [countryList, setCountryList] = useState(null);
   const [state, setState] = useState(null);
   const [country, setCountry] = useState({
-    code: "IN",
-    value: "India",
+    code: "IND",
     label: "India",
+    value: "India",
   });
 
-  useEffect(() => {
-    getCountryListData();
-  }, []);
+  // useEffect(() => {
+  //   getCountryListData();
+  //   getSateData();
+  // }, []);
 
   useEffect(() => {
     getSateData();

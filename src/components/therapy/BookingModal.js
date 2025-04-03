@@ -37,13 +37,13 @@ const stepsTherapyBooking = [
   },
   {
     id: 2,
-    label: "Select Date & Time",
-    title: "Date & Time",
+    label: "Fill Information",
+    title: "Information",
   },
   {
     id: 3,
-    label: "Fill Information",
-    title: "Information",
+    label: "Select Date & Time",
+    title: "Date & Time",
   },
   {
     id: 4,
@@ -119,7 +119,11 @@ export default function BookingModal() {
   const [stateList, setStateList] = useState([]);
   const [cityList, setCityList] = useState([]);
 
-  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState({
+    code: "IND",
+    label: "India",
+    value: "India",
+  });
   const [selectedState, setSelectedState] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
 
@@ -264,6 +268,8 @@ export default function BookingModal() {
           return false;
         }
       case 2:
+        return true;
+      case 3:
         if (selectedDate && selectedTimeSlot) {
           return true;
         } else {
@@ -281,8 +287,6 @@ export default function BookingModal() {
             return false;
           }
         }
-      case 3:
-        return true;
       default:
         return false;
     }
@@ -307,10 +311,10 @@ export default function BookingModal() {
         }
       } else if (activeStep === 1) {
         increaseActiveStep();
-      } else if (activeStep === 2) {
+      } else if (activeStep === 3) {
         increaseActiveStep();
       }
-      if (activeStep === 3) {
+      if (activeStep === 2) {
         try {
           await form.validateFields();
           const userDetails = form.getFieldsValue();
@@ -486,10 +490,13 @@ export default function BookingModal() {
 
   useEffect(() => {
     if (isBookingModal && activeStep === 0) {
-      fetchCountriesData();
+      form.setFieldsValue({
+        country: selectedCountry.value,
+      });
+      fetchStatesData(selectedCountry.code);
     } else if (isBookingModal && activeStep === 1) {
       fetchTherapyStaffList();
-    } else if (isBookingModal && activeStep === 2) {
+    } else if (isBookingModal && activeStep === 3) {
       fetchCalendarDetails();
     } else if (isBookingModal && activeStep === 4) {
       logModalInfomation();
@@ -497,7 +504,7 @@ export default function BookingModal() {
   }, [isBookingModal, activeStep]);
 
   useEffect(() => {
-    if (activeStep === 2 && isBookingModal) {
+    if (activeStep === 3 && isBookingModal) {
       fetchCalendarDetails();
     }
   }, [currentMonth]);
@@ -663,6 +670,7 @@ export default function BookingModal() {
                   <Select
                     placeholder="Select a country"
                     onChange={handleCountryChange}
+                    disabled={true}
                   >
                     {countryList.map((item) => (
                       <Option key={item.value} value={item.value}>
@@ -732,7 +740,7 @@ export default function BookingModal() {
         ) : (
           <NoStaffAvailabe />
         );
-      case 2:
+      case 3:
         return (
           <div className="h-full p-5 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-3">
             <div>
@@ -804,7 +812,7 @@ export default function BookingModal() {
             </div>
           </div>
         );
-      case 3:
+      case 2:
         return (
           <div className="p-6 flex flex-col gap-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1022,7 +1030,7 @@ export default function BookingModal() {
             </div>
 
             <div className="w-full p-3 flex justify-end items-center border-t-2">
-              {activeStep === 3 ? (
+              {activeStep === 2 ? (
                 <Form.Item>
                   <button
                     className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
@@ -1054,7 +1062,7 @@ export default function BookingModal() {
           {contextHolder}
         </section>
       </div>
-      {isLoading && activeStep === 3 && <BlockPageLoader />}
+      {isLoading && activeStep === 2 && <BlockPageLoader />}
     </Modal>
   );
 }
