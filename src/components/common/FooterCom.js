@@ -84,76 +84,78 @@ export default function FooterCom() {
             <p className="text_text14 !text-[#000000]">
               Copyright © {new Date().getFullYear()} Divyamrut Naturals
             </p>
-            // <div className="flex space-x-2 mt-4">
-            //   {[
-            //     {
-            //       label: "Facebook",
-            //       url: "https://www.facebook.com/people/Parmartham/100087884869484/",
-            //     },
-            //     {
-            //       label: "Instagram",
-            //       url: "https://www.instagram.com/divyamrut_ayurcare/",
-            //     },
-            //     {
-            //       label: "Twitter",
-            //       url: "https://x.com/i/flow/login?redirect_after_login=%2FParmarthamzucol",
-            //     },
-            //     {
-            //       label: "Youtube",
-            //       url: "https://www.linkedin.com/showcase/parmartham",
-            //     },
-            //   ].map((items) => (
-            //     <Link key={items.label} href={items.url} target="_blank">
-            //       <div
-            //         onMouseEnter={() => setHoveredPlatform(items.label)}
-            //         onMouseLeave={() => setHoveredPlatform(null)}
-            //         className="hover:bg-[#FFFFFF] rounded-full p-2"
-            //       >
-            //         {items.label == "Facebook" ? (
-            //           <Facebook
-            //             fill={
-            //               hoveredPlatform === items.label
-            //                  ? "#AA218C"
-            //                 : "#FFFFFF"
-            //             }
-            //             h={25}
-            //             w={25}
-            //           />
-            //         ) : items.label == "Instagram" ? (
-            //           <Instagram
-            //             fill={
-            //               hoveredPlatform === items.label
-            //                 ? "#AA218C"
-            //                 : "#FFFFFF"
-            //             }
-            //             h={25}
-            //             w={25}
-            //           />
-            //         ) : items.label == "Twitter" ? (
-            //           <Twitter
-            //             fill={
-            //               hoveredPlatform === items.label
-            //                  ? "#AA218C"
-            //                 : "#FFFFFF"
-            //             }
-            //             h={25}
-            //             w={25}
-            //           />
-            //         ) : (
-            //           <Youtube
-            //             fill={
-            //               hoveredPlatform === items.label
-            //                 ? "#AA218C"
-            //                 : "#FFFFFF"
-            //             }
-            //             h={25}
-            //             w={25}
-            //           />
-            //         )}
-            //       </div>
-            //     </Link>
-            //   ))}
-            // </div>
+          {/*
+            <div className="flex space-x-2 mt-4">
+              {[
+                {
+                  label: "Facebook",
+                  url: "https://www.facebook.com/people/Parmartham/100087884869484/",
+                },
+                {
+                  label: "Instagram",
+                  url: "https://www.instagram.com/divyamrut_ayurcare/",
+                },
+                {
+                  label: "Twitter",
+                  url: "https://x.com/i/flow/login?redirect_after_login=%2FParmarthamzucol",
+                },
+                {
+                  label: "Youtube",
+                  url: "https://www.linkedin.com/showcase/parmartham",
+                },
+              ].map((items) => (
+                <Link key={items.label} href={items.url} target="_blank">
+                  <div
+                    onMouseEnter={() => setHoveredPlatform(items.label)}
+                    onMouseLeave={() => setHoveredPlatform(null)}
+                    className="hover:bg-[#FFFFFF] rounded-full p-2"
+                  >
+                    {items.label == "Facebook" ? (
+                      <Facebook
+                        fill={
+                          hoveredPlatform === items.label
+                             ? "#AA218C"
+                            : "#FFFFFF"
+                        }
+                        h={25}
+                        w={25}
+                      />
+                    ) : items.label == "Instagram" ? (
+                      <Instagram
+                        fill={
+                          hoveredPlatform === items.label
+                            ? "#AA218C"
+                            : "#FFFFFF"
+                        }
+                        h={25}
+                        w={25}
+                      />
+                    ) : items.label == "Twitter" ? (
+                      <Twitter
+                        fill={
+                          hoveredPlatform === items.label
+                             ? "#AA218C"
+                            : "#FFFFFF"
+                        }
+                        h={25}
+                        w={25}
+                      />
+                    ) : (
+                      <Youtube
+                        fill={
+                          hoveredPlatform === items.label
+                            ? "#AA218C"
+                            : "#FFFFFF"
+                        }
+                        h={25}
+                        w={25}
+                      />
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+            */}
           </div>
         </div>
       </footer>
