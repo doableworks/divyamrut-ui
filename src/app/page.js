@@ -10,7 +10,7 @@ import Script from "next/script";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
-export const metadata = {
+export const generateMetadata = async () => ({
   title: "Nityanava | Holistic Healing & Wellness Therapies",
   description:
     "Experience holistic healing with Osteopathy, Acupuncture, Sound Therapy, Marma & more at Nityanava. Restore balance & enhance well-being naturally",
@@ -47,7 +47,7 @@ export const metadata = {
   alternates: {
     canonical: siteUrl,
   },
-};
+});
 
 export default function Home() {
     const schemaData = {

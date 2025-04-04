@@ -3,7 +3,7 @@ import Script from "next/script";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
-export const generateMetadata = {
+export const generateMetadata = async () => ({
   title: "Holistic Healing Therapies | Nityanava",
   description:
     "Discover holistic healing with Osteopathy, Acupuncture, Marma, Sound Therapy & more at Nityanava. Restore balance & well-being naturally. Contact us today.",
@@ -18,13 +18,13 @@ export const generateMetadata = {
       "Discover holistic healing with Osteopathy, Acupuncture, Marma, Sound Therapy & more at Nityanava. Restore balance & well-being naturally. Contact us today.",
     images: [
       {
-        url: `${siteUrl}/asset/logo/logo.svg`,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL}/asset/logo/logo.svg`,
         width: 1200,
         height: 630,
         alt: "Nityanava Logo",
       },
     ],
-    url: siteUrl,
+    url: process.env.NEXT_PUBLIC_SITE_URL,
     site_name: "Nityanava",
   },
   twitter: {
@@ -33,15 +33,17 @@ export const generateMetadata = {
     title: "Holistic Healing Therapies | Nityanava",
     description:
       "Discover holistic healing with Osteopathy, Acupuncture, Marma, Sound Therapy & more at Nityanava. Restore balance & well-being naturally. Contact us today.",
-    image: {
-      url: `${siteUrl}/asset/logo/logo.svg`,
-      alt: "Nityanava Logo",
-    },
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_SITE_URL}/asset/logo/logo.svg`,
+        alt: "Nityanava Logo",
+      },
+    ],
   },
   alternates: {
-    canonical: `${siteUrl}/therapy`,
+    canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/therapy`,
   },
-};
+});
 
 const schemaData = {
   "@context": "https://schema.org",
