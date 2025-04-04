@@ -164,6 +164,14 @@ body {
     @apply text-center text-[#FFFFFF] inline-flex items-center justify-center px-4 py-2 bg-[#AA218C]   hover:!bg-[#85186d] transition mt-10 cursor-pointer min-h-[48px] rounded;
   }
 
+  .site-button-secondary-outlined {
+    @apply border border-[--voilet] text-center text-[--voilet] inline-flex items-center justify-center px-4 py-2 bg-transparent transition mt-10 cursor-pointer min-h-[48px] rounded;
+  }
+
+  .site-scrollbar {
+    @apply scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent
+  }
+
   /* Input */
   .input-label {
     @apply block text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-[--neutral] mb-3;

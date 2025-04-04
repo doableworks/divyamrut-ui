@@ -8,7 +8,11 @@ import StaffItem, { NoStaffAvailabe } from "./StaffItem";
 import { message } from "antd";
 import CustomCalendar from "@/components/calendar/CustomCalendar";
 import dayjs from "dayjs";
-import { CaretRightOutlined, CaretLeftOutlined } from "@ant-design/icons";
+import {
+  CaretRightOutlined,
+  CaretLeftOutlined,
+  CloseOutlined,
+} from "@ant-design/icons";
 import { twMerge } from "tailwind-merge";
 import { Form, Input } from "antd";
 import PhoneInput from "react-phone-input-2";
@@ -19,6 +23,8 @@ import axios from "axios";
 import CalendarSkeleton from "@/components/loader/therapy-spinners/CalendarSkeleton.js";
 import { useSession } from "next-auth/react";
 import BlockPageLoader from "@/components/loader/BlockPageLoader";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import CustomButton from "../common/CustomButton";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -133,13 +139,26 @@ export default function BookingModal() {
 
   const isBookingModal = useSelector((state) => state.therapy.isBookingModal);
 
+  const [couponApply, setCouponApply] = useState({
+    isOpen: false,
+    couponCode: null,
+    isSuccess: false,
+    successMessage: "",
+    loading: false,
+    tempValue: "",
+  });
+
+  const [noOfTherapiesSelected, setNoOfTherapiesSelected] = useState(null);
+
   const increaseActiveStep = () => {
     setActiveStep(activeStep + 1);
   };
 
   const handleSetSelectedStaff = (clickedStaff) => {
     setSelectedStaff(clickedStaff);
-    increaseActiveStep();
+    if (noOfTherapiesSelected) {
+      increaseActiveStep();
+    }
   };
 
   const decreaseActiveStep = () => {
@@ -188,7 +207,12 @@ export default function BookingModal() {
         country: selectedCountry.value,
         state: selectedState.value,
         city: selectedCity.value,
+        no_of_therapies: noOfTherapiesSelected,
       };
+
+      if (couponApply.couponCode) {
+        body["coupon_id"] = couponApply.couponCode;
+      }
 
       const headers = {
         "Content-Type": "application/json",
@@ -196,7 +220,7 @@ export default function BookingModal() {
 
       const response = await axios.post(url, body, {
         headers,
-        next: { revalidate: 60 },
+        cache: "no-store",
       });
 
       const data = response.data;
@@ -236,7 +260,7 @@ export default function BookingModal() {
 
       const response = await axios.post(url, body, {
         headers,
-        next: { revalidate: 60 },
+        cache: "no-store",
       });
 
       const data = response.data;
@@ -258,12 +282,18 @@ export default function BookingModal() {
       case 0:
         return true;
       case 1:
-        if (selectedStaff) {
+        if (selectedStaff && noOfTherapiesSelected) {
           return true;
-        } else {
+        } else if (!selectedStaff) {
           messageApi.open({
             type: "error",
             content: "Please choose the staff to proceed.",
+          });
+          return false;
+        } else if (!noOfTherapiesSelected) {
+          messageApi.open({
+            type: "error",
+            content: "Please select valid no. of therapies.",
           });
           return false;
         }
@@ -495,13 +525,18 @@ export default function BookingModal() {
       });
       fetchStatesData(selectedCountry.code);
     } else if (isBookingModal && activeStep === 1) {
+      form.setFieldsValue({
+        therapiesNumber: 1,
+      });
+      setNoOfTherapiesSelected(1);
       fetchTherapyStaffList();
+    } else if (isBookingModal && activeStep === 2) {
     } else if (isBookingModal && activeStep === 3) {
       fetchCalendarDetails();
     } else if (isBookingModal && activeStep === 4) {
       logModalInfomation();
     }
-  }, [isBookingModal, activeStep]);
+  }, [isBookingModal, activeStep, couponApply.couponCode]);
 
   useEffect(() => {
     if (activeStep === 3 && isBookingModal) {
@@ -547,6 +582,7 @@ export default function BookingModal() {
           country: selectedCountry.value,
           state: selectedState.value,
           city: selectedCity.value,
+          no_of_therapies: filledUserDetails.therapiesNumber,
         },
       };
 
@@ -556,7 +592,7 @@ export default function BookingModal() {
 
       const response = await axios.post(url, body, {
         headers,
-        next: { revalidate: 60 },
+        cache: "no-store",
       });
       setLastStepStatus("finish");
       const data = response.data;
@@ -653,6 +689,72 @@ export default function BookingModal() {
     }
   }, [orderDetails]);
 
+  const handleOpenCouponApply = () => {
+    setCouponApply({
+      ...couponApply,
+      isOpen: true,
+    });
+  };
+
+  const handleCloseCoupon = () => {
+    setCouponApply({
+      couponCode: null,
+      isOpen: false,
+      isSuccess: false,
+      successMessage: "",
+      loading: false,
+    });
+  };
+
+  const handleChangeCouponCodeValue = (event) => {
+    setCouponApply({
+      ...couponApply,
+      tempValue: event.target.value,
+    });
+  };
+
+  const handleVerifyCouponCode = async () => {
+    try {
+      setCouponApply({
+        ...couponApply,
+        loading: true,
+      });
+      const url = `${apiUrl}/therapy/validate-coupon/?coupon_id=${couponApply.tempValue}`;
+      const response = await axios.get(url);
+      if (response.status >= 200 && response.status < 300) {
+        setCouponApply({
+          ...couponApply,
+          couponCode: couponApply.tempValue,
+          isSuccess: true,
+          successMessage: `${response.data.discount} discount successfully applied with code "${couponApply.tempValue}".`,
+          isOpen: false,
+          loading: false,
+        });
+
+        messageApi.open({
+          type: "success",
+          content: `🎉 Yay! ${response.data.discount}% discount applied successfully.`,
+        });
+      } else {
+        throw new Error(
+          "Oops! That code didn’t work. Please enter a valid one."
+        );
+      }
+    } catch (err) {
+      console.log("Therapy Coupon Error:", err);
+      setCouponApply({
+        ...couponApply,
+        loading: false,
+      });
+      messageApi.open({
+        type: "error",
+        content:
+          err?.response?.data?.error ||
+          "Oops! That code didn’t work. Please enter a valid one.",
+      });
+    }
+  };
+
   const renderActiveStep = (step) => {
     switch (step) {
       case 0:
@@ -668,6 +770,7 @@ export default function BookingModal() {
                   ]}
                 >
                   <Select
+                    style={{ height: "48px" }}
                     placeholder="Select a country"
                     onChange={handleCountryChange}
                     disabled={true}
@@ -686,6 +789,7 @@ export default function BookingModal() {
                   rules={[{ required: true, message: "Please select a state" }]}
                 >
                   <Select
+                    style={{ height: "48px" }}
                     placeholder="Select a state"
                     disabled={!selectedCountry}
                     onChange={handleStateChange}
@@ -704,6 +808,7 @@ export default function BookingModal() {
                   rules={[{ required: true, message: "Please select a city" }]}
                 >
                   <Select
+                    style={{ height: "48px" }}
                     placeholder="Select a city"
                     disabled={!selectedState}
                     onChange={handleCityChange}
@@ -865,15 +970,15 @@ export default function BookingModal() {
         );
       case 4:
         return confirmationDetails ? (
-          <section className="p-6 h-full flex flex-col">
+          <section className="p-6 h-full flex flex-col ">
             <p className="section-title !text-gray-500 !text-left !mb-3">
               Confirm Details
             </p>
             <hr className="mb-3 border" />
 
-            <div className="lg:overflow-y-auto px-3">
+            <div className="space-y-4 my-4">
               <div className="flex flex-col lg:flex-row gap-2">
-                <div className="h-full flex-grow bg-white p-4 rounded-md grid grid-cols-1 gap-2 mb-5">
+                <div className="h-full flex-grow bg-white p-4 rounded-md grid grid-cols-1 gap-2">
                   <p className="section-title !text-gray-500 !text-left">
                     Your Details
                   </p>
@@ -939,15 +1044,81 @@ export default function BookingModal() {
                 </div>
               </div>
 
-              <div className="rounded-md overflow-hidden bg-white border-gray-300 flex-grow my-6 flex flex-col justify-between">
+              {!couponApply.isOpen && !couponApply.isSuccess && (
+                <div className="flex flex-col">
+                  <button
+                    onClick={handleOpenCouponApply}
+                    className="text-[--voilet] self-end text-sm outline-none"
+                    type="button"
+                  >
+                    Have a Discount Coupon?
+                  </button>
+                </div>
+              )}
+
+              {couponApply.isSuccess && !couponApply.isOpen && (
+                <div className="flex flex-col">
+                  <button
+                    className="text-[--green] self-end text-sm outline-none"
+                    type="button"
+                  >
+                    {couponApply.successMessage}
+                  </button>
+                </div>
+              )}
+
+              {couponApply.isOpen && (
+                <div className="flex-grow bg-white p-4 rounded-md flex flex-col md:flex-row gap-4">
+                  <input
+                    type="text"
+                    className="grow outline-none border-b-2 p-2 text-lg uppercase placeholder:capitalize"
+                    placeholder="Enter discount code"
+                    value={couponApply.tempValue}
+                    onChange={handleChangeCouponCodeValue}
+                  />
+                  <div className="flex gap-4">
+                    <CustomButton
+                      spinnerColor={"#aa218c"}
+                      type="button"
+                      className="site-button-secondary-outlined !mt-0 w-24 grow"
+                      onClick={handleVerifyCouponCode}
+                      disabled={couponApply.loading}
+                      title="Check"
+                      loading={couponApply.loading}
+                    />
+                    <button
+                      type="button"
+                      className="border px-3 border-neutral-400"
+                      onClick={handleCloseCoupon}
+                      disabled={couponApply.loading}
+                    >
+                      <XMarkIcon className="h-6 w-6" />
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              <div className="rounded-md overflow-hidden bg-white border-gray-300 flex-grow flex flex-col justify-between">
                 <div className="p-6 font-jost text-[18px]">
                   <div className="flex justify-between">
                     <p>Price:</p>
-                    <p>{confirmationDetails?.allotment_info?.therapy_price}</p>
+                    <p>
+                      {confirmationDetails?.allotment_info?.therapy_price
+                        ? parseFloat(
+                            confirmationDetails?.allotment_info?.therapy_price
+                          ).toFixed(2)
+                        : "0.00"}
+                    </p>
                   </div>
                   <div className="flex justify-between">
                     <p>GST:</p>
-                    <p>NA</p>
+                    <p>
+                      {confirmationDetails?.allotment_info?.gst_price
+                        ? parseFloat(
+                            confirmationDetails?.allotment_info?.gst_price
+                          ).toFixed(2)
+                        : "0.00"}
+                    </p>
                   </div>
                 </div>
 
@@ -955,7 +1126,12 @@ export default function BookingModal() {
                   <div className="flex justify-between font-jost text-xl">
                     <p>Total:</p>
                     <p>
-                      {confirmationDetails?.allotment_info?.therapy_price}/-
+                      {confirmationDetails?.allotment_info?.therapy_price
+                        ? parseFloat(
+                            confirmationDetails?.allotment_info?.therapy_price
+                          ).toFixed(2)
+                        : "0.00"}
+                      /-
                     </p>
                   </div>
                 </div>
@@ -1017,7 +1193,7 @@ export default function BookingModal() {
             initialValues={{ layout: "vertical" }}
             onFinish={handleStepNext}
           >
-            <div className="flex-grow h-[65vh] overflow-y-auto overflow-x-hidden">
+            <div className="flex-grow h-[65vh] overflow-y-auto overflow-x-hidden site-scrollbar">
               {activeStep !== 4 && (
                 <div className="lg:hidden">
                   <p className="section-title !text-gray-500 !text-left !p-6">
@@ -1026,7 +1202,7 @@ export default function BookingModal() {
                   <hr className="mb-4" />
                 </div>
               )}
-              {renderActiveStep(activeStep)}
+              <section className="">{renderActiveStep(activeStep)}</section>
             </div>
 
             <div className="w-full p-3 flex justify-end items-center border-t-2">
@@ -1048,6 +1224,45 @@ export default function BookingModal() {
                 >
                   Proceed to Payment
                 </button>
+              ) : activeStep === 1 ? (
+                <div className="flex justify-between items-center gap-4 w-full">
+                  <div className="flex flex-wrap gap-2 items-center">
+                    <p className="text-sm text-[--voilet]">No.of Therapies</p>
+                    <Form.Item
+                      name="therapiesNumber"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please select at least 1 therapy",
+                        },
+                      ]}
+                    >
+                      <Select
+                        style={{ height: "42px", width: "70px" }}
+                        placeholder="Select number of therapies"
+                        onChange={(value) => {
+                          setNoOfTherapiesSelected(value);
+                        }}
+                      >
+                        {Array.from({ length: 10 }, (_, i) => i + 1).map(
+                          (num) => (
+                            <Select.Option key={num} value={num}>
+                              {num}
+                            </Select.Option>
+                          )
+                        )}
+                      </Select>
+                    </Form.Item>
+                  </div>
+
+                  <button
+                    onClick={handleStepNext}
+                    className="site-button-secondary !mt-0 !min-w-24 !min-h-max"
+                    type="button"
+                  >
+                    Next
+                  </button>
+                </div>
               ) : (
                 <button
                   onClick={handleStepNext}
