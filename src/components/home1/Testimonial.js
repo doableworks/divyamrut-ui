@@ -9,21 +9,21 @@ import { Grid, Carousel } from "antd";
 
 const initialTestimonial = [
   {
-    name: "Lorem Name",
+    name: "Radhika Sharma",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+      "I had chronic back pain for years, but after a few Meru Therapy sessions, I feel lighter and more mobile than ever. The practitioners at Nityanava truly understand the body!",
     image: null,
   },
   {
-    name: "Lorem Name",
+    name: "Amit Verma",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+      "Marma Therapy at Nityanava was a deeply healing experience. I left every session feeling relaxed and rejuvenated. It helped me manage stress in a very natural way.",
     image: null,
   },
   {
-    name: "Lorem Name",
+    name: "Sneha Pillai",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+      "I was new to holistic healing but Meru Therapy really changed how I feel. My posture has improved, and I feel more aligned both physically and mentally.",
     image: null,
   },
 ];
