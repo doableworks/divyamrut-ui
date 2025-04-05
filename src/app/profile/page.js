@@ -2,6 +2,7 @@ import React from "react";
 import ProfilePage from "@/components/profile/profilePage";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/auth";
+import { notFound } from "next/navigation";
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const fetchUser = async (accessToken) => {
@@ -9,7 +10,7 @@ const fetchUser = async (accessToken) => {
     const res = await fetch(`${apiUrl}/api/user-details/`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${accessToken}`, 
+        Authorization: `Bearer ${accessToken}`,
       },
       cache: "no-store",
     });
@@ -26,22 +27,25 @@ const fetchUser = async (accessToken) => {
   }
 };
 
-
 const page = async () => {
   const session = await getServerSession(authOptions);
 
-   if (!session || !session.accessToken) {
+  if (!session || !session.accessToken) {
     console.error("No session or access token found");
     return redirect("/");
   }
+
   const userProfileData = await fetchUser(session.accessToken);
 
-  return !!userProfileData ? (
+  if (!userProfileData) {
+    notFound();
+  }
+
+  return (
     <div>
       <ProfilePage userProfileData={userProfileData} />
     </div>
-  ) : null;
+  );
 };
 
 export default page;
-

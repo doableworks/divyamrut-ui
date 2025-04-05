@@ -348,7 +348,7 @@ const UserProfileList = ({ userProfileData }) => {
       setLoading(false);
     }
   };
-  console.log(purchaseProductsData);
+
   const renderActiveTabContent = () => {
     switch (activeTab.id) {
       case "Therapy":
@@ -557,39 +557,48 @@ const UserProfileList = ({ userProfileData }) => {
                   key={`${orderIndex}-${itemIndex}`}
                   className="border rounded p-3 px-4 flex flex-row items-center gap-2"
                 >
-                  <div className="w-28 h-28 flex-shrink-0">
-                    <img
-                      src={item.product_image}
-                      alt={item.proudct_title}
-                      className="w-full h-full object-cover rounded"
-                    />
-                  </div>
+                  <a
+                    href={`/products/${item.category_slug}/${item.product_slug}`}
+                  >
+                    <div className="w-28 h-28 flex-shrink-0">
+                      <img
+                        src={item.product_image}
+                        alt={item.proudct_title}
+                        className="w-full h-full object-cover rounded"
+                      />
+                    </div>
+                  </a>
 
                   <div>
-                    <p className="section-content !text-left !text-[15px]">
-                      Product:{" "}
-                      <span className="!text-gray-900 !font-medium">
-                        {item.product_title}
-                      </span>
-                    </p>
-                    <p className="section-content !text-left !text-[15px]">
-                      Price:{" "}
-                      <span className="!text-gray-900 !font-medium">
-                        Rs. {item.product_price}/-
-                      </span>
-                    </p>
-                    <p className="section-content !text-left !text-[15px]">
-                      Quantity:{" "}
-                      <span className="!text-gray-900 !font-medium">
-                        {item.quantity}
-                      </span>
-                    </p>
-                    <p className="section-content !text-left !text-[15px]">
-                      Status:{" "}
-                      <span className="text-gray-900 font-medium capitalize">
-                        {item.status}
-                      </span>
-                    </p>
+                    <a
+                      href={`/products/${item.category_slug}/${item.product_slug}`}
+                    >
+                      <p className="section-content !text-left !text-[15px]">
+                        Product:{" "}
+                        <span className="!text-gray-900 !font-medium">
+                          {item.product_title}
+                        </span>
+                      </p>
+                      <p className="section-content !text-left !text-[15px]">
+                        Price:{" "}
+                        <span className="!text-gray-900 !font-medium">
+                          Rs. {item.product_price}/-
+                        </span>
+                      </p>
+                      <p className="section-content !text-left !text-[15px]">
+                        Quantity:{" "}
+                        <span className="!text-gray-900 !font-medium">
+                          {item.quantity}
+                        </span>
+                      </p>
+                      <p className="section-content !text-left !text-[15px]">
+                        Status:{" "}
+                        <span className="text-gray-900 font-medium capitalize">
+                          {item.status}
+                        </span>
+                      </p>
+                    </a>
+
                     {item.status === "delivered" &&
                       item.is_return &&
                       !item.return_request && (

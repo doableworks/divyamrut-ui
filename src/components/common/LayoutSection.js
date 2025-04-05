@@ -21,14 +21,12 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
 
   const initialMenuItems = [
     { label: "About Us", path: "/about-us" },
-    { label: "Consultations", path: "/consultations" },
     {
       label: "Therapies",
       path: "/therapy",
       parentSlug: "/therapy/",
       subMenu: navbarAPIitems?.therapy_categories,
     },
-    { label: "Health Packages", path: "/health-packages" },
     {
       label: "Products",
       path: "/products",
