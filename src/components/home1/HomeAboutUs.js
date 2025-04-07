@@ -5,12 +5,13 @@ import Divider from "../common/Divider";
 import { useRouter } from "next/navigation";
 import CustomButton from "../common/CustomButton";
 
-export default function HomeAboutUs() {
+export default function HomeAboutUs({ scrollToRef }) {
   const router = useRouter();
 
-  const handleGoToAbout = () => {
-    router.push("/about-us");
+  const handleGoToEnquiry = () => {
+    scrollToRef?.current?.scrollIntoView({ behavior: "smooth" });
   };
+  
 
   return (
     <div className="flex justify-center w-full mb-12 mt-6">
@@ -34,6 +35,7 @@ export default function HomeAboutUs() {
           <CustomButton
             title="Book a Discovery Call"
             className="site-button-primary !mt-6"
+            onClick={handleGoToEnquiry}
           />
         </div>
       </section>

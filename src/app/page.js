@@ -1,11 +1,5 @@
-import Testimonial from "@/components/home1/Testimonial";
-import WhatWeOffer from "@/components/home1/WhatWeOffer";
-import WhyChooseUs from "@/components/home1/WhyChooseUs";
-import HeroBanner from "@/components/common/reference/HeroBanner";
-import HomeAboutUs from "@/components/home1/HomeAboutUs";
-import HomeEnquiry from "@/components/home1/HomeEnquiry";
-import PathPurposeGoal from "@/components/home1/PathPurposeGoal";
-import HomeIllustration from "@/components/home1/HomeIllustration";
+
+import HomeMainContainer from "@/components/home1/HomeMainContainer";
 import Script from "next/script";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
@@ -50,69 +44,70 @@ export const generateMetadata = async () => ({
 });
 
 export default function Home() {
-    const schemaData = {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "@id": `${siteUrl}/#website`,
-          name: "Nityanava",
-          url: siteUrl,
-          potentialAction: {
-            "@type": "SearchAction",
-            target: `${siteUrl}/search?q={search_term_string}`,
-            "query-input": "required name=search_term_string",
-          },
+
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${siteUrl}/#website`,
+        name: "Nityanava",
+        url: siteUrl,
+        potentialAction: {
+          "@type": "SearchAction",
+          target: `${siteUrl}/search?q={search_term_string}`,
+          "query-input": "required name=search_term_string",
         },
-        {
-          "@type": "Organization",
-          "@id": `${siteUrl}/#organization`,
-          name: "Nityanava",
-          url: siteUrl,
-          logo: `${siteUrl}/asset/logo/logo.svg`,
-          sameAs: [
-            "https://www.facebook.com/nityanava",
-            "https://twitter.com/nityanava",
-            "https://www.linkedin.com/company/nityanava",
-          ],
-          contactPoint: {
-            "@type": "ContactPoint",
-            telephone: "+91-8169123024",
-            email:"contact@divyamrutnaturals.com",
-            contactType: "customer service",
-            areaServed: "Worldwide",
-            availableLanguage: "English",
-          },
-        },
-        {
-          "@type": "LocalBusiness",
-          "@id": `${siteUrl}/#localbusiness`,
-          name: "Nityanava",
-          image: `${siteUrl}/asset/logo/logo.svg`,
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "413, Sai Arcade, N.S. Road, Mulund West",
-            addressLocality: "Mulund West",
-            addressRegion: "Mumbai",
-            postalCode: "400080",
-            addressCountry: "India",
-          },
+      },
+      {
+        "@type": "Organization",
+        "@id": `${siteUrl}/#organization`,
+        name: "Nityanava",
+        url: siteUrl,
+        logo: `${siteUrl}/asset/logo/logo.svg`,
+        sameAs: [
+          "https://www.facebook.com/nityanava",
+          "https://twitter.com/nityanava",
+          "https://www.linkedin.com/company/nityanava",
+        ],
+        contactPoint: {
+          "@type": "ContactPoint",
           telephone: "+91-8169123024",
-          email:"contact@divyamrutnaturals.com",
-          priceRange: "10Rs.",
-          openingHours: "Mo-Su 09:00-18:00",
+          email: "contact@divyamrutnaturals.com",
+          contactType: "customer service",
+          areaServed: "Worldwide",
+          availableLanguage: "English",
         },
-        {
-          "@type": "WebPage",
-          "@id": `${siteUrl}/#webpage`,
-          url: siteUrl,
-          name: "Homepage",
-          isPartOf: {
-            "@id": `${siteUrl}/#website`,
-          },
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": `${siteUrl}/#localbusiness`,
+        name: "Nityanava",
+        image: `${siteUrl}/asset/logo/logo.svg`,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "413, Sai Arcade, N.S. Road, Mulund West",
+          addressLocality: "Mulund West",
+          addressRegion: "Mumbai",
+          postalCode: "400080",
+          addressCountry: "India",
         },
-      ],
-    };
+        telephone: "+91-8169123024",
+        email: "contact@divyamrutnaturals.com",
+        priceRange: "10Rs.",
+        openingHours: "Mo-Su 09:00-18:00",
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${siteUrl}/#webpage`,
+        url: siteUrl,
+        name: "Homepage",
+        isPartOf: {
+          "@id": `${siteUrl}/#website`,
+        },
+      },
+    ],
+  };
 
   return (
     <main>
@@ -120,17 +115,12 @@ export default function Home() {
         id="json-ld"
         type="application/ld+json"
         strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData, null, 2) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schemaData, null, 2),
+        }}
       />
 
-      <HeroBanner />
-      <HomeAboutUs />
-      <PathPurposeGoal />
-      <WhatWeOffer />
-      {/* <HomeIllustration /> */}
-      <Testimonial />
-      <HomeEnquiry />
-      {/* <WhyChooseUs /> */}
+      <HomeMainContainer />
     </main>
   );
 }

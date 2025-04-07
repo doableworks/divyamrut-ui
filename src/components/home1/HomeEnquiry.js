@@ -1,15 +1,15 @@
 "use client";
 
-import { Input, Form, message, Skeleton, Row, Col } from "antd";
-import SocialConnect from "./SocialConnect";
-import { useState } from "react";
+import { Input, Form, message } from "antd";
+import { useState, forwardRef } from "react";
 import axios from "axios";
 import CustomButton from "../common/CustomButton";
 import { twMerge } from "tailwind-merge";
 
 const apIUrl = process.env.NEXT_PUBLIC_API_URL;
 
-export default function HomeEnquiry({ formOnly = false }) {
+const HomeEnquiry = forwardRef(function HomeEnquiry(props, ref) {
+  const { formOnly = false } = props;
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
@@ -42,14 +42,9 @@ export default function HomeEnquiry({ formOnly = false }) {
   };
 
   return (
-    <section className={twMerge("", !formOnly && "bg-[#ffffff82]")}>
+    <section ref={ref} className={twMerge("", !formOnly && "bg-[#ffffff82]")}>
       <div className={twMerge("", !formOnly && "common_page_width")}>
-        <div
-          className={twMerge(
-            "",
-            !formOnly && "grid grid-cols-1 lg:grid-cols-2 gap-8"
-          )}
-        >
+        <div className={twMerge("", !formOnly && "grid grid-cols-1 lg:grid-cols-2 gap-8")}>
           {!formOnly && (
             <div>
               <p className="highlight-heading !text-left !mb-3">
@@ -61,7 +56,7 @@ export default function HomeEnquiry({ formOnly = false }) {
               </p>
             </div>
           )}
-          {formOnly && <h2 className="highlight-heading !text-left ">Send us a message</h2>}
+          {formOnly && <h2 className="highlight-heading !text-left">Send us a message</h2>}
           <Form
             layout="vertical"
             form={form}
@@ -72,7 +67,7 @@ export default function HomeEnquiry({ formOnly = false }) {
               <Form.Item
                 label="Your Name"
                 name="yourname"
-                rules={[{ required: true, message: "name is required" }]}
+                rules={[{ required: true, message: "Name is required" }]}
               >
                 <Input placeholder="Enter your name here" />
               </Form.Item>
@@ -80,24 +75,18 @@ export default function HomeEnquiry({ formOnly = false }) {
                 label="Email"
                 name="email"
                 rules={[
-                  { required: true, message: "Email address is required." },
-                  {
-                    type: "email",
-                    message: "Please enter a valid email address.",
-                  },
+                  { required: true, message: "Email is required." },
+                  { type: "email", message: "Enter a valid email." },
                 ]}
               >
-                <Input placeholder="Enter yout email" />
+                <Input placeholder="Enter your email" />
               </Form.Item>
               <Form.Item
                 label="Your Message"
                 name="message"
                 rules={[{ required: true, message: "Message is required" }]}
               >
-                <Input.TextArea
-                  placeholder="Enter your message here"
-                  rows={4}
-                />
+                <Input.TextArea placeholder="Enter your message here" rows={4} />
               </Form.Item>
               <Form.Item>
                 <CustomButton
@@ -112,8 +101,9 @@ export default function HomeEnquiry({ formOnly = false }) {
           </Form>
         </div>
       </div>
-      {/* <SocialConnect /> */}
       {contextHolder}
     </section>
   );
-}
+});
+
+export default HomeEnquiry;
