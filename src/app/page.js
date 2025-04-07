@@ -127,7 +127,7 @@ export default function Home() {
       <HomeAboutUs />
       <PathPurposeGoal />
       <WhatWeOffer />
-      <HomeIllustration />
+      {/* <HomeIllustration /> */}
       <Testimonial />
       <HomeEnquiry />
       {/* <WhyChooseUs /> */}

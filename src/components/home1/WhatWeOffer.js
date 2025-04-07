@@ -53,16 +53,6 @@ const WhatWeOffer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6 m-auto">
           {offers.map((testimonial, index) => (
             <div key={index} className="bg-white shadow-md rounded-md">
-              <div className="flex gap-2 justify-between overflow-hidden">
-                {/* <Image
-                  src={testimonial.image}
-                  width={180}
-                  height={150}
-                  alt={testimonial.name}
-                  className="rounded-bl-[4rem] max-w-[180px]"
-                  objectFit="cover"
-                /> */}
-              </div>
               <div className="p-8 flex flex-col items-center justify-between h-full">
                 <div className="grow">
                   <p className="text-2xl font-prata leading-relaxed text-center capitalize mb-4 text-[--yellow]">
@@ -70,7 +60,6 @@ const WhatWeOffer = () => {
                   </p>
                   <p className="section-content">{testimonial.feedback}</p>
                 </div>
-                <div className="site-button-primary !mt-6">Learn more</div>
               </div>
             </div>
           ))}

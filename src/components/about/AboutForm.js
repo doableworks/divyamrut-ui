@@ -9,6 +9,7 @@ import {
   MailOutlined,
   PushpinOutlined,
 } from "@ant-design/icons";
+import HomeEnquiry from "../home1/HomeEnquiry";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -61,7 +62,7 @@ const AboutForm = () => {
           </div>
           <div className="right-section w-full md:w-[65%] h-full">
             <div className="bg-white p-8 shadow-lg rounded-md max-w-3xl mx-auto">
-              <h2 className="highlight-heading !text-left ">
+              {/* <h2 className="highlight-heading !text-left ">
                 Send us a message
               </h2>
               <form className="space-y-4">
@@ -122,7 +123,8 @@ const AboutForm = () => {
                   <Message fill={"#FFFFFF"} w={25} h={25} />
                   <span>Send Message</span>
                 </button>
-              </form>
+              </form> */}
+              <HomeEnquiry formOnly/>
             </div>
           </div>
         </div>
