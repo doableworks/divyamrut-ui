@@ -141,7 +141,7 @@ const OrderSummary = ({
         </Card>
 
         {/* Payment Amount Section */}
-        <div className="p-6 border rounded-lg shadow-md space-y-4 bg-white">
+        <div className="font-poppins p-6 border rounded-lg shadow-md space-y-4 bg-white">
           <div className="flex justify-between items-center">
             <span className="font-semibold text-gray-800">Subtotal</span>
             <span className="text-heading">
@@ -152,23 +152,18 @@ const OrderSummary = ({
             <div className="flex items-center justify-between">
               <span className="font-semibold text-gray-800">Shipping</span>
               <span className="text-heading">
-                {calculateTotal() <= 500
-                  ? "₹500"
-                  : "Free Shipping"}
+                {"Free Shipping"}
               </span>
             </div>
             <div className="text-sm text-gray-600">
-              Shipping Charges (Free for orders above ₹500)
+              Shipping Charges
             </div>
           </div>
           <div className="flex justify-between items-center border-t pt-4">
             <span className="font-bold text-lg">TOTAL</span>
             <span className="text-lg font-bold text-gray-800">
               ₹
-              {Number(calculateTotal()) +
-                Number(
-                  calculateTotal() <= 500 ? 500 : 0
-                )}
+              {calculateTotal()}
             </span>
           </div>
         </div>

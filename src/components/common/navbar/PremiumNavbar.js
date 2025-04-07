@@ -162,10 +162,7 @@ export default function PremiumNavbar({ scrollNum }) {
           <figure>
             <Link href="/">
               <Image
-                // src="/asset/divyamrut_transparent_logo.webp"
-                // src="/asset/logo/Logo-mobile.png"
                 src="/asset/logo/logo.svg"
-                // src="/asset/logo/Logo-large-device.png"
                 alt="Divyamrut Logo"
                 width={400}
                 height={400}
@@ -174,12 +171,10 @@ export default function PremiumNavbar({ scrollNum }) {
                   "transition-all duration-600 ease-in-out block lg:hidden",
                   isScrolling
                     ? "h-16 w-20"
-                    : "h-16 w-20 [@media(min-width:1340.98px)]:h-[95px] [@media(min-width:1340.98px)]:w-[115px]"
+                    : "h-16 w-20 [@media(min-width:1340.98px)]:ml-32 [@media(min-width:1340.98px)]:h-[95px] [@media(min-width:1340.98px)]:w-[115px]"
                 )}
               />
               <Image
-                // src="/asset/divyamrut_transparent_logo.webp"
-                // src="/asset/logo/Logo-large-device.png"
                 src="/asset/logo/logo.svg"
                 alt="Divyamrut Logo"
                 width={400}
@@ -189,7 +184,7 @@ export default function PremiumNavbar({ scrollNum }) {
                   "transition-all duration-600 ease-in-out hidden lg:block",
                   isScrolling
                     ? "h-16 w-20"
-                    : "h-16 w-20 [@media(min-width:1340.98px)]:h-[95px] [@media(min-width:1340.98px)]:w-[115px]"
+                    : "h-16 w-20 [@media(min-width:1340.98px)]:ml-32 [@media(min-width:1340.98px)]:h-[95px] [@media(min-width:1340.98px)]:w-[115px]"
                 )}
               />
             </Link>

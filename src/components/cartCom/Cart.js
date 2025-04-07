@@ -202,7 +202,7 @@ const CartPage = () => {
       </div>
       
       {selectedItems?.length > 0 && (
-        <div className="w-full lg:w-[40%] xl:w-[30%] h-fit mx-auto bg-white shadow-md rounded-lg flex flex-col p-6 lg:sticky self-start lg:top-40">
+        <div className="font-poppins  w-full lg:w-[40%] xl:w-[30%] h-fit mx-auto bg-white shadow-md rounded-lg flex flex-col p-6 lg:sticky self-start lg:top-40">
           <div className="mt-4">
             <h2 className="text-heading !text-left mb-4">Bill details</h2>
             <div className="flex justify-between mb-2">
@@ -217,11 +217,11 @@ const CartPage = () => {
             <div className="flex justify-between items-center mb-2">
               <div className="gap-2">
                 <div className="section-content !text-left">
-                  Shipping Charges <br /> (Free for orders above ₹500)
+                  Shipping Charges 
                 </div>
               </div>
               <span className="text-heading !text-right">
-                {calculateTotal() <= 500 ? "₹500" : "Free Shipping"}
+                {"Free Shipping"}
               </span>
             </div>
             <div className="flex justify-between items-center font-bold">

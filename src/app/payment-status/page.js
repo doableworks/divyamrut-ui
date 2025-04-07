@@ -73,45 +73,69 @@ const Page = () => {
 
   return paymentDetail?.status ? (
     <div className="common_page_width">
-      <div className="py-8">
-        <div className="mb-8 flex flex-col justify-center items-center">
-          <LottieShowcase
-            source="https://lottie.host/embed/34db972f-7afa-42de-a78f-a65f2c1bec27/y1OW9bi51L.lottie"
-            height="150px"
-            width="150px"
-          />
+      <div className="py-12 flex justify-center items-center min-h-[70vh]">
+        <div className="bg-gradient-to-br from-white to-white shadow-lg rounded-2xl p-10 max-w-2xl w-full text-center ">
+          <div className="w-full flex justify-center">
+            <LottieShowcase
+              source="https://lottie.host/embed/34db972f-7afa-42de-a78f-a65f2c1bec27/y1OW9bi51L.lottie"
+              height="150px"
+              width="150px"
+            />
+          </div>
 
           {order_type === "Therapy" ? (
             <>
-              <h2 className="highlight-heading !text-[24px] !mt-0 !mb-2">
-                Your Session is Scheduled
+              <h2 className="text-2xl font-bold text-[#45b29d] mt-4">
+                🌿 Your Session is Scheduled!
               </h2>
-              <p className="section-content !max-w-lg !text-[16px]">
-                You have successfully booked a slot with our therapist. Please
-                ensure you are available on time to avoid any inconvenience. You
-                can check your booking details in the profile section within the
-                next hour.
+              <p className="mt-2 text-gray-700 text-base">
+                You've successfully booked a session with our therapist. Please
+                be available on time to avoid any inconvenience. Booking details
+                will appear in your profile shortly.
               </p>
             </>
           ) : order_type === "Product" ? (
             <>
-              <h2 className="highlight-heading !text-[24px] !mt-0 !mb-2">
-                Payment Successful & Product Verified
+              <h2 className="text-2xl font-bold text-[#45b29d] mt-4">
+                🛒 Thanks for Your Purchase!
               </h2>
-              <p className="section-content !max-w-lg !text-[16px]">
-                Your payment has been successfully processed, and your product
-                has been verified. The product will be delivered to your
-                provided address shortly. Please ensure someone is available to
-                receive the product and verify it upon arrival. For any issues
-                or further assistance, feel free to reach out to our support
-                team.
+              <p className="mt-2 text-gray-700 text-base">
+                Your payment was processed successfully and your product has
+                been verified. It will be delivered soon. Make sure someone is
+                available to receive it. For help, reach out to our support team
+                anytime.
               </p>
             </>
           ) : null}
 
-          <p className="mt-4 text-gray-500">
-            Redirecting in <strong>{countdown}</strong> seconds...
-          </p>
+          <div className="mt-6 mx-auto w-full max-w-md  border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+            <table className="min-w-full text-sm text-left text-gray-700">
+              <tbody>
+                <tr className="border-b">
+                  <th className="px-4 py-3 font-medium w-1/3">
+                    Payment ID
+                  </th>
+                  <td className="px-4 py-3">{paymentId}</td>
+                </tr>
+                <tr className="border-b">
+                  <th className="px-4 py-3  font-medium">Order ID</th>
+                  <td className="px-4 py-3">{orderId}</td>
+                </tr>
+                <tr className="border-b">
+                  <th className="px-4 py-3  font-medium">Amount Paid</th>
+                  <td className="px-4 py-3">Rs. {(paymentDetail.amount).toFixed(2)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="mt-6 text-gray-600 text-sm">
+            Redirecting in{" "}
+            <span className="font-semibold text-green-800 text-base">
+              {countdown}
+            </span>{" "}
+            seconds...
+          </div>
         </div>
       </div>
     </div>

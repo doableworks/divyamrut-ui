@@ -216,7 +216,7 @@ const AddDeliveryAddress = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Form.Item name="landmark">
-              <Input placeholder="Landmark e.g. near build/hospital/school (optional)" />
+              <Input placeholder="Landmark e.g. near building/hospital/school (optional)" />
             </Form.Item>
             <Form.Item name="address_type">
               <Input placeholder="Address Type e.g. Home/Office" />

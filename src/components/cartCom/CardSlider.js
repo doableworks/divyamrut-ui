@@ -239,7 +239,7 @@ const CardSlider = () => {
                     {item.length - 1 !== length && <Divider className="my-4" />}
                   </>
                 ))}
-                <div className="bg-FFEEE2 mt-4 p-4 m-5 rounded-lg">
+                <div className="bg-FFEEE2 mt-4 p-4 m-5 rounded-lg font-poppins ">
                   <h2 className="text-heading !text-left mb-4">Bill details</h2>
                   <div className="flex justify-between mb-2">
                     <div className="flex items-center gap-2">
@@ -255,11 +255,11 @@ const CardSlider = () => {
                   <div className="flex justify-between items-center mb-2">
                     <div className="gap-2">
                       <div className="section-content !text-left">
-                        Shipping Charges <br /> (Free for orders above ₹500)
+                        Shipping Charges <br />
                       </div>
                     </div>
                     <span className="text-heading !text-right">
-                      {calculateTotal() <= 500 ? "₹500" : "Free Shipping"}
+                      {"Free Shipping"}
                     </span>
                   </div>
                   <div className="flex justify-between items-center font-bold">
