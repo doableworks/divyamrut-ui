@@ -26,7 +26,7 @@ const features = [
   {
     icon: <MailOutlined style={{ color: "white", fontSize: "28px" }} />,
     heading: "E-mail",
-    text: "contact@divyamrutnaturals.com",
+    text: "contact@nityanava.com",
   },
   {
     icon: <PushpinOutlined style={{ color: "white", fontSize: "28px" }} />,

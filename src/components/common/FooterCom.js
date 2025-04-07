@@ -75,7 +75,7 @@ export default function FooterCom() {
                 <br />
                 +91 8169123024
                 <br />
-                contact@divyamrutnaturals.com
+                contact@nityanava.com
               </p>
             </div>
           </div>

@@ -35,10 +35,10 @@ const page = () => {
                 If there are any damages to the product while you receive it, we
                 request you to email us at{" "}
                 <a
-                  href="mailto:contact@divyamrutnaturals.com"
+                  href="mailto:contact@nityanava.com"
                   className="text-blue-600 underline"
                 >
-                  contact@divyamrutnaturals.com
+                  contact@nityanava.com
                 </a>{" "}
                 with attachments of the damaged product. Your order will be
                 reissued or refunded based on your request within 48 hours.
@@ -108,10 +108,10 @@ const page = () => {
             <p>
               <strong>Email:</strong>{" "}
               <a
-                href="mailto:contact@divyamrutnaturals.com"
+                href="mailto:contact@nityanava.com"
                 className="text-blue-600 underline"
               >
-                contact@divyamrutnaturals.com
+                contact@nityanava.com
               </a>
             </p>
           </div>

@@ -73,7 +73,7 @@ export default function Home() {
         contactPoint: {
           "@type": "ContactPoint",
           telephone: "+91-8169123024",
-          email: "contact@divyamrutnaturals.com",
+          email: "contact@nityanava.com",
           contactType: "customer service",
           areaServed: "Worldwide",
           availableLanguage: "English",
@@ -93,7 +93,7 @@ export default function Home() {
           addressCountry: "India",
         },
         telephone: "+91-8169123024",
-        email: "contact@divyamrutnaturals.com",
+        email: "contact@nityanava.com",
         priceRange: "10Rs.",
         openingHours: "Mo-Su 09:00-18:00",
       },
