@@ -171,7 +171,7 @@ export default function PremiumNavbar({ scrollNum }) {
                   "transition-all duration-600 ease-in-out block lg:hidden",
                   isScrolling
                     ? "h-16 w-20"
-                    : "h-16 w-20 [@media(min-width:1340.98px)]:ml-32 [@media(min-width:1340.98px)]:h-[95px] [@media(min-width:1340.98px)]:w-[115px]"
+                    : "h-16 w-20 [@media(min-width:1340.98px)]:h-[95px] [@media(min-width:1340.98px)]:w-[115px]"
                 )}
               />
               <Image
@@ -184,7 +184,7 @@ export default function PremiumNavbar({ scrollNum }) {
                   "transition-all duration-600 ease-in-out hidden lg:block",
                   isScrolling
                     ? "h-16 w-20"
-                    : "h-16 w-20 [@media(min-width:1340.98px)]:ml-32 [@media(min-width:1340.98px)]:h-[95px] [@media(min-width:1340.98px)]:w-[115px]"
+                    : "h-16 w-20 [@media(min-width:1340.98px)]:h-[95px] [@media(min-width:1340.98px)]:w-[115px]"
                 )}
               />
             </Link>
