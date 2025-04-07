@@ -91,6 +91,14 @@ body {
   }
 }
 
+/* Force slick-track to start from the left */
+.ant-carousel .slick-track {
+  margin-left: 0 !important;
+  justify-content: flex-start !important;
+}
+
+
+
 @layer utilities {
   .narrow-scrollbar {
     scrollbar-width: thin;
