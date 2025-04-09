@@ -15,10 +15,8 @@ const AllPosts = ({ data }) => {
       setBlogPosts((prev) => ({ ...prev, loading: true }));
 
       const url = `${apiUrl}/blogs/blogs?page=${blogPosts.page}&page_size=${blogPosts.pageSize}`;
-      console.log("Fetching from:", url);
 
       const response = await axios.get(url);
-      console.log("API Response:", response.data);
 
       setBlogPosts((prev) => ({
         ...prev,
@@ -31,28 +29,27 @@ const AllPosts = ({ data }) => {
     }
   };
 
+
   return (
-    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {blogPosts?.results.map((post, index) => (
         <Link href={`/blogs/${post.slug}`} key={index}>
           <li className="flex flex-col gap-4 group cursor-pointer">
-            <Image
-              src={post?.cover_image || NoImageAvailabe}
-              alt={"img"}
-              width={100}
-              height={100}
-              className="h-56 w-full bg-cover bg-center"
+            <img
+              src={post?.overview_image || NoImageAvailabe}
+              alt="img"
+              className="h-56 w-full bg-cover bg-center rounded"
             />
             <div className="space-y-2">
               <h3 className="section-title !font-semibold !capitalize !text-left  group-hover:!text-[--yellow] line-clamp-2">
                 {post?.title}
               </h3>
               <p
-                dangerouslySetInnerHTML={{ __html: post?.description }}
+                dangerouslySetInnerHTML={{ __html: post?.short_description }}
                 className="text-xs text-primary line-clamp-4"
               ></p>
               {post?.created && (
-                <p className="text-xs text-primary">
+                <p className="text-xs text-[--voilet]">
                  Created: {formatDateToDDMMYYYY(post?.created)}
                 </p>
               )}

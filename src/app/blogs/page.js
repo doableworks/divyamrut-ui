@@ -7,7 +7,7 @@ const fetchBlogPosts = async () => {
   try {
     const url = `${apiUrl}/blogs/blogs?page=1&page_size=10`;
     const response = await fetch(url, {
-      next: { revalidate: 60 }, 
+      cache: "no-store",
     });
 
     if (!response.ok) {
