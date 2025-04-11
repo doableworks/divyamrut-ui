@@ -77,7 +77,7 @@ const TestimonialSlider = ({ className = "", data = initialTestimonial }) => {
                 </p>
                 <p
                   dangerouslySetInnerHTML={{ __html: testimonial?.description }}
-                  className="section-content h-[100px] overflow-hidden"
+                  className="section-content h-[120px] overflow-hidden"
                 ></p>
               </div>
             </li>
