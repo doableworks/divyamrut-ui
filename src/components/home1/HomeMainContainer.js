@@ -7,6 +7,7 @@ import HomeAboutUs from "@/components/home1/HomeAboutUs";
 import HomeEnquiry from "@/components/home1/HomeEnquiry";
 import PathPurposeGoal from "@/components/home1/PathPurposeGoal";
 import { useRef } from "react";
+import HomeIllustration from "./HomeIllustration";
 
 export default function HomeMainContainer() {
   const enquiryRef = useRef(null);
