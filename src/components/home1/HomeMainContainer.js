@@ -17,7 +17,7 @@ export default function HomeMainContainer() {
       <HomeAboutUs scrollToRef={enquiryRef} />
       <PathPurposeGoal />
       <WhatWeOffer />
-      {/* <HomeIllustration /> */}
+      <HomeIllustration />
       <Testimonial />
       <HomeEnquiry ref={enquiryRef} />
       {/* <WhyChooseUs /> */}

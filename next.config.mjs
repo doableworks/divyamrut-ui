@@ -8,7 +8,23 @@ const nextConfig = {
     return [
       {
         source: "/sitemap.xml",
-        destination: "https://app.ozassignments.com/sitemap.xml",
+        destination: "https://register.nityanava.com/sitemap.xml",
+      },
+      {
+        source: "/sitemap-static.xml",
+        destination: "https://register.nityanava.com/sitemap-static.xml",
+      },
+      {
+        source: "/sitemap-products.xml",
+        destination: "https://register.nityanava.com/sitemap-products.xml",
+      },
+      {
+        source: "/sitemap-therapies.xml",
+        destination: "http://register.nityanava.com/sitemap-therapies.xml",
+      },
+      {
+        source: "/sitemap-blogs.xml",
+        destination: "http://register.nityanava.com/sitemap-blogs.xml",
       },
     ];
   },
