@@ -76,6 +76,9 @@ body {
 .login_modal .ant-modal {
   top: 70px !important;
 }
+.big-star .ant-rate-star {
+  font-size: 38px !important;
+}
 
 .no-x-scroller {
   overflow-x: auto;
