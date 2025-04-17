@@ -4,7 +4,6 @@ import { SessionProvider } from "next-auth/react";
 import PremiumNavbar from "@/components/common/navbar/PremiumNavbar";
 import LoginModal from "../login/loginModal";
 import RegisterModal from "../login/RegisterModal";
-import Footer from "@/components/common/FooterCom";
 import { twMerge } from "tailwind-merge";
 import { useDispatch } from "react-redux";
 import { setMenuItems } from "@/redux/feature/menuSlice";
@@ -12,6 +11,7 @@ import { SetIsSticky } from "@/redux/feature/productSlice";
 import CardSlider from "@/components/cartCom/CardSlider";
 import BookingModal from "../therapy/BookingModal";
 import { usePathname } from "next/navigation";
+import Footer from "./reference/Footer";
 
 export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
   const dispatch = useDispatch();
