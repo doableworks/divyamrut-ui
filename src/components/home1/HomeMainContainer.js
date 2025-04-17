@@ -8,6 +8,7 @@ import HomeEnquiry from "@/components/home1/HomeEnquiry";
 import PathPurposeGoal from "@/components/home1/PathPurposeGoal";
 import { useRef } from "react";
 import HomeIllustration from "./HomeIllustration";
+import DisplayBlocks from "./DisplayBlocks";
 
 export default function HomeMainContainer() {
   const enquiryRef = useRef(null);
@@ -15,6 +16,7 @@ export default function HomeMainContainer() {
   return (
     <>
       <HeroBanner />
+      <DisplayBlocks />
       <HomeAboutUs scrollToRef={enquiryRef} />
       <PathPurposeGoal />
       <WhatWeOffer />
