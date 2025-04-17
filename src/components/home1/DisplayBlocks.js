@@ -14,7 +14,7 @@ export default function DisplayBlocks() {
 
   const productCategories = productItems?.subMenu;
   return (
-    <section className="py-8 px-14 md:px-24 lg:px-40">
+    <section className="mt-8 px-4 md:px-24 lg:px-40">
       <Carousel
         autoplay
         autoplaySpeed={3000}
