@@ -17,7 +17,7 @@ export default function DisplayBlocks() {
     <section className="mt-8 px-4 md:px-24 lg:px-40">
       <Carousel
         autoplay
-        autoplaySpeed={3000}
+        autoplaySpeed={1700}
         dots={false}
         slidesToShow={
           screens.xl || screens.xxl ? 5 : screens.md || screens.lg ? 4 : 2
