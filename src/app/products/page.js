@@ -3,6 +3,7 @@ import ProductsScroller from "@/components/proudect/ProductsScroller";
 import ProductSlider1 from "@/components/proudect/ProductSlider1";
 import { notFound } from "next/navigation";
 import Script from "next/script";
+import DisplayBlocks from "@/components/home1/DisplayBlocks";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
@@ -234,8 +235,10 @@ const page = async () => {
       <div className="relative h-[350px]">
         <ProductBanner srcUrl={bannerImgArr[0]} />
       </div>
-      <div className="common_page_width">
-        <ProductSlider1 categories={categoryData} />
+      <div>
+        <DisplayBlocks />
+      </div>
+      <div className="common_page_width !pt-0">
         {categoryData.map(
           (category, index) =>
             category?.products?.length > 0 && (

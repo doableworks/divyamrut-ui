@@ -26,7 +26,7 @@ const Product = ({ item, productCategory, session }) => {
   };
 
   return (
-    <div className="relative h-full flex flex-col justify-between cursor-pointer rounded overflow-hidden">
+    <div className="relative h-full flex flex-col justify-between cursor-pointer rounded overflow-hidden pb-12 md:pb-0">
       <button
         type="button"
         onClick={() =>
