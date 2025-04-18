@@ -4,6 +4,10 @@ import { useSelector } from "react-redux";
 
 const quickLinkItems = [
   {
+    name: "Social Responsibility",
+    slug: "/social-responsibility",
+  },
+  {
     name: "Shipping Policy",
     slug: "/shipping-policy",
   },
@@ -38,7 +42,6 @@ export default function Footer() {
 
   const productItems = menuItems?.find((each) => each.label === "Products");
   const therapyItems = menuItems?.find((each) => each.label === "Therapies");
-  
 
   return (
     <div className="bg-[--yellow] w-full px-8 md:px-20 xl:px-36 pt-16 pb-8 font-poppins">
