@@ -4,7 +4,7 @@ export default function AboutUsDetail() {
       <div className="common_page_width !space-y-6 !p-5">
         <div>
           <p className="highlight-heading !text-left">Philosophy:</p>
-          <p className="section-content !text-left">
+          <p className="section-content !text-justify">
             We humans co-exist amidst the most wonderful Divine Nature that is
             encompassed with all that’s necessary for a healthy and benevolent
             life. When ancient traditional modalities get harmoniously
@@ -28,7 +28,7 @@ export default function AboutUsDetail() {
 
         <div>
           <p className="highlight-heading !text-left">Approach:</p>
-          <p className="section-content !text-left">
+          <p className="section-content !text-justify">
             In order to achieve healthy and happy mind-body complex, it is
             primarily important to identify the cause to its depth. There is
             substantial document evidence to support the philosophy that, ‘it
