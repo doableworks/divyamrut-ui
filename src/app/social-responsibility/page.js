@@ -127,7 +127,7 @@ const page = (props) => {
             <p className="section-title !text-sm !text-left">Our Values</p>
             <div className="border-b-2 w-12 border-[--neutral] mt-2 mb-4" />
             <p className="!text-2xl  !leading-relaxed font-playfair text-[--yellow] !text-left">
-              Project Paathshala
+              Paathshala
             </p>
             <p className="section-content !text-left">
               Being an Indian business, we firmly think that our vast youth and
