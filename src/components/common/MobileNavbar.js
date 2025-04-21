@@ -76,10 +76,11 @@ const MobileNavbar = ({
           {menuItems.map((item, index) => (
             <div key={index} className="mb-2">
               <div
-                className={`${pathname === item.path
-                  ? "text-[--e-global-color-E0A43B] font-bold"
-                  : "text-[#3E3E3E]"
-                  } flex justify-between items-center hover:bg-[--e-global-color-E0A43B] hover:text-white cursor-pointer
+                className={`${
+                  pathname === item.path
+                    ? "text-[--e-global-color-E0A43B] font-bold"
+                    : "text-[#3E3E3E]"
+                } flex justify-between items-center hover:bg-[--e-global-color-E0A43B] hover:text-white cursor-pointer
                 font-suse text-[16px] font-[500] leading-[22px] text-left
                 px-5 py-2 rounded`}
                 onClick={() =>
@@ -99,29 +100,26 @@ const MobileNavbar = ({
               </div>
               {item.subMenu && activeSubMenu === index && (
                 <div className="pl-5">
-                  {item.subMenu.map(
-                    (subItem, subIndex) =>
-                      subItem.is_published && (
-                        <p
-                          key={subIndex}
-                          className={`${pathname === subItem?.slug
-                            ? "text-[--e-global-color-E0A43B] font-bold"
-                            : "text-[#3E3E3E]"
-                            } hover:text-[--voilet] cursor-pointer px-5 py-2`}
-                          onClick={() =>
-
-                            handleAction(
-                              item?.parentSlug == "/products/" &&
-                                subItem.sub_categories?.length == 0
-                                ? `/products/${subItem.slug}/`
-                                : `${item.parentSlug}/${subItem.slug}/`
-                            )
-                          }
-                        >
-                          {subItem?.name}
-                        </p>
-                      )
-                  )}
+                  {item.subMenu.map((subItem, subIndex) => (
+                    <p
+                      key={subIndex}
+                      className={`${
+                        pathname === subItem?.slug
+                          ? "text-[--e-global-color-E0A43B] font-bold"
+                          : "text-[#3E3E3E]"
+                      } hover:text-[--voilet] cursor-pointer px-5 py-2`}
+                      onClick={() =>
+                        handleAction(
+                          item?.parentSlug == "/products/" &&
+                            subItem.sub_categories?.length == 0
+                            ? `/products/${subItem.slug}/`
+                            : `${item.parentSlug}/${subItem.slug}/`
+                        )
+                      }
+                    >
+                      {subItem?.name}
+                    </p>
+                  ))}
                 </div>
               )}
             </div>

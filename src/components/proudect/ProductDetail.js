@@ -12,16 +12,20 @@ import Divider from "@/components/common/Divider";
 import useCartActions from "@/components/cartCom/useCartActions";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import { useSession } from "next-auth/react";
+import { BellIcon } from "@heroicons/react/24/outline";
+import axiosInstance from "@/lib/axios";
+import { message } from "antd";
 
 const ProductDetail = ({ item }) => {
   const router = useRouter();
+  const [messageApi, contextHolder] = message.useMessage();
   const dispatch = useDispatch();
   const { data: session } = useSession();
   const [selectedImage, SetSelectedImage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const { onAddItem, onIncreaseOrDecreaseItem } = useCartActions();
-
+  const [isNotified, setIsNotified] = useState(false);
 
   const handleAddItem = async () => {
     try {
@@ -31,15 +35,6 @@ const ProductDetail = ({ item }) => {
       console.log("handleAddItem error", error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleBuyBtn = async () => {
-    if (session) {
-      dispatch(setBuyProduct({ items: item, source: "direct-buy" }));
-      router.push("/payment-delivery");
-    } else {
-      dispatch(setOpenLoginModal(true));
     }
   };
 
@@ -53,6 +48,41 @@ const ProductDetail = ({ item }) => {
       }
       return prev;
     });
+  };
+
+  const handleNotifyMe = async () => {
+    if (!session) {
+      dispatch(setOpenLoginModal(true));
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const url = "/product/notifications-create/";
+      const body = { product_uid: item.uid };
+
+      const response = await axiosInstance.post(url, body, { session });
+      if (response.status >= 200 && response.status < 300) {
+        console.log(response.data);
+        setIsNotified(true);
+        messageApi.open({
+          type: "success",
+          content:
+            "Thank you for your patience! You'll be notified as soon as the product is back in stock.",
+        });
+      } else {
+        throw new Error("Getting error while creating reminder");
+      }
+    } catch (err) {
+      console.log("Notify Me Error", err);
+      messageApi.open({
+        type: "error",
+        content:
+          "Something went wrong while setting the reminder. Please try again shortly.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -130,10 +160,21 @@ const ProductDetail = ({ item }) => {
                 />
               </>
             ) : (
-              <CustomButton
-                className="site-button-primary !bg-gray-400 !mt-4 w-[-webkit-fill-available] !cursor-not-allowed"
-                title="Out of Stock"
-              />
+              <div className="flex w-full gap-4">
+                <CustomButton
+                  className="site-button-primary !flex-grow !bg-gray-400 !mt-4 !cursor-not-allowed"
+                  title="Out of Stock"
+                  disabled={true}
+                />
+                <CustomButton
+                  onClick={handleNotifyMe}
+                  className="site-button-secondary-outlined !mt-4"
+                  title={isNotified ? "We'll Notify You" : "Notify Me"}
+                  loading={loading}
+                  disabled={loading || isNotified}
+                  spinnerColor={"#AA218C"}
+                />
+              </div>
             )}
           </div>
 
@@ -202,6 +243,7 @@ const ProductDetail = ({ item }) => {
           />
         </div>
       )}
+      {contextHolder}
     </>
   );
 };
