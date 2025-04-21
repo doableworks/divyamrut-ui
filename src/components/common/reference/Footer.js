@@ -40,8 +40,8 @@ const quickLinkItems = [
 export default function Footer() {
   const menuItems = useSelector((state) => state.menuItems).all;
 
-  const productItems = menuItems?.find((each) => each.label === "Products");
-  const therapyItems = menuItems?.find((each) => each.label === "Therapies");
+  const productItems = menuItems?.find((each) => each.path === "/products");
+  const therapyItems = menuItems?.find((each) => each.path === "/therapy");
 
   return (
     <div className="bg-[--yellow] w-full px-8 md:px-20 xl:px-36 pt-16 pb-8 font-poppins">

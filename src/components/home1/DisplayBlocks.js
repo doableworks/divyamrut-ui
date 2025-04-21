@@ -10,7 +10,7 @@ export default function DisplayBlocks() {
   const screens = useBreakpoint();
   const menuItems = useSelector((state) => state.menuItems).all;
 
-  const productItems = menuItems?.find((each) => each.label === "Products");
+  const productItems = menuItems?.find((each) => each.path === "/products");
 
   const productCategories = productItems?.subMenu;
   return (

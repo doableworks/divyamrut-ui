@@ -12,11 +12,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { closeNav, openNav } from "@/redux/feature/mobileNavSlice";
 import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
-import useCartActions from "@/components/cartCom/useCartActions"
-import {
-  addCartItemsAfterLogin,
-  clearCart,
-} from "@/redux/feature/cartSlice";
+import useCartActions from "@/components/cartCom/useCartActions";
+import { addCartItemsAfterLogin, clearCart } from "@/redux/feature/cartSlice";
 import axiosInstance from "@/lib/axios";
 
 export default function PremiumNavbar({ scrollNum }) {
@@ -56,7 +53,7 @@ export default function PremiumNavbar({ scrollNum }) {
 
   useEffect(() => {
     if (session) {
-      GetApiCartItem()
+      GetApiCartItem();
     }
   }, [session]);
 
@@ -106,7 +103,7 @@ export default function PremiumNavbar({ scrollNum }) {
       await signOut();
       dispatch(closeNav());
       dispatch(setOpenLoginModal(true));
-      dispatch(clearCart())
+      dispatch(clearCart());
     } catch (error) {
       console.log("onLogOut error", error);
     }
@@ -119,8 +116,8 @@ export default function PremiumNavbar({ scrollNum }) {
         isScrollAndUp
           ? "fixed translate-y-0"
           : isScrolling
-            ? "absolute translate-y-[-100%]"
-            : "absolute translate-y-0"
+          ? "absolute translate-y-[-100%]"
+          : "absolute translate-y-0"
       )}
     >
       <div className="max-w-7xl flex-grow px-5 [@media(min-width:1340.98px)]:pt-3">
@@ -229,7 +226,7 @@ export default function PremiumNavbar({ scrollNum }) {
                     className={twMerge(
                       "relative navbar-li h-full",
                       item.path &&
-                      "hover:border-b-2 border-b-[--yellow] box-border"
+                        "hover:border-b-2 border-b-[--yellow] box-border"
                     )}
                   >
                     {item.isNew && (
@@ -279,24 +276,21 @@ export default function PremiumNavbar({ scrollNum }) {
             <figure className="p-5">
               <section>
                 <ul className="grid grid-cols-4 py-4 gap-4">
-                  {isSubMenu.subMenu.map(
-                    (sub, index) =>
-                      sub.is_published && (
-                        <Link
-                          href={
-                            isSubMenu?.parentSlug == "/products/" &&
-                              sub.sub_categories?.length == 0
-                              ? `/products/${sub.slug}/`
-                              : `${isSubMenu.parentSlug}/${sub.slug}/`
-                          }
-                          key={index}
-                        >
-                          <li className="navbar-li hover:text-[--voilet]">
-                            {sub.name}
-                          </li>
-                        </Link>
-                      )
-                  )}
+                  {isSubMenu.subMenu.map((sub, index) => (
+                    <Link
+                      href={
+                        isSubMenu?.parentSlug == "/products/" &&
+                        sub.sub_categories?.length == 0
+                          ? `/products/${sub.slug}/`
+                          : `${isSubMenu.parentSlug}/${sub.slug}/`
+                      }
+                      key={index}
+                    >
+                      <li className="navbar-li hover:text-[--voilet]">
+                        {sub.name}
+                      </li>
+                    </Link>
+                  ))}
                 </ul>
               </section>
             </figure>
@@ -319,9 +313,3 @@ export default function PremiumNavbar({ scrollNum }) {
     </nav>
   );
 }
-
-
-
-
-
-

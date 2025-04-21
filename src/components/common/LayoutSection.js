@@ -19,18 +19,39 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
   const [scrolled, setScrolled] = useState(0);
   const pathname = usePathname();
 
+
   const initialMenuItems = [
     { label: "About Us", path: "/about-us" },
-    { label: "Consultations", path: "/consultations" },
     {
-      label: "Therapies",
+      label: "Consultations",
+      path: "/consultations",
+      parentSlug: "/consultations/",
+      subMenu: [
+        {
+          name: "Emotional Health Coaching",
+          slug: "/emotional-health-coaching",
+        },
+        {
+          name: "Nutrition & Diet Coaching",
+          slug: "/nutrition-diet-coaching",
+        },
+        { name: "Life Coaching", slug: "/life-coaching" },
+        {
+          name: "Medical Astrology Consultation",
+          slug: "/medical-astrology-consultation",
+        },
+        { name: "Financial Coaching", slug: "/financial-coaching" },
+      ],
+    },
+    {
+      label: "Holistic Therapies",
       path: "/therapy",
       parentSlug: "/therapy/",
       subMenu: navbarAPIitems?.therapy_categories,
     },
-    { label: "Health Packages", path: "/health-packages" },
+    { label: "Well-being Packages", path: "/health-packages" },
     {
-      label: "Products",
+      label: "Wellness Products",
       path: "/products",
       parentSlug: "/products/",
       subMenu: navbarAPIitems?.product_categories,
