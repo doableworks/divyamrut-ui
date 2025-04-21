@@ -1,10 +1,11 @@
-const page = () => {
+import ConsultationLanding from "@/components/consultations/ConsultationLanding";
 
-    return (
-      <div className="h-screen">
-  
-      </div>
-    );
-  };
-  
-  export default page;
+const page = () => {
+  return (
+    <div className="">
+      <ConsultationLanding />
+    </div>
+  );
+};
+
+export default page;

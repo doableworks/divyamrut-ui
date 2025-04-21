@@ -66,9 +66,11 @@ const FeedbackForm = () => {
       form.resetFields();
       setRating(null);
       setIsSuccess(true);
-    } catch (error) {
-      console.error("Feedback error:", error);
-      message.error("Something went wrong. Please try again.");
+    } catch (err) {
+      console.error(err);
+      message.error(
+        err?.response?.data?.error || "Something went wrong. Please try again."
+      );
       setIsSuccess(false);
     } finally {
       setLoading(false);
@@ -147,6 +149,12 @@ const FeedbackForm = () => {
             label="How was your experience?"
             rules={[
               { required: true, message: "Please provide your feedback!" },
+              {
+                validator: (_, value) =>
+                  !value || value.length >= 20
+                    ? Promise.resolve()
+                    : Promise.reject("Feedback should be at least 20 characters."),
+              },
             ]}
           >
             <Input.TextArea

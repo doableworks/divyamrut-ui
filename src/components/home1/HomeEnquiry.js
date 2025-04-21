@@ -50,10 +50,7 @@ const HomeEnquiry = forwardRef(function HomeEnquiry(props, ref) {
               <p className="highlight-heading !text-left !mb-3">
                 Let’s work together
               </p>
-              <p className="section-content !text-left !text-lg">
-                The combination of ancient knowledge with scientific therapies
-                for holistic well-being.
-              </p>
+              <div className="border-b-2 w-12 border-[--yellow] mt-2 mb-4" />
             </div>
           )}
           {formOnly && <h2 className="highlight-heading !text-left">Send us a message</h2>}

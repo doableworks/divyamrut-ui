@@ -28,8 +28,8 @@ const features = [
 export default function PathPurposeGoal({ className }) {
   return (
     <div className={twMerge("flex justify-center w-full bg-white", className)}>
-      <section className="common_page_width">
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
+      <section className="px-6 md:px-16 py-24">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <div
               key={index}

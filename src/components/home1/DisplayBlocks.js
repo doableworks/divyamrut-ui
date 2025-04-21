@@ -14,31 +14,31 @@ export default function DisplayBlocks() {
 
   const productCategories = productItems?.subMenu;
   return (
-    <section className="mt-8 px-4 md:px-24 lg:px-40">
+    <section className="mt-8 px-4 md:px-16">
       <Carousel
         autoplay
         autoplaySpeed={1700}
         dots={false}
         slidesToShow={
-          screens.xl || screens.xxl ? 5 : screens.md || screens.lg ? 4 : 2
+          screens.xl || screens.xxl ? 6 : screens.md || screens.lg ? 4 : 2
         }
         infinite={
           screens.xl || screens.xxl
-            ? productCategories?.length > 5
+            ? productCategories?.length > 6
             : screens.md || screens.lg
             ? productCategories?.length > 4
             : productCategories?.length > 2
         }
         draggable={
           screens.xl || screens.xxl
-            ? productCategories?.length > 5
+            ? productCategories?.length > 6
             : screens.md || screens.lg
             ? productCategories?.length > 4
             : productCategories?.length > 2
         }
         swipe={
           screens.xl || screens.xxl
-            ? productCategories?.length > 5
+            ? productCategories?.length > 6
             : screens.md || screens.lg
             ? productCategories?.length > 4
             : productCategories?.length > 2
