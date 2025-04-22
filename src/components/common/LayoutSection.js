@@ -34,11 +34,13 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
         {
           name: "Nutrition & Diet Coaching",
           slug: "/nutrition-diet-coaching",
+          isSoon: true
         },
         { name: "Life Coaching", slug: "/life-coaching" },
         {
           name: "Medical Astrology Consultation",
           slug: "/medical-astrology-consultation",
+          isSoon: true
         },
         { name: "Financial Coaching", slug: "/financial-coaching" },
       ],

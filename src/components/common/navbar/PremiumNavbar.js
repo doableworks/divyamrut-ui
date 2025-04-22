@@ -229,9 +229,9 @@ export default function PremiumNavbar({ scrollNum }) {
                         "hover:border-b-2 border-b-[--yellow] box-border"
                     )}
                   >
-                    {item.isNew && (
+                    {item.isSoon && (
                       <span className="bg-[--yellow] absolute text-white font-sans text-[10px] rounded rounded-br-none px-1 font-medium top-[-20px]">
-                        New
+                        Coming Soon
                       </span>
                     )}
                     {item.label}
@@ -285,7 +285,13 @@ export default function PremiumNavbar({ scrollNum }) {
                           : `${isSubMenu.parentSlug}/${sub.slug}/`
                       }
                       key={index}
+                      className="relative"
                     >
+                      {sub.isSoon && (
+                        <span className="bg-[--yellow] absolute text-white font-poppins text-[10px] rounded rounded-bl-none px-1 font-medium top-[-20px]">
+                          Coming Soon
+                        </span>
+                      )}
                       <li className="navbar-li hover:text-[--voilet]">
                         {sub.name}
                       </li>
