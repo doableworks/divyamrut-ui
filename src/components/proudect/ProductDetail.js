@@ -166,14 +166,16 @@ const ProductDetail = ({ item }) => {
                   title="Out of Stock"
                   disabled={true}
                 />
-                <CustomButton
-                  onClick={handleNotifyMe}
-                  className="site-button-secondary-outlined !mt-4"
-                  title={isNotified ? "We'll Notify You" : "Notify Me"}
-                  loading={loading}
-                  disabled={loading || isNotified}
-                  spinnerColor={"#AA218C"}
-                />
+                {!isNotified && (
+                  <CustomButton
+                    onClick={handleNotifyMe}
+                    className="site-button-secondary-outlined !mt-4"
+                    title="Notify Me"
+                    loading={loading}
+                    disabled={loading || isNotified}
+                    spinnerColor={"#AA218C"}
+                  />
+                )}
               </div>
             )}
           </div>

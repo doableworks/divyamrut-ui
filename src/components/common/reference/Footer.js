@@ -1,4 +1,5 @@
 "use client";
+import { WhatsAppSvg } from "@/icon/icons";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 
@@ -97,13 +98,26 @@ export default function Footer() {
                 Email: <span>contact@nityanava.com</span>
               </a>
             </li>
-            <li className="text-sm hover:underline">
+            <li className="text-sm hover:underline flex gap-2 flex-col">
               <a
                 target="_blank"
                 href="https://wa.me/916377717747"
                 rel="noopener noreferrer"
+                className="flex items-center gap-2"
               >
-                Phone: +91-6377717747
+                <span>Call or</span>
+                <span>
+                  <WhatsAppSvg />
+                </span>
+                <span>Support</span>
+              </a>
+              <a
+                target="_blank"
+                href="https://wa.me/916377717747"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <span>+91-6377717747</span>
               </a>
             </li>
             <li className="text-sm hover:underline">

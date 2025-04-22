@@ -4,6 +4,7 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { NoImageAvailabe } from "@/contants/contants";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,6 +39,21 @@ const offers = [
     feedback:
       "A community to support and inspire each other to achieve holistic well-being. Bi-monthly sessions by field experts to impart knowledge and formulas to hasten the healing process with fun and enthusiasm",
   },
+  {
+    name: "",
+    feedback:
+      "",
+  },
+  {
+    name: "",
+    feedback:
+      "",
+  },
+  {
+    name: "",
+    feedback:
+      "",
+  },
 ];
 
 const WhatWeOffer = () => {
@@ -52,15 +68,22 @@ const WhatWeOffer = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6 m-auto">
           {offers.map((testimonial, index) => (
-            <div key={index} className="bg-white shadow-md rounded-md">
-              <div className="p-8 flex flex-col items-center justify-between h-full">
-                <div className="grow">
-                  <p className="text-2xl font-prata leading-relaxed text-center capitalize mb-4 text-[--yellow]">
-                    {testimonial.name}
-                  </p>
-                  <p className="section-content">{testimonial.feedback}</p>
-                </div>
+            <div key={index} className="bg-white shadow-md rounded-md ">
+              <div className="flex gap-4 justify-between overflow-hidden h-32">
+                <p className="pl-7 section-title !capitalize !flex !justify-center !items-center !text-[--yellow]">
+                  {testimonial.name}
+                </p>
+                <Image
+                  src={NoImageAvailabe}
+                  width={180}
+                  height={150}
+                  alt={testimonial?.name}
+                  className="rounded-bl-[4rem] max-w-[180px] h-full"
+                  objectFit="cover"
+                />
               </div>
+
+              <p className="section-content !p-8">{testimonial.feedback}</p>
             </div>
           ))}
         </div>
