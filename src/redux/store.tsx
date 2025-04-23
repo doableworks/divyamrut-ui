@@ -1,54 +1,3 @@
-// import { configureStore, combineReducers } from '@reduxjs/toolkit';
-// import { persistStore, persistReducer } from 'redux-persist';
-// import authModalSlice from './feature/authModalSlice';
-// import createWebStorage from "redux-persist/lib/storage/createWebStorage";
-
-// const createNoopStorage = () => {
-//   return {
-//     getItem() {
-//       return Promise.resolve(null);
-//     },
-//     setItem(_key, value) {
-//       return Promise.resolve(value);
-//     },
-//     removeItem() {
-//       return Promise.resolve();
-//     },
-//   };
-// };
-
-// const storage =
-//   typeof window !== "undefined"
-//     ? createWebStorage("local")
-//     : createNoopStorage();
-
-
-
-// const rootReducer = combineReducers({
-//     authModal: authModalSlice,
-//   });
-
-//   const persistConfig = {
-//     key: 'root',
-//     storage,
-//   };
-
-//   const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-//   export const store = configureStore({
-//     reducer: persistedReducer,
-//     middleware: getDefaultMiddleware =>
-// 		getDefaultMiddleware({ serializableCheck: false }).concat(),
-// 	  devTools: true
-//   });
-
-// // devTools: process.env.NODE_ENV !== 'production'
-
-// export const persistor = persistStore(store);
-
-
-
-
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { persistStore, persistReducer, PersistConfig } from 'redux-persist';
 import authModalSlice from './feature/authModalSlice';
@@ -56,11 +5,10 @@ import cartSlice from './feature/cartSlice';
 import buyProductSlice from './feature/buyProductSlice'; 
 import productSlice from './feature/productSlice'; 
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
-import type { Middleware } from 'redux';
-import type { PersistPartial } from 'redux-persist/es/persistReducer';
 import mobileNavSlice from './feature/mobileNavSlice'
 import menuSlice from './feature/menuSlice'
 import therapySlice from '@/redux/feature/therapySlice'
+import consultationSlice from './feature/consultationSlice'
 
 interface Storage {
   getItem(key: string): Promise<string | null>;
@@ -92,7 +40,8 @@ const rootReducer = combineReducers({
   menuItems: menuSlice,
   therapy: therapySlice,
   product: productSlice,
-  buyProduct: buyProductSlice
+  buyProduct: buyProductSlice,
+  consultation: consultationSlice
 });
 
 const persistConfig: PersistConfig<ReturnType<typeof rootReducer>> = {

@@ -1,7 +1,15 @@
 "use client";
 import { NoImageAvailabe } from "@/contants/contants";
+import { toggleConsultationModal } from "@/redux/feature/consultationSlice";
+import { useDispatch } from "react-redux";
 
 export default function ConsultationLanding({ data }) {
+  const dispatch = useDispatch();
+
+  const handleChangeConsultationModal = () => {
+    dispatch(toggleConsultationModal(true));
+  };
+
   const description =
     "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.";
 
@@ -17,20 +25,21 @@ export default function ConsultationLanding({ data }) {
               className="section-content md:!text-left"
               dangerouslySetInnerHTML={{ __html: description }}
             ></p>
-            <button className="site-button-primary !mt-6 !hidden md:!inline !capitalize">
+            <button onClick={handleChangeConsultationModal} className="site-button-primary !mt-6 !hidden md:!inline !capitalize">
               Book A Session
             </button>
           </figure>
           <section className="relative lg:h-[550px]">
             <figure className="relative z-10 flex rounded-tr-full rounded-tl-full overflow-hidden h-[550px] border-2">
               <img
-                src={ NoImageAvailabe}
+                src={NoImageAvailabe}
                 alt="therapy"
                 className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110"
               />
             </figure>
 
             <button
+              onClick={handleChangeConsultationModal}
               className="site-button-primary w-full md:!hidden h-[60px] !capitalize"
             >
               Book A Session

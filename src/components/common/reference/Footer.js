@@ -50,8 +50,8 @@ export default function Footer() {
         <div>
           <p className="text-lg font-semibold mb-8">Products</p>
           <ul className="space-y-5">
-            {productItems?.subMenu?.map((each) => (
-              <li key={each.key}>
+            {productItems?.subMenu?.map((each, index) => (
+              <li key={index}>
                 <Link
                   href={`/products/${each.slug}`}
                   className="text-sm hover:underline"
@@ -65,8 +65,8 @@ export default function Footer() {
         <div>
           <p className="text-lg font-semibold mb-8">Therapies</p>
           <ul className="space-y-5">
-            {therapyItems?.subMenu?.map((each) => (
-              <li key={each.key}>
+            {therapyItems?.subMenu?.map((each, index) => (
+              <li key={index}>
                 <Link
                   href={`/therapy/${each.slug}`}
                   className="text-sm hover:underline"
@@ -80,8 +80,8 @@ export default function Footer() {
         <div>
           <p className="text-lg font-semibold mb-8">Quick links</p>
           <ul className="space-y-5">
-            {quickLinkItems?.map((each) => (
-              <li key={each.key}>
+            {quickLinkItems?.map((each, index) => (
+              <li key={index}>
                 <Link href={each.slug} className="text-sm hover:underline">
                   {each.name}
                 </Link>

@@ -12,6 +12,7 @@ import CardSlider from "@/components/cartCom/CardSlider";
 import BookingModal from "../therapy/BookingModal";
 import { usePathname } from "next/navigation";
 import Footer from "./reference/Footer";
+import ConsultationBooking from "../consultations/ConsultationBooking";
 
 export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
   const dispatch = useDispatch();
@@ -121,6 +122,7 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
       <LoginModal />
       <RegisterModal />
       <BookingModal />
+      <ConsultationBooking />
     </SessionProvider>
   );
 };

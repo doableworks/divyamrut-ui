@@ -40,19 +40,16 @@ const offers = [
       "A community to support and inspire each other to achieve holistic well-being. Bi-monthly sessions by field experts to impart knowledge and formulas to hasten the healing process with fun and enthusiasm",
   },
   {
-    name: "",
-    feedback:
-      "",
+    name: "Corporate Experiences",
+    feedback: "Tailored corporate retreats and experiences designed to foster collaboration, boost team morale, and inspire innovation in unique and enriching settings.",
   },
   {
-    name: "",
-    feedback:
-      "",
+    name: "⁠Luxury Wellness Holidays",
+    feedback: "Indulge in transformative wellness escapes featuring world-class spas, holistic therapies, and tranquil environments for complete mind and body rejuvenation.",
   },
   {
-    name: "",
-    feedback:
-      "",
+    name: "Social Responsibility",
+    feedback: "Committed to creating positive impact through sustainable practices, community engagement, and supporting initiatives that drive environmental and social change.",
   },
 ];
 
@@ -69,8 +66,8 @@ const WhatWeOffer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6 m-auto">
           {offers.map((testimonial, index) => (
             <div key={index} className="bg-white shadow-md rounded-md ">
-              <div className="flex gap-4 justify-between overflow-hidden h-32">
-                <p className="pl-7 section-title !capitalize !flex !justify-center !items-center !text-[--yellow]">
+              <div className="overflow-hidden h-32 grid grid-cols-12 gap-4">
+                <p className="col-span-8 p-4 section-title !capitalize !flex !justify-center !items-center !text-[--yellow]">
                   {testimonial.name}
                 </p>
                 <Image
@@ -78,7 +75,7 @@ const WhatWeOffer = () => {
                   width={180}
                   height={150}
                   alt={testimonial?.name}
-                  className="rounded-bl-[4rem] max-w-[180px] h-full"
+                  className="rounded-bl-[4rem] w-full h-full col-span-4"
                   objectFit="cover"
                 />
               </div>
