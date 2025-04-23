@@ -26,37 +26,37 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
     {
       label: "Consultations",
       path: "/consultations",
-      parentSlug: "/consultations/",
+      parentSlug: "/consultations",
       subMenu: [
         {
           name: "Emotional Health Coaching",
-          slug: "/emotional-health-coaching",
+          slug: "emotional-health-coaching",
         },
         {
           name: "Nutrition & Diet Coaching",
-          slug: "/nutrition-diet-coaching",
+          slug: "nutrition-diet-coaching",
           isSoon: true
         },
-        { name: "Life Coaching", slug: "/life-coaching" },
+        { name: "Life Coaching", slug: "life-coaching" },
         {
           name: "Medical Astrology Consultation",
-          slug: "/medical-astrology-consultation",
+          slug: "medical-astrology-consultation",
           isSoon: true
         },
-        { name: "Financial Coaching", slug: "/financial-coaching" },
+        { name: "Financial Coaching", slug: "financial-coaching" },
       ],
     },
     {
       label: "Holistic Therapies",
       path: "/therapy",
-      parentSlug: "/therapy/",
+      parentSlug: "/therapy",
       subMenu: navbarAPIitems?.therapy_categories,
     },
     { label: "Well-being Packages", path: "/health-packages" },
     {
       label: "Wellness Products",
       path: "/products",
-      parentSlug: "/products/",
+      parentSlug: "/products",
       subMenu: navbarAPIitems?.product_categories,
     },
     { label: "Contact Us", path: "/contact-us" },

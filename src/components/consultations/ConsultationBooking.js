@@ -121,7 +121,14 @@ export default function ConsultationBooking() {
   const [orderDetails, setOrderDetails] = useState(null);
   const [countryList, setCountryList] = useState([]);
   const [stateList, setStateList] = useState([]);
-  const [cityList, setCityList] = useState([]);
+  const [cityList, setCityList] = useState([
+    {
+      code: "BLR",
+      label: "Banglore",
+      value: "Banglore",
+    },
+    { code: "BOM", label: "Mumbai", value: "Mumbai" },
+  ]);
 
   const [selectedCountry, setSelectedCountry] = useState({
     code: "IND",
@@ -190,20 +197,36 @@ export default function ConsultationBooking() {
     try {
       const url = `${apiUrl}/therapy/book-appointment/`;
 
+      // const body = {
+      //   therapist_id: selectedStaff.uid,
+      //   date: selectedTimeSlot.date,
+      //   start_time: selectedTimeSlot.start_time_format,
+      //   end_time: selectedTimeSlot.end_time_format,
+      //   first_name: filledUserDetails.firstname,
+      //   last_name: filledUserDetails.lastname,
+      //   email: filledUserDetails.email,
+      //   phone_no: filledUserDetails.phoneNumber,
+      //   slug: currentPath[2],
+      //   country: selectedCountry.value,
+      //   state: selectedState.value,
+      //   city: selectedCity.value,
+      //   no_of_therapies: noOfTherapiesSelected,
+      // };
+
       const body = {
-        therapist_id: selectedStaff.uid,
-        date: selectedTimeSlot.date,
-        start_time: selectedTimeSlot.start_time_format,
-        end_time: selectedTimeSlot.end_time_format,
-        first_name: filledUserDetails.firstname,
-        last_name: filledUserDetails.lastname,
-        email: filledUserDetails.email,
-        phone_no: filledUserDetails.phoneNumber,
-        slug: currentPath[2],
-        country: selectedCountry.value,
-        state: selectedState.value,
-        city: selectedCity.value,
-        no_of_therapies: noOfTherapiesSelected,
+        therapist_id: "a7142ebb-f418-46fe-b4ea-c80cd2f94d49",
+        date: "2025-04-24",
+        start_time: "12:00 PM",
+        end_time: "01:00 PM",
+        first_name: "Shubham",
+        last_name: "Arora",
+        email: "samaroraytb@gmail.com",
+        phone_no: "+917989989898",
+        slug: "cranio-sacral-therapy",
+        country: "India",
+        state: "Bihar",
+        city: "Patna",
+        no_of_therapies: 1,
       };
 
       if (couponApply.couponCode) {
@@ -395,20 +418,42 @@ export default function ConsultationBooking() {
   const fetchTherapyStaffList = async () => {
     setIsLoading(true);
     try {
-      const url = `${apiUrl}/therapy/therapy-profile/`;
+      // const url = `${apiUrl}/therapy/therapy-profile/`;
 
-      const body = {
-        slug: currentPath[2],
-        country: selectedCountry.value,
-        state: selectedState.value,
-        city: selectedCity.value,
-      };
+      // const body = {
+      //   slug: currentPath[2],
+      //   country: selectedCountry.value,
+      //   state: selectedState.value,
+      //   city: selectedCity.value,
+      // };
 
-      const response = await axios.post(url, body, {
-        cache: "no-store",
-      });
+      // const response = await axios.post(url, body, {
+      //   cache: "no-store",
+      // });
 
-      const data = response.data;
+      // const data = response.data;
+      const data = [
+        {
+          uid: "ffa21be6-940f-4fca-9dde-8813f8d693c5",
+          user_email: "nityanavatherapiest@gmail.com",
+          user_firstname: "Dr. Rashmi",
+          user_lastname: "Singh",
+          image: null,
+          gender: "Female",
+          address:
+            "Bittu Panni Wale, Ram Vihar Colony, Near by Naina Beauty Parlor\r\nNear By New Raghav Puram\r\nBittu Panni Wale",
+          therapist_identity: "DIVN236736",
+          description:
+            "<p>Craniosacral therapist and Somatic Experiencing Practitioner (SEP)</p>",
+          phone_no: "09997678477",
+          is_active: true,
+          created_at: "2025-01-28T13:54:55.782131+05:30",
+          updated_at: "2025-04-23T12:44:53.322771+05:30",
+          country: "India",
+          state: "Bihar",
+          city: "Patna",
+        },
+      ];
       setTherapyStaffList(data);
     } catch (err) {
       console.log(err);
@@ -566,26 +611,48 @@ export default function ConsultationBooking() {
     try {
       const url = `${apiUrl}/payment/create-order/`;
 
+      // const body = {
+      //   amount: confirmationDetails.allotment_info.therapy_price,
+      //   receipt: "Therapy",
+      //   currency: "INR",
+      //   notes: {
+      //     user_email: session?.user?.user?.email || "",
+      //     email: filledUserDetails.email,
+      //     therapist_id: selectedStaff.uid,
+      //     therapy_slug: currentPath[2],
+      //     date: selectedTimeSlot.date,
+      //     start_time: selectedTimeSlot.start_time_format,
+      //     end_time: selectedTimeSlot.end_time_format,
+      //     first_name: filledUserDetails.firstname,
+      //     last_name: filledUserDetails.lastname,
+      //     phone_no: filledUserDetails.phoneNumber,
+      //     user_appointment_id: confirmationDetails.appointment_id,
+      //     country: selectedCountry.value,
+      //     state: selectedState.value,
+      //     city: selectedCity.value,
+      //     no_of_therapies: filledUserDetails.therapiesNumber,
+      //   },
+      // };
+
       const body = {
-        amount: confirmationDetails.allotment_info.therapy_price,
+        amount: 4000,
         receipt: "Therapy",
         currency: "INR",
         notes: {
-          user_email: session?.user?.user?.email || "",
-          email: filledUserDetails.email,
-          therapist_id: selectedStaff.uid,
-          therapy_slug: currentPath[2],
-          date: selectedTimeSlot.date,
-          start_time: selectedTimeSlot.start_time_format,
-          end_time: selectedTimeSlot.end_time_format,
-          first_name: filledUserDetails.firstname,
-          last_name: filledUserDetails.lastname,
-          phone_no: filledUserDetails.phoneNumber,
-          user_appointment_id: confirmationDetails.appointment_id,
-          country: selectedCountry.value,
-          state: selectedState.value,
-          city: selectedCity.value,
-          no_of_therapies: filledUserDetails.therapiesNumber,
+          user_email: "",
+          email: "samaroraytb@gmail.com",
+          therapist_id: "a7142ebb-f418-46fe-b4ea-c80cd2f94d49",
+          therapy_slug: "cranio-sacral-therapy",
+          date: "2025-04-24",
+          start_time: "12:00 PM",
+          end_time: "01:00 PM",
+          first_name: "Shubham",
+          last_name: "Arora",
+          phone_no: "+917989989898",
+          user_appointment_id: "eaad3ec5-4235-4de9-8e0a-c24cf2e3ebc4",
+          country: "India",
+          state: "Bihar",
+          city: "Patna",
         },
       };
 
@@ -767,7 +834,7 @@ export default function ConsultationBooking() {
               <div className="space-y-6">
                 <Form.Item
                   name="country"
-                  label="Select Country"
+                  label="Country"
                   rules={[
                     { required: true, message: "Please select a country" },
                   ]}
@@ -786,7 +853,7 @@ export default function ConsultationBooking() {
                   </Select>
                 </Form.Item>
 
-                <Form.Item
+                {/* <Form.Item
                   name="state"
                   label="Select State"
                   rules={[{ required: true, message: "Please select a state" }]}
@@ -803,17 +870,17 @@ export default function ConsultationBooking() {
                       </Option>
                     ))}
                   </Select>
-                </Form.Item>
+                </Form.Item> */}
 
                 <Form.Item
                   name="city"
-                  label="Select City"
+                  label="Select Location"
                   rules={[{ required: true, message: "Please select a city" }]}
                 >
                   <Select
                     style={{ height: "48px" }}
                     placeholder="Select a city"
-                    disabled={!selectedState}
+                    // disabled={!selectedState}
                     onChange={handleCityChange}
                   >
                     {cityList.map((item) => (
