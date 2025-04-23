@@ -4,13 +4,21 @@ import { useSearchParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import LottieShowcase from "../../components/payment/LottieShowcase";
+import { useSession } from "next-auth/react";
+import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
+import { useDispatch } from "react-redux";
 
 const Page = () => {
+  const dispatch = useDispatch();
+  const { data: session } = useSession();
   const searchParams = useSearchParams();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [paymentDetail, setPaymentDetail] = useState(null);
-  const [countdown, setCountdown] = useState(5); // Start countdown from 5
+  const [countdown, setCountdown] = useState(10);
+
+  const [isAfterLoginModal, setIsAfterLoginModal] = useState(false);
+  const [isHideRedirection, setHideRedirection] = useState(false);
 
   const paymentId = searchParams.get("payment_id");
   const orderId = searchParams.get("order_id");
@@ -57,9 +65,17 @@ const Page = () => {
         setCountdown((prev) => {
           if (prev === 1) {
             clearInterval(interval);
-            router.push(
-              `/profile?tab=${order_type === "Therapy" ? "Therapy" : "Orders"}`
-            );
+            if (session) {
+              router.push(
+                `/profile?tab=${
+                  order_type === "Therapy" ? "Therapy" : "Orders"
+                }`
+              );
+            } else {
+              setHideRedirection(true);
+              setIsAfterLoginModal(true);
+              dispatch(setOpenLoginModal(true));
+            }
           }
           return prev - 1;
         });
@@ -68,6 +84,24 @@ const Page = () => {
       return () => clearInterval(interval);
     }
   }, [paymentDetail, router]);
+
+  useEffect(() => {
+    if (session && paymentDetail?.status && isAfterLoginModal) {
+      router.push(
+        `/profile?tab=${order_type === "Therapy" ? "Therapy" : "Orders"}`
+      );
+    }
+  }, [session, paymentDetail, order_type, router]);
+
+  useEffect(() => {
+    if (isAfterLoginModal && !session) {
+      const timeout = setTimeout(() => {
+        router.push("/");
+      }, 30000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [isAfterLoginModal, session, router]);
 
   if (isLoading) return <BlockPageLoader />;
 
@@ -112,9 +146,7 @@ const Page = () => {
             <table className="min-w-full text-sm text-left text-gray-700">
               <tbody>
                 <tr className="border-b">
-                  <th className="px-4 py-3 font-medium w-1/3">
-                    Payment ID
-                  </th>
+                  <th className="px-4 py-3 font-medium w-1/3">Payment ID</th>
                   <td className="px-4 py-3">{paymentId}</td>
                 </tr>
                 <tr className="border-b">
@@ -123,19 +155,29 @@ const Page = () => {
                 </tr>
                 <tr className="border-b">
                   <th className="px-4 py-3  font-medium">Amount Paid</th>
-                  <td className="px-4 py-3">Rs. {(paymentDetail.amount).toFixed(2)}</td>
+                  <td className="px-4 py-3">
+                    Rs. {paymentDetail.amount.toFixed(2)}
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <div className="mt-6 text-gray-600 text-sm">
-            Redirecting in{" "}
-            <span className="font-semibold text-green-800 text-base">
-              {countdown}
-            </span>{" "}
-            seconds...
-          </div>
+          {!session && (
+            <p className="mt-6 text-red-500 text-sm">
+              Please log in to view your profile.
+            </p>
+          )}
+
+          {!isHideRedirection && (
+            <div className="mt-4 text-gray-600 text-sm">
+              Redirecting in{" "}
+              <span className="font-semibold text-green-800 text-base">
+                {countdown}
+              </span>{" "}
+              seconds...
+            </div>
+          )}
         </div>
       </div>
     </div>

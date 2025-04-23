@@ -205,7 +205,6 @@ export default function BookingModal() {
         phone_no: filledUserDetails.phoneNumber,
         slug: currentPath[2],
         country: selectedCountry.value,
-        state: selectedState.value,
         city: selectedCity.value,
         no_of_therapies: noOfTherapiesSelected,
       };
@@ -330,7 +329,6 @@ export default function BookingModal() {
         try {
           await form.validateFields();
           const userLocation = form.getFieldsValue();
-          console.log(userLocation);
           increaseActiveStep();
         } catch (error) {
           console.error("Validation failed:", error);
@@ -404,7 +402,6 @@ export default function BookingModal() {
       const body = {
         slug: currentPath[2],
         country: selectedCountry.value,
-        state: selectedState.value,
         city: selectedCity.value,
       };
 
@@ -475,9 +472,12 @@ export default function BookingModal() {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${apiUrl}/api/cities/${countryCode}/${stateCode}/`
+        `${apiUrl}/api/cities/${countryCode}/`
       );
-      setCityList(response.data);
+      const newCity = await response.data.filter(
+        (each) => each.code === "BLR" || each.code === "BOM"
+      );
+      setCityList(newCity);
     } catch (error) {
       notification.error({
         message: "Failed to Load Cities",
@@ -523,7 +523,7 @@ export default function BookingModal() {
       form.setFieldsValue({
         country: selectedCountry.value,
       });
-      fetchStatesData(selectedCountry.code);
+      fetchCitiesData(selectedCountry.code);
     } else if (isBookingModal && activeStep === 1) {
       form.setFieldsValue({
         therapiesNumber: 1,
@@ -580,7 +580,6 @@ export default function BookingModal() {
           phone_no: filledUserDetails.phoneNumber,
           user_appointment_id: confirmationDetails.appointment_id,
           country: selectedCountry.value,
-          state: selectedState.value,
           city: selectedCity.value,
           no_of_therapies: filledUserDetails.therapiesNumber,
         },
@@ -783,7 +782,7 @@ export default function BookingModal() {
                   </Select>
                 </Form.Item>
 
-                <Form.Item
+                {/* <Form.Item
                   name="state"
                   label="Select State"
                   rules={[{ required: true, message: "Please select a state" }]}
@@ -800,17 +799,16 @@ export default function BookingModal() {
                       </Option>
                     ))}
                   </Select>
-                </Form.Item>
+                </Form.Item> */}
 
                 <Form.Item
                   name="city"
-                  label="Select City"
+                  label="Select Location"
                   rules={[{ required: true, message: "Please select a city" }]}
                 >
                   <Select
                     style={{ height: "48px" }}
                     placeholder="Select a city"
-                    disabled={!selectedState}
                     onChange={handleCityChange}
                   >
                     {cityList.map((item) => (
