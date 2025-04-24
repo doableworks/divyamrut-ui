@@ -162,11 +162,16 @@ const Page = () => {
                 <button
                   type="button"
                   className="site-button-secondary-outlined !mt-3"
+                  onClick={() => router.push("/")}
                 >
                   Back to Home
                 </button>
-                <button type="button" className="site-button-primary !mt-3">
-                  Go to profile
+                <button
+                  type="button"
+                  onClick={() => dispatch(setOpenLoginModal(true))}
+                  className="site-button-primary !mt-3"
+                >
+                  Login
                 </button>
               </div>
             </div>
