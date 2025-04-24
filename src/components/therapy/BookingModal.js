@@ -205,7 +205,7 @@ export default function BookingModal() {
         phone_no: filledUserDetails.phoneNumber,
         slug: currentPath[2],
         country: selectedCountry.value,
-        city: selectedCity.value,
+        city: selectedCity.label,
         no_of_therapies: noOfTherapiesSelected,
       };
 
@@ -402,7 +402,7 @@ export default function BookingModal() {
       const body = {
         slug: currentPath[2],
         country: selectedCountry.value,
-        city: selectedCity.value,
+        location_uid: selectedCity.code,
       };
 
       const response = await axios.post(url, body, {
@@ -471,13 +471,13 @@ export default function BookingModal() {
   const fetchCitiesData = async (countryCode, stateCode) => {
     setIsLoading(true);
     try {
-      const response = await axios.get(
-        `${apiUrl}/api/cities/${countryCode}/`
-      );
-      const newCity = await response.data.filter(
-        (each) => each.code === "BLR" || each.code === "BOM"
-      );
-      setCityList(newCity);
+      const response = await axios.get(`${apiUrl}/api/locations/`);
+      const data = await response.data.map((each) => ({
+        label: each.name,
+        value: each.uid,
+        code: each.uid,
+      }));
+      setCityList(data);
     } catch (error) {
       notification.error({
         message: "Failed to Load Cities",
@@ -580,7 +580,7 @@ export default function BookingModal() {
           phone_no: filledUserDetails.phoneNumber,
           user_appointment_id: confirmationDetails.appointment_id,
           country: selectedCountry.value,
-          city: selectedCity.value,
+          city: selectedCity.label,
           no_of_therapies: filledUserDetails.therapiesNumber,
         },
       };

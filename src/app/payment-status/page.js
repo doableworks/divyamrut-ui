@@ -93,16 +93,6 @@ const Page = () => {
     }
   }, [session, paymentDetail, order_type, router]);
 
-  useEffect(() => {
-    if (isAfterLoginModal && !session) {
-      const timeout = setTimeout(() => {
-        router.push("/");
-      }, 30000);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [isAfterLoginModal, session, router]);
-
   if (isLoading) return <BlockPageLoader />;
 
   return paymentDetail?.status ? (
@@ -163,10 +153,23 @@ const Page = () => {
             </table>
           </div>
 
-          {!session && (
-            <p className="mt-6 text-red-500 text-sm">
-              Please log in to view your profile.
-            </p>
+          {!session && isHideRedirection && (
+            <div>
+              <p className="mt-6 text-red-500 text-sm">
+                Please log in to view your profile.
+              </p>
+              <div className="flex gap-4 justify-center items-center">
+                <button
+                  type="button"
+                  className="site-button-secondary-outlined !mt-3"
+                >
+                  Back to Home
+                </button>
+                <button type="button" className="site-button-primary !mt-3">
+                  Go to profile
+                </button>
+              </div>
+            </div>
           )}
 
           {!isHideRedirection && (
