@@ -1,3 +1,4 @@
+"use client"
 import { SearchOutlined, CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import "./styles.css";
 import Link from "next/link";

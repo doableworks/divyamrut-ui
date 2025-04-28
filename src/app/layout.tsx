@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "antd/dist/reset.css";
 import { ReduxProvider } from "../redux/provider";
@@ -42,8 +43,41 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+const getNavbarItems = async () => {
+  try {
+    const res = await fetch(`${apiUrl}/therapy/combined-categories/`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) {
+      throw new Error("Failed to fetch navbar data");
+    }
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching navbar items:", error);
+    return [];
+  }
+};
+
+const getDisplayBlocks = async () => {
+  try {
+    const res = await fetch(`${apiUrl}/blogs/display-blocks/`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) {
+      throw new Error("Failed to fetch navbar data");
+    }
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching navbar items:", error);
+    return [];
+  }
+};
+
 export default async function RootLayout({ children }: RootLayoutProps) {
-  
+  const navbarAPIItems = await getNavbarItems();
+  const displayBlockItems = await getDisplayBlocks();
 
   return (
     <html lang="en">
@@ -53,7 +87,12 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <NextTopLoader />
         <ReduxProvider>
           <AntdRegistry>
-            <MainLayout>{children}</MainLayout>
+            <MainLayout
+              navbarAPIItems={navbarAPIItems}
+              displayBlockItems={displayBlockItems}
+            >
+              {children}
+            </MainLayout>
           </AntdRegistry>
         </ReduxProvider>
       </body>

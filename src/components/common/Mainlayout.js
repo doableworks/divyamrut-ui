@@ -1,41 +1,8 @@
 import { ConfigProvider } from "antd";
 import { LayoutSection } from "@/components/common/LayoutSection";
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-const getNavbarItems = async () => {
-  try {
-    const res = await fetch(`${apiUrl}/therapy/combined-categories/`, {
-      cache: "no-store",
-    });
-    if (!res.ok) {
-      throw new Error("Failed to fetch navbar data");
-    }
-    return await res.json();
-  } catch (error) {
-    console.error("Error fetching navbar items:", error);
-    return [];
-  }
-};
-
-const getDisplayBlocks = async () => {
-  try {
-    const res = await fetch(`${apiUrl}/blogs/display-blocks/`, {
-      cache: "no-store",
-    });
-    if (!res.ok) {
-      throw new Error("Failed to fetch navbar data");
-    }
-    return await res.json();
-  } catch (error) {
-    console.error("Error fetching navbar items:", error);
-    return [];
-  }
-};
-
-export default async function MainLayout({ children }) {
-  const navbarAPIItems = await getNavbarItems();
-  const displayBlockItems = await getDisplayBlocks();
+export default async function MainLayout({ children, navbarAPIItems, displayBlockItems }) {
+  
 
   const customTheme = {
     components: {

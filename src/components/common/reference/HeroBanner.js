@@ -1,10 +1,10 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React from "react";
-import BackgroundImagesSlider from "@/components/home1/BackgrounImageSlider";
-import { Calender, Flower } from "@/icon/icons";
 
 const HeroBanner = () => {
+  const router = useRouter();
   return (
     <div
       className="relative w-full overflow-hidden bg-gradient-to-t from-[#EAB64F] via-[#D79F34] to-[#D0861A]
@@ -39,7 +39,8 @@ const HeroBanner = () => {
 
         <div className="flex justify-center items-center mt-8">
           <button
-            className="font-opensans border border-1 mx-auto text-white px-8 py-2 rounded border-white font-medium text-sm md:text-xl uppercase"
+            onClick={() => router.push("/about-us")}
+            className="font-opensans border border-1 mx-auto text-white px-8 py-2 rounded border-white font-medium text-sm md:text-xl uppercase outline-none"
             type="button"
           >
             Know More
