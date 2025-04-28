@@ -109,7 +109,7 @@ const MobileNavbar = ({
                       onClick={() =>
                         handleAction(
                           item?.parentSlug == "/products"
-                            ? `/products/${subItem.category_slug}/${subItem.slug}`
+                            ? `/products/${subItem.slug}`
                             : `${item.parentSlug}/${subItem.slug}/`
                         )
                       }

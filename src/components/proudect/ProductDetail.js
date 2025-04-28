@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import CustomButton from "@/components/common/CustomButton";
 import ImageMedium from "./ImageMedium";
 import { setBuyProduct } from "@/redux/feature/buyProductSlice";
@@ -10,11 +10,9 @@ import { useRouter } from "nextjs-toploader/app";
 import { twMerge } from "tailwind-merge";
 import Divider from "@/components/common/Divider";
 import useCartActions from "@/components/cartCom/useCartActions";
-import { setOpenLoginModal } from "@/redux/feature/authModalSlice";
 import { useSession } from "next-auth/react";
-import { BellIcon } from "@heroicons/react/24/outline";
 import axiosInstance from "@/lib/axios";
-import { message } from "antd";
+import { Form, Input, message, Modal } from "antd";
 
 const ProductDetail = ({ item }) => {
   const router = useRouter();
@@ -26,6 +24,9 @@ const ProductDetail = ({ item }) => {
   const [quantity, setQuantity] = useState(1);
   const { onAddItem, onIncreaseOrDecreaseItem } = useCartActions();
   const [isNotified, setIsNotified] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalLoading, setModalLoading] = useState(false);
+  const [form] = Form.useForm();
 
   const handleAddItem = async () => {
     try {
@@ -50,40 +51,52 @@ const ProductDetail = ({ item }) => {
     });
   };
 
-  const handleNotifyMe = async () => {
-    if (!session) {
-      dispatch(setOpenLoginModal(true));
-      return;
-    }
+  const handleModalOk = async (values) => {
+    const emailToUse = values.email;
 
     try {
-      setLoading(true);
+      setModalLoading(true);
       const url = "/product/notifications-create/";
-      const body = { product_uid: item.uid };
+      const body = { product_uid: item.uid, email: emailToUse };
 
-      const response = await axiosInstance.post(url, body, { session });
+      const response = await axiosInstance.post(url, body);
+
       if (response.status >= 200 && response.status < 300) {
-        console.log(response.data);
         setIsNotified(true);
+        setIsModalOpen(false);
         messageApi.open({
           type: "success",
           content:
-            "Thank you for your patience! You'll be notified as soon as the product is back in stock.",
+            "Thank you! You'll be notified as soon as the product is back in stock.",
         });
       } else {
-        throw new Error("Getting error while creating reminder");
+        throw new Error("Failed to set notification.");
       }
     } catch (err) {
-      console.log("Notify Me Error", err);
+      console.log("handleModalOk Error", err);
       messageApi.open({
         type: "error",
-        content:
-          "Something went wrong while setting the reminder. Please try again shortly.",
+        content: "Failed to set notification. Please try again later.",
       });
     } finally {
-      setLoading(false);
+      setModalLoading(false);
     }
   };
+
+  const handleModalCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleNotifyMe = async () => {
+    setIsModalOpen(true);
+  };
+
+  useEffect(() => {
+    if (isModalOpen && session?.user?.user?.email) {
+      form.setFieldsValue({ email: session.user.user.email });
+      handleModalOk();
+    }
+  }, [session, isModalOpen]);
 
   return (
     <>
@@ -246,6 +259,52 @@ const ProductDetail = ({ item }) => {
         </div>
       )}
       {contextHolder}
+
+      <Modal
+        title=""
+        open={isModalOpen}
+        footer={null}
+        onCancel={!modalLoading && handleModalCancel}
+      >
+        <div className="p-5">
+          <p className="section-content !text-left !mb-4">
+            Enter your email address to get notified when the product is back in
+            stock:
+          </p>
+          <Form form={form} layout="vertical" onFinish={handleModalOk}>
+            <Form.Item
+              label="Email Address"
+              name="email"
+              rules={[
+                { required: true, message: "Please input your email!" },
+                {
+                  type: "email",
+                  message: "Please enter a valid email address!",
+                },
+              ]}
+              initialValue={session?.user?.email || ""}
+            >
+              <Input
+                placeholder="Enter your email"
+                disabled={modalLoading}
+                className="!mt-2"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Item>
+
+            <Form.Item className="w-full">
+              <CustomButton
+                htmlType="submit"
+                title="Create Alert"
+                className="site-button-secondary !mt-4 !w-full"
+                loading={modalLoading}
+                type="submit"
+                disabled={modalLoading}
+              />
+            </Form.Item>
+          </Form>
+        </div>
+      </Modal>
     </>
   );
 };
