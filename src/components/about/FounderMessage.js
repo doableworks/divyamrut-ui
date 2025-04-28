@@ -3,7 +3,7 @@ import React from "react";
 const FounderMessage = () => {
   return (
     <section>
-      <div className="w-full h-[500px] overflow-hidden">
+      {/* <div className="w-full h-[500px] overflow-hidden">
         <video
           className="w-full h-full object-cover"
           src="https://cdn.pixabay.com/video/2021/05/16/74233-550033536_large.mp4"
@@ -13,32 +13,47 @@ const FounderMessage = () => {
           playsInline
           controls
         />
-      </div>
+      </div> */}
       <div className="common_page_width !space-y-6 !p-5">
-        <p className="highlight-heading !text-left">Philosophy:</p>
+        <p className="highlight-heading !text-left">About the Founder:</p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div>
+            <p className="section-content !text-justify">
+              In early days of my masters in dental surgery, I came across a
+              quote in one of our primary textbooks. It said, “The art of
+              medicine consists of amusing the patient while it is the nature
+              that cures the disease”. I felt curious to understand what was
+              this wise soul trying to convey? Who is this nature? Is he quoting
+              the beautiful trees, flowers and mountains or does he mean there
+              is some godly figure sitting up there that is curing all diseases.
+              Also what it meant when he said amusing the patient? why to amuse
+              the patient, what’s the importance around making someone smile?
+              What’s the role of entertainment and amusement in treatment. In
+              over two decades of my medical practice, this exploration kept
+              happening in the background and it kept revealing to me through my
+              healing stories that there is a magical healing power inherently
+              bestowed by the creator, the nature on each and every individual
+              consciousness, and it is indeed in amusement, joy, and happiness,
+              and in an healthy state of mind that these power to heal the body
+              unleash itself.
+            </p>
+            <p className="section-content !text-justify">
+              The defence mechanism and the immune system of the body is that
+              power. The magical ways of respiratory and cardiac systems to keep
+              everything in equilibrium is that power. The strength and
+              resilience of our digestive system is that power. The ability of
+              the mind to de-clutter itself using the breath is that power.
+            </p>
+          </div>
+          <div
+            className="bg-white h-96 w-full rounded-md bg-center bg-cover"
+            style={{
+              backgroundImage:
+                "url(https://register.nityanava.com/media/uploads/public/images/bb27840a-aa06-4d9a-8cda-2366b6a49db6.webp)",
+            }}
+          ></div>
+        </div>
         <p className="section-content !text-justify">
-          In early days of my masters in dental surgery, I came across a quote
-          in one of our primary textbooks. It said, “The art of medicine
-          consists of amusing the patient while it is the nature that cures the
-          disease”. I felt curious to understand what was this wise soul trying
-          to convey? Who is this nature? Is he quoting the beautiful trees,
-          flowers and mountains or does he mean there is some godly figure
-          sitting up there that is curing all diseases. Also what it meant when
-          he said amusing the patient? why to amuse the patient, what’s the
-          importance around making someone smile? What’s the role of
-          entertainment and amusement in treatment. In over two decades of my
-          medical practice, this exploration kept happening in the background
-          and it kept revealing to me through my healing stories that there is a
-          magical healing power inherently bestowed by the creator, the nature
-          on each and every individual consciousness, and it is indeed in
-          amusement, joy, and happiness, and in an healthy state of mind that
-          these power to heal the body unleash itself. <br />
-          The defence mechanism and the immune system of the body is that power.
-          The magical ways of respiratory and cardiac systems to keep everything
-          in equilibrium is that power. The strength and resilience of our
-          digestive system is that power. The ability of the mind to de-clutter
-          itself using the breath is that power.
-          <br />
           The whole of the existence is full of these magical powers and we
           humans are part of the same existence and have inherited these
           wonderful self healing powers which just needs to be uncovered.

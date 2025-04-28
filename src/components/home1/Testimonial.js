@@ -11,19 +11,19 @@ const initialTestimonial = [
     name: "Radhika Sharma",
     description:
       "I had chronic back pain for years, but after a few Meru Therapy sessions, I feel lighter and more mobile than ever. The practitioners at Nityanava truly understand the body!",
-    image: 'https://register.nityanava.com/media/uploads/public/images/0413903b-9cf8-4c88-b1f5-953436b21a74.jpg',
+    image: null,
   },
   {
     name: "Amit Verma",
     description:
       "Marma Therapy at Nityanava was a deeply healing experience. I left every session feeling relaxed and rejuvenated. It helped me manage stress in a very natural way.",
-    image: 'https://register.nityanava.com/media/uploads/public/images/9912822b-98d1-444a-8dc6-1b634626e2a5.jpg',
+    image: null,
   },
   {
     name: "Sneha Pillai",
     description:
       "I was new to holistic healing but Meru Therapy really changed how I feel. My posture has improved, and I feel more aligned both physically and mentally.",
-    image: 'https://register.nityanava.com/media/uploads/public/images/8a4a1b47-4491-4806-900d-5af258045799.jpg',
+    image: null,
   },
 ];
 
