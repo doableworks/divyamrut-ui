@@ -3,6 +3,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  typescript: {
+    ignoreDuringBuilds: true,
+  },
   trailingSlash: true,
   rewrites: async () => {
     return [

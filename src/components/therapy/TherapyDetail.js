@@ -40,7 +40,7 @@ export default function TherapyDetail({ data }) {
                 disabled={true}
                 className="site-button-primary !mt-6 !hidden md:!inline !capitalize !cursor-not-allowed"
               >
-                Comming Soon
+                Coming Soon
               </button>
             )}
           </figure>
