@@ -14,6 +14,8 @@ import {
 import NextTopLoader from "nextjs-toploader";
 import MainLayout from "@/components/common/Mainlayout";
 import "@/app/globals.css";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/auth";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -76,6 +78,7 @@ const getDisplayBlocks = async () => {
 };
 
 export default async function RootLayout({ children }: RootLayoutProps) {
+  const session = await getServerSession(authOptions as AuthOptions);
   const navbarAPIItems = await getNavbarItems();
   const displayBlockItems = await getDisplayBlocks();
 

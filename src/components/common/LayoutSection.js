@@ -19,6 +19,7 @@ export const LayoutSection = ({
   children,
   navbarAPIitems,
   displayBlockItems,
+  sessionData,
 }) => {
   const dispatch = useDispatch();
   const scrollContainerRef = useRef(null);
@@ -98,7 +99,11 @@ export const LayoutSection = ({
   }, [dispatch]);
 
   return (
-    <SessionProvider refetchInterval={10 * 60} refetchOnWindowFocus={false}>
+    <SessionProvider
+      session={sessionData}
+      refetchInterval={10 * 60}
+      refetchOnWindowFocus={false}
+    >
       <main
         ref={scrollContainerRef}
         className="flex flex-col relative bg-[--base] text-[--neutral] overflow-y-auto overflow-x-hidden h-[100vh] font-poppins"
