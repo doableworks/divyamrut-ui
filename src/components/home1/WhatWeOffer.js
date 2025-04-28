@@ -41,11 +41,11 @@ const offers = [
   },
   {
     name: "Corporate Experiences",
-    feedback: "Tailored corporate retreats and experiences designed to foster collaboration, boost team morale, and inspire innovation in unique and enriching settings.",
+    feedback: "Uplifting experiences for teams and groups to create awareness and bring into experience the importance of holistic health in achieving work life balance for an overall healthy and happy life. We also design customised plans based on needs of your organisation.",
   },
   {
     name: "⁠Luxury Wellness Holidays",
-    feedback: "Indulge in transformative wellness escapes featuring world-class spas, holistic therapies, and tranquil environments for complete mind and body rejuvenation.",
+    feedback: "Luxury in real essence is to enjoy life with a health body and happy mind. Invest in health by soaking in holistic therapies, yoga and meditation while enjoying luxurious stay at tranquil and serene environments for a complete rejuvenation of your mind body and soul.",
   },
   {
     name: "Social Responsibility",

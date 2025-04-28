@@ -1,16 +1,16 @@
 "use client";
 import { useState } from "react";
-import FaqsItem from "./FAQsItem";
+import FaqsItem from "../therapy/FAQsItem";
 
-export default function FaqsUnorder({ details,  }) {
+export default function ConsaltationTech({ details }) {
   const [openFaq, setOpenFaq] = useState(details[0]);
 
   return (
     <div className="common_page_width">
-      <p className="section-title">Best for</p>
+      <p className="section-title">emotional well-being </p>
       <p className="highlight-heading md:!mt-0">
-        Who is this treatment
-        <br /> best suited for?
+        combination of techniques
+        <br /> detailed consultation
       </p>
       <ul className="flex flex-col items-center list-none gap-9 mt-10">
         {details.map((each) => (
