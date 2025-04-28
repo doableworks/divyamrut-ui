@@ -51,8 +51,6 @@ const MobileNavbar = ({
         <>
           <div className="flex justify-between items-center">
             <Image
-              // src={"/asset/divyamrut_transparent_logo.webp"}
-              // src="/asset/logo/Logo-mobile.png"
               src="/asset/logo/logo.svg"
               height={100}
               width={100}
@@ -103,11 +101,11 @@ const MobileNavbar = ({
                   {item.subMenu.map((subItem, subIndex) => (
                     <p
                       key={subIndex}
-                      className={`${
+                      className={`relative ${
                         pathname === subItem?.slug
                           ? "text-[--e-global-color-E0A43B] font-bold"
                           : "text-[#3E3E3E]"
-                      } hover:text-[--voilet] cursor-pointer px-5 py-2`}
+                      } hover:text-[--voilet] cursor-pointer px-5 py-3`}
                       onClick={() =>
                         handleAction(
                           item?.parentSlug == "/products/" &&
@@ -117,7 +115,12 @@ const MobileNavbar = ({
                         )
                       }
                     >
-                      {subItem?.name}
+                      {(subItem.isSoon || subItem.is_soon) && (
+                        <span className="bg-[--yellow] absolute text-white font-poppins text-[10px] rounded rounded-bl-none px-1 font-medium -top-[3px] right-0">
+                          Coming Soon
+                        </span>
+                      )}
+                      <span>{subItem?.name}</span>
                     </p>
                   ))}
                 </div>

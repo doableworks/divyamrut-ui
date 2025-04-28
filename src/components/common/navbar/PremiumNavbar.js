@@ -229,7 +229,7 @@ export default function PremiumNavbar({ scrollNum }) {
                         "hover:border-b-2 border-b-[--yellow] box-border"
                     )}
                   >
-                    {item.isSoon && (
+                    {item.is_soon && (
                       <span className="bg-[--yellow] absolute text-white font-sans text-[10px] rounded rounded-br-none px-1 font-medium top-[-20px]">
                         Coming Soon
                       </span>
@@ -275,7 +275,7 @@ export default function PremiumNavbar({ scrollNum }) {
             <hr />
             <figure className="p-5">
               <section>
-                <ul className="grid grid-cols-4 py-4 gap-4">
+                <ul className="grid grid-cols-4 py-4 gap-8">
                   {isSubMenu.subMenu.map((sub, index) => (
                     <Link
                       href={
@@ -287,7 +287,7 @@ export default function PremiumNavbar({ scrollNum }) {
                       key={index}
                       className="relative"
                     >
-                      {sub.isSoon && (
+                      {(sub.isSoon || sub.is_soon) && (
                         <span className="bg-[--yellow] absolute text-white font-poppins text-[10px] rounded rounded-bl-none px-1 font-medium top-[-20px]">
                           Coming Soon
                         </span>

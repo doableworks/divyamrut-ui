@@ -30,7 +30,7 @@ const offers = [
       " Shuddhi… an uplifting range of everyday essentials rooted in ancient Indian Culture to purify your mind body and environment.",
   },
   {
-    name: "Yoga Therapy and Mindfulness Practices",
+    name: "Yoga Therapy and Meditations",
     feedback:
       "Incorporating the transformative path of Yoga and Meditation practices with knowledge of medical science to deliver health and well-being at atomic as well as causal levels.",
   },

@@ -42,16 +42,17 @@ const TestimonialSlider = ({ className = "", data = initialTestimonial }) => {
       )}
     >
       <div className="relative z-20 mx-auto w-[90%] md:w-[85%] py-14 md:py-32">
-        <div>
-          <h6 className="section-title">Testimonial</h6>
-          <h2 className="highlight-heading">Customer Feedback & Reviews</h2>
-          <div className="flex gap-4 justify-center mb-10">
+        <div className="flex flex-col justify-center items-center">
+          <h6 className="section-title !mb">Testimonials</h6>
+          <div className="border-b-2 w-12 border-[--yellow] mt-2 mb-4" />
+          {/* <h2 className="highlight-heading">Customer Feedback & Reviews</h2> */}
+          {/* <div className="flex gap-4 justify-center mb-10">
             <Star h={25} w={25} fill={"#f0ad4e"} />
             <Star h={25} w={25} fill={"#f0ad4e"} />
             <Star h={25} w={25} fill={"#f0ad4e"} />
             <Star h={25} w={25} fill={"#f0ad4e"} />
             <Star h={25} w={25} fill={"#ccd6df"} />
-          </div>
+          </div> */}
         </div>
 
         <Carousel

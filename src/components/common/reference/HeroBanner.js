@@ -42,7 +42,7 @@ const HeroBanner = () => {
             className="font-opensans border border-1 mx-auto text-white px-8 py-2 rounded border-white font-medium text-sm md:text-xl uppercase"
             type="button"
           >
-            Check More
+            Know More
           </button>
         </div>
       </div>

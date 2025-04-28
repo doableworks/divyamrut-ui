@@ -18,7 +18,7 @@ export default function AllTherapyList() {
               subItem.is_published && (
                 <Link
                   key={index}
-                  href={`${therapyNav.parentSlug + subItem.slug}/`}
+                  href={`${therapyNav.parentSlug}/${subItem.slug}/`}
                 >
                   <li className="list-none flex flex-col gap-5 rounded-lg overflow-hidden">
                     <div className="flex rounded-lg overflow-hidden h-64 w-full bg-white">

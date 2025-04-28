@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { Grid, Carousel } from "antd";
 const { useBreakpoint } = Grid;
 
-
 export default function DisplayBlocks() {
   const screens = useBreakpoint();
   const menuItems = useSelector((state) => state.menuItems).all;
@@ -63,9 +62,10 @@ export default function DisplayBlocks() {
               <div className="absolute w-full h-full bg-black/40 group-hover:bg-black/60 transition-all duration-300" />
 
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-white font-medium text-xl tracking-wide uppercase text-center">
-                  {block?.short_name}
-                </div>
+                <div
+                  className="text-white font-medium text-xl tracking-wide uppercase text-center"
+                  dangerouslySetInnerHTML={{ __html: block?.short_name }}
+                ></div>
               </div>
 
               <div className="absolute bottom-3 right-3 bg-white/80 rounded-full p-1 shadow-sm">

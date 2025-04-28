@@ -14,7 +14,7 @@ export default function TherapyDetail({ data }) {
     dispatch(toggleBookingModal(true));
   };
 
-  const { description, faqs, image, name, testimonials } = data;
+  const { description, faqs, image, name, testimonials, is_soon } = data;
 
   return (
     <div>
@@ -28,12 +28,21 @@ export default function TherapyDetail({ data }) {
               className="section-content md:!text-left"
               dangerouslySetInnerHTML={{ __html: description }}
             ></p>
-            <button
-              onClick={handleBookTherapy}
-              className="site-button-primary !mt-6 !hidden md:!inline !capitalize"
-            >
-              Book A Session
-            </button>
+            {!is_soon ? (
+              <button
+                onClick={handleBookTherapy}
+                className="site-button-primary !mt-6 !hidden md:!inline !capitalize"
+              >
+                Book A Session
+              </button>
+            ) : (
+              <button
+                disabled={true}
+                className="site-button-primary !mt-6 !hidden md:!inline !capitalize !cursor-not-allowed"
+              >
+                Comming Soon
+              </button>
+            )}
           </figure>
           <section className="relative lg:h-[550px]">
             <figure className="relative z-10 flex rounded-tr-full rounded-tl-full overflow-hidden h-[550px] border-2">
@@ -61,12 +70,12 @@ export default function TherapyDetail({ data }) {
       {data?.therapy_benifits?.length > 0 && (
         <BenefitsOfTherapy details={data.therapy_benifits} />
       )}
-
+{/* 
       {testimonials.length > 0 && (
         <div>
           <Testimonial className="bg-white" data={testimonials} />
         </div>
-      )}
+      )} */}
 
       {faqs?.length > 0 && <FaqUnorder details={faqs} />}
     </div>

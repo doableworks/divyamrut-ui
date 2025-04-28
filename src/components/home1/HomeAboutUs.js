@@ -31,13 +31,6 @@ export default function HomeAboutUs({ scrollToRef }) {
         <p className="text-2xl text-[--voilet] font-prata text-center italic leading-relaxed">
           Be Happy. Be Healthy. Be Ever New.
         </p>
-        <div className="flex justify-center">
-          <CustomButton
-            title="Book a Discovery Call"
-            className="site-button-primary !mt-6"
-            onClick={handleGoToEnquiry}
-          />
-        </div>
       </section>
     </div>
   );
