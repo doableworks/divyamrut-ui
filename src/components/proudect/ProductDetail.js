@@ -89,7 +89,7 @@ const ProductDetail = ({ item }) => {
     <>
       <div className="relative flex flex-col lg:flex-row gap-10 min-h-[80vh]">
         <div className="lg:sticky w-full self-start md:top-10 lg:w-1/2 flex flex-col items-center">
-          <div className="bg-white relative w-full h-[50vh] md:h-[60vh] lg:w-[40vw]">
+          <div className="bg-[--base] relative w-full h-[50vh] md:h-[60vh] lg:w-[40vw]">
             <ImageMedium
               imgSrc={
                 item?.uploaded_images[selectedImage]?.image
