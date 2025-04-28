@@ -9,6 +9,7 @@ import mobileNavSlice from './feature/mobileNavSlice'
 import menuSlice from './feature/menuSlice'
 import therapySlice from '@/redux/feature/therapySlice'
 import consultationSlice from './feature/consultationSlice'
+import displayBlockSlice from './feature/displayBlockSlice';
 
 interface Storage {
   getItem(key: string): Promise<string | null>;
@@ -41,7 +42,8 @@ const rootReducer = combineReducers({
   therapy: therapySlice,
   product: productSlice,
   buyProduct: buyProductSlice,
-  consultation: consultationSlice
+  consultation: consultationSlice,
+  displayBlocks: displayBlockSlice
 });
 
 const persistConfig: PersistConfig<ReturnType<typeof rootReducer>> = {

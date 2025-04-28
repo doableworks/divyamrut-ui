@@ -38,7 +38,7 @@ export default function TherapyDetail({ data }) {
             ) : (
               <button
                 disabled={true}
-                className="site-button-primary !mt-6 !hidden md:!inline !capitalize !cursor-not-allowed"
+                className="site-button-secondary-outlined !mt-6 !hidden md:!inline !capitalize !cursor-not-allowed"
               >
                 Coming Soon
               </button>
@@ -53,12 +53,21 @@ export default function TherapyDetail({ data }) {
               />
             </figure>
 
-            <button
-              onClick={handleBookTherapy}
-              className="site-button-primary w-full md:!hidden h-[60px] !capitalize"
-            >
-              Book A Session
-            </button>
+            {!is_soon ? (
+              <button
+                onClick={handleBookTherapy}
+                className="site-button-primary w-full md:!hidden h-[60px] !capitalize"
+              >
+                Book A Session
+              </button>
+            ) : (
+              <button
+                disabled={true}
+                className="site-button-secondary-outlined w-full md:!hidden h-[60px] !capitalize cursor-not-allowed"
+              >
+                Coming Soon
+              </button>
+            )}
           </section>
         </div>
       </div>
@@ -70,7 +79,7 @@ export default function TherapyDetail({ data }) {
       {data?.therapy_benifits?.length > 0 && (
         <BenefitsOfTherapy details={data.therapy_benifits} />
       )}
-{/* 
+      {/* 
       {testimonials.length > 0 && (
         <div>
           <Testimonial className="bg-white" data={testimonials} />

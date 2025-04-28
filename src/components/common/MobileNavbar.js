@@ -108,9 +108,8 @@ const MobileNavbar = ({
                       } hover:text-[--voilet] cursor-pointer px-5 py-3`}
                       onClick={() =>
                         handleAction(
-                          item?.parentSlug == "/products/" &&
-                            subItem.sub_categories?.length == 0
-                            ? `/products/${subItem.slug}/`
+                          item?.parentSlug == "/products"
+                            ? `/products/${subItem.category_slug}/${subItem.slug}`
                             : `${item.parentSlug}/${subItem.slug}/`
                         )
                       }

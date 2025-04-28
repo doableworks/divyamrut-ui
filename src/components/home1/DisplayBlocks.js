@@ -7,11 +7,8 @@ const { useBreakpoint } = Grid;
 
 export default function DisplayBlocks() {
   const screens = useBreakpoint();
-  const menuItems = useSelector((state) => state.menuItems).all;
+  const blockItems = useSelector((state) => state.displayBlocks).blocks;
 
-  const productItems = menuItems?.find((each) => each.path === "/products");
-
-  const productCategories = productItems?.subMenu;
   return (
     <section className="mt-8 px-4 md:px-16">
       <Carousel
@@ -23,31 +20,31 @@ export default function DisplayBlocks() {
         }
         infinite={
           screens.xl || screens.xxl
-            ? productCategories?.length > 6
+            ? blockItems?.length > 6
             : screens.md || screens.lg
-            ? productCategories?.length > 4
-            : productCategories?.length > 2
+            ? blockItems?.length > 4
+            : blockItems?.length > 2
         }
         draggable={
           screens.xl || screens.xxl
-            ? productCategories?.length > 6
+            ? blockItems?.length > 6
             : screens.md || screens.lg
-            ? productCategories?.length > 4
-            : productCategories?.length > 2
+            ? blockItems?.length > 4
+            : blockItems?.length > 2
         }
         swipe={
           screens.xl || screens.xxl
-            ? productCategories?.length > 6
+            ? blockItems?.length > 6
             : screens.md || screens.lg
-            ? productCategories?.length > 4
-            : productCategories?.length > 2
+            ? blockItems?.length > 4
+            : blockItems?.length > 2
         }
         className="custom-carousel"
       >
-        {productCategories?.map((block, index) => (
+        {blockItems?.map((block, index) => (
           <a
             key={index}
-            href={`/products/${block?.slug}`}
+            href={block?.slug}
             className="relative group p-3"
           >
             <div className="aspect-square w-full relative rounded-lg overflow-hidden">

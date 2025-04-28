@@ -13,13 +13,17 @@ import BookingModal from "../therapy/BookingModal";
 import { usePathname } from "next/navigation";
 import Footer from "./reference/Footer";
 import ConsultationBooking from "../consultations/ConsultationBooking";
+import { setDisplayBlocks } from "@/redux/feature/displayBlockSlice";
 
-export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
+export const LayoutSection = ({
+  children,
+  navbarAPIitems,
+  displayBlockItems,
+}) => {
   const dispatch = useDispatch();
   const scrollContainerRef = useRef(null);
   const [scrolled, setScrolled] = useState(0);
   const pathname = usePathname();
-
 
   const initialMenuItems = [
     { label: "About Us", path: "/about-us" },
@@ -35,13 +39,13 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
         {
           name: "Nutrition & Diet Coaching",
           slug: "nutrition-diet-coaching",
-          isSoon: true
+          isSoon: true,
         },
         { name: "Life Coaching", slug: "life-coaching" },
         {
           name: "Medical Astrology Consultation",
           slug: "medical-astrology-consultation",
-          isSoon: true
+          isSoon: true,
         },
         { name: "Financial Coaching", slug: "financial-coaching" },
       ],
@@ -57,13 +61,14 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
       label: "Wellness Products",
       path: "/products",
       parentSlug: "/products",
-      subMenu: navbarAPIitems?.product_categories,
+      subMenu: navbarAPIitems?.product_data,
     },
     { label: "Contact Us", path: "/contact-us" },
   ];
 
   useLayoutEffect(() => {
     dispatch(setMenuItems(initialMenuItems));
+    dispatch(setDisplayBlocks(displayBlockItems));
   }, [dispatch, navbarAPIitems]);
 
   useEffect(() => {
@@ -93,11 +98,7 @@ export const LayoutSection = ({ children, sessionData, navbarAPIitems }) => {
   }, [dispatch]);
 
   return (
-    <SessionProvider
-      session={sessionData}
-      refetchInterval={10 * 60}
-      refetchOnWindowFocus={false}
-    >
+    <SessionProvider refetchInterval={10 * 60} refetchOnWindowFocus={false}>
       <main
         ref={scrollContainerRef}
         className="flex flex-col relative bg-[--base] text-[--neutral] overflow-y-auto overflow-x-hidden h-[100vh] font-poppins"

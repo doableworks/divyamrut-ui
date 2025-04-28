@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "antd/dist/reset.css";
 import { ReduxProvider } from "../redux/provider";
@@ -12,11 +11,8 @@ import {
   Open_Sans,
 } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/auth";
 import MainLayout from "@/components/common/Mainlayout";
 import "@/app/globals.css";
-import { AuthOptions } from "next-auth";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -42,40 +38,22 @@ const opensans = Open_Sans({
   variable: "--font-opensans",
 });
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-const getNavbarItems = async () => {
-  try {
-    const res = await fetch(`${apiUrl}/therapy/combined-categories/`, {
-      cache: "no-store", 
-    });
-    if (!res.ok) {
-      throw new Error("Failed to fetch navbar data");
-    }
-    return await res.json();
-  } catch (error) {
-    console.error("Error fetching navbar items:", error);
-    return [];
-  }
-};
-
 interface RootLayoutProps {
   children: React.ReactNode;
 }
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const session = await getServerSession(authOptions as AuthOptions);
-  const navbarAPIItems = await getNavbarItems(); 
+  
 
   return (
     <html lang="en">
-      <body className={`${poppins.variable} ${prata.variable} ${playfairDisplay.variable} ${opensans.variable}`}>
+      <body
+        className={`${poppins.variable} ${prata.variable} ${playfairDisplay.variable} ${opensans.variable}`}
+      >
         <NextTopLoader />
         <ReduxProvider>
           <AntdRegistry>
-            <MainLayout session={session} navbarAPIItems={navbarAPIItems}>
-              {children}
-            </MainLayout>
+            <MainLayout>{children}</MainLayout>
           </AntdRegistry>
         </ReduxProvider>
       </body>
