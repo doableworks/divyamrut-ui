@@ -15,22 +15,23 @@ const page = () => {
   ];
 
   return (
-    <div className="common_page_width">
-      <h1 className="section-highlight">
+    <div className="common_page_width flex flex-col">
+      <h1 className="highlight-heading !text-left">
         Concern Specific Health and Wellbeing packages
       </h1>
-      <p>
+      <p className="section-content !text-left !mb-4">
         A comprehensive approach to find an optimum health plan by curating a
         tailored made package by working one on one to discover what would work
         best for you.
       </p>
-      <ul>
-        <ul className="list-disc pl-5 space-y-2">
-          {services.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
+      <ul className="!list-disc !mr-7 !space-y-2 !text-left section-content">
+        {services.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
       </ul>
+      <button className="site-button-secondary-outlined !self-center" disabled={true}>
+        Coming Soon
+      </button>
     </div>
   );
 };

@@ -21,7 +21,7 @@ const features = [
       />
     ),
     heading: "Phone",
-    text: "+91-8169123024",
+    text: "+91-9833172105",
   },
   {
     icon: <MailOutlined style={{ color: "white", fontSize: "28px" }} />,
