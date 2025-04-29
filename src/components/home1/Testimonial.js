@@ -68,13 +68,13 @@ const TestimonialSlider = ({ className = "", data = initialTestimonial }) => {
           {infiniteData.map((testimonial, index) => (
             <li className="flex p-4 overflow-hidden list-none" key={index}>
               <div className="relative min-h-full testimonial-card bg-[#F9F3EB] shadow-lg p-6 rounded-lg w-full py-12">
-                <Image
+                {/* <Image
                   src={testimonial?.image || NoProfileImage}
                   alt={index}
                   height={100}
                   width={100}
                   className="rounded-full h-24 w-24 mx-auto mb-3"
-                />
+                /> */}
                 <p className="section-title !text-gray-600 !mb-4">
                   {testimonial?.name}
                 </p>
