@@ -232,9 +232,7 @@ const page = async () => {
           Find the best deals on Nityanava by Divyamrut Naturals
         </p>
       </div>
-      <div className="relative h-[350px]">
-        <ProductBanner srcUrl={bannerImgArr[0]} />
-      </div>
+      
       <div>
         <DisplayBlocks />
       </div>

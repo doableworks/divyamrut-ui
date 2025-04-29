@@ -23,10 +23,14 @@ const ProductsScroller = ({ category }) => {
   };
 
   return (
-    <>
+    !category.is_soon && (
       <div className="my-24">
-        <div className={"flex flex-row justify-between items-center gap-4 mb-4"}>
-          <h2 className="highlight-heading !text-left !text-2xl">{category.name}</h2>
+        <div
+          className={"flex flex-row justify-between items-center gap-4 mb-4"}
+        >
+          <h2 className="highlight-heading !text-left !text-2xl">
+            {category.name}
+          </h2>
           <span
             className={"text-text flex flex-row gap-2 cursor-pointer"}
             onClick={() => handleMoveRoute(category)}
@@ -82,7 +86,7 @@ const ProductsScroller = ({ category }) => {
             ))}
         </Carousel>
       </div>
-    </>
+    )
   );
 };
 

@@ -29,13 +29,14 @@ export default function AllTherapyList({ isConsultant }) {
                 href={`${therapyNav.parentSlug}/${subItem.slug}/`}
               >
                 <li className="list-none flex flex-col gap-5 rounded-lg overflow-hidden">
-                  <div className="flex rounded-lg overflow-hidden h-64 w-full bg-white">
+                  <div className="aspect-[1/1] w-full rounded-lg overflow-hidden bg-[--base]">
                     <img
-                      src={subItem.image || NoImageAvailabe}
+                      src={subItem?.thumbnail_image || NoImageAvailabe}
                       alt={subItem.uid}
-                      className="object-cover w-full h-full"
+                      className="object-contain w-full h-full"
                     />
                   </div>
+
                   <div>
                     <p className="section-title">{subItem.name}</p>
                     <p

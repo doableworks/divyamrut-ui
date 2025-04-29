@@ -63,13 +63,14 @@ export default function ConsultationLanding({ data }) {
       </div>
 
       {data?.consultation_benifit?.length > 0 && (
-        <ConsultHighlight highlights={data.consultation_benifit} />
+        <ConsultHighlight
+          highlights={data.consultation_benifit}
+          title={data?.title}
+        />
       )}
 
       {data?.consultation_technique?.length > 0 && (
-        <ConsaltationTech
-          details={data.consultation_technique}
-        />
+        <ConsaltationTech details={data.consultation_technique} />
       )}
 
       <div className="common_page_width">

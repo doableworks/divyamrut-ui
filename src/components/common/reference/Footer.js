@@ -46,16 +46,19 @@ export default function Footer() {
         <div>
           <p className="text-lg font-semibold mb-8">Products</p>
           <ul className="space-y-5">
-            {productItems?.subMenu?.map((each, index) => (
-              <li key={index}>
-                <Link
-                  href={`/products/${each.slug}`}
-                  className="text-sm hover:underline"
-                >
-                  {each.name}
-                </Link>
-              </li>
-            ))}
+            {productItems?.subMenu?.map(
+              (each, index) =>
+                !each.is_soon && (
+                  <li key={index}>
+                    <Link
+                      href={`/products/${each.slug}`}
+                      className="text-sm hover:underline"
+                    >
+                      {each.name}
+                    </Link>
+                  </li>
+                )
+            )}
           </ul>
         </div>
         <div>

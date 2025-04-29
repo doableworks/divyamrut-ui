@@ -28,7 +28,7 @@ const offers = [
     feedback:
       "A comprehensive approach to find an optimum health plan by curating a tailored made package by working one on one to discover what would work best for you.",
     image:
-      "https://register.nityanava.com/media/uploads/public/images/25549b10-ebc1-49df-a92d-25870b876909.jpg",
+      "https://register.nityanava.com/media/uploads/public/images/0966e7c8-64a6-4495-bf2c-9a0a7dd334f2.jpg",
   },
   {
     name: "Wellness Products",
@@ -49,7 +49,7 @@ const offers = [
     feedback:
       "A community to support and inspire each other to achieve holistic well-being. Bi-monthly sessions by field experts to impart knowledge and formulas to hasten the healing process with fun and enthusiasm",
     image:
-      "https://register.nityanava.com/media/uploads/public/images/25549b10-ebc1-49df-a92d-25870b876909.jpg",
+      "https://register.nityanava.com/media/uploads/public/images/79bdc063-3000-4684-b708-ab53774009f5.jpg",
   },
   {
     name: "Corporate Experiences",
