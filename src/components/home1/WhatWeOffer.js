@@ -13,6 +13,8 @@ const offers = [
     name: "Transformational Health Coaching",
     feedback:
       "A safe space to open up and discuss all your health concerns in depth for us to help you discover the root cause based in your emotions.",
+    image:
+      "https://register.nityanava.com/media/uploads/public/images/25549b10-ebc1-49df-a92d-25870b876909.jpg",
   },
   {
     name: "Varied Holistic Therapies",
@@ -41,15 +43,18 @@ const offers = [
   },
   {
     name: "Corporate Experiences",
-    feedback: "Uplifting experiences for teams and groups to create awareness and bring into experience the importance of holistic health in achieving work life balance for an overall healthy and happy life. We also design customised plans based on needs of your organisation.",
+    feedback:
+      "Uplifting experiences for teams and groups to create awareness and bring into experience the importance of holistic health in achieving work life balance for an overall healthy and happy life. We also design customised plans based on needs of your organisation.",
   },
   {
     name: "⁠Luxury Wellness Holidays",
-    feedback: "Luxury in real essence is to enjoy life with a health body and happy mind. Invest in health by soaking in holistic therapies, yoga and meditation while enjoying luxurious stay at tranquil and serene environments for a complete rejuvenation of your mind body and soul.",
+    feedback:
+      "Luxury in real essence is to enjoy life with a health body and happy mind. Invest in health by soaking in holistic therapies, yoga and meditation while enjoying luxurious stay at tranquil and serene environments for a complete rejuvenation of your mind body and soul.",
   },
   {
     name: "Social Responsibility",
-    feedback: "Committed to creating positive impact through sustainable practices, community engagement, and supporting initiatives that drive environmental and social change.",
+    feedback:
+      "We pay forward with gratefulness for all that the nature has been providing to us. We donate a portion of our proceeds to forward projects for women empowerment, to enhance spiritual literacy in mankind and provide free coaching for mental well-being to socially & financially deprived communities in various parts of India.",
   },
 ];
 
@@ -71,7 +76,7 @@ const WhatWeOffer = () => {
                   {testimonial.name}
                 </p>
                 <Image
-                  src={NoImageAvailabe}
+                  src={testimonial?.image || NoImageAvailabe}
                   width={180}
                   height={150}
                   alt={testimonial?.name}

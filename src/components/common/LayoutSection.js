@@ -30,7 +30,7 @@ export const LayoutSection = ({
     { label: "About Us", path: "/about-us" },
     {
       label: "Consultations",
-      path: "/consultations",
+      path: "#",
       parentSlug: "/consultations",
       subMenu: navbarAPIitems?.consultation,
     },
