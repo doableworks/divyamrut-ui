@@ -4,7 +4,7 @@ const AboutFounder = () => {
   return (
     <div className="common_page_width !space-y-6 !p-5">
       <p className="highlight-heading !text-left">About the Founder:</p>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6">
         <div>
           <p className="section-content !text-justify">
             A passionate explorer of both the outer world and the inner space,
@@ -34,13 +34,7 @@ const AboutFounder = () => {
             Mumbai.
           </p>
         </div>
-        <div
-          className="bg-white h-96 w-full rounded-md bg-center bg-cover"
-          style={{
-            backgroundImage:
-              "url(https://register.nityanava.com/media/uploads/public/images/bb27840a-aa06-4d9a-8cda-2366b6a49db6_cs9vIAq.webp)",
-          }}
-        ></div>
+        
       </div>
 
       <p className="section-content !text-left !mt-4">

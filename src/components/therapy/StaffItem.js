@@ -22,7 +22,7 @@ export default function StaffItem({
       )}
     >
       <Image
-        src={NoProfileImage}
+        src={detail?.image || NoProfileImage}
         alt={detail.id}
         height={100}
         width={100}

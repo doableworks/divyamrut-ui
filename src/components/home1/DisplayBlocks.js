@@ -44,7 +44,7 @@ export default function DisplayBlocks() {
         {blockItems?.map((block, index) => (
           <a
             key={index}
-            href={block?.slug}
+            href={block?.url}
             className="relative group p-3"
           >
             <div className="aspect-square w-full relative rounded-lg overflow-hidden">

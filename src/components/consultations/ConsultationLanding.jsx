@@ -40,7 +40,7 @@ export default function ConsultationLanding({ data }) {
               onClick={handleChangeConsultationModal}
               className="site-button-primary !mt-6 !hidden md:!inline !capitalize"
             >
-              Book A Session
+              Book a Consultation
             </button>
           </figure>
           <section className="relative lg:h-[550px]">
@@ -56,7 +56,7 @@ export default function ConsultationLanding({ data }) {
               onClick={handleChangeConsultationModal}
               className="site-button-primary w-full md:!hidden h-[60px] !capitalize"
             >
-              Book A Session
+              Book a Consultation
             </button>
           </section>
         </div>

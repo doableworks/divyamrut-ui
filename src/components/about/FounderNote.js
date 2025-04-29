@@ -10,7 +10,7 @@ const FounderNote = () => {
             className="bg-white h-96 w-full rounded-md bg-center bg-cover"
             style={{
               backgroundImage:
-                "url(https://register.nityanava.com/media/uploads/public/images/bb27840a-aa06-4d9a-8cda-2366b6a49db6.webp)",
+                "url(https://register.nityanava.com/media/uploads/public/images/a1fc9401-fa3b-4f65-919a-4f199a3313cd_w41CKu5.jpg)",
             }}
           ></div>
           <div>

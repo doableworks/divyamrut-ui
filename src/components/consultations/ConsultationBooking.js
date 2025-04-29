@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Select, Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import "@/components/therapy/therapy.css";
+import { toggleBookingModal } from "@/redux/feature/therapySlice";
+import "../therapy/therapy.css";
 import CustomSteps from "@/components/steps/index";
 import StaffItem, { NoStaffAvailabe } from "../therapy/StaffItem";
 import { message } from "antd";
@@ -27,6 +28,8 @@ import CustomButton from "../common/CustomButton";
 import { toggleConsultationModal } from "@/redux/feature/consultationSlice";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+const allowedStatuses = ["wait", "process", "finish", "error"];
 
 const stepsTherapyBooking = [
   {
@@ -93,7 +96,7 @@ const initialTimeSlots = [
   },
 ];
 
-export default function ConsultationBooking() {
+export default function BookingModal() {
   const { data: session, status } = useSession();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -121,14 +124,7 @@ export default function ConsultationBooking() {
   const [orderDetails, setOrderDetails] = useState(null);
   const [countryList, setCountryList] = useState([]);
   const [stateList, setStateList] = useState([]);
-  const [cityList, setCityList] = useState([
-    {
-      code: "BLR",
-      label: "Banglore",
-      value: "Banglore",
-    },
-    { code: "BOM", label: "Mumbai", value: "Mumbai" },
-  ]);
+  const [cityList, setCityList] = useState([]);
 
   const [selectedCountry, setSelectedCountry] = useState({
     code: "IND",
@@ -168,6 +164,10 @@ export default function ConsultationBooking() {
     }
   };
 
+  const decreaseActiveStep = () => {
+    setActiveStep(activeStep - 1);
+  };
+
   const handleCancelBookingModal = () => {
     setActiveStep(0);
 
@@ -195,38 +195,21 @@ export default function ConsultationBooking() {
   const logModalInfomation = async () => {
     setIsLoading(true);
     try {
-      const url = `${apiUrl}/therapy/book-appointment/`;
-
-      // const body = {
-      //   therapist_id: selectedStaff.uid,
-      //   date: selectedTimeSlot.date,
-      //   start_time: selectedTimeSlot.start_time_format,
-      //   end_time: selectedTimeSlot.end_time_format,
-      //   first_name: filledUserDetails.firstname,
-      //   last_name: filledUserDetails.lastname,
-      //   email: filledUserDetails.email,
-      //   phone_no: filledUserDetails.phoneNumber,
-      //   slug: currentPath[2],
-      //   country: selectedCountry.value,
-      //   state: selectedState.value,
-      //   city: selectedCity.value,
-      //   no_of_therapies: noOfTherapiesSelected,
-      // };
+      const url = `${apiUrl}/consultation/consultant-appointment/`;
 
       const body = {
-        therapist_id: "a7142ebb-f418-46fe-b4ea-c80cd2f94d49",
-        date: "2025-04-24",
-        start_time: "12:00 PM",
-        end_time: "01:00 PM",
-        first_name: "Shubham",
-        last_name: "Arora",
-        email: "samaroraytb@gmail.com",
-        phone_no: "+917989989898",
-        slug: "cranio-sacral-therapy",
-        country: "India",
-        state: "Bihar",
-        city: "Patna",
-        no_of_therapies: 1,
+        consultant_id: selectedStaff.uid,
+        date: selectedTimeSlot.date,
+        start_time: selectedTimeSlot.start_time_format,
+        end_time: selectedTimeSlot.end_time_format,
+        first_name: filledUserDetails.firstname,
+        last_name: filledUserDetails.lastname,
+        email: filledUserDetails.email,
+        phone_no: filledUserDetails.phoneNumber,
+        slug: currentPath[2],
+        country: selectedCountry.value,
+        city: selectedCity.label,
+        no_of_consultant: noOfTherapiesSelected,
       };
 
       if (couponApply.couponCode) {
@@ -266,7 +249,7 @@ export default function ConsultationBooking() {
     try {
       const month = currentMonth.month() + 1;
       const year = currentMonth.year();
-      const url = `${apiUrl}/therapy/therapist/availability/${selectedStaff.uid}/`;
+      const url = `${apiUrl}/consultation/consultant/availability/${selectedStaff.uid}/`;
 
       const body = {
         year: year,
@@ -349,7 +332,6 @@ export default function ConsultationBooking() {
         try {
           await form.validateFields();
           const userLocation = form.getFieldsValue();
-          console.log(userLocation);
           increaseActiveStep();
         } catch (error) {
           console.error("Validation failed:", error);
@@ -418,42 +400,18 @@ export default function ConsultationBooking() {
   const fetchTherapyStaffList = async () => {
     setIsLoading(true);
     try {
-      // const url = `${apiUrl}/therapy/therapy-profile/`;
+      const url = `${apiUrl}/consultation/consultation-profile/`;
 
-      // const body = {
-      //   slug: currentPath[2],
-      //   country: selectedCountry.value,
-      //   state: selectedState.value,
-      //   city: selectedCity.value,
-      // };
+      const body = {
+        slug: currentPath[2],
+        location_uid: selectedCity.code,
+      };
 
-      // const response = await axios.post(url, body, {
-      //   cache: "no-store",
-      // });
+      const response = await axios.post(url, body, {
+        cache: "no-store",
+      });
 
-      // const data = response.data;
-      const data = [
-        {
-          uid: "ffa21be6-940f-4fca-9dde-8813f8d693c5",
-          user_email: "nityanavatherapiest@gmail.com",
-          user_firstname: "Dr. Rashmi",
-          user_lastname: "Singh",
-          image: null,
-          gender: "Female",
-          address:
-            "Bittu Panni Wale, Ram Vihar Colony, Near by Naina Beauty Parlor\r\nNear By New Raghav Puram\r\nBittu Panni Wale",
-          therapist_identity: "DIVN236736",
-          description:
-            "<p>Craniosacral therapist and Somatic Experiencing Practitioner (SEP)</p>",
-          phone_no: "09997678477",
-          is_active: true,
-          created_at: "2025-01-28T13:54:55.782131+05:30",
-          updated_at: "2025-04-23T12:44:53.322771+05:30",
-          country: "India",
-          state: "Bihar",
-          city: "Patna",
-        },
-      ];
+      const data = response.data;
       setTherapyStaffList(data);
     } catch (err) {
       console.log(err);
@@ -501,10 +459,7 @@ export default function ConsultationBooking() {
     setIsLoading(true);
     try {
       const response = await axios.get(`${apiUrl}/api/states/${countryCode}/`);
-      const stateData = response.data.filter(
-        (each) => each.code === "KA" || each.code === "MH"
-      );
-      setStateList(stateData);
+      setStateList(response.data);
     } catch (error) {
       notification.error({
         message: "Failed to Load States",
@@ -518,14 +473,13 @@ export default function ConsultationBooking() {
   const fetchCitiesData = async (countryCode, stateCode) => {
     setIsLoading(true);
     try {
-      const response = await axios.get(
-        `${apiUrl}/api/cities/${countryCode}/${stateCode}/`
-      );
-      console.log(response.data);
-      const cityData = response.data.filter(
-        (each) => each.code === "BLR" || each.code === "BOM"
-      );
-      setCityList(cityData);
+      const response = await axios.get(`${apiUrl}/api/locations/`);
+      const data = await response.data.map((each) => ({
+        label: each.name,
+        value: each.uid,
+        code: each.uid,
+      }));
+      setCityList(data);
     } catch (error) {
       notification.error({
         message: "Failed to Load Cities",
@@ -571,7 +525,7 @@ export default function ConsultationBooking() {
       form.setFieldsValue({
         country: selectedCountry.value,
       });
-      fetchStatesData(selectedCountry.code);
+      fetchCitiesData(selectedCountry.code);
     } else if (isBookingModal && activeStep === 1) {
       form.setFieldsValue({
         therapiesNumber: 1,
@@ -611,48 +565,25 @@ export default function ConsultationBooking() {
     try {
       const url = `${apiUrl}/payment/create-order/`;
 
-      // const body = {
-      //   amount: confirmationDetails.allotment_info.therapy_price,
-      //   receipt: "Therapy",
-      //   currency: "INR",
-      //   notes: {
-      //     user_email: session?.user?.user?.email || "",
-      //     email: filledUserDetails.email,
-      //     therapist_id: selectedStaff.uid,
-      //     therapy_slug: currentPath[2],
-      //     date: selectedTimeSlot.date,
-      //     start_time: selectedTimeSlot.start_time_format,
-      //     end_time: selectedTimeSlot.end_time_format,
-      //     first_name: filledUserDetails.firstname,
-      //     last_name: filledUserDetails.lastname,
-      //     phone_no: filledUserDetails.phoneNumber,
-      //     user_appointment_id: confirmationDetails.appointment_id,
-      //     country: selectedCountry.value,
-      //     state: selectedState.value,
-      //     city: selectedCity.value,
-      //     no_of_therapies: filledUserDetails.therapiesNumber,
-      //   },
-      // };
-
       const body = {
-        amount: 4000,
-        receipt: "Therapy",
+        amount: confirmationDetails.allotment_info.consultant_price,
+        receipt: "Consultant",
         currency: "INR",
         notes: {
-          user_email: "",
-          email: "samaroraytb@gmail.com",
-          therapist_id: "a7142ebb-f418-46fe-b4ea-c80cd2f94d49",
-          therapy_slug: "cranio-sacral-therapy",
-          date: "2025-04-24",
-          start_time: "12:00 PM",
-          end_time: "01:00 PM",
-          first_name: "Shubham",
-          last_name: "Arora",
-          phone_no: "+917989989898",
-          user_appointment_id: "eaad3ec5-4235-4de9-8e0a-c24cf2e3ebc4",
-          country: "India",
-          state: "Bihar",
-          city: "Patna",
+          user_email: session?.user?.user?.email || "",
+          email: filledUserDetails.email,
+          consultant_id: selectedStaff.uid,
+          consultation_slug: currentPath[2],
+          date: selectedTimeSlot.date,
+          start_time: selectedTimeSlot.start_time_format,
+          end_time: selectedTimeSlot.end_time_format,
+          first_name: filledUserDetails.firstname,
+          last_name: filledUserDetails.lastname,
+          phone_no: filledUserDetails.phoneNumber,
+          consultaions_uid: confirmationDetails.appointment_id,
+          country: selectedCountry.value,
+          city: selectedCity.label,
+          no_of_consultations: filledUserDetails.therapiesNumber,
         },
       };
 
@@ -718,7 +649,7 @@ export default function ConsultationBooking() {
             });
             dispatch(toggleConsultationModal(false));
             router.push(
-              `/payment-status?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}&order_type=Therapy`
+              `/payment-status?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}&order_type=Consultant`
             );
           } else {
             console.log("Payment Failed or Cancelled:", response);
@@ -834,7 +765,7 @@ export default function ConsultationBooking() {
               <div className="space-y-6">
                 <Form.Item
                   name="country"
-                  label="Country"
+                  label="Select Country"
                   rules={[
                     { required: true, message: "Please select a country" },
                   ]}
@@ -880,7 +811,6 @@ export default function ConsultationBooking() {
                   <Select
                     style={{ height: "48px" }}
                     placeholder="Select a city"
-                    // disabled={!selectedState}
                     onChange={handleCityChange}
                   >
                     {cityList.map((item) => (
@@ -1091,24 +1021,27 @@ export default function ConsultationBooking() {
                   <p className="section-content !text-left">
                     Date & Time:{" "}
                     <span className="section-content !text-left !text-[--neutral] font-bold">
-                      {confirmationDetails?.allotment_info?.therapy_date}
+                      {confirmationDetails?.allotment_info?.consultant_date}
                     </span>{" "}
                     <span className="section-content !text-left !text-[--neutral] font-bold">
-                      {confirmationDetails?.allotment_info?.therapy_start_time}
+                      {
+                        confirmationDetails?.allotment_info
+                          ?.consultant_start_time
+                      }
                     </span>
                   </p>
 
                   <p className="section-content !text-left">
-                    Therapiest:{" "}
+                    Consultant:{" "}
                     <span className="section-content !text-left !text-[--neutral] font-bold">
-                      {confirmationDetails?.allotment_info?.therapist_name}
+                      {confirmationDetails?.allotment_info?.consultant_name}
                     </span>
                   </p>
 
                   <p className="section-content !text-left">
                     Service:{" "}
                     <span className="section-content !text-left !text-[--neutral] font-bold">
-                      {confirmationDetails?.allotment_info?.therapy_name}
+                      {confirmationDetails?.allotment_info?.consultant_name}
                     </span>
                   </p>
                 </div>
@@ -1173,9 +1106,10 @@ export default function ConsultationBooking() {
                   <div className="flex justify-between">
                     <p>Price:</p>
                     <p>
-                      {confirmationDetails?.allotment_info?.therapy_price
+                      {confirmationDetails?.allotment_info?.consultant_price
                         ? parseFloat(
-                            confirmationDetails?.allotment_info?.therapy_price
+                            confirmationDetails?.allotment_info
+                              ?.consultant_price
                           ).toFixed(2)
                         : "0.00"}
                     </p>
@@ -1196,9 +1130,10 @@ export default function ConsultationBooking() {
                   <div className="flex justify-between font-jost text-xl">
                     <p>Total:</p>
                     <p>
-                      {confirmationDetails?.allotment_info?.therapy_price
+                      {confirmationDetails?.allotment_info?.consultant_price
                         ? parseFloat(
-                            confirmationDetails?.allotment_info?.therapy_price
+                            confirmationDetails?.allotment_info
+                              ?.consultant_price
                           ).toFixed(2)
                         : "0.00"}
                       /-
@@ -1297,7 +1232,7 @@ export default function ConsultationBooking() {
               ) : activeStep === 1 ? (
                 <div className="flex justify-between items-center gap-4 w-full">
                   <div className="flex flex-wrap gap-2 items-center">
-                    <p className="text-sm text-[--voilet]">No.of Therapies</p>
+                    <p className="text-sm text-[--voilet]">No.of Consultant</p>
                     <Form.Item
                       name="therapiesNumber"
                       rules={[

@@ -107,13 +107,14 @@ const Page = () => {
             />
           </div>
 
-          {order_type === "Therapy" ? (
+          {order_type === "Therapy" || order_type === "Consultant" ? (
             <>
               <h2 className="text-2xl font-bold text-[#45b29d] mt-4">
                 🌿 Your Session is Scheduled!
               </h2>
               <p className="mt-2 text-gray-700 text-base">
-                You've successfully booked a session with our therapist. Please
+                You've successfully booked a session with our{" "}
+                {order_type === "Therapy" ? "therapist" : "consultant"}. Please
                 be available on time to avoid any inconvenience. Booking details
                 will appear in your profile shortly.
               </p>
