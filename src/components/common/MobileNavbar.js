@@ -110,6 +110,9 @@ const MobileNavbar = ({
                         handleAction(
                           item?.parentSlug == "/products"
                             ? `/products/${subItem.slug}`
+                            : item?.parentSlug == "/consultations" &&
+                            subItem.is_soon
+                            ? "#"
                             : `${item.parentSlug}/${subItem.slug}/`
                         )
                       }

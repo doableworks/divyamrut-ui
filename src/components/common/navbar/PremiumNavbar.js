@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { SearchOutlined, CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import "./styles.css";
 import Link from "next/link";
@@ -279,7 +279,11 @@ export default function PremiumNavbar({ scrollNum }) {
                   {isSubMenu.subMenu.map((sub, index) => (
                     <Link
                       href={
-                        isSubMenu?.parentSlug == "/products" ? `/products/${sub.slug}`
+                        isSubMenu?.parentSlug == "/products"
+                          ? `/products/${sub.slug}`
+                          : isSubMenu?.parentSlug == "/consultations" &&
+                            sub.is_soon
+                          ? "#"
                           : `${isSubMenu.parentSlug}/${sub.slug}/`
                       }
                       key={index}

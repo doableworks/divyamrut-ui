@@ -82,6 +82,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   const navbarAPIItems = await getNavbarItems();
   const displayBlockItems = await getDisplayBlocks();
 
+  console.log("navbarAPIItems", navbarAPIItems)
+
   return (
     <html lang="en">
       <body

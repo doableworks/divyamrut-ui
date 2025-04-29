@@ -8,21 +8,24 @@ import { Grid, Carousel } from "antd";
 
 const initialTestimonial = [
   {
-    name: "Radhika Sharma",
+    name: "Shreya Agarwal",
+    designation: "Teacher | Social Worker",
     description:
-      "I had chronic back pain for years, but after a few Meru Therapy sessions, I feel lighter and more mobile than ever. The practitioners at Nityanava truly understand the body!",
+      "Once I had BCST with Nikita, I felt emotionally balanced, lighter, and embodied. I noticed the stress in my diaphragm and legs disappear, and it felt like I had my life again.",
     image: null,
   },
   {
-    name: "Amit Verma",
+    name: "Leela",
+    designation: "Meditation Instructor | Social Worker",
     description:
-      "Marma Therapy at Nityanava was a deeply healing experience. I left every session feeling relaxed and rejuvenated. It helped me manage stress in a very natural way.",
+      "With BCST, I could relax both my mind and my body. After the sessions I felt stronger and my energy went up and also my breast cyst got much smaller.",
     image: null,
   },
   {
-    name: "Sneha Pillai",
+    name: "Poonam A",
+    designation: "Entrepreneur | Mother",
     description:
-      "I was new to holistic healing but Meru Therapy really changed how I feel. My posture has improved, and I feel more aligned both physically and mentally.",
+      "Nikita's BCST sessions assisted me in dealing with my sleep problems and worry. Just after three sessions, I could sleep naturally without medication and I felt very mentally stable.",
     image: null,
   },
 ];
