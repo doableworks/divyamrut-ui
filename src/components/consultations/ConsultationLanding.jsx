@@ -68,7 +68,6 @@ export default function ConsultationLanding({ data }) {
 
       {data?.consultation_technique?.length > 0 && (
         <ConsaltationTech
-          title="combination of techniques"
           details={data.consultation_technique}
         />
       )}
