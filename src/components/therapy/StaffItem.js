@@ -32,7 +32,7 @@ export default function StaffItem({
         <p className="font-semibold text-sm font-poppins text-[--neutral] text-center mt-1 capitalize">
           {detail?.user_firstname} {detail?.user_lastname}
         </p>
-        <p className="text-[10px] font-normal uppercase font-poppins text-center text-gray-500">
+        {/* <p className="text-[10px] font-normal uppercase font-poppins text-center text-gray-500">
           EXECUTIVE CHAIRMAN FORTIS C DOC | Fortis C-Doc
         </p>
         <div className="text-gray-600 flex gap-2 items-center justify-center">
@@ -41,12 +41,12 @@ export default function StaffItem({
             <span className="font-semibold">5+ Years</span>
             {" "}Experience
           </p>
-        </div>
+        </div> */}
       </div>
-      <p
+      {detail?.description && <p
         className="text-gray-500 font-poppins font-medium text-[10px] bg-[#fff6f0] p-2 mx-2 rounded-md my-2 text-center"
         dangerouslySetInnerHTML={{ __html: detail?.description }}
-      ></p>
+      ></p>}
     </li>
   );
 }

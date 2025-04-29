@@ -5,14 +5,7 @@ const FounderNote = () => {
     <section>
       <div className="common_page_width !space-y-6 !p-5">
         <p className="highlight-heading !text-left">Founder's Note</p>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div
-            className="bg-white h-96 w-full rounded-md bg-center bg-cover"
-            style={{
-              backgroundImage:
-                "url(https://register.nityanava.com/media/uploads/public/images/a1fc9401-fa3b-4f65-919a-4f199a3313cd_w41CKu5.jpg)",
-            }}
-          ></div>
+        <div className="grid grid-cols-1 gap-6">
           <div>
             <p className="section-content !text-justify">
               In early days of my masters in dental surgery, I came across a

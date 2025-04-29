@@ -44,16 +44,16 @@ const Product = ({ item, productCategory, session }) => {
           />
         </div>
 
-        <div className="flex flex-col gap-1 py-4 h-44 overflow-hidden">
+        <div className="flex flex-col gap-1 py-4 h-32 overflow-hidden">
           <h6 className="line-clamp-2 uppercase font-semibold text-sm text-[--neutral] font-poppins">
             {item?.name}
           </h6>
-          <p
+          {/* <p
             className="line-clamp-3 text-[12px] text-gray-500 font-extralight font-poppins"
             dangerouslySetInnerHTML={{ __html: item?.description }}
-          />
+          /> */}
           <p className="line-clamp-2 uppercase font-semibold text-lg mt-4 text-[--neutral] font-poppins">
-            {item?.currency == "USD" ? "$" : "₹"}&nbsp;{item?.price}
+            ₹&nbsp;{item?.price}
           </p>
         </div>
       </button>

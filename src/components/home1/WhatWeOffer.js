@@ -42,7 +42,7 @@ const offers = [
     feedback:
       "Incorporating the transformative path of Yoga and Meditation practices with knowledge of medical science to deliver health and well-being at atomic as well as causal levels.",
     image:
-      "https://register.nityanava.com/media/uploads/public/images/25549b10-ebc1-49df-a92d-25870b876909.jpg",
+      "https://register.nityanava.com/media/uploads/public/images/183ea419-eeb1-4516-94a1-4c58e816e277.jpg",
   },
   {
     name: "Sacred Support Group",
@@ -63,14 +63,14 @@ const offers = [
     feedback:
       "Luxury in real essence is to enjoy life with a health body and happy mind. Invest in health by soaking in holistic therapies, yoga and meditation while enjoying luxurious stay at tranquil and serene environments for a complete rejuvenation of your mind body and soul.",
     image:
-      "https://register.nityanava.com/media/uploads/public/images/25549b10-ebc1-49df-a92d-25870b876909.jpg",
+      "https://register.nityanava.com/media/uploads/public/images/148784db-ee8f-40e7-96a2-961ce66cb4c1.jpg",
   },
   {
     name: "Social Responsibility",
     feedback:
       "We pay forward with gratefulness for all that the nature has been providing to us. We donate a portion of our proceeds to forward projects for women empowerment, to enhance spiritual literacy in mankind and provide free coaching for mental well-being to socially & financially deprived communities in various parts of India.",
     image:
-      "https://register.nityanava.com/media/uploads/public/images/25549b10-ebc1-49df-a92d-25870b876909.jpg",
+      "https://register.nityanava.com/media/uploads/public/images/1b5ba315-3856-4475-87c7-d2bd4859231b.jpg",
   },
 ];
 
@@ -91,13 +91,15 @@ const WhatWeOffer = () => {
                 <p className="col-span-8 p-4 section-title !capitalize !flex !justify-center !items-center !text-[--yellow]">
                   {testimonial.name}
                 </p>
-                <Image
-                  src={testimonial?.image || NoImageAvailabe}
-                  width={180}
-                  height={150}
-                  alt={testimonial?.name}
-                  className="rounded-bl-[4rem] w-full h-full col-span-4"
-                  objectFit="cover"
+                <div
+                  className="rounded-bl-[4rem] w-full h-full col-span-4 bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url(${
+                      testimonial?.image || NoImageAvailabe
+                    })`,
+                  }}
+                  role="img"
+                  aria-label={testimonial?.name}
                 />
               </div>
 

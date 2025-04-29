@@ -5,10 +5,6 @@ import { useSelector } from "react-redux";
 
 const quickLinkItems = [
   {
-    name: "Social Responsibility",
-    slug: "/social-responsibility",
-  },
-  {
     name: "Shipping Policy",
     slug: "/shipping-policy",
   },
@@ -113,11 +109,11 @@ export default function Footer() {
               </a>
               <a
                 target="_blank"
-                href="https://wa.me/916377717747"
+                href="https://wa.me/919833172105"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2"
               >
-                <span>+91-6377717747</span>
+                <span>+91-9833172105</span>
               </a>
             </li>
             <li className="text-sm hover:underline">

@@ -279,11 +279,10 @@ export default function PremiumNavbar({ scrollNum }) {
                   {isSubMenu.subMenu.map((sub, index) => (
                     <Link
                       href={
-                        isSubMenu?.parentSlug == "/products"
-                          ? `/products/${sub.slug}`
-                          : isSubMenu?.parentSlug == "/consultations" &&
-                            sub.is_soon
+                        sub.is_soon
                           ? "#"
+                          : isSubMenu?.parentSlug == "/products"
+                          ? `/products/${sub.slug}`
                           : `${isSubMenu.parentSlug}/${sub.slug}/`
                       }
                       key={index}
