@@ -22,6 +22,7 @@ const ProductsScroller = ({ category }) => {
     router.push(`/products/${cate.slug}`);
   };
 
+
   return (
     !category.is_soon && (
       <div className="my-24">

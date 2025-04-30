@@ -34,7 +34,7 @@ const Product = ({ item, productCategory, session }) => {
         }
         className="text-left"
       >
-        <div className="h-64 rounded-xl overflow-hidden bg-white flex justify-center items-center">
+        <div className="aspect-square rounded-xl overflow-hidden bg-[--base] flex justify-center items-center">
           <Image
             src={item?.image ? item?.image : NoImageAvailabe}
             width={100}

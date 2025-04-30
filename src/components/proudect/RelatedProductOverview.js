@@ -42,7 +42,7 @@ const RelatedProductOverview = ({
         onClick={() =>
           router.push(`/products/${productCategory}/${item.slug}`)
         }
-        className="bg-white w-full h-48 rounded-xl overflow-hidden mb-4"
+        className="bg-[--base] aspect-square w-full h-48 rounded-xl overflow-hidden mb-4"
       >
         <Image
           src={item?.image ? item?.image : NoImageAvailabe}
