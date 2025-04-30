@@ -72,7 +72,7 @@ const ProductsScroller = ({ category }) => {
         >
           {category &&
             category?.products.map((product, index) => (
-              <div key={index + category?.name} className={`h-full pl-[20px] `}>
+              <div key={index + category?.name} className={`h-full p-2`}>
                 <Product
                   key={index}
                   item={product}

@@ -35,12 +35,11 @@ const Product = ({ item, productCategory, session }) => {
         className="text-left"
       >
         <div className="aspect-square rounded-xl overflow-hidden bg-[--base] flex justify-center items-center">
-          <Image
+          <img
             src={item?.image ? item?.image : NoImageAvailabe}
-            width={100}
-            height={100}
             className="w-full h-full object-contain"
             alt={item?.name}
+            loading="lazy"
           />
         </div>
 

@@ -14,11 +14,11 @@ const ImageMedium = ({ imgSrc }) => {
 
   return (
     <ControlledZoom isZoomed={isZoomed} onZoomChange={handleZoom}>
-      <Image
+      <img
         alt="img"
         src={imgSrc ? imgSrc : NoImageAvailabe}
         fill={true}
-        className="object-contain h-full w-full"
+        className="object-contain h-full w-full aspect-square"
       />
     </ControlledZoom>
   );
