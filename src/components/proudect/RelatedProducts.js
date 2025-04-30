@@ -2,6 +2,7 @@
 import RelatedProductSlider from "./RelatedProductSlider";
 import Divider from "../common/Divider";
 import { usePathname } from "next/navigation";
+
 const RelatedProduct = ({ slidesData, subCategory }) => {
   const pathname = usePathname();
   const productCategory = pathname.split("/");

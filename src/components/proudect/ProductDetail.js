@@ -26,7 +26,10 @@ const ProductDetail = ({ item }) => {
   const [isNotified, setIsNotified] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalLoading, setModalLoading] = useState(false);
+  const [hoverImage, setHoverImage] = useState(null);
   const [form] = Form.useForm();
+
+  console.log(item);
 
   const handleAddItem = async () => {
     try {
@@ -102,12 +105,13 @@ const ProductDetail = ({ item }) => {
     <>
       <div className="relative flex flex-col lg:flex-row gap-10 min-h-[80vh]">
         <div className="lg:sticky w-full self-start md:top-10 lg:w-1/2 flex flex-col items-center">
-        <div className="relative w-full aspect-square overflow-hidden rounded-xl bg-[--base] lg:w-[40vw]">
+          <div className="relative w-full aspect-square overflow-hidden rounded-xl bg-[--base] lg:w-[40vw]">
             <ImageMedium
+              id="main-preview-img"
               imgSrc={
-                item?.uploaded_images[selectedImage]?.image
-                  ? item?.uploaded_images[selectedImage]?.image
-                  : NoImageAvailabe
+                hoverImage ||
+                item?.uploaded_images[selectedImage]?.image ||
+                NoImageAvailabe
               }
             />
           </div>
@@ -136,12 +140,64 @@ const ProductDetail = ({ item }) => {
           <h1 className={twMerge("product_title", "mb-4")}>{item.name}</h1>
           <div className="mb-4">
             <p className="text-2xl font-semibold">
-              {item?.currency == "USD" ? "$" : "₹"}&nbsp;{item?.price}
+              ₹&nbsp;{item?.price}
               <span className="text-sm ml-2 font-normal">
                 (Inclusive of all taxes)
               </span>
             </p>
           </div>
+
+          {item.similar_products?.length > 0 && (
+            <div className="my-6">
+              <p className="section-title !text-left !mb-4 !normal-case">
+                Available Colors:
+              </p>
+              <div className="flex flex-row gap-3 overflow-x-auto narrow-scrollbar pb-2">
+                {item.similar_products.map((product, index) => (
+                  <div
+                    key={index}
+                    className="border border-gray-300 rounded-md overflow-hidden cursor-pointer flex-shrink-0 w-16 h-16 hover:border-slate-700"
+                    onMouseEnter={() => {
+                      if (product.image) {
+                        setHoverImage(product.image);
+                        SetSelectedImage(-1);
+                        const previewImg =
+                          document.getElementById("main-preview-img");
+                        if (previewImg) {
+                          previewImg.setAttribute("src", product.image);
+                        }
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      SetSelectedImage(0);
+                      setHoverImage(null);
+                      const previewImg =
+                        document.getElementById("main-preview-img");
+                      if (previewImg && item.uploaded_images?.[0]?.image) {
+                        previewImg.setAttribute(
+                          "src",
+                          item.uploaded_images[0].image
+                        );
+                      }
+                    }}
+                    onClick={() =>
+                      router.push(
+                        `/products/${product.category_slug}/${product.slug}`
+                      )
+                    }
+                  >
+                    <Image
+                      src={product.image || NoImageAvailabe}
+                      alt={`Color ${index}`}
+                      height={64}
+                      width={64}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="flex flex-col lg:flex-row gap-1 lg:gap-5">
             {parseInt(item.quantity) > 0 ? (

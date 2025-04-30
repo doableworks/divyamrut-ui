@@ -53,7 +53,7 @@ const RelatedProductOverview = ({
         />
       </button>
 
-      <section className="h-60 flex flex-col justify-between">
+      <section className="h-44 flex flex-col justify-between">
         <button
           type="button"
           onClick={() =>
@@ -63,18 +63,12 @@ const RelatedProductOverview = ({
           <p className="text-lg font-bold text-left line-clamp-2 group-hover:text-[--yellow]">
             {item?.name}
           </p>
-          <div className="flex gap-1 mt-4">
-            <Star h={15} w={15} fill={"#f0ad4e"} />
-            <Star h={15} w={15} fill={"#f0ad4e"} />
-            <Star h={15} w={15} fill={"#f0ad4e"} />
-            <Star h={15} w={15} fill={"#f0ad4e"} />
-            <Star h={15} w={15} fill={"#ccd6df"} />
-          </div>
+          
         </button>
 
         <div>
           <p className="font-semibold text-xl text-gray-500 text-left mt-3 mb-3">
-            {item?.currency == "Rs." ? "₹" : item?.currency}&nbsp;{item?.price}
+          ₹&nbsp;{item?.price}
           </p>
           <CustomButton
             htmlType="submit"

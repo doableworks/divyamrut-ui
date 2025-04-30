@@ -5,7 +5,7 @@ import { Controlled as ControlledZoom } from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import { NoImageAvailabe } from "@/contants/contants";
 
-const ImageMedium = ({ imgSrc }) => {
+const ImageMedium = ({ imgSrc, id }) => {
   const [isZoomed, setIsZoomed] = useState(false);
 
   const handleZoom = useCallback((shouldZoom) => {
@@ -15,6 +15,8 @@ const ImageMedium = ({ imgSrc }) => {
   return (
     <ControlledZoom isZoomed={isZoomed} onZoomChange={handleZoom}>
       <img
+        id={id}
+        key={imgSrc}
         alt="img"
         src={imgSrc ? imgSrc : NoImageAvailabe}
         fill={true}
