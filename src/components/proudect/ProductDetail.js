@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, { use, useEffect, useState } from "react";
 import CustomButton from "@/components/common/CustomButton";
 import ImageMedium from "./ImageMedium";
@@ -28,8 +27,6 @@ const ProductDetail = ({ item }) => {
   const [modalLoading, setModalLoading] = useState(false);
   const [hoverImage, setHoverImage] = useState(null);
   const [form] = Form.useForm();
-
-  console.log(item);
 
   const handleAddItem = async () => {
     try {
@@ -104,7 +101,7 @@ const ProductDetail = ({ item }) => {
   return (
     <>
       <div className="relative flex flex-col lg:flex-row gap-10 min-h-[80vh]">
-        <div className="lg:sticky w-full self-start md:top-10 lg:w-1/2 flex flex-col items-center">
+        <div className="lg:sticky w-full  md:top-10 lg:w-1/2 flex flex-col lg:flex-row-reverse items-center self-start lg:items-start gap-2">
           <div className="relative w-full aspect-square overflow-hidden rounded-xl bg-[--base] lg:w-[40vw]">
             <ImageMedium
               id="main-preview-img"
@@ -115,7 +112,7 @@ const ProductDetail = ({ item }) => {
               }
             />
           </div>
-          <div className="flex flex-row gap-2 w-full mt-8 overflow-x-auto narrow-scrollbar pb-2">
+          <div className="flex flex-row lg:flex-col gap-2 w-full lg:w-auto mt-8 lg:mt-0 overflow-x-auto lg:overflow-y-auto narrow-scrollbar pb-2 lg:pb-0 flex-shrink-0 lg:h-full">
             {item.uploaded_images.map((path, index) => (
               <div
                 key={index}
@@ -124,9 +121,7 @@ const ProductDetail = ({ item }) => {
                   selectedImage == index && "border-2 border-slate-700"
                 }`}
               >
-                <Image
-                  height={100}
-                  width={100}
+                <img
                   src={path?.image ? path?.image : NoImageAvailabe}
                   alt={`Thumbnail ${index}`}
                   className="w-full h-full object-contain"
@@ -146,64 +141,69 @@ const ProductDetail = ({ item }) => {
               </span>
             </p>
           </div>
-
+          
           {item.similar_products?.length > 0 && (
             <div className="mb-4">
               <p className="section-title !text-left !my-3 !normal-case">
                 Available Colors:
               </p>
-              <div className="flex flex-row gap-3 overflow-x-auto narrow-scrollbar pb-2">
-                {[item, ...item.similar_products].map((product, index) => {
+              <div className="flex flex-row items-center gap-4 overflow-x-auto narrow-scrollbar pb-2">
+                {[...item.similar_products, item].map((product, index) => {
                   const isCurrentProduct = product.uid === item.uid;
                   return (
                     <div
                       key={index}
-                      className={twMerge(
-                        "border rounded-md overflow-hidden cursor-pointer flex-shrink-0 w-16 h-16 hover:border-slate-700",
-                        isCurrentProduct
-                          ? "border-2 border-[--yellow] p-1 cursor-not-allowed"
-                          : "border-gray-300"
-                      )}
-                      onMouseEnter={() => {
-                        if (!isCurrentProduct && product.image) {
-                          setHoverImage(product.image);
-                          SetSelectedImage(-1);
-                          const previewImg =
-                            document.getElementById("main-preview-img");
-                          if (previewImg) {
-                            previewImg.setAttribute("src", product.image);
-                          }
-                        }
-                      }}
-                      onMouseLeave={() => {
-                        if (!isCurrentProduct) {
-                          SetSelectedImage(0);
-                          setHoverImage(null);
-                          const previewImg =
-                            document.getElementById("main-preview-img");
-                          if (previewImg && item.uploaded_images?.[0]?.image) {
-                            previewImg.setAttribute(
-                              "src",
-                              item.uploaded_images[0].image
+                      className="flex flex-col gap-2 items-center justify-center text-center w-20"
+                    >
+                      <div
+                        className={twMerge(
+                          "border rounded-md overflow-hidden cursor-pointer flex-shrink-0 hover:border-slate-700",
+                          isCurrentProduct
+                            ? "border-2 border-[--yellow] p-1 cursor-not-allowed shadow-md w-16 h-16"
+                            : "border-gray-300 w-14 h-14"
+                        )}
+                        onClick={() => {
+                          if (!isCurrentProduct) {
+                            router.push(
+                              `/products/${product.category_slug}/${product.slug}`
                             );
                           }
-                        }
-                      }}
-                      onClick={() => {
-                        if (!isCurrentProduct) {
-                          router.push(
-                            `/products/${product.category_slug}/${product.slug}`
-                          );
-                        }
-                      }}
-                    >
-                      <Image
-                        src={product.image || NoImageAvailabe}
-                        alt={`Color ${index}`}
-                        height={64}
-                        width={64}
-                        className="w-full h-full object-cover"
-                      />
+                        }}
+                        // onMouseEnter={() => {
+                        //   if (!isCurrentProduct && product.image) {
+                        //     setHoverImage(product.image);
+                        //     SetSelectedImage(-1);
+                        //     const previewImg =
+                        //       document.getElementById("main-preview-img");
+                        //     if (previewImg) {
+                        //       previewImg.setAttribute("src", product.image);
+                        //     }
+                        //   }
+                        // }}
+                        // onMouseLeave={() => {
+                        //   if (!isCurrentProduct) {
+                        //     SetSelectedImage(0);
+                        //     setHoverImage(null);
+                        //     const previewImg =
+                        //       document.getElementById("main-preview-img");
+                        //     if (previewImg && item.uploaded_images?.[0]?.image) {
+                        //       previewImg.setAttribute(
+                        //         "src",
+                        //         item.uploaded_images[0].image
+                        //       );
+                        //     }
+                        //   }
+                        // }}
+                      >
+                        <img
+                          src={product.image || NoImageAvailabe}
+                          alt={`Color ${index}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <p className="text-sm font-medium whitespace-nowrap text-[--neutral]">
+                        {product?.colour}
+                      </p>
                     </div>
                   );
                 })}
