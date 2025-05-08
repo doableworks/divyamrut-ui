@@ -1,5 +1,5 @@
-import ProductList from "@/components/proudect/ProductList";
-import Link from "next/link";
+import ProductCategory from "@/components/proudect/ProductCategory";
+import ProductCategoryRedesign from "@/components/proudect/ProductCategoryRedesign";
 import { notFound } from "next/navigation";
 import Script from "next/script";
 
@@ -137,7 +137,6 @@ const page = async ({ params }) => {
 
   if (!data) {
     notFound();
-    return;
   }
 
   return (
@@ -151,32 +150,11 @@ const page = async ({ params }) => {
         }}
       />
 
-      <div className="common_page_width">
-        {data && data.products.length > 0 ? (
-          <>
-            <ProductList products={data.products} params={params} />
-            <h1 className="highlight-heading !mt-10">{data?.name}</h1>
-            <p
-              className="detail-text"
-              dangerouslySetInnerHTML={{ __html: data?.description }}
-            />
-          </>
-        ) : (
-          <div className="w-full py-32 flex flex-col items-center justify-center gap-5">
-            <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-primary text-center">
-              No Products Found. Coming soon
-            </p>
-            <Link
-              href="/products"
-              className="site-button-primary !m-0 w-[-webkit-fill-available] capitalize"
-            >
-              <p className="font-jost text-[14px] md:text-[18px] font-[500] leading-[1.4em] text-white text-center">
-                Browse products
-              </p>
-            </Link>
-          </div>
-        )}
-      </div>
+      {data?.is_new_design ? (
+        <ProductCategoryRedesign data={data} params={params}/>
+      ) : (
+        <ProductCategory data={data} params={params} />
+      )}
     </>
   );
 };

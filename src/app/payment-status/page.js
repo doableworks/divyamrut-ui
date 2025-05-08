@@ -112,7 +112,7 @@ const Page = () => {
               <h2 className="text-2xl font-bold text-[#45b29d] mt-4">
                 🌿 Your Session is Scheduled!
               </h2>
-              <p className="mt-2 text-gray-700 text-base">
+              <p className="mt-2 text-gray-700">
                 You've successfully booked a session with our{" "}
                 {order_type === "Therapy" ? "therapist" : "consultant"}. Please
                 be available on time to avoid any inconvenience. Booking details
@@ -124,7 +124,7 @@ const Page = () => {
               <h2 className="text-2xl font-bold text-[#45b29d] mt-4">
                 🛒 Thanks for Your Purchase!
               </h2>
-              <p className="mt-2 text-gray-700 text-base">
+              <p className="mt-2 text-gray-700">
                 Your payment was processed successfully and your product has
                 been verified. It will be delivered soon. Make sure someone is
                 available to receive it. For help, reach out to our support team
@@ -181,7 +181,7 @@ const Page = () => {
           {!isHideRedirection && (
             <div className="mt-4 text-gray-600 text-sm">
               Redirecting in{" "}
-              <span className="font-semibold text-green-800 text-base">
+              <span className="font-semibold text-green-800">
                 {countdown}
               </span>{" "}
               seconds...

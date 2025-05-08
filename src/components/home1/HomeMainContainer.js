@@ -21,7 +21,6 @@ export default function HomeMainContainer() {
       <HomeIllustration />
       <Testimonial />
       <HomeEnquiry />
-      {/* <WhyChooseUs /> */}
     </>
   );
 }

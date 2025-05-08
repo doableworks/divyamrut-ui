@@ -7,7 +7,8 @@ const LottieShowcase = ({ source, height = "150px", width = "150px" }) => {
       src={source}
       style={{ height: height, width: width, border: "none" }}
       title="Lottie Animation"
-    ></iframe>
+      allow="autoplay"
+    />
   );
 };
 

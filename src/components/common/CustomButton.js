@@ -17,7 +17,7 @@ export default function CustomButton({
     <button
       disabled={loading}
       type={type}
-      className={`${className}`}
+      className={`flex items-center justify-center gap-2 ${className}`}
       style={style}
       {...rest}
     >
@@ -28,7 +28,7 @@ export default function CustomButton({
           style={spinnerStyle}
         />
       )}
-      {icon && !loading && <span className="mr-2">{icon}</span>}
+      {icon && !loading && <span>{icon}</span>}
       {title && <span>{title}</span>}
     </button>
   );

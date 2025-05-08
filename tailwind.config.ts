@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        "700": "700px",
+      },
       boxShadow: {
         lg: "20px 10px 15px -3px rgb(0 0 0 / 0.1)",
         xl: "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
@@ -37,6 +40,13 @@ const config: Config = {
         q45B29D: "var(--e-global-color-45B29D)",
         E0A43B: "var(--e-global-color-E0A43B)",
         q3c3c3d: "var(--e-global-color-f83c760)",
+
+        voilet: "var(--voilet)",
+        green: "var(--green)",
+        yellow: "var(--yellow)",
+        base: "var(--base)",
+        neutral: "var(--neutral)",
+        "yellow-light": "var(--yellow-light)",
       },
       backgroundImage: {
         "custom-radial":
@@ -51,10 +61,10 @@ const config: Config = {
         poppins: ["var(--font-poppins)"],
         prata: ["var(--font-prata)"],
         playfair: ["var(--font-playfair)"],
-        opensans: ["var(--font-opensans)"]
+        opensans: ["var(--font-opensans)"],
       },
     },
   },
-  plugins: [require("@tailwindcss/line-clamp"), require('tailwind-scrollbar')],
+  plugins: [require("@tailwindcss/line-clamp"), require("tailwind-scrollbar")],
 };
 export default config;

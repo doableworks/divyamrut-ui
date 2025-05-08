@@ -112,22 +112,25 @@ const ProductDetail = ({ item }) => {
               }
             />
           </div>
-          <div className="flex flex-row lg:flex-col gap-2 w-full lg:w-auto mt-8 lg:mt-0 overflow-x-auto lg:overflow-y-auto narrow-scrollbar pb-2 lg:pb-0 flex-shrink-0 lg:h-full">
-            {item.uploaded_images.map((path, index) => (
-              <div
-                key={index}
-                onClick={() => SetSelectedImage(index)}
-                className={`border border-gray-300 rounded-md overflow-hidden cursor-pointer flex-shrink-0 w-20 h-20 ${
-                  selectedImage == index && "border-2 border-slate-700"
-                }`}
-              >
-                <img
-                  src={path?.image ? path?.image : NoImageAvailabe}
-                  alt={`Thumbnail ${index}`}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-            ))}
+          <div className="flex flex-row lg:flex-col gap-2 w-full lg:w-auto mt-8 lg:mt-0 overflow-x-auto lg:overflow-y-auto pb-2 lg:pb-0 flex-shrink-0 lg:max-h-[80vh] lg:pr-2 lg:overflow-x-hidden  scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+            {item.uploaded_images.map(
+              (path, index) =>
+                path?.image && (
+                  <div
+                    key={index}
+                    onClick={() => SetSelectedImage(index)}
+                    className={`border border-gray-300 rounded-md overflow-hidden cursor-pointer flex-shrink-0 w-20 h-20 ${
+                      selectedImage == index && "border-2 border-slate-700"
+                    }`}
+                  >
+                    <img
+                      src={path?.image ? path?.image : NoImageAvailabe}
+                      alt={`Thumbnail ${index}`}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                )
+            )}
           </div>
         </div>
 
@@ -141,7 +144,7 @@ const ProductDetail = ({ item }) => {
               </span>
             </p>
           </div>
-          
+
           {item.similar_products?.length > 0 && (
             <div className="mb-4">
               <p className="section-title !text-left !my-3 !normal-case">
@@ -266,7 +269,7 @@ const ProductDetail = ({ item }) => {
               <p className="text-xl font-jost normal-case font-bold mb-3">
                 About the Item
               </p>
-              <ul className="list-disc list-outside flex flex-col gap-3 md:ml-6 text-base">
+              <ul className="list-disc list-outside flex flex-col gap-3 md:ml-6">
                 {item?.feature_1 && (
                   <li dangerouslySetInnerHTML={{ __html: item?.feature_1 }} />
                 )}
@@ -295,7 +298,7 @@ const ProductDetail = ({ item }) => {
           </p>
           <Divider className="mb-4 mt-4" />
           <p
-            className="list-disc list-outside my-6 flex flex-col gap-3 text-base leading-relaxed"
+            className="list-disc list-outside my-6 flex flex-col gap-3 leading-relaxed"
             dangerouslySetInnerHTML={{ __html: item?.product_benefits }}
           />
         </div>
@@ -308,7 +311,7 @@ const ProductDetail = ({ item }) => {
           </p>
           <Divider className="mb-4 mt-4" />
           <p
-            className="list-disc list-outside my-6 flex flex-col gap-3 text-base leading-relaxed"
+            className="list-disc list-outside my-6 flex flex-col gap-3 leading-relaxed"
             dangerouslySetInnerHTML={{ __html: item?.method_of_preparation }}
           />
         </div>
@@ -321,7 +324,7 @@ const ProductDetail = ({ item }) => {
           </p>
           <Divider className="mb-4 mt-4" />
           <p
-            className="text-base font-jost leading-relaxed"
+            className="  font-jost leading-relaxed"
             dangerouslySetInnerHTML={{ __html: item?.description }}
           />
         </div>

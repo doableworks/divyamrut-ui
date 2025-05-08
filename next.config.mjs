@@ -50,16 +50,6 @@ const nextConfig = {
       },
     ],
   },
-
-  // async redirects() {
-  //   [
-  //     {
-  //       source: "",
-  //       destination: "",
-  //       permanent: "boolean",
-  //     },
-  //   ];
-  // },
 };
 
 export default nextConfig;

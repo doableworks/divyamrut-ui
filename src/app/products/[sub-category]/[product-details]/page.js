@@ -1,4 +1,5 @@
 import ProductDetail from "@/components/proudect/ProductDetail";
+import ProductDetailRedesign from "@/components/proudect/ProductDetailRedesign";
 import RelatedProducts from "@/components/proudect/RelatedProducts";
 import { notFound } from "next/navigation";
 import Script from "next/script";
@@ -118,15 +119,21 @@ const Page = async ({ params }) => {
           __html: JSON.stringify(schemaData, null, 2),
         }}
       />
-      <div className="common_page_width relative z-20">
-        <ProductDetail item={item} />
-        {item?.related_products?.length > 0 && (
-          <RelatedProducts
-            subCategory={params["sub-category"]}
-            slidesData={item?.related_products}
-          />
-        )}
-      </div>
+      {item?.is_new_design ? (
+        <div className="common_page_width relative z-20">
+        <ProductDetailRedesign item={item} />
+        </div>
+      ) : (
+        <div className="common_page_width relative z-20">
+          <ProductDetail item={item} />
+          {item?.related_products?.length > 0 && (
+            <RelatedProducts
+              subCategory={params["sub-category"]}
+              slidesData={item?.related_products}
+            />
+          )}
+        </div>
+      )}
     </>
   );
 };
