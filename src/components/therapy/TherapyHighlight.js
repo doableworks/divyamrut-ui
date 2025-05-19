@@ -5,9 +5,9 @@ export default function TherapyHighlight({ highlights }) {
       <p className="highlight-heading">Highlights of the therapy</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 lg:mt-14">
-        {highlights.map((highlight) => (
+        {highlights.map((highlight, index) => (
           <div
-            key={highlight.id}
+            key={index}
             className="bg-[--base] rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200"
           >
             <h3 className="text-xl font-semibold mb-4">{highlight.title}</h3>

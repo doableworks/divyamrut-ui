@@ -281,8 +281,11 @@ export default function PremiumNavbar({ scrollNum }) {
                       href={
                         sub.is_soon
                           ? "#"
-                          : isSubMenu?.parentSlug == "/products"
+                          : isSubMenu?.parentSlug == "/products" &&
+                            sub.products.length > 1
                           ? `/products/${sub.slug}`
+                          : isSubMenu?.parentSlug == "/products"
+                          ? `/products/${sub.slug}/${sub.products[0]?.slug}`
                           : `${isSubMenu.parentSlug}/${sub.slug}/`
                       }
                       key={index}
