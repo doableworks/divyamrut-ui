@@ -18,9 +18,8 @@ const ImageMedium = ({ imgSrc, id }) => {
         id={id}
         key={imgSrc}
         alt="img"
-        src={imgSrc ? imgSrc : NoImageAvailabe}
-        fill={true}
-        className="object-contain h-full w-full aspect-square"
+        src={imgSrc || NoImageAvailabe}
+        className="object-contain w-full h-full aspect-[3/4]"
       />
     </ControlledZoom>
   );

@@ -34,7 +34,7 @@ const Product = ({ item, productCategory, session }) => {
         }
         className="text-left"
       >
-        <div className="aspect-square rounded-xl overflow-hidden bg-[--base] flex justify-center items-center">
+        <div className="aspect-[3/4] bg-white rounded-xl overflow-hidden bg-[--base] flex justify-center items-center">
           <img
             src={item?.image ? item?.image : NoImageAvailabe}
             className="w-full h-full object-contain"
@@ -43,15 +43,14 @@ const Product = ({ item, productCategory, session }) => {
           />
         </div>
 
-        <div className="flex flex-col gap-1 py-4 h-32 overflow-hidden">
+        <div className="flex flex-col gap-1 py-4 h-28 overflow-hidden">
           <h6 className="line-clamp-2 uppercase font-semibold text-sm text-[--neutral] font-poppins">
             {item?.name}
           </h6>
           {/* <p
-            className="line-clamp-3 text-[12px] text-gray-500 font-extralight font-poppins"
-            dangerouslySetInnerHTML={{ __html: item?.description }}
-          /> */}
-          <p className="line-clamp-2 uppercase font-semibold text-lg mt-4 text-[--neutral] font-poppins">
+            className="line-clamp-2 text-[12px] text-gray-500 font-light font-poppins"
+          >Embroidery workwith colorful tassels made by craftsmen & women in Kutch region of.</p> */}
+          <p className="uppercase font-semibold text-lg text-[--neutral] font-poppins">
             ₹&nbsp;{item?.price}
           </p>
         </div>

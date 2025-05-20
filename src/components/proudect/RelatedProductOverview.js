@@ -42,14 +42,13 @@ const RelatedProductOverview = ({
         onClick={() =>
           router.push(`/products/${productCategory}/${item.slug}`)
         }
-        className="bg-[--base] aspect-square w-full h-48 rounded-xl overflow-hidden mb-4"
+        className="aspect-[3/4] bg-white rounded-xl overflow-hidden mb-4"
       >
-        <Image
+        <img
           src={item?.image ? item?.image : NoImageAvailabe}
-          width={100}
-          height={100}
           className="w-full h-full object-contain"
           alt={item?.name}
+          loading="lazy"
         />
       </button>
 

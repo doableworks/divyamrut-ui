@@ -28,6 +28,16 @@ const ProductDetail = ({ item }) => {
   const [hoverImage, setHoverImage] = useState(null);
   const [form] = Form.useForm();
 
+  const uploadedImages = [
+    {
+      id: "01001",
+      image: item.image,
+      is_published: true,
+      uid: "default_image",
+    },
+    ...item.uploaded_images.filter((each) => each?.image !== null),
+  ];
+
   const handleAddItem = async () => {
     try {
       setLoading(true);
@@ -102,29 +112,29 @@ const ProductDetail = ({ item }) => {
     <>
       <div className="relative flex flex-col lg:flex-row gap-10 min-h-[80vh]">
         <div className="lg:sticky w-full  md:top-10 lg:w-1/2 flex flex-col lg:flex-row-reverse items-center self-start lg:items-start gap-2">
-          <div className="relative w-full aspect-square overflow-hidden rounded-xl bg-[--base] lg:w-[40vw]">
+          <div className="relative w-full aspect-[3/4] bg-white overflow-hidden rounded-xl lg:w-full">
             <ImageMedium
               id="main-preview-img"
               imgSrc={
                 hoverImage ||
-                item?.uploaded_images[selectedImage]?.image ||
+                uploadedImages[selectedImage]?.image ||
                 NoImageAvailabe
               }
             />
           </div>
           <div className="flex flex-row lg:flex-col gap-2 w-full lg:w-auto mt-8 lg:mt-0 overflow-x-auto lg:overflow-y-auto narrow-scrollbar pb-2 lg:pb-0 flex-shrink-0 lg:h-full">
-            {item.uploaded_images.map((path, index) => (
+            {uploadedImages.map((path, index) => (
               <div
                 key={index}
                 onClick={() => SetSelectedImage(index)}
-                className={`border border-gray-300 rounded-md overflow-hidden cursor-pointer flex-shrink-0 w-20 h-20 ${
+                className={`border border-gray-300 rounded-md overflow-hidden cursor-pointer flex-shrink-0 w-20 aspect-[3/4] ${
                   selectedImage == index && "border-2 border-slate-700"
                 }`}
               >
                 <img
                   src={path?.image ? path?.image : NoImageAvailabe}
                   alt={`Thumbnail ${index}`}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full"
                 />
               </div>
             ))}
@@ -141,7 +151,7 @@ const ProductDetail = ({ item }) => {
               </span>
             </p>
           </div>
-          
+
           {item.similar_products?.length > 0 && (
             <div className="mb-4">
               <p className="section-title !text-left !my-3 !normal-case">

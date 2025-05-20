@@ -282,6 +282,9 @@ export default function PremiumNavbar({ scrollNum }) {
                         sub.is_soon
                           ? "#"
                           : isSubMenu?.parentSlug == "/products" &&
+                            isSubMenu?.sub_categories?.length > 0
+                          ? `/collections/${sub.slug}`
+                          : isSubMenu?.parentSlug == "/products" &&
                             sub.products.length > 1
                           ? `/products/${sub.slug}`
                           : isSubMenu?.parentSlug == "/products"
@@ -291,6 +294,7 @@ export default function PremiumNavbar({ scrollNum }) {
                       key={index}
                       className="relative"
                     >
+                      {console.log(isSubMenu)}
                       {(sub.isSoon || sub.is_soon) && (
                         <span className="bg-[--yellow] absolute text-white font-poppins text-[10px] rounded rounded-bl-none px-1 font-medium top-[-20px]">
                           Coming Soon
