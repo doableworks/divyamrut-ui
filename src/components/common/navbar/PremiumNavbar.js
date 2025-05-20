@@ -282,9 +282,6 @@ export default function PremiumNavbar({ scrollNum }) {
                         sub.is_soon
                           ? "#"
                           : isSubMenu?.parentSlug == "/products" &&
-                            isSubMenu?.sub_categories?.length > 0
-                          ? `/collections/${sub.slug}`
-                          : isSubMenu?.parentSlug == "/products" &&
                             sub.products.length > 1
                           ? `/products/${sub.slug}`
                           : isSubMenu?.parentSlug == "/products"
