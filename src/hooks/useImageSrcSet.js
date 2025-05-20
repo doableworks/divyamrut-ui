@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 const useImageSrcSet = (imageUrl) => {
   const generateSrcSet = (url) => {
-    const baseUrl = url.split('?')[0];
+    const baseUrl = url?.split('?')[0];
     const params = [
       { width: 300 },
       { width: 400 },

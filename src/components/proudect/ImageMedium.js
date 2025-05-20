@@ -16,13 +16,16 @@ const ImageMedium = ({ imgSrc, id }) => {
 
   return (
     <ControlledZoom isZoomed={isZoomed} onZoomChange={handleZoom}>
-      <img
-        id={id}
-        key={imgSrc}
-        alt="img"
-        src={imgSrc || NoImageAvailabe}
-        className="object-contain w-full h-full aspect-[3/4]"
-      />
+      <div className="bg-white aspect-[3/4]">
+        <img
+          id={id}
+          key={imgSrc}
+          alt="img"
+          className="object-cover h-full w-full "
+          loading="lazy"
+          src={imgSrc}
+        />
+      </div>
     </ControlledZoom>
   );
 };

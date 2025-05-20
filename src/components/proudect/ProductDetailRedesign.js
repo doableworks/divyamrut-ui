@@ -125,12 +125,12 @@ const ProductDetailRedesign = ({ item }) => {
   return (
     <>
       <div className="relative flex flex-col lg:grid lg:grid-cols-12 gap-10 min-h-[80vh]">
-        <div className="lg:sticky w-full lg:col-span-8">
+        <div className="lg:sticky w-full lg:col-span-7">
           <ProductImageGallery images={allImages} />
         </div>
 
-        <div className="flex flex-col w-full lg:col-span-4">
-          <div className="lg:sticky lg:top-0 space-y-2">
+        <div className="flex flex-col w-full lg:col-span-5">
+          <div className="lg:sticky lg:bottom-0 space-y-2">
             <h1 className="text-3xl text-yellow font-prata leading-relaxed">
               {item.name}
             </h1>

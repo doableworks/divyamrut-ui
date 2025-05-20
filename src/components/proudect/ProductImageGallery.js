@@ -151,13 +151,13 @@ const ProductImageGallery = ({ images }) => {
         <div className="hidden md:flex gap-4">
           <div
             ref={thumbnailsRef}
-            className="w-16 flex flex-col gap-2 sticky top-48 self-start max-h-[80vh] overflow-y-auto"
+            className="w-16 flex flex-col gap-2 sticky top-32 self-start max-h-[80vh] overflow-y-auto"
             style={{ scrollbarWidth: "thin" }}
           >
             {images.map((image, index) => (
               <div
                 key={index}
-                className={`border-2 w-16 h-16 cursor-pointer transition-all flex-shrink-0 ${
+                className={`border-2 w-16 aspect-[3/4] cursor-pointer transition-all flex-shrink-0 ${
                   activeIndex === index
                     ? "border-yellow opacity-100"
                     : "border-gray-200 opacity-70 hover:opacity-100 hover:border-voilet"

@@ -50,7 +50,7 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const getNavbarItems = async () => {
   try {
     const res = await fetch(`${apiUrl}/therapy/combined-categories/`, {
-      next: { revalidate: 60 },
+      next: { revalidate: 0 },
     });
     if (!res.ok) {
       throw new Error("Failed to fetch navbar data");

@@ -5,7 +5,6 @@ import Link from "next/link";
 import useCartActions from "../cartCom/useCartActions";
 import { message } from "antd";
 import { NoImageAvailabe } from "@/contants/contants";
-import useImageSrcSet from "@/hooks/useImageSrcSet";
 
 const ProductOverviewRedesign = ({ item }) => {
   const [loading, setLoading] = useState(false);
@@ -24,36 +23,27 @@ const ProductOverviewRedesign = ({ item }) => {
     }
   };
 
-  const imageSrcSet = useImageSrcSet(item?.image) || NoImageAvailabe;
-  const hoverImageSrcSet = useImageSrcSet(item?.uploaded_images?.[0]?.image);
-
   return (
     <div className="relative h-full flex flex-col justify-between cursor-pointer rounded overflow-hidden">
       <button type="button" className="text-left">
         <div className="relative flex items-center justify-center overflow-hidden">
           <Link href={`/products/${item?.category_slug}/${item?.slug}`}>
-            <div className="aspect-[4/3] overflow-hidden bg-base relative group">
-              {/* Default image */}
+            <div className="aspect-[3/4] overflow-hidden bg-base relative group">
               <img
                 alt="Default Product"
                 className="w-full h-full object-cover transition-opacity duration-300 ease-in-out group-hover:opacity-0"
                 src={item?.image || NoImageAvailabe}
-                // srcSet={imageSrcSet}
-                // sizes="(max-width: 600px) 100vw, 600px"
                 loading="lazy"
               />
-
-              {/* Hover image if available */}
-              {item?.uploaded_images[0]?.image && (
-                <img
-                  src={item?.uploaded_images[0]?.image || NoImageAvailabe}
-                  // srcSet={hoverImageSrcSet}
-                  // sizes="(max-width: 768px) 100vw, 600px"
-                  alt="Hover Product"
-                  className="w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100"
-                  loading="lazy"
-                />
-              )}
+              <img
+                src={
+                  (item?.uploaded_images && item?.uploaded_images[0]?.image) ||
+                  NoImageAvailabe
+                }
+                alt="Hover Product"
+                className="w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100"
+                loading="lazy"
+              />
             </div>
           </Link>
 

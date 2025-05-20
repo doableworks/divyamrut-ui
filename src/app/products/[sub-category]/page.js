@@ -150,11 +150,7 @@ const page = async ({ params }) => {
         }}
       />
 
-      {data?.is_new_design ? (
-        <ProductCategoryRedesign data={data} params={params}/>
-      ) : (
-        <ProductCategory data={data} params={params} />
-      )}
+      <ProductCategory data={data} params={params} />
     </>
   );
 };
