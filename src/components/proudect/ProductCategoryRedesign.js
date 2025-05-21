@@ -61,6 +61,8 @@ const ProductCategoryRedesign = ({ data }) => {
                 }}
                 className="rich-content text-center"
               />
+
+              <hr className="my-6" />
             </div>
           ))
         ) : (

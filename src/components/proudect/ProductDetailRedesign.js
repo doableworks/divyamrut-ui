@@ -1,10 +1,8 @@
 "use client";
 import React, { use, useEffect, useState } from "react";
 import CustomButton from "@/components/common/CustomButton";
-import ImageMedium from "./ImageMedium";
-import { setBuyProduct } from "@/redux/feature/buyProductSlice";
 import { NoImageAvailabe } from "@/contants/contants";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useRouter } from "nextjs-toploader/app";
 import { twMerge } from "tailwind-merge";
 import Divider from "@/components/common/Divider";
@@ -14,14 +12,7 @@ import axiosInstance from "@/lib/axios";
 import { Form, Input, message, Modal } from "antd";
 import ProductImageGallery from "./ProductImageGallery";
 import ProductInfoTabs from "./ProductInfoTabs";
-
-const specifications = [
-  { title: "COMPOSITION", description: "92% FINE merino wool 8% silk" },
-  { title: "SIZE", description: "125 x 250 cm / 50 x 100 in approx." },
-  { title: "THICKNESS", description: "Fine" },
-  { title: "DETAILS", description: "Without fringes" },
-  { title: "WEIGHT", description: "276 g / 0.61 lb approx." },
-];
+import "@/styles/rich-tag-styles.css";
 
 const ProductDetailRedesign = ({ item }) => {
   const router = useRouter();
@@ -112,7 +103,6 @@ const ProductDetailRedesign = ({ item }) => {
     item?.image,
     ...(item?.uploaded_images || []).map((img) => img.image),
   ];
-  
 
   const features = [
     item?.feature_1,
@@ -134,36 +124,35 @@ const ProductDetailRedesign = ({ item }) => {
             <h1 className="text-3xl text-yellow font-prata leading-relaxed">
               {item.name}
             </h1>
-            <p className="text-xl font-medium text-neutral pb-3">
+            {item?.price && <p className="text-xl font-medium text-neutral pb-3">
               ₹&nbsp;{item?.price}
               <span className="text-sm ml-2 font-normal">
                 (Inclusive of all taxes)
               </span>
-            </p>
+            </p>}
             <Divider className="mb-4" />
 
             <div className="text-sm">
-              {specifications?.length > 0 && (
+              {item?.specification?.length > 0 && (
                 <div>
                   <ul className="capitalize space-y-1">
-                    {specifications.map((each, index) => (
+                    {item.specification.map((each, index) => (
                       <li key={index}>
                         <span className="font-bold">{each?.title}:</span>{" "}
-                        {each?.description}
+                        {each?.detail}
                       </li>
                     ))}
                   </ul>
                 </div>
               )}
 
-              {features?.length > 0 && (
-                <div className="my-5 md:ml-4">
-                  <ul className="list-disc list-outside flex flex-col gap-2">
-                    {features.map((feature, index) =>
-                      feature ? <li key={index}>{feature}</li> : null
-                    )}
-                  </ul>
-                </div>
+              {item?.description && (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: item?.description,
+                  }}
+                  className="rich-content my-6"
+                />
               )}
             </div>
 
@@ -218,9 +207,7 @@ const ProductDetailRedesign = ({ item }) => {
                     >
                       {loading == item.uid ? <LoadingOutlined spin /> : "-"}
                     </button>
-                    <p className="w-14 text-center">
-                      {quantity}
-                    </p>
+                    <p className="w-14 text-center">{quantity}</p>
                     <button onClick={() => handleIncreaseCartItem("increase")}>
                       {loading == item.uid ? <LoadingOutlined spin /> : "+"}
                     </button>
@@ -259,7 +246,7 @@ const ProductDetailRedesign = ({ item }) => {
 
       <Divider className="my-20" />
 
-      <ProductInfoTabs />
+      <ProductInfoTabs item={item} />
 
       {contextHolder}
 

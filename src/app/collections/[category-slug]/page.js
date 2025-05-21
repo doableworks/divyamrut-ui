@@ -19,7 +19,7 @@ const data = {
       products: [
         {
           category_slug: "meditation-pooja-shawls",
-          slug: "meditation-shawl-kala-cotton-magenta",
+          slug: "pavitra-large-organic-kala-cotton-shawls-magenta",
           image:
             "https://register.nityanava.com/media/uploads/product/images/cf2d940b-b72a-4763-b02b-d2b4f71659b7_KOHhm8O.jpg",
           name: "Pavitra - Large Organic kala Cotton Shawl",

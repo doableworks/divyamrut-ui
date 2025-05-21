@@ -62,11 +62,11 @@ const ProductOverviewRedesign = ({ item }) => {
 
         <Link href={`/products/${item?.category_slug}/${item?.slug}`}>
           <div className="flex flex-col gap-1 py-4 overflow-hidden">
-            <h6 className="line-clamp-2 font-semibold text-sm text-center capitalize">
+            <h6 className="line-clamp-2 font-semibold text-sm text-center capitalize h-10">
               {item?.name}
             </h6>
 
-            <p className="line-clamp-1 uppercase text-gray-500 text-xs font-medium text-center">
+            <p className="line-clamp-1 uppercase text-gray-500 text-sm font-medium text-center">
               ₹&nbsp;{item?.price}
             </p>
           </div>
