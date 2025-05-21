@@ -37,7 +37,7 @@ const page = async ({ params }) => {
     notFound();
   }
 
-  return <ProductCategoryRedesign data={data} params={params} />;
+  return <ProductCategoryRedesign data={data} />;
 };
 
 export default page;
