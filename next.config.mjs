@@ -48,6 +48,11 @@ const nextConfig = {
         hostname: "*",
         pathname: "/**",
       },
+      {
+        protocol: "http",
+        hostname: "*",
+        pathname: "/**",
+      },
     ],
   },
 };
