@@ -275,6 +275,7 @@ export default function PremiumNavbar({ scrollNum }) {
             <hr />
             <figure className="p-5">
               <section>
+                {console.log(isSubMenu)}
                 <ul className="grid grid-cols-4 py-4 gap-8">
                   {isSubMenu.subMenu.map((sub, index) => (
                     <Link
@@ -282,7 +283,7 @@ export default function PremiumNavbar({ scrollNum }) {
                         sub.is_soon
                           ? "#"
                           : isSubMenu?.parentSlug == "/products" &&
-                            sub?.sub_categories?.length > 0
+                            sub?.is_new_design
                           ? `/collections/${sub.slug}`
                           : isSubMenu?.parentSlug == "/products" &&
                             sub.products.length > 1

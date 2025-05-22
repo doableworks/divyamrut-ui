@@ -111,8 +111,8 @@ const MobileNavbar = ({
                           subItem.is_soon
                             ? "#"
                             : item?.parentSlug == "/products" &&
-                              subItem.sub_categories?.length > 0
-                            ? `/collections/${sub.slug}`
+                              subItem.is_new_design
+                            ? `/collections/${subItem.slug}`
                             : item?.parentSlug == "/products" &&
                               subItem.products.length > 1
                             ? `/products/${subItem.slug}`

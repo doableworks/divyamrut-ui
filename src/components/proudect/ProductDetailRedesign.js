@@ -135,10 +135,10 @@ const ProductDetailRedesign = ({ item }) => {
             <div className="text-sm">
               {item?.specification?.length > 0 && (
                 <div>
-                  <ul className="capitalize space-y-1">
+                  <ul className="capitalize space-y-1 font-semibold">
                     {item.specification.map((each, index) => (
                       <li key={index}>
-                        <span className="font-bold">{each?.title}:</span>{" "}
+                        <span className="text-neutral">{each?.title}:</span>{" "}
                         {each?.detail}
                       </li>
                     ))}
