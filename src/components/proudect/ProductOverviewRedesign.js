@@ -47,7 +47,7 @@ const ProductOverviewRedesign = ({ item }) => {
             </div>
           </Link>
 
-          {/* {item?.quantity && parseInt(item.quantity) > 0 && (
+          {item?.quantity && parseInt(item.quantity) > 0 && (
             <CustomButton
               className="absolute bottom-2 h-10 w-10 right-2 bg-white rounded shadow"
               icon={<PlusIcon className="w-5 font-bold" />}
@@ -57,7 +57,7 @@ const ProductOverviewRedesign = ({ item }) => {
               spinnerColor="#000"
               spinnerSize="small"
             />
-          )} */}
+          )}
         </div>
 
         <Link href={`/products/${item?.category_slug}/${item?.slug}`}>

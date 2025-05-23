@@ -7,6 +7,7 @@ import { NoImageAvailabe } from "@/contants/contants";
 import "@/styles/rich-tag-styles.css";
 
 const ProductCategoryRedesign = ({ data }) => {
+  console.log(data);
   return (
     <div className="w-full">
       <div className="relative">
@@ -29,22 +30,23 @@ const ProductCategoryRedesign = ({ data }) => {
             <h1 className="highlight-heading !text-voilet !mb-0">
               {data?.name}
             </h1>
-            <p
-              className="text-sm"
-              dangerouslySetInnerHTML={{ __html: data?.description }}
-            ></p>
           </div>
         </div>
       </div>
 
       <div className="common_page_width">
-        {data?.products && data.products.length > 0 ? (
-          data.products.map((products, index) => (
+        <p
+          className="rich-content text-center "
+          dangerouslySetInnerHTML={{ __html: data?.description }}
+        ></p>
+
+        {data?.collections && data.collections.length > 0 ? (
+          data.collections.map((products, index) => (
             <div key={index}>
               <h2 className="highlight-heading">{products?.title}</h2>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: products?.description_one,
+                  __html: products?.description1,
                 }}
                 className="rich-content text-center"
               />
@@ -57,7 +59,7 @@ const ProductCategoryRedesign = ({ data }) => {
 
               <div
                 dangerouslySetInnerHTML={{
-                  __html: products?.description_two,
+                  __html: products?.description2,
                 }}
                 className="rich-content text-center"
               />
