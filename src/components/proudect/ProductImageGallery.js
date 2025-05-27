@@ -160,7 +160,7 @@ const ProductImageGallery = ({ images }) => {
                 className={`border-2 w-16 aspect-[3/4] cursor-pointer transition-all flex-shrink-0 ${
                   activeIndex === index
                     ? "border-yellow opacity-100"
-                    : "border-gray-200 opacity-70 hover:opacity-100 hover:border-voilet"
+                    : "border-gray-200 opacity-70 hover:opacity-100 hover:border-[--voilet]"
                 }`}
                 onClick={() => handleThumbnailClick(index)}
               >
@@ -217,7 +217,7 @@ const ProductImageGallery = ({ images }) => {
               <button
                 key={index}
                 className={`w-2 h-2 rounded-full transition-all ${
-                  activeIndex === index ? "bg-voilet w-4" : "bg-gray-300"
+                  activeIndex === index ? "bg-[--voilet] w-4" : "bg-gray-300"
                 }`}
                 onClick={() => handleDotClick(index)}
                 aria-label={`View image ${index + 1}`}

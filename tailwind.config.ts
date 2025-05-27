@@ -40,13 +40,6 @@ const config: Config = {
         q45B29D: "var(--e-global-color-45B29D)",
         E0A43B: "var(--e-global-color-E0A43B)",
         q3c3c3d: "var(--e-global-color-f83c760)",
-
-        voilet: "var(--voilet)",
-        green: "var(--green)",
-        yellow: "var(--yellow)",
-        base: "var(--base)",
-        neutral: "var(--neutral)",
-        "yellow-light": "var(--yellow-light)",
       },
       backgroundImage: {
         "custom-radial":

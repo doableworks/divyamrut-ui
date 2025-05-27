@@ -27,7 +27,7 @@ const ProductCategoryRedesign = ({ data }) => {
 
         <div className="bg-black bg-opacity-10 w-full absolute top-0 left-0 h-full flex flex-col items-center justify-center p-8">
           <div className=" text-white max-w-4xl text-center">
-            <h1 className="highlight-heading !text-voilet !mb-0">
+            <h1 className="highlight-heading !text-[--voilet] !mb-0">
               {data?.name}
             </h1>
           </div>

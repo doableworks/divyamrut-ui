@@ -98,7 +98,7 @@ const ProductInfoTabs = ({ item }) => {
           key={tab}
           className={`px-6 py-3 text-sm font-medium ${
             activeTab === tab
-              ? "text-voilet border-b-2 border-voilet"
+              ? "text-[--voilet] border-b-2 border-[--voilet]"
               : "text-gray-500 hover:text-amber-600"
           }`}
           onClick={() => setActiveTab(tab)}
@@ -116,7 +116,7 @@ const ProductInfoTabs = ({ item }) => {
         <div key={tab} className="border-b border-gray-200">
           <button
             className={`flex justify-between items-center w-full px-4 py-3 text-left ${
-              activeTab === tab ? "text-voilet font-medium" : "text-gray-700"
+              activeTab === tab ? "text-[--voilet] font-medium" : "text-gray-700"
             }`}
             onClick={() => setActiveTab(activeTab === tab ? null : tab)}
           >

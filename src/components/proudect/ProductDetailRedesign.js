@@ -121,10 +121,10 @@ const ProductDetailRedesign = ({ item }) => {
 
         <div className="flex flex-col w-full lg:col-span-5">
           <div className="lg:sticky lg:bottom-0 space-y-2">
-            <h1 className="text-3xl text-yellow font-prata leading-relaxed">
+            <h1 className="text-3xl text-[--yellow] font-prata leading-relaxed">
               {item.name}
             </h1>
-            {item?.price && <p className="text-xl font-medium text-neutral pb-3">
+            {item?.price && <p className="text-xl font-medium text-[--neutral] pb-3">
               ₹&nbsp;{item?.price}
               <span className="text-sm ml-2 font-normal">
                 (Inclusive of all taxes)
@@ -138,7 +138,7 @@ const ProductDetailRedesign = ({ item }) => {
                   <ul className="capitalize space-y-1 font-semibold">
                     {item.specification.map((each, index) => (
                       <li key={index}>
-                        <span className="text-neutral">{each?.title}:</span>{" "}
+                        <span className="text-[--neutral]">{each?.title}:</span>{" "}
                         {each?.detail}
                       </li>
                     ))}

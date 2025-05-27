@@ -41,18 +41,18 @@ export default function Footer() {
   const therapyItems = menuItems?.find((each) => each.path === "/therapy");
 
   return (
-    <div className="bg-[--yellow] w-full px-8 md:px-20 xl:px-36 pt-16 pb-8 font-poppins text-neutral">
+    <div className="bg-[--yellow] w-full px-8 md:px-20 xl:px-36 pt-16 pb-8 font-poppins text-[--neutral]">
       <section className=" grid [@media(max-width:390px)]:grid-cols-1 grid-cols-2 lg:grid-cols-4 [@media(max-width:390px)]:gap-16 gap-8 md:gap-16">
         <div>
           <p className="text-lg font-semibold mb-8">Products</p>
-          <ul className="space-y-5">
+          <ul className="space-y-5 text-[--neutral]">
             {productItems?.subMenu?.map(
               (each, index) =>
                 !each.is_soon && (
                   <li key={index}>
                     <Link
                       href={`/products/${each.slug}`}
-                      className="text-sm hover:underline"
+                      className="text-sm text-[--neutral] hover:underline hover:text-[--neutral]"
                     >
                       {each.name}
                     </Link>
@@ -63,12 +63,12 @@ export default function Footer() {
         </div>
         <div>
           <p className="text-lg font-semibold mb-8">Therapies</p>
-          <ul className="space-y-5">
+          <ul className="space-y-5 text-[--neutral]">
             {therapyItems?.subMenu?.map((each, index) => (
               <li key={index}>
                 <Link
                   href={`/therapy/${each.slug}`}
-                  className="text-sm hover:underline"
+                  className="text-sm text-[--neutral] hover:underline hover:text-[--neutral]"
                 >
                   {each.name}
                 </Link>
@@ -78,10 +78,10 @@ export default function Footer() {
         </div>
         <div>
           <p className="text-lg font-semibold mb-8">Quick links</p>
-          <ul className="space-y-5">
+          <ul className="space-y-5 text-[--neutral]">
             {quickLinkItems?.map((each, index) => (
               <li key={index}>
-                <Link href={each.slug} className="text-sm hover:underline">
+                <Link href={each.slug} className="text-sm text-[--neutral] hover:underline hover:text-[--neutral]">
                   {each.name}
                 </Link>
               </li>
@@ -91,13 +91,13 @@ export default function Footer() {
 
         <div>
           <p className="text-lg font-semibold mb-8">Contact</p>
-          <ul className="space-y-5">
-            <li className="text-sm hover:underline">
+          <ul className="space-y-5 text-[--neutral] hover:text-[--neutral]">
+            <li className="text-sm text-[--neutral] hover:underline hover:text-[--neutral]">
               <a href="mailto:contact@nityanava.com">
                 Email: <span>contact@nityanava.com</span>
               </a>
             </li>
-            <li className="text-sm hover:underline flex gap-2 flex-col">
+            <li className="text-sm text-[--neutral] hover:underline hover:text-[--neutral] flex gap-2 flex-col">
               <a
                 target="_blank"
                 href="https://wa.me/916377717747"
@@ -119,7 +119,7 @@ export default function Footer() {
                 <span>+91-9833172105</span>
               </a>
             </li>
-            <li className="text-sm hover:underline">
+            <li className="text-sm text-[--neutral] hover:underline hover:text-[--neutral]">
               <a href="/contact-us">Contact Us</a>
             </li>
           </ul>

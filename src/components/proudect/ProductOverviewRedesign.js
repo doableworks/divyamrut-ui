@@ -28,7 +28,7 @@ const ProductOverviewRedesign = ({ item }) => {
       <button type="button" className="text-left">
         <div className="relative flex items-center justify-center overflow-hidden">
           <Link href={`/products/${item?.category_slug}/${item?.slug}`}>
-            <div className="aspect-[3/4] overflow-hidden bg-base relative group">
+            <div className="aspect-[3/4] overflow-hidden bg-white relative group">
               <img
                 alt="Default Product"
                 className="w-full h-full object-cover transition-opacity duration-300 ease-in-out group-hover:opacity-0"
