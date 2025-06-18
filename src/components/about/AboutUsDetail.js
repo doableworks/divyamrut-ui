@@ -33,7 +33,7 @@ export default function AboutUsDetail() {
           <p className="section-content !text-justify !mb-3">
             That’s when you get to witness every new moment of life unleash
             itself in its totality and keep your divine self…{" "}
-            <span className="!text-[--voilet] !italic font-semibold">
+            <span className="text-[--yellow] !italic font-semibold">
               Nityanava… Ever New!
             </span>
           </p>
@@ -41,7 +41,7 @@ export default function AboutUsDetail() {
           <p className="section-content !text-justify !mb-3">
             At Nityanava we honour our ancient roots to bring in experience the
             nectar of the Divine…
-            <span className="!text-[--voilet] !italic font-semibold">
+            <span className="text-[--yellow] !italic font-semibold">
               Divya Amrut
             </span>{" "}
             in forms of various holistic therapies, life enhancing well-being
@@ -57,7 +57,7 @@ export default function AboutUsDetail() {
             In order to achieve a healthy and happy mind-body complex, it is
             primarily important to identify the cause to its depth. There is
             substantial documented evidence to support the philosophy that,{" "}
-            <span className="!text-[--voilet] !italic font-semibold">
+            <span className="text-[--yellow] !italic font-semibold">
               ‘it all begins in the mind’
             </span>{" "}
             and therefore the root cause of any dis-ease state at the level of

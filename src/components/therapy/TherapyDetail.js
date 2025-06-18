@@ -19,7 +19,7 @@ export default function TherapyDetail({ data }) {
   return (
     <div>
       <div className="!mt-0 common_page_width">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 lg:gap-40 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-20 lg:gap-40">
           <figure className="p-3 flex flex-col justify-center md:items-start">
             <h1 className="highlight-heading md:!m-0 md:!text-left !mb-2">
               {name}
@@ -44,7 +44,7 @@ export default function TherapyDetail({ data }) {
               </button>
             )}
           </figure>
-          <section className="relative lg:h-[550px]">
+          <section className="relative lg:min-h-[550px]">
             <figure className="relative z-10 flex rounded-tr-full rounded-tl-full overflow-hidden h-[550px] border-2">
               <img
                 src={image || NoImageAvailabe}

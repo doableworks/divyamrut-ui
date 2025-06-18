@@ -4,14 +4,14 @@ const AboutFounder = () => {
   return (
     <div className="common_page_width !space-y-6 !p-5">
       <p className="highlight-heading !text-left">About the Founder:</p>
-      <div
-        className="h-[500px] w-full rounded-md bg-center bg-contain bg-no-repeat common_page_width "
-        style={{
-          backgroundImage:
-            "url(https://register.nityanava.com/media/uploads/public/images/a1fc9401-fa3b-4f65-919a-4f199a3313cd_w41CKu5.jpg)",
-        }}
-      ></div>
-      <div className="grid grid-cols-1 gap-6">
+      <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 lg:gap-12">
+        <div
+          className="h-[500px] lg:h-full w-full rounded-md bg-center bg-contain lg:bg-cover bg-no-repeat "
+          style={{
+            backgroundImage:
+              "url(https://register.nityanava.com/media/uploads/public/images/a1fc9401-fa3b-4f65-919a-4f199a3313cd_w41CKu5.jpg)",
+          }}
+        ></div>
         <div>
           <p className="section-content !text-justify">
             A passionate explorer of both the outer world and the inner space,
@@ -40,45 +40,46 @@ const AboutFounder = () => {
             </span>{" "}
             Mumbai.
           </p>
+
+          <p className="section-content !text-left !mt-4">
+            Practicing spirituality and Art of Living since 23 years and is a
+            faculty for the world renowned{" "}
+            <span className="!text-[--yellow] !italic">Happiness Program</span> and
+            also teaches{" "}
+            <span className="!text-[--yellow] !italic">
+              Sahaj Samadhi Dhyan Yog
+            </span>{" "}
+            and{" "}
+            <span className="!text-[--yellow] !italic">
+              Deep Sleep & Anxiety Relief
+            </span>{" "}
+            programs of the Art of Living foundation with the mission to make minds
+            happy and spread smiles to more and more people across the globe.
+          </p>
+
+          <p className="section-content !text-left !mt-4">
+            Trained in{" "}
+            <span className="!text-[--yellow] !italic">
+              Advanced holistic healing techniques
+            </span>{" "}
+            like Marma, Cranio Sacral therapy, Sujog and Accupuncture. Has also
+            learned various self uplifting sciences like Neurolinguistic Programming
+            and Graphology.
+          </p>
+
+          <p className="section-content !text-left !mt-4">
+            With the belief that health is complete only when healing is holistic
+            and with an objective to help people achieve physical, mental, emotional
+            and spiritual well-being, Disha also practices as an Holistic Health
+            Consultant synergising traditional therapies with her modern medical
+            profession to deliver comprehensive health, a much needed approach in
+            current times wherein the fast paced life is compelling people to
+            suppress symptoms of disease by just depending on modern medicine and
+            henceforth neglecting the root cause of it at mental and emotional
+            levels.
+          </p>
         </div>
       </div>
-
-      <p className="section-content !text-left !mt-4">
-        Practicing spirituality and Art of Living since 23 years and is a
-        faculty for the world renowned{" "}
-        <span className="!text-[--yellow] !italic">Happiness Program</span> and
-        also teaches{" "}
-        <span className="!text-[--yellow] !italic">
-          Sahaj Samadhi Dhyan Yog
-        </span>{" "}
-        and{" "}
-        <span className="!text-[--yellow] !italic">
-          Deep Sleep & Anxiety Relief
-        </span>{" "}
-        programs of the Art of Living foundation with the mission to make minds
-        happy and spread smiles to more and more people across the globe.
-      </p>
-      <p className="section-content !text-left !mt-4">
-        Trained in{" "}
-        <span className="!text-[--yellow] !italic">
-          Advanced holistic healing techniques
-        </span>{" "}
-        like Marma, Cranio Sacral therapy, Sujog and Accupuncture. Has also
-        learned various self uplifting sciences like Neurolinguistic Programming
-        and Graphology.
-      </p>
-
-      <p className="section-content !text-left !mt-4">
-        With the belief that health is complete only when healing is holistic
-        and with an objective to help people achieve physical, mental, emotional
-        and spiritual well-being, Disha also practices as an Holistic Health
-        Consultant synergising traditional therapies with her modern medical
-        profession to deliver comprehensive health, a much needed approach in
-        current times wherein the fast paced life is compelling people to
-        suppress symptoms of disease by just depending on modern medicine and
-        henceforth neglecting the root cause of it at mental and emotional
-        levels.
-      </p>
 
       <p className="section-content !text-left !mt-4">
         A{" "}
@@ -100,7 +101,7 @@ const AboutFounder = () => {
         purposeful and happy.
       </p>
 
-      <p className="text-2xl text-[--voilet] font-prata text-center italic">
+      <p className="text-2xl text-[--yellow] font-prata text-center italic">
         'Disha means Direction' <br />
         Disha says…
       </p>

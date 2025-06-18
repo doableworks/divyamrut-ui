@@ -37,10 +37,10 @@ const ProductsScroller = ({ category }) => {
             onClick={() => handleMoveRoute(category)}
           >
             {" "}
-            VIEW ALL <RightArrow fill={"#64748b"} w={18} />{" "}
+            VIEW <RightArrow fill={"#64748b"} w={18} />{" "}
           </span>
         </div>
-        <Carousel
+        {/* <Carousel
           autoplay
           autoplaySpeed={4000}
           dots={false}
@@ -69,10 +69,11 @@ const ProductsScroller = ({ category }) => {
               : category?.products.length > 1
           }
           className="custom-carousel"
-        >
+        > */}
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {category &&
             category?.products.map((product, index) => (
-              <div key={index + category?.name} className={`h-full p-2`}>
+              <li key={index + category?.name} className={`p-2`}>
                 <Product
                   key={index}
                   item={product}
@@ -83,9 +84,10 @@ const ProductsScroller = ({ category }) => {
                   }
                   session={session}
                 />
-              </div>
+              </li>
             ))}
-        </Carousel>
+        </ul>
+        {/* </Carousel> */}
       </div>
     )
   );

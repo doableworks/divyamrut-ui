@@ -41,7 +41,7 @@ const HerPublications = () => {
           <li key={index}>
             {pub.title}
             {" — "}
-            <span className="!text-[--voilet] !font-semibold">
+            <span className="!font-semibold">
               {pub.journal},{" "}
             </span>
             <span className="!text-[--yellow] !italic !font-semibold">

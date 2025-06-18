@@ -150,7 +150,7 @@ body {
     @apply text-[--neutral] text-[18px] font-[500] leading-[1.4em] uppercase text-center;
   }
   .section-content {
-    @apply text-primary text-sm leading-relaxed text-center;
+    @apply text-[--neutral] text-sm leading-relaxed text-center;
   }
 
   .text-heading {

@@ -63,7 +63,7 @@ export default function WhyUsSection() {
             key={index}
           >
             <span>{each.icon}</span>
-            <span className="section-title !text-gray-500 !text-[22px] text-center max-w-[70%]">
+            <span className="section-title !text-[22px] text-center max-w-[70%]">
               {each.label}
             </span>
 

@@ -50,16 +50,16 @@ const Product = ({ item, productCategory, session }) => {
           {/* <p
             className="line-clamp-2 text-[12px] text-gray-500 font-light font-poppins"
           >Embroidery workwith colorful tassels made by craftsmen & women in Kutch region of.</p> */}
-          <p className="uppercase font-semibold text-lg text-[--neutral] font-poppins">
+          {/* <p className="uppercase font-semibold text-lg text-[--neutral] font-poppins">
             ₹&nbsp;{item?.price}
-          </p>
+          </p> */}
         </div>
       </button>
-      {parseInt(item.quantity) > 0 ? (
+      {/* {parseInt(item.quantity) > 0 ? (
         <CustomButton
           htmlType="submit"
           className="site-button-primary !mt-4 w-[-webkit-fill-available] capitalize"
-          title="ADD TO CART"
+          title="Know More"
           loading={loading}
           type="submit"
           onClick={(event) => handleAddItem(event)}
@@ -69,7 +69,15 @@ const Product = ({ item, productCategory, session }) => {
           className="site-button-primary !mt-4 w-[-webkit-fill-available] !bg-gray-400 cursor-not-allowed"
           title="Out of Stock"
         />
-      )}
+      )} */}
+      <CustomButton
+        htmlType="submit"
+        className="site-button-primary !mt-4 w-[-webkit-fill-available] capitalize"
+        title="Know More"
+        onClick={() =>
+          router.push(`/products/${productCategory}/${item?.slug}`)
+        }
+      />
     </div>
   );
 };

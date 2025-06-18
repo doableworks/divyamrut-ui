@@ -10,7 +10,7 @@ const FounderNote = () => {
             <p className="section-content !text-justify">
               In early days of my masters in dental surgery, I came across a
               quote in one of our primary textbooks. It said,{" "}
-              <span className="!text-[--voilet] !italic font-semibold">
+              <span className="!text-[--yellow] !italic font-semibold">
                 “The art of medicine consists of amusing the patient while it is
                 the nature that cures the disease”
               </span>
@@ -23,7 +23,7 @@ const FounderNote = () => {
             </p>
             <p className="section-content !text-justify">
               What’s the role of
-              <span className="!text-[--voilet] !italic font-semibold">
+              <span className="text-[--yellow] !italic font-semibold">
                 &nbsp; entertainment and amusement in treatment.{" "}
               </span>
             </p>
@@ -41,20 +41,20 @@ const FounderNote = () => {
         </div>
         <p className="section-content !text-justify">
           The defence mechanism and the{" "}
-          <span className="!text-[--voilet] !italic font-semibold">
+          <span className="text-[--yellow] !italic font-semibold">
             immune system
           </span>{" "}
           of the body is that power. The magical ways of{" "}
-          <span className="!text-[--voilet] !italic font-semibold">
+          <span className="text-[--yellow] !italic font-semibold">
             respiratory and cardiac systems
           </span>{" "}
           to keep{" "}
-          <span className="!text-[--voilet] !italic font-semibold">
+          <span className="text-[--yellow] !italic font-semibold">
             everything in equilibrium{" "}
           </span>
           is that power. The strength and resilience of our digestive system is
           that power.{" "}
-          <span className="!text-[--voilet] !italic font-semibold">
+          <span className="text-[--yellow] !italic font-semibold">
             The ability of the mind to de-clutter itself
           </span>{" "}
           using the breath is that power.
@@ -70,7 +70,7 @@ const FounderNote = () => {
           Self-exploration with a broader perspective by recognising the
           infinitely powerful and wondrous secrets of the existence is the way
           to learn and decode this magical technology of{" "}
-          <span className="!text-[--voilet] !italic font-semibold">
+          <span className="text-[--yellow] !italic font-semibold">
             consciousness to heal thy self.
           </span>
         </p>
@@ -89,7 +89,7 @@ const FounderNote = () => {
 
         <p className="section-content !text-justify">
           I realised…{" "}
-          <span className="!text-[--voilet] !italic font-semibold">
+          <span className="text-[--yellow] !italic font-semibold">
             I can heal my life… and if I can, even you can heal your life.
           </span>
         </p>
@@ -107,7 +107,7 @@ const FounderNote = () => {
           Everything at Nityanava, be it consultations with me &nbsp;&amp;&nbsp;
           be it therapies with our team &nbsp;&amp;&nbsp; our select products;
           are all designed to bring you back to your ever-present, forever new —
-          <span className="!text-[--voilet] !italic font-semibold">
+          <span className="text-[--yellow] !italic font-semibold">
             {" "}
             you… where there is totality of your being, fullness of your
             consciousness and happiness in life!
@@ -115,7 +115,7 @@ const FounderNote = () => {
         </p>
 
         <p className="section-content !text-justify">
-          <span className="!text-[--voilet] !italic font-semibold">
+          <span className="text-[--yellow] !italic font-semibold">
             Health and well-being then is just a by-product!
           </span>
         </p>
@@ -130,7 +130,7 @@ const FounderNote = () => {
         </p>
 
         <p className="section-content !text-justify">
-          <span className="!text-[--voilet] !italic font-semibold">
+          <span className="text-[--yellow] !italic font-semibold">
             Keep Smiling and Celebrate Life!
           </span>
         </p>
@@ -140,7 +140,7 @@ const FounderNote = () => {
           present moment. Every moment is a new moment &nbsp;&amp;&nbsp; every
           moment you are a ‘new you’; when life is experienced in the present.
           You are healthy in this moment.{" "}
-          <span className="!text-[--voilet] !italic font-semibold">
+          <span className="text-[--yellow] !italic font-semibold">
             You are HEALTH… in this NOW!
           </span>
         </p>
