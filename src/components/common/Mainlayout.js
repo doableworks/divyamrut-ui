@@ -1,7 +1,7 @@
 import { ConfigProvider } from "antd";
 import { LayoutSection } from "@/components/common/LayoutSection";
 
-export default async function MainLayout({ children, navbarAPIItems, displayBlockItems,  session, }) {
+export default function MainLayout({ children, navbarAPIItems, displayBlockItems,  session, }) {
   
 
   const customTheme = {

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState, useMemo } from "react";
 import { SessionProvider } from "next-auth/react";
 import PremiumNavbar from "@/components/common/navbar/PremiumNavbar";
 import LoginModal from "../login/loginModal";
@@ -26,34 +26,43 @@ export const LayoutSection = ({
   const [scrolled, setScrolled] = useState(0);
   const pathname = usePathname();
 
-  const initialMenuItems = [
-    { label: "About Us", path: "/about-us" },
-    {
-      label: "Consultations",
-      path: "#",
-      parentSlug: "/consultations",
-      subMenu: navbarAPIitems?.consultation,
-    },
-    {
-      label: "Holistic Therapies",
-      path: "/therapy",
-      parentSlug: "/therapy",
-      subMenu: navbarAPIitems?.therapy_categories,
-    },
-    { label: "Well-being Packages", path: "/health-packages" },
-    {
-      label: "Wellness Products",
-      path: "/products",
-      parentSlug: "/products",
-      subMenu: navbarAPIitems?.product_data,
-    },
-    { label: "Contact Us", path: "/contact-us" },
-  ];
+  // Memoize the menu items to recreate when navbarAPIitems changes
+  const initialMenuItems = useMemo(
+    () => [
+      { label: "About Us", path: "/about-us" },
+      {
+        label: "Consultations",
+        path: "#",
+        parentSlug: "/consultations",
+        subMenu: navbarAPIitems?.consultation || [],
+      },
+      {
+        label: "Holistic Therapies",
+        path: "/therapy",
+        parentSlug: "/therapy",
+        subMenu: navbarAPIitems?.therapy_categories || [],
+      },
+      { label: "Well-being Packages", path: "/health-packages" },
+      {
+        label: "Wellness Products",
+        path: "/products",
+        parentSlug: "/products",
+        subMenu: navbarAPIitems?.product_data || [],
+      },
+      { label: "Contact Us", path: "/contact-us" },
+    ],
+    [navbarAPIitems]
+  );
 
-  useLayoutEffect(() => {
-    dispatch(setMenuItems(initialMenuItems));
-    dispatch(setDisplayBlocks(displayBlockItems));
-  }, [dispatch, navbarAPIitems]);
+  // Dispatch data to Redux store when component mounts or data changes
+  useEffect(() => {
+    if (navbarAPIitems && Object.keys(navbarAPIitems).length > 0) {
+      dispatch(setMenuItems(initialMenuItems));
+    }
+    if (displayBlockItems && displayBlockItems.length > 0) {
+      dispatch(setDisplayBlocks(displayBlockItems));
+    }
+  }, [navbarAPIitems, displayBlockItems, dispatch, initialMenuItems]);
 
   useEffect(() => {
     const handleScroll = () => {
