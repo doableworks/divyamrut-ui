@@ -1,8 +1,8 @@
 export default function TherapyHighlight({ highlights }) {
   return (
-    <section className="bg-white p-10 lg:py-28 lg:px-20">
-      <h2 className="section-title">Power of Healing</h2>
-      <p className="highlight-heading">Highlights of the therapy</p>
+    <section className="bg-white p-10 lg:py-10 lg:px-20">
+      <h2 className="highlight-heading">Power of Healing</h2>
+      <p className="section-title">Highlights of the therapy</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 lg:mt-14">
         {highlights.map((highlight, index) => (

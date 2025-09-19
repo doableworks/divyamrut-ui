@@ -29,10 +29,10 @@ export const LayoutSection = ({
   // Memoize the menu items to recreate when navbarAPIitems changes
   const initialMenuItems = useMemo(
     () => [
+      { label: "Home", path: "/" },
       { label: "About Us", path: "/about-us" },
       {
         label: "Consultations",
-        path: "#",
         parentSlug: "/consultations",
         subMenu: navbarAPIitems?.consultation || [],
       },

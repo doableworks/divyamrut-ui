@@ -41,9 +41,9 @@ export default function Footer() {
   const therapyItems = menuItems?.find((each) => each.path === "/therapy");
 
   return (
-    <div className="bg-[--yellow] w-full px-8 md:px-20 xl:px-36 pt-16 pb-8 font-poppins text-[--neutral]">
+    <div className="bg-[--yellow] w-full px-8 md:px-20 py-8 font-poppins text-[--neutral]">
       <section className=" grid [@media(max-width:390px)]:grid-cols-1 grid-cols-2 lg:grid-cols-4 [@media(max-width:390px)]:gap-16 gap-8 md:gap-16">
-        <div>
+        <div className="lg:pl-14">
           <p className="text-lg font-semibold mb-8">Products</p>
           <ul className="space-y-5 text-[--neutral]">
             {productItems?.subMenu?.map(
@@ -61,7 +61,7 @@ export default function Footer() {
             )}
           </ul>
         </div>
-        <div>
+        <div className="lg:pl-14">
           <p className="text-lg font-semibold mb-8">Therapies</p>
           <ul className="space-y-5 text-[--neutral]">
             {therapyItems?.subMenu?.map((each, index) => (
@@ -76,7 +76,7 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <div>
+        <div className="lg:pl-16">
           <p className="text-lg font-semibold mb-8">Quick links</p>
           <ul className="space-y-5 text-[--neutral]">
             {quickLinkItems?.map((each, index) => (
@@ -125,7 +125,7 @@ export default function Footer() {
           </ul>
         </div>
       </section>
-      <hr className="my-10 h-px bg-gray-700 opacity-10 border-0" />
+      <hr className="my-4 h-px bg-gray-700 opacity-10 border-0" />
       <p className="text-center ">
         © {new Date().getFullYear()} Nityanava | All Rights Reserved
       </p>

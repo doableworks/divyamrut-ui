@@ -15,10 +15,10 @@ export default function FaqsItem({ detail, openFaq, setOpenFaq }) {
   return (
     <li
       onClick={handleChangeOpen}
-      className="bg-white p-8 rounded-2xl w-full xl:w-[800px] group cursor-pointer"
+      className="bg-white p-4 rounded-xl w-full  group cursor-pointer"
     >
       <div className="flex gap-4 justify-between items-start">
-        <p className="section-title !text-left !text-[--neutral] !text-[16px] md:!text-[20px] !normal-case mb-3 group-hover:!text-[--voilet]">{detail?.title}</p>
+        <p className="section-title !text-left !text-[--neutral] !text-[16px] md:!text-[20px] !normal-case group-hover:!text-[--voilet]">{detail?.title}</p>
 
         <UpOutlined
           style={{ color: "#3c3c3d" }}
@@ -29,7 +29,7 @@ export default function FaqsItem({ detail, openFaq, setOpenFaq }) {
         />
       </div>
       {openFaq === detail.uid && (
-        <p  className="section-content !text-left" dangerouslySetInnerHTML={{ __html: detail?.description }}></p>
+        <p  className="section-content !text-left mt-4" dangerouslySetInnerHTML={{ __html: detail?.description }}></p>
       )}
     </li>
   );

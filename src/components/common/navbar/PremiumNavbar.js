@@ -220,25 +220,43 @@ export default function PremiumNavbar({ scrollNum }) {
         <section className="hidden [@media(min-width:1340.98px)]:block">
           {!isShowSearch ? (
             <ul className="flex gap-8 justify-center h-8">
-              {menuItems.map((item, index) => (
-                <Link href={item.path ? item.path : ""} key={index}>
-                  <li
-                    onMouseEnter={() => handleMouseEnter(item)}
-                    className={twMerge(
-                      "relative navbar-li h-full",
-                      item.path &&
+              {menuItems.map((item, index) =>
+                item.path ? (
+                  <Link href={item.path} key={index}>
+                    <li
+                      onMouseEnter={() => handleMouseEnter(item)}
+                      className={twMerge(
+                        "relative navbar-li h-full",
                         "hover:border-b-2 border-b-[--yellow] box-border"
-                    )}
-                  >
-                    {item.is_soon && (
-                      <span className="bg-[--yellow] absolute text-white font-sans text-[10px] rounded rounded-br-none px-1 font-medium top-[-20px]">
-                        Coming Soon
-                      </span>
-                    )}
-                    {item.label}
-                  </li>
-                </Link>
-              ))}
+                      )}
+                    >
+                      {item.is_soon && (
+                        <span className="bg-[--yellow] absolute text-white font-sans text-[10px] rounded rounded-br-none px-1 font-medium top-[-20px]">
+                          Coming Soon
+                        </span>
+                      )}
+                      {item.label}
+                    </li>
+                  </Link>
+                ) : (
+                  <div key={index}>
+                    <li
+                      onMouseEnter={() => handleMouseEnter(item)}
+                      className={twMerge(
+                        "relative navbar-li h-full",
+                        "hover:border-b-2 border-b-[--yellow] box-border"
+                      )}
+                    >
+                      {item.is_soon && (
+                        <span className="bg-[--yellow] absolute text-white font-sans text-[10px] rounded rounded-br-none px-1 font-medium top-[-20px]">
+                          Coming Soon
+                        </span>
+                      )}
+                      {item.label}
+                    </li>
+                  </div>
+                )
+              )}
             </ul>
           ) : (
             <div className="flex gap-4 justify-center mb-4">

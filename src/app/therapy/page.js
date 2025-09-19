@@ -123,8 +123,8 @@ export default function TherapyPage() {
         }}
       />
       <div className="pb-[6rem] pt-[2rem] lg:pb-[6rem] lg:pt-16">
-        <h1 className="section-title !mb-0">Holistic Therapies</h1>
-        <h2 className="highlight-heading">
+        <h1 className="highlight-heading !mb-0">Holistic Therapies</h1>
+        <h2 className="section-title lg:mb-4">
           Empowering Wellness, Healing,
           <br className="hidden md:inline-block" /> and Growth
         </h2>

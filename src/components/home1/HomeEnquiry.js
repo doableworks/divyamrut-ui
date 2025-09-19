@@ -50,7 +50,7 @@ const HomeEnquiry = forwardRef(function HomeEnquiry(props, ref) {
               <p className="highlight-heading !text-left !mb-3">
                 Let’s work together
               </p>
-              <div className="border-b-2 w-12 border-[--yellow] mt-2 mb-4" />
+              {/* <div className="border-b-2 w-12 border-[--yellow] mt-2 mb-4" /> */}
             </div>
           )}
           {formOnly && <h2 className="highlight-heading !text-left">Send us a message</h2>}
@@ -62,14 +62,14 @@ const HomeEnquiry = forwardRef(function HomeEnquiry(props, ref) {
           >
             <div className="flex flex-col gap-6">
               <Form.Item
-                label="Your Name"
+                label={<span className="input-label">Your Name</span>}
                 name="yourname"
                 rules={[{ required: true, message: "Name is required" }]}
               >
                 <Input placeholder="Enter your name here" />
               </Form.Item>
               <Form.Item
-                label="Email"
+                label={<span className="input-label">Email</span>}
                 name="email"
                 rules={[
                   { required: true, message: "Email is required." },
@@ -79,7 +79,7 @@ const HomeEnquiry = forwardRef(function HomeEnquiry(props, ref) {
                 <Input placeholder="Enter your email" />
               </Form.Item>
               <Form.Item
-                label="Your Message"
+                label={<span className="input-label">Your Message</span>}
                 name="message"
                 rules={[{ required: true, message: "Message is required" }]}
               >

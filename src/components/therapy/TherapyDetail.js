@@ -16,18 +16,20 @@ export default function TherapyDetail({ data }) {
 
   const { description, faqs, image, name, testimonials, is_soon } = data;
 
+  console.log("Therapy Detail Data:", description);
+
   return (
     <div>
       <div className="!mt-0 common_page_width">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-20 lg:gap-40">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-20">
           <figure className="p-3 flex flex-col justify-center md:items-start">
             <h1 className="highlight-heading md:!m-0 md:!text-left !mb-2">
               {name}
             </h1>
-            <p
-              className="section-content md:!text-left"
+            <div
+              className="md:!text-left section-content therapy-description"
               dangerouslySetInnerHTML={{ __html: description }}
-            ></p>
+            ></div>
             {!is_soon ? (
               <button
                 onClick={handleBookTherapy}
@@ -45,7 +47,7 @@ export default function TherapyDetail({ data }) {
             )}
           </figure>
           <section className="relative lg:min-h-[550px]">
-            <figure className="relative z-10 flex rounded-tr-full rounded-tl-full overflow-hidden h-[550px] border-2">
+            <figure className="relative z-10 flex rounded-tr-full rounded-tl-full overflow-hidden h-[550px] lg:h-[700px] border-2">
               <img
                 src={image || NoImageAvailabe}
                 alt="therapy"

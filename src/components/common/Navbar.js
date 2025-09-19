@@ -23,7 +23,7 @@ import { useSession } from "next-auth/react";
 const initialMenuItems = [
   { label: "Home", path: "/" },
   { label: "About Us", path: "/about-us" },
-  { label: "Consultations", path: "/consultations" },
+  { label: "Consultations", subMenu: [] },
   {
     label: "Therapies",
     subMenu: [],
@@ -52,6 +52,11 @@ const Navbar = ({ therapySubmenu, productSubMenu, isScrolled }) => {
 
   const menuItems = initialMenuItems.map((each) => {
     switch (each.label) {
+      case "Consultations":
+        return {
+          label: "Consultations",
+          subMenu: [], // Force empty submenu for consultations
+        };
       case "Therapies":
         return {
           label: "Therapies",
@@ -153,12 +158,11 @@ const Navbar = ({ therapySubmenu, productSubMenu, isScrolled }) => {
               About Us
             </h5>
             <h5
-              className={`cursor-pointer hover:text-E0A43B ${
+              className={`${
                 pathname == "/consultations"
                   ? "text-E0A43B"
                   : "text-[--neutral]"
               }`}
-              onClick={() => handleMoveRoute("/consultations")}
             >
               Consultations
             </h5>
