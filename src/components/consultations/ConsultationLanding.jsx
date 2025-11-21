@@ -33,7 +33,7 @@ export default function ConsultationLanding({ data }) {
               {data?.title}
             </h1>
             <p
-              className="section-content md:!text-left"
+              className="section-content md:!text-left therapy-description"
               dangerouslySetInnerHTML={{ __html: data?.description }}
             ></p>
             <button

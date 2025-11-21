@@ -24,9 +24,9 @@ const offers = [
       "https://register.nityanava.com/media/uploads/public/images/724120ed-4657-4e74-b1a2-bbfaa9a53e92.jpg",
   },
   {
-    name: "Concern Specific Health and Wellbeing packages",
+    name: "Wellness Workshops",
     feedback:
-      "A comprehensive approach to find an optimum health plan by curating a tailored made package by working one on one to discover what would work best for you.",
+      "Meticulously designed workshops that empower individuals and groups to explore the path of comprehensive and holistic well-being.Each experience is thoughtfully curated to help participants to cultivate optimum health, inner harmony, and lasting happiness.",
     image:
       "https://register.nityanava.com/media/uploads/public/images/0966e7c8-64a6-4495-bf2c-9a0a7dd334f2.jpg",
   },

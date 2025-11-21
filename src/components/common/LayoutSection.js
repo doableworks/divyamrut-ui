@@ -43,6 +43,7 @@ export const LayoutSection = ({
         subMenu: navbarAPIitems?.therapy_categories || [],
       },
       { label: "Well-being Packages", path: "/health-packages" },
+      { label: "Wellness-Retreats", path: "/wellness-retreat" },
       {
         label: "Wellness Products",
         path: "/products",
