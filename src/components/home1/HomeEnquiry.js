@@ -44,16 +44,26 @@ const HomeEnquiry = forwardRef(function HomeEnquiry(props, ref) {
   return (
     <section ref={ref} className={twMerge("", !formOnly && "bg-[#ffffff82]")}>
       <div className={twMerge("", !formOnly && "common_page_width")}>
-        <div className={twMerge("", !formOnly && "grid grid-cols-1 lg:grid-cols-2 gap-8")}>
+        <div
+          className={twMerge(
+            "",
+            !formOnly && "grid grid-cols-1 lg:grid-cols-2 gap-8"
+          )}
+        >
           {!formOnly && (
             <div>
               <p className="highlight-heading !text-left !mb-3">
-                Let’s work together
+                Let&apos;s work together
               </p>
               {/* <div className="border-b-2 w-12 border-[--yellow] mt-2 mb-4" /> */}
+              <p className="section-title !text-left !mb-6">
+                Together lets make holistc living a way of life
+              </p>
             </div>
           )}
-          {formOnly && <h2 className="highlight-heading !text-left">Send us a message</h2>}
+          {formOnly && (
+            <h2 className="highlight-heading !text-left">Send us a message</h2>
+          )}
           <Form
             layout="vertical"
             form={form}
@@ -83,7 +93,10 @@ const HomeEnquiry = forwardRef(function HomeEnquiry(props, ref) {
                 name="message"
                 rules={[{ required: true, message: "Message is required" }]}
               >
-                <Input.TextArea placeholder="Enter your message here" rows={4} />
+                <Input.TextArea
+                  placeholder="Enter your message here"
+                  rows={4}
+                />
               </Form.Item>
               <Form.Item>
                 <CustomButton

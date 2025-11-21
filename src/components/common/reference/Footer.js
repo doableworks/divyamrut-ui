@@ -44,7 +44,7 @@ export default function Footer() {
     <div className="bg-[--yellow] w-full px-8 md:px-20 py-8 font-poppins text-[--neutral]">
       <section className=" grid [@media(max-width:390px)]:grid-cols-1 grid-cols-2 lg:grid-cols-4 [@media(max-width:390px)]:gap-16 gap-8 md:gap-16">
         <div className="lg:pl-14">
-          <p className="text-lg font-semibold mb-8">Products</p>
+          <p className="text-lg font-semibold mb-8">Consultations and Workshops</p>
           <ul className="space-y-5 text-[--neutral]">
             {productItems?.subMenu?.map(
               (each, index) =>
