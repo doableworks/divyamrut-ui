@@ -27,8 +27,8 @@ import useCart from "@/hooks/useCart";
 const stepsBuyProducts = [
   {
     id: 0,
-    label: "delivery Address",
-    title: "delivery Address",
+    label: "Delivery Address",
+    title: "Delivery Address",
   },
   {
     id: 1,

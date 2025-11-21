@@ -932,7 +932,7 @@ export default function BookingModal() {
                   },
                 ]}
               >
-                <Input placeholder="Enter yout email" />
+                <Input placeholder="Enter your email" />
               </Form.Item>
               <Form.Item
                 label="Number"

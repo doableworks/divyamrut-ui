@@ -124,7 +124,7 @@ const AddDeliveryAddress = ({
               ]}
             >
               <Input
-                placeholder="Enter yout email"
+                placeholder="Enter your email"
                 disabled={userData || userAddress?.email}
               />
             </Form.Item>
