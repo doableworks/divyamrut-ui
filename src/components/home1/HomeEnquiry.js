@@ -57,7 +57,7 @@ const HomeEnquiry = forwardRef(function HomeEnquiry(props, ref) {
               </p>
               {/* <div className="border-b-2 w-12 border-[--yellow] mt-2 mb-4" /> */}
               <p className="section-title !text-left !mb-6">
-                Together lets make holistc living a way of life
+                Together let&apos;s make holistic living a way of life
               </p>
             </div>
           )}
