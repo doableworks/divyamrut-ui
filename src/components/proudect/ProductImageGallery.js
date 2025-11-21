@@ -145,13 +145,13 @@ const ProductImageGallery = ({ images }) => {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-1">
       {/* Desktop View */}
       {!isMobile && (
-        <div className="hidden md:flex gap-4">
+        <div className="hidden md:flex gap-4 w-full">
           <div
             ref={thumbnailsRef}
-            className="w-16 flex flex-col gap-2 sticky top-32 self-start max-h-[80vh] overflow-y-auto"
+            className="w-16 flex flex-col gap-2 sticky top-32 self-start max-h-[80vh] overflow-y-auto flex-shrink-0"
             style={{ scrollbarWidth: "thin" }}
           >
             {images.map((image, index) => (
@@ -174,7 +174,7 @@ const ProductImageGallery = ({ images }) => {
           </div>
 
           {/* Main images stacked vertically */}
-          <div ref={galleryRef} className="flex-1 flex flex-col gap-6">
+          <div ref={galleryRef} className="flex flex-col gap-6 flex-1">
             {images.map((image, index) => (
               <div
                 key={index}
@@ -182,7 +182,7 @@ const ProductImageGallery = ({ images }) => {
                 className="w-full"
                 id={`image-${index}`}
               >
-                <div className="relative w-full">
+                <div className="relative w-full h-fit">
                   <ImageMedium imgSrc={image || NoImageAvailabe} />
                 </div>
               </div>

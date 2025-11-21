@@ -73,7 +73,7 @@ const Product = ({ item, productCategory, session }) => {
       <CustomButton
         htmlType="submit"
         className="site-button-primary !mt-4 w-[-webkit-fill-available] capitalize"
-        title="Know More"
+        title="Add to Cart"
         onClick={() =>
           router.push(`/products/${productCategory}/${item?.slug}`)
         }

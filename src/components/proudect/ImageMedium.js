@@ -5,7 +5,7 @@ import { Controlled as ControlledZoom } from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import useImageSrcSet from "@/hooks/useImageSrcSet";
 
-const ImageMedium = ({ imgSrc, id }) => {
+const ImageMedium = ({ imgSrc, id, aspect=3/4 }) => {
   const [isZoomed, setIsZoomed] = useState(false);
 
   const imageSrcSet = useImageSrcSet(imgSrc);
@@ -16,7 +16,8 @@ const ImageMedium = ({ imgSrc, id }) => {
 
   return (
     <ControlledZoom isZoomed={isZoomed} onZoomChange={handleZoom}>
-      <div className="bg-white aspect-[3/4]">
+      {/* <div className="aspect-[3/4] bg-white"> */}
+      <div className={`aspect-[${aspect}] bg-white`}>
         <img
           id={id}
           key={imgSrc}

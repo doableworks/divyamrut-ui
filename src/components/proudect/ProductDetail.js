@@ -111,8 +111,9 @@ const ProductDetail = ({ item }) => {
   return (
     <>
       <div className="relative flex flex-col lg:flex-row gap-10 min-h-[80vh]">
-        <div className="lg:sticky w-full  md:top-10 lg:w-1/2 flex flex-col lg:flex-row-reverse items-center self-start lg:items-start gap-2">
-          <div className="relative w-full aspect-[3/4] bg-white overflow-hidden rounded-xl lg:w-full">
+        {/* removed lg:sticky */}
+        <div className="w-full  md:top-10 lg:w-1/2 flex flex-col lg:flex-row-reverse items-center self-start lg:items-start gap-2"> 
+          <div className="relative w-full aspect-[1] bg-white overflow-hidden rounded-xl lg:w-full">
             <ImageMedium
               id="main-preview-img"
               imgSrc={
@@ -120,6 +121,7 @@ const ProductDetail = ({ item }) => {
                 uploadedImages[selectedImage]?.image ||
                 NoImageAvailabe
               }
+              aspect={1}
             />
           </div>
           <div className="flex flex-row lg:flex-col gap-2 w-full lg:w-auto mt-8 lg:mt-0 overflow-x-auto lg:overflow-y-auto narrow-scrollbar pb-2 lg:pb-0 flex-shrink-0 lg:h-full">
