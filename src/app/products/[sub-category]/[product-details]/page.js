@@ -119,11 +119,12 @@ const Page = async ({ params }) => {
           __html: JSON.stringify(schemaData, null, 2),
         }}
       />
-      {item?.is_new_design ? (
-        <div className="common_page_width relative z-20">
-        <ProductDetailRedesign item={item} />
-        </div>
-      ) : (
+      {/* {item?.is_new_design ? (
+        // <div className="common_page_width relative z-20">
+        // <ProductDetailRedesign item={item} />
+        // </div>
+      ) : */}
+       (
         <div className="common_page_width relative z-20">
           <ProductDetail item={item} />
           {item?.related_products?.length > 0 && (
@@ -133,7 +134,8 @@ const Page = async ({ params }) => {
             />
           )}
         </div>
-      )}
+      )
+      {/* } */}
     </>
   );
 };
