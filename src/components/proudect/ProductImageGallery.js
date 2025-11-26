@@ -183,7 +183,7 @@ const ProductImageGallery = ({ images }) => {
                 id={`image-${index}`}
               >
                 <div className="relative w-full h-fit">
-                  <ImageMedium imgSrc={image || NoImageAvailabe} />
+                  <ImageMedium imgSrc={image || NoImageAvailabe} aspect={1} />
                 </div>
               </div>
             ))}
