@@ -6,11 +6,11 @@ const AboutFounder = () => {
       <p className="highlight-heading !text-left">About the Founder:</p>
       <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 lg:gap-12">
         <div
-          className="h-[500px] lg:h-full w-full rounded-md bg-center bg-contain lg:bg-cover bg-no-repeat "
+          className="h-[300px] lg:h-full w-full rounded-md bg-center bg-contain lg:bg-cover bg-no-repeat "
           style={{
             backgroundImage:
-              "url(https://register.nityanava.com/media/uploads/public/images/a1fc9401-fa3b-4f65-919a-4f199a3313cd_w41CKu5.jpg)",
-          }}
+              "url(https://register.nityanava.com/media/uploads/public/images/042e1dc3-5e24-4f9c-88e9-b79325219feb.jpg)",
+            }}
         ></div>
         <div>
           <p className="section-content !text-justify">

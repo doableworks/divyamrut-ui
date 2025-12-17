@@ -50,13 +50,13 @@ const whyUsArray = [
 
 export default function WhyUsSection() {
   return (
-    <div className="relative bg-white py-[3rem] px-5 md:px-10 md:py-[5.5rem] w-full">
+    <div className="relative bg-white py-[3rem] px-5 md:px-10 md:py-[2rem] w-full">
       <div className=" !mb-20">
         <p className="section-title !text-center">WHY US?</p>
         <p className="highlight-heading">What Makes Us Stand Out</p>
       </div>
 
-      <ul className="list-none grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-20 my-6">
+      <ul className="list-none grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 md:gap-2 my-6 md:max-w-6xl md:mx-auto">
         {whyUsArray.map((each, index) => (
           <li
             className="flex flex-col justify-center items-center gap-10"

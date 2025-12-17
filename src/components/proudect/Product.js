@@ -17,7 +17,7 @@ const Product = ({ item, productCategory, session }) => {
     event.stopPropagation();
     try {
       setLoader(true);
-      await onAddItem(item);
+      await onAddItem(item, 1); // Adding quantity parameter with default value of 1
     } catch (error) {
       console.log("handleAddItem error", error);
     } finally {
@@ -74,9 +74,8 @@ const Product = ({ item, productCategory, session }) => {
         htmlType="submit"
         className="site-button-primary !mt-4 w-[-webkit-fill-available] capitalize"
         title="Add to Cart"
-        onClick={() =>
-          router.push(`/products/${productCategory}/${item?.slug}`)
-        }
+        loading={loading}
+        onClick={handleAddItem}
       />
     </div>
   );

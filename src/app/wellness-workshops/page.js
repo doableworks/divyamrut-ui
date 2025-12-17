@@ -117,7 +117,7 @@ const page = () => {
           mind, and spirit. Through our holistic approach, you'll experience not just the absence of illness, but the
           joyful presence of awareness, vitality, and purpose.
         </p>
-        <Link href="/contact-us" className="site-button-primary">
+        <Link href="https://wa.link/5nize1" rel="noopener noreferrer" target="_blank" className="site-button-primary">
           Contact Us
         </Link>
       </section>

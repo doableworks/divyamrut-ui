@@ -118,7 +118,7 @@ const page = () => {
           space where mind, body, and spirit realign, and leave with renewed energy, clarity, and a deeper sense
           of purpose.
         </p>
-        <Link href="/contact-us" className="site-button-primary">
+        <Link href="https://wa.link/5nize1" rel="noopener noreferrer" target="_blank" className="site-button-primary">
           Connect & Explore Retreats
         </Link>
       </section>

@@ -28,34 +28,48 @@ export const LayoutSection = ({
 
   // Memoize the menu items to recreate when navbarAPIitems changes
   const initialMenuItems = useMemo(
-    () => [
-      { label: "Home", path: "/" },
-      { label: "About Us", path: "/about-us" },
-      {
-        label: "Consultations",
-        path: "/consultations",
-        parentSlug: "/consultations",
-        subMenu: [...(navbarAPIitems?.consultation || [])].reverse(),
-        // doing this from frontend as backend is not accessible currently
-      },
-      {
-        label: "Holistic Therapies",
-        path: "/therapy",
-        parentSlug: "/therapy",
-        subMenu: navbarAPIitems?.therapy_categories || [],
-      },
-      { label: "Wellness Workshops", path: "/wellness-workshops" },
-      { label: "Wellness-Retreats", path: "/wellness-retreat" },
-      {
-        label: "Wellness Products",
-        path: "/products",
-        parentSlug: "/products",
-        subMenu: navbarAPIitems?.product_data || [],
-      },
-      { label: "Contact Us", path: "/contact-us" },
-    ],
+    () => {
+      // Reorder products to show meditation shawls first
+      const reorderedProducts = navbarAPIitems?.product_data ? [...navbarAPIitems.product_data] : [];
+      const meditationShawls = reorderedProducts.filter(item => 
+        item.name.toLowerCase().includes('meditation shawl')
+      );
+      const otherProducts = reorderedProducts.filter(item => 
+        !item.name.toLowerCase().includes('meditation shawl')
+      );
+      const orderedProducts = [...meditationShawls, ...otherProducts];
+
+      return [
+        { label: "Home", path: "/" },
+        { label: "About Us", path: "/about-us" },
+        {
+          label: "Consultations",
+          path: "/consultations",
+          parentSlug: "/consultations",
+          subMenu: [...(navbarAPIitems?.consultation || [])].reverse(),
+          // doing this from frontend as backend is not accessible currently
+        },
+        {
+          label: "Holistic Therapies",
+          path: "/therapy",
+          parentSlug: "/therapy",
+          subMenu: navbarAPIitems?.therapy_categories || [],
+        },
+        { label: "Wellness Workshops", path: "/wellness-workshops" },
+        { label: "Wellness-Retreats", path: "/wellness-retreat" },
+        {
+          label: "Wellness Products",
+          path: "/products",
+          parentSlug: "/products",
+          subMenu: orderedProducts,
+        },
+        { label: "Contact Us", path: "/contact-us" },
+      ];
+    },
     [navbarAPIitems]
   );
+
+  console.log(navbarAPIitems?.product_data);;
 
   // Dispatch data to Redux store when component mounts or data changes
   useEffect(() => {
