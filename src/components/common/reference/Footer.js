@@ -38,7 +38,10 @@ export default function Footer() {
   const menuItems = useSelector((state) => state.menuItems).all;
 
   const productItems = menuItems?.find((each) => each.path === "/products");
+  const consultationItems = menuItems?.find((each) => each.path === "/consultations");
   const therapyItems = menuItems?.find((each) => each.path === "/therapy");
+
+  console.log("Footer - Consultation Items:", consultationItems?.subMenu);
 
   return (
     <div className="bg-[--yellow] w-full px-8 md:px-20 py-8 font-poppins text-[--neutral]">
@@ -46,12 +49,12 @@ export default function Footer() {
         <div className="lg:pl-14">
           <p className="text-lg font-semibold mb-8">Consultations and Workshops</p>
           <ul className="space-y-5 text-[--neutral]">
-            {productItems?.subMenu?.map(
+            {consultationItems?.subMenu?.map(
               (each, index) =>
                 !each.is_soon && (
                   <li key={index}>
                     <Link
-                      href={`/products/${each.slug}`}
+                      href={`/consultations/${each.slug}`}
                       className="text-sm text-[--neutral] hover:underline hover:text-[--neutral]"
                     >
                       {each.name}
@@ -59,6 +62,14 @@ export default function Footer() {
                   </li>
                 )
             )}
+            <li>
+              <Link
+                href="/wellness-workshops"
+                className="text-sm text-[--neutral] hover:underline hover:text-[--neutral]"
+              >
+                Wellness Workshops
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="lg:pl-14">

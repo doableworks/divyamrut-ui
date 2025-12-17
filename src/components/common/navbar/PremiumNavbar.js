@@ -21,6 +21,7 @@ export default function PremiumNavbar({ scrollNum }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const pathname = usePathname();
+  console.log("PremiumNavbar - Pathname:", pathname);
   const { GetApiCartItem } = useCartActions();
   const cartItems = useSelector((state) => state.cart.items);
   const cartCount = Array.isArray(cartItems) ? cartItems.length : cartItems;
@@ -34,6 +35,7 @@ export default function PremiumNavbar({ scrollNum }) {
   const isMobileNavOpen = useSelector((state) => state.mobileNav.isOpen);
   const [loading, setLoading] = useState(false);
   const menuItems = useSelector((state) => state.menuItems.all);
+  console.log("PremiumNavbar - Menu Items:", menuItems);
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -219,6 +221,7 @@ export default function PremiumNavbar({ scrollNum }) {
 
         <section className="hidden [@media(min-width:1340.98px)]:block">
           {!isShowSearch ? (
+            // ...existing code...
             <ul className="flex gap-8 justify-center h-8">
               {menuItems.map((item, index) =>
                 item.path ? (
@@ -227,7 +230,9 @@ export default function PremiumNavbar({ scrollNum }) {
                       onMouseEnter={() => handleMouseEnter(item)}
                       className={twMerge(
                         "relative navbar-li h-full",
-                        "hover:border-b-2 border-b-[--yellow] box-border"
+                        "hover:border-b-2 border-b-[--yellow] box-border",
+                        pathname.replace(/\/$/, '') === item.path.replace(/\/$/, '') &&
+                          "border-b-2 border-b-[--yellow] box-border"
                       )}
                     >
                       {item.is_soon && (
@@ -244,7 +249,9 @@ export default function PremiumNavbar({ scrollNum }) {
                       onMouseEnter={() => handleMouseEnter(item)}
                       className={twMerge(
                         "relative navbar-li h-full",
-                        "hover:border-b-2 border-b-[--yellow] box-border"
+                        "hover:border-b-2 border-b-[--yellow] box-border",
+                        pathname.replace(/\/$/, '') === item.path?.replace(/\/$/, '') &&
+                          "border-b-2 border-b-[--yellow]"
                       )}
                     >
                       {item.is_soon && (
@@ -259,6 +266,7 @@ export default function PremiumNavbar({ scrollNum }) {
               )}
             </ul>
           ) : (
+            // ...existing code...
             <div className="flex gap-4 justify-center mb-4">
               <label
                 htmlFor="siteSearchInput"

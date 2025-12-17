@@ -33,8 +33,10 @@ export const LayoutSection = ({
       { label: "About Us", path: "/about-us" },
       {
         label: "Consultations",
+        path: "/consultations",
         parentSlug: "/consultations",
-        subMenu: navbarAPIitems?.consultation || [],
+        subMenu: [...(navbarAPIitems?.consultation || [])].reverse(),
+        // doing this from frontend as backend is not accessible currently
       },
       {
         label: "Holistic Therapies",
@@ -42,7 +44,7 @@ export const LayoutSection = ({
         parentSlug: "/therapy",
         subMenu: navbarAPIitems?.therapy_categories || [],
       },
-      { label: "Well-being Packages", path: "/health-packages" },
+      { label: "Wellness Workshops", path: "/wellness-workshops" },
       { label: "Wellness-Retreats", path: "/wellness-retreat" },
       {
         label: "Wellness Products",
