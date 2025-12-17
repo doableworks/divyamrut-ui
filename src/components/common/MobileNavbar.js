@@ -75,25 +75,31 @@ const MobileNavbar = ({
             <div key={index} className="mb-2">
               <div
                 className={`${
-                  pathname === item.path
+                  pathname.replace(/\/$/, '') === item.path?.replace(/\/$/, '')
                     ? "text-[--e-global-color-E0A43B] font-bold"
                     : "text-[#3E3E3E]"
                 } flex justify-between items-center hover:bg-[--e-global-color-E0A43B] hover:text-white cursor-pointer
                 font-suse text-[16px] font-[500] leading-[22px] text-left
                 px-5 py-2 rounded`}
-                onClick={() =>
-                  item.subMenu ? toggleSubMenu(index) : handleAction(item.path)
-                }
+                // Original onClick for entire div - commented out
+                // onClick={() => item.subMenu ? toggleSubMenu(index) : handleAction(item.path)}
+                onClick={() =>  handleAction(item.path)}
               >
                 {item.label}
                 {item.subMenu && (
-                  <>
+                  <div 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleSubMenu(index);
+                    }}
+                    className="cursor-pointer p-1"
+                  >
                     {activeSubMenu === index ? (
                       <UpOutlined />
                     ) : (
                       <DownOutlined />
                     )}
-                  </>
+                  </div>
                 )}
               </div>
               {item.subMenu && activeSubMenu === index && (
