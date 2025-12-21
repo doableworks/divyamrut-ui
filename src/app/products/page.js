@@ -17,6 +17,7 @@ const getAllCategoriesData = async () => {
       throw new Error("Failed to fetch data");
     }
     const data = await res.json();
+    console.log("Fetched Categories Data:", data);
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -66,7 +67,18 @@ export async function generateMetadata() {
 
 const page = async () => {
   const categoryData = await getAllCategoriesData();
-  const bannerImgArr = categoryData.map((item) => item.image);
+  
+  // Reorder categories to show meditation shawls first
+  const reorderedCategories = categoryData ? [...categoryData] : [];
+  const meditationShawls = reorderedCategories.filter(category => 
+    category.name.toLowerCase().includes('meditation shawl')
+  );
+  const otherCategories = reorderedCategories.filter(category => 
+    !category.name.toLowerCase().includes('meditation shawl')
+  );
+  const orderedCategories = [...meditationShawls, ...otherCategories];
+  
+  const bannerImgArr = orderedCategories.map((item) => item.image);
 
   if (!categoryData) {
     notFound();
@@ -79,7 +91,7 @@ const page = async () => {
     url: "https://nityanava.com/products",
     description:
       "Browse our wide range of wellness products across multiple categories. Find the best deals on Nityanava by Divyamrut Naturals.",
-    numberOfItems: categoryData?.length || 4,
+    numberOfItems: orderedCategories?.length || 4,
 
     itemListElement: [
       {
@@ -237,7 +249,7 @@ const page = async () => {
         <DisplayBlocks />
       </div>
       <div className="common_page_width !pt-0">
-        {categoryData.map(
+        {orderedCategories.map(
           (category, index) =>
             category?.products?.length > 0 && (
               <ProductsScroller

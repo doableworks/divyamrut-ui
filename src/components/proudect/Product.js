@@ -43,7 +43,7 @@ const Product = ({ item, productCategory, session }) => {
           />
         </div>
 
-        <div className="flex flex-col gap-1 py-4 h-28 overflow-hidden">
+        <div className="flex flex-col gap-1 py-4 max-h-28 overflow-hidden">
           <h6 className="line-clamp-2 uppercase font-semibold text-sm text-[--neutral] font-poppins">
             {item?.name}
           </h6>
@@ -72,7 +72,7 @@ const Product = ({ item, productCategory, session }) => {
       )} */}
       <CustomButton
         htmlType="submit"
-        className="site-button-primary !mt-4 w-[-webkit-fill-available] capitalize"
+        className="site-button-primary !mt-0 w-[-webkit-fill-available] capitalize"
         title="Add to Cart"
         loading={loading}
         onClick={handleAddItem}

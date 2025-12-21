@@ -25,7 +25,7 @@ const ProductsScroller = ({ category }) => {
 
   return (
     !category.is_soon && (
-      <div className="my-24">
+      <div className="my-8">
         <div
           className={"flex flex-row justify-between items-center gap-4 mb-4"}
         >
@@ -70,7 +70,7 @@ const ProductsScroller = ({ category }) => {
           }
           className="custom-carousel"
         > */}
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-8 gap-x-4">
           {category &&
             category?.products.map((product, index) => (
               <li key={index + category?.name} className={`p-2`}>
