@@ -21,7 +21,6 @@ export default function PremiumNavbar({ scrollNum }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const pathname = usePathname();
-  console.log("PremiumNavbar - Pathname:", pathname);
   const { GetApiCartItem } = useCartActions();
   const cartItems = useSelector((state) => state.cart.items);
   const cartCount = Array.isArray(cartItems) ? cartItems.length : cartItems;
@@ -35,7 +34,6 @@ export default function PremiumNavbar({ scrollNum }) {
   const isMobileNavOpen = useSelector((state) => state.mobileNav.isOpen);
   const [loading, setLoading] = useState(false);
   const menuItems = useSelector((state) => state.menuItems.all);
-  console.log("PremiumNavbar - Menu Items:", menuItems);
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -162,10 +160,10 @@ export default function PremiumNavbar({ scrollNum }) {
           <figure>
             <Link href="/">
               <Image
-                src="/asset/logo/logo.svg"
+                src="/asset/logo/logo-new.svg"
                 alt="Divyamrut Logo"
-                width={400}
-                height={400}
+                width={600}
+                height={600}
                 quality={100}
                 className={twMerge(
                   "transition-all duration-600 ease-in-out block lg:hidden",
@@ -175,16 +173,16 @@ export default function PremiumNavbar({ scrollNum }) {
                 )}
               />
               <Image
-                src="/asset/logo/logo.svg"
+                src="/asset/logo/logo-new.svg"
                 alt="Divyamrut Logo"
-                width={400}
-                height={400}
+                width={600}
+                height={600}
                 quality={100}
                 className={twMerge(
                   "transition-all duration-600 ease-in-out hidden lg:block",
                   isScrolling
-                    ? "h-16 w-20"
-                    : "h-16 w-20 [@media(min-width:1340.98px)]:h-[95px] [@media(min-width:1340.98px)]:w-[115px]"
+                    ? "h-20 w-20"
+                    : "h-16 w-20 [@media(min-width:1340.98px)]:h-[95px] [@media(min-width:1340.98px)]:w-full"
                 )}
               />
             </Link>
@@ -229,7 +227,7 @@ export default function PremiumNavbar({ scrollNum }) {
                     <li
                       onMouseEnter={() => handleMouseEnter(item)}
                       className={twMerge(
-                        "relative navbar-li h-full",
+                        "relative navbar-li h-full text-black",
                         "hover:border-b-2 border-b-[--yellow] box-border",
                         pathname.replace(/\/$/, '') === item.path.replace(/\/$/, '') &&
                           "border-b-2 border-b-[--yellow] box-border"
@@ -325,7 +323,7 @@ export default function PremiumNavbar({ scrollNum }) {
                           Coming Soon
                         </span>
                       )}
-                      <li className="navbar-li hover:text-[--voilet]">
+                      <li className="navbar-li text-black hover:text-[--voilet]">
                         {sub.name}
                       </li>
                     </Link>

@@ -41,7 +41,6 @@ export default function Footer() {
   const consultationItems = menuItems?.find((each) => each.path === "/consultations");
   const therapyItems = menuItems?.find((each) => each.path === "/therapy");
 
-  console.log("Footer - Consultation Items:", consultationItems?.subMenu);
 
   return (
     <div className="bg-[--yellow] w-full px-8 md:px-20 py-8 font-poppins text-[--neutral]">

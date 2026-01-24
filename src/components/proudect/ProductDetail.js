@@ -278,7 +278,7 @@ const ProductDetail = ({ item }) => {
               <p className="text-xl font-jost normal-case font-bold mb-3">
                 About the Item
               </p>
-              <ul className="list-disc list-outside flex flex-col gap-3 md:ml-6">
+              <ul className="list-disc list-outside text-black flex flex-col gap-3 md:ml-6">
                 {item?.feature_1 && (
                   <li dangerouslySetInnerHTML={{ __html: item?.feature_1 }} />
                 )}

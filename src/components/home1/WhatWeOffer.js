@@ -79,10 +79,10 @@ const WhatWeOffer = () => {
     <div id="WhatWeOffer" className="bg-FFEEE2">
       <div className="my-16 md:px-9">
         <div className="flex flex-col justify-center items-center">
-          <h6 className="highlight-heading !mb-0">What we offer:</h6>
-          <h2 className="!max-w-xl highlight-heading !mt-0">
+          <h6 className="highlight-heading !mb-0">What we offer: The combination of nature and science.</h6>
+          {/* <h2 className="!max-w-xl highlight-heading !mt-0">
             The combination of nature and science.
-          </h2>
+          </h2> */}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6 m-auto">
           {offers.map((testimonial, index) => (

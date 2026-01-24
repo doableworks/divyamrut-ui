@@ -59,14 +59,14 @@ const RelatedProductOverview = ({
             router.push(`/products/${productCategory}/${item.slug}`)
           }
         >
-          <p className="text-lg font-bold text-left line-clamp-2 group-hover:text-[--yellow]">
+          <p className="text-lg font-bold text-left text-black line-clamp-2 group-hover:text-[--yellow]">
             {item?.name}
           </p>
           
         </button>
 
         <div>
-          <p className="font-semibold text-xl text-gray-500 text-left mt-3 mb-3">
+          <p className="font-semibold text-black text-xl text-left mt-3 mb-3">
           ₹&nbsp;{item?.price}
           </p>
           <CustomButton

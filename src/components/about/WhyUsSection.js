@@ -52,7 +52,7 @@ export default function WhyUsSection() {
   return (
     <div className="relative bg-white py-[3rem] px-5 md:px-10 md:py-[2rem] w-full">
       <div className=" !mb-20">
-        <p className="section-title !text-center">WHY US?</p>
+        {/* <p className="section-title !text-center">WHY US?</p> */}
         <p className="highlight-heading">What Makes Us Stand Out</p>
       </div>
 

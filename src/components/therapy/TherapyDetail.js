@@ -18,6 +18,17 @@ export default function TherapyDetail({ data }) {
 
   console.log("Therapy Detail Data:", description);
 
+  // Function to convert ol tags to ul tags
+  const convertOlToUl = (htmlString) => {
+    if (!htmlString) return htmlString;
+    
+    return htmlString
+      .replace(/<ol\b[^>]*>/gi, '<ul>')
+      .replace(/<\/ol>/gi, '</ul>');
+  };
+
+  const processedDescription = convertOlToUl(description);
+
   return (
     <div>
       <div className="!mt-0 common_page_width">
@@ -27,8 +38,8 @@ export default function TherapyDetail({ data }) {
               {name}
             </h1>
             <div
-              className="md:!text-left section-content therapy-description"
-              dangerouslySetInnerHTML={{ __html: description }}
+              className="!text-left section-content therapy-description"
+              dangerouslySetInnerHTML={{ __html: processedDescription }}
             ></div>
             {!is_soon ? (
               <button

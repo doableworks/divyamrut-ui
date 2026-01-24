@@ -122,7 +122,26 @@ export default function TherapyPage() {
           __html: JSON.stringify(schemaData, null, 2),
         }}
       />
-      <div className="pb-[6rem] pt-[2rem] lg:pb-[6rem] lg:pt-16">
+      {/* Full width banner */}
+      <div className="relative w-full h-[400px] md:h-[250px] lg:h-[300px] flex items-center justify-center">
+        {/* Mobile/Tablet Background */}
+        <div 
+          className="absolute inset-0 md:hidden bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('/asset/banner/All-Banner-mobile.jpg.jpeg')`
+          }}
+        ></div>
+        
+        {/* Desktop Background */}
+        <div 
+          className="absolute inset-0 hidden md:block bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('/asset/banner/All-Banner-Desktop.jpg.jpeg')`
+          }}
+        ></div>
+      </div>
+      
+      <div className="pb-[6rem] pt-[2rem] lg:pb-[6rem] lg:pt-8">
         <h1 className="highlight-heading !mb-0">Holistic Therapies</h1>
         <h2 className="section-title lg:mb-4">
           Empowering Wellness, Healing,

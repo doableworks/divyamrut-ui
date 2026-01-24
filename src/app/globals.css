@@ -35,7 +35,7 @@
   --yellow: #e0a43b;
   --yellow-light: rgba(224, 163, 59, 0.338);
   --base: #ffeee2;
-  --neutral: #3c3c3d;
+  --neutral: #000000;
 }
 
 html,
@@ -141,16 +141,16 @@ body {
 
   /* heading/ text */
   .highlight-heading {
-    @apply mt-[1rem] mb-[1rem] text-4xl leading-relaxed font-prata text-[--yellow] text-center;
+    @apply mt-[1rem] mb-[1rem] text-4xl leading-relaxed font-prata text-black text-center;
   }
   .sub_heading {
     @apply mt-[1rem] mb-[1.5rem] text-[18px] md:text-[26px] leading-[30px] md:leading-[36px] font-[600] text-center;
   }
   .section-title {
-    @apply text-[--neutral] text-[18px] font-[500] leading-[1.4em] uppercase text-center;
+    @apply text-black text-[18px] font-[500] leading-[1.4em] uppercase text-center;
   }
   .section-content {
-    @apply text-[--neutral] text-[16px] leading-relaxed text-center;
+    @apply text-black text-[16px] leading-relaxed text-center;
   }
 
   .text-heading {

@@ -120,9 +120,29 @@ export default function TherapyPage() {
           __html: JSON.stringify(schemaData, null, 2),
         }}
       />
-      <div className="pb-[6rem] pt-[2rem] lg:pb-[6rem] lg:pt-16">
-        <h1 className="section-title !mb-0">Our Consultations</h1>
-        <h2 className="highlight-heading">
+      {/* Full width banner */}
+      <div className="relative w-full h-[400px] md:h-[250px] lg:h-[300px] flex items-center justify-center">
+        {/* Mobile/Tablet Background */}
+        <div 
+          className="absolute inset-0 md:hidden bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('/asset/banner/All-Banner-mobile.jpg.jpeg')`
+          }}
+        ></div>
+        
+        {/* Desktop Background */}
+        <div 
+          className="absolute inset-0 hidden md:block bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('/asset/banner/All-Banner-Desktop.jpg.jpeg')`
+          }}
+        ></div>
+      </div>
+
+      
+      <div className="pb-[6rem] pt-[2rem] lg:pb-[6rem] lg:pt-8">
+        <h1 className="highlight-heading !mb-0">Our Consultations</h1>
+        <h2 className="section-title mb-4">
           Empowering Wellness, Healing,
           <br className="hidden md:inline-block" /> and Growth
         </h2>

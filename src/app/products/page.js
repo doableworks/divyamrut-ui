@@ -17,7 +17,6 @@ const getAllCategoriesData = async () => {
       throw new Error("Failed to fetch data");
     }
     const data = await res.json();
-    console.log("Fetched Categories Data:", data);
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -236,15 +235,33 @@ const page = async () => {
           __html: JSON.stringify(schemaData, null, 2),
         }}
       />
-
-      <div className="hidden">
-        <h1>Nityanava Products</h1>
-        <p>
-          Browse our wide range of wellness products across multiple categories.
-          Find the best deals on Nityanava by Divyamrut Naturals
-        </p>
+      {/* Full width banner */}
+      <div className="relative w-full h-[400px] md:h-[250px] lg:h-[300px] flex items-center justify-center">
+        {/* Mobile/Tablet Background */}
+        <div 
+          className="absolute inset-0 md:hidden bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('/asset/banner/All-Banner-mobile.jpg.jpeg')`
+          }}
+        ></div>
+        
+        {/* Desktop Background */}
+        <div 
+          className="absolute inset-0 hidden md:block bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('/asset/banner/All-Banner-Desktop.jpg.jpeg')`
+          }}
+        ></div>
       </div>
+
       
+      <div className="pt-16">
+        <h1 className="highlight-heading !mb-0">Our Products</h1>
+        <h2 className="section-title">
+          All Things Wellness
+          <br className="hidden md:inline-block" /> Products for mind, body, and balance.
+        </h2>
+      </div>
       <div>
         <DisplayBlocks />
       </div>

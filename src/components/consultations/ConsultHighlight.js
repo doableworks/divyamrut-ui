@@ -1,8 +1,8 @@
 export default function ConsultHighlight({ highlights, title }) {
   return (
     <section className="bg-white p-10 lg:py-28 lg:px-20">
-      <h2 className="section-title">Benefits of</h2>
-      <p className="highlight-heading">{title}</p>
+      {/* <h2 className="section-title">Benefits of</h2> */}
+      <p className="highlight-heading">Benefits of {title}</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 lg:mt-14">
         {highlights.map((highlight) => (
@@ -10,7 +10,7 @@ export default function ConsultHighlight({ highlights, title }) {
             key={highlight.id}
             className="bg-[--base] rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200"
           >
-            <h3 className="text-xl font-semibold mb-4">{highlight.title}</h3>
+            <h3 className="text-xl text-black font-semibold mb-4">{highlight.title}</h3>
 
             <p className="section-content !text-left">
               {highlight.description}

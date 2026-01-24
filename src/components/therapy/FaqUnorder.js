@@ -8,9 +8,9 @@ export default function FaqsUnorder({ details }) {
   return (
     <div className="p-10 py-24 w-full xl:px-20">
       <p className="highlight-heading">FAQs</p>
-      <p className="section-title md:!mt-0">
+      {/* <p className="section-title md:!mt-0">
         Essential information at a glance.
-      </p>
+      </p> */}
       <ul className="flex flex-col items-center list-none gap-9 mt-10">
         {details.map(
           (each) =>

@@ -8,10 +8,10 @@ export default function FaqsUnorder({ details,  }) {
   return (
     <div className="common_page_width">
       <p className="highlight-heading">Best for</p>
-      <p className="section-title md:!mt-0">
+      {/* <p className="section-title md:!mt-0">
         Who is this treatment
         <br /> best suited for?
-      </p>
+      </p> */}
       <ul className="flex flex-col items-center list-none gap-9 mt-10">
         {details.map((each) => (
           <FaqsItem

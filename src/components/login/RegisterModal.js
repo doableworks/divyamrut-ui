@@ -129,10 +129,11 @@ const RegisterModal = () => {
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 rounded overflow-hidden h-auto lg:min-h-[70vh]">
           <Image
-            src={NoImageAvailabe}
+            // src={NoImageAvailabe}
+            src={"/asset/common/my-account-popup.jpg.jpeg"}
             alt="Login"
-            height={100}
-            width={100}
+            height={400}
+            width={400}
             className="w-full h-full hidden lg:flex object-cover"
           />
           <div className="flex flex-col p-11 justify-center items">

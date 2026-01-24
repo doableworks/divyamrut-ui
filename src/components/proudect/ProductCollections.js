@@ -8,7 +8,6 @@ const ProductCollections = ({ data, categorySlug }) => {
   if (!data || data.length === 0) {
     return <div className="text-center py-10">No collections found</div>;
   }
-  console.log(data);
 
   const handleCollectionClick = (slug) => {
     router.push(`/collections/${categorySlug}/${slug}`);

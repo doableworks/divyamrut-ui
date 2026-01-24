@@ -10,7 +10,6 @@ import ConsultHighlight from "./ConsultHighlight";
 export default function ConsultationLanding({ data }) {
   const dispatch = useDispatch();
 
-  console.log(data);
 
   const handleChangeConsultationModal = () => {
     dispatch(toggleConsultationModal(true));
@@ -74,7 +73,7 @@ export default function ConsultationLanding({ data }) {
       )}
 
       <div className="common_page_width">
-        <p className="section-title">Best for</p>
+        {/* <p className="section-title">Best for</p> */}
         <p className="highlight-heading md:!mt-0">
           Who is this treatment
           <br /> best suited for?

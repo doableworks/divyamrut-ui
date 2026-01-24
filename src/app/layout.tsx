@@ -82,9 +82,36 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   const navbarAPIItems = await getNavbarItems();
   const displayBlockItems = await getDisplayBlocks();
 
-
   return (
     <html lang="en">
+      <head>
+        {/* Favicon and App Icons */}
+        {/* <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-title" content="Nityanava" />
+        <link rel="manifest" href="/site.webmanifest" /> */}
+        {/* Primary Meta Tags */}
+        <title>Nityanava | Holistic Health, Healing & Conscious Living with Dr. Disha Bhanushali</title>
+        <meta name="title" content="Nityanava | Holistic Health, Healing & Conscious Living with Dr. Disha Bhanushali" />
+        <meta name="description" content="Experience holistic healing that integrates modern medicine, ancient wisdom, and consciousness-based practices. Guided by Dr. Disha Bhanushali to restore physical, mental, emotional & spiritual well-being." />
+
+        {/* Open Graph / Facebook / WhatsApp */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Nityanava – Heal at the Root. Live Ever New." />
+        <meta property="og:description" content="A holistic wellness space founded by Dr. Disha Bhanushali, integrating science, spirituality, and ancient healing to awaken your body's innate power to heal and live joyfully." />
+        <meta property="og:site_name" content="Nityanava" />
+        <meta property="og:url" content="https://nityanava.com" />
+        <meta property="og:image" content="https://nityanava.com/asset/og-image.jpg" />
+        <meta property="og:image:alt" content="Holistic healing and conscious well-being at Nityanava with Dr. Disha Bhanushali" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Nityanava – Heal at the Root. Live Ever New." />
+        <meta name="twitter:description" content="Discover conscious healing that restores balance at the level of body, mind, and soul—so health becomes natural and happiness a way of life." />
+        <meta name="twitter:image" content="https://nityanava.com/asset/og-image.jpg" />
+      </head>
       <body
         className={`${poppins.variable} ${prata.variable} ${playfairDisplay.variable} ${opensans.variable}`}
       >

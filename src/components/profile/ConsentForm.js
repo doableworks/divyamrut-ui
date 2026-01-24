@@ -79,7 +79,6 @@ export default function ConsentForm({
   const handleCancel = () => {
     handleCloseConsentForm(false);
   };
-  console.log(session);
 
   const handleSubmitConsentForm = async (values) => {
     if (!session) {
