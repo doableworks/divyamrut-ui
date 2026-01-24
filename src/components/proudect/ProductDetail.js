@@ -306,8 +306,8 @@ const ProductDetail = ({ item }) => {
             Benefits of {item?.title}
           </p>
           <Divider className="mb-4 mt-4" />
-          <p
-            className="list-disc list-outside my-6 flex flex-col gap-3 leading-relaxed"
+          <div
+            className="my-6 flex flex-col gap-3 leading-relaxed [&_li]:text-black [&_li]:list-disc [&_li]:ml-6 [&_ul]:list-disc [&_ul]:ml-4"
             dangerouslySetInnerHTML={{ __html: item?.product_benefits }}
           />
         </div>

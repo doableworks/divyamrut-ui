@@ -103,14 +103,14 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <meta property="og:description" content="A holistic wellness space founded by Dr. Disha Bhanushali, integrating science, spirituality, and ancient healing to awaken your body's innate power to heal and live joyfully." />
         <meta property="og:site_name" content="Nityanava" />
         <meta property="og:url" content="https://nityanava.com" />
-        <meta property="og:image" content="https://nityanava.com/asset/og-image.jpg" />
+        <meta property="og:image" content="https://nityanava.com/asset/og-image.jpg.jpeg" />
         <meta property="og:image:alt" content="Holistic healing and conscious well-being at Nityanava with Dr. Disha Bhanushali" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Nityanava – Heal at the Root. Live Ever New." />
         <meta name="twitter:description" content="Discover conscious healing that restores balance at the level of body, mind, and soul—so health becomes natural and happiness a way of life." />
-        <meta name="twitter:image" content="https://nityanava.com/asset/og-image.jpg" />
+        <meta name="twitter:image" content="https://nityanava.com/asset/og-image.jpg.jpeg" />
       </head>
       <body
         className={`${poppins.variable} ${prata.variable} ${playfairDisplay.variable} ${opensans.variable}`}
