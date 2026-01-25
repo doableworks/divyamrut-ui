@@ -128,7 +128,6 @@ export const LayoutSection = ({
           />
           {children}
         </div>
-
         <div>
           <Footer />
         </div>

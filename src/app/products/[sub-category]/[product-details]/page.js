@@ -124,7 +124,6 @@ const Page = async ({ params }) => {
         // <ProductDetailRedesign item={item} />
         // </div>
       ) : */}
-       (
         <div className="common_page_width relative z-20">
           <ProductDetail item={item} />
           {item?.related_products?.length > 0 && (
@@ -134,7 +133,6 @@ const Page = async ({ params }) => {
             />
           )}
         </div>
-      )
       {/* } */}
     </>
   );

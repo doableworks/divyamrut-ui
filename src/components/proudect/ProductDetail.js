@@ -307,7 +307,7 @@ const ProductDetail = ({ item }) => {
           </p>
           <Divider className="mb-4 mt-4" />
           <div
-            className="my-6 flex flex-col gap-3 leading-relaxed [&_li]:text-black [&_li]:list-disc [&_li]:ml-6 [&_ul]:list-disc [&_ul]:ml-4"
+            className="my-6 flex flex-col gap-3 leading-relaxed [&_li]:text-black [&_li]:list-disc [&_li]:ml-6 [&_ul]:list-disc [&_ul]:ml-4 [&_h3]:text-black"
             dangerouslySetInnerHTML={{ __html: item?.product_benefits }}
           />
         </div>
@@ -320,7 +320,7 @@ const ProductDetail = ({ item }) => {
           </p>
           <Divider className="mb-4 mt-4" />
           <p
-            className="list-disc list-outside my-6 flex flex-col gap-3 leading-relaxed"
+            className="list-disc list-outside my-6 flex flex-col gap-3 leading-relaxed [&_li]:text-black"
             dangerouslySetInnerHTML={{ __html: item?.method_of_preparation }}
           />
         </div>
