@@ -5,14 +5,16 @@ import PremiumNavbar from "@/components/common/navbar/PremiumNavbar";
 import LoginModal from "../login/loginModal";
 import RegisterModal from "../login/RegisterModal";
 import { twMerge } from "tailwind-merge";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setMenuItems } from "@/redux/feature/menuSlice";
 import { SetIsSticky } from "@/redux/feature/productSlice";
+import { setWorkshops } from "@/redux/feature/workshopSlice";
 import CardSlider from "@/components/cartCom/CardSlider";
 import BookingModal from "../therapy/BookingModal";
 import { usePathname } from "next/navigation";
 import Footer from "./reference/Footer";
 import ConsultationBooking from "../consultations/ConsultationBooking";
+import WorkshopRegistrationModal from "../modals/WorkshopRegistrationModal";
 import { setDisplayBlocks } from "@/redux/feature/displayBlockSlice";
 
 export const LayoutSection = ({
@@ -25,6 +27,9 @@ export const LayoutSection = ({
   const scrollContainerRef = useRef(null);
   const [scrolled, setScrolled] = useState(0);
   const pathname = usePathname();
+
+  // Get workshops from Redux to use in menu
+  const workshopsFromRedux = useSelector((state) => state.workshop.workshops);
 
   // Memoize the menu items to recreate when navbarAPIitems changes
   const initialMenuItems = useMemo(
@@ -55,7 +60,17 @@ export const LayoutSection = ({
           parentSlug: "/therapy",
           subMenu: navbarAPIitems?.therapy_categories || [],
         },
-        { label: "Wellness Workshops", path: "/wellness-workshops" },
+        {
+          label: "Wellness Workshops",
+          path: "/wellness-workshops",
+          parentSlug: "/wellness-workshops", 
+          subMenu: workshopsFromRedux?.map(workshop => ({
+            slug: workshop.slug,
+            name: workshop.title,
+            is_published: workshop.is_published || true,
+            is_soon: false
+          })) || [],
+        },
         { label: "Wellness-Retreats", path: "/wellness-retreat" },
         {
           label: "Wellness Products",
@@ -66,7 +81,7 @@ export const LayoutSection = ({
         { label: "Contact Us", path: "/contact-us" },
       ];
     },
-    [navbarAPIitems]
+    [navbarAPIitems, workshopsFromRedux]
   );
 
   console.log(navbarAPIitems?.product_data);;
@@ -80,6 +95,29 @@ export const LayoutSection = ({
       dispatch(setDisplayBlocks(displayBlockItems));
     }
   }, [navbarAPIitems, displayBlockItems, dispatch, initialMenuItems]);
+
+  // Fetch workshops and store in Redux
+  useEffect(() => {
+    const fetchWorkshops = async () => {
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+        if (!apiUrl) return;
+
+        const response = await fetch(`${apiUrl}/workshop/`, {
+          next: { revalidate: 60 },
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          dispatch(setWorkshops(data.results || []));
+        }
+      } catch (error) {
+        console.error("Error fetching workshops:", error);
+      }
+    };
+
+    fetchWorkshops();
+  }, [dispatch]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -119,7 +157,7 @@ export const LayoutSection = ({
       >
         <PremiumNavbar scrollNum={scrolled} />
 
-        <div className="flex-grow">
+        <div>
           <div
             className={twMerge(
               "h-[65px] [@media(min-width:1340.98px)]:h-[172px]",
@@ -137,6 +175,7 @@ export const LayoutSection = ({
       <RegisterModal />
       <BookingModal />
       <ConsultationBooking />
+      <WorkshopRegistrationModal />
     </SessionProvider>
   );
 };

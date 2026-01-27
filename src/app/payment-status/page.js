@@ -131,6 +131,17 @@ const Page = () => {
                 anytime.
               </p>
             </>
+          ) : order_type === "Workshop" ? (
+            <>
+              <h2 className="text-2xl font-bold text-[#45b29d] mt-4">
+                ✨ Workshop Registration Successful!
+              </h2>
+              <p className="mt-2 text-gray-700">
+                You've successfully registered for the workshop! Please be available 
+                on the scheduled date and time to avoid any inconvenience. Workshop 
+                details and joining instructions will appear in your profile shortly.
+              </p>
+            </>
           ) : null}
 
           <div className="mt-6 mx-auto w-full max-w-md  border border-gray-200 rounded-xl shadow-sm overflow-hidden">
