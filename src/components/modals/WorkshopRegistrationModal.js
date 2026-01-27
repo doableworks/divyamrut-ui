@@ -43,6 +43,22 @@ export default function WorkshopRegistrationModal() {
 
   const handleRegistration = async (values) => {
     setLoading(true);
+    
+    // Simulate a brief loading delay
+    setTimeout(() => {
+      // Show success message
+      messageApi.success("Registration successful! You will receive confirmation details shortly.");
+      
+      // Close the registration modal after a brief delay
+      setTimeout(() => {
+        handleCancel();
+      }, 2000);
+      
+      setLoading(false);
+    }, 1000);
+    
+    // TODO: Implement actual backend integration later
+    /*
     try {
       const registrationData = {
         workshop_id: selectedWorkshop.id,
@@ -65,13 +81,15 @@ export default function WorkshopRegistrationModal() {
       if (response.status >= 200 && response.status < 300) {
         const registrationResult = response.data;
         
-        messageApi.success("Registration created successfully! Proceeding to payment...");
+        messageApi.success("Registration created successfully! You will receive payment instructions shortly.");
         
-        // Close the registration modal
-        handleCancel();
+        // Close the registration modal after a brief delay
+        setTimeout(() => {
+          handleCancel();
+        }, 2000);
         
-        // Proceed to payment
-        await handlePayment(registrationResult);
+        // TODO: Implement payment flow later
+        // await handlePayment(registrationResult);
       }
     } catch (error) {
       console.error("Registration error:", error);
@@ -93,6 +111,7 @@ export default function WorkshopRegistrationModal() {
     } finally {
       setLoading(false);
     }
+    */
   };
 
   const handlePayment = async (registrationData) => {
@@ -311,7 +330,7 @@ export default function WorkshopRegistrationModal() {
                 className="site-button-primary !m-0"
                 disabled={loading}
               >
-                {loading ? "Processing..." : "Proceed to Payment"}
+                {loading ? "Processing..." : "Register Now"}
               </button>
             </div>
           </Form>
