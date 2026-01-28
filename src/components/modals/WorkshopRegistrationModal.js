@@ -45,20 +45,20 @@ export default function WorkshopRegistrationModal() {
     setLoading(true);
     
     // Simulate a brief loading delay
-    setTimeout(() => {
-      // Show success message
-      messageApi.success("Registration successful! You will receive confirmation details shortly.");
+    // setTimeout(() => {
+    //   // Show success message
+    //   messageApi.success("Registration successful! You will receive confirmation details shortly.");
       
-      // Close the registration modal after a brief delay
-      setTimeout(() => {
-        handleCancel();
-      }, 2000);
+    //   // Close the registration modal after a brief delay
+    //   setTimeout(() => {
+    //     handleCancel();
+    //   }, 2000);
       
-      setLoading(false);
-    }, 1000);
+    //   setLoading(false);
+    // }, 1000);
     
     // TODO: Implement actual backend integration later
-    /*
+
     try {
       const registrationData = {
         workshop_id: selectedWorkshop.id,
@@ -67,29 +67,19 @@ export default function WorkshopRegistrationModal() {
         last_name: values.last_name,
         mobile: values.mobile || "",
       };
-      console.log("Registration Data:", registrationData);
-
-      // Use fresh axios instance without interceptors for public registration endpoint
-      const response = await axios.post(`${apiUrl}/workshop/register/`, registrationData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    
-      console.log("Registration Response:", response);
-
+     const response = await axiosInstance.post(
+      `${apiUrl}/workshop/register/`,
+      registrationData,
+      {
+        session: session, // This will add auth header if logged in
+      }
+    );
       if (response.status >= 200 && response.status < 300) {
         const registrationResult = response.data;
         
         messageApi.success("Registration created successfully! You will receive payment instructions shortly.");
         
-        // Close the registration modal after a brief delay
-        setTimeout(() => {
-          handleCancel();
-        }, 2000);
-        
-        // TODO: Implement payment flow later
-        // await handlePayment(registrationResult);
+        await handlePayment(registrationResult);
       }
     } catch (error) {
       console.error("Registration error:", error);
@@ -111,7 +101,6 @@ export default function WorkshopRegistrationModal() {
     } finally {
       setLoading(false);
     }
-    */
   };
 
   const handlePayment = async (registrationData) => {
@@ -119,17 +108,12 @@ export default function WorkshopRegistrationModal() {
       setLoading(true);
       
       const orderData = {
-        amount: selectedWorkshop.price,
+        amount: registrationData.amount,
         currency: "INR",
         receipt: "Workshop",
         notes: {
           email: registrationData.registrant.email,
-          workshop_registration_uid: registrationData.registration_uid,
-          workshop_title: selectedWorkshop.title,
-          workshop_date: selectedWorkshop.date,
-          workshop_time: `${selectedWorkshop.start_time} - ${selectedWorkshop.end_time}`,
-          workshop_venue: selectedWorkshop.venue || "Online",
-          workshop_mode: selectedWorkshop.mode,
+          workshop_registration_uid: registrationData.registration_uid
         },
       };
 
@@ -139,7 +123,7 @@ export default function WorkshopRegistrationModal() {
           "Content-Type": "application/json",
         },
       });
-
+      console.log("Payment Order Response:", response);
       if (response.status >= 200 && response.status < 300) {
         const orderDetails = response.data;
         
