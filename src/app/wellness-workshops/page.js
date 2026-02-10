@@ -54,7 +54,7 @@ const page = () => {
         </h2>
 
       {/* Workshops Grid */}
-      <section className="mb-16">
+      <section className="mb-16 mt-12 md:mt-0">
         {loading ? (
           <div className="text-center py-12">
             <p className="text-gray-600 text-lg">Loading workshops...</p>
