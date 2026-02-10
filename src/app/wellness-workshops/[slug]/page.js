@@ -68,6 +68,25 @@ const WorkshopDetailPage = async ({ params }) => {
     notFound();
   }
 
+  // Helper function to convert 24-hour time to 12-hour format with AM/PM
+  const convertTo12Hour = (time24) => {
+    if (!time24) return '';
+    
+    const [hours, minutes] = time24.split(':');
+    const hour = parseInt(hours, 10);
+    const minute = minutes || '00';
+    
+    if (hour === 0) {
+      return `12:${minute} AM`;
+    } else if (hour < 12) {
+      return `${hour}:${minute} AM`;
+    } else if (hour === 12) {
+      return `12:${minute} PM`;
+    } else {
+      return `${hour - 12}:${minute} PM`;
+    }
+  };
+
   // Helper function to get icon component from icon name
   const getIconComponent = (iconName) => {
     if (!iconName) return null;
@@ -134,7 +153,7 @@ const WorkshopDetailPage = async ({ params }) => {
                     <div>
                       <span className="text-sm font-medium text-black mr-2">Time: </span>
                       <span className="text-base font-semibold text-black">
-                        {workshop.start_time} - {workshop.end_time}
+                        {convertTo12Hour(workshop.start_time)} - {convertTo12Hour(workshop.end_time)}
                       </span>
                     </div>
                   </div>
