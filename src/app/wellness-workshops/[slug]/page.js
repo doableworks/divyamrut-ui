@@ -5,6 +5,7 @@ import * as icons from "lucide-react";
 import FaqsOrder from "@/components/workshops/faqs";
 import WorkshopRegistrationButton from "@/components/workshops/WorkshopRegistrationButton";
 // import WorkshopSidebar from "@/components/workshops/WorkshopSidebar";
+import Image from "next/image";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -256,14 +257,14 @@ const WorkshopDetailPage = async ({ params }) => {
               <h2 className="highlight-heading !text-3xl !text-left md:!text-center !mb-6">Workshop Benefits</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {workshop.benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-center gap-4 px-4 py-2 bg-gray-50 rounded-lg">
+                  <div key={index} className="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-lg">
                     {benefit.icon && (
                       <div className="text-3xl text-[--yellow] flex-shrink-0">
-                        {getIconComponent(benefit.icon)}
+                       <Image src ={benefit.icon} alt={benefit.title} width={20} height={20} className="object-contain" />
                       </div>
                     )}
                     <div>
-                      <h3 className="font-semibold text-gray-800 mb-2">{benefit.title}</h3>
+                      <h3 className="font-semibold text-gray-800 ">{benefit.title}</h3>
                       <p className="text-gray-600 text-sm">{benefit.description}</p>
                     </div>
                   </div>

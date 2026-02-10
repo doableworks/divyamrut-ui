@@ -84,7 +84,6 @@ export const LayoutSection = ({
     [navbarAPIitems, workshopsFromRedux]
   );
 
-  console.log(navbarAPIitems?.product_data);;
 
   // Dispatch data to Redux store when component mounts or data changes
   useEffect(() => {
@@ -106,9 +105,12 @@ export const LayoutSection = ({
         const response = await fetch(`${apiUrl}/workshop/`, {
           next: { revalidate: 60 },
         });
+
+        console.log("Fetching workshops from API:", apiUrl);
         
         if (response.ok) {
           const data = await response.json();
+          console.log("API Response for workshops:", data);
           dispatch(setWorkshops(data.results || []));
         }
       } catch (error) {
