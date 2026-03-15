@@ -232,4 +232,57 @@ body {
   .therapy-description em {
     @apply italic;
   }
+  
+  /* HTML content wrapper for CMS-provided HTML (no classes) */
+  .html-content h2 {
+    color: var(--yellow);
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-bottom: 1rem; /* mb-4 */
+    text-align: left;
+  }
+
+  .html-content h3 {
+    color: var(--neutral);
+    font-weight: 600;
+    font-size: 1.25rem; /* text-xl */
+    margin-bottom: 1rem; /* mb-4 */
+    text-align: left;
+  }
+
+  .html-content p {
+    color: var(--neutral);
+    font-size: 16px;
+    line-height: 1.6; /* leading-relaxed */
+    margin-bottom: 1rem; /* mb-4 */
+    text-align: left;
+  }
+
+  .html-content ul {
+    list-style-type: disc;
+    padding-left: 1.5rem; /* pl-6 */
+    margin-bottom: 1.5rem; /* mb-6 */
+    text-align: left;
+  }
+
+  .html-content ul li {
+    color: var(--neutral);
+    font-size: 16px;
+    line-height: 1.6;
+    display: list-item;
+  }
+
+  /* Provide vertical spacing between list items similar to space-y-2 */
+  .html-content ul li + li {
+    margin-top: 0.5rem; /* space-y-2 */
+  }
+
+  .html-content strong {
+    font-weight: 600;
+  }
+
+  .html-content em {
+    font-style: italic;
+  }
 }
