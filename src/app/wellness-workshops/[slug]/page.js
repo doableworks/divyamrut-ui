@@ -18,7 +18,6 @@ const getWorkshopBySlug = async (slug) => {
       throw new Error("Failed to fetch workshop");
     }
     const data = await res.json();
-    console.log("Fetched Workshop Data:", data);
     return data;
   } catch (error) {
     console.error("Error fetching workshop:", error);
@@ -101,6 +100,19 @@ const WorkshopDetailPage = async ({ params }) => {
     return IconComponent ? <IconComponent size={32} /> : null;
   };
 
+  // Determine if workshop is completed (server-time comparison)
+  const isCompleted = (() => {
+    try {
+      if (!workshop?.date) return false;
+      const now = new Date();
+      const wDate = new Date(workshop.date);
+      if (isNaN(wDate.getTime())) return false;
+      return now > wDate;
+    } catch (err) {
+      return false;
+    }
+  })();
+  
   return (
     <div className="common_page_width">
       <div className="grid grid-cols-1 gap-8">
@@ -197,7 +209,10 @@ const WorkshopDetailPage = async ({ params }) => {
 
               {/* Register Now Button */}
               <div className="mb-6">
-                <WorkshopRegistrationButton workshop={workshop} />
+                <WorkshopRegistrationButton workshop={workshop} disabled={isCompleted} />
+                {isCompleted && (
+                  <p className="text-red-600 mt-2 text-xs">This workshop has been completed and registration is closed.</p>
+                )}
               </div>
             </div>
 
@@ -305,7 +320,10 @@ const WorkshopDetailPage = async ({ params }) => {
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
               Join us for this transformative workshop and embark on a journey towards holistic wellness and inner harmony.
             </p>
-            <WorkshopRegistrationButton workshop={workshop} showPrice={true} />
+            <WorkshopRegistrationButton workshop={workshop} showPrice={true} disabled={isCompleted} />
+            {isCompleted && (
+              <p className="text-red-600 mt-4" style={{ fontSize: '12px' }}>This workshop has been completed and registration is closed.</p>
+            )}
           </div>
         </div>
       </div>

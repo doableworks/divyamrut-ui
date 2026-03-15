@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { toggleWorkshopRegistrationModal } from "@/redux/feature/workshopSlice";
 
-export default function WorkshopRegistrationButton({ workshop, showPrice = false }) {
+export default function WorkshopRegistrationButton({ workshop, showPrice = false, disabled = false }) {
   const dispatch = useDispatch();
 
   const handleRegisterClick = () => {
@@ -17,6 +17,14 @@ export default function WorkshopRegistrationButton({ workshop, showPrice = false
     return (
       <button disabled className="site-button-secondary-outlined !w-fit cursor-not-allowed">
         Workshop Full
+      </button>
+    );
+  }
+
+    if (disabled) {
+    return (
+      <button disabled className="site-button-secondary-outlined !w-fit cursor-not-allowed">
+        Workshop completed
       </button>
     );
   }

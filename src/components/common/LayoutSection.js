@@ -64,12 +64,22 @@ export const LayoutSection = ({
           label: "Wellness Workshops",
           path: "/wellness-workshops",
           parentSlug: "/wellness-workshops", 
-          subMenu: workshopsFromRedux?.map(workshop => ({
-            slug: workshop.slug,
-            name: workshop.title,
-            is_published: workshop.is_published || true,
-            is_soon: false
-          })) || [],
+          subMenu: workshopsFromRedux?.map((workshop) => {
+            const date = workshop?.date ? new Date(workshop.date) : null;
+            const now = new Date();
+            const status = date && !isNaN(date.getTime()) && now > date ? "completed" : "ongoing";
+
+            return {
+              slug: workshop.slug,
+              name: workshop.title,
+              is_published: workshop.is_published ?? true,
+              status, // 'ongoing' or 'completed'
+              date: workshop.date || null,
+              price: workshop.price ?? null,
+              available_seats: workshop.available_seats ?? null,
+              is_soon: false,
+            };
+          }) || [],
         },
         { label: "Wellness-Retreats", path: "/wellness-retreat" },
         {
@@ -111,7 +121,7 @@ export const LayoutSection = ({
         if (response.ok) {
           const data = await response.json();
           console.log("API Response for workshops:", data);
-          dispatch(setWorkshops(data.results || []));
+          dispatch(setWorkshops(data.workshops.results || []));
         }
       } catch (error) {
         console.error("Error fetching workshops:", error);
